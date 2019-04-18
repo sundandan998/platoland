@@ -1,0 +1,1372 @@
+//公共样式
+*{
+    padding:0;
+    margin:0;
+}
+li{
+    list-style: none;
+}
+input{
+    border:none;
+    outline:none;
+    text-indent: 1.5rem;
+}
+.fl{
+    float: left;
+}
+.fr{
+   float: right; 
+}
+a{
+    text-decoration: none;
+    color:#979EAC;
+}
+.el-input__inner{
+    border: none;
+    border-bottom: 1px solid #999;
+    border-radius:0px;
+}
+.el-input{
+    width: 90%;
+    margin-top: 0px;   
+}
+//loading加载样式
+.spinner span{
+    margin: 0px auto;
+    display: table;
+}
+.mint-header{
+    background-color:#fff !important;
+    color:#000;
+}
+h1{
+    font-weight: 400;
+}
+$color-primary: #1aad19;
+body{
+    background-color: #f6f6f6;
+}
+.mine-cell .mint-cell-wrapper{
+    background-image:none;
+}
+.mine-cell .mint-cell:last-child{
+    background-image:none;
+}
+//登录页
+.login {
+    height: 100%;
+    background-color: #fff;
+}
+.login-cancel img {
+    margin: 10px;
+}
+.logo{
+    text-align: center;
+}
+.login-tab .mint-navbar {
+    text-align: unset;
+}
+.login-tab a.mint-tab-item {
+    display: contents;
+}
+.login-tab .mint-tab-item-label {
+    margin-right: 45px;
+    margin: 20px 40px 20px 15px;
+}
+//.mint-navbar .mint-tab-item.is-selected {
+//  color: #000;
+//  border-bottom:none;
+//}
+.login-tab .mint-tab-item-label {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.login-content .mint-cell{
+    border-bottom:1px solid #f6f6f6;
+    width: 95%;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.verification-input{
+    text-align: center;
+  
+}
+.el-form-item__error {
+    position: absolute;
+    left: 20px;
+}
+.login-checkbox{
+    margin:30px 0 0 15px;
+    zoom:103%;
+    span{
+        color:#000;
+        font-size:0.8rem;
+    }
+    .fr span{
+        margin-right: 10px;
+    }
+}
+.login-btn{
+    text-align: center;
+    .mint-button{
+    text-transform: center;
+    margin: 50px auto 10px auto;
+    width: 90%;
+    border-radius: 15px;
+    }
+} 
+//-------------------------登录/忘记密码------------------
+.forget-password-title {
+    margin: 20px;
+}
+.forget-password-title h1{
+  font-size: 1.2rem;
+}
+//.forget-password-btn .mint-button--primary {
+//  background-color: #0B6FBA;
+//  margin: 50px auto 50px auto;
+//}
+.forget-password-btn{
+    text-align: center;
+    .mint-button{
+    text-transform: center;
+    margin: 50px auto 10px auto;
+    width: 90%;
+    border-radius: 15px;
+    }
+} 
+//-------------------------登录/重置邮件------------------
+.reset-mail-information{
+    width: 80%;
+    text-align: center;
+    margin:0 auto;
+    img{
+        margin-top: 10px;
+        width: 50px;
+    }
+}
+.reset-mail-keyboard{
+    margin-top: 140px;
+}
+//----------------------注册---------------
+.register-footer{
+    margin:50px 0px 0px 0px;
+    text-align: center;
+    ul{
+        display: inline-block;
+        overflow: auto;
+        margin-left: -70px;
+        li{
+            display: inline;
+            float: left;
+            margin-left: 20px;
+        }
+    } 
+    p{
+        margin-top: -20px;
+    }
+}
+.register-eye {
+    float: right;
+    margin-right: 30px;
+    position: relative;
+    top: -35px;
+}
+//-------------------------------首页-------------------
+
+.home-logo {
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    img{
+        width: 150px;
+        vertical-align: -webkit-baseline-middle;
+    }
+}
+.home-investment{
+    width: 98%;
+    background-color: #fff;
+    margin: 10px auto;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 1px 6px 5px #ccc;
+}
+.home-investment-top img{
+    width: 50px;
+    margin-top: -10px;
+    margin-left: -50px;
+}
+.home-investment-top li img{
+    width: 20px;
+}
+.home-investment-top-left li{
+    float: left;
+    margin-right: 18px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+.home-investment-top-right{
+    margin-right: 10px;
+    margin-top: -5px;
+}
+.home-investment-content {
+    margin-top: -20px;
+    margin-left: 60px;
+    height: 50px;
+    p{
+        font-size: 0.8rem;
+        color:#999;
+        margin-left: 10px;
+    }
+}
+.home-investment-bot {
+    height: 30px;
+}
+.home-investment-bot li{
+    font-size: 0.8rem;
+    margin-left: 15px;
+}
+.home-investment-bot li.fr {
+    margin-right: 10px;
+}
+.home-investment-progress{
+    width: 93%;
+   margin-left: 15px;
+}
+
+.home-land{
+    width: 98%;
+    margin:0 auto;
+    margin-top: 30px;
+}
+.home-land .van-notice-bar{
+    background-color: #fff;
+    color:#000;
+    border-radius: 5px;
+}
+.home-popularity-content{
+    background-color: #fff;
+    width: 98%;
+    height: 130px;
+    margin:0 auto;
+    border-radius: 7px;
+    margin-top: 10px;
+    li{
+        float: left;
+        margin:20px 10px 0 10px; 
+        font-size: 0.8rem; 
+    }
+}
+.home-popularity-content-top{
+    height: 70px;
+    p{
+       font-size: 0.8rem;   
+    }
+}
+.home-popularity-content-bot{
+    width: 100%;
+    height: 37px;
+}
+.home-popularity-progress {
+    margin: 0 10px 0 10px;
+    border-radius: 7px;
+}
+.home-assets-subscription-title{
+    height: 30px;
+    margin-top: 20px;
+    margin-left: 8px;
+    span{
+         color:#000; 
+         font-size: 0.8rem; 
+         margin-left: 5px;
+    }
+    img{
+        width: 12px;
+        margin-right: 5px;
+    }
+}
+.home-assets-subscription-content{
+    white-space: nowrap;
+    overflow-x: auto;
+    margin-left: 8px;
+}
+.home-assets-subscription-content::-webkit-scrollbar{
+    display: none;
+}
+.assets-subscription{
+    width: 45%;
+    display:inline-block;
+    background-color: #fff;
+    border-radius: 7px;
+    font-size: 0.8rem; 
+    box-shadow: 1px 6px 5px #ccc;
+      span{
+          font-size: 0.7rem;
+           color: #999;
+      }
+    
+}
+.assets-subscription{
+    img{
+       margin:10px 0px 0 10px;
+    }
+}
+.assets-subscription-text {
+    margin:10px 15px 0 0px;
+      p{
+         font-size: 0.7rem; 
+          color: #999;
+      }
+}
+.assets-subscription-title{
+    p{
+          margin: 5px 0 0 10px;
+        
+    }
+}
+.assets-subscription-information {
+    ul{
+        color: #000;
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        li{
+            margin-bottom: 10px;
+        }
+    }
+}
+.home-assets-more{
+    width: 98%;
+    background-color: #fff;
+    margin:20px auto;
+    border-radius:5px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    box-shadow: 1px 5px 5px #ccc;
+    span{
+        font-size: 0.8rem;
+    }
+}
+//首页/流通中/通证列表页
+
+//首页/流通中/通证详情页
+.pass-details-information{
+    background-color: #fff;
+    width: 100%;
+    margin: 2px auto;
+    height: auto;
+    overflow: hidden;
+}
+.pass-details-information-header{
+    margin:10px 0 10px 10px;
+    font-weight: 700;
+ }
+.pass-details-information-content{
+    li{
+        margin: 20px 5px 20px 10px;
+         font-size: 0.8rem;
+    }
+    img{
+        width: 25px;
+    }
+}
+.details-information-identification{
+    display: block;
+    margin:-25px 0 0 30px;
+}
+.pass-details-issue-data {
+    height: auto;
+    margin-top: 10px;
+    background-color: #fff;
+    overflow: hidden;
+    img{
+        width: 25px;
+    }
+}
+.pass-details-issue-data-header{
+    margin:10px 0 0px 10px;
+    font-weight: 700;
+}
+.pass-details-issue-data-content{
+    li{
+       margin: 20px 5px 20px 10px;
+       font-size: 0.8rem;
+    }  
+}
+table.el-table__header {
+    width: auto !important;
+}
+table.el-table__body {
+     width: auto !important;
+     font-size: 0.8rem;
+}
+.pass-details-issue-form {
+    margin-top: 10px;
+}
+.pass-details-issue-form-heder {
+    background-color: #fff;
+    span{
+         margin-left: 10px;
+         font-weight: 700;
+    }  
+}
+.pass-details-issue-history-title {
+    background-color: #fff;
+    span{
+        margin: 10px 0 10px 10px;
+        display: inline-block;
+        font-size: 0.8rem;
+    }
+}
+.pass-details-issue-trend-title{
+    span{
+        margin: 10px 0 10px 10px;
+        display: inline-block;
+        font-size: 0.8rem;
+    }
+}
+//首页/流通中/通证详情页/通证主体/主体介绍
+.subject-details-content {
+    margin-top: 10px;
+    background-color: #fff;
+    height: auto;
+    p{
+        margin-top: 10px;
+    }
+}
+.subject-introduce-title
+    h2{
+        margin:20px auto;
+        text-align: center;
+    }
+.subject-introduce-img{
+   img{
+       width: 98%;
+       margin:0 auto;
+       display: block;
+   }
+}
+.subject-introduce-introduction-title {
+    margin: 20px 0 10px 5px;
+}
+.subject-introduce-introduction-content-text {
+    width: 62%;
+    font-size: 0.9rem;
+    margin-right: 5px;
+}
+.subject-introduce-introduction-content-img {
+    display: contents;
+    img{
+        width: 30%;
+        margin-left: 5px;
+    }
+}
+.subject-introduce-business-title {
+    margin: 20px 0 10px 5px;
+}
+.subject-introduce-business-content-text {
+    width: 60%;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+.subject-introduce-business-content-img {
+    display: contents;
+    img{
+        width: 30%;
+        margin-left: 20px;
+    }
+}
+.subject-introduce-business-title {
+    margin: 20px 0 10px 5px;
+}
+
+element.style {
+}
+.subject-introduce-team {
+    display: inline-block;
+    margin-left: 5px;
+}
+//首页/流通中/通证详情页/通证主体/主体信息
+.subject-details-content .mint-tab-item-label {
+    font-size: 1.0rem;
+}
+.information-content span {
+    font-size: 0.8rem;
+}
+.information-title{
+    margin:10px 0 10px 10px;
+}
+//首页/流通中/去交易
+.van-tabs__line {
+    z-index: 1;
+    left: 0;
+    bottom: 15px;
+    height: 3px;
+    position: absolute;
+    border-radius: 3px;
+    background-color: #456DF1;
+}
+.to-deal-purchase {
+    width: 98%;
+    background-color: #fff;
+    margin: 10px auto;
+    height: auto;
+    border-radius: 5px;
+}
+.to-deal-purchase-top{
+    border-bottom: 1px solid #ccc;
+    margin: 5px 10px 5px 10px;
+    height: 40px;
+    line-height: 40px;
+    img{
+        width: 25px;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+}
+.to-deal-purchase-bot span:nth-child(2){
+    color:#1A8EEE;
+    font-size: 1.2rem;
+}
+.to-deal-purchase-bot{
+    margin-left: 10px;
+    span{
+        font-size: 0.8rem;
+        color:#999;
+        margin-right: 50px;
+        img{
+            width: 20px;
+            position: relative;
+            top: 5px;
+        }
+    }
+    p{
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 10px;
+        padding-bottom: 5px;
+    }
+}
+//首页/流通中/去交易/购买通证
+.Purchase-pass-content {
+    background-color: #fff;
+    width: 98%;
+    margin: 10px auto;
+}
+.Purchase-pass-content-top{
+    img{
+        margin: 15px 15px 15px 10px;
+    }
+    span{
+        display: block;
+        font-size: 0.8rem;
+        padding-top: 10px;
+    }
+    p{
+        margin: 20px 0 0 15px;
+    }
+}
+.Purchase-pass-content-bot {
+    margin: 30px 0 0 15px;
+    padding-bottom: 10px;
+}
+.Purchase-pass-tabbar .mint-field .mint-cell-value {
+    border-bottom: 1px solid #ccc;
+}
+.Purchase-pass-tabbar p{
+    height: 20px;
+    background-color: #fff;
+    font-size: 0.8rem;
+    padding:10px 0 10px 10px;
+}
+.Purchase-pass-tabbar .mint-cell-wrapper {
+    padding-top: 10px;
+}
+.Purchase-pass-btn{
+//  margin-top: 20px;
+}
+//首页/流通中/购买发布
+.purchase-pass-type {
+    height: 50px;
+    background-color: #fff;
+    margin-top: 10px;
+    line-height: 50px;
+    span{
+        margin-left: 15px;
+        color:#999;
+    }
+}
+.purchase-pass-type-checkbox {
+    margin-right: 10px;
+    input{
+        margin-left: 50px;
+    }
+}
+.purchase-pass-buy-assets{
+    height: 80px;
+    background-color: #fff;
+    margin-top: 10px;
+}
+.purchase-pass-buy-assets span:first-child{
+    line-height: 80px;
+    margin-left: 15px;
+    color:#999;
+}
+.purchase-pass-buy-information{
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 0.8rem;
+    span{
+        position: relative;
+        top: -15px;
+        left: 10px;
+    }
+    img{
+        margin-top: 8px;
+        margin-left: 20px;
+    }
+}
+.purchase-pass-valuation-assets span:first-child{
+    color:#999;
+        margin-left: 15px;
+}
+.purchase-pass-valuation-assets {
+    height: 50px;
+    background-color: #fff;
+    margin-top: 10px;
+    line-height: 50px;
+}
+.purchase-pass-valuation-assets-img{
+    margin-right: 10px;
+    img{
+        margin-top: 8px;
+    }
+}
+.purchase-pass-input {
+    height: auto;
+    background-color: #fff;
+    margin-top: 10px;
+    input{
+        border: 1px solid #ccc;
+        height: 40px;
+        border-radius: 5px;
+        width: 90%;
+        margin: 5px 0 10px 15px;
+    }
+    p{
+        padding: 10px 0 0 15px;
+        color: #999;
+    }
+    span{
+        margin-left: 15px;
+        padding-bottom: 10px;
+        display:block;
+    }
+}
+.purchase-pass-quota {
+    margin-top: 10px;
+    background-color: #fff;
+    input{
+        border: 1px solid #ccc;
+        display: inline-block;
+        width: 35%;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        text-align: center;
+        text-indent: initial;
+        margin-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    p{
+        margin-left: 15px;
+        color: #999;
+        padding-top: 10px;
+    }
+}
+//首页/发行中/通证详情
+.pass-details-issue-btn{
+    img{
+        margin:10px 150px 0 5px;
+    }
+}
+.copy-text{
+    -webkit-touch-callout: all;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+}
+//首页/发行中/买入通证
+.buy-pass-name {
+    height: 50px;
+    background-color: #fff;
+    margin-top: 10px;
+    overflow: hidden;
+    span{
+        display: block;
+        font-size: 0.8rem;
+    }
+    img{
+        margin: 10px;
+    }
+}
+.buy-password-show {
+    margin-top: -80px;
+}
+.buy-pass-name-text {
+   margin: 10px 0 0 10px;
+}
+.buy-pass-name-price {
+    background-color: #fff;
+    margin-top: 10px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 10px;
+    p{
+        margin-left: 15px;
+        color:#999;
+        display:inline-block;
+    }
+    span{
+        margin-right: 10px;
+        color:#999;
+    }
+}
+.buy-pass-time {
+    margin-bottom: 20px;
+    span {
+    color: red;
+    margin-left: 15px;
+    }
+}
+//首页/待发行/入驻期
+.to-issue-name {
+    margin-top: 10px;
+}
+.to-issue-progess{
+    span{
+        margin: 10px 0 10px 10px;
+        display: inline-block;
+    }
+    .el-steps--horizontal{
+        margin-left: 30px;
+    }
+}
+.to-issue-btn{
+    margin:20px 0 0 10px;
+    button{
+        margin-right: 5px;
+    }
+}
+//首页/探索
+//.certificate-list-card li:first-child img{
+//  width: 50px;
+//  position: relative;
+//  top: 10px;
+//  left: -10px;
+//}
+.certificate-list-card li{
+    height: 70px;
+    width: 98%;
+    background-color: #fff;
+    margin: 10px auto;
+    border-radius:5px;
+    box-shadow: 1px 5px 5px #ccc;
+    p{
+        font-size: 0.8rem;
+        color: #999;
+    }
+    span{
+        font-size: 0.8rem;
+        margin: 10px 0 10px 0px;
+        display: block;
+        position: relative;
+        top: 15px;
+    }
+    img{
+        position: relative;
+        top: 15px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+.certificate-list-card button.mint-button.fr.mint-button--primary.mint-button--small {
+    position: relative;
+    top: -28px;
+    right: 10px;
+    height: 20px;
+    label{
+       font-size: 0.8rem;
+       line-height: 20px;
+    }
+}
+/*--------------------------商户---------------*/
+.merchant-list{
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    margin-top: 10px;
+    height: auto;
+}
+.merchant-list-img{
+    display: inline-block;
+    margin:0 20px 0 -20px;
+}
+.merchant-list-name{
+    p{
+        display: inline-block;
+        margin: 5px 0px 0 50px;  
+    }
+    ul{
+        height: auto;
+        margin: -10px 0 0 10px;
+        li{
+            float: left;
+            margin-right: 15px;    
+        }
+    }
+}
+.merchant-list-nauthentication{
+    position: absolute;
+    right: 0;
+    bottom: 80px;
+}
+/*------------------------我的---------------------*/
+.mine-head{
+    height: 0;
+    text-align: center;
+    margin-top: 30px;
+}
+.mine-cell{
+    margin-top: 150px;
+}
+.mine-cell-list{
+    margin:5px 5px 10px 5px;
+}
+//------------------------我的/交易流水------------------
+.transaction-flow-title{
+    color:#fff;
+    width: 100%;
+    img{
+        width: 15px;
+        padding:0 5px 0 5px;   
+    }
+    ul{
+        margin-left: -30px;
+        li{
+            margin-right: 20px;
+        }
+    }
+    fl{
+        margin-right: 30px;
+        font-size:0.8rem;   
+    }
+}
+.transaction-flow-list{
+    margin-top: 50px;
+}
+//-----------------------我的/资产------------------
+.assets-list{
+    margin:10px 0 40px 0;
+    img{
+        width: 24px;
+        float: right;
+        margin-right: 10px;
+    }
+  }
+//我的/资产/明细
+.assets-detailed-header{
+    margin-bottom: 1px;
+}
+  .assets-detailed-list p {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: -10px;
+}
+.assets-list-right {
+    margin: -30px 10px 0 0;
+}
+.assets-detailed-list a.mint-cell {
+    margin-bottom: -23px;
+}
+//我的/资产/明细/交易详情
+.transaction-details-number {
+    background-color: #fff;
+    text-align: center;
+    padding: 20px;
+    span{
+        font-size: 1.4rem;
+    }
+    p{
+        font-size: 0.8rem;
+        color:#999;
+    }
+}
+.transaction-details-adress {
+    background-color: #fff;
+    height: 80px;
+    padding: 0 10px 0 20px;
+    margin-top: -1px;
+    li{
+        line-height: 40px;
+        color: #999;
+    }
+}
+.transaction-details-information{
+     background-color: #fff;
+    height: 150px;
+    padding: 0 10px 0 20px;
+    margin-top: 10px;
+    li{
+       line-height: 40px;
+       color: #999; 
+    }
+}
+//我的/资产/资产详情
+.assets-detailed-exhibition {
+    background-color: #fff;
+    span{
+        font-size: 0.8rem;
+        color:#999;
+    }
+}
+.assets-detailed-exhibition-text{
+    text-align: center;
+    padding-top: 30px;
+    span{
+        font-size: 1.5rem;
+        
+    }
+}
+.assets-detailed-exhibition-img {
+    width: 55%;
+    margin: 0 auto;
+    height: 80px;
+    padding-top: 20px;
+    li{
+        font-size: 0.8rem;
+    }
+}
+.assets-detailed-whole {
+    height: 40px;
+    background-color: #fff;
+}
+.assets-detailed-whole-header {
+    span{
+        margin:10px 10px 0 10px;
+        font-size: 0.9rem;
+    }
+}
+.assets-detailed-tabbar button{
+    margin-top: 20px;
+}
+//我的/资产/资产详情/转入
+.to-change-into-exhibition{
+    background-color: #fff;
+    margin-top: 10px;
+    height: auto;
+    padding-bottom: 20px;
+    span{
+        font-size: 1.0rem;
+        text-align: center;
+    }
+}
+.to-change-into-exhibition-img {
+    width: 55%;
+    margin: 0 auto;
+    height: 80px;
+    padding-top: 20px;
+    li{
+        font-size: 0.8rem;
+    }
+}
+.to-change-into-exhibition-adress{
+    word-wrap:break-word;
+    word-break:break-all;
+    margin-top: 20px;
+    padding-bottom: 15px;
+}
+.to-change-into-qrcode {
+    background-color: #fff;
+    margin-top: -1px;
+    text-align: center;
+    p{
+      font-size: 0.8rem;
+      color:#999;
+      padding-bottom: 20px;  
+    }
+}
+//我的/资产/资产详情/转出
+.turn-out-exhibition {
+    background-color: #fff;
+    height: 70px;
+    margin: 10px 0 10px 0;
+}
+.turn-out-exhibition-img{
+    margin-left: 15px;
+    padding-top: 14px;
+    span{
+      display: block;  
+      font-size: 0.8rem;
+    }
+    img{
+        margin-right: 15px;
+    }
+}
+.turn-out-exhibition-qrcode {
+    background-color: #fff;
+    text-align: center;
+    margin:30px 0 30px 0;
+    height: 50px;
+    line-height: 50px;
+}
+.turn-out-exhibition-text p{
+    font-size: 0.8rem;
+    color:#999;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+//  margin-top: 10px;
+//  img{
+//      width: 24px;
+//  }
+//}
+
+//  ----------------------我的/安全中心---------------------
+ .safety-center-list .mint-cell {
+    margin:5px 0px 5px 0;
+  }
+ .safety-center-list .mint-cell-wrapper {
+    background-image:none;
+ }
+  //  ----------------------我的/安全中心/重置密码---------------------
+.rest-pass-word-from {
+    background-color: #fff;
+    text-align: center;
+    padding-bottom: 10px;
+}
+//.rest-pass-word-from .el-input__inner{
+//  border: none;
+//  border-bottom: 1px solid #999;
+//  border-radius:0px;
+//}
+//.rest-pass-word-from .el-input{
+//  margin-top: 0px;   
+//}
+.rest-pass-word-from .mint-cell-wrapper {
+    background-image: none;
+}
+.rest-pass-word-from label{
+    margin-left: 15px;
+}
+.rest-pass-word-text{
+    margin-top: 20px;
+    p{
+        font-size: 0.8rem;
+        color: #999;
+        margin-left: 15px;
+    }
+}
+//我的/安全中心/短信验证
+.open-information-from {
+    background-color: #fff;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.open-information-from label{
+    margin-left: 15px;
+}
+//.open-information-from .el-input__inner{
+//  border: none;
+//  border-bottom: 1px solid #999;
+//  border-radius:0px;
+//}
+.open-information-from {
+    span{
+        position: relative;
+        right: 30px;
+        top: 40px;
+        z-index: 1;
+    }
+}
+//我的/安全中心/开启支付密码
+.open-pay-password{
+    background-color: #fff;
+}
+.open-pay-password-keyboard-title {
+    margin: 15px;
+}
+.open-pay-password-keyboard .van-password-input{
+    padding-bottom: 20px;
+}
+.open-pay-password-keyboard-text {
+    font-size: 0.8rem;
+    margin: 10px;
+    padding-bottom: 20px;
+}
+//我的/安全中心/安全验证
+.safety-verification{
+    background-color: #fff; 
+}
+.safety-verification-list {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    input{
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+    }
+    ul{
+        margin-bottom: 20px;
+        li{
+            padding: 10px 10px 0 15px; 
+        }
+    }
+}
+.safety-send{
+    position: relative;
+    top: -25px;
+    right: 10px;  
+}
+.safety-verification-text {
+    font-size: 0.8rem;
+    color: #999;
+    padding:10px 0 20px 10px;
+}
+
+//------------------------------我的/关于我们--------------
+.about-our b{
+    width: 5px;
+    height: 5px;
+    background-color: #000;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: -3px; 
+}
+.about-our-logo {
+    text-align: center;
+    margin-top: 20px;
+}
+.about-our-text {
+    background-color: #fff;
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    ul{
+        padding: 10px;
+        li{
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+    }
+}
+.about-our-text ul li:first-child{
+    font-size: 1.0rem;
+    margin-left: 0px;
+}
+.about-our-Contact{
+    background-color: #fff;
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    li{
+        border-bottom: 1px solid #999;
+        line-height: 35px;
+        font-size: 0.8rem;
+        margin:0 10px 0 16px;
+    }
+}
+.about-our-Contact ul li:first-child{
+    font-size: 1.0rem;
+    margin-left: 8px;
+    border-bottom:none;
+}
+//------------------------------我的/地址薄/编辑---------------
+.edit-adress {
+    background-color: #fff;
+}
+.edit-adress-list {
+    margin-top: 10px;
+    span{
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        padding-left: 15px;
+        color: #999;
+    }
+}
+.edit-adress-list a.mint-cell.mint-field.is-nolabel {
+    border-bottom: 1px solid #999;
+    margin: 0 20px;
+}
+.edit-adress-btn{
+    margin: 20px 0 20px 0;
+}
+.edit-adress-text {
+    font-size: 0.8rem;
+    color: #999;
+    margin-left: 15px;
+    padding-bottom: 20px;
+}
+//------------------------------我的/地址薄/添加--------------
+.add-adress-list {
+    margin-top: 1px;
+    background-color: #fff;
+    padding-bottom: 20px;
+    span{
+        padding-left: 15px;
+        color: #999;
+        margin-top: 20px;
+        display: inline-block;
+    }
+}
+.add-adress-list a.mint-cell.mint-field.is-nolabel {
+    border-bottom: 1px solid #999;
+    margin: 0 20px;
+}
+.add-adress-list .mint-cell-wrapper {
+    background-image: none;
+}
+.add-adress-btn{
+    margin: 20px 0 20px 0;
+    background-color: #fff;
+}
+//------------------------------我的/公告中心---------------
+.news-details-list {
+    margin-top: 1px;
+    background-color: #fff;
+    overflow: hidden;
+    span{
+    font-size: 0.8rem;
+    }
+    ul{
+        width: 98%;
+        font-size: 0.8rem;
+        margin: 10px 10px 10px 15px;
+    }
+}
+.notice{
+    width: 98%;
+    margin: 0 auto;
+    height: 38px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.anim{
+    transition: all 0.5s;
+    margin-top: -30px;
+}
+.notice-list{
+    img{ 
+        position: relative;
+        top: 10px;
+        padding-right: 10px;
+    }
+    li{
+        margin-right: 5px;
+        color:#000;
+        font-size: 0.9rem;
+
+    }
+}
+
+.news-center-list .mint-cell-title {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+//----------------------------首页/通证介绍-----------------------
+.pass-information{
+    border-bottom:1px solid #ccc;
+    width: 100%;
+    li{
+        margin-top: 10px;
+        float: left;
+        border-right:1px solid #ccc;
+        padding: 0 10px 0 10px; 
+        height: auto;
+    }
+}
+.pass-information li:last-child{
+    border-right:none;
+}
+.pass-time {
+    margin-top: 80px;
+}
+ .pass-quotation button{
+    margin-right: 70px;
+    margin-left: 40px;
+    margin-top: 150px;
+}
+.popup{
+    height: auto;
+    width: 100%;
+}
+.popup-header{
+    text-align: center;
+    img{
+        float: left;
+        width: 14px;
+        height: auto; 
+    }
+}
+button.mint-button.popup-btn.mint-button--primary.mint-button--large {
+    margin: 0 auto;
+}
+//-------------首页/支付结果-------------
+.payment-result-header h3{
+    text-align: center;
+}
+.payment-result-header{
+    border-bottom:1px solid #ccc;
+    a{
+        margin-top: -40px; 
+    }
+}
+.payment-result-success{
+    text-align: center;
+    margin-top: 10px;
+    img:first-child{
+         width: 50px;
+        height: auto; 
+    }
+    span{
+        font-size: 2.4rem;
+    }
+    i{
+         display: block;
+        font-weight: 400;       
+        text-decoration:line-through;
+        font-size: 2.0rem;
+        color:#CCCCCC;  
+    }
+}
+.activity-line-l{
+    margin-top: 10px;   
+    height: 1px;
+    width: 40%;
+    background-color: #ccc;
+}
+.activity-line-r{
+    margin-top: 10px;   
+    height: 1px;
+    width: 40%;
+    background-color: #ccc;
+}
+.payment-result-activity span{
+    margin-left: 15px;
+    color:#ccc;
+}
+.payment-result-invitation{
+    margin-top: 10px;
+}
