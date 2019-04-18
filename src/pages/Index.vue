@@ -192,7 +192,7 @@
 							  <van-tab title="待发行">
 							  	 	<ul  class="certificate-list-card">
 									  	<router-link to="/issue">
-												<li>
+												<li	>
 													<img src="../assets/images/u345.png" alt="" class="fl" />
 													<span>PLD (PLD)</span>
 													<span>PLATOLAND集团</span>
@@ -277,7 +277,7 @@ creadte() {
     setInterval(this.scroll,3000)
 },
 	mounted: function () {
-  	this.showdata()
+	this.showdata()
 //	  console.group(this.$store.state.app.showFooter)
 	},
   methods:{	
@@ -310,11 +310,11 @@ creadte() {
 		},
 		//	  公告通知
     scroll(){
-       this.animate=true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
-       setTimeout(()=>{      //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
-               this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
-               this.items.shift();               //删除数组的第一个元素
-               this.animate=false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
+       this.animate=true
+       setTimeout(()=>{ 
+               this.items.push(this.items[0])
+               this.items.shift()
+               this.animate=false
        },500)
     }
   }

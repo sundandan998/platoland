@@ -15,8 +15,10 @@ module.exports = function () {
 		      'remarks':'@date(2019-4-dd)'
     	}]
     }),
-    historyData:Mock.mock({
-    	'data|5':[{
+    detailsData:Mock.mock({
+    	'data':[{
+    		'name': '@cname',
+    		'nickname':'@cword'
     		'date': '@datetime("MM-dd HH:mm:ss")',
     		'email':'@email',
     		'num':'@increment'
@@ -24,19 +26,21 @@ module.exports = function () {
     }),
     query:([
     	{
-    		  'name': '流通中',
-		      'hold':'10',
-		      'issue':'152',
-		      'date':'2019-4-15'
-    },
-   	{
+    			'id':'0',
     		  'name': '待发行',
 		      'hold':'10',
 		      'issue':'152',
 		      'date':'2019-4-15'
     },
-     	{
+   	{			'id':'1',
     		  'name': '发行中',
+		      'hold':'10',
+		      'issue':'152',
+		      'date':'2019-4-15'
+    },
+     	{
+     			'id':'2',
+    		  'name': '流通中',
 		      'hold':'10',
 		      'issue':'152',
 		      'date':'2019-4-15'
