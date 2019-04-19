@@ -1,7 +1,7 @@
 <template>
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
-			<mt-header title="通证详情123">
+			<mt-header title="通证详情">
 			  <router-link to="/" slot="left">
 			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
@@ -69,7 +69,7 @@
 					</li>
 					<li>首次发行</li>
 					<li>2019-3-28</li>
-					<li>{{this.remarks}}</li>
+					<li>{{this.$route.query.remarks}}</li>
 					<li>50</li>
 					<li>2.00000</li>
 					<li>5.00</li>
@@ -92,8 +92,7 @@ import Clipboard from 'clipboard'
 import {mapActions, mapGetters,mapState} from 'vuex'
 export default {
 	created () {
-//		this.buyHistoryData()
-//console.log(this.datalist)
+//		this.issueing()
 	},
 	data() {
 	    return {

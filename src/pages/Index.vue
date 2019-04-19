@@ -64,8 +64,8 @@
 	        	</ul> 
 	    		</div>    
 	    		<div class="home-assets-subscription-content">
-	    			<router-link to="/issue">
-	    				<div class="assets-subscription">
+	    			<!--<router-link :to="{path:'/issue'}">-->
+	    				<div class="assets-subscription" @click="issue">
 	    						<img src="../assets/images/u345.png"/>
 	    						<div class="assets-subscription-text fr">
 	    								<span>WHZ(网红站)</span>
@@ -87,9 +87,9 @@
 									</ul>
 								</div>
 	    				</div>
-	    			</router-link>
-	    			<router-link to="/details">
-	    				<div class="assets-subscription">
+	    			<!--</router-link>-->
+	    			<!--<router-link to="/details">-->
+	    				<div class="assets-subscription" @click="issueing">
 	    					  <img src="../assets/images/u365.png"/>
 	    						<div class="assets-subscription-text fr">
 	    								<span>WHZ(网红站)</span>
@@ -111,7 +111,7 @@
 									</ul>
 								</div>
 	    				</div>
-	    			</router-link>
+	    			<!--</router-link>-->
 	    			<router-link to="/pass">
 	    				<div class="assets-subscription">  						
 	    					<img src="../assets/images/ld.png"/>
@@ -308,6 +308,29 @@ creadte() {
 			window.localStorage.setItem('data',JSON.stringify(this.datalist))
 //			console.log(this.datalist[1].remarks)
 		},
+//		待发行
+		issue(){
+			this.$router.push({
+				path:'/issue',
+				query:{
+					remarks: this.datalist[0].remarks,
+					issue:this.datalist[0].issue,
+					hold:this.datalist[0].hold
+				}
+			})
+		},
+//		发行中
+	issueing(){
+			this.$router.push({
+				path:'/details',
+				query:{
+					remarks: this.datalist[1].remarks,
+					issue:this.datalist[1].issue,
+					hold:this.datalist[1].hold
+				}
+			})
+		}
+	},
 		//	  公告通知
     scroll(){
        this.animate=true
@@ -323,8 +346,8 @@ creadte() {
 //		      'app.isShow'
 //		    ])
 //		}
-}
+//}
 </script>
 <style lang="scss">
-	  @import '../assets/scss/global';
+	  @import '../assets/scss/global'
 </style>

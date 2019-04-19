@@ -25,10 +25,10 @@
 						<img src="../../../assets/images/icon-3.png"/>
 						<span class="details-information-identification"> LD(LaoDou)</span>
 					</li>
-					<li>捞豆</li>
+					<li>{{detailslist.nickname}}</li>
 					<li>		
 						<router-link to="/subject">
-							<span>15dr</span>	
+							<span>{{detailslist.address}}</span>	
 						</router-link></li>
 					<li>
 						<router-link to="/subject">
@@ -63,20 +63,21 @@
 					<li>发行单价:</li>
 				</ul>
 				<ul class="fr">
-					<li>待发行</li>
-					<li>5%</li>
+					<li>{{detailslist.state}}</li>
+					<li>{{detailslist.Proportion}}</li>
 					<li>
 						<img src="../../../assets/images/u318.png"/>
-						<span class="details-information-identification"> USDT</span>
+						<span class="details-information-identification">{{detailslist.assets}}
+						</span>
 					</li>
-					<li>首次发行</li>
-					<li>2019-3-28</li>
-					<li>2019-3-28</li>
-					<li>50</li>
-					<li>2.00000</li>
-					<li>5.00</li>
-					<li>6000</li>
-					<li>6.00</li>
+					<li>{{detailslist.mode}}</li>
+					<li>{{this.$route.query.remarks}}</li>
+					<li>{{this.$route.query.remarks}}</li>
+					<li>{{this.$route.query.issue}}</li>
+					<li>{{this.$route.query.hold}}</li>
+					<li>{{detailslist.purnum}}</li>
+					<li>{{detailslist.initialprice}}</li>
+					<li>{{detailslist.issueprice}}</li>
 				</ul>
 			</div>
 		</div>
@@ -85,15 +86,21 @@
 
 <script>
 export default {
-	created() {
-//		this.buyHistoryData()
+	created(){
 	},
 	data() {
 	    return {
-
+	    	detailslist:[]
 	    }
 	},
+	mounted() {
+		this.detailsdata()
+	},
 	methods:{
+		async detailsdata(){
+		const res = await this.$http.get('/api/detailsData')
+		this.detailslist = res.data
+		}
 	}
 }
 </script>

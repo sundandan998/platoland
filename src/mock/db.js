@@ -1,12 +1,14 @@
 var Mock = require('mockjs')
 module.exports = function () {
   return {
+//	登录注册接口
     user: Mock.mock({
       'name': '@cname',
       'email': '@email',
       'age|18-25': 22,
       'sex': 'girl'
     }),
+//  首页 --待发行 发行中--流通中数据接口
     formData: Mock.mock({
     	'data|3':[{
     		  'name': '@cname',
@@ -15,16 +17,28 @@ module.exports = function () {
 		      'remarks':'@date(2019-4-dd)'
     	}]
     }),
+//  通证详情接口
     detailsData:Mock.mock({
-    	'data':[{
     		'name': '@cname',
-    		'nickname':'@cword'
-    		'date': '@datetime("MM-dd HH:mm:ss")',
-    		'email':'@email',
-    		'num':'@increment'
-    	}]
+    		'nickname':'@cword',
+    		'address':'@ip',
+    		'subject':'@county()',
+    		'Issuer': 'platoland集团',
+    		'num':'@increment',
+    		'state':'待发行',
+    		'Proportion':'@float(60, 100, 3, 5)',
+    		'assets':'USDT',
+    		'mode':'首次发行',
+    		'issuedate':'@datetime',
+    		'closingdata':'@datetime',
+    		'smallnum':'@increment(100)',
+    		'issuemum':'@increment',
+    		'purnum':'@increment(100)',
+    		'initialprice':'@increment()',
+    		'issueprice':'@increment'
     }),
-    query:([
+    query:(
+    	[
     	{
     			'id':'0',
     		  'name': '待发行',
