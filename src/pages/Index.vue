@@ -112,8 +112,8 @@
 								</div>
 	    				</div>
 	    			<!--</router-link>-->
-	    			<router-link to="/pass">
-	    				<div class="assets-subscription">  						
+	    			<!--<router-link to="/pass">-->
+	    				<div class="assets-subscription" @click="issued">  						
 	    					<img src="../assets/images/ld.png"/>
 	    						<div class="assets-subscription-text fr">
 	    								<span>WHZ(网红站)</span>
@@ -135,7 +135,7 @@
 									</ul>
 								</div>
 	    				</div>
-	    			</router-link>    			
+	    			<!--</router-link>-->    			
 	    		</div>
 	    		<div class="home-assets-more">
 	    			<span>更多功能,即将上线</span>
@@ -302,8 +302,19 @@ creadte() {
 				})
 			}
 		},
+		//	  公告通知
+    scroll(){
+       this.animate=true
+       setTimeout(()=>{ 
+               this.items.push(this.items[0])
+               this.items.shift()
+               this.animate=false
+       },500)
+    },
 	async showdata(){
-			const res = await this.$http.get('/api/formData')
+//		const res = await this.$http.get('/formData')
+			const url=this.$backStage('/formData')
+		 	const res = await this.$http.get(url)
 			this.datalist = res.data.data
 			window.localStorage.setItem('data',JSON.stringify(this.datalist))
 //			console.log(this.datalist[1].remarks)
@@ -329,18 +340,20 @@ creadte() {
 					hold:this.datalist[1].hold
 				}
 			})
-		}
 	},
-		//	  公告通知
-    scroll(){
-       this.animate=true
-       setTimeout(()=>{ 
-               this.items.push(this.items[0])
-               this.items.shift()
-               this.animate=false
-       },500)
-    }
-  }
+	//流通中
+	issued(){
+			this.$router.push({
+				path:'/pass',
+				query:{
+					remarks: this.datalist[2].remarks,
+					issue:this.datalist[2].issue,
+					hold:this.datalist[2].hold
+				}
+			})
+		}
+	}
+ }
 //	computed:{
 //			...mapGetters([
 //		      'app.isShow'

@@ -100,11 +100,9 @@ export default {
 	    }
 	},
 	mounted: function () {
-////	this.showdata()
 		this.remarks
-////	console.log(this.datalist)
-	console.group(this.$store.state.app.remarks)
-////	console.log(this.datalist)
+		console.group(this.$store.state.app.remarks)
+
 	},
 	methods:{
 //		复制

@@ -28,7 +28,18 @@
 		</div>
 	</div>
 </template>
-<script></script>
+<script>
+export default{
+	data(){
+		return{
+			
+		}
+	},
+	methods:{
+		
+	}
+}
+</script>
 <style lang="scss">
 	@import '../../../assets/scss/global'
 </style>

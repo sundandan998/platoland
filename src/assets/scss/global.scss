@@ -22,9 +22,9 @@ a{
     color:#979EAC;
 }
 .el-input__inner{
-    border: none;
-    border-bottom: 1px solid #999;
-    border-radius:0px;
+    border: none !important;
+    border-bottom: 1px solid #999 !important;
+    border-radius:0px !important;
 }
 .el-input{
     width: 90%;
@@ -37,7 +37,7 @@ a{
 }
 .mint-header{
     background-color:#fff !important;
-    color:#000;
+    color:#000 !important;
 }
 h1{
     font-weight: 400;
@@ -45,6 +45,9 @@ h1{
 $color-primary: #1aad19;
 body{
     background-color: #f6f6f6;
+}
+.van-tabs__line {
+    background-color: #456DF1 !important;
 }
 .mine-cell .mint-cell-wrapper{
     background-image:none;

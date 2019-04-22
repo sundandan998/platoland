@@ -17,6 +17,9 @@ import { Indicator } from 'mint-ui'
 import VueAxios from 'vue-axios'
 //引入jquery
 import $ from 'jquery'
+//api接口
+import AppConfig from './appconfig'
+Vue.use(new AppConfig())
 Vue.prototype.$Indicator = Indicator
 require('./mock.js')
 Vue.use(VueAxios, axios)

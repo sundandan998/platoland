@@ -130,8 +130,10 @@ export default{
 		}
 	},
 	methods:{	
-		async handleLogin(){
-			const res = await this.$http.get('/api/user')
+		async handleLogin(){			
+//			const res = await this.$http.get('/api/user')
+		 	const url=this.$backStage('/user')
+		 	const res = await this.$http.get(url)
 			const data = res
 //				 console.log(data)
 			if(data.status===200){
@@ -184,7 +186,7 @@ export default{
 
 <style lang="scss">
 	body{
-		background-color: #fff !important;
+		/*background-color: #fff !important;*/
 	}
 	@import '../../assets/scss/global';
 </style>

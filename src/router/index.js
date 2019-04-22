@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Index from '@/pages/Index'
 //测试页面
 import Cs from '@/pages/home/in-circulation/Cs'
-import demo from '@/pages/home/in-circulation/demo'
-import rank from '@/pages/home/in-circulation/rank'
 //登录页面
 import Login from '@/pages/login/Login'
 //登录页面--忘记密码
@@ -82,17 +80,7 @@ export default new Router({
       path: '/cs',
       name: 'Cs',
       component: Cs
-   },
-   	{
-      path: '/rank',
-      name: 'rank',
-      component: rank
-   	},
-   	{
-      path: '/demo',
-      name: 'demo',
-      component: demo
-   },
+  	},
 		//登录
 		{
       path: '/login',

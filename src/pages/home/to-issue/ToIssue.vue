@@ -98,7 +98,9 @@ export default {
 	},
 	methods:{
 		async detailsdata(){
-		const res = await this.$http.get('/api/detailsData')
+//		const res = await this.$http.get('/api/detailsData')
+		const url=this.$backStage('/detailsData')
+		const res = await this.$http.get(url)		
 		this.detailslist = res.data
 		}
 	}

@@ -1,7 +1,7 @@
 <template>
 	<div class="pass-details">
 		<div class="pass-details-header">
-			<mt-header title="通证详情44">
+			<mt-header title="通证详情">
 			  <router-link to="/assets" slot="left">
 			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
@@ -71,26 +71,15 @@
 					</li>
 					<li>首次发行</li>
 					<li>2019-3-28</li>
-					<li>2019-3-28</li>
-					<li>50</li>
-					<li>2.00000</li>
+					<li>{{this.$route.query.remarks}}</li>
+					<li>{{this.$route.query.issue}}</li>
+					<li>{{this.$route.query.hold}}</li>
 					<li>5.00</li>
 					<li>6000</li>
 					<li>6.00</li>
 				</ul>
 			</div>
 		</div>
-		<!--<div class="pass-details-issue-form">
-			<div class="pass-details-issue-form-heder">
-				<span>股东结构</span>
-			</div>
-			<el-table :data="tableData">
-				<el-table-column prop="name" label="股东"></el-table-column>
-      			<el-table-column prop="hold" label="持股比例"></el-table-column>
-      			<el-table-column prop="issue" label="发行比例"></el-table-column>
-      			<el-table-column prop="remarks" label="备注"></el-table-column>
-    		</el-table>
-		</div>-->
 		<div class="pass-details-issue-btn">
 			<router-link to="/deal">
 				<mt-button type="primary" size="large">去交易</mt-button>
@@ -111,7 +100,9 @@ export default {
 	},
 	methods:{
 		async formData(){
-		const res = await this.$http.get('/api/formData')
+//		const res = await this.$http.get('/api/formData')
+		const url=this.$backStage('/formData')
+		const res = await this.$http.get(url)
 		const data = res
 		if(data.status===200){
 	//		console.log(data.data.data[1].name)

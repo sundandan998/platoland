@@ -62,5 +62,9 @@ export default {
 </script>
 
 <style lang="scss">
+	.assest-header{
+		background-color: #fff;
+		color:#000;
+	}
 @import "../../../assets/scss/global";
 </style>
