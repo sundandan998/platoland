@@ -47,6 +47,8 @@ import Edit from '@/pages/mine/address-book/EditAddress'
 import Add from '@/pages/mine/address-book/AddAddress'
 //我的/公告消息
 import News from '@/pages/mine/news-center/NewsCenter'
+//我的/版本更新
+import Version from '@/pages/mine/version-update/Version'
 //我的/公告消息/详情
 import NewsDetails from '@/pages/mine/news-center/NewsDetails'
 //首页--通证列表
@@ -223,6 +225,12 @@ export default new Router({
       path: '/newsdetails',
       name: 'NewsDetails',
       component: NewsDetails  
+  	},
+  	//我的/版本更新
+  		{
+      path: '/version',
+      name: 'Version',
+      component: Version  
   	},
 		//首页--通证列表
 		{

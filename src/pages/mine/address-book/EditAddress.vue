@@ -11,15 +11,17 @@
 			</mt-header>
 		</div>
 		<div class="add-adress-list">
-			<span>备注名称</span>
-			<mt-field></mt-field>
+			<span>备注名称</span>			
+			<mt-field>
+				<span class="add-adress-name">{{this.$route.query.name}}</span>
+			</mt-field>
 			<span>描述</span>
 			<mt-field ></mt-field>
 			<span>USDT地址</span>
 			<mt-field >
 				<p class="to-change-into-exhibition-adress">
-				13SncaFeFFGQDYHSmWafwkTXCBWqaeix7cSmWafwkTXCBWqaeix7
-			</p>
+				{{this.$route.query.address}}
+				</p>
 			</mt-field>
 		</div>
 		<div class="edit-adress-btn ">

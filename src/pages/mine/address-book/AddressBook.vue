@@ -12,31 +12,50 @@
 			   </mt-button>
 			</mt-header>
 		</div>
-		<div class="adress-book-list">
-			<mt-cell title="将宝宝"label="13dfsd..422" >
-				<span>
-					<router-link to="/edit">
+		<div class="adress-book-list" v-for="item in book">
+			<mt-cell>				
+				<div class="adress-book-content fl">
+					<p>{{item.name}}</p>
+					<p>{{item.address}}</p>
+				</div>
+				<!--<router-link to="/edit">-->
+					<div @click="editcontent">
 						<mt-button size="small" type="primary">编辑</mt-button>
-					</router-link>
-				</span>
-			</mt-cell>
-			<mt-cell title="xxx"label="13dfsd..422" >
-				<router-link to="/edit">
-					<span><mt-button size="small" type="primary">编辑</mt-button></span>
-				</router-link>
+					</div>
+					
+				<!--</router-link>-->
 			</mt-cell>
 		</div>
 	</div>
 </template>
 <script>
 export default{
+	created () {
+    	this.address()
+  	},
 	data(){
 		return{
-			
+			book:[]
 		}
 	},
 	methods:{
-		
+		async address (){
+			const res = await this.$http.get('/api/address')
+//			const url=this.$backStage('/adress')
+//	 		const res = await this.$http.get(url)
+			const data = res	
+			this.book = res.data.data
+		},
+//		点击编辑跳转
+		editcontent(){
+			this.$router.push({
+				path:'/edit',
+				query:{
+					name: this.book[0].name,
+					address:this.book[0].address
+				}
+			})
+		}
 	}
 }
 </script>

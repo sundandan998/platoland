@@ -40,25 +40,32 @@ module.exports = function () {
     query:(
     	[
     	{
-    			'id':'0',
-    		  'name': '待发行',
-		      'hold':'10',
-		      'issue':'152',
-		      'date':'2019-4-15'
-    },
-   	{			'id':'1',
-    		  'name': '发行中',
-		      'hold':'10',
-		      'issue':'152',
-		      'date':'2019-4-15'
-    },
-     	{
-     			'id':'2',
-    		  'name': '流通中',
-		      'hold':'10',
-		      'issue':'152',
-		      'date':'2019-4-15'
-    }
-    	])
+				'id':'0',
+		  	'name': '待发行',
+	      'hold':'10',
+	      'issue':'152',
+	      'date':'2019-4-15'
+    	},
+			{			
+				'id':'1',
+			  'name': '发行中',
+	      'hold':'10',
+	      'issue':'152',
+	      'date':'2019-4-15'
+	    },
+		 	{
+	 			'id':'2',
+			  'name': '流通中',
+	      'hold':'10',
+	      'issue':'152',
+	      'date':'2019-4-15'
+			}
+    	]),
+    address:Mock.mock({
+    	'data|4':[{
+    			'name': '@cname',
+    			'address':'@guid'
+    	}]   
+    })
   }
 }
