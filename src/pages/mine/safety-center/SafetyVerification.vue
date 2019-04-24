@@ -1,8 +1,8 @@
 <template>
 	<div class="safety-verification">
 		<div class="safety-verification-header">
-			<mt-header title="安全验证">
-			  <router-link to="/" slot="left">
+			<mt-header fixed title="安全验证">
+			  <router-link to="/safety" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			</mt-header>
@@ -17,9 +17,12 @@
 				<li><input type="text" placeholder="请输入验证码"/><span class=" safety-send fr">发送</span></li>
 			</ul>
 		</div>
-		<div class="safety-verification-btn">
-			<mt-button type="primary" size="large">下一步</mt-button>
-		</div>
+		<router-link to="/open">
+			<div class="safety-verification-btn">
+				<mt-button type="primary" size="large">下一步</mt-button>
+			</div>
+		</router-link>
+		
 		<div class="safety-verification-text">
 			<p>注意：</p>
 			<p>为保证资产安全，请勿将邮箱、短信验证码泄露给他人。</p>

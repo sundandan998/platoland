@@ -1,7 +1,7 @@
 <template>
 	<div class="release">
 		<div class="purchase-pass-header">
-			<mt-header title="发布">
+			<mt-header fixed title="发布">
 			  <router-link to="/deal" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
@@ -32,6 +32,20 @@
 				<img src="../../../assets/images/ld.png" alt="" />	<span>USDT</span>	
 			</div>					
 		</div>
+		<div class="" v-if="hide">
+			<!-- 密码输入框 -->
+			<van-password-input
+			  :value="value"
+			  @focus="showKeyboard = true"
+			/>
+			<!-- 数字键盘 -->
+			<van-number-keyboard
+			  :show="showKeyboard"
+			  @input="onInput"
+			  @delete="onDelete"
+			  @blur="showKeyboard = false"
+			/>
+		</div>
 		<div class="purchase-pass-input">
 			<p>数量</p>
 			<input type="text" placeholder="买入数量" />
@@ -45,12 +59,32 @@
 			<input type="text" placeholder="卖方最低出售数量"/>  ~ <input type="text"placeholder="卖方最高出售数量" />
 		</div>
 			<div class="Purchase-pass-btn">
-				<mt-button size="large" type="primary">确定</mt-button>	
+				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>	
 		</div>
 	</div>
 </template>
 
 <script>
+export default{
+	data(){
+		return{
+	 		value: '',
+	      	hide:'',
+  			showKeyboard: true	
+		}
+	},
+	methods: {
+    onInput(key) {
+      this.value = (this.value + key).slice(0, 6);
+    },
+    onDelete() {
+      this.value = this.value.slice(0, this.value.length - 1);
+    },
+     passwordShow(hide){
+    	this.hide = !(hide === 'show')
+    }
+   }
+}
 </script>
 
 <style lang="scss">

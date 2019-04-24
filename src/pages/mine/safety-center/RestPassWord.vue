@@ -1,7 +1,7 @@
 <template>
 	<div class="rest-pass-word">
 		<div class="rest-pass-word-header">
-			<mt-header title="重置登录密码">
+			<mt-header fixed title="重置登录密码">
 			  <router-link to="/safety" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>

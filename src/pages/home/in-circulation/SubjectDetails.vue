@@ -1,8 +1,8 @@
 <template>
 	<div class="subject-details">
 		<div class="subject-details-header">
-			<mt-header title="通证主体">
-			  <router-link to="/" slot="left">
+			<mt-header fixed title="通证主体">
+			  <router-link to="/issue" slot="left">
 			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>

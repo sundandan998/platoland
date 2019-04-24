@@ -1,9 +1,9 @@
 <template>
   <div class="certificate-list">
     <div class="certificate-list-header">
-      <mt-header title="资产列表">
-        <router-link to="/" slot="left">
-          <mt-button icon="back"></mt-button>
+      <mt-header fixed title="资产列表">
+        <router-link to="/purchaserelease" slot="left">
+          <mt-button icon="back"v-on:click="back"></mt-button>
         </router-link>
       </mt-header>
     </div>
@@ -62,17 +62,20 @@ export default {
   },
   created() {},
   methods: {
-    removeData(a) {
-      let newGetData =globalData	
-      let temporary = newGetData.map((item, index) => {
-        if (item.name == a) {
-          item.hidden = 0;
-          this.$router.push({ name: "Assets", params: item })
-        }
-        return item
-      })
-       globalData = temporary
-    }
+//  removeData(a) {
+//    let newGetData =globalData	
+//    let temporary = newGetData.map((item, index) => {
+//      if (item.name == a) {
+//        item.hidden = 0;
+//        this.$router.push({ name: "Assets", params: item })
+//      }
+//      return item
+//    })
+//     globalData = temporary
+//  },
+    back(){
+        	this.$router.go(-1)//返回上一层
+    	}
   }
 }
 </script>

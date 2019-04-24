@@ -1,9 +1,9 @@
 <template>
 	<div class="pass-details">
 		<div class="pass-details-header">
-			<mt-header title="通证详情">
-			  <router-link to="/assets" slot="left">
-			    <mt-button icon="back">返回</mt-button>
+			<mt-header fixed title="通证详情">
+			  <router-link to="/" slot="left">
+			    <mt-button icon="back"返回></mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -27,9 +27,10 @@
 					</li>
 					<li>捞豆</li>
 					<li>		
-						<router-link to="/subject">
-							<span>15dr</span>	
-						</router-link></li>
+						<span class="tag-read" @click="copy"
+							data-clipboard-text="sdsf">
+							fdsf
+						</span>
 					<li>
 						<router-link to="/subject">
 							<span>北京河底捞餐饮股份有限公司</span>	
@@ -89,6 +90,7 @@
 </template>
 
 <script>
+import Clipboard from 'clipboard'
 export default {
 	created () {
     	this.formData()
@@ -110,6 +112,25 @@ export default {
 				this.tableData = data.data.data	
 				}
 			}
+		},
+//		复制
+		copy() {
+	        var clipboard = new Clipboard('.tag-read')
+	        clipboard.on('success', e => {
+	          console.log('复制成功')
+	          // 释放内存
+	          clipboard.destroy()
+	        })
+	        clipboard.on('error', e => {
+	          // 不支持复制
+	          console.log('该浏览器不支持自动复制')
+	          // 释放内存
+	          clipboard.destroy()
+	        })
+      },
+//		返回上一级
+		back(){
+			this.$router.go(-1)
 		}
 	  }
 	}

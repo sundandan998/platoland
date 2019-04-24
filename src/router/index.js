@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/pages/Index'
+//import Home from '@/pages/Home'
 //测试页面
 import Cs from '@/pages/home/in-circulation/Cs'
 //登录页面
@@ -13,6 +13,12 @@ import Reset from '@/pages/login/reset-mail/ResetMail'
 import Register from '@/pages/register/Register'
 //注册页面/发送邮件
 import Send from '@/pages/register/send-mail/SendMail'
+//首页
+import Home from '@/pages/home/Home'
+//我的
+import Mine from '@/pages/mine/Mine'
+//探索
+import Explore from '@/pages/explore/Explore'
 //我的/关于我们
 import About from '@/pages/mine/about-our/AboutOur'
 //我的/资产
@@ -27,6 +33,8 @@ import TransactionDetails from '@/pages/mine/assets/TransactionDetails'
 import Into from '@/pages/mine/assets/ToChangeInto'
 //首页/我的/资产/明细/转出
 import Out from '@/pages/mine/assets/TurnOut'
+//首页/我的/资产/明细/扫一扫
+import Scan from '@/pages/mine/assets/Scan'
 //我的/安全
 import Safety from '@/pages/mine/safety-center/SafetyCenter'
 //我的/安全/重置密码
@@ -113,10 +121,23 @@ export default new Router({
       name: 'Send',
       component: Send
     },
+     // 首页
     {
       path: '/',
-      name: 'Index',
-      component: Index
+      name: 'Home',
+      component: Home
+    },
+    //  我的
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: Mine
+    },
+    // 探索
+    {
+      path: '/explore',
+      name: 'Explore',
+      component: Explore
     },
 		//  我的/关于我们
 		{
@@ -159,6 +180,12 @@ export default new Router({
       path: '/out',
       name: 'Out',
       component: Out
+    },
+    //首页/我的/资产/明细/扫一扫
+    {
+      path: '/sacan',
+      name: 'Scan',
+      component: Scan
     },
      // 我的/安全
     {
@@ -228,6 +255,7 @@ export default new Router({
   	},
   	//我的/版本更新
   		{
+//    path: '/version/:name',
       path: '/version',
       name: 'Version',
       component: Version  

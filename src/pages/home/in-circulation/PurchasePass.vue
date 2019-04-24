@@ -1,8 +1,8 @@
 <template>
 	<div class="Purchase-pass">
 		<div class="Purchase-pass-header">
-			<mt-header title="购买通证">
-			  <router-link to="/buy" slot="left">
+			<mt-header fixed title="购买通证">
+			  <router-link to="/deal" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			</mt-header>
@@ -33,27 +33,27 @@
 		</div>
 		<div class="Purchase-pass-btn">
 			<!--<router-link to="/payment">-->
-				<mt-button size="large" type="primary">确定</mt-button>
+				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
 			<!--</router-link>-->		
 		</div>
 			<div class="payment">
 		<div class="payment-header">
 			<!--<p>1.00(LD)</p>-->
 		</div>
-		<!-- 密码输入框 -->
-		<van-password-input
-		  :value="value"
-		  info="密码为 6 位数字"
-		  @focus="showKeyboard = true"
-		/>
-		
-		<!-- 数字键盘 -->
-		<van-number-keyboard
-		  :show="showKeyboard"
-		  @input="onInput"
-		  @delete="onDelete"
-		  @blur="showKeyboard = false"
-		/>
+		<div class="" v-if="hide">
+			<!-- 密码输入框 -->
+			<van-password-input
+			  :value="value"
+			  @focus="showKeyboard = true"
+			/>
+			<!-- 数字键盘 -->
+			<van-number-keyboard
+			  :show="showKeyboard"
+			  @input="onInput"
+			  @delete="onDelete"
+			  @blur="showKeyboard = false"
+			/>
+		</div>
 	</div>
 	</div>
 </template>
@@ -63,7 +63,8 @@ export default {
   data() {
     return {
       value: '',
-      showKeyboard: false
+      hide:'',
+      showKeyboard: true
     };
   },
   methods: {
@@ -72,10 +73,22 @@ export default {
     },
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
+    },
+    passwordShow(hide){
+      this.hide = !(hide === 'show')
     }
+  },
+  watch:{
+  	value(){
+  		if(this.value.length==6){
+  			this.$router.push({
+  				path:'/deal'
+  			})
+  		}
+  	}
   }
 }
 </script>
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

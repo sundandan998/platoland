@@ -1,7 +1,7 @@
 <template>
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
-			<mt-header title="通证详情">
+			<mt-header fixed title="通证详情">
 			  <router-link to="/" slot="left">
 			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
@@ -27,7 +27,10 @@
 					</li>
 					<li>捞豆</li>
 					<li>
-						<span class="tag-read" data-clipboard-text="15drdf" @click="copy">15drdf</span>
+						<span class="tag-read" @click="copy"
+							data-clipboard-text="sdsf">
+							sdsf
+						</span>
 					<li>
 						<router-link to="/subject">
 							<span>北京河底捞餐饮股份有限公司</span>	
@@ -119,7 +122,8 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-       }
+     },
+
 	},
 	computed:{
 		...mapState({

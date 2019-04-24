@@ -2,9 +2,9 @@
 	<div class="transaction-details">
 		<div class="transaction-details-header">
 			<div class="assets-detailed-header">
-				<mt-header title="交易详情">
+				<mt-header fixed title="交易详情">
 				  <router-link to="/detailedlist" slot="left">
-				    <mt-button icon="back"></mt-button>
+				    <mt-button icon="back" v-on:click="back"></mt-button>
 				  </router-link>
 				</mt-header>
 			</div>
@@ -40,6 +40,18 @@
 </template>
 
 <script>
+export default{
+	data(){
+		return{
+			
+		}
+	},
+	methods:{
+		back(){
+        	this.$router.go(-1);//返回上一层
+    	},
+	}
+}
 </script>
 
 <style lang="scss">

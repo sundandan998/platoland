@@ -1,8 +1,8 @@
 <template>
 	<div class="adress-book">
 		<div class="adress-book-header">
-			<mt-header title="地址簿">
-			  <router-link to="/" slot="left">
+			<mt-header fixed title="地址簿">
+			  <router-link to="/mine" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right">

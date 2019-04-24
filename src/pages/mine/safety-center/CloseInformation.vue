@@ -1,7 +1,7 @@
 <template>
 	<div class="open-information">
 		<div class="open-information-header">
-			<mt-header title="关闭短信验证">
+			<mt-header fixed title="关闭短信验证">
 			  <router-link to="/safety" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>

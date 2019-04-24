@@ -1,7 +1,7 @@
 <template>
 	<div class="turn-out">
 		<div class="turn-out-header">
-			<mt-header title="转出">
+			<mt-header fixed title="转出">
 			  <router-link to="/assetsdetailed" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>

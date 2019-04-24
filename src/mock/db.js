@@ -37,6 +37,7 @@ module.exports = function () {
     		'initialprice':'@increment()',
     		'issueprice':'@increment'
     }),
+//  首页流通中/待发行/发行中接口
     query:(
     	[
     	{
@@ -61,11 +62,16 @@ module.exports = function () {
 	      'date':'2019-4-15'
 			}
     	]),
+//  	地址簿接口
     address:Mock.mock({
     	'data|4':[{
     			'name': '@cname',
     			'address':'@guid'
     	}]   
-    })
+    }),
+		//  版本号接口
+			version:Mock.mock({
+  			"version|123.1-10": 1
+		})
   }
 }

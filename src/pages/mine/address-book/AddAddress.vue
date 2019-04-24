@@ -1,7 +1,7 @@
 <template>
 	<div class="add-address">
 		<div class="add-address-header">
-			<mt-header title="添加地址">
+			<mt-header fixed title="添加地址">
 			  <router-link to="/book" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>

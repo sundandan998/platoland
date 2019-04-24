@@ -1,8 +1,8 @@
 <template>
 	<div class="news-details">
 		<div class="news-details-header">
-			<mt-header title="公告详情">
-			  <router-link to="/" slot="left">
+			<mt-header fixed title="公告详情">
+			  <router-link to="/news" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			</mt-header>

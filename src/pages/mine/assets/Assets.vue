@@ -1,8 +1,8 @@
 <template>
   <div class="assest">
     <div class="assest-header">
-      <mt-header title="资产">
-        <router-link to="/" slot="left">
+      <mt-header fixed title="资产">
+        <router-link to="/mine" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
         <mt-button icon slot="right">
@@ -17,10 +17,10 @@
         <img src="../../../assets/images/u3511.png" alt>
       </router-link>
     </div>
-    <div class="certificate-list-card">
+    <div class="certificate-list-card assets-list-add">
       <ul>
         <li v-for="(item, index) in addList" :key="index">
-          <router-link to="/pass">
+          <router-link to="/assetsdetailed">
             <img src="../../../assets/images/u345.png" alt class="fl">
             <span>{{item.name}}</span>
             <span>{{item.company}}</span>

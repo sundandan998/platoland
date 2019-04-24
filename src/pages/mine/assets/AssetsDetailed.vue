@@ -1,7 +1,7 @@
 <template>
 	<div class="assets-detailed">
 		<div class="assets-detailed-header">
-			<mt-header title="资产详情">
+			<mt-header fixed title="资产详情">
 			  <router-link to="/assets" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
@@ -12,7 +12,10 @@
 			      </span>
 			      <el-dropdown-menu slot="dropdown">
 			        <el-dropdown-item>扫一扫</el-dropdown-item>
-			        <el-dropdown-item>转出</el-dropdown-item>
+			        <router-link to="/out">
+			        	<el-dropdown-item>转出</el-dropdown-item>
+			        </router-link>
+			        
 			        <el-dropdown-item><span @click="remove">移除</span></el-dropdown-item>
 			      </el-dropdown-menu>
 			    </el-dropdown>

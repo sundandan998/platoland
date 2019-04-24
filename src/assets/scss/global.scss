@@ -430,7 +430,7 @@ table.el-table__body {
 }
 //首页/流通中/通证详情页/通证主体/主体介绍
 .subject-details-content {
-    margin-top: 10px;
+    margin-top: 30px;
     background-color: #fff;
     height: auto;
     p{
@@ -500,6 +500,13 @@ element.style {
     margin:10px 0 10px 10px;
 }
 //首页/流通中/去交易
+.pass-details-header {
+    margin-bottom: 45px;
+}
+.sell-pass {
+    position: relative;
+    top: -40px;
+}
 .van-tabs__line {
     z-index: 1;
     left: 0;
@@ -554,7 +561,7 @@ element.style {
 .Purchase-pass-content {
     background-color: #fff;
     width: 98%;
-    margin: 10px auto;
+    margin: 45px auto;
 }
 .Purchase-pass-content-top{
     img{
@@ -585,14 +592,11 @@ element.style {
 .Purchase-pass-tabbar .mint-cell-wrapper {
     padding-top: 10px;
 }
-.Purchase-pass-btn{
-//  margin-top: 20px;
-}
 //首页/流通中/购买发布
 .purchase-pass-type {
     height: 50px;
     background-color: #fff;
-    margin-top: 10px;
+    margin-top: 45px;
     line-height: 50px;
     span{
         margin-left: 15px;
@@ -705,7 +709,7 @@ element.style {
 .buy-pass-name {
     height: 50px;
     background-color: #fff;
-    margin-top: 10px;
+    margin-top: 45px;
     overflow: hidden;
     span{
         display: block;
@@ -764,12 +768,9 @@ element.style {
     }
 }
 //首页/探索
-//.certificate-list-card li:first-child img{
-//  width: 50px;
-//  position: relative;
-//  top: 10px;
-//  left: -10px;
-//}
+.certificate-list-header {
+    margin-bottom: 45px;
+}
 .certificate-list-card li{
     height: 70px;
     width: 98%;
@@ -870,8 +871,12 @@ element.style {
     margin-top: 50px;
 }
 //-----------------------我的/资产------------------
+.assets-list-add{
+    position: relative;
+    top: 30px;
+}
 .assets-list{
-    margin:10px 0 40px 0;
+    margin:45px 0 40px 0;
     img{
         width: 24px;
         float: right;
@@ -880,7 +885,7 @@ element.style {
   }
 //我的/资产/明细
 .assets-detailed-header{
-    margin-bottom: 1px;
+    margin-bottom: 45px;
 }
   .assets-detailed-list p {
     width: 100%;
@@ -1005,7 +1010,7 @@ element.style {
 .turn-out-exhibition {
     background-color: #fff;
     height: 70px;
-    margin: 10px 0 10px 0;
+    margin: 45px 0 10px 0;
 }
 .turn-out-exhibition-img{
     margin-left: 15px;
@@ -1190,6 +1195,9 @@ element.style {
     border-bottom:none;
 }
 //------------------------------我的/地址薄/编辑---------------
+.adress-book-header {
+    margin-bottom: 45px;
+}
 .edit-adress {
     background-color: #fff;
 }

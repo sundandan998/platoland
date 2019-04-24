@@ -1,8 +1,11 @@
 <template>
 	<div class="login">
-		<div class="login-cancel">
-			<img src="../../assets/images/cancel.png" alt="" />
-		</div>
+		<router-link to="/">
+			<div class="login-cancel">
+				<img src="../../assets/images/cancel.png" alt="" />
+			</div>	
+		</router-link>
+		
 		<div class="logo">			
 			<img src="../../assets/images/logo.png" alt="" />
 		</div>
@@ -179,7 +182,7 @@ export default{
 //  	显示与隐藏密码
     	changePass(value) {
         	this.visible = !(value === 'show');
-      } 
+     }
 	}
 }
 </script>

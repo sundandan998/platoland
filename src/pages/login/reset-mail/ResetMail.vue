@@ -1,8 +1,8 @@
 <template>
 	<div class="reset-mail">
-		<div class="login-cancel">
+		<div class="login-cancel" @click="back">
 			<img src="../../../assets/images/cancel.png" alt="" />
-		</div>
+		</div>		
 		<div class="logo">			
 			<img src="../../../assets/images/logo.png" alt="" />
 		</div>
@@ -12,24 +12,21 @@
 			<span>请输入验证码。</span>		
 		</div>
 		<div class="reset-mail-keyboard">
-			<van-number-keyboard
+			<van-number-keyboard 
+			
 			  :show="showKeyboard"
 			  @input="onInput"
 			  @delete="onDelete"
 			  close-button-text="重新发送邮件"
 			  @blur="showKeyboard = false"
 			/>
-			<van-password-input
+			<van-password-input 
+				 @click="complete"
 			  :value="value"
 			  :mask="false"
 			  @focus="showKeyboard = true"
 			/>
 		</div>
-		<!--<div class="login-btn">
-			<router-link to="/login">
-				<mt-button type="primary" size="large">确定</mt-button>
-			</router-link>			
-		</div>-->
 	</div>
 </template>
 
@@ -43,15 +40,26 @@ export default{
 	},
 	methods:{
 	   onInput(key) {
-      		this.value = (this.value + key).slice(0, 6);
+      		this.value = (this.value + key).slice(0, 6)     	
     	},
     	onDelete() {
-      		this.value = this.value.slice(0, this.value.length - 1);
-    	}
+      		this.value = this.value.slice(0, this.value.length - 1)     		
+    	},
+    	complete(key){
+    		if(key.value==6){
+    			console.log('sddd')
+    			}			
+			},
+//  		this.$router.push({
+//    			path: '/login'
+//    		})
+     	back(){
+      		window.history.back()
+      	}
 	}
 }
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

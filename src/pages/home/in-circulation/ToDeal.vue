@@ -2,7 +2,7 @@
 	<div class="to-deal">
 		<div class="to-deal-header">
 			<div class="pass-details-header">
-				<mt-header title="交易市场">
+				<mt-header fixed title="交易市场">
 				  <router-link to="/pass" slot="left">
 				    <mt-button icon="back"></mt-button>
 				  </router-link>

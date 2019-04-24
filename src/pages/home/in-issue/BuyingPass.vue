@@ -1,9 +1,9 @@
 <template>
 	<div class="buy-pass">
 		<div class="buy-pass-header">
-			<mt-header title="买入通证">
+			<mt-header fixed title="买入通证">
 			  <router-link to="/details" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back"v-on:click="back"></mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -37,7 +37,7 @@
 				<p>发行截止日期 <span>2021-01-01</span></p>
 			</div>			
 		</div>
-		<div class="buy-password-show" v-if="hide">
+		  <div class="buy-password-show" v-if="hide">
 			<!-- 密码输入框 -->
 			<van-password-input
 			  :value="value"
@@ -75,7 +75,20 @@ export default {
     },
     passwordShow(hide){
     	this.hide = !(hide === 'show')
-    }
+    },
+    //		返回上一级
+	back(){
+		this.$router.go(-1)
+	}
+  },
+  watch:{
+	value(){
+		if(this.value.length==6){
+			this.$router.push({
+				path:'/details'
+			})
+		}
+	}
   }
 }
 </script>

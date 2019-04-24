@@ -1,7 +1,7 @@
 <template>
 	<div class="to-change-into">
 		<div class="to-change-into-header">
-			<mt-header title="转入">
+			<mt-header fixed title="转入">
 			  <router-link to="/assetsdetailed" slot="left">
 			    <mt-button icon="back"></mt-button>
 			  </router-link>
