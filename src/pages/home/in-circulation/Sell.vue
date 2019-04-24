@@ -41,7 +41,10 @@
 			<div class="payment-header">
 			<!--<p>1.00(LD)</p>-->
 		</div>
-		<div class="sell-pass" v-if="hide">
+		<mt-popup
+		  v-model="popupVisible"
+		  position="bottom">
+		  	<div class="" v-if="hide">
 			<!-- 密码输入框 -->
 			<van-password-input
 			  :value="value"
@@ -55,6 +58,7 @@
 			  @blur="showKeyboard = false"
 			/>
 		</div>
+		</mt-popup>
 	</div>
 	</div>
 </template>
@@ -63,9 +67,10 @@
 export default {
   data() {
     return {
-      value: '123',
+      value: '',
       hide:'',
-      showKeyboard: true
+      showKeyboard: true,
+      popupVisible: false
     };
   },
   methods: {
@@ -77,6 +82,7 @@ export default {
     },
      passwordShow(hide){
     	this.hide = !(hide === 'show')
+    	this.popupVisible = !(false === 'true')
     }
   },
   watch:{

@@ -46,6 +46,14 @@ $color-primary: #1aad19;
 body{
     background-color: #f6f6f6;
 }
+//支付密码样式
+.mint-popup-bottom {
+    width: 100%;
+}
+.van-number-keyboard{
+    position: unset;
+}
+
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -1155,7 +1163,7 @@ element.style {
 }
 .about-our-logo {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 45px;
 }
 .about-our-text {
     background-color: #fff;

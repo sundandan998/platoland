@@ -37,7 +37,10 @@
 				<p>发行截止日期 <span>2021-01-01</span></p>
 			</div>			
 		</div>
-		  <div class="buy-password-show" v-if="hide">
+		<mt-popup
+		  v-model="popupVisible"
+		  position="bottom">
+		  	<div class="" v-if="hide">
 			<!-- 密码输入框 -->
 			<van-password-input
 			  :value="value"
@@ -51,6 +54,7 @@
 			  @blur="showKeyboard = false"
 			/>
 		</div>
+		</mt-popup>
 		<div class="buy-pass-btn">
 			<mt-button size="large" type="primary" @click="passwordShow">确定</mt-button>	
 		</div>	
@@ -63,7 +67,8 @@ export default {
     return {
       value: '',
       hide:'',
-      showKeyboard: true
+      showKeyboard: true,
+      popupVisible: false
     }
   },
   methods: {
@@ -75,6 +80,7 @@ export default {
     },
     passwordShow(hide){
     	this.hide = !(hide === 'show')
+    	this.popupVisible = !(false === 'true')
     },
     //		返回上一级
 	back(){

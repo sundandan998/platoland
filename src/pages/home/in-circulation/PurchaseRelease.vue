@@ -34,7 +34,10 @@
 				<img src="../../../assets/images/ld.png" alt="" />	<span>USDT</span>	
 			</div>					
 		</div>
-		<div class="" v-if="hide">
+		<mt-popup
+		  v-model="popupVisible"
+		  position="bottom">
+		  	<div class="" v-if="hide">
 			<!-- 密码输入框 -->
 			<van-password-input
 			  :value="value"
@@ -48,6 +51,8 @@
 			  @blur="showKeyboard = false"
 			/>
 		</div>
+		</mt-popup>
+	
 		<div class="purchase-pass-input">
 			<p>数量</p>
 			<input type="text" placeholder="买入数量" />
@@ -60,9 +65,9 @@
 			<p>限额</p>
 			<input type="text" placeholder="卖方最低出售数量"/>  ~ <input type="text"placeholder="卖方最高出售数量" />
 		</div>
-			<div class="purchase-pass-btn">
-				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>	
-			</div>
+		<div class="purchase-pass-btn">
+			<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>	
+		</div>
 	
 	</div>
 </template>
@@ -73,7 +78,8 @@ export default{
 		return {
 	      value: '',
 	      hide:'',
-	      showKeyboard: true
+	      showKeyboard: true,
+	      popupVisible: false
     	}
 	},
 	methods: {
@@ -85,6 +91,7 @@ export default{
     },
     passwordShow(hide){
       this.hide = !(hide === 'show')
+      this.popupVisible = !(false === 'true')
     }
   },
 	watch:{
