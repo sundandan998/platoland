@@ -1,50 +1,92 @@
 <template>
-  <mt-tabbar v-model="message" fixed>
-        <mt-tab-item id="home">
-            <!--<img slot="icon" <!--:src="this.atabs[0]"-->
-            主页
-        </mt-tab-item>
-        <mt-tab-item id="explore">
-            <!--<img slot="icon" <!--v-bind:src="this.atabs[1]"-->
-            积分商城
-        </mt-tab-item>
-        <mt-tab-item id="mine">
-            <!--<img slot="icon" <!--v-bind:src="this.atabs[2]"-->
-            微社区
-        </mt-tab-item>
-    </mt-tabbar>
+	<div class="add-address">
+		<div class="add-address-header">
+			<mt-header fixed title="添加地址">
+			  <router-link to="/book" slot="left">
+			    <mt-button icon="back"></mt-button>
+			  </router-link>
+			</mt-header>
+		</div>
+		<div class="add-adress-list formData">
+			<span>备注名称</span>
+			<mt-field></mt-field>
+			<span>描述</span>
+			<mt-field ></mt-field>
+			<router-link to="/list">
+				<!--<span> 	
+				   	<img src="../../../assets/images/u2693.png" alt="" />
+				   	添加地址
+				   	<span>{{this.$route.query.company}}</span>
+				   	
+				</span>	-->
+				<span v-if="!isData">
+		          <img src="../../../assets/images/u2693.png" alt>
+		          添加地址
+		        </span>
+		        <span v-else>
+		          <img src="../../../assets/images/u2693.png" alt>
+		          替换地址
+		        </span>
+			</router-link>	
+			<div class="certificate-list-card assets-list-add">
+	        <ul v-if="isData">
+	          <li>
+	            <router-link to="/assetsdetailed">
+	              <img src="../../../assets/images/u345.png" alt class="fl">
+	              <span>{{addList.name}}</span>
+	              <span>{{addList.company}}</span>
+	              <div class="assets-list-right fr">
+	                <p>6.00</p>
+	              </div>
+	            </router-link>
+	          </li>
+	        </ul>
+	      </div>
+		</div>
+		<div class="add-adress-btn">
+			<router-link to="/book">
+				<mt-button type="primary" size="large">添加</mt-button>
+			</router-link>
+		</div>
+		<div class="edit-adress-text">
+			<p>注意：资金转出到其他账户后无法退回，请务必核实：</p>
+			<p>1.对方信息是否正确</p>
+			<p>2.账号是否是其本人使用</p>
+		</div>
+	</div>
 </template>
- 
- 
+let globalList = {}
 <script>
-export default {
-    data(){
-        return{
-        //选中的tabbar值message为外面页面传入的值selected
-            message:this.selected,
-        //这里使用的icon图标为图片，所以需要加图片改变的传入，若使用阿里图标，则不用加
-            atabs:this.tabs,
-        }
-    },
-    props:{
-        selected: String,
-        tabs:Array,
-    },
-    watch: {
-        message: function (val, oldVal) {
-            // 这里就可以通过 val 的值变更来确定去向
-            switch(val){
-                case 'home':
-                    this.$router.push('/home')
-                break;
-                case 'explore':
-                    this.$router.push('/explore')
-                break;
-                case 'mine':
-                    this.$router.push('/mine')
-                break;
-            }
-        }
-    },
+export default{
+	data(){
+		return{
+			username:'',
+			addList: globalList,
+      		isData: false
+		}
+	},
+	watch: {
+   		$route: "getparameter"
+  	},
+	methods:{
+		openaction(){
+			this.sheetVisible =!this.sheetVisible
+		},
+		getparameter() {
+	      let path = this.$route.params
+	      if (JSON.stringify(path) != "{}") {
+	        path = this.$route.params;
+	        globalList = path;
+	        this.isData = true;
+	        this.addList = globalList;
+	      } else {
+	        this.isData = false;
+	      }
+    	}
+	}
 }
 </script>
+
+<style lang="scss">
+	@import '../../../assets/scss/global'
+</style>

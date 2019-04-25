@@ -11,22 +11,24 @@
 			<p>已向xiaolingzi@163.com发送验证信息</p>
 			<span>请输入验证码。</span>		
 		</div>
-		<div class="reset-mail-keyboard">
-			<van-number-keyboard 
-			
+		<mt-popup
+		  v-model="popupVisible"
+		  position="bottom">
+		  	<div class="">
+			<!-- 密码输入框 -->
+			<van-password-input
+			  :value="value"
+			  @focus="showKeyboard = true"
+			/>
+			<!-- 数字键盘 -->
+			<van-number-keyboard
 			  :show="showKeyboard"
 			  @input="onInput"
 			  @delete="onDelete"
-			  close-button-text="重新发送邮件"
 			  @blur="showKeyboard = false"
 			/>
-			<van-password-input 
-				 @click="complete"
-			  :value="value"
-			  :mask="false"
-			  @focus="showKeyboard = true"
-			/>
 		</div>
+		</mt-popup>
 	</div>
 </template>
 
@@ -35,7 +37,9 @@ export default{
 	data(){
 		return{
 			value: '',
-			showKeyboard: true
+//			hide:'',
+			showKeyboard: true,
+      		popupVisible: true
 		}
 	},
 	methods:{

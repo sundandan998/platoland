@@ -15,6 +15,7 @@ import axios from 'axios'
 import store from './store'
 import { Indicator } from 'mint-ui'
 import VueAxios from 'vue-axios'
+import Vuex from 'vuex'
 //引入jquery
 import $ from 'jquery'
 //api接口
@@ -25,6 +26,7 @@ require('./mock.js')
 Vue.use(VueAxios, axios)
 Vue.use(external)
 Vue.use(MintUI)
+Vue.use(Vuex)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
@@ -32,5 +34,7 @@ new Vue({
   router,
 	store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })
+
+

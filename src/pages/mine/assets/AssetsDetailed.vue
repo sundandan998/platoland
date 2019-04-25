@@ -89,6 +89,9 @@ export default{
 		remove(){
 			this.$messagebox.confirm("确定移除资产?")
 			.then(action => {
+				this.$router.push({
+				path:'/assets'
+				})
 			})
 		}
 	}

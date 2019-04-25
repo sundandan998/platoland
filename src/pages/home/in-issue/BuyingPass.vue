@@ -91,7 +91,7 @@ export default {
 	value(){
 		if(this.value.length==6){
 			this.$router.push({
-				path:'/details'
+				path:'/'
 			})
 		}
 	}

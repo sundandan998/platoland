@@ -72,6 +72,13 @@ module.exports = function () {
 		//  版本号接口
 			version:Mock.mock({
   			"version|123.1-10": 1
-		})
+		}),
+//		资产列表接口
+  list:Mock.mock({
+    	'data|4':[{
+    			'name': '@cname',
+    			'company':'@guid'
+    	}]   
+    })
   }
 }

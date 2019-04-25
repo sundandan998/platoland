@@ -3,7 +3,7 @@
 		<div class="edit-adress-header">
 			<mt-header fixed title="地址详情">
 			  <router-link to="/book" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back" @click="saveBox"></mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right" @click="delBox">
 			   	<img src="../../../assets/images/delete.png"  alt=""/>删除
@@ -25,7 +25,7 @@
 			</mt-field>
 		</div>
 		<div class="edit-adress-btn ">
-			<mt-button type="primary" size="large" @click="saveBox">保存</mt-button>
+			<mt-button type="primary" size="large">保存</mt-button>
 		</div>
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->

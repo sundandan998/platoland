@@ -57,6 +57,8 @@ export default {
 		return {
 			selected: 1
 		}	
+	},
+	methods:{
 	}
 }
 </script>

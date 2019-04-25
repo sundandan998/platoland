@@ -3,7 +3,7 @@
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
 			  <router-link to="/" slot="left">
-			    <mt-button icon="back" v-on:click="back"></mt-button>
+			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="pass-details-issue-btn">
-			<router-link to="/deal">
+			<router-link to="/deal">				
 				<mt-button type="primary" size="large">去交易</mt-button>
 			</router-link>			
 		</div>
@@ -92,15 +92,15 @@
 <script>
 import Clipboard from 'clipboard'
 export default {
-	created () {
-    	this.formData()
-  	},
 	data() {
 	    return {
-	      tableData: []
+	      tableData: [],
+	      index:'',
 	    }
 	},
-
+	created () {
+    	this.formData()   	
+  	},
 	methods:{
 		async formData(){
 //		const res = await this.$http.get('/api/formData')
@@ -128,15 +128,8 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-     	},
-//		返回上一级
-		back(){
-			this.$router.go(-1)
-		}
-	 },
-	 watch:{
-	 	
-  }
+  		},
+	}
 }
 </script>
 

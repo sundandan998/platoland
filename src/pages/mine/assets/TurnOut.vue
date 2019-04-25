@@ -18,7 +18,11 @@
 			</div>			
 		</div>
 		<mt-cell title="付款给" label="请选择付款给">
-		  <span><img src="../../../assets/images/book.png" alt="" /></span>
+			<router-link to="book">
+				 <span>
+			  	<img src="../../../assets/images/book.png" alt="" />
+			  </span>	
+			</router-link>		 
 		  <!--<img slot="icon" src="../assets/100x100.png" width="24" height="24">-->
 		</mt-cell>
 		<div class="purchase-pass-input">
@@ -33,7 +37,9 @@
 			</router-link>
 		</div>
 		<div class="turn-out-exhibition-btn">
-			<mt-button type="primary" size="large">确认</mt-button>
+			<router-link to="assetsdetailed">
+				<mt-button type="primary" size="large">确认</mt-button>
+			</router-link>
 		</div>
 		<div class="turn-out-exhibition-text">
 			<p>注意：</p>
