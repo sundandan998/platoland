@@ -3,7 +3,7 @@
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
 			  <router-link to="/" slot="left">
-			    <mt-button icon="back">返回</mt-button>
+			    <mt-button icon="back"v-on:click="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -123,6 +123,9 @@ export default {
 	          clipboard.destroy()
 	        })
      },
+     back(){
+     	this.$router.go(-1)
+     }
 
 	},
 	computed:{

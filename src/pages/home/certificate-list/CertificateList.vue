@@ -17,10 +17,10 @@
         >
           <img src="../../../assets/images/u345.png" alt class="fl">
           <span>{{item.name}}</span>
-          <span>{{item.company}}</span>
+          <span>{{item.company}}</span>  
           <router-link to="/pass">
-            <mt-button size="small" type="primary" class="fr">详情</mt-button>
-          </router-link>
+        		<mt-button size="small" type="primary" class="fr">详情</mt-button>
+      		</router-link>
         </li>
       </ul>
     </div>
@@ -62,17 +62,17 @@ export default {
   },
   created() {},
   methods: {
-//  removeData(a) {
-//    let newGetData =globalData	
-//    let temporary = newGetData.map((item, index) => {
-//      if (item.name == a) {
-//        item.hidden = 0;
-//        this.$router.push({ name: "Assets", params: item })
-//      }
-//      return item
-//    })
-//     globalData = temporary
-//  },
+    removeData(a) {
+      let newGetData =globalData	
+      let temporary = newGetData.map((item, index) => {
+        if (item.name == a) {
+          item.hidden = 0;
+          this.$router.push({ name: "Assets", params: item })
+        }
+        return item
+      })
+       globalData = temporary
+    },
     back(){
         	this.$router.go(-1)//返回上一层
     	}

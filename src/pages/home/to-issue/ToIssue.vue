@@ -2,7 +2,7 @@
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
-			  <router-link to="" slot="left">
+			  <router-link to="/" slot="left">
 			    <mt-button icon="back" v-on:click="back">返回</mt-button>
 			  </router-link>
 			</mt-header>

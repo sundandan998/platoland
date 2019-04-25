@@ -20,7 +20,9 @@
 			</router-link>			
 		</div>
 		<div class="add-adress-btn">
-			<mt-button type="primary" size="large">添加</mt-button>
+			<router-link to="/book">
+				<mt-button type="primary" size="large">添加</mt-button>
+			</router-link>
 		</div>
 		<div class="edit-adress-text">
 			<p>注意：资金转出到其他账户后无法退回，请务必核实：</p>

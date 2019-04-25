@@ -3,7 +3,7 @@
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
 			  <router-link to="/" slot="left">
-			    <mt-button icon="back"返回></mt-button>
+			    <mt-button icon="back" v-on:click="back"></mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -100,6 +100,7 @@ export default {
 	      tableData: []
 	    }
 	},
+
 	methods:{
 		async formData(){
 //		const res = await this.$http.get('/api/formData')
@@ -127,13 +128,16 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-      },
+     	},
 //		返回上一级
 		back(){
 			this.$router.go(-1)
 		}
-	  }
-	}
+	 },
+	 watch:{
+	 	
+  }
+}
 </script>
 
 <style lang="scss">

@@ -19,7 +19,9 @@
 			</el-form>
 		</div>
 		<div class="rest-pass-word-btn">
-			<mt-button type="primary" size="large">确认</mt-button>
+			<router-link to="/safety">
+				<mt-button type="primary" size="large">确认</mt-button>	
+			</router-link>			
 		</div>
 		<div class="rest-pass-word-text">
 			<p>注意：</p>

@@ -32,7 +32,25 @@
 				<img src="../../../assets/images/ld.png" alt="" />	<span>USDT</span>	
 			</div>					
 		</div>
-		<div class="" v-if="hide">
+		<div class="purchase-pass-input">
+			<p>数量</p>
+			<input type="text" placeholder="买入数量" />
+			<p>单价</p>
+			<input type="text" placeholder="单价"  />
+			<span>可用：10,000  USDT</span>
+			<span>手续费：0.00  PLD</span>
+		</div>
+		<div class="purchase-pass-quota">
+			<p>限额</p>
+			<input type="text" placeholder="卖方最低出售数量"/>  ~ <input type="text"placeholder="卖方最高出售数量" />
+		</div>
+		<div class="Purchase-pass-btn">
+			<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>	
+		</div>
+		<mt-popup
+		  v-model="popupVisible"
+		  position="bottom">
+		  	<div class="" v-if="hide">
 			<!-- 密码输入框 -->
 			<van-password-input
 			  :value="value"
@@ -46,21 +64,7 @@
 			  @blur="showKeyboard = false"
 			/>
 		</div>
-		<div class="purchase-pass-input">
-			<p>数量</p>
-			<input type="text" placeholder="买入数量" />
-			<p>单价</p>
-			<input type="text" placeholder="单价"  />
-			<span>可用：10,000  USDT</span>
-			<span>手续费：0.00  PLD</span>
-		</div>
-		<div class="purchase-pass-quota">
-			<p>限额</p>
-			<input type="text" placeholder="卖方最低出售数量"/>  ~ <input type="text"placeholder="卖方最高出售数量" />
-		</div>
-			<div class="Purchase-pass-btn">
-				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>	
-		</div>
+		</mt-popup>
 	</div>
 </template>
 
@@ -70,7 +74,8 @@ export default{
 		return{
 	 		value: '',
 	      	hide:'',
-  			showKeyboard: true	
+  			showKeyboard: true,
+  			popupVisible: false
 		}
 	},
 	methods: {
@@ -82,7 +87,17 @@ export default{
     },
      passwordShow(hide){
     	this.hide = !(hide === 'show')
+    	this.popupVisible = !(false === 'true')
     }
+   },
+   watch:{
+   	value(){
+   		if(this.value.length==6){
+   			this.$router.push({
+   				path:'/deal'
+   			})
+   		}
+   	}
    }
 }
 </script>

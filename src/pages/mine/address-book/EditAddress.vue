@@ -3,7 +3,7 @@
 		<div class="edit-adress-header">
 			<mt-header fixed title="地址详情">
 			  <router-link to="/book" slot="left">
-			    <mt-button icon="back" @click="saveBox"></mt-button>
+			    <mt-button icon="back"></mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right" @click="delBox">
 			   	<img src="../../../assets/images/delete.png"  alt=""/>删除
@@ -24,11 +24,9 @@
 				</p>
 			</mt-field>
 		</div>
-		<router-link to="/book">
-			<div class="edit-adress-btn ">
-				<mt-button type="primary" size="large">保存</mt-button>
-			</div>
-		</router-link>		
+		<div class="edit-adress-btn ">
+			<mt-button type="primary" size="large" @click="saveBox">保存</mt-button>
+		</div>
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->
 		</div>
@@ -44,12 +42,20 @@ export default{
 	//点击删除弹出的消息框
 	delBox(){
 		this.$messagebox.confirm("确定删除该地址?")
-		.then(action => {})
+		.then(action => {
+			this.$router.push({
+				path:'/book'
+			})
+		})
 		},
 	//点击返回弹出的消息框
 	saveBox(){
 		this.$messagebox.confirm("是否保存更改信息?")
-		.then(action => {})
+		.then(action => {
+			this.$router.push({
+				path:'/book'
+			})
+		})
 		}
 	}
 //
