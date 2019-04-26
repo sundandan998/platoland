@@ -1,11 +1,9 @@
 <template>
 	<div class="to-deal">
 		<div class="to-deal-header">
-			<div class="pass-details-header">
+			<div class="to-details-header">
 				<mt-header fixed title="交易市场">
-				  <router-link to="/pass" slot="left">
-				    <mt-button icon="back"></mt-button>
-				  </router-link>
+				   <mt-button slot="left"icon="back" v-on:click="$router.go(-1)"></mt-button>
 				  <mt-button icon="" slot="right">
 				  	<router-link to="/purchaserelease">
 				  		<img src="../../../assets/images/fb.png" alt="" /> 发布
@@ -20,13 +18,24 @@
 			  	<router-link to="/purchase">			  	
 				  	<div class="to-deal-purchase">
 				  		<div class="to-deal-purchase-top">
-				  			<img src="../../../assets/images/u345.png" alt="" />
+				  			<!--<img src="../../../assets/images/u345.png" alt="" />-->
 				  			<span>han**@qq.com</span>
 				  		</div>
 				  		<div class="to-deal-purchase-bot">
 				  			<span>数量:60.000</span>
 				  			<span><img src="../../../assets/images/ld.png"/> 6.00</span>
-				  			<p>限额2.000 —— 10.000</p>
+				  			<p>限额2.000 -10.000</p>
+				  		</div>
+				  	</div>
+				  	<div class="to-deal-purchase">
+				  		<div class="to-deal-purchase-top">
+				  			<!--<img src="../../../assets/images/u345.png" alt="" />-->
+				  			<span>han**@qq.com</span>
+				  		</div>
+				  		<div class="to-deal-purchase-bot">
+				  			<span>数量:60.000</span>
+				  			<span><img src="../../../assets/images/ld.png"/> 6.00</span>
+				  			<p>限额2.000 -10.000</p>
 				  		</div>
 				  	</div>
 			  	</router-link>
@@ -35,7 +44,7 @@
 			  	<router-link to="/sell">
 				  	<div class="to-deal-purchase">
 				  		<div class="to-deal-purchase-top">
-				  			<img src="../../../assets/images/u345.png" alt="" />
+				  			<!--<img src="../../../assets/images/u345.png" alt="" />-->
 				  			<span>liu**@qq.com</span>
 				  		</div>
 				  		<div class="to-deal-purchase-bot">

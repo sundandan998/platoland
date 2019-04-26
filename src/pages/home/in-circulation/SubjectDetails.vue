@@ -2,9 +2,7 @@
 	<div class="subject-details">
 		<div class="subject-details-header">
 			<mt-header fixed title="通证主体">
-			  <router-link to="" slot="left">
-			    <mt-button icon="back" v-on:click="back">返回</mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="subject-details-content">
@@ -93,10 +91,6 @@ export default {
 		}
 	},
 	methods:{
-	//返回上一级
-		back(){
-			this.$router.go(-1)
-		}
 	}
 }
 </script>

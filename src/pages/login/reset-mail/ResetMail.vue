@@ -60,7 +60,16 @@ export default{
      	back(){
       		window.history.back()
       	}
+	},
+  watch:{
+	value(){
+		if(this.value.length==6){
+			this.$router.push({
+				path:'/login'
+			})
+		}
 	}
+  }
 }
 </script>
 

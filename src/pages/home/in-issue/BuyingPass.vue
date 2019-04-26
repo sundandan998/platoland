@@ -2,9 +2,7 @@
 	<div class="buy-pass">
 		<div class="buy-pass-header">
 			<mt-header fixed title="买入通证">
-			  <router-link to="/details" slot="left">
-			    <mt-button icon="back"v-on:click="back"></mt-button>
-			  </router-link>
+			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="buy-pass-name">
@@ -81,17 +79,13 @@ export default {
     passwordShow(hide){
     	this.hide = !(hide === 'show')
     	this.popupVisible = !(false === 'true')
-    },
-    //		返回上一级
-	back(){
-		this.$router.go(-1)
-	}
+    }
   },
   watch:{
 	value(){
 		if(this.value.length==6){
 			this.$router.push({
-				path:'/'
+				path:'/details'
 			})
 		}
 	}

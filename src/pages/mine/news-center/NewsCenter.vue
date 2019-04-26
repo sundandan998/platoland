@@ -9,13 +9,12 @@
 			</mt-header>
 		</div>
 		<div class="news-center-list">
-			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖！" 
-				label="2019-03-26  15:02 " to="/newsdetails">
-				<img slot="icon" src="../../../assets/images/u357.png">
+			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖!" label="2019-3-15" to="newsdetails"
+  is-link>
+			  <img slot="icon" src="../../../assets/images/u357.png">
 			</mt-cell>
-			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖！" 
-				label="2019-03-26  15:02 "  to="/newsdetails">
-				<img slot="icon" src="../../../assets/images/u357.png">
+			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖!"label="2019-3-15" to="newsdetails"is-link>
+			  <img slot="icon" src="../../../assets/images/u357.png">
 			</mt-cell>
 		</div>
 	</div>

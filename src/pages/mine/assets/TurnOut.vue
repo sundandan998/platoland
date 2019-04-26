@@ -2,12 +2,12 @@
 	<div class="turn-out">
 		<div class="turn-out-header">
 			<mt-header fixed title="转出">
-			  <router-link to="/assetsdetailed" slot="left">
-			    <mt-button icon="back"></mt-button>
-			  </router-link>
-			  <mt-button icon="" slot="right">
-			  	<img src="../../../assets/images/scan.png" alt="" />
-			  </mt-button>
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)"></mt-button>		    
+			    	<mt-button icon="" slot="right">
+			    		<router-link to="/scan">
+			  			<img src="../../../assets/images/scan.png" alt="" />
+			  			  </router-link>	
+			  		</mt-button>				  		
 			</mt-header>
 		</div>
 		<div class="turn-out-exhibition">			
@@ -32,7 +32,7 @@
 			<span>手续费：0.00  PLD</span>
 		</div>
 		<div class="turn-out-exhibition-qrcode">
-			<router-link to="/">
+			<router-link to="/scan">
 				<span>扫一扫</span>
 			</router-link>
 		</div>

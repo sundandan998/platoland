@@ -2,9 +2,7 @@
 	<div class="Purchase-pass">
 		<div class="Purchase-pass-header">
 			<mt-header fixed title="购买通证">
-			  <router-link to="/deal" slot="left">
-			    <mt-button icon="back"></mt-button>
-			  </router-link>
+			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="Purchase-pass-content">
@@ -22,7 +20,7 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
 			  <van-tab title="按数量购买">
-			  	<mt-field placeholder="600,000起购">USDT</mt-field>
+			  	<mt-field placeholder="最小可买 1,000">USDT</mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  </van-tab>
 			  <van-tab title="按价格购买">

@@ -2,9 +2,7 @@
 	<div class="assets-detailed">
 		<div class="assets-detailed-header">
 			<mt-header fixed title="明细">
-			  <router-link to="/assets" slot="left">
-			    <mt-button icon="back" v-on:click="back"></mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="assets-detailed-list">
@@ -38,9 +36,6 @@ export default{
 		}
 	},
 	methods:{
-		back(){
-        	this.$router.go(-1);//返回上一层
-    	},
 	}
 }
 </script>

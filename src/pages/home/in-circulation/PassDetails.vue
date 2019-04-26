@@ -2,9 +2,7 @@
 	<div class="pass-details">
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
-			  <router-link to="/" slot="left">
-			    <mt-button icon="back"></mt-button>
-			  </router-link>
+			    <mt-button slot="left" icon="back"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="pass-details-information">
@@ -20,7 +18,7 @@
 					<li>发行方：</li>
 					<li>发行方报告：</li>
 				</ul>
-				<ul class="fr">					
+				<ul class="fr information-content-right">					
 					<li>
 						<img src="../../../assets/images/ld.png"/>
 						<span class="details-information-identification"> LD(LaoDou)</span>
@@ -63,7 +61,7 @@
 					<li>初始单价:</li>
 					<li>发行单价:</li>
 				</ul>
-				<ul class="fr">
+				<ul class="fr information-content-right">
 					<li>流通中</li>
 					<li>5%</li>
 					<li>
@@ -72,9 +70,9 @@
 					</li>
 					<li>首次发行</li>
 					<li>2019-3-28</li>
-					<li>{{this.$route.query.remarks}}</li>
-					<li>{{this.$route.query.issue}}</li>
-					<li>{{this.$route.query.hold}}</li>
+					<li>{{$route.params.remarks}}</li>
+					<li>{{$route.params.issue}}</li>
+					<li>{{$route.params.hold}}</li>
 					<li>5.00</li>
 					<li>6000</li>
 					<li>6.00</li>
@@ -101,6 +99,15 @@ export default {
 	created () {
     	this.formData()   	
   	},
+	beforeRouteEnter(to, from, next) {
+//		console.log(from)
+//		if(from.path =='/pass'){
+//			console.log('kp')
+//			next()
+//		}
+//     console.log(from.path =='/list')
+    	next()
+	},
 	methods:{
 		async formData(){
 //		const res = await this.$http.get('/api/formData')
@@ -128,7 +135,7 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-  		},
+  		}
 	}
 }
 </script>

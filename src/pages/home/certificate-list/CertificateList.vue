@@ -2,9 +2,7 @@
   <div class="certificate-list" >
     <div class="certificate-list-header">
       <mt-header fixed title="资产列表">
-        <router-link to="/purchaserelease" slot="left">
-          <mt-button icon="back" v-on:click="back"></mt-button>
-        </router-link>
+          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)"></mt-button>
       </mt-header>
     </div>
     <!--<div class="certificate-list-card">
@@ -29,7 +27,7 @@
       </ul>
     </div>-->
     <div class="certificate-list-card">
-      <ul v-if="fromPath =='/assets'">
+      <ul v-if="fromPath =='/assets'|| fromPath=='/pass'">
         <li v-for="(item, index) in getData" :key="index" v-if="item.hidden!=0">
           <div @click.prevent.stop="removeData(item.name)">
             <img src="../../../assets/images/u345.png" alt class="fl">
@@ -83,11 +81,8 @@ export default {
 	//  console.log(this.fromPath);
 	  },
 	beforeRouteEnter(to, from, next) {
-    // console.log(to);
-    // console.log(from);
-    fromPath = from;
-    // console.log(next);
-    next();
+    fromPath = from
+    next()
   },
  	methods: {
 // 		async list (){
@@ -119,9 +114,6 @@ export default {
         return item
       })
        globalData = temporary
-    },
-    back(){
-        	this.$router.go(-1)//返回上一层
     }
   }
 }

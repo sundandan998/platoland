@@ -11,11 +11,12 @@
 			   		<img slot="icon" src="../../../assets/images/gd.png">
 			      </span>
 			      <el-dropdown-menu slot="dropdown">
+			      	 <router-link to="/scan">
 			        <el-dropdown-item>扫一扫</el-dropdown-item>
+			        </router-link>
 			        <router-link to="/out">
 			        	<el-dropdown-item>转出</el-dropdown-item>
-			        </router-link>
-			        
+			        </router-link>			        
 			        <el-dropdown-item><span @click="remove">移除</span></el-dropdown-item>
 			      </el-dropdown-menu>
 			    </el-dropdown>

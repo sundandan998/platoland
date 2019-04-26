@@ -2,9 +2,7 @@
 	<div class="release">
 		<div class="purchase-pass-header">
 			<mt-header fixed title="发布">
-			  <router-link to="/deal" slot="left">
-			    <mt-button icon="back"></mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
 		<div class="purchase-pass-type">

@@ -3,9 +3,11 @@
     <div class="page-wrap">     
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="home" class="home-index">
-    		<div class="home-logo">
-    			<img src="../../assets/images/logo.png"/>
-    		</div>
+    		<div class="home-header">
+		      <mt-header fixed title="首 页">
+		          <mt-button slot="left"></mt-button>
+		      </mt-header>
+		    </div>
     		<router-link to="/pass">
 				<div class="home-investment">
 				<img src="../../assets/images/gf.png" alt="" />
@@ -58,9 +60,9 @@
 	    			<li class="fl"><span>投资机会</span></li>
 	    			<li class="fr">
 	    				<router-link to="/explore">
-	    					<span>全部</span>
+	    					<p>全部 ></p>
 	    				</router-link>
-	    				<img src="../../assets/images/more.png" alt="" />
+<!--	    				<img src="../../assets/images/more.png" alt="" />-->
 	    			</li>
         	</ul> 
     		</div>    
@@ -218,8 +220,8 @@ creadte() {
 //		待发行
 		issue(){
 			this.$router.push({
-				path:'/issue',
-				query:{
+				name:'Issue',
+				params:{
 					remarks: this.datalist[0].remarks,
 					issue:this.datalist[0].issue,
 					hold:this.datalist[0].hold
@@ -229,8 +231,8 @@ creadte() {
 //		发行中
 	issueing(){
 			this.$router.push({
-				path:'/details',
-				query:{
+				name:'Details',
+				params:{
 					remarks: this.datalist[1].remarks,
 					issue:this.datalist[1].issue,
 					hold:this.datalist[1].hold
@@ -240,8 +242,8 @@ creadte() {
 	//流通中
 	issued(){
 			this.$router.push({
-				path:'/pass',
-				query:{
+				name:'Pass',
+				params:{
 					remarks: this.datalist[2].remarks,
 					issue:this.datalist[2].issue,
 					hold:this.datalist[2].hold

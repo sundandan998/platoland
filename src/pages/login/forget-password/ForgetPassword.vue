@@ -24,11 +24,11 @@
 		</div>
 		<div class="forget-password-btn">
 			<router-link to="/reset">
-				<mt-button type="primary">确定</mt-button>
+				<mt-button type="primary">下一步</mt-button>
 			</router-link>	
-			<router-link to="/login">
+			<!--<router-link to="/login">
 				<mt-button type="default">取消</mt-button>
-			</router-link>			
+			</router-link>			-->
 		</div>
 	</div>
 </template>

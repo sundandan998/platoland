@@ -2,9 +2,7 @@
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情">
-			  <router-link to="/" slot="left">
-			    <mt-button icon="back" v-on:click="back">返回</mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>
 			<div class="pass-details-information">
@@ -118,11 +116,8 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-       },
-		//		返回上一级
-		back(){
-			this.$router.go(-1)
-		}		
+       }
+			
 	}
 }
 </script>

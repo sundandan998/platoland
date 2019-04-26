@@ -35,6 +35,8 @@ import Into from '@/pages/mine/assets/ToChangeInto'
 import Out from '@/pages/mine/assets/TurnOut'
 //首页/我的/资产/明细/扫一扫
 import Scan from '@/pages/mine/assets/Scan'
+//首页/我的/资产/明细/扫一扫详情
+import ScanDetail from '@/pages/mine/assets/ScanDetail'
 //我的/安全
 import Safety from '@/pages/mine/safety-center/SafetyCenter'
 //我的/安全/重置密码
@@ -184,9 +186,15 @@ export default new Router({
     },
     //首页/我的/资产/明细/扫一扫
     {
-      path: '/sacan',
+      path: '/scan',
       name: 'Scan',
       component: Scan
+    },
+    //首页/我的/资产/明细/扫一扫详情
+    {
+      path: '/scandetail',
+      name: 'ScanDetail',
+      component: ScanDetail
     },
      // 我的/安全
     {
@@ -255,77 +263,76 @@ export default new Router({
       component: NewsDetails  
   	},
   	//我的/版本更新
-  		{
-//    path: '/version/:name',
+  	{
       path: '/version',
       name: 'Version',
       component: Version  
   	},
 		//首页--通证列表
-		{
-      path: '/list',
-      name: 'List',
-      component: List  
-	  },
+	{
+	  path: '/list',
+	  name: 'List',
+	  component: List  
+	 },
 //	  首页/流通中/通证详情
-		{
-			path: '/pass',
-			name: 'Pass',
-			component: Pass
-		},
+	{
+		path: '/pass',
+		name: 'Pass',
+		component: Pass
+	},
 //	首页/流通中/主体详情
-		{
-			path: '/subject',
-			name: 'Subject',
-			component: Subject
-		},
-		//首页/流通中/去交易
-		{
-			path: '/deal',
-			name: 'Deal',
-			component: Deal
-		},
-		//首页/流通中/去交易/购买通证
-		{
-			path: '/purchase',
-			name: 'PurchasePass',
-			component: PurchasePass
-		},
-			//首页/流通中/去交易/出售通证
-		{
-			path: '/sell',
-			name: 'Sell',
-			component: Sell
-		},
-		//首页/流通中/去交易/买入发布
-		{
-			path: '/purchaserelease',
-			name: 'Purchase',
-			component: Purchase
-		},
-		//首页/流通中/去交易/卖出发布
-		{
-			path: '/sellrelease',
-			name: 'SellOut',
-			component: SellOut
-		},
+	{
+		path: '/subject',
+		name: 'Subject',
+		component: Subject
+	},
+	//首页/流通中/去交易
+	{
+		path: '/deal',
+		name: 'Deal',
+		component: Deal
+	},
+	//首页/流通中/去交易/购买通证
+	{
+		path: '/purchase',
+		name: 'PurchasePass',
+		component: PurchasePass
+	},
+		//首页/流通中/去交易/出售通证
+	{
+		path: '/sell',
+		name: 'Sell',
+		component: Sell
+	},
+	//首页/流通中/去交易/买入发布
+	{
+		path: '/purchaserelease',
+		name: 'Purchase',
+		component: Purchase
+	},
+	//首页/流通中/去交易/卖出发布
+	{
+		path: '/sellrelease',
+		name: 'SellOut',
+		component: SellOut
+	},
 //	首页/发行中/通证详情
-		{
-			path: '/details',
-			name: 'Details',
-			component: Details
-		},
+	{
+		path: '/details',
+		name: 'Details',
+		component: Details
+	},
 //	首页/发行中/通证详情
-		{
-			path: '/buy',
-			name: 'Buy',
-			component: Buy
-		},
+	{
+		path: '/buy',
+		name: 'Buy',
+		component: Buy
+	},
 //首页/待发行/入驻期
-		{
-			path: '/issue',
-			name: 'Issue',
-			component: Issue
-		}
+	{
+		path: '/issue',
+		name: 'Issue',
+		component: Issue
+	}
 	]
 })

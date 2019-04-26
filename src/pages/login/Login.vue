@@ -37,14 +37,14 @@
 			    </el-form-item>		
   			</el-form>
 			<div class="login-checkbox" v-for="item of items">
-				<input type="checkbox" v-model="item.state" v-on:click="loginCheckbox(item)"/> 
-				<span>记住账号</span>
+				<!--<input type="checkbox" v-model="item.state" v-on:click="loginCheckbox(item)"/> 
+				<span>记住账号</span>-->
 				<router-link to="/password" class="fr">
 					<span>忘记密码?</span>
 				</router-link>
 			</div>
 			<div class="login-btn">
-				<mt-button id = "loginbtn" type="default" v-on:click="handleLogin">登录</mt-button>
+				<mt-button id = "loginbtn" type="default" v-on:click="handleLogin">登&nbsp;录</mt-button>
 			</div>
 		  </mt-tab-container-item>
 		  <mt-tab-container-item id="register">
@@ -80,12 +80,12 @@
 			    </el-form-item>
   			</el-form>
   			<div class="login-checkbox" v-for="item of items">
-				<input type="checkbox" v-model="item.state" v-on:click="regCheckbox(item)"/> 
-				<span>我已阅读并同意《用户使用协议》</span>
+				<!--<input type="checkbox" v-model="item.state" v-on:click="regCheckbox(item)"/>--> 
+				<span>注册即表示同意<a href="">《用户使用协议》</a></span>
 			</div>
 			<div class="login-btn">
 				<router-link to="reset">
-					<mt-button id = "regbtn" type="default">注册</mt-button>
+					<mt-button id = "regbtn" type="default">注&nbsp;册</mt-button>
 				</router-link>				
 			</div>
 		  </mt-tab-container-item>
@@ -188,8 +188,9 @@ export default{
 </script>
 
 <style lang="scss">
-	body{
-		/*background-color: #fff !important;*/
-	}
-	@import '../../assets/scss/global';
+	.login{
+		height: 100%;
+		background-color: #fff !important;
+		}
+	@import '../../assets/scss/global'
 </style>
