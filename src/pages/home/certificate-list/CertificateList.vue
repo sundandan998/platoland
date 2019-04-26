@@ -36,7 +36,7 @@
             <span>{{item.name}}</span>
             <span>{{item.company}}</span>
           </div>
-					<mt-button size="small" @click="$router.push('/tzxq')"  type="primary" class="fr">详情</mt-button>
+					<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>
         </li>
       </ul>
       <ul v-if="fromPath =='/add'">
@@ -46,7 +46,7 @@
             <span>{{item.name}}</span>
             <span>{{item.company}}</span>
           </div>
-          <mt-button size="small" @click="$router.push('/tzxq')" type="primary" class="fr">详情</mt-button>
+          <mt-button size="small" @click="$router.push('/pass')" type="primary" class="fr">详情</mt-button>
         </li>
       </ul>
     </div>

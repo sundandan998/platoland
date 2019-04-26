@@ -75,9 +75,6 @@ import Sell from '@/pages/home/in-circulation/Sell'
 import Purchase from '@/pages/home/in-circulation/PurchaseRelease'
 //首页/流通中/去交易/卖出发布
 import SellOut from '@/pages/home/in-circulation/SellRelease'
-//首页/流通中/xxxxx
-//首页/流通中/去交易/卖出发布
-import Tzxq from '@/pages/home/in-circulation/Tzxq'
 //首页/发行中/通证详情
 import Details from '@/pages/home/in-issue/PassDetails'
 //首页/发行中/买入通证
@@ -90,7 +87,7 @@ export default new Router({
 	mode:'history',
   routes: [
 //测试
-		{
+	{
       path: '/cs',
       name: 'Cs',
       component: Cs
@@ -311,12 +308,6 @@ export default new Router({
 			path: '/sellrelease',
 			name: 'SellOut',
 			component: SellOut
-		},
-			//首页/流通中xxxx
-		{
-			path: '/tzxq',
-			name: 'Tzxq',
-			component: Tzxq
 		},
 //	首页/发行中/通证详情
 		{
