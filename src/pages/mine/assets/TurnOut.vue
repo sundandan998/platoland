@@ -17,14 +17,15 @@
 				<span>北京河底捞餐饮有限公司</span>		
 			</div>			
 		</div>
-		<mt-cell title="付款给" label="请选择付款给">
+		<div class="purchase-pass-input">
+			<p>付款给</p>
+			<input type="text" placeholder="请选择收款地址" />
 			<router-link to="book">
-				 <span>
-			  	<img src="../../../assets/images/book.png" alt="" />
-			  </span>	
-			</router-link>		 
-		  <!--<img slot="icon" src="../assets/100x100.png" width="24" height="24">-->
-		</mt-cell>
+				<span>
+			  		<img src="../../../assets/images/book.png" alt="" />
+			  	</span>	
+			</router-link>	
+		</div>
 		<div class="purchase-pass-input">
 			<p>转出数量</p>
 			<input type="text" placeholder="买入数量" />

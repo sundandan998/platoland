@@ -18,12 +18,12 @@
 					<li>发行方：</li>
 					<li>发行方报告：</li>
 				</ul>
-				<ul class="fr">					
+				<ul class="fr information-content-right">					
 					<li>
-						<img src="../../../assets/images/icon-3.png"/>
-						<span class="details-information-identification"> LD(LaoDou)</span>
+						<!--<img src="../../../assets/images/icon-3.png"/>-->
+						<span class="details-information-identification">{{this.$route.params.id}}</span>
 					</li>
-					<li>{{detailslist.nickname}}</li>
+					<li>{{this.$route.params.id}}</li>
 					<li>
 						<span class="tag-read" @click="copy"
 							data-clipboard-text="detailslist.address">
@@ -61,21 +61,21 @@
 					<li>初始单价:</li>
 					<li>发行单价:</li>
 				</ul>
-				<ul class="fr">
-					<li>{{detailslist.state}}</li>
+				<ul class="fr information-content-right">
+					<li>{{this.$route.params.name}}</li>
 					<li>{{detailslist.Proportion}}</li>
 					<li>
 						<img src="../../../assets/images/u318.png"/>
 						<span class="details-information-identification">{{detailslist.assets}}</span>
 					</li>
-					<li>{{detailslist.mode}}</li>
-					<li>{{this.$route.query.remarks}}</li>
-					<li>{{this.$route.query.remarks}}</li>
-					<li>{{this.$route.query.issue}}</li>
-					<li>{{this.$route.query.hold}}</li>
-					<li>{{detailslist.purnum}}</li>
-					<li>{{detailslist.initialprice}}</li>
-					<li>{{detailslist.issueprice}}</li>
+					<li>{{detailslist.assets}}</li>
+					<li>{{this.$route.params.date}}</li>
+					<li>{{this.$route.params.date}}</li>
+					<li>{{this.$route.params.hold}}</li>
+					<li>{{this.$route.params.hold}}</li>
+					<li>{{this.$route.params.hold}}</li>
+					<li>{{this.$route.params.issue}}</li>
+					<li>{{this.$route.params.issue}}</li>
 				</ul>
 			</div>
 		</div>
@@ -89,7 +89,8 @@ export default {
 	},
 	data() {
 	    return {
-	    	detailslist:[]
+	    	detailslist:[],
+	    	data:[]
 	    }
 	},
 	mounted() {
@@ -101,6 +102,7 @@ export default {
 		const url=this.$backStage('/detailsData')
 		const res = await this.$http.get(url)		
 		this.detailslist = res.data
+		console.log(this.$route.params.name)
 		},
 //		复制
 		copy() {

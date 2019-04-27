@@ -3,6 +3,16 @@
     padding:0;
     margin:0;
 }
+//字体样式
+@font-face {
+    font-family: 'myFont';
+    src: url('/assets/font/pingfang.ttf'); 
+    font-weight: normal;
+    font-style: normal;
+}
+html,body { 
+    font-family: myFont, sans-serif; 
+    }
 li{
     list-style: none;
 }
@@ -166,7 +176,13 @@ label.mint-button-text {
         position: relative;
         top: 4px;
     }
-}   
+}  
+.mint-field-clear {
+    opacity: .2;
+    top: -3px;
+    left: -3px;
+    position: relative;
+} 
 //-------------------------登录/忘记密码------------------
 .forget-password {
     background-color: #fff;
@@ -276,7 +292,7 @@ label.mint-button-text {
     margin-left: 60px;
     height: 50px;
     p{
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         color:#999;
         margin-left: 10px;
     }
@@ -427,6 +443,9 @@ label.mint-button-text {
     font-weight: 700;
  }
 .pass-details-information-content{
+    img{
+        width: 25px;
+    }
     li{
        margin: 20px 24px 20px 24px;
        font-size: 0.72rem;
@@ -674,7 +693,7 @@ element.style {
     margin: 24px 20px 2px 20px;
 }
 .Purchase-pass-tabbar input.mint-field-core{
-    font-size: 0.68rem;
+    font-size: 0.89rem;
     color:#999;        
     top: -4px;
     position: relative;
@@ -694,7 +713,7 @@ element.style {
     padding-top: 10px;
 }
 .Purchase-pass-tabbar {
-    margin-top: -42px;
+    margin-top: -10px;
     margin-bottom: 54px;
 }
 .Purchase-pass-btn {
@@ -841,8 +860,9 @@ element.style {
 .buy-pass-name {
     height: 50px;
     background-color: #fff;
-    margin-top: 45px;
+    margin-top: 50px;
     overflow: hidden;
+    padding-left: 15px;
     span{
         display: block;
         font-size: 0.8rem;
@@ -859,26 +879,42 @@ element.style {
 }
 .buy-pass-name-price {
     background-color: #fff;
-    margin-top: 10px;
     height: 50px;
+    margin-top: 1px;
     line-height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     p{
-        margin-left: 15px;
-        color:#999;
+        margin-left: 30px;
+        color:#666;
         display:inline-block;
+        font-size: 0.78rem;
     }
     span{
         margin-right: 10px;
         color:#999;
     }
 }
+.buy-pass-name-price-text.fr span {
+    font-size: 0.89rem;
+    color: #333;
+}
 .buy-pass-time {
     margin-bottom: 20px;
+    padding-top: 10px;
+    background-color: #fff;
+    p{
+        font-size: 0.78rem;
+        color: #000;
+        padding: 1px 0 0 50px;
+    }
     span {
-    color: red;
+    color: #ff6600;
     margin-left: 15px;
     }
+}
+.buy-pass-btn{
+    width: 85%;
+    margin: 0 auto;
 }
 //首页/待发行/入驻期
 .to-issue-name {
@@ -908,7 +944,7 @@ element.style {
 }
 .certificate-list-card li{
     height: 70px;
-    width: 98%;
+    width: 100%;
     background-color: #fff;
     margin: -8px auto;
     p{
@@ -926,13 +962,13 @@ element.style {
         position: relative;
         top: 15px;
         margin-right: 10px;
-        margin-left: 10px;
+        margin-left: 25px;
     }
 }
 .certificate-list-card button.mint-button.fr.mint-button--primary.mint-button--small {
     position: relative;
     top: -28px;
-    right: 10px;
+    right: 25px;
     height: 20px;
     label{
        font-size: 0.8rem;
@@ -1014,27 +1050,37 @@ element.style {
     margin-top: 50px;
 }
 //-----------------------我的/资产------------------
+.assest-header{
+    margin-bottom: 50px;
+}
 .assets-list-add{
     position: relative;
-    top: 30px;
+    top: 10px;
 }
 .assets-list{
-    margin:45px 0 40px 0;
+    background-color: #fff;
+    height: 30px;
+    text-align: center;
     img{
-        width: 24px;
-        float: right;
         margin-right: 10px;
+        margin-top: 2px;
+    }
+    span{
+        font-size: 0.78rem;
+        position: relative;
+        top: -4px;
     }
   }
 //我的/资产/明细
 .assets-detailed-header{
-    margin-bottom: 45px;
+    margin-bottom: 41px;
 }
   .assets-detailed-list p {
     width: 100%;
     text-align: center;
     position: relative;
     top: -10px;
+    font-size: 0.78rem;
 }
 .assets-list-right {
     margin: -30px 10px 0 0;
@@ -1056,25 +1102,52 @@ element.style {
     }
 }
 .transaction-details-adress {
+    font-size: 0.72rem;   
     background-color: #fff;
     height: 80px;
     padding: 0 10px 0 20px;
     margin-top: -1px;
     li{
-        line-height: 40px;
-        color: #999;
+        color: #979eac;
+        line-height: 28px;
+            
     }
 }
 .transaction-details-information{
+     font-size: 0.72rem; 
      background-color: #fff;
-    height: 150px;
+    height:130px;
     padding: 0 10px 0 20px;
     margin-top: 10px;
     li{
-       line-height: 40px;
-       color: #999; 
+       line-height: 28px;
+      color: #979eac;
     }
 }
+.transaction-details-information-text{
+    background-color: #fff; 
+      span{
+        font-size: 0.72rem; 
+        color: #979eac;
+        margin-left: 20px;
+    }
+}
+.transaction-details-information-border{
+   width: 330px;
+    height: 76px;
+    border: 1px solid #999;  
+    margin-left: 20px; 
+}
+.transaction-details-information-right{
+    li{
+     color: #333;   
+    }
+    font-size: 0.78rem;
+    
+    margin-right: 20px;
+    text-align: right;
+}
+    
 //我的/资产/资产详情
 .assets-detailed-exhibition {
     background-color: #fff;
@@ -1153,7 +1226,7 @@ element.style {
 .turn-out-exhibition {
     background-color: #fff;
     height: 70px;
-    margin: 45px 0 10px 0;
+    margin: 50px 0 10px 0;
 }
 .turn-out-exhibition-img{
     margin-left: 15px;

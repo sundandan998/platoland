@@ -18,10 +18,10 @@
 					<li>发行方：</li>
 					<li>发行方报告：</li>
 				</ul>
-				<ul class="fr">					
+				<ul class="fr information-content-right">					
 					<li>
-						<img src="../../../assets/images/icon-3.png"/>
-						<span class="details-information-identification"> LD(LaoDou)</span>
+						<!--<img src="../../../assets/images/icon-3.png"/>-->
+						<span class="details-information-identification"> {{this.$route.params.id}}</span>
 					</li>
 					<li>捞豆</li>
 					<li>
@@ -61,8 +61,8 @@
 					<li>初始单价:</li>
 					<li>发行单价:</li>
 				</ul>
-				<ul class="fr">
-					<li>发行中</li>
+				<ul class="fr information-content-right">
+					<li>{{this.$route.params.name}}</li>
 					<li>5%</li>
 					<li>
 						<img src="../../../assets/images/u318.png"/>

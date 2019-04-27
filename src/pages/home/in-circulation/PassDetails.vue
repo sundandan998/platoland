@@ -1,7 +1,7 @@
 <template>
 	<div class="pass-details">
 		<div class="pass-details-header">
-			<mt-header fixed title="通证详情">
+			<mt-header fixed title="通证详情vv">
 			    <mt-button slot="left" icon="back"v-on:click="$router.go(-1)"></mt-button>
 			</mt-header>
 		</div>
@@ -20,8 +20,8 @@
 				</ul>
 				<ul class="fr information-content-right">					
 					<li>
-						<img src="../../../assets/images/ld.png"/>
-						<span class="details-information-identification"> LD(LaoDou)</span>
+						<!--<img src="../../../assets/images/ld.png"/>-->
+						<span class="details-information-identification">{{this.$route.params.id}}</span>
 					</li>
 					<li>捞豆</li>
 					<li>		
@@ -62,20 +62,20 @@
 					<li>发行单价:</li>
 				</ul>
 				<ul class="fr information-content-right">
-					<li>流通中</li>
+					<li>{{this.$route.params.name}}</li>
 					<li>5%</li>
 					<li>
 						<img src="../../../assets/images/u318.png"/>
 						<span class="details-information-identification"> USDT</span>
 					</li>
 					<li>首次发行</li>
-					<li>2019-3-28</li>
-					<li>{{$route.params.remarks}}</li>
+					<li>{{this.$route.params.date}}</li>
+					<li>{{this.$route.params.date}}</li>
 					<li>{{$route.params.issue}}</li>
 					<li>{{$route.params.hold}}</li>
-					<li>5.00</li>
+					<li>{{this.$route.params.issue}}</li>
 					<li>6000</li>
-					<li>6.00</li>
+					<li>{{this.$route.params.hold}}</li>
 				</ul>
 			</div>
 		</div>

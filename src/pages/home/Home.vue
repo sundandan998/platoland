@@ -17,7 +17,7 @@
     			</div>
 					<div class="home-investment-top-left">
 						<ul>
-						<li>PLD (捞豆)</li>
+						<li>{{this.plddata.name}}</li>
 						<li><img src="../../assets/images/t.png"/> 0.02</li>
 					</ul>
 					</div>	
@@ -26,12 +26,12 @@
 							<mt-button size="small">立刻投资</mt-button>
 						</router-link>
 					</div>
-					<p>PLATOLAND集团</p>
+					<p>{{this.plddata.Issuer}}</p>
 				</div>
 				<div class="home-investment-bot">
 					<ul>
-						<li class="fl">发行总量:{{this.$store.state.app.showFooter}}</li>
-						<li class="fl">已发行:20000</li>
+						<li class="fl">发行总量:{{this.plddata.purnum}}</li>
+						<li class="fl">已发行:{{this.plddata.num}}</li>
 						<li class="fr">已达成30%</li>
 					</ul>
 				</div>
@@ -67,78 +67,27 @@
         	</ul> 
     		</div>    
     		<div class="home-assets-subscription-content">
-			<!--<router-link :to="{path:'/issue'}">-->
-				<div class="assets-subscription" @click="issue">
-				<img src="../../assets/images/u345.png"/>
-				<div class="assets-subscription-text fr">
-						<span>WHZ(网红站)</span>
-						<p>丽人美妆工作室</p>
-				</div>
-				<div class="assets-subscription-title">
-					<p>待发行</p>
-				</div>
-				<div class="assets-subscription-information">
-					<ul class="fl">
-						<li>发行时间</li>
-						<li>发行总量</li>
-						<li>初始价格</li>
-					</ul>
-					<ul class="fr" v-for="(items,index) in datalist" v-if="index==0">
-						<li>{{items.remarks}}</li>
-						<li>{{items.issue}}</li>
-						<li>{{items.hold}}</li>
-					</ul>
-				</div>
-			</div>
-	    			<!--</router-link>-->
-	    			<!--<router-link to="/details">-->
-			<div class="assets-subscription" @click="issueing">
-			  <img src="../../assets/images/u365.png"/>
-				<div class="assets-subscription-text fr">
-						<span>WHZ(网红站)</span>
-						<p>丽人美妆工作室</p>
-				</div>
-				<div class="assets-subscription-title">
-					<p>发行中</p>
-				</div>
-				<div class="assets-subscription-information">
-					<ul class="fl">
-						<li>发行时间</li>
-						<li>发行总量</li>
-						<li>初始价格</li>
-					</ul>
-					<ul class="fr" v-for="(items,index) in datalist"v-if="index==1">
-						<li>{{items.remarks}}</li>
-						<li>{{items.issue}}</li>
-						<li>{{items.hold}}</li>
-					</ul>
-				</div>
-			</div>
-	    			<!--</router-link>-->
-	    			<!--<router-link to="/pass">-->
-			<div class="assets-subscription" @click="issued">  						
-				<img src="../../assets/images/ld.png"/>
-				<div class="assets-subscription-text fr">
-						<span>WHZ(网红站)</span>
-						<p>丽人美妆工作室</p>
-				</div>
-				<div class="assets-subscription-title">
-					<p>流通中</p>
-				</div>
-				<div class="assets-subscription-information" >									
-					<ul class="fl">
-						<li>发行时间</li>
-						<li>发行总量</li>
-						<li>初始价格</li>
-					</ul>
-					<ul class="fr" v-for="(items,index) in datalist" v-if="index==2">
-						<li >{{items.remarks}}</li>
-						<li>{{items.issue}}</li>
-						<li>{{items.hold}}</li>
-					</ul>
-				</div>
-			</div>
-	    			<!--</router-link>-->    			
+					<div class="assets-subscription" v-for="(items,index) in issuedata">
+					<img src="../../assets/images/u345.png"/>
+					<div class="assets-subscription-text fr">
+							<span>{{items.id}}</span>
+					</div>
+					<div class="assets-subscription-title">
+						<p>{{items.state}}</p>
+					</div>
+					<div class="assets-subscription-information">
+						<ul class="fl">
+							<li>发行时间</li>
+							<li>发行总量</li>
+							<li>初始价格</li>
+						</ul>
+						<ul class="fr">
+							<li>{{items.date}}</li>
+							<li>{{items.issue}}</li>
+							<li>{{items.hold}}</li>
+						</ul>
+					</div>
+				</div>	
     		</div>
     		<div class="home-assets-more">
     			<span>更多功能,即将上线</span>
@@ -174,7 +123,10 @@ export default {
   data () {
     return {
       selected: 'home',
-message:this.selected,
+			message:this.selected,
+			plddata:[],
+			data:[],
+			issuedata:[],
       datalist:[],
       animate:false,
       items:[
@@ -196,7 +148,8 @@ creadte() {
     setInterval(this.scroll,3000)
 },
 	mounted: function () {
-	this.showdata()
+		this.pld(),
+		this.listissue()
 //	  console.group(this.$store.state.app.showFooter)
 	},
   methods:{	
@@ -209,6 +162,22 @@ creadte() {
                this.animate=false
        },500)
     },
+  async	listissue(){
+			const url=this.$backStage('/query')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+		 	this.issuedata = res.data
+		 	console.log(this.issuedata)
+		 	console.log(this.issuedata[0].state)
+	},
+	async	pld(){
+   		const url=this.$backStage('/pldDetailsData')
+   		const res = await this.$http.get(url)
+		 	const data = res.data
+		 	this.plddata = res.data
+//		 	console.log(data)
+//		 	console.log(this.plddata)
+  },
 	async showdata(){
 //		const res = await this.$http.get('/formData')
 			const url=this.$backStage('/formData')

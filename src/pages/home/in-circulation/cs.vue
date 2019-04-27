@@ -1,92 +1,257 @@
 <template>
-	<div class="add-address">
-		<div class="add-address-header">
-			<mt-header fixed title="添加地址">
-			  <router-link to="/book" slot="left">
-			    <mt-button icon="back"></mt-button>
-			  </router-link>
-			</mt-header>
-		</div>
-		<div class="add-adress-list formData">
-			<span>备注名称</span>
-			<mt-field></mt-field>
-			<span>描述</span>
-			<mt-field ></mt-field>
-			<router-link to="/list">
-				<!--<span> 	
-				   	<img src="../../../assets/images/u2693.png" alt="" />
-				   	添加地址
-				   	<span>{{this.$route.query.company}}</span>
-				   	
-				</span>	-->
-				<span v-if="!isData">
-		          <img src="../../../assets/images/u2693.png" alt>
-		          添加地址
-		        </span>
-		        <span v-else>
-		          <img src="../../../assets/images/u2693.png" alt>
-		          替换地址
-		        </span>
-			</router-link>	
-			<div class="certificate-list-card assets-list-add">
-	        <ul v-if="isData">
-	          <li>
-	            <router-link to="/assetsdetailed">
-	              <img src="../../../assets/images/u345.png" alt class="fl">
-	              <span>{{addList.name}}</span>
-	              <span>{{addList.company}}</span>
-	              <div class="assets-list-right fr">
-	                <p>6.00</p>
-	              </div>
-	            </router-link>
-	          </li>
-	        </ul>
-	      </div>
-		</div>
-		<div class="add-adress-btn">
-			<router-link to="/book">
-				<mt-button type="primary" size="large">添加</mt-button>
-			</router-link>
-		</div>
-		<div class="edit-adress-text">
-			<p>注意：资金转出到其他账户后无法退回，请务必核实：</p>
-			<p>1.对方信息是否正确</p>
-			<p>2.账号是否是其本人使用</p>
-		</div>
-	</div>
+  <div class="exchange">
+    <div class="page-wrap">     
+      <mt-tab-container class="page-tabbar-container" v-model="selected">
+        <mt-tab-container-item id="home" class="home-index">
+    		<div class="home-header">
+		      <mt-header fixed title="首 页">
+		          <mt-button slot="left"></mt-button>
+		      </mt-header>
+		    </div>
+				<div class="home-investment" @click="pld">
+				<img src="../../../assets/images/gf.png" alt="" />
+				<div class="home-investment-content">
+    			<div class="home-investment-top fl">
+    				<img src="../../../assets/images/icon-3.png" alt="" />
+    			</div>
+					<div class="home-investment-top-left">
+						<ul>
+						<li>{{this.plddata.name}}</li>
+						<li><img src="../../../assets/images/t.png"/> 0.02</li>
+					</ul>
+					</div>	
+					<div class="home-investment-top-right fr">
+						<router-link to="/buy">
+							<mt-button size="small">立刻投资</mt-button>
+						</router-link>
+					</div>
+					<!--<p>PLATOLAND集团</p>-->
+					<p>{{this.plddata.Issuer}}</p>
+				</div>
+				<div class="home-investment-bot">
+					<ul>
+						<li class="fl">发行总量:{{this.plddata.purnum}}</li>
+						<li class="fl">已发行:{{this.plddata.num}}</li>
+						<li class="fr">已达成30%</li>
+					</ul>
+				</div>
+				<div class="home-investment-progress">
+						<mt-progress :value="20" :bar-height="5"></mt-progress>
+				</div>	    		
+	    	</div>
+      		<!--/总资产-->
+         	<!--land指数-->
+         	<div class="home-land">
+         		<router-link to="/news">
+		         	<div class="notice">
+		            <ul class="notice-list" ref="notice-list" :class="{anim:animate==true}">
+		                <li v-for='item in items'>
+		                	<img src="../../../assets/images/horn.png"/>a
+		                </li>
+		            </ul>
+		        	</div>
+         		</router-link>
+         	</div>
+         	<!--/land指数-->
+        	<!--资产认购-->
+    		<div class="home-assets-subscription-title">
+    			<ul>
+	    			<li class="fl"><span>投资机会</span></li>
+	    			<li class="fr">
+	    				<router-link to="/explore">
+	    					<p>全部 ></p>
+	    				</router-link>
+<!--	    				<img src="../../../assets/images/more.png" alt="" />-->
+	    			</li>
+        	</ul> 
+    		</div>    
+    		<div class="home-assets-subscription-content" v-for="(items,index) in issuedata">
+					<div class="assets-subscription">
+					<img src="../../../assets/images/u345.png"/>
+					<div class="assets-subscription-text fr">
+							<span>{{items.id}}</span>
+							<!--<p>丽人美妆工作室</p>-->
+					</div>
+					<div class="assets-subscription-title">
+						<p>{{items.state}}</p>
+					</div>
+					<div class="assets-subscription-information">
+						<ul class="fl">
+							<li>发行时间</li>
+							<li>发行总量</li>
+							<li>初始价格</li>
+						</ul>
+						<ul class="fr">
+							<li>{{items.date}}</li>
+							<li>{{items.issue}}</li>
+							<li>{{items.hold}}</li>
+						</ul>
+					</div>
+				</div> 			
+    		</div>
+    		<div class="home-assets-more">
+    			<span>更多功能,即将上线</span>
+    		</div>
+         	<!--/资产认购-->
+        </mt-tab-container-item>
+  
+      </mt-tab-container>
+    </div>
+    <mt-tabbar v-model="message" fixed>
+      <mt-tab-item id="home">
+      	<img slot="icon" src="../../../assets/images/home-b.png" v-if="this.selected == 'home'"> 
+      	<img slot="icon" src="../../../assets/images/home.png" v-else> 
+      	首页
+      </mt-tab-item>         
+	      <mt-tab-item id="explore">
+	      	<img slot="icon" src="../../../assets/images/explore-b.png"v-if="this.selected == 'merchant'">
+	      	<img slot="icon" src="../../../assets/images/explore.png"v-else>
+	      	探索
+	      </mt-tab-item>
+      <mt-tab-item id="mine" >
+      	<img slot="icon" src="../../../assets/images/mine-b.png" v-if="this.selected == 'mine'">     	
+    	<img slot="icon" src="../../../assets/images/mine.png"v-else>   
+      	我的
+      </mt-tab-item>
+    </mt-tabbar>
+  </div>
 </template>
-let globalList = {}
 <script>
-export default{
-	data(){
-		return{
-			username:'',
-			addList: globalList,
-      		isData: false
-		}
+import {mapActions, mapGetters,mapState} from 'vuex'
+export default {
+  name: 'page-tabbar',
+  data () {
+    return {
+      selected: 'home',
+			message:this.selected,			
+			plddata:[],
+			data:[],
+			issuedata:[],
+      datalist:[],
+      animate:false,     
+      items:[
+          {name:"PLATOLAND生态获区块链协会创新应用大奖！1"},
+          {name:"PLATOLAND生态获区块链协会创新应用大奖！2"},
+          {name:"PLATOLAND生态获区块链协会创新应用大奖！3"}
+      ]
+    }
+  },
+creadte() {
+	 	_this.$indicator.open({
+      text: '加载中....',
+      spinnerType: 'fading-circle'
+		  })
+		 //关闭加载
+		_this.$indicator.close()
+		setInterval(this.scroll,3000)
+},
+mounted: function () {
+	this.pld(),
+	this.listissue()
+	},
+  methods:{
+		//	  公告通知
+    scroll(){
+       this.animate=true
+       setTimeout(()=>{ 
+           this.items.push(this.items[0])
+           this.items.shift()
+           this.animate=false
+       },500)
+    },
+   	async	pld(){
+   		const url=this.$backStage('/pldDetailsData')
+   		const res = await this.$http.get(url)
+		 	const data = res.data
+		 	this.plddata = res.data
+//		 	console.log(data)
+//		 	console.log(this.plddata)
+   	},
+//  待发行
+	async	listissue(){
+			const url=this.$backStage('/query')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+		 	this.issuedata = res.data
+		 	console.log(this.issuedata)
+		 	console.log(this.issuedata[0].state)
+		 	
+		 		
+//			console.log(data) 	
+//			window.localStorage.setItem('data',JSON.stringify(data))			
+////				console.log(data[0].id)	
+//			this.$router.push({
+//				name:'Issue',
+//				params:{
+//					id: data[0].id,
+//					name:data[0].name,
+//					hold:data[0].hold,
+//					issue:data[0].issue,
+//					date:data[0].date,
+//				}
+//			})
+	},
+//	发行中
+	async	issueing(){
+			const url=this.$backStage('/query?id=WHZ')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+				
+				console.log(data[0].name)	
+			this.$router.push({
+				name:'Details',
+				params:{
+					id: data[0].id,
+					name:data[0].name,
+					hold:data[0].hold,
+					issue:data[0].issue,
+					date:data[0].date,
+				}
+			})
+	},
+//	流通中
+	async	issued(){
+			const url=this.$backStage('/query?id=LD')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+			console.log(data) 	
+			window.localStorage.setItem('data',JSON.stringify(data))				
+			this.$router.push({
+				name:'Pass',
+				params:{
+					id: data[0].id,
+					name:data[0].name,
+					hold:data[0].hold,
+					issue:data[0].issue,
+					date:data[0].date,
+				}
+			})
+	}
 	},
 	watch: {
-   		$route: "getparameter"
-  	},
-	methods:{
-		openaction(){
-			this.sheetVisible =!this.sheetVisible
-		},
-		getparameter() {
-	      let path = this.$route.params
-	      if (JSON.stringify(path) != "{}") {
-	        path = this.$route.params;
-	        globalList = path;
-	        this.isData = true;
-	        this.addList = globalList;
-	      } else {
-	        this.isData = false;
-	      }
-    	}
-	}
-}
+	    message: function (val, oldVal) {
+        // 这里就可以通过 val 的值变更来确定去向
+        switch(val){
+            case 'home':
+                this.$router.push('/')
+            break;
+            case 'explore':
+                this.$router.push('/explore')
+            break;
+            case 'mine':
+                this.$router.push('/mine')
+            break;
+	        }
+	    }
+    }
+ }
+//	computed:{
+//			...mapGetters([
+//		      'app.isShow'
+//		    ])
+//		}
+//}
 </script>
-
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	  @import '../../../assets/scss/global'
 </style>

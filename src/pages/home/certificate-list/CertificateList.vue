@@ -53,16 +53,16 @@
 <script>
 	let globalData = [
 {
-    name: "PLD",
+    name: "PLD (PLD)",
     company: "PLATOLAND集团"
 },
 {
-    name: "河底捞",
+    name: "LD (河底捞)",
     company: "河底捞集团"
 },
 {
-    name: "捞豆",
-    company: "捞豆集团"
+    name: "ZCK(租车卡)",
+    company: "丰达汽车"
 },
 ]
 let fromPath = "";

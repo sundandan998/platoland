@@ -14,7 +14,7 @@
     </div>
     <div class="assets-list">
       <router-link to="/list">
-        <img src="../../../assets/images/u3511.png" alt>
+        <img src="../../../assets/images/u3511.png" alt><span>添加资产</span>
       </router-link>
     </div>
     <div class="certificate-list-card assets-list-add">
