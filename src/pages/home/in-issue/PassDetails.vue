@@ -1,7 +1,7 @@
 <template>
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
-			<mt-header fixed title="通证详情">
+			<mt-header fixed title="通证详情1">
 			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>

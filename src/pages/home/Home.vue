@@ -26,13 +26,13 @@
 							<mt-button size="small">立刻投资</mt-button>
 						</router-link>
 					</div>
-					<p>{{this.plddata.Issuer}}</p>
+					<p>{{this.plddata.Detail}}</p>
 				</div>
 				<div class="home-investment-bot">
 					<ul>
 						<li class="fl">发行总量:{{this.plddata.purnum}}</li>
 						<li class="fl">已发行:{{this.plddata.num}}</li>
-						<li class="fr">已达成30%</li>
+						<li class="fr">{{this.$store.state.app.detail}}</li>
 					</ul>
 				</div>
 				<div class="home-investment-progress">
@@ -67,7 +67,7 @@
         	</ul> 
     		</div>    
     		<div class="home-assets-subscription-content">
-					<div class="assets-subscription" v-for="(items,index) in issuedata">
+					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
 					<img src="../../assets/images/u345.png"/>
 					<div class="assets-subscription-text fr">
 							<span>{{items.id}}</span>
@@ -117,7 +117,8 @@
   </div>
 </template>
 <script>
-import {mapActions, mapGetters,mapState} from 'vuex'
+import {mapActions} from 'vuex'
+import store from './../../store/modules/app.js'
 export default {
   name: 'page-tabbar',
   data () {
@@ -147,9 +148,11 @@ creadte() {
   created(){
     setInterval(this.scroll,3000)
 },
-	mounted: function () {
+	mounted () {
 		this.pld(),
-		this.listissue()
+		this.version(),
+		this.listissue(),
+		this.$store.dispatch('detail')
 //	  console.group(this.$store.state.app.showFooter)
 	},
   methods:{	
@@ -162,61 +165,59 @@ creadte() {
                this.animate=false
        },500)
     },
-  async	listissue(){
-			const url=this.$backStage('/query')
+	  async	pld(){
+	   		const url=this.$backStage('/pldDetailsData')
+	   		const res = await this.$http.get(url)
+			 	const data = res.data
+			 	this.plddata = res.data
+	//		 	console.log(data)
+	//		 	console.log(this.plddata)
+	  },
+	  async	listissue(){
+				const url=this.$backStage('/query')
+			 	const res = await this.$http.get(url)
+			 	const data = res.data
+			 	this.issuedata = res.data
+//			 	console.log(this.issuedata)
+//			 	console.log(this.issuedata[0].state)
+		},
+		async issue(id){
+			const url=this.$backStage('/query?id='+id)
+		 	const res = await this.$http.get(url)
+			const data = res		
+			this.$router.push({
+				name:'Detail',
+			})
+			this.$store.commit('detail', res.data[0])
+//			window.localStorage.setItem('data',JSON.stringify(this.datalist))
+		},
+		 ...mapActions('detail',[
+	          'app.detail' 
+	      ]),
+//	   版本升级   
+	  async version(){
+	  	const url=this.$backStage('/version')
 		 	const res = await this.$http.get(url)
 		 	const data = res.data
-		 	this.issuedata = res.data
-		 	console.log(this.issuedata)
-		 	console.log(this.issuedata[0].state)
-	},
-	async	pld(){
-   		const url=this.$backStage('/pldDetailsData')
-   		const res = await this.$http.get(url)
-		 	const data = res.data
-		 	this.plddata = res.data
-//		 	console.log(data)
-//		 	console.log(this.plddata)
-  },
-	async showdata(){
-//		const res = await this.$http.get('/formData')
-			const url=this.$backStage('/formData')
-		 	const res = await this.$http.get(url)
-			this.datalist = res.data.data
-			window.localStorage.setItem('data',JSON.stringify(this.datalist))
-//			console.log(this.datalist[1].remarks)
-		},
-//		待发行
-		issue(){
-			this.$router.push({
-				name:'Issue',
-				params:{
-					remarks: this.datalist[0].remarks,
-					issue:this.datalist[0].issue,
-					hold:this.datalist[0].hold
-				}
+//		 	console.log(data.version)
+//			console.log(this.$version)
+		 	const version =this.$version()
+		 	if(parseFloat(data.version)< parseFloat(version)){
+		 		this.versionbox()
+		 		if(parseFloat(data.force)===1){
+		 				this.forceversion()
+		 		}
+		 	}
+	  },
+//	  版本弹框
+	  versionbox(){
+			this.$messagebox.confirm("<div><span>新版本特性:</span><p>1.xxxxxx</p></div>")
+			.then(action => {
 			})
 		},
-//		发行中
-	issueing(){
-			this.$router.push({
-				name:'Details',
-				params:{
-					remarks: this.datalist[1].remarks,
-					issue:this.datalist[1].issue,
-					hold:this.datalist[1].hold
-				}
-			})
-	},
-	//流通中
-	issued(){
-			this.$router.push({
-				name:'Pass',
-				params:{
-					remarks: this.datalist[2].remarks,
-					issue:this.datalist[2].issue,
-					hold:this.datalist[2].hold
-				}
+		forceversion(){
+			this.$messagebox.confirm("<div><span>新版本特性:</span>强制升级</div>")
+			.then(action => {
 			})
 		}
 	},
@@ -237,12 +238,6 @@ creadte() {
 	    }
     }
  }
-//	computed:{
-//			...mapGetters([
-//		      'app.isShow'
-//		    ])
-//		}
-//}
 </script>
 <style lang="scss">
 	  @import '../../assets/scss/global'

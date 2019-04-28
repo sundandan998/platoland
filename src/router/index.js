@@ -61,6 +61,8 @@ import News from '@/pages/mine/news-center/NewsCenter'
 import Version from '@/pages/mine/version-update/Version'
 //我的/公告消息/详情
 import NewsDetails from '@/pages/mine/news-center/NewsDetails'
+//首页--通证详情
+import Detail from '@/pages/home/detail/Detail'
 //首页--通证列表
 import List from '@/pages/home/certificate-list/CertificateList'
 //首页/流通中/通证详情
@@ -268,6 +270,12 @@ export default new Router({
       name: 'Version',
       component: Version  
   	},
+  		//首页--通正详情
+	{
+	  path: '/detail',
+	  name: 'Detail',
+	  component: Detail  
+	 },
 		//首页--通证列表
 	{
 	  path: '/list',
