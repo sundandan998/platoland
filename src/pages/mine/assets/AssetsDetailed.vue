@@ -25,12 +25,12 @@
 		</div>
 		<div class="assets-detailed-exhibition">
 			<div class="assets-detailed-exhibition-text">
-				<span>10.0000</span>
+				<span>{{this.detail.amount}}</span>
 			</div>			
 			<div class="assets-detailed-exhibition-img">				
 				<img src="../../../assets/images/ld.png" alt="" class="fl"   />
 				<ul class="fr">
-					<li>LD（捞豆）</li>
+					<li>{{this.detail.id}}</li>
 					<li>北京河底捞餐饮有限公司</li>
 				</ul>				
 			</div>
@@ -79,10 +79,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default{
 	data(){
 		return{
-			
+			data:{}
 		}
 	},
 	methods:{
@@ -95,6 +97,11 @@ export default{
 				})
 			})
 		}
+	},
+	computed:{	
+		...mapGetters([
+	      'detail'
+	    ])
 	}
 
 }

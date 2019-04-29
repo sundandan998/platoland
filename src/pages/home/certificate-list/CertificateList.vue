@@ -5,102 +5,77 @@
           <mt-button slot="left" icon="back" v-on:click="$router.go(-1)"></mt-button>
       </mt-header>
     </div>
-    <!--<div class="certificate-list-card">
-      <ul>
-        <li
-          v-for="(item, index) in getData"
-          :key="index"
-          v-if="item.hidden!=0"  
-          
-        >
-        <div @click="listData">
-        	<img src="../../../assets/images/u345.png" alt class="fl">
-        	<p>
-	          <span>{{item.name}}</span>
-	          <span>{{item.company}}</span> 
-          </p>
-        </div>      
-          <router-link to="/tzxq">
-        		<mt-button size="small" type="primary" class="fr">详情</mt-button>
-      		</router-link>
-        </li>
-      </ul>
-    </div>-->
     <div class="certificate-list-card">
-      <ul v-if="fromPath =='/assets'|| fromPath=='/pass'">
-        <li v-for="(item, index) in getData" :key="index" v-if="item.hidden!=0">
-          <div @click.prevent.stop="removeData(item.name)">
+      <ul>
+        <li v-for="(item, index) in assetsdata" :key="index"  >
+        	 <!--@click.prevent.stop="removeData(item.name)"-->
+        	 <!--@click="$router.push('/detail')-->
+          <div @click="issue(item.id)">
             <img src="../../../assets/images/u345.png" alt class="fl">
             <span>{{item.name}}</span>
             <span>{{item.company}}</span>
           </div>
-					<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>
+          <input type="checkbox" class="fr"/>
+					<!--<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>-->
         </li>
       </ul>
-      <ul v-if="fromPath =='/add'">
+      <!--<ul v-if="fromPath =='/add'">
         <li v-for="(item, index) in getData" :key="index">
           <div @click.prevent.stop="addressPush(item)">
             <img src="../../../assets/images/u345.png" alt class="fl">
             <span>{{item.name}}</span>
             <span>{{item.company}}</span>
           </div>
-          <mt-button size="small" @click="$router.push('/pass')" type="primary" class="fr">详情</mt-button>
-        </li>
-      </ul>
+          <!--<mt-button size="small" @click="$router.push('/pass')" type="primary" class="fr">详情</mt-button>-->
+        <!--</li>-->
+      <!--</ul>-->
     </div>
   </div>
 </template>
 <script>
-	let globalData = [
-{
-    name: "PLD (PLD)",
-    company: "PLATOLAND集团"
-},
-{
-    name: "LD (河底捞)",
-    company: "河底捞集团"
-},
-{
-    name: "ZCK(租车卡)",
-    company: "丰达汽车"
-},
-]
+import {mapGetters} from 'vuex'	
+import store from './../../../store/modules/app.js'
+let globalData = []
 let fromPath = "";
 export default {
   data() {
     return {
       popupVisible: true,
       getData: [],
+      data:[],
       getData: globalData,
-      fromPath: fromPath
+      fromPath: fromPath,
+      assetsdata:[]
     }
   },
 	created () {
+		
+//		this.listassets()
 //	  	this.list()
 		this.fromPath = fromPath.path
 	//  console.log(this.fromPath);
 	  },
+	      mounted () {
+		this.$store.dispatch('detail'),
+		this.listassets()
+//	  console.group(this.$store.state.app.showFooter)
+		},
+		computed:{	
+		...mapGetters([
+	      'refpath'
+	    ])
+	},
+	
 	beforeRouteEnter(to, from, next) {
     fromPath = from
     next()
+ },
+  beforeRouteLeave(to, from, next) {
+  	//console.group('beforeRouteLeave ===============》');
+  	this.$store.commit('refpath', '')
+  	next()
   },
  	methods: {
-// 		async list (){
-////			const res = await this.$http.get('/api/list')
-//			const url=this.$backStage('/list')
-//	 		const res = await this.$http.get(url)
-//			const data = res	
-//			this.getData = res.data.data
-////			console.log(this.getData[0].company)
-//		},
-//		listData(){
-//			this.$router.push({
-//				path:'/add',
-//				query:{		
-//					company:this.getData[0].company
-//				}
-//			})
-//		},
     addressPush(b) {
         this.$router.push({ name: "Add", params: b });
     },
@@ -114,8 +89,40 @@ export default {
         return item
       })
        globalData = temporary
-    }
+    },
+
+    async issue(id){
+    	
+    	
+    	if (this.refpath==='/add'){
+    		this.$router.push({
+				path:'/add',
+			})	
+    	}else{
+    		
+    		const url=this.$backStage('/query?id='+id)
+		 	const res = await this.$http.get(url)
+			const data = res	
+			console.log(data)
+			this.$router.push({
+				name:'Detail',
+			})			
+			this.$store.commit('detail', res.data[0])
+    	}
+
+			
+		},
+		async	listassets(){
+			
+			const url=this.$backStage('/query')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+		 	this.assetsdata = res.data	
+//			 	console.log(this.issuedata)
+//			 	console.log(this.issuedata[0].state)
+		}
   }
+ 
 }
 </script>
 

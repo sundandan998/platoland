@@ -8,8 +8,7 @@
 		<div class="buy-pass-name">
 			<img src="../../../assets/images/ld.png" alt="" class="fl" />
 			<div class="buy-pass-name-text">
-				<span>PLD</span>
-				<span>PLATOLAND集团</span>
+				<span>{{this.detail.id}}</span>
 			</div>			
 		</div>
 		<div class="buy-pass-name-price">
@@ -60,6 +59,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -80,6 +80,11 @@ export default {
     	this.hide = !(hide === 'show')
     	this.popupVisible = !(false === 'true')
     }
+  },
+  computed:{	
+	...mapGetters([
+      'detail'
+    ])
   },
   watch:{
 	value(){

@@ -8,7 +8,7 @@
 		          <mt-button slot="left"></mt-button>
 		      </mt-header>
 		    </div>
-    		<router-link to="/pass">
+    		<router-link :to="{path:'/detail',state:'发行中'}">
 				<div class="home-investment">
 				<img src="../../assets/images/gf.png" alt="" />
 				<div class="home-investment-content">
@@ -70,7 +70,7 @@
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
 					<img src="../../assets/images/u345.png"/>
 					<div class="assets-subscription-text fr">
-							<span>{{items.id}}</span>
+							<span class="home-name">{{items.id}}</span>
 					</div>
 					<div class="assets-subscription-title">
 						<p>{{items.state}}</p>
@@ -82,9 +82,9 @@
 							<li>初始价格</li>
 						</ul>
 						<ul class="fr">
-							<li>{{items.date}}</li>
-							<li>{{items.issue}}</li>
-							<li>{{items.hold}}</li>
+							<li>{{items.issuetime}}</li>
+							<li>{{items.amountnum}}</li>
+							<li>{{items.initialprice}}</li>
 						</ul>
 					</div>
 				</div>	
@@ -118,6 +118,7 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
+import detail from './detail/Detail'
 import store from './../../store/modules/app.js'
 export default {
   name: 'page-tabbar',
@@ -165,31 +166,33 @@ creadte() {
                this.animate=false
        },500)
     },
+	//  首页/官方/接口
 	  async	pld(){
 	   		const url=this.$backStage('/pldDetailsData')
 	   		const res = await this.$http.get(url)
 			 	const data = res.data
 			 	this.plddata = res.data
 	//		 	console.log(data)
-	//		 	console.log(this.plddata)
+//			 	console.log(this.plddata)
 	  },
+//	  首页/发行中/待发行/沟通中接口
 	  async	listissue(){
 				const url=this.$backStage('/query')
 			 	const res = await this.$http.get(url)
 			 	const data = res.data
-			 	this.issuedata = res.data
+			 	this.issuedata = res.data	
 //			 	console.log(this.issuedata)
 //			 	console.log(this.issuedata[0].state)
 		},
+//		点击跳转通证详情接口
 		async issue(id){
 			const url=this.$backStage('/query?id='+id)
 		 	const res = await this.$http.get(url)
 			const data = res		
 			this.$router.push({
 				name:'Detail',
-			})
+			})			
 			this.$store.commit('detail', res.data[0])
-//			window.localStorage.setItem('data',JSON.stringify(this.datalist))
 		},
 		 ...mapActions('detail',[
 	          'app.detail' 
@@ -202,14 +205,14 @@ creadte() {
 //		 	console.log(data.version)
 //			console.log(this.$version)
 		 	const version =this.$version()
-		 	if(parseFloat(data.version)< parseFloat(version)){
+		 	if(parseFloat(data.version)> parseFloat(version)){
 		 		this.versionbox()
 		 		if(parseFloat(data.force)===1){
 		 				this.forceversion()
 		 		}
 		 	}
 	  },
-//	  版本弹框
+//	  版本升级弹框
 	  versionbox(){
 			this.$messagebox.confirm("<div><span>新版本特性:</span><p>1.xxxxxx</p></div>")
 			.then(action => {

@@ -12,8 +12,9 @@
       <mt-field></mt-field>
       <span>描述:</span>
       <mt-field></mt-field>
-      <router-link to="/list">
-        <span v-if="!isData">
+      
+      	<div @click="addadress">
+      		<span v-if="!isData">
           <img src="../../../assets/images/u2693.png" alt>
           添加地址
         </span>
@@ -21,7 +22,9 @@
           <img src="../../../assets/images/u2693.png" alt>
           替换地址
         </span>
-      </router-link>
+      	</div>
+        
+      <!--</router-link>-->
       <div class="certificate-list-card assets-list-add">
         <ul v-if="isData">
           <li>
@@ -49,6 +52,7 @@
 </template>
 
 <script>
+import store from './../../../store/modules/app.js'	
 let globalList = {};
 export default {
   data() {
@@ -78,6 +82,13 @@ export default {
       } else {
         this.isData = false;
       }
+    },
+    addadress(){
+    	const p = this.$route.path
+    	this.$store.commit('refpath', p)
+    	this.$router.push({
+				name:'List',
+			})	
     }
   }
 };

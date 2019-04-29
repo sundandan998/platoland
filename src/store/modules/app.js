@@ -2,7 +2,8 @@ const app = {
   state: {
     showFooter:'265',
     remarks:'',
-    detail:{}
+    detail:{},
+    refpath:''
   },
     mutations: {
     	SHOW_FOOTER:(state,data) => {
@@ -14,6 +15,9 @@ const app = {
     detail:(state,data) => {
     	state.detail = data
     },
+    refpath:(state,data) => {
+    	state.refpath = data
+    },
   },
     actions: {
     	showFooter: ({ commit },showFooter) => {
@@ -24,6 +28,9 @@ const app = {
     },
      	detail: ({ commit },detail) => {
     		commit('detail',detail)
+    },
+    refpath: ({ commit },detail) => {
+    		commit('refpath',detail)
     }
 
     

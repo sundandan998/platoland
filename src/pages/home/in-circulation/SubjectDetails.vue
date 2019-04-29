@@ -17,7 +17,7 @@
 			  		<span>基本信息</span>
 			  	</div>
 			    <div class="information-content">
-			    	<mt-cell title="主体名称：" value="北京河底捞餐饮有限公司"></mt-cell>
+			    	<mt-cell title="主体名称："><span>{{this.detail.body}}</span></mt-cell>
 			    	<mt-cell title="通证昵称：" to="//github.com" value="河底捞捞豆"></mt-cell>
 			  		<mt-cell title="通证标识：" value="">
 			  			<img src="../../../assets/images/u1429.png" alt="" />&nbsp;
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
 	data(){
 		return{
@@ -91,6 +92,11 @@ export default {
 		}
 	},
 	methods:{
+	},
+	computed:{	
+		...mapGetters([
+	      'detail'
+	    ])
 	}
 }
 </script>

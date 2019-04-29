@@ -79,7 +79,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="pass-details-issue-btn">
+		<div class="pass-details-issue-btn" v-if="show"@click="showbtn">
 			<router-link to="/deal">				
 				<mt-button type="primary" size="large">去交易</mt-button>
 			</router-link>			
@@ -120,6 +120,9 @@ export default {
 				this.tableData = data.data.data	
 				}
 			}
+		},
+		showbtn(){
+			this.show = !this.show;
 		},
 //		复制
 		copy() {

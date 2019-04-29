@@ -5,7 +5,7 @@
 			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>
-			<div class="pass-details-information">
+		<div class="pass-details-information">
 			<div class="pass-details-information-header">
 				<span>基本信息</span>
 			</div>
@@ -16,14 +16,14 @@
 					<li>合约地址：</li>
 					<li>通证主体：</li>				
 					<li>发行方：</li>
-					<li>发行方报告：</li>
+					<li>权益说明：</li>
 				</ul>
 				<ul class="fr information-content-right">					
 					<li>
 						<!--<img src="../../../assets/images/icon-3.png"/>-->
 						<span class="details-information-identification">{{this.detail.id}}</span>
 					</li>
-					<li>{{this.detail.Issuer}}</li>
+					<li>{{this.detail.name}}</li>
 					<li>
 						<span class="tag-read" @click="copy"
 							data-clipboard-text="detailslist.address">
@@ -31,13 +31,12 @@
 						</span>
 					<li>
 						<router-link to="/subject">
-							<span>{{this.detail.assets}}</span>	
+							<span>{{this.detail.body}}</span>	
 						</router-link>	
 					</li>
 					<li>{{this.detail.issuer}}</li>
-					<li>{{this.detail.issuer}}</li>
 					<li>
-						<span>{{this.detail.assets}}</span>
+						<span>{{this.detail.explain}}</span>
 						<!--<router-link to="/login">
 							<span>《河底捞捞豆报告》.pdf</span>	
 						</router-link>	-->
@@ -59,31 +58,45 @@
 					<li>截止日期:</li>
 					<li>最小发行量:</li>
 					<li>发行数量:</li>
-					<li>起购数量:</li>					
+					<li>起购数量:</li>	
+					<li>已售数量:</li>	
 					<li>初始单价:</li>
 					<li>发行单价:</li>
 				</ul>
 				<ul class="fr information-content-right">
 					<li>{{this.detail.state}}</li>
-					<li>{{this.detail.hold}}</li>
+					<li>{{this.detail.proportion}}</li>
 					<li>
-						<img src="../../../assets/images/u318.png"/>
+						<!--<img src="../../../assets/images/u318.png"/>-->
 						<span class="details-information-identification">{{this.detail.assets}}</span>
 					</li>
-					<li>{{this.detail.date}}</li>
-					<li>{{this.detail.date}}</li>
-					<li>{{this.detail.num}}</li>
-					<li>{{this.detail.purnum}}</li>
-					<li>{{this.detail.smallnum}}</li>
-					<li>{{this.detail.num}}</li>
-					<li>{{this.detail.purnum}}</li>
+					<li>{{this.detail.mode}}</li>
+					<li>{{this.detail.issuetime}}</li>
+					<li>{{this.detail.endtime}}</li>
+					<li>{{this.detail.minnum}}</li>
+					<li>{{this.detail.amountnum}}</li>
+					<li>{{this.detail.purchasenum}}</li>
+					<li>{{this.detail.purchasenum}}</li>
+					<li>{{this.detail.initialprice}}</li>
+					<li>{{this.detail.issueprice}}</li>
 				</ul>
 			</div>
+		</div>
+		<div class="pass-details-issue-btn" id="transaction">
+			<router-link to="/deal">				
+				<mt-button type="primary" size="large">去交易</mt-button>
+			</router-link>			
+		</div>
+		<div class="pass-details-issue-btn" id="purchase">
+			<router-link to="buy">
+				<mt-button type="primary" size="large">买入</mt-button>
+			</router-link>
 		</div>
 	</div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import Clipboard from 'clipboard'
 import {mapGetters} from 'vuex'
 export default {
@@ -94,11 +107,14 @@ export default {
 	data() {
 	    return {
 	    	detailslist:[],
-	    	data:[]
+	    	data:[],
+	    	show:''
 	    }
 	},
 	mounted() {
+		this.showbtn()
 	},
+
 	methods:{
 //		复制
 		copy() {
@@ -114,8 +130,20 @@ export default {
 	          // 释放内存
 	          clipboard.destroy()
 	        })
-       }
-			
+    	},
+		showbtn(){
+//			debugger
+			if(this.detail.state== '待发行'){
+				document.getElementById("transaction").style.display="none"
+				document.getElementById("purchase").style.display="none"
+			}else if(this.detail.state== '发行中'){
+				document.getElementById("transaction").style.display="none"
+				document.getElementById("purchase").style.display="block"
+			}else if(this.detail.state== '流通中'){
+				document.getElementById("purchase").style.display="none"
+				document.getElementById("transaction").style.display="block"
+			}
+		}
 	},
 	computed:{	
 		...mapGetters([
