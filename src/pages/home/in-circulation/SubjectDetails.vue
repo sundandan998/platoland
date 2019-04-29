@@ -17,21 +17,41 @@
 			  		<span>基本信息</span>
 			  	</div>
 			    <div class="information-content">
-			    	<mt-cell title="主体名称："><span>{{this.detail.body}}</span></mt-cell>
-			    	<mt-cell title="通证昵称：" to="//github.com" value="河底捞捞豆"></mt-cell>
-			  		<mt-cell title="通证标识：" value="">
-			  			<img src="../../../assets/images/u1429.png" alt="" />&nbsp;
-			  			<span>HDL（HeDiLao）</span>
+			    	<mt-cell title="主体名称：">
+			    		<span>{{this.detail.body}}</span>
+			    	</mt-cell>
+			    	<mt-cell title="通证昵称:" to="//github.com">
+			    		<span>{{this.detail.name}}</span>
+			    	</mt-cell>
+			  		<mt-cell title="通证标识:">			  			
+			  			<!--<img src="../../../assets/images/u1429.png" alt="" />&nbsp;-->
+			  			<span>{{this.detail.name}}</span>
 			  						  			
 			  		</mt-cell>
-			  		<mt-cell title="主体类型：" value="有限公司"></mt-cell>
-			  		<mt-cell title="注册住所：" value="北京市朝阳区东街2号3楼302"></mt-cell>
-			  		<mt-cell title="经营地址：" value="北京市昌平区北街22-02"></mt-cell>
-			  		<mt-cell title="法人：" value="xxx"></mt-cell>
-			  		<mt-cell title="注册资本：" value="xxx万"></mt-cell>
-			  		<mt-cell title="成立日期：" value="2018年10月28日"></mt-cell>
-			  		<mt-cell title="营业期限：" value="2018年10月28日至2038年10月27日"></mt-cell>
-			  		<mt-cell title="经营范围：" label="技术推广服务；主体管理咨询；不得从事本市产业政策禁止和限制类项目的经营活动"></mt-cell>
+			  		<mt-cell title="主体类型：" >
+			  			<span>{{this.detail.assets}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="注册住所：">
+			  			<span>{{this.detail.residence}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="经营地址：" >
+			  			<span>{{this.detail.businessaddress}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="法人:">
+			  			<span>{{this.detail.person}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="注册资本：" >
+			  			<span>{{this.detail.capital}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="成立日期：" >
+			  			<span>{{this.detail.establishdate}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="营业期限：" >
+			  			<span>{{this.detail.term}}</span>
+			  		</mt-cell>
+			  		<mt-cell title="经营范围：">
+			  			<span>{{this.detail.range}}</span>
+			  		</mt-cell>
 			    </div>
 			  </mt-tab-container-item>
 			  <mt-tab-container-item id="introduce">

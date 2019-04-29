@@ -8,8 +8,7 @@
 		          <mt-button slot="left"></mt-button>
 		      </mt-header>
 		    </div>
-    		<!--<router-link :to="{path:'/detail',state:'发行中'}">-->
-				<div class="home-investment" @click="issue(items.id)">
+				<div class="home-investment" @click="issue('PLD')">
 				<img src="../../assets/images/gf.png" alt="" />
 				<div class="home-investment-content">
     			<div class="home-investment-top fl">
@@ -38,8 +37,7 @@
 				<div class="home-investment-progress">
 						<mt-progress :value="20" :bar-height="5"></mt-progress>
 				</div>	    		
-	    		</div>
-	    	<!--</router-link>-->
+	    	</div>
       		<!--/总资产-->
          	<!--land指数-->
          	<div class="home-land">
@@ -166,7 +164,7 @@ creadte() {
                this.animate=false
        },500)
     },
-	//  首页/官方/接口
+	//  首页/官方数据渲染
 	  async	pld(){
 	   		const url=this.$backStage('/pldDetailsData')
 	   		const res = await this.$http.get(url)
@@ -175,7 +173,7 @@ creadte() {
 	//		 	console.log(data)
 //			 	console.log(this.plddata)
 	  },
-//	  首页/发行中/待发行/沟通中接口
+//	  首页/发行中/待发行/沟通中渲染页面数据
 	  async	listissue(){
 				const url=this.$backStage('/query')
 			 	const res = await this.$http.get(url)
