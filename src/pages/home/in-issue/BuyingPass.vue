@@ -74,7 +74,7 @@ export default {
       this.value = (this.value + key).slice(0, 6);
     },
     onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1);
+      this.value = this.value.slice(0, this.value.length - 1)
     },
     passwordShow(hide){
     	this.hide = !(hide === 'show')

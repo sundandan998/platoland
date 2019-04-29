@@ -8,8 +8,8 @@
 		          <mt-button slot="left"></mt-button>
 		      </mt-header>
 		    </div>
-    		<router-link :to="{path:'/detail',state:'发行中'}">
-				<div class="home-investment">
+    		<!--<router-link :to="{path:'/detail',state:'发行中'}">-->
+				<div class="home-investment" @click="issue(items.id)">
 				<img src="../../assets/images/gf.png" alt="" />
 				<div class="home-investment-content">
     			<div class="home-investment-top fl">
@@ -39,7 +39,7 @@
 						<mt-progress :value="20" :bar-height="5"></mt-progress>
 				</div>	    		
 	    		</div>
-	    	</router-link>
+	    	<!--</router-link>-->
       		<!--/总资产-->
          	<!--land指数-->
          	<div class="home-land">
@@ -199,29 +199,41 @@ creadte() {
 	      ]),
 //	   版本升级   
 	  async version(){
-	  	const url=this.$backStage('/version')
+	  	const url=this.$backStage('/versionnum')
 		 	const res = await this.$http.get(url)
 		 	const data = res.data
-//		 	console.log(data.version)
-//			console.log(this.$version)
 		 	const version =this.$version()
+		 	this.$store.commit('version', res.data)
 		 	if(parseFloat(data.version)> parseFloat(version)){
 		 		this.versionbox()
-		 		if(parseFloat(data.force)===1){
+		 		if(parseFloat(data.force)===0){
 		 				this.forceversion()
+		 		}else{
+		 			this.versionbox()
 		 		}
 		 	}
 	  },
 //	  版本升级弹框
 	  versionbox(){
-			this.$messagebox.confirm("<div><span>新版本特性:</span><p>1.xxxxxx</p></div>")
-			.then(action => {
-			})
+		 this.$messagebox.confirm('', { 
+				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
+				 title: '新版本提醒', 
+				 confirmButtonText: '升级', 
+				 cancelButtonText: '取消' 
+				 })
 		},
-		forceversion(){
-			this.$messagebox.confirm("<div><span>新版本特性:</span>强制升级</div>")
-			.then(action => {
-			})
+//		强制升级
+		forceversion(){	
+			 this.$messagebox.confirm('', { 
+				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
+				 title: '新版本提醒', 
+				 confirmButtonText: '升级', 
+				 cancelButtonText: '' 
+				 }).then(action => {					
+							this.$router.push({
+								name:'https://www.baidu.com'
+							})
+					})	
 		}
 	},
 	watch: {

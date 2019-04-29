@@ -55,7 +55,7 @@ export default {
 		this.fromPath = fromPath.path
 	//  console.log(this.fromPath);
 	  },
-	      mounted () {
+	mounted () {
 		this.$store.dispatch('detail'),
 		this.listassets()
 //	  console.group(this.$store.state.app.showFooter)
@@ -91,16 +91,13 @@ export default {
        globalData = temporary
     },
 
-    async issue(id){
-    	
-    	
+    async issue(id){ 	
     	if (this.refpath==='/add'){
     		this.$router.push({
 				path:'/add',
 			})	
-    	}else{
-    		
-    		const url=this.$backStage('/query?id='+id)
+    	}else{   		
+    	const url=this.$backStage('/query?id='+id)
 		 	const res = await this.$http.get(url)
 			const data = res	
 			console.log(data)
@@ -112,8 +109,7 @@ export default {
 
 			
 		},
-		async	listassets(){
-			
+		async	listassets(){			
 			const url=this.$backStage('/query')
 		 	const res = await this.$http.get(url)
 		 	const data = res.data

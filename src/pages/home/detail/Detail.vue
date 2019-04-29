@@ -18,7 +18,7 @@
 					<li>发行方：</li>
 					<li>权益说明：</li>
 				</ul>
-				<ul class="fr information-content-right">					
+				<ul class="fr information-content-right information-content-right-li">					
 					<li>
 						<!--<img src="../../../assets/images/icon-3.png"/>-->
 						<span class="details-information-identification">{{this.detail.id}}</span>

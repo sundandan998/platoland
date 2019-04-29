@@ -9,34 +9,33 @@
 		</div>
 		<div class="version-logo">
 			<img src="../../../assets/images/logo.png" alt="" />
-			<p>v1.0</p>
+			<p>{{this.version.version}}</p>
 		</div>
-		<button @click="versionbox">弹框</button>
 		<div class="version-update">
 			<mt-cell title="版本更新" value="当前为最新版本"></mt-cell>
 		</div>
 		
 	</div>
 </template>
-
 <script>
+import {mapGetters} from 'vuex'
 export default{
 	data(){
 		return{
+				
 		}
 	},
 	created(){
 	},
+	mounted(){
+	},
 	methods:{
-		versionbox(){
-			this.$messagebox.confirm("<div><span>新版本特性:</span><p>1.xxxxxx</p></div>")
-			.then(action => {
-			})
-		},
-		upversion(){
-			
-		}
-	}
+	},
+	computed:{	
+	...mapGetters([
+      'version'
+    ])
+  },
 }
 </script>
 

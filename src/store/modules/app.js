@@ -1,39 +1,33 @@
 const app = {
   state: {
-    showFooter:'265',
-    remarks:'',
+//	详情
     detail:{},
-    refpath:''
+//  地址薄添加
+    refpath:'',
+//  版本
+		version:''
   },
-    mutations: {
-    	SHOW_FOOTER:(state,data) => {
-    	state.showFooter = data
-    },
-     remarks:(state,remarks) => {
-    	state.remarks = remarks
-    },
+  mutations: {
     detail:(state,data) => {
     	state.detail = data
     },
     refpath:(state,data) => {
     	state.refpath = data
     },
+    version:(state,data) => {
+    	state.version = data
+    },
   },
-    actions: {
-    	showFooter: ({ commit },showFooter) => {
-    		commit('SHOW_FOOTER',showFooter)
-    },
-     	remarks: ({ commit },remarks) => {
-    		commit('remarks',remarks)
-    },
+  actions: {
      	detail: ({ commit },detail) => {
     		commit('detail',detail)
     },
-    refpath: ({ commit },detail) => {
+    	refpath: ({ commit },detail) => {
     		commit('refpath',detail)
-    }
-
-    
+    },
+     	version: ({ commit },detail) => {
+    		commit('version',detail)
+    }   
   }
 }
 export default app

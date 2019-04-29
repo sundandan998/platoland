@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     openaction() {
-      this.sheetVisible = !this.sheetVisible;
+      this.sheetVisible = !this.sheetVisible
     },
     getparameter() {
       let path = this.$route.params;

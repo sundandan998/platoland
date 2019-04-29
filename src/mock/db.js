@@ -8,37 +8,9 @@ module.exports = function () {
       'age|18-25': 22,
       'sex': 'girl'
     }),
-////  首页 --待发行 发行中--流通中数据接口
-//  formData: Mock.mock({
-//  	'data|3':[{
-//  		  'name': '@cname',
-//		      'hold':'@float(60, 100, 3, 5)',
-//		      'issue':'@integer(60, 100)',
-//		      'remarks':'@date(2019-4-dd)'
-//  	}]
-//  }),
-//  通证详情接口
-    detailsData:Mock.mock({
-    		'name': '@cname',
-    		'nickname':'@cword',
-    		'address':'@ip',
-    		'subject':'@county()',
-    		'Issuer': 'platoland集团',
-    		'num':'@increment',
-    		'state':'待发行',
-    		'Proportion':'@float(60, 100, 3, 5)',
-    		'assets':'USDT',
-    		'mode':'首次发行',
-    		'issuedate':'@datetime',
-    		'closingdata':'@datetime',
-    		'smallnum':'@increment(100)',
-    		'issuemum':'@increment',
-    		'purnum':'@increment(100)',
-    		'initialprice':'@increment()',
-    		'issueprice':'@increment'
-    }),
     //  pld通证详情接口
     pldDetailsData:Mock.mock({
+    		'id':'PLD',
     		'name': 'PLD',
     		'nickname':'@cword',
     		'address':'@ip',
@@ -193,8 +165,8 @@ module.exports = function () {
     	}]   
     }),
 		//  版本号接口
-			version:Mock.mock({
-  			"version|123.1-10": 1,
+			versionnum:Mock.mock({				
+  			"version":'3.0',
   			"force|1-0": 1,
   			"describe":'升级描述'
 		}),

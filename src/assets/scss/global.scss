@@ -374,7 +374,7 @@ label.mint-button-text {
     display: none;
 }
 .assets-subscription{
-    width: 45%;
+    width: auto;
     display:inline-block;
     background-color: #fff;
     border-radius: 7px;
@@ -473,6 +473,9 @@ label.mint-button-text {
        color: #666;
        
     }  
+}
+.information-content-right-li{
+    margin-top: 20px;
 }
 .information-content-right li{
     text-align: right;
