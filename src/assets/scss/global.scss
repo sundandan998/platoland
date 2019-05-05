@@ -952,6 +952,9 @@ element.style {
     p{
         font-size: 0.8rem;
         color: #999;
+        position: relative;
+        top: -25px;
+        right: 15px;
     }
     span{
         font-size: 0.8rem;
@@ -1052,6 +1055,7 @@ element.style {
     margin-top: 50px;
 }
 //-----------------------我的/资产------------------
+
 .certificate-list-card input{
     margin-right: 25px;
     margin-top: -25px;
@@ -1504,6 +1508,9 @@ element.style {
     }
 }
 //------------------------------我的/地址薄/添加--------------
+.add-address-content p{
+    margin-left: 45px;
+}
 .add-adress-list {
     margin-top: 1px;
     background-color: #fff;

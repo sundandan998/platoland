@@ -23,18 +23,21 @@
 			   </mt-button>
 			</mt-header>
 		</div>
+		<!--v-for="(item,index) in assetsdata"-->
+		<!--@click="toAsset(item.id)"-->
 		<div class="assets-detailed-exhibition">
-			<div class="assets-detailed-exhibition-text">
-				<span>{{this.detail.amount}}</span>
-			</div>			
-			<div class="assets-detailed-exhibition-img">				
-				<img src="../../../assets/images/ld.png" alt="" class="fl"   />
-				<ul class="fr">
-					<li>{{this.detail.id}}</li>
-					<li>北京河底捞餐饮有限公司</li>
-				</ul>				
-			</div>
+				<div class="assets-detailed-exhibition-text">
+					<span>{{this.detail.id}}</span>
+				</div>			
+				<div class="assets-detailed-exhibition-img">				
+					<img src="../../../assets/images/ld.png" alt="" class="fl"   />
+					<ul class="fr">
+						<li>{{this.detail.body}}</li>
+						<!--<li>北京河底捞餐饮有限公司</li>-->
+					</ul>				
+				</div>
 			<mt-cell title="可用量" value="50.000">
+
 				 <img slot="icon" src="../../../assets/images/u4662.png">
 			</mt-cell>
 			<mt-cell title="冻结量" value="50.00">
@@ -80,13 +83,15 @@
 
 <script>
 import {mapGetters} from 'vuex'
-
 export default{
 	data(){
 		return{
 			data:{}
 		}
 	},
+	created(){
+		this.asset
+  },
 	methods:{
 		//	点击移除弹出的消息框
 		remove(){

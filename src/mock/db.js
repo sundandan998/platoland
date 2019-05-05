@@ -146,9 +146,9 @@ module.exports = function () {
     	[
     	{
 				'id':'USDT',
-				'name': '网红钻',
-				'body':'丽人美妆工作室',
-				'issuer':'丽人美妆工作室',
+				'name': 'USDT',
+				'body':'USDT',
+				'issuer':'USDT',
 				'state':'待发行',
 				'address':'13Sn....ix7c',
 				'amount':'500',

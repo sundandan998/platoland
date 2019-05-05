@@ -16,7 +16,7 @@ const app = {
     },
     version:(state,data) => {
     	state.version = data
-    },
+    }
   },
   actions: {
      	detail: ({ commit },detail) => {
@@ -27,7 +27,7 @@ const app = {
     },
      	version: ({ commit },detail) => {
     		commit('version',detail)
-    }   
+    }
   }
 }
 export default app

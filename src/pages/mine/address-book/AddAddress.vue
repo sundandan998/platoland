@@ -11,31 +11,32 @@
       <span>备注名称:</span>
       <mt-field></mt-field>
       <span>描述:</span>
-      <mt-field></mt-field>
-      
-      	<div @click="addadress">
-      		<span v-if="!isData">
-          <img src="../../../assets/images/u2693.png" alt>
-          添加地址
+      <mt-field></mt-field>    
+      	<div @click="addadress">     		
+      		<span class="add-address-content">
+	          <img src="../../../assets/images/u2693.png" alt>
+	          <span>{{this.detail.id}}</span>
+	          <p>{{this.detail.body}}</p>  
+	          <p>添加地址</p>
         </span>
-        <span v-else>
+        <!--<span v-else>
           <img src="../../../assets/images/u2693.png" alt>
           替换地址
-        </span>
+        </span>-->
       	</div>
         
       <!--</router-link>-->
       <div class="certificate-list-card assets-list-add">
-        <ul v-if="isData">
+        <!--<ul>
           <li>
             <router-link to="/assetsdetailed">
-              <img src="../../../assets/images/u345.png" alt class="fl">
-              <span>{{addList.name}}</span>
-              <span>{{addList.company}}</span>
+            
+              <span>{{this.detail.id}}</span>
+              <span>{{this.detail.body}}</span>
               <div class="assets-list-right fr"></div>
             </router-link>
           </li>
-        </ul>
+        </ul>-->
       </div>
     </div>
     <div class="add-adress-btn">
@@ -53,36 +54,18 @@
 
 <script>
 import store from './../../../store/modules/app.js'	
-let globalList = {};
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
-      username: "",
-      addList: globalList,
-      isData: false
-    };
+    }
   },
   created() {
-    this.getparameter();
-  },
-  watch: {
-    $route: "getparameter"
   },
   methods: {
-    openaction() {
-      this.sheetVisible = !this.sheetVisible
-    },
-    getparameter() {
-      let path = this.$route.params;
-      if (JSON.stringify(path) != "{}") {
-        path = this.$route.params;
-        globalList = path;
-        this.isData = true;
-        this.addList = globalList;
-      } else {
-        this.isData = false;
-      }
-    },
+//	showadd(){
+//		this.showadd= !this.showadd
+//	},
     addadress(){
     	const p = this.$route.path
     	this.$store.commit('refpath', p)
@@ -90,8 +73,14 @@ export default {
 				name:'List',
 			})	
     }
-  }
-};
+  },
+  computed:{	
+		...mapGetters([
+	      'detail'
+	    ])
+	},
+	
+}
 </script>
 
 <style lang="scss">

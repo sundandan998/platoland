@@ -17,21 +17,22 @@
         <img src="../../../assets/images/u3511.png" alt><span>添加资产</span>
       </router-link>
     </div>
-     
-    <div class="certificate-list-card" v-for="(item, index) in getData" @click="toAsset(item.id)">
+    <router-link to="/assetsdetailed">
+     	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset()">
       <ul>
         <li>
 	        <img src="../../../assets/images/u345.png" alt class="fl">
-	        <span>{{item.name}}</span>
-	        <span>{{item.company}}</span>         
+	        <span>{{item.id}}</span>
+	        <span>{{item.name}}</span>   
+	        <p class="fr">{{item.issueprice}}</p>
 					<!--<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>-->
         </li>
       </ul>
     </div>
-     
+    </router-link>     
     <div class="certificate-list-card assets-list-add">
       <ul>
-        <li v-for="(item, index) in addList" :key="index">
+        <!--<li v-for="(item, index) in addList" :key="index">
           <router-link to="/assetsdetailed">
             <img src="../../../assets/images/u345.png" alt class="fl">
             <span>{{item.name}}</span>
@@ -40,7 +41,7 @@
               <p>6.00</p>
             </div>
           </router-link>
-        </li>
+        </li>-->
       </ul>
     </div>
   </div>
@@ -48,27 +49,21 @@
 <script>
 import {mapActions} from 'vuex'	
 let globalList = []
-let globalData = [
-{
-    id: "USDT",
-    name: "USDT"
-},
-{
-	id: "PLD",
-  name: "PLD（PLATOLAND）",
-  company: "PLD（PLATOLAND）"
-}
-]
 export default {
   data() {
    return {
-      addList:globalList,
-      getData: [],
-      getData: globalData,
+   		assetsdata:[]
+//    addList:globalList,
+//    getData: []
+//    getData: globalData,
    }
   },
   created(){
      this.getparameter()
+     this.toAsset()
+  },
+  mounted(){
+  	this.toAsset()
   },
   watch:{
    '$route':'getparameter'
@@ -76,20 +71,24 @@ export default {
   methods: {
   	getparameter(){
      let path = this.$route.params
-     let arr = globalList
+//   let arr = globalList
      if(JSON.stringify(path) != '{}'){
          arr.push(path)
          globalList = arr
-         this.addList =globalList
+//       this.addList =globalList
      }
    },
-  	async toAsset(id){
-  	const url=this.$backStage('/asset?id='+id)
+  	async toAsset(){
+  	const url=this.$backStage('/asset')
 		 	const res = await this.$http.get(url)
-			const data = res		
-			this.$router.push({
-				name:'AssetsDetailed',
-			})			
+			const data = res.data
+//			console.log(data[0].id)
+			this.assetsdata = data
+//			this.getData = data
+//				console.log(this.assetsdata)
+//			this.$router.push({
+//				name:'AssetsDetailed',
+//			})			
 			this.$store.commit('detail', res.data[0])  	  	
   	}
   }   
@@ -101,5 +100,5 @@ export default {
 		background-color: #fff;
 		color:#000;
 	}
-@import "../../../assets/scss/global";
+@import "../../../assets/scss/global"
 </style>

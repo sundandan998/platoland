@@ -31,7 +31,7 @@
 					<ul>
 						<li class="fl">发行总量:{{this.plddata.purnum}}</li>
 						<li class="fl">已发行:{{this.plddata.num}}</li>
-						<li class="fr">{{this.$store.state.app.detail}}</li>
+						<li class="fr">{{this.plddata.num}}</li>
 					</ul>
 				</div>
 				<div class="home-investment-progress">

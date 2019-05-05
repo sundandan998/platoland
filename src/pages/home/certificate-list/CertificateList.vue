@@ -97,12 +97,12 @@ export default {
 				path:'/add',
 			})	
     	}else{   		
-    	const url=this.$backStage('/query?id='+id)
-		 	const res = await this.$http.get(url)
-			const data = res	
-			console.log(data)
-			this.$router.push({
-				name:'Detail',
+	    	const url=this.$backStage('/query?id='+id)
+			 	const res = await this.$http.get(url)
+				const data = res	
+				console.log(data)
+				this.$router.push({
+					name:'Detail',
 			})			
 			this.$store.commit('detail', res.data[0])
     	}
@@ -114,6 +114,7 @@ export default {
 		 	const res = await this.$http.get(url)
 		 	const data = res.data
 		 	this.assetsdata = res.data	
+		 	this.$store.commit('detail', res.data[0])
 //			 	console.log(this.issuedata)
 //			 	console.log(this.issuedata[0].state)
 		}
