@@ -19,35 +19,15 @@
     </div>
     <router-link to="/assetsdetailed">
      	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset(item.id)">
-      <ul>
-        <li>
-	        <img src="../../../assets/images/u345.png" alt class="fl">
-	        <span>{{item.id}}</span>
-	        <span>{{item.name}}</span>   
-	        <p class="fr">{{item.purchasenum}}</p>
-					<!--<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>-->
-        </li>
-      </ul>
-    </div>
-    </router-link>     
-    <!--<div class="certificate-list-card assets-list-add" >
-      <ul>
-        <li>
-          <router-link to="/assetsdetailed">
-            <img src="../../../assets/images/u345.png" alt class="fl">
-            <span>{{$route.params.name}}</span>
-
-            <div class="assets-list-right fr">
-              <p>6.00</p>
-            </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>-->
+        <mt-cell :title="item.id" :value="item.purchasenum" :label="item.name">
+          <img slot="icon" src="../../../assets/images/u345.png">
+        </mt-cell>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'	
+import {mapActions} from 'vuex'
 export default {
   data() {
    return {
@@ -72,10 +52,10 @@ export default {
 //			console.log(data)
 			this.assetsdata = data
 //			console.log(this.assetsdata)
-//			})			
-			this.$store.commit('detail', res.data[0])  	  	
+//			})
+			this.$store.commit('detail', res.data[0])
   	}
-  }   
+  }
 }
 </script>
 

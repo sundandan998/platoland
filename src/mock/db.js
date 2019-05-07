@@ -11,23 +11,30 @@ module.exports = function () {
     //  pld通证详情接口
     pldDetailsData:Mock.mock({
     		'id':'PLD',
-    		'name': 'PLD',
-    		'nickname':'@cword',
-    		'address':'@ip',
-    		'subject':'@county()',
-    		'Issuer': 'platoland集团',
-    		'num':'@increment',
-    		'state':'发行中',
-    		'Proportion':'@float(60, 100, 3, 5)',
-    		'assets':'USDT',
-    		'mode':'首次发行',
-    		'issuedate':'@datetime',
-    		'closingdata':'@datetime',
-    		'smallnum':'@increment(100)',
-    		'issuemum':'@increment',
-    		'purnum':'@increment(100)',
-    		'initialprice':'@increment()',
-    		'issueprice':'@increment'
+        'name': 'PLATOLAND集团',
+        'body':'PLATOLAND',
+        'issuer':'PLATOLAND',
+        'state':'发行中',
+        'address':'13Sn....ix7c',
+        'explain':'权益说明',
+        'proportion':'1%',
+        'assets':'USDT',
+        'mode':'首次发行',
+        'issuetime':'2019/12/12',
+        'endtime':'2021/12/11',
+        'minnum':'2,500,000',
+        'amountnum':'500,000,000',
+        'soldnum':'0',
+        'purchasenum':'20,000',
+        'initialprice':'0.1  USDT',
+        'issueprice':'0.1  USDT',
+        'residence':'北京市石景山区畅园2号222',
+        'businessaddress':'北京昌平区回龙观102号',
+        'person':'贾八',
+        'capital':'100万',
+        'establishdate':'2012/12/12',
+        'term':'2012-12-12-2032-12-11',
+        'range':'经营范围'
     }),
 //  首页流通中/待发行/发行中接口
     query:Mock.mock(
@@ -38,7 +45,7 @@ module.exports = function () {
 				'body':'丽人美妆工作室',
 				'issuer':'丽人美妆工作室',
 				'state':'待发行',
-				'address':'13Sn....ix7c',      
+				'address':'13Sn....ix7c',
 	      'explain':'权益说明',
 	 			'proportion':'1%',
 	 			'assets':'USDT',
@@ -70,7 +77,7 @@ module.exports = function () {
 				'proportion':'1%',
 				'assets':'GUSD',
 				'mode':'增资发行',
-				'issuetime':'2018/1/1',	 				 		 			
+				'issuetime':'2018/1/1',
 	      'endtime':'2019/7/28',
 	      'minnum':'5,000,000',
 	      'amountnum':'900,000,000',
@@ -97,7 +104,7 @@ module.exports = function () {
 				'proportion':'10%',
 				'assets':'流通中',
 				'mode':'首次发行',
-				'issuetime':'2018/4/1',	 				 		 			
+				'issuetime':'2018/4/1',
 	      'endtime':'2019/4/1',
 	      'minnum':'500,000',
 	      'amountnum':'5,000,000',
@@ -119,7 +126,7 @@ module.exports = function () {
 				'body':'PLATOLAND',
 				'issuer':'PLATOLAND',
 				'state':'发行中',
-				'address':'13Sn....ix7c',      
+				'address':'13Sn....ix7c',
 	      'explain':'权益说明',
 	 			'proportion':'1%',
 	 			'assets':'USDT',
@@ -139,7 +146,7 @@ module.exports = function () {
 	      'establishdate':'2012/12/12',
 	      'term':'2012-12-12-2032-12-11',
 	      'range':'经营范围'
-	      
+
     	},
     	]),
     	asset:Mock.mock(
@@ -177,14 +184,14 @@ module.exports = function () {
 				'proportion':'2%',
 				'assets':'GUSD',
 				'mode':'增资发行',
-				'issuetime':'2019/1/1',	 				 		 			
+				'issuetime':'2019/1/1',
 	      'endtime':'2020/12/28',
 	      'minnum':'5,000,000',
 	      'soldnum':'9,000,000',
 	      'purchasenum':'50,000',
 	      'initialprice':'0.01  GUSD',
 	      'issueprice':'0.02  USDT',
-	     
+
     	}
     	]),
 //  	地址簿接口
@@ -192,10 +199,10 @@ module.exports = function () {
     	'data|4':[{
     			'name': '@cname',
     			'address':'@guid'
-    	}]   
+    	}]
     }),
 		//  版本号接口
-			versionnum:Mock.mock({				
+			versionnum:Mock.mock({
   			"version":'3.0',
   			"force|1-0": 1,
   			"describe":'升级描述'
@@ -205,7 +212,7 @@ module.exports = function () {
     	'data|4':[{
     			'name': '@cname',
     			'company':'@guid'
-    	}]   
+    	}]
     })
   }
 }

@@ -5,26 +5,16 @@
           <mt-button slot="left" icon="back" v-on:click="$router.go(-1)"></mt-button>
       </mt-header>
     </div>
-    <div class="certificate-list-card">
-      <ul>
-        <li v-for="(item, index) in assetsdata" >
-        	 <!--@click.prevent.stop="removeData(item.name)"-->
-        	 <!--@click="$router.push('/detail')-->
-          <div @click="issue(item.id)">
-            <img src="../../../assets/images/u345.png" alt class="fl">
-            <span>{{item.name}}</span>
-            <span>{{item.company}}</span>
-          </div>
-          <mt-switch v-model="value"  class="fr asset-list-switch" @change="assetswitch"></mt-switch>
-          <!--<input type="checkbox"class="fr"/>-->
-					<!--<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>-->
-        </li>
-      </ul>
+    <div class="certificate-list-card" v-for ="(item, index) in assetsdata">
+      <mt-cell :title="item.id" :value="item.name" :label="item.company" @click="issue(item.id)">
+          <img slot="icon" src="../../../assets/images/u345.png">
+          <mt-switch v-model="value" class="asset-list-switch" @change="assetswitch"></mt-switch>
+      </mt-cell>
     </div>
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'	
+import {mapGetters} from 'vuex'
 import store from './../../../store/modules/app.js'
 export default {
   data() {
@@ -33,7 +23,7 @@ export default {
       value:false,
       data:[],
       assetsdata:[]
-   		
+
     }
   },
 	created () {
@@ -43,7 +33,7 @@ export default {
 		this.listassets()
 //	  console.group(this.$store.state.app.showFooter)
 		},
-		computed:{	
+		computed:{
 		...mapGetters([
 	      'refpath'
 	    ])
@@ -54,27 +44,27 @@ export default {
   	next()
   },
  	methods: {
-    async issue(id){ 	
+    async issue(id){
     	if (this.refpath==='/add'){
     		this.$router.push({
 				path:'/add',
-			})	
-    	}else{   		
+			})
+    	}else{
 	    	const url=this.$backStage('/query?id='+id)
 			 	const res = await this.$http.get(url)
 				const data = res.data
 //				console.log(data[0].id)
 				this.$router.push({
 					name:'Detail',
-			})			
+			})
 			this.$store.commit('detail', res.data[0])
     	}
 		},
-		async	listassets(){			
+		async	listassets(){
 			const url=this.$backStage('/query')
 		 	const res = await this.$http.get(url)
 		 	const data = res.data
-		 	this.assetsdata = res.data	
+		 	this.assetsdata = res.data
 //		 	console.log(this.assetsdata[0].id)
 		 	this.$store.commit('detail', res.data[0])
 		},
@@ -86,7 +76,7 @@ export default {
 			}
 		}
   }
- 
+
 }
 </script>
 

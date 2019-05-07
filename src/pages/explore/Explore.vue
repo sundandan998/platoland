@@ -1,6 +1,6 @@
 <template>
   <div class="exchange">
-    <div class="page-wrap">     
+    <div class="page-wrap">
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="explore">
         	<div class="explore">
@@ -10,68 +10,43 @@
 	        	<div class="explore-navbar">
 	        		<van-tabs>
 							  <van-tab title="全部">
-							  	<ul  class="certificate-list-card">
-										<li>
-											<img src="../../assets/images/u345.png" alt="" class="fl" />
-											<span>PLD (PLD)</span>
-											<span>PLATOLAND集团</span>
-											<router-link to="/issue">
-												<mt-button size="small" type="primary" class="fr">详情</mt-button>
-											</router-link>
-											
-										</li>
-										<li>
-											<img src="../../assets/images/u345.png" alt="" class="fl" />
-											<span>PLD (PLD)</span>
-											<span>PLATOLAND集团</span>
-											<router-link to="/issue">
-												<mt-button size="small" type="primary" class="fr">详情</mt-button>
-											</router-link>
-										</li>
-									</ul>
+                  <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
+                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <router-link to="/issue">
+                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
+                    </router-link>
+                  </mt-cell>
+                   <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
+                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <router-link to="/issue">
+                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
+                    </router-link>
+                  </mt-cell>
 							  </van-tab>
 							  <van-tab title="流通中">
-							  	<ul  class="certificate-list-card">
-								  	<router-link to="/pass">
-											<li>
-												<img src="../../assets/images/u345.png" alt="" class="fl" />
-												<span>PLD (PLD)</span>
-												<span>PLATOLAND集团</span>
-												<router-link to="/issue">
-													<mt-button size="small" type="primary" class="fr">详情</mt-button>
-												</router-link>
-											</li>
-										</router-link>
-									</ul>
+									<mt-cell title="PLD (PLD)" label="PLATOLAND集团">
+                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <router-link to="/issue">
+                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
+                    </router-link>
+                  </mt-cell>
 							  </van-tab>
 							  <van-tab title="发行中">
-							  	<ul  class="certificate-list-card">
-								  	<router-link to="/details">
-											<li>
-												<img src="../../assets/images/u345.png" alt="" class="fl" />
-												<span>PLD (PLD)</span>
-												<span>PLATOLAND集团</span>
-												<router-link to="/issue">
-													<mt-button size="small" type="primary" class="fr">详情</mt-button>
-												</router-link>
-											</li>
-										</router-link>
-									</ul>
+							   <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
+                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <router-link to="/issue">
+                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
+                    </router-link>
+                  </mt-cell>
 							  </van-tab>
 							  <van-tab title="待发行">
-							  	 	<ul  class="certificate-list-card">
-									  	<router-link to="/issue">
-												<li	>
-													<img src="../../assets/images/u345.png" alt="" class="fl" />
-													<span>PLD (PLD)</span>
-													<span>PLATOLAND集团</span>
-													<router-link to="/issue">
-														<mt-button size="small" type="primary" class="fr">详情</mt-button>
-													</router-link>
-												</li>
-											</router-link>
-										</ul>
-							  </van-tab>
+						  	 <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
+                  <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                  <router-link to="/issue">
+                    <mt-button size="small" type="primary" class="fr">详情</mt-button>
+                  </router-link>
+                </mt-cell>
+						  </van-tab>
 						</van-tabs>
 	        	</div>
 	        </div>
@@ -81,18 +56,18 @@
     </div>
     <mt-tabbar v-model="message" fixed>
       <mt-tab-item id="home">
-      	<img slot="icon" src="../../assets/images/home-b.png" v-if="this.selected == 'home'"> 
-      	<img slot="icon" src="../../assets/images/home.png" v-else> 
+      	<img slot="icon" src="../../assets/images/home-b.png" v-if="this.selected == 'home'">
+      	<img slot="icon" src="../../assets/images/home.png" v-else>
       	首页
-      </mt-tab-item>         
+      </mt-tab-item>
 	      <mt-tab-item id="explore">
-	      	<img slot="icon" src="../../assets/images/explore-b.png"v-if="this.selected == 'merchant'">
+	      	<img slot="icon" src="../../assets/images/explore-b.png"v-if="this.selected == 'explore'">
 	      	<img slot="icon" src="../../assets/images/explore.png"v-else>
 	      	探索
 	      </mt-tab-item>
       <mt-tab-item id="mine" >
-      	<img slot="icon" src="../../assets/images/mine-b.png" v-if="this.selected == 'mine'">     	
-    	<img slot="icon" src="../../assets/images/mine.png"v-else>   
+      	<img slot="icon" src="../../assets/images/mine-b.png" v-if="this.selected == 'mine'">
+    	<img slot="icon" src="../../assets/images/mine.png"v-else>
       	我的
       </mt-tab-item>
     </mt-tabbar>
@@ -122,7 +97,7 @@ export default {
 	mounted: function () {
 
 	},
-  methods:{	
+  methods:{
 	},
 	watch: {
 	    message: function (val, oldVal) {

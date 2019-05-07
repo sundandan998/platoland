@@ -2,20 +2,20 @@
 	<div class="turn-out">
 		<div class="turn-out-header">
 			<mt-header fixed title="转出">
-			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)"></mt-button>		    
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)"></mt-button>
 			    	<mt-button icon="" slot="right">
 			    		<router-link to="/scan">
 			  			<img src="../../../assets/images/scan.png" alt="" />
-			  			  </router-link>	
-			  		</mt-button>				  		
+			  			  </router-link>
+			  		</mt-button>
 			</mt-header>
 		</div>
-		<div class="turn-out-exhibition">			
-			<div class="turn-out-exhibition-img">				
+		<div class="turn-out-exhibition">
+			<div class="turn-out-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
 				<span>LD（捞豆）</span>
-				<span>北京河底捞餐饮有限公司</span>		
-			</div>			
+				<span>北京河底捞餐饮有限公司</span>
+			</div>
 		</div>
 		<div class="purchase-pass-input">
 			<p>付款给</p>
@@ -23,12 +23,12 @@
 			<router-link to="book">
 				<span>
 			  		<img src="../../../assets/images/book.png" alt="" />
-			  	</span>	
-			</router-link>	
+			  	</span>
+			</router-link>
 		</div>
 		<div class="purchase-pass-input">
 			<p>转出数量</p>
-			<input type="text" placeholder="买入数量" />
+			<input type="text" placeholder="买入数量"/>
 			<span>可用：10,000  USDT</span>
 			<span>手续费：0.00  PLD</span>
 		</div>
@@ -49,11 +49,11 @@
 			<p>3.为保障资金安全，我们会按照安全策略进行人工审核，请耐心等待</p>
 			<p>4.请务必确认设备安全，防止信息被篡改或泄露</p>
 		</div>
-		
 	</div>
 </template>
 
 <script>
+
 </script>
 
 <style lang="scss">

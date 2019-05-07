@@ -10,38 +10,12 @@
 				<span>基本信息</span>
 			</div>
 			<div class="pass-details-information-content">
-				<ul class="fl">					
-					<li>通政标识：</li>
-					<li>通证昵称：</li>
-					<li>合约地址：</li>
-					<li>通证主体：</li>				
-					<li>发行方：</li>
-					<li>权益说明：</li>
-				</ul>
-				<ul class="fr information-content-right information-content-right-li">					
-					<li>
-						<!--<img src="../../../assets/images/icon-3.png"/>-->
-						<span class="details-information-identification">{{this.detail.id}}</span>
-					</li>
-					<li>{{this.detail.name}}</li>
-					<li>
-						<span class="tag-read" @click="copy"
-							data-clipboard-text="detailslist.address">
-							{{this.detail.address}}
-						</span>
-					<li>
-						<router-link to="/subject">
-							<span>{{this.detail.body}}</span>	
-						</router-link>	
-					</li>
-					<li>{{this.detail.issuer}}</li>
-					<li>
-						<span>{{this.detail.explain}}</span>
-						<!--<router-link to="/login">
-							<span>《河底捞捞豆报告》.pdf</span>	
-						</router-link>	-->
-					</li>
-				</ul>
+        <mt-cell title="通政标识：" :value="this.detail.id"></mt-cell>
+        <mt-cell title="通证昵称：" :value="this.detail.name"></mt-cell>
+        <mt-cell title="合约地址：" :value="this.detail.address"></mt-cell>
+        <mt-cell title="通证主体：" :value="this.detail.body"  to="/subject"></mt-cell>
+        <mt-cell title="发行方：" :value="this.detail.issuer"></mt-cell>
+        <mt-cell title="权益说明：" :value="this.detail.explain"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-data">
@@ -49,43 +23,24 @@
 				<span>发行数据</span>
 			</div>
 			<div class="pass-details-issue-data-content">
-				<ul class="fl">
-					<li>发行状态:</li>
-					<li>股权发行比例:</li>
-					<li>计价资产</li>
-					<li>发行方式</li>
-					<li>发行日期:</li>
-					<li>截止日期:</li>
-					<li>最小发行量:</li>
-					<li>发行数量:</li>
-					<li>起购数量:</li>	
-					<li>已售数量:</li>	
-					<li>初始单价:</li>
-					<li>发行单价:</li>
-				</ul>
-				<ul class="fr information-content-right">
-					<li>{{this.detail.state}}</li>
-					<li>{{this.detail.proportion}}</li>
-					<li>
-						<!--<img src="../../../assets/images/u318.png"/>-->
-						<span class="details-information-identification">{{this.detail.assets}}</span>
-					</li>
-					<li>{{this.detail.mode}}</li>
-					<li>{{this.detail.issuetime}}</li>
-					<li>{{this.detail.endtime}}</li>
-					<li>{{this.detail.minnum}}</li>
-					<li>{{this.detail.amountnum}}</li>
-					<li>{{this.detail.purchasenum}}</li>
-					<li>{{this.detail.purchasenum}}</li>
-					<li>{{this.detail.initialprice}}</li>
-					<li>{{this.detail.issueprice}}</li>
-				</ul>
+        <mt-cell title="发行状态:" :value="this.detail.state"></mt-cell>
+        <mt-cell title="股权发行比例:" :value="this.detail.proportion"></mt-cell>
+        <mt-cell title="计价资产:" :value="this.detail.assets"></mt-cell>
+        <mt-cell title="发行方式:" :value="this.detail.mode"></mt-cell>
+        <mt-cell title="发行日期:" :value="this.detail.issuetime"></mt-cell>
+        <mt-cell title="截止日期:" :value="this.detail.endtime"></mt-cell>
+        <mt-cell title="最小发行量:" :value="this.detail.minnum"></mt-cell>
+        <mt-cell title="起购数量:" :value="this.detail.amountnum"></mt-cell>
+        <mt-cell title="已售数量:" :value="this.detail.purchasenum"></mt-cell>
+        <mt-cell title="初始单价:" :value="this.detail.purchasenum"></mt-cell>
+        <mt-cell title="发行单价:" :value="this.detail.initialprice"></mt-cell>
+        <mt-cell title="权益说明:" :value="this.detail.issueprice"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-btn" id="transaction">
-			<router-link to="/deal">				
+			<router-link to="/deal">
 				<mt-button type="primary" size="large">去交易</mt-button>
-			</router-link>			
+			</router-link>
 		</div>
 		<div class="pass-details-issue-btn" id="purchase">
 			<router-link to="buy">
@@ -145,7 +100,7 @@ export default {
 			}
 		}
 	},
-	computed:{	
+	computed:{
 		...mapGetters([
 	      'detail'
 	    ])
