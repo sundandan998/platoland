@@ -6,21 +6,21 @@
 			    <mt-button icon="back" @click="saveBox"></mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right" @click="delBox">
-			   	<img src="../../../assets/images/delete.png"  alt=""/>删除
+			   	<img src="../../../assets/images/delete.png"  alt=""/><span>删除</span>
 			   </mt-button>
 			</mt-header>
 		</div>
 		<div class="add-adress-list">
 			<span>备注名称</span>			
 			<mt-field>
-				<span class="add-adress-name">{{this.$route.query.name}}</span>
+				<span class="add-adress-name">{{this.detail.name}}</span>
 			</mt-field>
 			<span>描述</span>
 			<mt-field ></mt-field>
 			<span>USDT地址</span>
 			<mt-field >
 				<p class="to-change-into-exhibition-adress">
-				{{this.$route.query.address}}
+				{{this.detail.address}}
 				</p>
 			</mt-field>
 		</div>
@@ -34,29 +34,47 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'	
 export default{
 	data(){
-		return{}
+		return{
+			book:[]
+		}
+	},
+	created(){
+		console.log(this.detail)
 	},
 	methods:{
 	//点击删除弹出的消息框
 	delBox(){
+//		console.log(this.detail)
 		this.$messagebox.confirm("确定删除该地址?")
-		.then(action => {
+		.then(action => {			
 			this.$router.push({
-				path:'/book'
-			})
+				path:'/book'				
+			})	
+			
 		})
-		},
+	},
 	//点击返回弹出的消息框
 	saveBox(){
 		this.$messagebox.confirm("是否保存更改信息?")
 		.then(action => {
 			this.$router.push({
 				path:'/book'
+				
 			})
 		})
-		}
+	},
+//	remove(index){
+//		console.log(this.detail)
+//		this.detail.splice(index,1)
+//	}
+ },
+	computed:{	
+		...mapGetters([
+	      'detail'
+		])
 	}
 //
 }

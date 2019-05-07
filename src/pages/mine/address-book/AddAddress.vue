@@ -84,8 +84,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/scss/global";
-.formData {
+@import "../../../assets/scss/global"
+/*.formData {
   margin-top: 50px !important;
 }
 .add-address .certificate-list-card {
@@ -100,5 +100,5 @@ export default {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-bottom: 1px solid #ccc;
-}
+}*/
 </style>

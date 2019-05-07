@@ -192,9 +192,9 @@ creadte() {
 			})			
 			this.$store.commit('detail', res.data[0])
 		},
-		 ...mapActions('detail',[
-	          'app.detail' 
-	      ]),
+//		 ...mapActions('detail',[
+//	          'app.detail' 
+//	      ]),
 //	   版本升级   
 	  async version(){
 	  	const url=this.$backStage('/versionnum')

@@ -12,7 +12,7 @@
 			   </mt-button>
 			</mt-header>
 		</div>
-		<div class="adress-book-list" v-for="item in book">
+		<div class="adress-book-list" v-for="(item,index) in book">
 			<mt-cell>				
 				<div class="adress-book-content fl">
 					<p>{{item.name}}</p>
@@ -20,7 +20,7 @@
 				</div>
 				<!--<router-link to="/edit">-->
 					<div @click="editcontent">
-						<mt-button size="small" type="primary">编辑</mt-button>
+						<mt-button size="small" type="primary" @click="address">编辑</mt-button>
 					</div>
 					
 				<!--</router-link>-->
@@ -29,6 +29,7 @@
 	</div>
 </template>
 <script>
+import {mapActions} from 'vuex'
 export default{
 	created () {
     	this.address()
@@ -40,20 +41,18 @@ export default{
 	},
 	methods:{
 		async address (){
-			const res = await this.$http.get('/api/address')
-//			const url=this.$backStage('/adress')
-//	 		const res = await this.$http.get(url)
+//			const res = await this.$http.get('/api/address')
+			const url=this.$backStage('/address')
+	 		const res = await this.$http.get(url)
 			const data = res	
 			this.book = res.data.data
+//			console.log(this.book)
+			this.$store.commit('detail', res.data.data[0])  
 		},
 //		点击编辑跳转
 		editcontent(){
 			this.$router.push({
-				path:'/edit',
-				query:{
-					name: this.book[0].name,
-					address:this.book[0].address
-				}
+				path:'/edit'				
 			})
 		}
 	}

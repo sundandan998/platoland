@@ -25,17 +25,19 @@
 		</div>
 		<!--v-for="(item,index) in assetsdata"-->
 		<!--@click="toAsset(item.id)"-->
-		<div class="assets-detailed-exhibition">
-				<div class="assets-detailed-exhibition-text">
-					<span>{{this.detail.id}}</span>
-				</div>			
-				<div class="assets-detailed-exhibition-img">				
-					<img src="../../../assets/images/ld.png" alt="" class="fl"   />
-					<ul class="fr">
-						<li>{{this.detail.body}}</li>
-						<!--<li>北京河底捞餐饮有限公司</li>-->
-					</ul>				
-				</div>
+		<div class="assets-detailed-exhibition" >
+		<!--<div class="assets-detailed-exhibition-text">
+			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
+			<span>{{this.detail.id}}</span>
+			<span>{{this.detail.body}}</span>
+		</div>-->
+		<div class="assets-detailed-exhibition-img" >				
+			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
+			<ul class="fr">
+				<li>{{this.detail.id}}</li>
+				<!--<li>北京河底捞餐饮有限公司</li>-->
+			</ul>				
+		</div>
 			<mt-cell title="可用量" value="50.000">
 
 				 <img slot="icon" src="../../../assets/images/u4662.png">
@@ -91,7 +93,9 @@ export default{
 	},
 	created(){
 		this.asset
-  },
+		this.detail
+//		console.log(this.detail)
+ 	},
 	methods:{
 		//	点击移除弹出的消息框
 		remove(){

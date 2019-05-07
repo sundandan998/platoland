@@ -18,76 +18,60 @@
       </router-link>
     </div>
     <router-link to="/assetsdetailed">
-     	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset()">
+     	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset(item.id)">
       <ul>
         <li>
 	        <img src="../../../assets/images/u345.png" alt class="fl">
 	        <span>{{item.id}}</span>
 	        <span>{{item.name}}</span>   
-	        <p class="fr">{{item.issueprice}}</p>
+	        <p class="fr">{{item.purchasenum}}</p>
 					<!--<mt-button size="small" @click="$router.push('/pass')"  type="primary" class="fr">详情</mt-button>-->
         </li>
       </ul>
     </div>
     </router-link>     
-    <div class="certificate-list-card assets-list-add">
+    <!--<div class="certificate-list-card assets-list-add" >
       <ul>
-        <!--<li v-for="(item, index) in addList" :key="index">
+        <li>
           <router-link to="/assetsdetailed">
             <img src="../../../assets/images/u345.png" alt class="fl">
-            <span>{{item.name}}</span>
-            <span>{{item.company}}</span>
+            <span>{{$route.params.name}}</span>
+
             <div class="assets-list-right fr">
               <p>6.00</p>
             </div>
           </router-link>
-        </li>-->
+        </li>
       </ul>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
 import {mapActions} from 'vuex'	
-let globalList = []
 export default {
   data() {
    return {
    		assetsdata:[]
-//    addList:globalList,
-//    getData: []
-//    getData: globalData,
    }
   },
   created(){
-     this.getparameter()
      this.toAsset()
+//   console.log(item)
   },
   mounted(){
   	this.toAsset()
+//	this.$store.dispatch('detail')
   },
   watch:{
-   '$route':'getparameter'
   },
   methods: {
-  	getparameter(){
-     let path = this.$route.params
-//   let arr = globalList
-     if(JSON.stringify(path) != '{}'){
-         arr.push(path)
-         globalList = arr
-//       this.addList =globalList
-     }
-   },
-  	async toAsset(){
-  	const url=this.$backStage('/asset')
+  	async toAsset(id){
+  		const url=this.$backStage('/asset?id'+id)
 		 	const res = await this.$http.get(url)
 			const data = res.data
-//			console.log(data[0].id)
+//			console.log(data)
 			this.assetsdata = data
-//			this.getData = data
-//				console.log(this.assetsdata)
-//			this.$router.push({
-//				name:'AssetsDetailed',
+//			console.log(this.assetsdata)
 //			})			
 			this.$store.commit('detail', res.data[0])  	  	
   	}
