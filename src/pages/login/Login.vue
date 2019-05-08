@@ -3,10 +3,10 @@
 		<router-link to="/">
 			<div class="login-cancel">
 				<img src="../../assets/images/cancel.png" alt="" />
-			</div>	
+			</div>
 		</router-link>
-		
-		<div class="logo">			
+
+		<div class="logo">
 			<img src="../../assets/images/logo.png" alt="" />
 		</div>
 		<mt-navbar v-model="active" class="login-tab">
@@ -34,10 +34,10 @@
 			          <img src="../../assets/images/pass.png" alt="">
 			        </i>
 			      </el-input>
-			    </el-form-item>		
+			    </el-form-item>
   			</el-form>
 			<div class="login-checkbox" v-for="item of items">
-				<!--<input type="checkbox" v-model="item.state" v-on:click="loginCheckbox(item)"/> 
+				<!--<input type="checkbox" v-model="item.state" v-on:click="loginCheckbox(item)"/>
 				<span>记住账号</span>-->
 				<router-link to="/password" class="fr">
 					<span>忘记密码?</span>
@@ -60,7 +60,7 @@
 			    </el-form-item>
 			    <el-form-item prop="pass" v-if="visible">
 			        <el-input type="password" v-model="verification.pass" placeholder="密码">
-			            <i slot="suffix" title="隐藏密码" @click="changePass('show')"> 
+			            <i slot="suffix" title="隐藏密码" @click="changePass('show')">
 			            	<img src="../../assets/images/eye-close.png"/>
 			            </i>
 			            <i slot="prefix">
@@ -70,7 +70,7 @@
 			    </el-form-item>
 			    <el-form-item prop="pass" v-else >
 			      	<el-input type="text" v-model="verification.pass" placeholder="密码">
-			            <i slot="suffix" title="显示密码" @click="changePass('hide')"> 
+			            <i slot="suffix" title="显示密码" @click="changePass('hide')">
 			            	<img src="../../assets/images/eye-open.png"/>
 			            </i>
 			            <i slot="prefix">
@@ -80,23 +80,23 @@
 			    </el-form-item>
   			</el-form>
   			<div class="login-checkbox" v-for="item of items">
-				<!--<input type="checkbox" v-model="item.state" v-on:click="regCheckbox(item)"/>--> 
+				<!--<input type="checkbox" v-model="item.state" v-on:click="regCheckbox(item)"/>-->
 				<span>注册即表示同意<a href="">《用户使用协议》</a></span>
 			</div>
 			<div class="login-btn">
 				<router-link to="reset">
 					<mt-button id = "regbtn" type="default">注&nbsp;册</mt-button>
-				</router-link>				
+				</router-link>
 			</div>
 		  </mt-tab-container-item>
-		</mt-tab-container>		
+		</mt-tab-container>
 	</div>
 </template>
 
 <script>
 import pub from '@/assets/js/pub.js'
 export default{
-	data (){	
+	data (){
 		var validatePass = (rule, value, callback) => {
 	      if (value === '') {
 	        callback(new Error('请输入密码'))
@@ -112,10 +112,10 @@ export default{
 			active: 'login',
 	        items: [{
 	          state: false
-	        }],	         
+	        }],
 			verification: {
 				email: '',
-	    		pass: '',	
+	    		pass: '',
 	    		checkPass: ''
 			},
 			rules: {
@@ -132,8 +132,8 @@ export default{
 	    	},
 		}
 	},
-	methods:{	
-		async handleLogin(){			
+	methods:{
+		async handleLogin(){
 //			const res = await this.$http.get('/api/user')
 		 	const url=this.$backStage('/user')
 		 	const res = await this.$http.get(url)
@@ -150,7 +150,7 @@ export default{
 				 })
 //					页面实时刷新
 				this.$router.go(0)
-//					loading加载					
+//					loading加载
 				this.$Indicator.open({
 					text: '加载中...',
 					spinnerType: 'fading-circle'
@@ -160,28 +160,28 @@ export default{
 //		登录页/点击记住账号 button 改变颜色
 	  	loginCheckbox: function (item) {
 //		  	item.state = !item.state;
-		  	if(item.state==true){	
+		  	if(item.state==true){
 		  		document.getElementById("loginbtn").style.background="#F6F8FA";
 		  		document.getElementById("loginbtn").style.color="#666";
 		  	}else{
 		  		document.getElementById("loginbtn").style.background="#26A2FF";
 		  		document.getElementById("loginbtn").style.color="#fff";
-		  	}      
+		  	}
     	},
 //  	注册页/点击我已阅读并同意button按钮 改变颜色
     	regCheckbox: function (item) {
 //		  	item.state = !item.state;
-		  	if(item.state==true){	
+		  	if(item.state==true){
 		  		document.getElementById("regbtn").style.background="#F6F8FA";
 		  		document.getElementById("regbtn").style.color="#666";
 		  	}else{
 		  		document.getElementById("regbtn").style.background="#26A2FF";
 		  		document.getElementById("regbtn").style.color="#fff";
-		  	}      
+		  	}
     	},
 //  	显示与隐藏密码
     	changePass(value) {
-        	this.visible = !(value === 'show');
+        	this.visible = !(value === 'show')
      }
 	}
 }

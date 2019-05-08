@@ -2,7 +2,7 @@
 	<div class="subject-details">
 		<div class="subject-details-header">
 			<mt-header fixed title="通证主体">
-			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>
 		<div class="subject-details-content">
@@ -17,7 +17,7 @@
 			    	<mt-cell title="主体名称：">
 			    		<span>{{this.detail.body}}</span>
 			    	</mt-cell>
-			    	<mt-cell title="通证昵称:" to="//github.com">
+			    	<mt-cell title="通证昵称:">
 			    		<span>{{this.detail.nickname}}</span>
 			    	</mt-cell>
 			  		<mt-cell title="通证标识:">

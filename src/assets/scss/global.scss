@@ -64,6 +64,11 @@ body{
     position: unset;
     display: block !important;
 }
+.mint-popup {
+    display: block!important;
+    z-index: 10000000;
+    width: 100%;
+}
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -1309,18 +1314,9 @@ element.style {
 }
 .safety-verification-list {
     padding: 10px 0 10px 10px;
-    input{
-        border-bottom: 1px solid #ccc;
-        width: 80%;
-        padding-top: 10px;
-        margin-left: 15px;
-    }
-    ul{
-        margin-bottom: 20px;
-        li{
-            padding: 10px 10px 0 15px;
-        }
-    }
+}
+.safety-verification-list input.mint-field-core {
+    border-bottom: 1px solid #999;
 }
 .safety-send{
     position: relative;

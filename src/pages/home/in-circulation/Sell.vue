@@ -20,12 +20,12 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
 			  <van-tab title="按数量出售">
-			  	<mt-field placeholder="600,000起购">USDT</mt-field>
+			  	<mt-field placeholder="最小可买1000" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  	<p>手续费：10  PLD</p>
 			  </van-tab>
 			  <van-tab title="按价格出售">
-			  	<mt-field placeholder="100,000起购">LD（捞豆）</mt-field>
+          <mt-field placeholder="100,000起购" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>

@@ -1,7 +1,7 @@
 //element框架
 import{Table,TableColumn,Form,FormItem,Input,Dropdown,DropdownMenu,DropdownItem} from 'element-ui'
 //vant框架
-import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, TabbarItem,Button} from 'vant'
+import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, TabbarItem,Button,Popup } from 'vant'
 const external = {
 	install: function(Vue){
 		Vue.use(Table)
@@ -20,6 +20,7 @@ const external = {
 		Vue.use(Dialog)
 		Vue.use(Tabbar).use(TabbarItem)
     Vue.use(Button)
+    Vue.use(Popup)
 	}
 }
 export default external

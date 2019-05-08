@@ -20,11 +20,11 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
 			  <van-tab title="按数量购买">
-			  	<mt-field placeholder="最小可买 1,000">USDT</mt-field>
+			  	<mt-field placeholder="最小可买 1,000" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  </van-tab>
 			  <van-tab title="按价格购买">
-			  	<mt-field placeholder="100,000起购">LD（捞豆）</mt-field>
+			  	<mt-field placeholder="100,000起购" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>

@@ -20,6 +20,7 @@
 		<div class="purchase-pass-input">
 			<p>付款给</p>
 			<input type="text" placeholder="请选择收款地址" />
+
 			<router-link to="book">
 				<span>
 			  		<img src="../../../assets/images/book.png" alt="" />
@@ -28,7 +29,7 @@
 		</div>
 		<div class="purchase-pass-input">
 			<p>转出数量</p>
-			<input type="text" placeholder="买入数量"/>
+      <mt-field placeholder="买入数量" type="number"></mt-field>
 			<span>可用：10,000  USDT</span>
 			<span>手续费：0.00  PLD</span>
 		</div>

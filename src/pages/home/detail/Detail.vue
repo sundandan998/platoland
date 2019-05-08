@@ -10,7 +10,7 @@
 				<span>基本信息</span>
 			</div>
 			<div class="pass-details-information-content">
-        <mt-cell title="通政标识：" :value="this.detail.id"></mt-cell>
+        <mt-cell title="通证标识：" :value="this.detail.id"></mt-cell>
         <mt-cell title="通证昵称：" :value="this.detail.nickname"></mt-cell>
         <mt-cell title="合约地址：" :value="this.detail.address"></mt-cell>
         <mt-cell title="通证主体：" :value="this.detail.body"  to="/subject" is-link></mt-cell>
