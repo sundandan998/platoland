@@ -10,13 +10,11 @@
 				<span>基本信息</span>
 			</div>
 			<div class="pass-details-information-content">
-		        <mt-cell title="通政标识：" :value="this.detail.id"></mt-cell>
-		        <mt-cell title="通证昵称：" :value="this.detail.name"></mt-cell>
-		        <mt-cell title="合约地址：" :value="this.detail.address"></mt-cell>
-		        <mt-cell title="通证主体：" :value="this.detail.body"  to="/subject" is-link></mt-cell>
-		        <mt-cell title="发行方：" :value="this.detail.issuer"></mt-cell>
-		        <mt-cell title="权益说明：" :value="this.detail.explain"></mt-cell>
-            <!-- <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field> -->
+        <mt-cell title="通政标识：" :value="this.detail.id"></mt-cell>
+        <mt-cell title="通证昵称：" :value="this.detail.nickname"></mt-cell>
+        <mt-cell title="合约地址：" :value="this.detail.address"></mt-cell>
+        <mt-cell title="通证主体：" :value="this.detail.body"  to="/subject" is-link></mt-cell>
+        <mt-cell title="发行方：" :value="this.detail.issuer"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-data">
@@ -24,18 +22,18 @@
 				<span>发行数据</span>
 			</div>
 			<div class="pass-details-issue-data-content">
-		        <mt-cell title="发行状态:" :value="this.detail.state"></mt-cell>
-		        <mt-cell title="股权发行比例:" :value="this.detail.proportion"></mt-cell>
-		        <mt-cell title="计价资产:" :value="this.detail.assets"></mt-cell>
-		        <mt-cell title="发行方式:" :value="this.detail.mode"></mt-cell>
-		        <mt-cell title="发行日期:" :value="this.detail.issuetime"></mt-cell>
-		        <mt-cell title="截止日期:" :value="this.detail.endtime"></mt-cell>
-		        <mt-cell title="最小发行量:" :value="this.detail.minnum"></mt-cell>
-		        <mt-cell title="起购数量:" :value="this.detail.amountnum"></mt-cell>
-		        <mt-cell title="已售数量:" :value="this.detail.purchasenum"></mt-cell>
-		        <mt-cell title="初始单价:" :value="this.detail.purchasenum"></mt-cell>
-		        <mt-cell title="发行单价:" :value="this.detail.initialprice"></mt-cell>
-		        <mt-cell title="权益说明:" :value="this.detail.issueprice"></mt-cell>
+        <mt-cell title="发行状态:" :value="this.detail.state"></mt-cell>
+        <mt-cell title="股权比例:" :value="this.detail.proportion"></mt-cell>
+        <mt-cell title="计价资产:" :value="this.detail.assets"></mt-cell>
+        <mt-cell title="发行方式:" :value="this.detail.mode"></mt-cell>
+        <mt-cell title="发行日期:" :value="this.detail.issuetime"></mt-cell>
+        <mt-cell title="截止日期:" :value="this.detail.endtime"></mt-cell>
+        <mt-cell title="最小发行量:" :value="this.detail.minnum"></mt-cell>
+        <mt-cell title="发行总量:" :value="this.detail.amountnum"></mt-cell>
+        <mt-cell title="起购数量:" :value="this.detail.purchasenum"></mt-cell>
+        <mt-cell title="已售数量:" :value="this.detail.soldnum"></mt-cell>
+        <mt-cell title="初始单价:" :value="this.detail.initialprice"></mt-cell>
+        <mt-cell title="发行单价:" :value="this.detail.issueprice"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-btn" id="transaction">

@@ -3,7 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>mint-demo</title>
+    <title>Welcome platoland</title>
+    ﻿
+    <script type="text/javascript" charset="utf-8">
+      ﻿// H5 plus事件处理
+      function plusReady() {
+        // Android处理返回键
+        plus.key.addEventListener('backbutton', function () {
+          ('iOS' == plus.os.name) ? plus.nativeUI.confirm('Confirm quit？', function (e) {
+            if (e.index > 0) {
+              plus.runtime.quit();
+            }
+          }, 'Platoland', ['No', 'Yes']) : (confirm('Confirm quit？') && plus.runtime.quit());
+        }, false);
+        // 关闭启动界面
+        //plus.navigator.setStatusBarBackground('#D74B28');
+        setTimeout(function () {
+          plus.navigator.closeSplashscreen();
+        }, 200);
+      }
+
+      if (window.plus) {
+        plusReady();
+      } else {
+        document.addEventListener('plusready', plusReady, false);
+      }
+    ﻿</script>
   </head>
   <body>
     <div id="app"></div>
