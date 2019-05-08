@@ -62,8 +62,8 @@ body{
 }
 .van-number-keyboard{
     position: unset;
+    display: block !important;
 }
-
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -347,20 +347,7 @@ label.mint-button-text {
 }
 .home-assets-subscription-title{
     height: 30px;
-    margin: 20px 5px 0 5px;
-    span{
-        color: #333;
-        font-size: 0.78rem;
-    }
-    img{
-        width: 12px;
-        margin-right: 5px;
-    }
-    p{
-        color: #26A2FF;
-        font-size: 0.67rem;
-        margin-top: 6px;
-    }
+    margin: 20px 5px 20px 5px;
 }
 .home-assets-subscription-content{
     white-space: nowrap;
@@ -443,20 +430,8 @@ label.mint-button-text {
     img{
         width: 25px;
     }
-    li{
-       // padding: 10px 25px 10px 25px;
-       // font-size: 0.72rem;
-       // color: #666;
-      margin: 20px 24px 20px 24px;
-       font-size: 0.72rem;
-       color: #666;
+}
 
-    }
-}
-.details-information-identification{
-    display: block;
-//  margin:-25px 0 0 30px;
-}
 .pass-details-issue-data {
     height: auto;
     margin-top: 10px;
@@ -467,27 +442,14 @@ label.mint-button-text {
     margin:10px 0 0px 16px;
     font-weight: 700;
 }
-.pass-details-issue-data-content{
-    li{
-       margin: 20px 24px 20px 24px;
-       font-size: 0.72rem;
-       color: #666;
-
-    }
+.mint-cell-text {
+    font-size: 0.72rem;
 }
-.information-content-right-li{
-//  margin-top: 20px;
-}
-.information-content-right li{
-    text-align: right;
-    font-size: 0.79rem;
-    img{
-        width: 25px;
-        position: relative;
-        top: -4px;
-        left:-80px;
+.mint-cell-value{
+  font-size: 0.72rem;
+  span{
 
-    }
+  }
 }
 table.el-table__header {
     width: auto !important;
@@ -799,9 +761,8 @@ element.style {
     height: auto;
     background-color: #fff;
     input{
-        border: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
         height: 40px;
-        border-radius: 5px;
         width: 90%;
         margin: 5px 0 10px 15px;
     }
@@ -821,15 +782,14 @@ element.style {
 .purchase-pass-quota {
     margin-bottom: 20px;
     background-color: #fff;
-    input{
-        border: 1px solid #ccc;
+    .purchase-pass-quota-input{
+        border-bottom: 1px solid #ccc;
         display: inline-block;
-        width: 35%;
+        width: 40%;
         height: 40px;
-        color: #f2f2f2;
+        color: #000;
         border-radius: 5px;
         font-size: 0.61rem;
-        text-align: center;
         text-indent: initial;
         margin-left: 15px;
         margin-top: 10px;
@@ -842,6 +802,9 @@ element.style {
         padding-top: 10px;
     }
 }
+.purchase-pass-quota .mint-field-core{
+    text-indent:0rem;
+ }
 .purchase-pass-btn{
     width: 90%;
     margin: 0 auto;
@@ -940,6 +903,9 @@ element.style {
 }
 //首页/探索
 /*--------------------------商户---------------*/
+.explore-header {
+    margin-bottom: 41px;
+}
 .merchant-list{
     border-top:1px solid #ccc;
     border-bottom:1px solid #ccc;
@@ -1342,8 +1308,7 @@ element.style {
     background-color: #fff;
 }
 .safety-verification-list {
-    padding-left: 10px;
-    padding-bottom: 10px;
+    padding: 10px 0 10px 10px;
     input{
         border-bottom: 1px solid #ccc;
         width: 80%;
@@ -1367,6 +1332,10 @@ element.style {
     color: #999;
     padding:10px 0 20px 10px;
 }
+.safety-verification-btn{
+  width: 90%;
+  margin: 50px auto;
+}
 
 //------------------------------我的/关于我们--------------
 .about-our b{
@@ -1388,18 +1357,19 @@ element.style {
     margin: 0 auto;
     border-radius: 5px;
     margin-top: 10px;
+    p{
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    span{
+      font-size: 1.0rem;
+      margin-left: 0px
+    }
     ul{
         padding: 10px;
-        li{
-            font-size: 0.8rem;
-            margin-left: 8px;
-        }
     }
 }
-.about-our-text ul li:first-child{
-    font-size: 1.0rem;
-    margin-left: 0px;
-}
+
 .about-our-Contact{
     background-color: #fff;
     width: 98%;
@@ -1407,17 +1377,12 @@ element.style {
     border-radius: 5px;
     margin-top: 10px;
     padding-bottom: 10px;
-    li{
-        border-bottom: 1px solid #999;
-        line-height: 35px;
-        font-size: 0.8rem;
-        margin:0 10px 0 16px;
+    p{
+      border-bottom:1px solid #999;
+      line-height: 40px;
+      width: 95%;
+      margin-left: 10px;
     }
-}
-.about-our-Contact ul li:first-child{
-    font-size: 1.0rem;
-    margin-left: 8px;
-    border-bottom:none;
 }
 //------------------------------我的/地址薄/编辑---------------
 .adress-book-header {

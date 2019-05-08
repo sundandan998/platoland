@@ -8,44 +8,39 @@
 							<mt-header fixed title="探索"></mt-header>
 	        	</div>
 	        	<div class="explore-navbar">
-	        		<van-tabs>
-							  <van-tab title="全部">
-                  <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
-                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                    <router-link to="/issue">
-                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
-                    </router-link>
-                  </mt-cell>
-                   <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
-                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                    <router-link to="/issue">
-                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
-                    </router-link>
-                  </mt-cell>
+	        		<van-tabs @click="tokenList">
+							  <van-tab title="全部" >
+                  <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                    <mt-cell :title="items.id" :label="items.body">
+                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                    </mt-cell>
+                  </div>
 							  </van-tab>
 							  <van-tab title="流通中">
-									<mt-cell title="PLD (PLD)" label="PLATOLAND集团">
-                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                    <router-link to="/issue">
-                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
-                    </router-link>
-                  </mt-cell>
+                  <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                    <mt-cell :title="items.id" :label="items.body">
+                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                    </mt-cell>
+                  </div>
+
 							  </van-tab>
 							  <van-tab title="发行中">
-							   <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
-                    <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                    <router-link to="/issue">
-                      <mt-button size="small" type="primary" class="fr">详情</mt-button>
-                    </router-link>
-                  </mt-cell>
+							   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                    <mt-cell :title="items.id" :label="items.body">
+                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                    </mt-cell>
+                  </div>
 							  </van-tab>
 							  <van-tab title="待发行">
-						  	 <mt-cell title="PLD (PLD)" label="PLATOLAND集团">
-                  <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                  <router-link to="/issue">
-                    <mt-button size="small" type="primary" class="fr">详情</mt-button>
-                  </router-link>
-                </mt-cell>
+						  	 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                    <mt-cell :title="items.id" :label="items.body">
+                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                    </mt-cell>
+                  </div>
 						  </van-tab>
 						</van-tabs>
 	        	</div>
@@ -80,7 +75,8 @@ export default {
   data () {
     return {
       selected: 'explore',
-			message:this.selected
+			message:this.selected,
+      issuedata:[]
     }
   },
 	creadte() {
@@ -94,10 +90,30 @@ export default {
   created(){
     setInterval(this.scroll,3000)
 	},
-	mounted: function () {
-
+	mounted(){
+    this.tokenList(0,'全部')
 	},
   methods:{
+    // 展示全部列表
+      async tokenList(index,title){
+        let u = '/query'
+        if(title != '全部'){
+          u = u + "?state=" + title
+        }
+        const url=this.$backStage(u)
+        const res = await this.$http.get(url)
+        this.issuedata = res.data
+      },
+      // 展示某一个详情
+      async tokenDetail(id){
+      const url=this.$backStage('/query?id='+id)
+      const res = await this.$http.get(url)
+      const data = res
+      this.$router.push({
+        name:'Detail',
+      })
+      this.$store.commit('detail', res.data[0])
+    }
 	},
 	watch: {
 	    message: function (val, oldVal) {

@@ -3,12 +3,12 @@
 		<div class="to-change-into-header">
 			<mt-header fixed title="转入">
 			  <router-link to="/assetsdetailed" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
-		<div class="to-change-into-exhibition">			
-			<div class="to-change-into-exhibition-img">				
+		<div class="to-change-into-exhibition">
+			<div class="to-change-into-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
 				<ul class="fr">
 					<li>LD（捞豆）</li>
@@ -17,8 +17,8 @@
 				<div class="to-change-into-exhibition-adress">
 					<span>13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c</span>
 					<img src="../../../assets/images/u4780.png" alt="" class="fr" />
-				</div>				
-			</div>			
+				</div>
+			</div>
 		</div>
 		<div class="to-change-into-qrcode">
 			<img src="../../../assets/images/qrcode.png" alt="" />

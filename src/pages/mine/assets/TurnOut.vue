@@ -2,7 +2,7 @@
 	<div class="turn-out">
 		<div class="turn-out-header">
 			<mt-header fixed title="转出">
-			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)"></mt-button>
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">返回</mt-button>
 			    	<mt-button icon="" slot="right">
 			    		<router-link to="/scan">
 			  			<img src="../../../assets/images/scan.png" alt="" />

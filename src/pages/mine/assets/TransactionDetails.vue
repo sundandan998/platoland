@@ -4,14 +4,14 @@
 			<div class="assets-detailed-header">
 				<mt-header fixed title="交易详情 ">
 				  <router-link to="/detailedlist" slot="left">
-				    <mt-button icon="back" v-on:click="back"></mt-button>
+				    <mt-button icon="back" v-on:click="back">返回</mt-button>
 				  </router-link>
 				</mt-header>
 			</div>
 		</div>
-		<div class="transaction-details-number">			
+		<div class="transaction-details-number">
 			<span>-50,000</span>
-			<p>交易成功</p>		
+			<p>交易成功</p>
 		</div>
 		<div class="transaction-details-adress">
 			<ul class="fl">
@@ -39,7 +39,7 @@
 				<li>2019-4-28</li>
 			</ul>
 		</div>
-		
+
 		<div class="transaction-details-information-text">
 			<span>交易说明</span>
 			<div class="transaction-details-information-border"></div>
@@ -51,7 +51,7 @@
 export default{
 	data(){
 		return{
-			
+
 		}
 	},
 	methods:{

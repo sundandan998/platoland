@@ -3,7 +3,7 @@
     <div class="assest-header">
       <mt-header fixed title="资产">
         <router-link to="/mine" slot="left">
-          <mt-button icon="back"></mt-button>
+          <mt-button icon="back">返回</mt-button>
         </router-link>
         <mt-button icon slot="right">
           <router-link to="/detailedlist">
@@ -19,7 +19,7 @@
     </div>
     <router-link to="/assetsdetailed">
      	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset(item.id)">
-        <mt-cell :title="item.id" :value="item.purchasenum" :label="item.name">
+        <mt-cell :title="item.id" :value="item.purchasenum" :label="item.body">
           <img slot="icon" src="../../../assets/images/u345.png">
         </mt-cell>
       </div>
@@ -46,11 +46,9 @@ export default {
   },
   methods: {
   	async toAsset(id){
-  		const url=this.$backStage('/asset?id'+id)
+  		const url=this.$backStage('/query?isactive=0')
 		 	const res = await this.$http.get(url)
-			const data = res.data
-//			console.log(data)
-			this.assetsdata = data
+			this.assetsdata = res.data
 //			console.log(this.assetsdata)
 //			})
 			this.$store.commit('detail', res.data[0])

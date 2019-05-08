@@ -3,7 +3,7 @@
 		<div class="to-deal-header">
 			<div class="to-details-header">
 				<mt-header fixed title="交易市场">
-				   <mt-button slot="left"icon="back" v-on:click="$router.go(-1)"></mt-button>
+				   <mt-button slot="left"icon="back" v-on:click="$router.go(-1)">返回</mt-button>
 				  <mt-button icon="" slot="right">
 				  	<router-link to="/purchaserelease">
 				  		<img src="../../../assets/images/fb.png" alt="" /> 发布
@@ -15,7 +15,7 @@
 		<div class="to-deal-navbar">
 			<van-tabs>
 			  <van-tab title="购买">
-			  	<router-link to="/purchase">			  	
+			  	<router-link to="/purchase">
 				  	<div class="to-deal-purchase">
 				  		<div class="to-deal-purchase-top">
 				  			<!--<img src="../../../assets/images/u345.png" alt="" />-->
@@ -56,7 +56,7 @@
 			  	</router-link>
 			  </van-tab>
 			</van-tabs>
-		</div>		
+		</div>
 	</div>
 </template>
 
@@ -65,7 +65,7 @@ export default {
 	data () {
 		return {
 			selected: 1
-		}	
+		}
 	},
 	methods:{
 	}

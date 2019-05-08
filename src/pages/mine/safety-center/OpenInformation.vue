@@ -3,9 +3,9 @@
 		<div class="open-information-header">
 			<mt-header fixed title="开启短信验证">
 			  <router-link to="/safety" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
-			</mt-header>		
+			</mt-header>
 		</div>
 		<div class="open-information-from">
 			<el-form class="demo-ruleForm">
@@ -19,7 +19,7 @@
 		</div>
 		<div class="rest-pass-word-btn">
 			<router-link to="/safety">
-				<mt-button type="primary" size="large">确认</mt-button>	
+				<mt-button type="primary" size="large">确认</mt-button>
 			</router-link>
 		</div>
 		<div class="rest-pass-word-text">

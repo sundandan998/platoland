@@ -3,7 +3,7 @@
 		<div class="news-details-header">
 			<mt-header fixed title="公告详情">
 			  <router-link to="/news" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>

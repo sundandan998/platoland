@@ -3,7 +3,7 @@
 		<div class="scandetail-header">
 			<mt-header fixed title="扫一扫">
 			  <router-link to="/assetsdetailed" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -19,7 +19,7 @@
 			</mt-cell>
 		</div>
 		<div class="scandetail-num">
-			<span>数量</span>			
+			<span>数量</span>
 			<input type="text" />
 			<p>可用 1.00</p>
 			<p>手续费0.002PLD</p>

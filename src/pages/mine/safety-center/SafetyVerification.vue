@@ -3,7 +3,7 @@
 		<div class="safety-verification-header">
 			<mt-header fixed title="安全验证">
 			  <router-link to="/safety" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -14,9 +14,15 @@
       </div>
     </div>
     <div class="safety-verification-list">
-      <span>138....1214</span>
+      <span>han****@163.com</span>
       <div>
         <input type="text" placeholder="输入验证码"> <b>发送</b>
+      </div>
+    </div>
+    <div class="safety-verification-list">
+      <span>登录密码</span>
+      <div>
+        <input type="text" placeholder="输入登录密码"> <b></b>
       </div>
     </div>
 		<router-link to="/open">

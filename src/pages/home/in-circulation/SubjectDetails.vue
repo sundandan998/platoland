@@ -9,13 +9,13 @@
 			<mt-navbar v-model="selected">
 			  <mt-tab-item id="information">主体信息</mt-tab-item>
 			  <mt-tab-item id="introduce">主体介绍</mt-tab-item>
-			</mt-navbar>			
+			</mt-navbar>
 			<!-- tab-container -->
-			<mt-tab-container v-model="selected">			  
+			<mt-tab-container v-model="selected">
 			  <mt-tab-container-item id="information">
-			  	<div class="information-title">
+			  <!-- 	<div class="information-title">
 			  		<span>基本信息</span>
-			  	</div>
+			  	</div> -->
 			    <div class="information-content">
 			    	<mt-cell title="主体名称：">
 			    		<span>{{this.detail.body}}</span>
@@ -23,10 +23,10 @@
 			    	<mt-cell title="通证昵称:" to="//github.com">
 			    		<span>{{this.detail.name}}</span>
 			    	</mt-cell>
-			  		<mt-cell title="通证标识:">			  			
+			  		<mt-cell title="通证标识:">
 			  			<!--<img src="../../../assets/images/u1429.png" alt="" />&nbsp;-->
 			  			<span>{{this.detail.name}}</span>
-			  						  			
+
 			  		</mt-cell>
 			  		<mt-cell title="主体类型：" >
 			  			<span>{{this.detail.assets}}</span>
@@ -67,7 +67,7 @@
 			    	</div>
 			    	<div class="subject-introduce-introduction-content">
 			    		<div class="subject-introduce-introduction-content-img fl">
-			    			<img src="../../../assets/images/u2356.jpg" alt="" />	
+			    			<img src="../../../assets/images/u2356.jpg" alt="" />
 			    		</div>
 						<div class="subject-introduce-introduction-content-text fr">
 							<span>河底捞是一家大型跨省直营火锅店品牌，成立于1994年。海底捞主要以经营川味火锅为主，注重融汇各地火锅特色。</span>
@@ -85,7 +85,7 @@
 						</div>
 			    	<div class="subject-introduce-business-content">
 			    		<div class="subject-introduce-business-content-img fr">
-			    			<img src="../../../assets/images/u2356.jpg" alt="" />	
+			    			<img src="../../../assets/images/u2356.jpg" alt="" />
 			    		</div>
 			    	</div>
 			    </div>
@@ -113,7 +113,7 @@ export default {
 	},
 	methods:{
 	},
-	computed:{	
+	computed:{
 		...mapGetters([
 	      'detail'
 	    ])

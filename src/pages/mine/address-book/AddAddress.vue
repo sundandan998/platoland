@@ -3,7 +3,7 @@
     <div class="add-address-header">
       <mt-header fixed title="添加地址">
         <router-link to="/book" slot="left">
-          <mt-button icon="back"></mt-button>
+          <mt-button icon="back">返回</mt-button>
         </router-link>
       </mt-header>
     </div>
@@ -11,12 +11,12 @@
       <span>备注名称:</span>
       <mt-field></mt-field>
       <span>描述:</span>
-      <mt-field></mt-field>    
-      	<div @click="addadress">     		
+      <mt-field></mt-field>
+      	<div @click="addadress">
       		<span class="add-address-content">
 	          <img src="../../../assets/images/u2693.png" alt>
 	          <span>{{this.detail.id}}</span>
-	          <p>{{this.detail.body}}</p>  
+	          <p>{{this.detail.body}}</p>
 	          <p>添加地址</p>
         </span>
         <!--<span v-else>
@@ -24,13 +24,13 @@
           替换地址
         </span>-->
       	</div>
-        
+
       <!--</router-link>-->
       <div class="certificate-list-card assets-list-add">
         <!--<ul>
           <li>
             <router-link to="/assetsdetailed">
-            
+
               <span>{{this.detail.id}}</span>
               <span>{{this.detail.body}}</span>
               <div class="assets-list-right fr"></div>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import store from './../../../store/modules/app.js'	
+import store from './../../../store/modules/app.js'
 import {mapGetters} from 'vuex'
 export default {
   data() {
@@ -71,15 +71,15 @@ export default {
     	this.$store.commit('refpath', p)
     	this.$router.push({
 				name:'List',
-			})	
+			})
     }
   },
-  computed:{	
+  computed:{
 		...mapGetters([
 	      'detail'
 	    ])
 	},
-	
+
 }
 </script>
 

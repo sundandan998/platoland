@@ -3,7 +3,7 @@
 		<div class="open-pay-password-header">
 			<mt-header fixed title="设置支付密码">
 			  <router-link to="/safety" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>

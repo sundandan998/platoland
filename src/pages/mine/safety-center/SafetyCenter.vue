@@ -3,13 +3,13 @@
 		<div class="safety-center-header">
 			<mt-header fixed title="安全中心">
 			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
 		<div class="safety-center-list">
 			<mt-cell title="登录密码"to="/safetyverification" is-link>
-				 <span><img src="../../../assets/images/u4061.png"/></span>
+				 <span>修改</span>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
 			<mt-cell title="短信认证"to="/safetyverification" is-link value="-3000">

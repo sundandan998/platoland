@@ -2,13 +2,13 @@
   <div class="certificate-list" >
     <div class="certificate-list-header">
       <mt-header fixed title="资产列表">
-          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)"></mt-button>
+          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">返回</mt-button>
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for ="(item, index) in assetsdata">
       <mt-cell :title="item.id" :value="item.name" :label="item.company" @click="issue(item.id)">
           <img slot="icon" src="../../../assets/images/u345.png">
-          <mt-switch v-model="value" class="asset-list-switch" @change="assetswitch"></mt-switch>
+          <mt-switch v-model="item.isactive=='0'" class="asset-list-switch" @change="assetswitch"></mt-switch>
       </mt-cell>
     </div>
   </div>
@@ -69,11 +69,9 @@ export default {
 		 	this.$store.commit('detail', res.data[0])
 		},
 		assetswitch(){
-			if(this.value == true){
 				this.$toast({
 				  message: '添加资产成功'
 				})
-			}
 		}
   }
 

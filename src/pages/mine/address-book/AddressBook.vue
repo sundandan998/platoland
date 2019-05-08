@@ -3,17 +3,17 @@
 		<div class="adress-book-header">
 			<mt-header fixed title="地址簿">
 			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right">
 			   	<router-link to="add">
 			   		<img src="../../../assets/images/u2664.png" alt="" />
-			   	</router-link>			   	
+			   	</router-link>
 			   </mt-button>
 			</mt-header>
 		</div>
 		<div class="adress-book-list" v-for="(item,index) in book">
-			<mt-cell>				
+			<mt-cell>
 				<div class="adress-book-content fl">
 					<p>{{item.name}}</p>
 					<p>{{item.address}}</p>
@@ -22,7 +22,7 @@
 					<div @click="editcontent">
 						<mt-button size="small" type="primary" @click="address">编辑</mt-button>
 					</div>
-					
+
 				<!--</router-link>-->
 			</mt-cell>
 		</div>
@@ -44,15 +44,15 @@ export default{
 //			const res = await this.$http.get('/api/address')
 			const url=this.$backStage('/address')
 	 		const res = await this.$http.get(url)
-			const data = res	
+			const data = res
 			this.book = res.data.data
 //			console.log(this.book)
-			this.$store.commit('detail', res.data.data[0])  
+			this.$store.commit('detail', res.data.data[0])
 		},
 //		点击编辑跳转
 		editcontent(){
 			this.$router.push({
-				path:'/edit'				
+				path:'/edit'
 			})
 		}
 	}

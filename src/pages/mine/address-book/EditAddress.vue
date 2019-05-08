@@ -3,7 +3,7 @@
 		<div class="edit-adress-header">
 			<mt-header fixed title="地址详情">
 			  <router-link to="/book" slot="left">
-			    <mt-button icon="back" @click="saveBox"></mt-button>
+			    <mt-button icon="back" @click="saveBox">返回</mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right" @click="delBox">
 			   	<img src="../../../assets/images/delete.png"  alt=""/><span>删除</span>
@@ -11,7 +11,7 @@
 			</mt-header>
 		</div>
 		<div class="add-adress-list">
-			<span>备注名称</span>			
+			<span>备注名称</span>
 			<mt-field>
 				<span class="add-adress-name">{{this.detail.name}}</span>
 			</mt-field>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'	
+import {mapGetters} from 'vuex'
 export default{
 	data(){
 		return{
@@ -49,11 +49,11 @@ export default{
 	delBox(){
 //		console.log(this.detail)
 		this.$messagebox.confirm("确定删除该地址?")
-		.then(action => {			
+		.then(action => {
 			this.$router.push({
-				path:'/book'				
-			})	
-			
+				path:'/book'
+			})
+
 		})
 	},
 	//点击返回弹出的消息框
@@ -62,7 +62,7 @@ export default{
 		.then(action => {
 			this.$router.push({
 				path:'/book'
-				
+
 			})
 		})
 	},
@@ -71,7 +71,7 @@ export default{
 //		this.detail.splice(index,1)
 //	}
  },
-	computed:{	
+	computed:{
 		...mapGetters([
 	      'detail'
 		])

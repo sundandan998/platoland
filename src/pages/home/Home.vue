@@ -51,15 +51,15 @@
          	<!--/land指数-->
         	<!--资产认购-->
     		<div class="home-assets-subscription-title">
-    			<ul>
+    		<!-- 	<ul>
 	    			<li class="fl"><span>投资机会</span></li>
 	    			<li class="fr">
 	    				<router-link to="/explore">
-	    					<p>全部 ></p>
+	    					<p class="fr">全部 ></p>
 	    				</router-link>
-<!--	    				<img src="../../assets/images/more.png" alt="" />-->
 	    			</li>
-        	</ul>
+        	</ul> -->
+          <mt-cell title="投资机会" to="/explore" is-link value="全部"> </mt-cell>
     		</div>
     		<div class="home-assets-subscription-content">
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
@@ -173,7 +173,7 @@ creadte() {
 	  },
 //	  首页/发行中/待发行/沟通中渲染页面数据
 	  async	listissue(){
-				const url=this.$backStage('/query')
+				const url=this.$backStage('/query?type=0')
 			 	const res = await this.$http.get(url)
 			 	const data = res.data
 			 	this.issuedata = res.data

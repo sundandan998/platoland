@@ -2,7 +2,7 @@
 	<div class="purchase-pass">
 		<div class="Purchase-pass-header">
 			<mt-header fixed title="出售通证">
-			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
+			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>
 		<div class="Purchase-pass-content">
@@ -33,7 +33,7 @@
 		<div class="Purchase-pass-btn">
 			<!--<router-link to="/payment">-->
 				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
-			<!--</router-link>-->		
+			<!--</router-link>-->
 		</div>
 		<div class="payment">
 			<div class="payment-header">
