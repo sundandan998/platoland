@@ -10,15 +10,16 @@
 		<div class="to-change-into-exhibition">
 			<div class="to-change-into-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<ul class="fr">
+				<ul>
 					<li>LD（捞豆）</li>
 					<li>北京河底捞餐饮有限公司</li>
 				</ul>
+        </div>
 				<div class="to-change-into-exhibition-adress">
 					<span>13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c</span>
 					<img src="../../../assets/images/u4780.png" alt="" class="fr" />
 				</div>
-			</div>
+
 		</div>
 		<div class="to-change-into-qrcode">
 			<img src="../../../assets/images/qrcode.png" alt="" />
