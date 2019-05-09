@@ -2,7 +2,7 @@
 	<div class="pass-details">
 		<div class="pass-details-header">
 			<mt-header fixed title="通证详情vv">
-			    <mt-button slot="left" icon="back"v-on:click="$router.go(-1)"></mt-button>
+			    <mt-button slot="left" icon="back"v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>
 		<div class="pass-details-information">
@@ -10,35 +10,35 @@
 				<span>基本信息</span>
 			</div>
 			<div class="pass-details-information-content">
-				<ul class="fl">					
+				<ul class="fl">
 					<li>通政标识：</li>
 					<li>通证昵称：</li>
 					<li>合约地址：</li>
-					<li>通证主体：</li>				
+					<li>通证主体：</li>
 					<li>发行方：</li>
 					<li>发行方报告：</li>
 				</ul>
-				<ul class="fr information-content-right">					
+				<ul class="fr information-content-right">
 					<li>
 						<!--<img src="../../../assets/images/ld.png"/>-->
 						<span class="details-information-identification">{{this.$route.params.id}}</span>
 					</li>
 					<li>捞豆</li>
-					<li>		
+					<li>
 						<span class="tag-read" @click="copy"
 							data-clipboard-text="sdsf">
 							fdsf
 						</span>
 					<li>
 						<router-link to="/subject">
-							<span>北京河底捞餐饮股份有限公司</span>	
-						</router-link>	
+							<span>北京河底捞餐饮股份有限公司</span>
+						</router-link>
 					</li>
 					<li>PLATOLAND集团</li>
 					<li>
 						<router-link to="/login">
-							<span>《河底捞捞豆报告》.pdf</span>	
-						</router-link>	
+							<span>《河底捞捞豆报告》.pdf</span>
+						</router-link>
 					</li>
 				</ul>
 			</div>
@@ -57,7 +57,7 @@
 					<li>截止日期:</li>
 					<li>最小发行量:</li>
 					<li>发行数量:</li>
-					<li>起购数量:</li>					
+					<li>起购数量:</li>
 					<li>初始单价:</li>
 					<li>发行单价:</li>
 				</ul>
@@ -80,9 +80,9 @@
 			</div>
 		</div>
 		<div class="pass-details-issue-btn" v-if="show"@click="showbtn">
-			<router-link to="/deal">				
+			<router-link to="/deal">
 				<mt-button type="primary" size="large">去交易</mt-button>
-			</router-link>			
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -97,7 +97,7 @@ export default {
 	    }
 	},
 	created () {
-    	this.formData()   	
+    	this.formData()
   	},
 	beforeRouteEnter(to, from, next) {
 //		console.log(from)
@@ -117,7 +117,7 @@ export default {
 		if(data.status===200){
 	//		console.log(data.data.data[1].name)
 			for (var i in data.data.data){
-				this.tableData = data.data.data	
+				this.tableData = data.data.data
 				}
 			}
 		},

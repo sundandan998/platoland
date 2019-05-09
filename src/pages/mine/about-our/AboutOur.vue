@@ -1,9 +1,9 @@
 <template>
 	<div class="about-our">
 		<div class="about-our-header">
-			<mt-header fixed title="关于我们">
+			<mt-header fixed :title="$t('m.our')">
 			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
@@ -11,33 +11,31 @@
 			<img src="../../../assets/images/logo.png" alt="" />
 		</div>
 		<div class="about-our-text">
-			<ul>
-				<li> <b></b> PLATOLAND使命</li>
-				<li>打造资产单价发现、人人可投资的资产通证化数字平台</li>
-				<li>让世上没有实现不了的价值</li>
-			</ul>
-			<ul>
-				<li> <b></b> PLATOLAND业务</li>
-				<li>为企业：将资产，通证化改造为可在市场流通的通证</li>
-				<li>为个人：普通民众可自由投资已通证化改造的资产，享有对应收益。门槛低，人人可投资</li>
-			</ul>
-			<ul>
-				<li> <b></b> PLD</li>
-				<li>PLD是PLATOLAND集团官方基于PLATOLAND生态发行的通证</li>
-			</ul>
-			<ul>
-				<li> <b></b> PLATOLAND运营方</li>
-				<li>PLATOLAND客户端由PLATOLAND有限公司运营，核心团队来自国际知名区块链企业、金融机构、法律机构等</li>
-			</ul>
+      <div>
+        <span><b></b> {{$t('m.ourtitleone')}}</span>
+        <p>{{$t('m.ourtextone')}}</p>
+        <p>{{$t('m.ourtexttwo')}}</p>
+      </div>
+			<div>
+				<span> <b></b> {{$t('m.ourtitletwo')}}</span>
+				<p>{{$t('m.ourtextthree')}}</p>
+				<p>{{$t('m.ourtextfour')}}</p>
+			</div>
+			<div>
+				<span> <b></b> {{$t('m.ourtitlethree')}}</span>
+				<p>{{$t('m.ourtextfive')}}</p>
+			</div>
+			<div>
+				<span> <b></b> {{$t('m.ourtitlefour')}}</span>
+				<p>{{$t('m.ourtextsix')}}</p>
+			</div>
 		</div>
 		<div class="about-our-Contact">
-			<ul>
-				<li> <b></b> 联系我们</li>
-				<li>网站</li>
-				<li>推特</li>
-				<li>微信</li>
-				<li>Telegram</li>
-			</ul>
+				<p> <b></b> {{$t('m.contact')}} </p>
+				<p>{{$t('m.website')}}  <a href="#" class="fr">http://www.platoland.com</a></p>
+				<p>{{$t('m.Twitter')}}</p>
+				<p>{{$t('m.wechat')}}</p>
+				<p>Telegram</p>
 		</div>
 	</div>
 </template>

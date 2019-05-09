@@ -3,36 +3,36 @@
 		<div class="rest-pass-word-header">
 			<mt-header fixed title="重置登录密码">
 			  <router-link to="/safety" slot="left">
-			    <mt-button icon="back"></mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
 		<div class="rest-pass-word-from">
 			<el-form :model="ruleForm":rules="rules" ref="ruleForm" class="demo-ruleForm">
-			  <el-form-item label="新登录密码" prop="pass" v-if="visible">			  
+			  <el-form-item label="新登录密码" prop="pass" v-if="visible">
 			    <el-input type="password" v-model="ruleForm.pass" autocomplete="off">
-		    	    <i slot="suffix" title="隐藏密码" @click="changePass('show')"> 
+		    	    <i slot="suffix" title="隐藏密码" @click="changePass('show')">
 		            	<img src="../../../assets/images/eye-close.png"/>
 		           </i>
-			    </el-input>	
+			    </el-input>
 			  </el-form-item>
-	  	     <el-form-item label="新登录密码" prop="pass" v-else>			  
+	  	     <el-form-item label="新登录密码" prop="pass" v-else>
 		      	<el-input type="text" v-model="ruleForm.pass">
-		            <i slot="suffix" title="显示密码" @click="changePass('hide')"> 
+		            <i slot="suffix" title="显示密码" @click="changePass('hide')">
 		            	<img src="../../../assets/images/eye-open.png"/>
-		            </i>	
+		            </i>
 	  			</el-input>
 		    </el-form-item>
 			 <el-form-item label="确认密码" prop="checkPass" v-if="visible">
 			    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off">
-			    	 <i slot="suffix" title="隐藏密码" @click="changePass('show')"> 
+			    	 <i slot="suffix" title="隐藏密码" @click="changePass('show')">
 		            	<img src="../../../assets/images/eye-close.png"/>
 		           </i>
 			    </el-input>
 			  </el-form-item>
 			   <el-form-item label="确认密码" prop="checkPass" v-else>
 			    <el-input type="text" v-model="ruleForm.checkPass" autocomplete="off">
-			    	 <i slot="suffix" title="隐藏密码" @click="changePass('show')"> 
+			    	 <i slot="suffix" title="隐藏密码" @click="changePass('show')">
 		            	<img src="../../../assets/images/eye-open.png"/>
 		           </i>
 			    </el-input>
@@ -53,7 +53,7 @@
 <script>
 import {Toast} from 'mint-ui'
   export default {
-    data() {	
+    data() {
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));

@@ -88,7 +88,7 @@ import Issue from '@/pages/home/to-issue/ToIssue'
 Vue.use(Router)
 
 export default new Router({
-	mode:'history',
+//mode:'history',
   routes: [
 //测试
 	{

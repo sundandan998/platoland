@@ -1,23 +1,23 @@
 <template>
 	<div class="edit-adress">
 		<div class="edit-adress-header">
-			<mt-header fixed title="地址详情">
+			<mt-header fixed :title="$t('m.addressdetail')">
 			  <router-link to="/book" slot="left">
-			    <mt-button icon="back" @click="saveBox"></mt-button>
+			    <mt-button icon="back" @click="saveBox">{{$t('m.back')}}</mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right" @click="delBox">
-			   	<img src="../../../assets/images/delete.png"  alt=""/><span>删除</span>
+			   	<img src="../../../assets/images/delete.png"  alt=""/><span>{{$t('m.delete')}}</span>
 			   </mt-button>
 			</mt-header>
 		</div>
 		<div class="add-adress-list">
-			<span>备注名称</span>			
+			<span>{{$t('m.remarks')}}</span>
 			<mt-field>
 				<span class="add-adress-name">{{this.detail.name}}</span>
 			</mt-field>
-			<span>描述</span>
+			<span>{{$t('m.describe')}}</span>
 			<mt-field ></mt-field>
-			<span>USDT地址</span>
+			<span>{{$t('m.usdtaddress')}}</span>
 			<mt-field >
 				<p class="to-change-into-exhibition-adress">
 				{{this.detail.address}}
@@ -25,7 +25,7 @@
 			</mt-field>
 		</div>
 		<div class="edit-adress-btn ">
-			<mt-button type="primary" size="large">保存</mt-button>
+			<mt-button type="primary" size="large">{{$t('m.preservation')}}</mt-button>
 		</div>
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'	
+import {mapGetters} from 'vuex'
 export default{
 	data(){
 		return{
@@ -49,11 +49,11 @@ export default{
 	delBox(){
 //		console.log(this.detail)
 		this.$messagebox.confirm("确定删除该地址?")
-		.then(action => {			
+		.then(action => {
 			this.$router.push({
-				path:'/book'				
-			})	
-			
+				path:'/book'
+			})
+
 		})
 	},
 	//点击返回弹出的消息框
@@ -62,7 +62,7 @@ export default{
 		.then(action => {
 			this.$router.push({
 				path:'/book'
-				
+
 			})
 		})
 	},
@@ -71,7 +71,7 @@ export default{
 //		this.detail.splice(index,1)
 //	}
  },
-	computed:{	
+	computed:{
 		...mapGetters([
 	      'detail'
 		])

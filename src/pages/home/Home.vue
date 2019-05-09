@@ -1,12 +1,10 @@
 <template>
   <div class="exchange">
-    <div class="page-wrap">     
+    <div class="page-wrap">
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="home" class="home-index">
     		<div class="home-header">
-		      <mt-header fixed title="首 页">
-		          <mt-button slot="left"></mt-button>
-		      </mt-header>
+		      <mt-header fixed  :title="$t('m.homepage')"></mt-header>
 		    </div>
 				<div class="home-investment" @click="issue('PLD')">
 				<img src="../../assets/images/gf.png" alt="" />
@@ -17,53 +15,38 @@
 					<div class="home-investment-top-left">
 						<ul>
 						<li>{{this.plddata.name}}</li>
-						<li><img src="../../assets/images/t.png"/> 0.02</li>
+						<li><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</li>
 					</ul>
-					</div>	
+					</div>
 					<div class="home-investment-top-right fr">
-						<router-link to="/buy">
-							<mt-button size="small">立刻投资</mt-button>
-						</router-link>
+							<mt-button size="small" @click="issue('PLD')">{{$t('m.investment')}}</mt-button>
 					</div>
 					<p>{{this.plddata.Detail}}</p>
 				</div>
 				<div class="home-investment-bot">
-					<ul>
-						<li class="fl">发行总量:{{this.plddata.purnum}}</li>
-						<li class="fl">已发行:{{this.plddata.num}}</li>
-						<li class="fr">{{this.plddata.num}}</li>
-					</ul>
+          <span>{{$t('m.issueamount')}}:{{this.plddata.amountnum}}</span>
+          <span>{{$t('m.issue')}}:{{this.plddata.soldnum}}</span>
 				</div>
 				<div class="home-investment-progress">
 						<mt-progress :value="20" :bar-height="5"></mt-progress>
-				</div>	    		
+				</div>
 	    	</div>
       		<!--/总资产-->
          	<!--land指数-->
          	<div class="home-land">
          		<router-link to="/news">
 		         	<div class="notice">
-		            <ul class="notice-list" ref="notice-list" :class="{anim:animate==true}">
-		                <li v-for='item in items'>
-		                	<img src="../../assets/images/horn.png"/>{{item.name}}
-		                </li>
-		            </ul>
+                <div class="notice-list" ref="notice-list" :class="{anim:animate==true}" v-for='item in items'>
+                  <img src="../../assets/images/horn.png"/><span> {{item.name}}</span>
+                </div>
 		        	</div>
          		</router-link>
          	</div>
          	<!--/land指数-->
         	<!--资产认购-->
     		<div class="home-assets-subscription-title">
-    			<ul>
-	    			<li class="fl"><span>投资机会</span></li>
-	    			<li class="fr">
-	    				<router-link to="/explore">
-	    					<p>全部 ></p>
-	    				</router-link>
-<!--	    				<img src="../../assets/images/more.png" alt="" />-->
-	    			</li>
-        	</ul> 
-    		</div>    
+          <mt-cell :title="$t('m.opportunity')" to="/explore" is-link :value="$t('m.whole')"> </mt-cell>
+    		</div>
     		<div class="home-assets-subscription-content">
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
 					<img src="../../assets/images/u345.png"/>
@@ -75,9 +58,9 @@
 					</div>
 					<div class="assets-subscription-information">
 						<ul class="fl">
-							<li>发行时间</li>
-							<li>发行总量</li>
-							<li>初始价格</li>
+							<li>{{$t('m.issuetime')}}</li>
+							<li>{{$t('m.issueamount')}}</li>
+							<li>{{$t('m.initialprice')}}</li>
 						</ul>
 						<ul class="fr">
 							<li>{{items.issuetime}}</li>
@@ -85,31 +68,31 @@
 							<li>{{items.initialprice}}</li>
 						</ul>
 					</div>
-				</div>	
+				</div>
     		</div>
     		<div class="home-assets-more">
-    			<span>更多功能,即将上线</span>
+    			<span>{{$t('m.morefunctions')}}</span>
     		</div>
          	<!--/资产认购-->
         </mt-tab-container-item>
-  
+
       </mt-tab-container>
     </div>
     <mt-tabbar v-model="message" fixed>
       <mt-tab-item id="home">
-      	<img slot="icon" src="../../assets/images/home-b.png" v-if="this.selected == 'home'"> 
-      	<img slot="icon" src="../../assets/images/home.png" v-else> 
-      	首页
-      </mt-tab-item>         
+      	<img slot="icon" src="../../assets/images/home-b.png" v-if="this.selected == 'home'">
+      	<img slot="icon" src="../../assets/images/home.png" v-else>
+      	{{$t('m.homepage')}}
+      </mt-tab-item>
 	      <mt-tab-item id="explore">
-	      	<img slot="icon" src="../../assets/images/explore-b.png"v-if="this.selected == 'merchant'">
+	      	<img slot="icon" src="../../assets/images/explore-b.png" v-if="this.selected == 'explore'">
 	      	<img slot="icon" src="../../assets/images/explore.png"v-else>
-	      	探索
+	      	{{$t('m.explore')}}
 	      </mt-tab-item>
       <mt-tab-item id="mine" >
-      	<img slot="icon" src="../../assets/images/mine-b.png" v-if="this.selected == 'mine'">     	
-    	<img slot="icon" src="../../assets/images/mine.png"v-else>   
-      	我的
+      	<img slot="icon" src="../../assets/images/mine-b.png" v-if="this.selected == 'mine'">
+    	<img slot="icon" src="../../assets/images/mine.png"v-else>
+      	{{$t('m.mine')}}
       </mt-tab-item>
     </mt-tabbar>
   </div>
@@ -130,7 +113,7 @@ export default {
       datalist:[],
       animate:false,
       items:[
-          {name:"PLATOLAND生态获区块链协会创新应用大奖！1"},
+          {name: "PLATOLAND生态获区块链协会创新应用大奖！1"},
           {name:"PLATOLAND生态获区块链协会创新应用大奖！2"},
           {name:"PLATOLAND生态获区块链协会创新应用大奖！3"}
       ]
@@ -148,37 +131,27 @@ creadte() {
     setInterval(this.scroll,3000)
 },
 	mounted () {
-		this.pld(),
 		this.version(),
 		this.listissue(),
 		this.$store.dispatch('detail')
 //	  console.group(this.$store.state.app.showFooter)
 	},
-  methods:{	
+  methods:{
 		//	  公告通知
     scroll(){
        this.animate=true
-       setTimeout(()=>{ 
+       setTimeout(()=>{
                this.items.push(this.items[0])
                this.items.shift()
                this.animate=false
        },500)
     },
-	//  首页/官方数据渲染
-	  async	pld(){
-	   		const url=this.$backStage('/pldDetailsData')
-	   		const res = await this.$http.get(url)
-			 	const data = res.data
-			 	this.plddata = res.data
-	//		 	console.log(data)
-//			 	console.log(this.plddata)
-	  },
 //	  首页/发行中/待发行/沟通中渲染页面数据
 	  async	listissue(){
-				const url=this.$backStage('/query')
+				const url=this.$backStage('/query?type=0')
 			 	const res = await this.$http.get(url)
-			 	const data = res.data
-			 	this.issuedata = res.data	
+			 	this.issuedata = res.data
+      this.plddata = res.data[3]
 //			 	console.log(this.issuedata)
 //			 	console.log(this.issuedata[0].state)
 		},
@@ -186,16 +159,16 @@ creadte() {
 		async issue(id){
 			const url=this.$backStage('/query?id='+id)
 		 	const res = await this.$http.get(url)
-			const data = res		
+			const data = res
 			this.$router.push({
 				name:'Detail',
-			})			
+			})
 			this.$store.commit('detail', res.data[0])
 		},
 //		 ...mapActions('detail',[
-//	          'app.detail' 
+//	          'app.detail'
 //	      ]),
-//	   版本升级   
+//	   版本升级
 	  async version(){
 	  	const url=this.$backStage('/versionnum')
 		 	const res = await this.$http.get(url)
@@ -203,35 +176,27 @@ creadte() {
 		 	const version =this.$version()
 		 	this.$store.commit('version', res.data)
 		 	if(parseFloat(data.version)> parseFloat(version)){
-		 		this.versionbox()
-		 		if(parseFloat(data.force)===0){
-		 				this.forceversion()
-		 		}else{
-		 			this.versionbox()
+		 		let isForce = false
+		 		if(data.force===0){
+          isForce = true
 		 		}
+		 		this.upgrade(isForce)
 		 	}
 	  },
-//	  版本升级弹框
-	  versionbox(){
-		 this.$messagebox.confirm('', { 
-				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
+
+		upgrade(isShow){
+			 this.$messagebox.confirm('', {
+         closeOnClickModal:false,
+         showCancelButton:isShow,
+				 message:"<div><p> 1.修复部分BUG</p><p>2.优化体验</p></div>",
 				 title: '新版本提醒', 
 				 confirmButtonText: '升级', 
 				 cancelButtonText: '取消' 
-				 })
-		},
-//		强制升级
-		forceversion(){	
-			 this.$messagebox.confirm('', { 
-				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
-				 title: '新版本提醒', 
-				 confirmButtonText: '升级', 
-				 cancelButtonText: '' 
-				 }).then(action => {					
-							this.$router.push({
-								name:'https://www.baidu.com'
-							})
-					})	
+				 }).then(action => {
+         if (window.plus) {
+         plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
+         plus.runtime.quit();
+         }},cancel => {})
 		}
 	},
 	watch: {

@@ -1,47 +1,20 @@
 <template>
 	<div class="pass-details-issue">
 		<div class="pass-details-header">
-			<mt-header fixed title="通证详情">
-			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">返回</mt-button>
+			<mt-header fixed :title="$t('m.passdetails')">
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="pass-details-information">
 			<div class="pass-details-information-header">
-				<span>基本信息</span>
+				<span>{{$t('m.essentialinformation')}}</span>
 			</div>
 			<div class="pass-details-information-content">
-				<ul class="fl">					
-					<li>通政标识：</li>
-					<li>通证昵称：</li>
-					<li>合约地址：</li>
-					<li>通证主体：</li>				
-					<li>发行方：</li>
-					<li>权益说明：</li>
-				</ul>
-				<ul class="fr information-content-right information-content-right-li">					
-					<li>
-						<!--<img src="../../../assets/images/icon-3.png"/>-->
-						<span class="details-information-identification">{{this.detail.id}}</span>
-					</li>
-					<li>{{this.detail.name}}</li>
-					<li>
-						<span class="tag-read" @click="copy"
-							data-clipboard-text="detailslist.address">
-							{{this.detail.address}}
-						</span>
-					<li>
-						<router-link to="/subject">
-							<span>{{this.detail.body}}</span>	
-						</router-link>	
-					</li>
-					<li>{{this.detail.issuer}}</li>
-					<li>
-						<span>{{this.detail.explain}}</span>
-						<!--<router-link to="/login">
-							<span>《河底捞捞豆报告》.pdf</span>	
-						</router-link>	-->
-					</li>
-				</ul>
+        <mt-cell :title="$t('m.passdetails')" :value="this.detail.id"></mt-cell>
+        <mt-cell :title="$t('m.nickname')" :value="this.detail.nickname"></mt-cell>
+        <mt-cell :title="$t('m.address')" :value="this.detail.address"></mt-cell>
+        <mt-cell :title="$t('m.body')" :value="this.detail.body"  to="/subject" is-link></mt-cell>
+        <mt-cell :title="$t('m.issuer')" :value="this.detail.issuer"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-data">
@@ -49,47 +22,28 @@
 				<span>发行数据</span>
 			</div>
 			<div class="pass-details-issue-data-content">
-				<ul class="fl">
-					<li>发行状态:</li>
-					<li>股权发行比例:</li>
-					<li>计价资产</li>
-					<li>发行方式</li>
-					<li>发行日期:</li>
-					<li>截止日期:</li>
-					<li>最小发行量:</li>
-					<li>发行数量:</li>
-					<li>起购数量:</li>	
-					<li>已售数量:</li>	
-					<li>初始单价:</li>
-					<li>发行单价:</li>
-				</ul>
-				<ul class="fr information-content-right">
-					<li>{{this.detail.state}}</li>
-					<li>{{this.detail.proportion}}</li>
-					<li>
-						<!--<img src="../../../assets/images/u318.png"/>-->
-						<span class="details-information-identification">{{this.detail.assets}}</span>
-					</li>
-					<li>{{this.detail.mode}}</li>
-					<li>{{this.detail.issuetime}}</li>
-					<li>{{this.detail.endtime}}</li>
-					<li>{{this.detail.minnum}}</li>
-					<li>{{this.detail.amountnum}}</li>
-					<li>{{this.detail.purchasenum}}</li>
-					<li>{{this.detail.purchasenum}}</li>
-					<li>{{this.detail.initialprice}}</li>
-					<li>{{this.detail.issueprice}}</li>
-				</ul>
+        <mt-cell :title="$t('m.issuingstate')" :value="this.detail.state"></mt-cell>
+        <mt-cell :title="$t('m.proportion')" :value="this.detail.proportion"></mt-cell>
+        <mt-cell :title="$t('m.valuationassets')" :value="this.detail.assets"></mt-cell>
+        <mt-cell :title="$t('m.mode')" :value="this.detail.mode"></mt-cell>
+        <mt-cell :title="$t('m.issuetime')" :value="this.detail.issuetime"></mt-cell>
+        <mt-cell :title="$t('m.endtime')" :value="this.detail.endtime"></mt-cell>
+        <mt-cell :title="$t('m.minnum')" :value="this.detail.minnum"></mt-cell>
+        <mt-cell :title="$t('m.issuenum')" :value="this.detail.amountnum"></mt-cell>
+        <mt-cell :title="$t('m.purchasenum')" :value="this.detail.purchasenum"></mt-cell>
+        <mt-cell :title="$t('m.soldnum')" :value="this.detail.soldnum"></mt-cell>
+        <mt-cell :title="$t('m.initialprice')" :value="this.detail.initialprice"></mt-cell>
+        <mt-cell :title="$t('m.issueprice')" :value="this.detail.issueprice"></mt-cell>
 			</div>
 		</div>
 		<div class="pass-details-issue-btn" id="transaction">
-			<router-link to="/deal">				
+			<router-link to="/deal">
 				<mt-button type="primary" size="large">去交易</mt-button>
-			</router-link>			
+			</router-link>
 		</div>
 		<div class="pass-details-issue-btn" id="purchase">
 			<router-link to="buy">
-				<mt-button type="primary" size="large">买入</mt-button>
+				<mt-button type="primary" size="large">{{$t('m.buy')}}</mt-button>
 			</router-link>
 		</div>
 	</div>
@@ -145,7 +99,7 @@ export default {
 			}
 		}
 	},
-	computed:{	
+	computed:{
 		...mapGetters([
 	      'detail'
 	    ])

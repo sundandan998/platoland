@@ -20,6 +20,9 @@ import Vuex from 'vuex'
 import $ from 'jquery'
 //api接口
 import AppConfig from './appconfig'
+// 国际化
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
 Vue.use(new AppConfig())
 Vue.prototype.$Indicator = Indicator
 require('./mock.js')
@@ -29,10 +32,19 @@ Vue.use(MintUI)
 Vue.use(Vuex)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
+const i18n = new VueI18n({
+    locale: 'en-US',    // 语言标识
+    //this.$i18n.locale // 通过切换locale的值来实现语言切换
+    messages: {
+      'zh-CN': require('./assets/lang/zh'),   // 中文语言包
+      'en-US': require('./assets/lang/en')    // 英文语言包
+    }
+})
 new Vue({
   el: '#app',
   router,
 	store,
+  i18n,
   components: { App },
   template: '<App/>',
 })

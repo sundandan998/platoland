@@ -1,8 +1,8 @@
 <template>
 	<div class="purchase-pass">
 		<div class="Purchase-pass-header">
-			<mt-header fixed title="出售通证">
-			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)"></mt-button>
+			<mt-header fixed :title="$t('m.sell')">
+			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="Purchase-pass-content">
@@ -19,44 +19,42 @@
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
-			  <van-tab title="按数量出售">
-			  	<mt-field placeholder="600,000起购">USDT</mt-field>
-			  	<p>可用：1,000  USDT</p>
-			  	<p>手续费：10  PLD</p>
+			  <van-tab :title="$t('m.numsale')">
+			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}：1,000  USDT</p>
+			  	<p>{{$t('m.servicecharge')}}：10  PLD</p>
 			  </van-tab>
-			  <van-tab title="按价格出售">
-			  	<mt-field placeholder="100,000起购">LD（捞豆）</mt-field>
-			  	<p>可用：1,000  USDT</p>
+			  <van-tab :title="$t('m.pricesale')">
+          <mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
 			<!--<router-link to="/payment">-->
-				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
-			<!--</router-link>-->		
+				<mt-button size="large" type="primary"@click="passwordShow">{{$t('m.sure')}}</mt-button>
+			<!--</router-link>-->
 		</div>
 		<div class="payment">
 			<div class="payment-header">
 			<!--<p>1.00(LD)</p>-->
 		</div>
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  	<div class="" v-if="hide">
-			<!-- 密码输入框 -->
-			<van-password-input
-			  :value="value"
-			  @focus="showKeyboard = true"
-			/>
-			<!-- 数字键盘 -->
-			<van-number-keyboard
-			  :show="showKeyboard"
-			  @input="onInput"
-			  @delete="onDelete"
-			  @blur="showKeyboard = false"
-			/>
-		</div>
-		</mt-popup>
+		 <div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <van-password-input
+        :value="value"
+        @focus="showKeyboard = true"
+      />
+
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
+    </div>
 	</div>
 	</div>
 </template>
@@ -66,21 +64,20 @@ export default {
   data() {
     return {
       value: '',
-      hide:'',
-      showKeyboard: true,
-      popupVisible: false
-    };
+      showKeyboard: false,
+      popupVisible: false,
+      // showPopupPwd:false
+    }
   },
   methods: {
     onInput(key) {
-      this.value = (this.value + key).slice(0, 6);
+      this.value = (this.value + key).slice(0, 6)
     },
     onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1);
+      this.value = this.value.slice(0, this.value.length - 1)
     },
-     passwordShow(hide){
-    	this.hide = !(hide === 'show')
-    	this.popupVisible = !(false === 'true')
+    passwordShow(){
+      this.popupVisible = true
     }
   },
   watch:{
@@ -95,5 +92,5 @@ export default {
 }
 </script>
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

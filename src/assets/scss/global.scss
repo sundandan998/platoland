@@ -4,14 +4,14 @@
     margin:0;
 }
 //字体样式
-@font-face {
-    font-family: 'myFont';
-    src: url('/assets/font/pingfang.ttf'); 
-    font-weight: normal;
-    font-style: normal;
-}
-html,body { 
-    font-family: myFont, sans-serif; 
+//@font-face {
+//  font-family: 'myFont';
+//  src: url('/assets/font/pingfang.ttf');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+html,body {
+    font-family: myFont, sans-serif;
     }
 li{
     list-style: none;
@@ -25,7 +25,7 @@ input{
     float: left;
 }
 .fr{
-   float: right; 
+   float: right;
 }
 a{
     text-decoration: none;
@@ -38,7 +38,7 @@ a{
 }
 .el-input{
     width: 85%;
-    margin-top: 0px;   
+    margin-top: 0px;
 }
 //loading加载样式
 .spinner span{
@@ -62,8 +62,24 @@ body{
 }
 .van-number-keyboard{
     position: unset;
+    display: block !important;
 }
-
+.mint-popup {
+    display: block!important;
+    z-index: 10000000;
+    width: 100%;
+}
+ .van-popup {
+    width: 100%;
+    height: 320px;
+}
+.paymentamount{
+    text-align: center;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -110,7 +126,7 @@ body{
 }
 .verification-input{
     text-align: center;
-  
+
 }
 .el-form-item__error {
     position: absolute;
@@ -136,13 +152,13 @@ body{
 }
 .login-btn{
     text-align: center;
-    .mint-button{      
-        background-color: #ddd; 
+    .mint-button{
+        background-color: #ddd;
         color: #fff;
         font-size: 0.88rem;
         margin: 50px auto 10px auto;
         width: 60%;
-        -webkit-box-shadow:none; 
+        -webkit-box-shadow:none;
         box-shadow: none;
         border-radius: 45px;
     }
@@ -176,13 +192,13 @@ label.mint-button-text {
         position: relative;
         top: 4px;
     }
-}  
+}
 .mint-field-clear {
     opacity: .2;
     top: -3px;
     left: -3px;
     position: relative;
-} 
+}
 //-------------------------登录/忘记密码------------------
 .forget-password {
     background-color: #fff;
@@ -200,16 +216,16 @@ label.mint-button-text {
 .forget-password-btn{
     text-align: center;
     .mint-button{
-        background-color: #ddd; 
+        background-color: #ddd;
         color: #fff;
         font-size: 0.88rem;
         margin: 50px auto 10px auto;
         width: 60%;
-        -webkit-box-shadow:none; 
+        -webkit-box-shadow:none;
         box-shadow: none;
         border-radius: 45px;
 	    }
-} 
+}
 //-------------------------登录/重置邮件------------------
 .reset-mail-information{
     width: 80%;
@@ -239,7 +255,7 @@ label.mint-button-text {
             float: left;
             margin-left: 20px;
         }
-    } 
+    }
     p{
         margin-top: -20px;
     }
@@ -261,7 +277,7 @@ label.mint-button-text {
     }
 }
 .home-investment{
-    width: 90%;
+    width: 98%;
     background-color: #fff;
     margin: 56px auto;
     height: auto;
@@ -298,13 +314,10 @@ label.mint-button-text {
 }
 .home-investment-bot {
     height: 30px;
-}
-.home-investment-bot li{
-    font-size: 0.8rem;
-    margin-left: 15px;
-}
-.home-investment-bot li.fr {
-    margin-right: 10px;
+    span{
+      font-size: 0.8rem;
+      margin-left: 15px;
+    }
 }
 .home-investment-progress{
     width: 93%;
@@ -312,7 +325,7 @@ label.mint-button-text {
 }
 
 .home-land{
-    width: 90%;
+    width: 98%;
     margin:0 auto;
     margin-top: -35px;
 }
@@ -330,14 +343,14 @@ label.mint-button-text {
     margin-top: 10px;
     li{
         float: left;
-        margin:20px 10px 0 10px; 
-        font-size: 0.8rem; 
+        margin:20px 10px 0 10px;
+        font-size: 0.8rem;
     }
 }
 .home-popularity-content-top{
     height: 70px;
     p{
-       font-size: 0.8rem;   
+       font-size: 0.8rem;
     }
 }
 .home-popularity-content-bot{
@@ -350,25 +363,12 @@ label.mint-button-text {
 }
 .home-assets-subscription-title{
     height: 30px;
-    margin: 20px 18px 0 18px;
-    span{
-        color: #333;
-        font-size: 0.78rem;
-    }
-    img{
-        width: 12px;
-        margin-right: 5px;
-    }
-    p{
-        color: #26A2FF;
-        font-size: 0.67rem;
-        margin-top: 6px;
-    }
+    margin: 20px 5px 20px 5px;
 }
 .home-assets-subscription-content{
     white-space: nowrap;
     overflow-x: auto;
-    margin: 0px 18px 0 18px;
+    margin: 20px 5px 0 5px;
 }
 .home-assets-subscription-content::-webkit-scrollbar{
     display: none;
@@ -378,13 +378,13 @@ label.mint-button-text {
     display:inline-block;
     background-color: #fff;
     border-radius: 7px;
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
     box-shadow: 1px 6px 5px #ccc;
       span{
           font-size: 0.7rem;
            color: #999;
       }
-    
+
 }
 .assets-subscription{
     img{
@@ -394,28 +394,29 @@ label.mint-button-text {
 .assets-subscription-text {
     margin:10px 15px 0 0px;
       p{
-         font-size: 0.7rem; 
+         font-size: 0.7rem;
           color: #999;
       }
 }
 .assets-subscription-title{
     p{
           margin: 5px 0 0 10px;
-        
+
     }
 }
 .assets-subscription-information {
     ul{
         color: #000;
-        padding: 5px 10px;
         font-size: 0.7rem;
+        margin-left: 5px;
+        margin-right: 5px;
         li{
             margin-bottom: 10px;
         }
     }
 }
 .home-assets-more{
-    width: 90%;
+    width: 98%;
     background-color: #fff;
     margin:20px auto;
     border-radius:5px;
@@ -445,48 +446,26 @@ label.mint-button-text {
     img{
         width: 25px;
     }
-    li{
-       margin: 20px 24px 20px 24px;
-       font-size: 0.72rem;
-       color: #666;
-       
-    }
 }
-.details-information-identification{
-    display: block;
-//  margin:-25px 0 0 30px;
-}
+
 .pass-details-issue-data {
     height: auto;
     margin-top: 10px;
     background-color: #fff;
-    overflow: hidden;  
+    overflow: hidden;
 }
 .pass-details-issue-data-header{
     margin:10px 0 0px 16px;
     font-weight: 700;
 }
-.pass-details-issue-data-content{
-    li{
-       margin: 20px 24px 20px 24px;
-       font-size: 0.72rem;
-       color: #666;
-       
-    }  
+.mint-cell-text {
+    font-size: 0.72rem;
 }
-.information-content-right-li{
-//  margin-top: 20px;
-}
-.information-content-right li{
-    text-align: right;
-    font-size: 0.79rem;
-    img{
-        width: 25px;
-        position: relative;
-        top: -4px;
-        left:-80px;
-        
-    }
+.mint-cell-value{
+  font-size: 0.72rem;
+  span{
+
+  }
 }
 table.el-table__header {
     width: auto !important;
@@ -503,7 +482,7 @@ table.el-table__body {
     span{
          margin-left: 10px;
          font-weight: 700;
-    }  
+    }
 }
 .pass-details-issue-history-title {
     background-color: #fff;
@@ -696,7 +675,7 @@ element.style {
 }
 .Purchase-pass-tabbar input.mint-field-core{
     font-size: 0.89rem;
-    color:#999;        
+    color:#999;
     top: -4px;
     position: relative;
 }
@@ -724,7 +703,7 @@ element.style {
     margin: 0 auto;
 }
 .Purchase-pass-btn .mint-button{
-    border-radius: 45px 
+    border-radius: 45px
 }
 //首页/流通中/购买发布
 .purchase-pass-header{
@@ -798,9 +777,8 @@ element.style {
     height: auto;
     background-color: #fff;
     input{
-        border: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
         height: 40px;
-        border-radius: 5px;
         width: 90%;
         margin: 5px 0 10px 15px;
     }
@@ -820,15 +798,14 @@ element.style {
 .purchase-pass-quota {
     margin-bottom: 20px;
     background-color: #fff;
-    input{
-        border: 1px solid #ccc;
+    .purchase-pass-quota-input{
+        border-bottom: 1px solid #ccc;
         display: inline-block;
-        width: 35%;
+        width: 40%;
         height: 40px;
-        color: #f2f2f2;
+        color: #000;
         border-radius: 5px;
         font-size: 0.61rem;
-        text-align: center;
         text-indent: initial;
         margin-left: 15px;
         margin-top: 10px;
@@ -841,6 +818,9 @@ element.style {
         padding-top: 10px;
     }
 }
+.purchase-pass-quota .mint-field-core{
+    text-indent:0rem;
+ }
 .purchase-pass-btn{
     width: 90%;
     margin: 0 auto;
@@ -938,49 +918,10 @@ element.style {
     }
 }
 //首页/探索
-.explore-header {
-    margin-bottom: 40px;
-}
-.certificate-list-header {
-    margin-bottom: 49px;
-}
-.certificate-list-card li{
-    height: 70px;
-    width: 100%;
-    background-color: #fff;
-    margin: -8px auto;
-    p{
-        font-size: 0.8rem;
-        color: #999;
-        position: relative;
-        top: -25px;
-        right: 15px;
-    }
-    span{
-        font-size: 0.8rem;
-        margin: 10px 0 10px 0px;
-        display: block;
-        position: relative;
-        top: 15px;
-    }
-    img{
-        position: relative;
-        top: 15px;
-        margin-right: 10px;
-        margin-left: 25px;
-    }
-}
-.certificate-list-card button.mint-button.fr.mint-button--primary.mint-button--small {
-    position: relative;
-    top: -28px;
-    right: 25px;
-    height: 20px;
-    label{
-       font-size: 0.8rem;
-       line-height: 20px;
-    }
-}
 /*--------------------------商户---------------*/
+.explore-header {
+    margin-bottom: 41px;
+}
 .merchant-list{
     border-top:1px solid #ccc;
     border-bottom:1px solid #ccc;
@@ -994,14 +935,14 @@ element.style {
 .merchant-list-name{
     p{
         display: inline-block;
-        margin: 5px 0px 0 50px;  
+        margin: 5px 0px 0 50px;
     }
     ul{
         height: auto;
         margin: -10px 0 0 10px;
         li{
             float: left;
-            margin-right: 15px;    
+            margin-right: 15px;
         }
     }
 }
@@ -1032,13 +973,14 @@ element.style {
 }
 .mint-cell-title {
     margin-left: 16px;
+    flex: 0px;
 }
 .transaction-flow-title{
     color:#fff;
     width: 100%;
     img{
         width: 15px;
-        padding:0 5px 0 5px;   
+        padding:0 5px 0 5px;
     }
     ul{
         margin-left: -30px;
@@ -1048,17 +990,15 @@ element.style {
     }
     fl{
         margin-right: 30px;
-        font-size:0.8rem;   
+        font-size:0.8rem;
     }
 }
 .transaction-flow-list{
     margin-top: 50px;
 }
 //-----------------------我的/资产------------------
-
-.asset-list-switch{
-    margin-top: -30px;
-    margin-right: 15px;
+.certificate-list-header {
+    margin-bottom: 41px;
 }
 .assest-header{
     margin-bottom: 50px;
@@ -1071,6 +1011,7 @@ element.style {
     background-color: #fff;
     height: 30px;
     text-align: center;
+    margin-bottom: 10px;
     img{
         margin-right: 10px;
         margin-top: 2px;
@@ -1112,7 +1053,7 @@ element.style {
     }
 }
 .transaction-details-adress {
-    font-size: 0.72rem;   
+    font-size: 0.72rem;
     background-color: #fff;
     height: 80px;
     padding: 0 10px 0 20px;
@@ -1120,11 +1061,11 @@ element.style {
     li{
         color: #979eac;
         line-height: 28px;
-            
+
     }
 }
 .transaction-details-information{
-     font-size: 0.72rem; 
+     font-size: 0.72rem;
      background-color: #fff;
     height:130px;
     padding: 0 10px 0 20px;
@@ -1135,9 +1076,9 @@ element.style {
     }
 }
 .transaction-details-information-text{
-    background-color: #fff; 
+    background-color: #fff;
       span{
-        font-size: 0.72rem; 
+        font-size: 0.72rem;
         color: #979eac;
         margin-left: 20px;
     }
@@ -1145,19 +1086,19 @@ element.style {
 .transaction-details-information-border{
    width: 330px;
     height: 76px;
-    border: 1px solid #999;  
-    margin-left: 20px; 
+    border: 1px solid #999;
+    margin-left: 20px;
 }
 .transaction-details-information-right{
     li{
-     color: #333;   
+     color: #333;
     }
     font-size: 0.78rem;
-    
+
     margin-right: 20px;
     text-align: right;
 }
-    
+
 //我的/资产/资产详情
 .assets-detailed-exhibition {
     background-color: #fff;
@@ -1171,7 +1112,7 @@ element.style {
     padding-top: 30px;
     span{
         font-size: 1.5rem;
-        
+
     }
 }
 .assets-detailed-exhibition-img {
@@ -1229,7 +1170,7 @@ element.style {
     p{
       font-size: 0.8rem;
       color:#999;
-      padding-bottom: 20px;  
+      padding-bottom: 20px;
     }
 }
 //我的/资产/资产详情/转出
@@ -1242,7 +1183,7 @@ element.style {
     margin-left: 15px;
     padding-top: 14px;
     span{
-      display: block;  
+      display: block;
       font-size: 0.8rem;
     }
     img{
@@ -1308,20 +1249,22 @@ element.style {
  .safety-center-list {
     margin-top: 45px;
 }
+.safety-verification-list{
+  span{
+    margin-left: 15px;
+  }
+  b{
+    font-weight:400;
+    position: relative;
+    top: -10px;
+  }
   //  ----------------------我的/安全中心/重置密码---------------------
+}
 .rest-pass-word-from {
     background-color: #fff;
     text-align: center;
     padding-bottom: 10px;
 }
-//.rest-pass-word-from .el-input__inner{
-//  border: none;
-//  border-bottom: 1px solid #999;
-//  border-radius:0px;
-//}
-//.rest-pass-word-from .el-input{
-//  margin-top: 0px;   
-//}
 .rest-pass-word-from .mint-cell-wrapper {
     background-image: none;
 }
@@ -1374,32 +1317,34 @@ element.style {
     padding-bottom: 20px;
 }
 //我的/安全中心/安全验证
+.safety-verification-header {
+    margin-bottom: 40px;
+}
 .safety-verification{
-    background-color: #fff; 
+    background-color: #fff;
 }
 .safety-verification-list {
-    padding-left: 10px;
-    padding-bottom: 10px;
-    input{
-        border-bottom: 1px solid #ccc;
-        width: 100%;
-    }
-    ul{
-        margin-bottom: 20px;
-        li{
-            padding: 10px 10px 0 15px; 
-        }
-    }
+    padding: 10px 0 10px 10px;
+}
+.safety-verification-list input.mint-field-core {
+    border-bottom: 1px solid #999;
 }
 .safety-send{
     position: relative;
     top: -25px;
-    right: 10px;  
+    right: 10px;
 }
 .safety-verification-text {
     font-size: 0.8rem;
     color: #999;
     padding:10px 0 20px 10px;
+}
+.safety-verification-btn{
+  width: 90%;
+  margin: 50px auto;
+}
+.open-information-header {
+    margin-bottom: 19px;
 }
 
 //------------------------------我的/关于我们--------------
@@ -1410,7 +1355,7 @@ element.style {
     border-radius: 50%;
     display: inline-block;
     position: relative;
-    top: -3px; 
+    top: -3px;
 }
 .about-our-logo {
     text-align: center;
@@ -1422,18 +1367,19 @@ element.style {
     margin: 0 auto;
     border-radius: 5px;
     margin-top: 10px;
+    p{
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    span{
+      font-size: 1.0rem;
+      margin-left: 0px
+    }
     ul{
         padding: 10px;
-        li{
-            font-size: 0.8rem;
-            margin-left: 8px;
-        }
     }
 }
-.about-our-text ul li:first-child{
-    font-size: 1.0rem;
-    margin-left: 0px;
-}
+
 .about-our-Contact{
     background-color: #fff;
     width: 98%;
@@ -1441,17 +1387,12 @@ element.style {
     border-radius: 5px;
     margin-top: 10px;
     padding-bottom: 10px;
-    li{
-        border-bottom: 1px solid #999;
-        line-height: 35px;
-        font-size: 0.8rem;
-        margin:0 10px 0 16px;
+    p{
+      border-bottom:1px solid #999;
+      line-height: 40px;
+      width: 95%;
+      margin-left: 10px;
     }
-}
-.about-our-Contact ul li:first-child{
-    font-size: 1.0rem;
-    margin-left: 8px;
-    border-bottom:none;
 }
 //------------------------------我的/地址薄/编辑---------------
 .adress-book-header {
@@ -1490,7 +1431,7 @@ element.style {
 .adress-book-list button{
     position: absolute;
     top: 10px;
-    right: 5px;  
+    right: 5px;
 }
  span.add-adress-name {
     position: absolute;
@@ -1540,35 +1481,22 @@ element.style {
     padding-bottom: 10px;
 }
 .news-center-header{
-  margin-bottom: 41px;  
+  margin-bottom: 41px;
 }
 .news-details-header{
     margin-bottom: 40px;
 }
 .news-details-list li:first-child{
-       font-size: 0.89rem; 
+       font-size: 0.89rem;
 }
 .news-details-list {
     margin-top: 1px;
     background-color: #fff;
     overflow: hidden;
-    margin-bottom: 10px; 
-    li{
-    font-size: 0.79rem;
-    margin: 10px 20px 10px 20px;
-        p{
-            font-size: 0.69rem;
-            display: inline-block;
-            margin-top: 8px;
-            margin-bottom: 24px; 
-            color:#aeaeae;
-            span{
-                margin-left: 6px;
-            }
-        }
-        span{
-        font-size: 0.79rem;
-      }
+    margin-bottom: 10px;
+    p{
+      font-size:0.72rem;
+      padding: 2px 10px 2px 10px;
     }
 }
 .notice{
@@ -1578,23 +1506,24 @@ element.style {
     border-radius: 4px;
     background-color: #fff;
     border: 1px solid #f2f2f2;
+    font-size: 0.9rem
 }
 .anim{
-    transition: all 0.5s;
-    margin-top: -30px;
+    transition: all 1s;
+    margin-top: -50px;
 }
 .notice-list{
-    img{ 
+    img{
         position: relative;
         top: 10px;
         padding-right: 10px;
     }
     li{
         height: 32px;
-        line-height: 32px;
         margin-right: 5px;
         color:#000;
         font-size: 0.72rem;
+        margin-top: -3px;
 
     }
 }
@@ -1623,7 +1552,7 @@ element.style {
         margin-top: 10px;
         float: left;
         border-right:1px solid #ccc;
-        padding: 0 10px 0 10px; 
+        padding: 0 10px 0 10px;
         height: auto;
     }
 }
@@ -1647,7 +1576,7 @@ element.style {
     img{
         float: left;
         width: 14px;
-        height: auto; 
+        height: auto;
     }
 }
 button.mint-button.popup-btn.mint-button--primary.mint-button--large {
@@ -1660,7 +1589,7 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
 .payment-result-header{
     border-bottom:1px solid #ccc;
     a{
-        margin-top: -40px; 
+        margin-top: -40px;
     }
 }
 .payment-result-success{
@@ -1668,27 +1597,27 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
     margin-top: 10px;
     img:first-child{
          width: 50px;
-        height: auto; 
+        height: auto;
     }
     span{
         font-size: 2.4rem;
     }
     i{
          display: block;
-        font-weight: 400;       
+        font-weight: 400;
         text-decoration:line-through;
         font-size: 2.0rem;
-        color:#CCCCCC;  
+        color:#CCCCCC;
     }
 }
 .activity-line-l{
-    margin-top: 10px;   
+    margin-top: 10px;
     height: 1px;
     width: 40%;
     background-color: #ccc;
 }
 .activity-line-r{
-    margin-top: 10px;   
+    margin-top: 10px;
     height: 1px;
     width: 40%;
     background-color: #ccc;
@@ -1700,3 +1629,4 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
 .payment-result-invitation{
     margin-top: 10px;
 }
+
