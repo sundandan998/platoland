@@ -69,6 +69,14 @@ body{
     z-index: 10000000;
     width: 100%;
 }
+ .van-popup {
+    font-size: 1.2rem;
+    text-align: center;
+    display: block;
+}
+.paymentamount{
+  text-align:center;
+}
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -1480,22 +1488,9 @@ element.style {
     background-color: #fff;
     overflow: hidden;
     margin-bottom: 10px;
-    li{
-    font-size: 0.79rem;
-    margin: 10px 20px 10px 20px;
-        p{
-            font-size: 0.69rem;
-            display: inline-block;
-            margin-top: 8px;
-            margin-bottom: 24px;
-            color:#aeaeae;
-            span{
-                margin-left: 6px;
-            }
-        }
-        span{
-        font-size: 0.79rem;
-      }
+    p{
+      font-size: 0.75rem;
+      padding: 2px 10px 2px 10px;
     }
 }
 .notice{
@@ -1628,3 +1623,4 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
 .payment-result-invitation{
     margin-top: 10px;
 }
+

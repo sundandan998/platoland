@@ -34,53 +34,44 @@
 				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
 			<!--</router-link>-->
 		</div>
-			<div class="payment">
-		<div class="payment-header">
-			<!--<p>1.00(LD)</p>-->
-		</div>
-		<!--密码输入框-->
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  	<div class="" v-if="hide">
-			<!-- 密码输入框 -->
-			<van-password-input
-			  :value="value"
-			  @focus="showKeyboard = true"
-			/>
-			<!-- 数字键盘 -->
-			<van-number-keyboard
-			  :show="showKeyboard"
-			  @input="onInput"
-			  @delete="onDelete"
-			  @blur="showKeyboard = false"
-			/>
-		</div>
-		</mt-popup>
-	</div>
+	   <div>
+      <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+        <span class="paymentamount">1.00 USDT</span>
+        <van-password-input
+          :value="value"
+          @focus="showKeyboard = true"
+        />
+
+        <!-- 数字键盘 -->
+        <van-number-keyboard
+          :show="showKeyboard"
+          @input="onInput"
+          @delete="onDelete"
+          @blur="showKeyboard = false"
+        />
+      </van-popup>
+    </div>
 	</div>
 </template>
 
 <script>
 export default {
-  data() {
+    data() {
     return {
       value: '',
-      hide:'',
-      showKeyboard: true,
+      showKeyboard: false,
       popupVisible: false
-    };
+    }
   },
   methods: {
     onInput(key) {
-      this.value = (this.value + key).slice(0, 6);
+      this.value = (this.value + key).slice(0, 6)
     },
     onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1);
+      this.value = this.value.slice(0, this.value.length - 1)
     },
-    passwordShow(hide){
-      this.hide = !(hide === 'show')
-      this.popupVisible = !(false === 'true')
+    passwordShow(){
+      this.popupVisible = true
     }
   },
   watch:{

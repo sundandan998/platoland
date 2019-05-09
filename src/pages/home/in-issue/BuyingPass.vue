@@ -34,22 +34,22 @@
 				<p>发行截止日期 <span>2021-01-01</span></p>
 			</div>
 		</div>
-    <div v-if="hide">
-      <mt-popup v-model="popupVisible" position="bottom">
-        <van-number-keyboard
-          :show="showKeyboard"
-          @input="onInput"
-          @delete="onDelete"
-          extra-key="."
-          @blur="showKeyboard = false"
-        />
-      </mt-popup>
-      <mt-popup>
-       <van-password-input
+    <div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <span class="paymentamount">1.00 USDT</span>
+      <van-password-input
         :value="value"
         @focus="showKeyboard = true"
       />
-      </mt-popup>
+
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
     </div>
 		<div class="buy-pass-btn">
 			<mt-button size="large" type="primary" @click="passwordShow">确定</mt-button>
@@ -63,8 +63,7 @@ export default {
   data() {
     return {
       value: '',
-      hide:'',
-      showKeyboard: true,
+      showKeyboard: false,
       popupVisible: false
     }
   },
@@ -75,10 +74,8 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1)
     },
-    passwordShow(hide){
-    	this.hide = !(hide === 'show')
-    	this.popupVisible = !(false === 'true')
-       // this.popupVisible = !(true === 'false')
+    passwordShow(){
+    	this.popupVisible = true
     }
   },
   computed:{
@@ -100,4 +97,5 @@ export default {
 
 <style lang="scss">
 	@import '../../../assets/scss/global'
+
 </style>
