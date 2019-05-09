@@ -20,12 +20,12 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
 			  <van-tab title="按数量出售">
-			  	<mt-field placeholder="600,000起购">USDT</mt-field>
+			  	<mt-field placeholder="最小可买1000" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  	<p>手续费：10  PLD</p>
 			  </van-tab>
 			  <van-tab title="按价格出售">
-			  	<mt-field placeholder="100,000起购">LD（捞豆）</mt-field>
+          <mt-field placeholder="100,000起购" type="number"></mt-field>
 			  	<p>可用：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>
@@ -39,24 +39,22 @@
 			<div class="payment-header">
 			<!--<p>1.00(LD)</p>-->
 		</div>
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  	<div class="" v-if="hide">
-			<!-- 密码输入框 -->
-			<van-password-input
-			  :value="value"
-			  @focus="showKeyboard = true"
-			/>
-			<!-- 数字键盘 -->
-			<van-number-keyboard
-			  :show="showKeyboard"
-			  @input="onInput"
-			  @delete="onDelete"
-			  @blur="showKeyboard = false"
-			/>
-		</div>
-		</mt-popup>
+		 <div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <van-password-input
+        :value="value"
+        @focus="showKeyboard = true"
+      />
+
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
+    </div>
 	</div>
 	</div>
 </template>
@@ -66,21 +64,20 @@ export default {
   data() {
     return {
       value: '',
-      hide:'',
-      showKeyboard: true,
-      popupVisible: false
-    };
+      showKeyboard: false,
+      popupVisible: false,
+      // showPopupPwd:false
+    }
   },
   methods: {
     onInput(key) {
-      this.value = (this.value + key).slice(0, 6);
+      this.value = (this.value + key).slice(0, 6)
     },
     onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1);
+      this.value = this.value.slice(0, this.value.length - 1)
     },
-     passwordShow(hide){
-    	this.hide = !(hide === 'show')
-    	this.popupVisible = !(false === 'true')
+    passwordShow(){
+      this.popupVisible = true
     }
   },
   watch:{

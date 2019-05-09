@@ -20,6 +20,7 @@
 		<div class="purchase-pass-input">
 			<p>付款给</p>
 			<input type="text" placeholder="请选择收款地址" />
+
 			<router-link to="book">
 				<span>
 			  		<img src="../../../assets/images/book.png" alt="" />
@@ -28,7 +29,7 @@
 		</div>
 		<div class="purchase-pass-input">
 			<p>转出数量</p>
-			<input type="text" placeholder="买入数量"/>
+      <mt-field placeholder="买入数量" type="number"></mt-field>
 			<span>可用：10,000  USDT</span>
 			<span>手续费：0.00  PLD</span>
 		</div>
@@ -38,10 +39,25 @@
 			</router-link>
 		</div>
 		<div class="turn-out-exhibition-btn">
-			<router-link to="assetsdetailed">
-				<mt-button type="primary" size="large">确认</mt-button>
-			</router-link>
+				<mt-button type="primary" size="large" @click="passwordShow">确认</mt-button>
 		</div>
+    <div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <span class="paymentamount">1.00 LD</span>
+      <van-password-input
+        :value="value"
+        @focus="showKeyboard = true"
+      />
+
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
+    </div>
 		<div class="turn-out-exhibition-text">
 			<p>注意：</p>
 			<p>1.请仔细核对转入账户是否可用、有效，转出成功将无法退回</p>
@@ -53,7 +69,35 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      value: '',
+      showKeyboard: false,
+      popupVisible: false
+    }
+  },
+  methods: {
+    onInput(key) {
+      this.value = (this.value + key).slice(0, 6)
+    },
+    onDelete() {
+      this.value = this.value.slice(0, this.value.length - 1)
+    },
+    passwordShow(){
+      this.popupVisible = true
+    }
+  },
+  watch:{
+  value(){
+    if(this.value.length==6){
+      this.$router.push({
+        path:'/assetsdetailed'
+      })
+    }
+  }
+  }
+}
 </script>
 
 <style lang="scss">

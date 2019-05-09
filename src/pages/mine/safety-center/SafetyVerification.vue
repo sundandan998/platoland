@@ -9,21 +9,15 @@
 		</div>
     <div class="safety-verification-list">
       <span>138....1214</span>
-      <div>
-        <input type="text" placeholder="输入验证码"> <b>发送</b>
-      </div>
+        <mt-field placeholder="输入验证码" type="number">发送</mt-field>
     </div>
     <div class="safety-verification-list">
       <span>han****@163.com</span>
-      <div>
-        <input type="text" placeholder="输入验证码"> <b>发送</b>
-      </div>
+       <mt-field placeholder="输入验证码" type="number">发送</mt-field>
     </div>
     <div class="safety-verification-list">
       <span>登录密码</span>
-      <div>
-        <input type="text" placeholder="输入登录密码"> <b></b>
-      </div>
+        <mt-field placeholder="输入登录密码" type="number"></mt-field>
     </div>
 		<router-link to="/open">
 			<div class="safety-verification-btn">

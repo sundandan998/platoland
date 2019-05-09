@@ -32,10 +32,12 @@
 			<span>{{this.detail.body}}</span>
 		</div>-->
 		<div class="assets-detailed-exhibition-img" >
-			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
-			<ul class="fr">
+      <img src="../../../assets/images/u345.png" class="fl"/>
+			<!-- <img src="../../../assets/images/ld.png" alt=""   /> -->
+			<ul>
 				<li>{{this.detail.id}}</li>
-				<!--<li>北京河底捞餐饮有限公司</li>-->
+        <li>{{this.detail.body}}</li>
+				<!-- <li>北京河底捞餐饮有限公司</li> -->
 			</ul>
 		</div>
 			<mt-cell title="可用量" value="50.000">

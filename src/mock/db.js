@@ -1,7 +1,7 @@
 var Mock = require('mockjs')
 module.exports = function () {
   return {
-//  登录注册接口
+//	登录注册接口
     user: Mock.mock({
       'name': '@cname',
       'email': '@email',
@@ -14,8 +14,6 @@ module.exports = function () {
       [
         {
           'id':'WHZ',
-          'isactive': '0',
-          'type': '0',
           'name': 'WHZ',
           'nickname': '网红钻',
           'body':'丽人美妆工作室',
@@ -45,8 +43,6 @@ module.exports = function () {
         },
         {
           'id':'ZCK',
-          'isactive': '0',
-          'type': '0',
           'name': 'ZuCheKa',
           'nickname': '租车卡',
           'address':'23Sn....ixzs',
@@ -76,8 +72,6 @@ module.exports = function () {
         },
         {
           'id':'LD',
-          'isactive': '1',
-          'type': '0',
           'name': 'LaoDou',
           'nickname': '捞豆',
           'address':'33Sn....ix7c',
@@ -107,10 +101,8 @@ module.exports = function () {
         },
         {
           'id':'PLD',
-          'isactive': '0',
-          'type': '0',
-          'name': 'PLD',
-          'nickname': 'PLD',
+          'name': 'PLD(PLD)',
+          'nickname': 'PLATOLAND集团',
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
           'state':'发行中',
@@ -135,36 +127,6 @@ module.exports = function () {
           'establishdate':'2012/12/12',
           'term':'2012-12-12-2032-12-11',
           'range':'信息咨询类服务'
-        },
-        {
-          'id':'USDT',
-          'isactive': '0',
-          'type': '1',
-          'name': 'USDT',
-          'body':'Tether Ltd.',
-          'issuer':'Tether Ltd.',
-          'state':'流通中',
-          'address':'13Sn....q2ws',
-          'explain':'权益说明',
-          'proportion':'1%',
-          'assets':'USDT',
-          'mode':'首次发行',
-          'issuetime':'2019/12/12',
-          'endtime':'2021/12/11',
-          'minnum':'2,500,000',
-          'amountnum':'500,000,000',
-          'soldnum':'150,000',
-          'purchasenum':'2,000',
-          'initialprice':'1',
-          'issueprice':'1',
-          'bodytype':'企业',
-          'residence':'维京群岛',
-          'businessaddress':'',
-          'person':'',
-          'capital':'10000万',
-          'establishdate':'2012/12/12',
-          'term':'2012-12-12-2032-12-11',
-          'range':''
         },
       ]),
     asset:Mock.mock(
@@ -211,7 +173,7 @@ module.exports = function () {
           'issueprice':'0.02'
         }
       ]),
-//    地址簿接口
+//  	地址簿接口
     address:Mock.mock({
       'data|4':[{
         'name': '@cname',
@@ -224,7 +186,7 @@ module.exports = function () {
       "force": 0,
       "describe":'升级描述'
     }),
-//    资产列表接口
+//		资产列表接口
     list:Mock.mock({
       'data|4':[{
         'name': '@cname',

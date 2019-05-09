@@ -96,9 +96,9 @@ export default {
   methods:{
     // 展示全部列表
       async tokenList(index,title){
-        let u = '/query'
+        let u = '/query?type=0'
         if(title != '全部'){
-          u = u + "?state=" + title
+          u = u + "&state=" + title
         }
         const url=this.$backStage(u)
         const res = await this.$http.get(url)

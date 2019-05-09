@@ -18,14 +18,6 @@
 			</div>
 		</div>
 		<div class="Purchase-pass-tabbar">
-
-    <!--   <van-number-keyboard
-        :show="show"
-        extra-key="."
-        @blur="show = false"
-        @input="onInput"
-        @delete="onDelete"
-      /> -->
 			<van-tabs>
 			  <van-tab title="按数量购买">
             <mt-field placeholder="600,000起购" type="number"></mt-field>
@@ -42,25 +34,23 @@
 				<p>发行截止日期 <span>2021-01-01</span></p>
 			</div>
 		</div>
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  <div class="" v-if="hide">
-  			<!-- 密码输入框 -->
-  			<van-password-input
-  			  :value="value"
-  			  @focus="showKeyboard = true"
-  			/>
-  			<!-- 数字键盘 -->
-  			<van-number-keyboard
-  			  :show="showKeyboard"
-  			  @input="onInput"
-  			  @delete="onDelete"
-          extra-key="."
-  			  @blur="showKeyboard = false"
-  			/>
-		</div>
-		</mt-popup>
+    <div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <span class="paymentamount">1.00 USDT</span>
+      <van-password-input
+        :value="value"
+        @focus="showKeyboard = true"
+      />
+
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
+    </div>
 		<div class="buy-pass-btn">
 			<mt-button size="large" type="primary" @click="passwordShow">确定</mt-button>
 		</div>
@@ -73,10 +63,8 @@ export default {
   data() {
     return {
       value: '',
-      hide:'',
-      showKeyboard: true,
-      popupVisible: false,
-      show: false
+      showKeyboard: false,
+      popupVisible: false
     }
   },
   methods: {
@@ -86,10 +74,8 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1)
     },
-    passwordShow(hide){
-    	this.hide = !(hide === 'show')
-    	this.popupVisible = !(false === 'true')
-       // this.popupVisible = !(true === 'false')
+    passwordShow(){
+    	this.popupVisible = true
     }
   },
   computed:{
@@ -111,4 +97,5 @@ export default {
 
 <style lang="scss">
 	@import '../../../assets/scss/global'
+
 </style>

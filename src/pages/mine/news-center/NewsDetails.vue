@@ -8,17 +8,15 @@
 			</mt-header>
 		</div>
 		<div class="news-details-list">
-			<ul>
-				<li>PLATOLAND生态获区块链协会创新应用大奖!
+				<p>PLATOLAND生态获区块链协会创新应用大奖!
 					<p>2019-6-5  13:15<span>会创新</span></p>
-				</li>
-				<li>
+				</p>
+				<p>
 	3-28，首届亚洲区块链大赛在北京闭幕，大赛设置各种奖项，经过激烈角逐和专家评比，最终  PLATOLAND生态模式及应用获得高度认可。
-				</li>
-				<li>
+				</p>
+				<p>
 					与会专家对PLATOLAND模式高度评价，认为在当前区块链应用
-				</li>
-			</ul>
+				</p>
 		</div>
 	</div>
 </template>

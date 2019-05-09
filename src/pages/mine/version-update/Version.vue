@@ -9,7 +9,7 @@
 		</div>
 		<div class="version-logo">
 			<img src="../../../assets/images/logo.png" alt="" />
-			<p>{{this.version.version}}</p>
+			<p>{{this.$version()}}</p>
 		</div>
 		<div class="version-update">
 			<mt-cell title="版本更新" value="当前为最新版本"></mt-cell>

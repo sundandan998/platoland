@@ -8,26 +8,25 @@
 		          <mt-button slot="left"></mt-button>
 		      </mt-header>
 		    </div>
-				<div class="home-investment" @click="pld">
+				<div class="home-investment" @click="issue('PLD')">
 				<img src="../../assets/images/gf.png" alt="" />
 				<div class="home-investment-content">
     			<div class="home-investment-top fl">
     				<img src="../../assets/images/icon-3.png" alt="" />
     			</div>
 					<div class="home-investment-top-left">
-						<ul>
-						<li>{{this.plddata.name}}</li>
-						<li><img src="../../assets/images/t.png"/> 0.02</li>
-					</ul>
+            <P>{{this.plddata.name}} <span><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</span></P>
+            <P>{{this.plddata.nickname}}</P>
 					</div>
 					<div class="home-investment-top-right fr">
-							<mt-button size="small" @click="pld">立刻投资</mt-button>
+							<mt-button size="small" @click="issue('PLD')">立刻投资</mt-button>
 					</div>
-					<p>{{this.plddata.Detail}}</p>
+					<!-- <p>{{this.plddata.Detail}}</p> -->
 				</div>
 				<div class="home-investment-bot">
-          <span>发行总量:{{this.plddata.purnum}}</span>
-          <span>已发行:{{this.plddata.num}}</span>
+          <span>发行总量:{{this.plddata.amountnum}}</span>
+          <span>已发行:{{this.plddata.soldnum}}</span>
+          <span>已达成:{{this.plddata.soldnum}}</span>
 			<!-- 		<ul>
 						<li class="fl"></li>
 						<li class="fl"></li>
@@ -51,14 +50,6 @@
          	<!--/land指数-->
         	<!--资产认购-->
     		<div class="home-assets-subscription-title">
-    		<!-- 	<ul>
-	    			<li class="fl"><span>投资机会</span></li>
-	    			<li class="fr">
-	    				<router-link to="/explore">
-	    					<p class="fr">全部 ></p>
-	    				</router-link>
-	    			</li>
-        	</ul> -->
           <mt-cell title="投资机会" to="/explore" is-link value="全部"> </mt-cell>
     		</div>
     		<div class="home-assets-subscription-content">
@@ -160,25 +151,12 @@ creadte() {
                this.animate=false
        },500)
     },
-	//  首页/官方数据渲染
-	  async	pld(){
-	   		const url=this.$backStage('/pldDetailsData')
-	   		const res = await this.$http.get(url)
-			 	const data = res.data
-			 	this.plddata = res.data
-        this.$router.push({
-        name:'Detail',
-        })
-        this.$store.commit('detail', res.data)
-	  },
 //	  首页/发行中/待发行/沟通中渲染页面数据
 	  async	listissue(){
 				const url=this.$backStage('/query?type=0')
 			 	const res = await this.$http.get(url)
-			 	const data = res.data
 			 	this.issuedata = res.data
-//			 	console.log(this.issuedata)
-//			 	console.log(this.issuedata[0].state)
+        this.plddata = res.data[3]
 		},
 //		点击跳转通证详情接口
 		async issue(id){
@@ -201,35 +179,27 @@ creadte() {
 		 	const version =this.$version()
 		 	this.$store.commit('version', res.data)
 		 	if(parseFloat(data.version)> parseFloat(version)){
-		 		this.versionbox()
-		 		if(parseFloat(data.force)===0){
-		 				this.forceversion()
-		 		}else{
-		 			this.versionbox()
+		 		let isForce = false
+		 		if(data.force===0){
+          isForce = true
 		 		}
+		 		this.upgrade(isForce)
 		 	}
 	  },
-//	  版本升级弹框
-	  versionbox(){
-		 this.$messagebox.confirm('', { 
-				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
+
+		upgrade(isShow){
+			 this.$messagebox.confirm('', {
+         closeOnClickModal:false,
+         showCancelButton:isShow,
+				 message:"<div><p> 1.修复部分BUG</p><p>2.优化体验</p></div>",
 				 title: '新版本提醒', 
 				 confirmButtonText: '升级', 
 				 cancelButtonText: '取消' 
-				 })
-		},
-//		强制升级
-		forceversion(){
-			 this.$messagebox.confirm('', { 
-				 message:"<div><p> 1.新增公告中心功能</p><p>2.支持向生态外转账</p><p>3.优化产品体验</p></div>",
-				 title: '新版本提醒', 
-				 confirmButtonText: '升级', 
-				 cancelButtonText: '' 
 				 }).then(action => {
-							this.$router.push({
-								name:'https://www.baidu.com'
-							})
-					})
+         if (window.plus) {
+         plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
+         plus.runtime.quit();
+         }},cancel => {})
 		}
 	},
 	watch: {

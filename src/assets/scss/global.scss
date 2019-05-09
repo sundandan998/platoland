@@ -64,6 +64,22 @@ body{
     position: unset;
     display: block !important;
 }
+.mint-popup {
+    display: block!important;
+    z-index: 10000000;
+    width: 100%;
+}
+ .van-popup {
+    width: 100%;
+    height: 320px;
+}
+.paymentamount{
+    text-align: center;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 .van-tabs__line {
     background-color: #456DF1 !important;
 }
@@ -276,31 +292,34 @@ label.mint-button-text {
 .home-investment-top li img{
     width: 20px;
 }
-.home-investment-top-left li{
-    float: left;
-    margin-right: 18px;
-    font-size: 0.8rem;
-    margin-left: 10px;
+.home-investment-top-left {
+  p{
+  font-size: 0.8rem;
+  margin: 3px 0 0 10px;
+  }
+  span{
+    margin-left: 40px;
+  }
 }
 .home-investment-top-right{
     margin-right: 10px;
-    margin-top: -5px;
+    margin-top: -50px;
 }
 .home-investment-content {
     margin-top: -20px;
     margin-left: 60px;
     height: 50px;
-    p{
-        font-size: 0.9rem;
-        color:#999;
-        margin-left: 10px;
-    }
+    // p{
+    //     font-size: 0.9rem;
+    //     color:#999;
+    //     margin-left: 10px;
+    // }
 }
 .home-investment-bot {
-    height: 30px;
+    height: 20px;
     span{
-      font-size: 0.8rem;
-      margin-left: 15px;
+      font-size: 0.7rem;
+      margin-left: 20px;
     }
 }
 .home-investment-progress{
@@ -1008,7 +1027,7 @@ element.style {
   }
 //我的/资产/明细
 .assets-detailed-header{
-    margin-bottom: 41px;
+    margin-bottom: 19px;
 }
   .assets-detailed-list p {
     width: 100%;
@@ -1106,6 +1125,7 @@ element.style {
     padding-top: 20px;
     li{
         font-size: 0.8rem;
+        margin-left: 50px;
     }
 }
 .assets-detailed-whole {
@@ -1309,18 +1329,9 @@ element.style {
 }
 .safety-verification-list {
     padding: 10px 0 10px 10px;
-    input{
-        border-bottom: 1px solid #ccc;
-        width: 80%;
-        padding-top: 10px;
-        margin-left: 15px;
-    }
-    ul{
-        margin-bottom: 20px;
-        li{
-            padding: 10px 10px 0 15px;
-        }
-    }
+}
+.safety-verification-list input.mint-field-core {
+    border-bottom: 1px solid #999;
 }
 .safety-send{
     position: relative;
@@ -1336,7 +1347,9 @@ element.style {
   width: 90%;
   margin: 50px auto;
 }
-
+.open-information-header {
+    margin-bottom: 19px;
+}
 //------------------------------我的/关于我们--------------
 .about-our b{
     width: 5px;
@@ -1484,22 +1497,9 @@ element.style {
     background-color: #fff;
     overflow: hidden;
     margin-bottom: 10px;
-    li{
-    font-size: 0.79rem;
-    margin: 10px 20px 10px 20px;
-        p{
-            font-size: 0.69rem;
-            display: inline-block;
-            margin-top: 8px;
-            margin-bottom: 24px;
-            color:#aeaeae;
-            span{
-                margin-left: 6px;
-            }
-        }
-        span{
-        font-size: 0.79rem;
-      }
+    p{
+      font-size:0.72rem;
+      padding: 2px 10px 2px 10px;
     }
 }
 .notice{
@@ -1632,3 +1632,4 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
 .payment-result-invitation{
     margin-top: 10px;
 }
+

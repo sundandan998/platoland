@@ -26,24 +26,21 @@
 			  </van-tab>
 			</van-tabs>
 		</div>
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  	<div class="" v-if="hide">
-			<!-- 密码输入框 -->
-			<van-password-input
-			  :value="value"
-			  @focus="showKeyboard = true"
-			/>
-			<!-- 数字键盘 -->
-			<van-number-keyboard
-			  :show="showKeyboard"
-			  @input="onInput"
-			  @delete="onDelete"
-			  @blur="showKeyboard = false"
-			/>
-		</div>
-		</mt-popup>
+		<van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+        <span class="paymentamount">1.00 USDT</span>
+        <van-password-input
+          :value="value"
+          @focus="showKeyboard = true"
+        />
+
+        <!-- 数字键盘 -->
+        <van-number-keyboard
+          :show="showKeyboard"
+          @input="onInput"
+          @delete="onDelete"
+          @blur="showKeyboard = false"
+        />
+      </van-popup>
 
 		<div class="purchase-pass-input">
 			<p>数量</p>
@@ -67,24 +64,22 @@
 
 <script>
 export default{
-	data(){
-		return {
-	      value: '',
-	      hide:'',
-	      showKeyboard: true,
-	      popupVisible: false
-    	}
-	},
-	methods: {
+	 data() {
+    return {
+      value: '',
+      showKeyboard: false,
+      popupVisible: false
+    }
+  },
+  methods: {
     onInput(key) {
-      this.value = (this.value + key).slice(0, 6);
+      this.value = (this.value + key).slice(0, 6)
     },
     onDelete() {
-      this.value = this.value.slice(0, this.value.length - 1);
+      this.value = this.value.slice(0, this.value.length - 1)
     },
-    passwordShow(hide){
-      this.hide = !(hide === 'show')
-      this.popupVisible = !(false === 'true')
+    passwordShow(){
+      this.popupVisible = true
     }
   },
 	watch:{

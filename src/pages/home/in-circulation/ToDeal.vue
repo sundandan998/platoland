@@ -62,16 +62,17 @@
 
 <script>
 export default {
-	data () {
-		return {
-			selected: 1
-		}
-	},
-	methods:{
-	}
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>
