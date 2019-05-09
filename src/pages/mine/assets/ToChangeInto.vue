@@ -9,11 +9,12 @@
 		</div>
 		<div class="to-change-into-exhibition">
 			<div class="to-change-into-exhibition-img">
-				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<ul>
-					<li>LD（捞豆）</li>
-					<li>北京河底捞餐饮有限公司</li>
-				</ul>
+        <div class="fl"><img src="../../../assets/images/ld.png" alt="" /></div>
+        <div class="fr">
+          <span>LD（捞豆）</span>
+          <span>北京河底捞餐饮有限公司</span>
+        </div>
+
         </div>
 				<div class="to-change-into-exhibition-adress">
 					<span>13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c</span>

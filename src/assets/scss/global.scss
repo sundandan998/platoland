@@ -1027,7 +1027,7 @@ element.style {
   }
 //我的/资产/明细
 .assets-detailed-header{
-    margin-bottom: 19px;
+    margin-bottom: 20px;
 }
   .assets-detailed-list p {
     width: 100%;
@@ -1119,13 +1119,12 @@ element.style {
     }
 }
 .assets-detailed-exhibition-img {
-    width: 55%;
+    width: 40%;
     margin: 0 auto;
     height: 80px;
     padding-top: 20px;
     li{
         font-size: 0.8rem;
-        margin-left: 50px;
     }
 }
 .assets-detailed-whole {
@@ -1148,18 +1147,15 @@ element.style {
     height: auto;
     padding-bottom: 20px;
     span{
-        font-size: 1.0rem;
-        text-align: center;
+        display: block;
+        font-size: 0.8rem;
     }
 }
 .to-change-into-exhibition-img {
-    width: 55%;
+    width: 50%;
     margin: 0 auto;
     height: 50px;
     padding-top: 20px;
-    li{
-        font-size: 0.8rem;
-    }
 }
 .to-change-into-exhibition-adress{
     word-wrap: break-word;

@@ -26,7 +26,7 @@
 				<div class="home-investment-bot">
           <span>发行总量:{{this.plddata.amountnum}}</span>
           <span>已发行:{{this.plddata.soldnum}}</span>
-          <span>已达成:{{this.plddata.soldnum}}</span>
+          <span>已达成:{{this.plddata.proportion}}</span>
 			<!-- 		<ul>
 						<li class="fl"></li>
 						<li class="fl"></li>
