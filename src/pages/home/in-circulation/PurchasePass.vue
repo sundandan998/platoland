@@ -1,42 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="Purchase-pass">
-    <div class="Purchase-pass-header">
-      <mt-header fixed title="购买通证">
-          <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">返回</mt-button>
-      </mt-header>
-    </div>
-    <div class="Purchase-pass-content">
-      <div class="Purchase-pass-content-top">
-        <img src="../../../assets/images/ld.png" alt="" class="fl" />
-        <span>LD（捞豆）</span>
-        <span>北京河底捞餐饮有限公司</span>
-        <p>han***@qq.com</p>
-      </div>
-      <div class="Purchase-pass-content-bot">
-        <img src="../../../assets/images/t.png" alt=""/>
-        <span>6.00</span>
-      </div>
-    </div>
-    <div class="Purchase-pass-tabbar">
-      <van-tabs>
-        <van-tab title="按数量购买">
-          <mt-field placeholder="最小可买 1,000" type="number"></mt-field>
-          <p>可用：1,000  USDT</p>
-        </van-tab>
-        <van-tab title="按价格购买">
-          <mt-field placeholder="100,000起购" type="number"></mt-field>
-          <p>可用：1,000  USDT</p>
-        </van-tab>
-      </van-tabs>
-    </div>
-    <div class="Purchase-pass-btn">
-      <!--<router-link to="/payment">-->
-        <mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
-      <!--</router-link>-->
-    </div>
-     <div>
-=======
 	<div class="Purchase-pass">
 		<div class="Purchase-pass-header">
 			<mt-header fixed title="购买通证">
@@ -72,8 +34,7 @@
 				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
 			<!--</router-link>-->
 		</div>
-	   <div>
->>>>>>> 621e17511108618c9d45f957e7381e24ac319adf
+    <div>
       <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
         <span class="paymentamount">1.00 USDT</span>
         <van-password-input
@@ -90,11 +51,7 @@
         />
       </van-popup>
     </div>
-<<<<<<< HEAD
-  </div>
-=======
 	</div>
->>>>>>> 621e17511108618c9d45f957e7381e24ac319adf
 </template>
 
 <script>
