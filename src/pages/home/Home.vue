@@ -3,6 +3,7 @@
     <div class="page-wrap">
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="home" class="home-index">
+<<<<<<< HEAD
         <div class="home-header">
           <mt-header fixed title="首 页">
               <mt-button slot="left"></mt-button>
@@ -37,6 +38,47 @@
           <div class="home-land">
             <router-link to="/news">
               <div class="notice">
+=======
+    		<div class="home-header">
+		      <mt-header fixed title="首 页">
+		          <mt-button slot="left"></mt-button>
+		      </mt-header>
+		    </div>
+				<div class="home-investment" @click="issue('PLD')">
+				<img src="../../assets/images/gf.png" alt="" />
+				<div class="home-investment-content">
+    			<div class="home-investment-top fl">
+    				<img src="../../assets/images/icon-3.png" alt="" />
+    			</div>
+					<div class="home-investment-top-left">
+						<ul>
+						<li>{{this.plddata.name}}</li>
+						<li><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</li>
+					</ul>
+					</div>
+					<div class="home-investment-top-right fr">
+							<mt-button size="small" @click="issue('PLD')">立刻投资</mt-button>
+					</div>
+					<p>{{this.plddata.Detail}}</p>
+				</div>
+				<div class="home-investment-bot">
+          <span>发行总量:{{this.plddata.amountnum}}</span>
+          <span>已发行:{{this.plddata.soldnum}}</span>
+			<!-- 		<ul>
+						<li class="fl"></li>
+						<li class="fl"></li>
+					</ul> -->
+				</div>
+				<div class="home-investment-progress">
+						<mt-progress :value="20" :bar-height="5"></mt-progress>
+				</div>
+	    	</div>
+      		<!--/总资产-->
+         	<!--land指数-->
+         	<div class="home-land">
+         		<router-link to="/news">
+		         	<div class="notice">
+>>>>>>> 621e17511108618c9d45f957e7381e24ac319adf
                 <div class="notice-list" ref="notice-list" :class="{anim:animate==true}" v-for='item in items'>
                   <img src="../../assets/images/horn.png"/>{{item.name}}
                 </div>
@@ -147,6 +189,7 @@ creadte() {
                this.animate=false
        },500)
     },
+<<<<<<< HEAD
 //    首页/发行中/待发行/沟通中渲染页面数据
     async listissue(){
         const url=this.$backStage('/query?type=0')
@@ -192,14 +235,70 @@ creadte() {
          confirmButtonText: '升级', 
          cancelButtonText: '取消' 
          }).then(action => {
+=======
+//	  首页/发行中/待发行/沟通中渲染页面数据
+	  async	listissue(){
+				const url=this.$backStage('/query?type=0')
+			 	const res = await this.$http.get(url)
+			 	this.issuedata = res.data
+      this.plddata = res.data[3]
+//			 	console.log(this.issuedata)
+//			 	console.log(this.issuedata[0].state)
+		},
+//		点击跳转通证详情接口
+		async issue(id){
+			const url=this.$backStage('/query?id='+id)
+		 	const res = await this.$http.get(url)
+			const data = res
+			this.$router.push({
+				name:'Detail',
+			})
+			this.$store.commit('detail', res.data[0])
+		},
+//		 ...mapActions('detail',[
+//	          'app.detail'
+//	      ]),
+//	   版本升级
+	  async version(){
+	  	const url=this.$backStage('/versionnum')
+		 	const res = await this.$http.get(url)
+		 	const data = res.data
+		 	const version =this.$version()
+		 	this.$store.commit('version', res.data)
+		 	if(parseFloat(data.version)> parseFloat(version)){
+		 		let isForce = false
+		 		if(data.force===0){
+          isForce = true
+		 		}
+		 		this.upgrade(isForce)
+		 	}
+	  },
+
+		upgrade(isShow){
+			 this.$messagebox.confirm('', {
+         closeOnClickModal:false,
+         showCancelButton:isShow,
+				 message:"<div><p> 1.修复部分BUG</p><p>2.优化体验</p></div>",
+				 title: '新版本提醒', 
+				 confirmButtonText: '升级', 
+				 cancelButtonText: '取消' 
+				 }).then(action => {
+>>>>>>> 621e17511108618c9d45f957e7381e24ac319adf
          if (window.plus) {
          plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
          plus.runtime.quit();
          }},cancel => {})
+<<<<<<< HEAD
     }
   },
   watch: {
       message: function (val, oldVal) {
+=======
+		}
+	},
+	watch: {
+	    message: function (val, oldVal) {
+>>>>>>> 621e17511108618c9d45f957e7381e24ac319adf
         // 这里就可以通过 val 的值变更来确定去向
         switch(val){
             case 'home':
