@@ -5,40 +5,40 @@
         <mt-tab-container-item id="explore">
         	<div class="explore">
 	        	<div class="explore-header">
-							<mt-header fixed title="探索"></mt-header>
+							<mt-header fixed :title="$t('m.explore')"></mt-header>
 	        	</div>
 	        	<div class="explore-navbar">
 	        		<van-tabs @click="tokenList">
-							  <van-tab title="全部" >
+							  <van-tab :title="$t('m.whole')" >
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                     <mt-cell :title="items.id" :label="items.body">
                       <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 							  </van-tab>
-							  <van-tab title="流通中">
+							  <van-tab :title="$t('m.incirculation')">
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                     <mt-cell :title="items.id" :label="items.body">
                       <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 
 							  </van-tab>
-							  <van-tab title="发行中">
+							  <van-tab :title="$t('m.inissue')">
 							   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                     <mt-cell :title="items.id" :label="items.body">
                       <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 							  </van-tab>
-							  <van-tab title="待发行">
+							  <van-tab :title="$t('m.tobeissued')">
 						  	 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                     <mt-cell :title="items.id" :label="items.body">
                       <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">详情</mt-button>
+                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 						  </van-tab>
@@ -53,17 +53,17 @@
       <mt-tab-item id="home">
       	<img slot="icon" src="../../assets/images/home-b.png" v-if="this.selected == 'home'">
       	<img slot="icon" src="../../assets/images/home.png" v-else>
-      	首页
+      	{{$t('m.homepage')}}
       </mt-tab-item>
 	      <mt-tab-item id="explore">
 	      	<img slot="icon" src="../../assets/images/explore-b.png"v-if="this.selected == 'explore'">
 	      	<img slot="icon" src="../../assets/images/explore.png"v-else>
-	      	探索
+	      	{{$t('m.explore')}}
 	      </mt-tab-item>
       <mt-tab-item id="mine" >
       	<img slot="icon" src="../../assets/images/mine-b.png" v-if="this.selected == 'mine'">
     	<img slot="icon" src="../../assets/images/mine.png"v-else>
-      	我的
+      	{{$t('m.mine')}}
       </mt-tab-item>
     </mt-tabbar>
   </div>
@@ -132,12 +132,6 @@ export default {
 	    }
     }
  }
-//	computed:{
-//			...mapGetters([
-//		      'app.isShow'
-//		    ])
-//		}
-//}
 </script>
 <style lang="scss">
 	  @import '../../assets/scss/global'

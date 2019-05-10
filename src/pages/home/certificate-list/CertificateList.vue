@@ -1,8 +1,8 @@
 <template>
   <div class="certificate-list" >
     <div class="certificate-list-header">
-      <mt-header fixed title="资产列表">
-          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">返回</mt-button>
+      <mt-header fixed :title="$t('m.assetslist')">
+          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for ="(item, index) in assetsdata">

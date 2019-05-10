@@ -1,8 +1,8 @@
 <template>
 	<div class="Purchase-pass">
 		<div class="Purchase-pass-header">
-			<mt-header fixed title="购买通证">
-			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">返回</mt-button>
+			<mt-header fixed :title="$t('m.purchasepass')">
+			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)"><span>{{$t('m.back')}}</span></mt-button>
 			</mt-header>
 		</div>
 		<div class="Purchase-pass-content">
@@ -19,22 +19,22 @@
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
-			  <van-tab title="按数量购买">
-			  	<mt-field placeholder="最小可买 1,000" type="number"></mt-field>
-			  	<p>可用：1,000  USDT</p>
+			  <van-tab :title="$t('m.number')">
+			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}：1,000  USDT</p>
 			  </van-tab>
-			  <van-tab title="按价格购买">
-			  	<mt-field placeholder="100,000起购" type="number"></mt-field>
-			  	<p>可用：1,000  USDT</p>
+			  <van-tab :title="$t('m.price')">
+			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
 			<!--<router-link to="/payment">-->
-				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
+				<mt-button size="large" type="primary"@click="passwordShow">{{$t('m.sure')}}</mt-button>
 			<!--</router-link>-->
 		</div>
-    <div>
+	   <div>
       <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
         <span class="paymentamount">1.00 USDT</span>
         <van-password-input
@@ -75,16 +75,16 @@ export default {
     }
   },
   watch:{
-    value(){
-      if(this.value.length==6){
-        this.$router.push({
-          path:'/deal'
-        })
-      }
-    }
+  	value(){
+  		if(this.value.length==6){
+  			this.$router.push({
+  				path:'/deal'
+  			})
+  		}
+  	}
   }
 }
 </script>
 <style lang="scss">
-  @import '../../../assets/scss/global'
+	@import '../../../assets/scss/global'
 </style>

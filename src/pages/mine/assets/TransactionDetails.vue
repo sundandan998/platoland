@@ -2,21 +2,21 @@
 	<div class="transaction-details">
 		<div class="transaction-details-header">
 			<div class="assets-detailed-header">
-				<mt-header fixed title="交易详情 ">
+				<mt-header fixed :title="$t('m.transactiondetail')">
 				  <router-link to="/detailedlist" slot="left">
-				    <mt-button icon="back" v-on:click="back">返回</mt-button>
+				    <mt-button icon="back" v-on:click="back">{{$t('m.back')}}</mt-button>
 				  </router-link>
 				</mt-header>
 			</div>
 		</div>
 		<div class="transaction-details-number">
 			<span>-50,000</span>
-			<p>交易成功</p>
+			<p>{{$t('m.transactionsuccess')}}</p>
 		</div>
 		<div class="transaction-details-adress">
 			<ul class="fl">
-				<li>交易方</li>
-				<li>地址</li>
+				<li>{{$t('m.transactionparty')}}</li>
+				<li>{{$t('m.transactionadreess')}}</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
 				<li>dandan@qq.com</li>
@@ -25,11 +25,10 @@
 		</div>
 		<div class="transaction-details-information">
 			<ul class="fl">
-				<li>订单编号</li>
-				<!--<li>资产</li>-->
-				<li>单价</li>
-				<li>数量</li>
-				<li>时间</li>
+				<li>{{$t('m.ordernumber')}}</li>
+				<li>{{$t('m.unitprice')}}</li>
+				<li>{{$t('m.transactionnum')}}</li>
+				<li>{{$t('m.transactiontime')}}</li>
 			</ul>
 			<ul class="fr transaction-details-information-right ">
 				<li>2019030200002</li>
@@ -40,10 +39,10 @@
 			</ul>
 		</div>
 
-<!-- 		<div class="transaction-details-information-text">
-			<span>交易说明</span>
+		<div class="transaction-details-information-text">
+			<span>{{$t('m.transactionexplain')}}</span>
 			<div class="transaction-details-information-border"></div>
-		</div> -->
+		</div>
 	</div>
 </template>
 

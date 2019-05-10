@@ -1,22 +1,22 @@
 <template>
 	<div class="safety-center">
 		<div class="safety-center-header">
-			<mt-header fixed title="安全中心">
+			<mt-header fixed :title="$t('m.safetycenter')">
 			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back">返回</mt-button>
+			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
 		<div class="safety-center-list">
-			<mt-cell title="登录密码"to="/safetyverification" is-link>
-				 <span>修改</span>
+			<mt-cell :title="$t('m.loginpwd')"to="/safetyverification" is-link>
+				 <span>{{$t('m.modify')}}</span>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
-			<mt-cell title="短信认证"to="/safetyverification" is-link value="-3000">
+			<mt-cell :title="$t('m.authentication')"to="/safetyverification" is-link value="-3000">
 				<mt-switch v-model="value1"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4109.png">
 			</mt-cell>
-				<mt-cell title="支付密码"to="/safetyverification" is-link value="-3000">
+				<mt-cell :title="$t('m.paymentpwd')"to="/safetyverification" is-link value="-3000">
 				<mt-switch v-model="value"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>

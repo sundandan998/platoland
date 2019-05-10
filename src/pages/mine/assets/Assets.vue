@@ -1,20 +1,20 @@
 <template>
   <div class="assest">
     <div class="assest-header">
-      <mt-header fixed title="资产">
+      <mt-header fixed :title="$t('m.assets')">
         <router-link to="/mine" slot="left">
-          <mt-button icon="back">返回</mt-button>
+          <mt-button icon="back">{{$t('m.back')}}</mt-button>
         </router-link>
         <mt-button icon slot="right">
           <router-link to="/detailedlist">
-            <img src="../../../assets/images/u2666.png" alt>明细
+            <img src="../../../assets/images/u2666.png" alt><span>{{$t('m.assetsdetail')}}</span>
           </router-link>
         </mt-button>
       </mt-header>
     </div>
     <div class="assets-list">
       <router-link to="/list">
-        <img src="../../../assets/images/u3511.png" alt><span>添加资产</span>
+        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addassets')}}</span>
       </router-link>
     </div>
     <router-link to="/assetsdetailed">
@@ -58,9 +58,5 @@ export default {
 </script>
 
 <style lang="scss">
-	.assest-header{
-		background-color: #fff;
-		color:#000;
-	}
 @import "../../../assets/scss/global"
 </style>

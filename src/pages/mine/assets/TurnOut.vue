@@ -1,8 +1,8 @@
 <template>
 	<div class="turn-out">
 		<div class="turn-out-header">
-			<mt-header fixed title="转出">
-			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">返回</mt-button>
+			<mt-header fixed :title="$t('m.changeout')">
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			    	<mt-button icon="" slot="right">
 			    		<router-link to="/scan">
 			  			<img src="../../../assets/images/scan.png" alt="" />
@@ -18,8 +18,8 @@
 			</div>
 		</div>
 		<div class="purchase-pass-input">
-			<p>付款给</p>
-			<input type="text" placeholder="请选择收款地址" />
+			<p>{{$t('m.payment')}}</p>
+			<input type="text" :placeholder="$t('m.paymentaddress')" />
 
 			<router-link to="book">
 				<span>
@@ -28,18 +28,18 @@
 			</router-link>
 		</div>
 		<div class="purchase-pass-input">
-			<p>转出数量</p>
-      <mt-field placeholder="买入数量" type="number"></mt-field>
-			<span>可用：10,000  USDT</span>
-			<span>手续费：0.00  PLD</span>
+			<p>{{$t('m.turnnum')}}</p>
+      <mt-field :placeholder="$t('m.buynum')" type="number"></mt-field>
+			<span>{{$t('m.available')}}：10,000  USDT</span>
+			<span>{{$t('m.servicecharge')}}：0.00  PLD</span>
 		</div>
 		<div class="turn-out-exhibition-qrcode">
 			<router-link to="/scan">
-				<span>扫一扫</span>
+				<span>{{$t('m.scan')}}</span>
 			</router-link>
 		</div>
 		<div class="turn-out-exhibition-btn">
-				<mt-button type="primary" size="large" @click="passwordShow">确认</mt-button>
+				<mt-button type="primary" size="large" @click="passwordShow">{{$t('m.sure')}}</mt-button>
 		</div>
     <div>
     <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
@@ -59,11 +59,11 @@
     </van-popup>
     </div>
 		<div class="turn-out-exhibition-text">
-			<p>注意：</p>
-			<p>1.请仔细核对转入账户是否可用、有效，转出成功将无法退回</p>
-			<p>2.请勿向陌生账户转出</p>
-			<p>3.为保障资金安全，我们会按照安全策略进行人工审核，请耐心等待</p>
-			<p>4.请务必确认设备安全，防止信息被篡改或泄露</p>
+			<p>{{$t('m.becareful')}}</p>
+			<p>{{$t('m.becarefulone')}}</p>
+			<p>{{$t('m.becarefultwo')}}</p>
+			<p>{{$t('m.becarefulthree')}}</p>
+			<p>{{$t('m.becarefulfour')}}</p>
 		</div>
 	</div>
 </template>
