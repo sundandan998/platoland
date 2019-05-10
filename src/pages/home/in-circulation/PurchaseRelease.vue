@@ -26,7 +26,8 @@
 			  </van-tab>
 			</van-tabs>
 		</div>
-		<van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+	   <div>
+      <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
         <span class="paymentamount">1.00 USDT</span>
         <van-password-input
           :value="value"
@@ -41,7 +42,7 @@
           @blur="showKeyboard = false"
         />
       </van-popup>
-
+    </div>
 		<div class="purchase-pass-input">
 			<p>数量</p>
         <mt-field placeholder="100,000起购" type="number"></mt-field>
@@ -64,7 +65,7 @@
 
 <script>
 export default{
-	 data() {
+    data() {
     return {
       value: '',
       showKeyboard: false,

@@ -101,8 +101,8 @@ module.exports = function () {
         },
         {
           'id':'PLD',
-          'name': 'PLD (PLD)',
-          'nickname': 'PLATOLAND集团',
+          'name': 'PLD',
+          'nickname': 'PLD',
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
           'state':'发行中',
