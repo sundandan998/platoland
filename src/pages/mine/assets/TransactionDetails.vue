@@ -40,10 +40,10 @@
 			</ul>
 		</div>
 
-		<div class="transaction-details-information-text">
+<!-- 		<div class="transaction-details-information-text">
 			<span>交易说明</span>
 			<div class="transaction-details-information-border"></div>
-		</div>
+		</div> -->
 	</div>
 </template>
 

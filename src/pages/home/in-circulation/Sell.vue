@@ -31,31 +31,25 @@
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
-			<!--<router-link to="/payment">-->
 				<mt-button size="large" type="primary"@click="passwordShow">确定</mt-button>
-			<!--</router-link>-->
 		</div>
-		<div class="payment">
-			<div class="payment-header">
-			<!--<p>1.00(LD)</p>-->
-		</div>
-		 <div>
-    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
-      <van-password-input
-        :value="value"
-        @focus="showKeyboard = true"
-      />
+	  <div>
+      <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+        <span class="paymentamount">1.00 USDT</span>
+        <van-password-input
+          :value="value"
+          @focus="showKeyboard = true"
+        />
 
-      <!-- 数字键盘 -->
-      <van-number-keyboard
-        :show="showKeyboard"
-        @input="onInput"
-        @delete="onDelete"
-        @blur="showKeyboard = false"
-      />
-    </van-popup>
+        <!-- 数字键盘 -->
+        <van-number-keyboard
+          :show="showKeyboard"
+          @input="onInput"
+          @delete="onDelete"
+          @blur="showKeyboard = false"
+        />
+      </van-popup>
     </div>
-	</div>
 	</div>
 </template>
 
@@ -65,8 +59,7 @@ export default {
     return {
       value: '',
       showKeyboard: false,
-      popupVisible: false,
-      // showPopupPwd:false
+      popupVisible: false
     }
   },
   methods: {
@@ -92,5 +85,5 @@ export default {
 }
 </script>
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>
