@@ -1,8 +1,8 @@
 <template>
 	<div class="buy-pass">
 		<div class="buy-pass-header">
-			<mt-header fixed title="买入通证">
-			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">返回</mt-button>
+			<mt-header fixed :title="$t('m.buyingpass')">
+			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="buy-pass-name">
@@ -12,26 +12,26 @@
 			</div>
 		</div>
 		<div class="buy-pass-name-price">
-			<p>单价</p>
+			<p>{{$t('m.unitprice')}}</p>
 			<div class="buy-pass-name-price-text fr">
 				<span>0.02</span><span>USDT</span>
 			</div>
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
-			  <van-tab title="按数量购买">
-            <mt-field placeholder="600,000起购" type="number"></mt-field>
-			  	<p>可用：1,000  USDT</p>
+			  <van-tab :title="$t('m.number')">
+            <mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p><span>{{$t('m.available')}}</span>：1,000  USDT</p>
 			  </van-tab>
-			  <van-tab title="按价格购买">
-			  	<mt-field placeholder="100,000起购" type="number"></mt-field>
-			  	<p>可用：1,000  USDT</p>
+			  <van-tab :title="$t('m.price')">
+			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+			  	<p><span>{{$t('m.available')}}</span>：1,000  USDT</p>
 			  </van-tab>
 			</van-tabs>
 			<div class="buy-pass-time">
-				<p>剩余可买数量 <span>700000</span></p>
+				<p>{{$t('m.surplus')}} <span>700000</span></p>
 				<!-- <p>距发行结束剩 <span>90天</span></p> -->
-				<p>发行截止日期 <span>2021-01-01</span></p>
+				<p>{{$t('m.date')}}<span> 2021-01-01</span></p>
 			</div>
 		</div>
     <div>
@@ -52,7 +52,7 @@
     </van-popup>
     </div>
 		<div class="buy-pass-btn">
-			<mt-button size="large" type="primary" @click="passwordShow">确定</mt-button>
+			<mt-button size="large" type="primary" @click="passwordShow">{{$t('m.sure')}}</mt-button>
 		</div>
 	</div>
 </template>

@@ -1,9 +1,9 @@
 <template>
 	<div class="adress-book">
 		<div class="adress-book-header">
-			<mt-header fixed title="地址簿">
+			<mt-header fixed :title="$t('m.addressbook')">
 			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back">返回</mt-button>
+			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
 			   <mt-button icon="" slot="right">
 			   	<router-link to="add">
@@ -20,7 +20,7 @@
 				</div>
 				<!--<router-link to="/edit">-->
 					<div @click="editcontent">
-						<mt-button size="small" type="primary" @click="address">编辑</mt-button>
+						<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
 					</div>
 
 				<!--</router-link>-->

@@ -229,7 +229,7 @@ label.mint-button-text {
         -webkit-box-shadow:none;
         box-shadow: none;
         border-radius: 45px;
-      }
+	    }
 }
 //-------------------------登录/重置邮件------------------
 .reset-mail-information{
@@ -297,34 +297,31 @@ label.mint-button-text {
 .home-investment-top li img{
     width: 20px;
 }
-.home-investment-top-left {
-  p{
-  font-size: 0.8rem;
-  margin: 3px 0 0 10px;
-  }
-  span{
-    margin-left: 40px;
-  }
+.home-investment-top-left li{
+    float: left;
+    margin-right: 18px;
+    font-size: 0.8rem;
+    margin-left: 10px;
 }
 .home-investment-top-right{
     margin-right: 10px;
-    margin-top: -50px;
+    margin-top: -5px;
 }
 .home-investment-content {
     margin-top: -20px;
     margin-left: 60px;
     height: 50px;
-    // p{
-    //     font-size: 0.9rem;
-    //     color:#999;
-    //     margin-left: 10px;
-    // }
+    p{
+        font-size: 0.9rem;
+        color:#999;
+        margin-left: 10px;
+    }
 }
 .home-investment-bot {
-    height: 20px;
+    height: 30px;
     span{
-      font-size: 0.7rem;
-      margin-left: 20px;
+      font-size: 0.8rem;
+      margin-left: 15px;
     }
 }
 .home-investment-progress{
@@ -1031,7 +1028,7 @@ element.style {
   }
 //我的/资产/明细
 .assets-detailed-header{
-    margin-bottom: 20px;
+    margin-bottom: 41px;
 }
   .assets-detailed-list p {
     width: 100%;
@@ -1123,7 +1120,7 @@ element.style {
     }
 }
 .assets-detailed-exhibition-img {
-    width: 40%;
+    width: 55%;
     margin: 0 auto;
     height: 80px;
     padding-top: 20px;
@@ -1151,22 +1148,24 @@ element.style {
     height: auto;
     padding-bottom: 20px;
     span{
-        display: block;
-        font-size: 0.8rem;
+        font-size: 1.0rem;
+        text-align: center;
     }
 }
 .to-change-into-exhibition-img {
-    width: 50%;
+    width: 55%;
     margin: 0 auto;
-    height: 50px;
+    height: 80px;
     padding-top: 20px;
+    li{
+        font-size: 0.8rem;
+    }
 }
 .to-change-into-exhibition-adress{
-    word-wrap: break-word;
-    word-break: break-all;
+    word-wrap:break-word;
+    word-break:break-all;
+    margin-top: 20px;
     padding-bottom: 15px;
-    width: 57%;
-    margin: 0 auto;
 }
 .to-change-into-qrcode {
     background-color: #fff;
@@ -1293,6 +1292,11 @@ element.style {
 .open-information-from label{
     margin-left: 15px;
 }
+//.open-information-from .el-input__inner{
+//  border: none;
+//  border-bottom: 1px solid #999;
+//  border-radius:0px;
+//}
 .open-information-from {
     span{
         position: relative;
@@ -1346,6 +1350,7 @@ element.style {
 .open-information-header {
     margin-bottom: 19px;
 }
+
 //------------------------------我的/关于我们--------------
 .about-our b{
     width: 5px;
