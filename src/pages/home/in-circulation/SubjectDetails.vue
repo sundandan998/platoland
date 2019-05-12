@@ -43,15 +43,10 @@
 			  		<mt-cell :title="$t('m.establishdate')" >
 			  			<span>{{this.detail.establishdate}}</span>
 			  		</mt-cell>
-<<<<<<< HEAD
-			  		<mt-cell title="营业期限：" :value="detail.term"></mt-cell>
-			  		<mt-cell title="经营范围：" :value="detail.range"></mt-cell>
-=======
 			  		<mt-cell :title="$t('m.term')" :value="detail.term">
 			  		</mt-cell>
 			  		<mt-cell :title="$t('m.range')" :value="detail.range">
 			  		</mt-cell>
->>>>>>> 3b3750f31505ea42d376721765bae302023ed642
 			    </div>
 			  </mt-tab-container-item>
 			  <mt-tab-container-item id="introduce">

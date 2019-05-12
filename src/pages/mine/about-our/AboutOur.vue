@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="about-our-contact">
-				<p> <b></b> 联系我们 </p>
+				<p><b></b> 联系我们 </p>
         <mt-cell title="网站" to="http://www.platoland.com" is-link value="http://www.platoland.com"></mt-cell>
 				<mt-cell title="推特" to="" ></mt-cell>
         <mt-cell title="reddit" to="" ></mt-cell>
