@@ -35,12 +35,13 @@
 				<p>PLATOLAND客户端由PLATOLAND有限公司运营，核心团队来自国际知名区块链企业、金融机构、法律机构等</p>
 			</div>
 		</div>
-		<div class="about-our-Contact">
+		<div class="about-our-contact">
 				<p> <b></b> 联系我们 </p>
-				<p>网站  <a href="#" class="fr">http://www.platoland.com</a></p>
-				<p>推特</p>
-				<p>微信</p>
-				<p>Telegram</p>
+        <mt-cell title="网站" to="http://www.platoland.com" is-link value="http://www.platoland.com"></mt-cell>
+				<mt-cell title="推特" to="" ></mt-cell>
+        <mt-cell title="reddit" to="" ></mt-cell>
+        <mt-cell title="Facebook" to="" is-link></mt-cell>
+        <mt-cell title="Telegram" to="" is-link></mt-cell>
 		</div>
 	</div>
 </template>

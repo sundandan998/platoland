@@ -43,10 +43,8 @@
 			  		<mt-cell title="成立日期：" >
 			  			<span>{{this.detail.establishdate}}</span>
 			  		</mt-cell>
-			  		<mt-cell title="营业期限：" :value="detail.term">
-			  		</mt-cell>
-			  		<mt-cell title="经营范围：" :label="detail.range">
-			  		</mt-cell>
+			  		<mt-cell title="营业期限：" :value="detail.term"></mt-cell>
+			  		<mt-cell title="经营范围：" :value="detail.range"></mt-cell>
 			    </div>
 			  </mt-tab-container-item>
 			  <mt-tab-container-item id="introduce">

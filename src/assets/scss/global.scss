@@ -40,6 +40,11 @@ a{
     width: 85%;
     margin-top: 0px;
 }
+// 去掉tabbar背景色
+.mint-tabbar > .mint-tab-item.is-selected {
+    background-color: #FAFAFA;
+    color: #26a2ff;
+}
 //loading加载样式
 .spinner span{
     margin: 0px auto;
@@ -807,7 +812,6 @@ element.style {
         width: 40%;
         height: 40px;
         color: #000;
-        border-radius: 5px;
         font-size: 0.61rem;
         text-indent: initial;
         margin-left: 15px;
@@ -1362,20 +1366,21 @@ element.style {
     margin: 0 auto;
     border-radius: 5px;
     margin-top: 10px;
+    padding-bottom: 10px;
     p{
-      font-size: 0.8rem;
-      margin-left: 8px;
+      font-size: 0.72rem;
+      margin: 0 10px 0 20px;
     }
     span{
-      font-size: 1.0rem;
-      margin-left: 0px
+      font-size: 0.78rem;
+      margin-left: 10px
     }
     ul{
         padding: 10px;
     }
 }
 
-.about-our-Contact{
+.about-our-contact{
     background-color: #fff;
     width: 98%;
     margin: 0 auto;
@@ -1383,10 +1388,16 @@ element.style {
     margin-top: 10px;
     padding-bottom: 10px;
     p{
+       font-size: 0.78rem;
       border-bottom:1px solid #999;
       line-height: 40px;
       width: 95%;
       margin-left: 10px;
+    }
+    .mint-cell-wrapper{
+      width: 95%;
+      margin:0 auto;
+      border-bottom:1px solid #999;
     }
 }
 //------------------------------我的/地址薄/编辑---------------
