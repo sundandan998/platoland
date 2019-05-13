@@ -26,25 +26,24 @@
 			  </van-tab>
 			</van-tabs>
 		</div>
-		<mt-popup
-		  v-model="popupVisible"
-		  position="bottom">
-		  	<div class="" v-if="hide">
-			<!-- 密码输入框 -->
-			<van-password-input
-			  :value="value"
-			  @focus="showKeyboard = true"
-			/>
-			<!-- 数字键盘 -->
-			<van-number-keyboard
-			  :show="showKeyboard"
-			  @input="onInput"
-			  @delete="onDelete"
-			  @blur="showKeyboard = false"
-			/>
-		</div>
-		</mt-popup>
+    <!-- 数字键盘 -->
+		<div>
+    <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <span class="paymentamount">1.00 USDT</span>
+      <van-password-input
+        :value="value"
+        @focus="showKeyboard = true"
+      />
 
+      <!-- 数字键盘 -->
+      <van-number-keyboard
+        :show="showKeyboard"
+        @input="onInput"
+        @delete="onDelete"
+        @blur="showKeyboard = false"
+      />
+    </van-popup>
+    </div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.transactionnum')}}</p>
         <mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
@@ -69,10 +68,9 @@
 export default{
 	data(){
 		return {
-	      value: '',
-	      hide:'',
-	      showKeyboard: true,
-	      popupVisible: false
+  	    value: '',
+        showKeyboard: false,
+        popupVisible: false
     	}
 	},
 	methods: {
@@ -82,9 +80,8 @@ export default{
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
     },
-    passwordShow(hide){
-      this.hide = !(hide === 'show')
-      this.popupVisible = !(false === 'true')
+    passwordShow(){
+      this.popupVisible = true
     }
   },
 	watch:{

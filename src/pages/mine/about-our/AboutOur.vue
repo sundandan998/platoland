@@ -11,24 +11,26 @@
 			<img src="../../../assets/images/logo.png" alt="" />
 		</div>
 		<div class="about-our-text">
-      <div>
-        <span><b></b> {{$t('m.ourtitleone')}}</span>
-        <p>{{$t('m.ourtextone')}}</p>
-        <p>{{$t('m.ourtexttwo')}}</p>
+      <div class="about-our-text-content">
+        <div>
+          <span><b></b> {{$t('m.ourtitleone')}}</span>
+          <p>{{$t('m.ourtextone')}}</p>
+          <p>{{$t('m.ourtexttwo')}}</p>
+        </div>
+  			<div>
+  				<span> <b></b> {{$t('m.ourtitletwo')}}</span>
+  				<p>{{$t('m.ourtextthree')}}</p>
+  				<p>{{$t('m.ourtextfour')}}</p>
+  			</div>
+  			<div>
+  				<span> <b></b> {{$t('m.ourtitlethree')}}</span>
+  				<p>{{$t('m.ourtextfive')}}</p>
+  			</div>
+  			<div>
+  				<span> <b></b> {{$t('m.ourtitlefour')}}</span>
+  				<p>{{$t('m.ourtextsix')}}</p>
+  			</div>
       </div>
-			<div>
-				<span> <b></b> {{$t('m.ourtitletwo')}}</span>
-				<p>{{$t('m.ourtextthree')}}</p>
-				<p>{{$t('m.ourtextfour')}}</p>
-			</div>
-			<div>
-				<span> <b></b> {{$t('m.ourtitlethree')}}</span>
-				<p>{{$t('m.ourtextfive')}}</p>
-			</div>
-			<div>
-				<span> <b></b> {{$t('m.ourtitlefour')}}</span>
-				<p>{{$t('m.ourtextsix')}}</p>
-			</div>
 		</div>
 		<div class="about-our-contact">
 				<p> <b></b> 联系我们 </p>

@@ -31,16 +31,14 @@
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
-			<!--<router-link to="/payment">-->
 				<mt-button size="large" type="primary"@click="passwordShow">{{$t('m.sure')}}</mt-button>
-			<!--</router-link>-->
 		</div>
 		<div class="payment">
 			<div class="payment-header">
-			<!--<p>1.00(LD)</p>-->
 		</div>
-		 <div>
+		<div>
     <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
+      <span class="paymentamount">1.00 USDT</span>
       <van-password-input
         :value="value"
         @focus="showKeyboard = true"

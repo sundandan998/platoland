@@ -26,7 +26,7 @@
 		<div class="assets-detailed-exhibition" >
 		<div class="assets-detailed-exhibition-img" >
 			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
-			<ul class="fr">
+			<ul>
 				<li>{{this.detail.id}}</li>
 				<!--<li>北京河底捞餐饮有限公司</li>-->
 			</ul>

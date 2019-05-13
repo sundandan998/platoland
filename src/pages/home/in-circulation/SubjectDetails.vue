@@ -45,8 +45,8 @@
 			  		</mt-cell>
 			  		<mt-cell :title="$t('m.term')" :value="detail.term">
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.range')" :value="detail.range">
-			  		</mt-cell>
+            <mt-cell :title="$t('m.range')" :value="detail.range">
+            </mt-cell>
 			    </div>
 			  </mt-tab-container-item>
 			  <mt-tab-container-item id="introduce">

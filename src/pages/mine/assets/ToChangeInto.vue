@@ -10,24 +10,53 @@
 		<div class="to-change-into-exhibition">
 			<div class="to-change-into-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<ul class="fr">
+				<ul>
 					<li>LD（捞豆）</li>
 					<li>北京河底捞餐饮有限公司</li>
 				</ul>
 				<div class="to-change-into-exhibition-adress">
-					<span>13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c</span>
-					<img src="../../../assets/images/u4780.png" alt="" class="fr" />
+					<img src="../../../assets/images/u4780.png" alt="" class="fr tag-read"
+          @click="copy" data-clipboard-text="13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c"
+          />
+          13SncaFeFFGQDYHSmWafwkTXCBWqaeix7c
 				</div>
 			</div>
 		</div>
 		<div class="to-change-into-qrcode">
 			<img src="../../../assets/images/qrcode.png" alt="" />
-			<p>{{$t('m.transfersuccess')}}</p>
+			<!-- <p>{{$t('m.transfersuccess')}}</p> -->
+      <p>仅支持LD(捞豆)收款,请勿用于其他通证收款</p>
 		</div>
 	</div>
 </template>
 
 <script>
+import Clipboard from 'clipboard'
+export default{
+    data(){
+    return {
+      }
+  },
+  methods:{
+    //复制
+    copy() {
+          var clipboard = new Clipboard('.tag-read')
+          clipboard.on('success', e => {
+            this.$toast({
+            message: '复制成功'
+          })
+            // 释放内存
+            clipboard.destroy()
+          })
+          clipboard.on('error', e => {
+            // 不支持复制
+            console.log('该浏览器不支持自动复制')
+            // 释放内存
+            clipboard.destroy()
+          })
+      }
+  }
+}
 </script>
 
 <style lang="scss">

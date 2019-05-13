@@ -827,9 +827,9 @@ element.style {
 }
 //首页/发行中/通证详情
 .pass-details-issue-btn{
-    img{
-        margin:10px 150px 0 5px;
-    }
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
 .copy-text{
     -webkit-touch-callout: all;
@@ -1122,6 +1122,8 @@ element.style {
     padding-top: 20px;
     li{
         font-size: 0.8rem;
+        margin-left: 50px;
+        margin-top: 5px;
     }
 }
 .assets-detailed-whole {
@@ -1172,6 +1174,10 @@ element.style {
       color:#999;
       padding-bottom: 20px;
     }
+}
+img.fr.tag-read {
+    float: right;
+    margin-top: 25px;
 }
 //我的/资产/资产详情/转出
 .turn-out-exhibition {
@@ -1375,12 +1381,13 @@ element.style {
       font-size: 1.0rem;
       margin-left: 0px
     }
-    ul{
-        padding: 10px;
-    }
+}
+.about-our-text-content {
+    margin: 0 10px 0 10px;
+    padding-bottom: 10px;
 }
 
-.about-our-Contact{
+.about-our-contact{
     background-color: #fff;
     width: 98%;
     margin: 0 auto;
@@ -1388,9 +1395,6 @@ element.style {
     margin-top: 10px;
     padding-bottom: 10px;
     p{
-      border-bottom:1px solid #999;
-      line-height: 40px;
-      width: 95%;
       margin-left: 10px;
     }
 }

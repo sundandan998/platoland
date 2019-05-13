@@ -19,13 +19,11 @@
 		</div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.payment')}}</p>
-			<input type="text" :placeholder="$t('m.paymentaddress')" />
-
-			<router-link to="book">
-				<span>
-			  		<img src="../../../assets/images/book.png" alt="" />
-			  	</span>
-			</router-link>
+      <mt-field type="text" :placeholder="$t('m.paymentaddress')" readonly="readonly">
+        <router-link to="book">
+          <img src="../../../assets/images/book.png" alt="" />
+        </router-link>
+      </mt-field>
 		</div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.turnnum')}}</p>
