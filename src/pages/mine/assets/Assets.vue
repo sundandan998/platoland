@@ -14,7 +14,7 @@
     </div>
     <div class="assets-list">
       <router-link to="/list">
-        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addassets')}}</span>
+        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addseets')}}</span>
       </router-link>
     </div>
     <router-link to="/assetsdetailed">

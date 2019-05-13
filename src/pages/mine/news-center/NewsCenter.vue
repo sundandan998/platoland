@@ -2,18 +2,18 @@
 	<div class="news-center">
 		<!--顶部标题-->
 		<div class="news-center-header">
-			<mt-header fixed title="公告中心">
+			<mt-header fixed  :title="$t('m.announcementcenter')">
 			  <router-link to="/" slot="left">
-			    <mt-button icon="back">返回</mt-button>
+			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
 			</mt-header>
 		</div>
 		<div class="news-center-list">
-			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖!" label="2019-3-15" to="newsdetails"
+			<mt-cell :title="$t('m.noticenews')" label="2019-3-15" to="newsdetails"
   is-link>
 			  <img slot="icon" src="../../../assets/images/u357.png">
 			</mt-cell>
-			<mt-cell title="PLATOLAND生态获区块链协会创新应用大奖!"label="2019-3-15" to="newsdetails"is-link>
+			<mt-cell :title="$t('m.noticenews')" label="2019-3-15" to="newsdetails"is-link>
 			  <img slot="icon" src="../../../assets/images/u357.png">
 			</mt-cell>
 		</div>

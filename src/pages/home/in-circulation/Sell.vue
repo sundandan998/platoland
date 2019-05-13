@@ -8,8 +8,8 @@
 		<div class="Purchase-pass-content">
 			<div class="Purchase-pass-content-top">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<span>LD（捞豆）</span>
-				<span>北京河底捞餐饮有限公司</span>
+				<span>LD（LaoDou）</span>
+        <span>{{$t('m.intobody')}}</span>
 				<p>han***@qq.com</p>
 			</div>
 			<div class="Purchase-pass-content-bot">
@@ -49,6 +49,7 @@
         :show="showKeyboard"
         @input="onInput"
         @delete="onDelete"
+        delete-button-text="Delete"
         @blur="showKeyboard = false"
       />
     </van-popup>
@@ -81,6 +82,9 @@ export default {
   watch:{
   	value(){
   		if(this.value.length==6){
+         this.$toast({
+          message: 'Done Successfully'
+        }),
   			this.$router.push({
   				path:'/deal'
   			})

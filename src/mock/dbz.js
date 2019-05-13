@@ -1,7 +1,7 @@
 var Mock = require('mockjs')
 module.exports = function () {
   return {
-//	登录注册接口
+//  登录注册接口
     user: Mock.mock({
       'name': '@cname',
       'email': '@email',
@@ -20,10 +20,10 @@ module.exports = function () {
           'issuer':'Beauty Makeup Office',
           'state':'Pending',
           'address':'13Sn....igg9',
-          'explain':'Equity Intro',
+          'explain':'权益说明',
           'proportion':'1%',
           'assets':'USDT',
-          'mode':'Initial Offering',
+          'mode':'首次发行',
           'issuetime':'2019/12/12',
           'endtime':'2021/12/11',
           'minnum':'2,500,000',
@@ -32,28 +32,27 @@ module.exports = function () {
           'purchasenum':'20,000',
           'initialprice':'0.1',
           'issueprice':'0.1',
-          'bodytype':'Company',
-          'residence':'Beijing Chaoyang District Wangjing SOHO',
-          'businessaddress':'Beijing Changping District',
-          'person':'Mr. Li',
+          'bodytype':'企业',
+          'residence':'北京市朝阳区望京1号111',
+          'businessaddress':'北京昌平区天长街101号',
+          'person':'李四',
           'capital':'100万',
           'establishdate':'2012/12/12',
           'term':'2012-12-12-2032-12-11',
-          // 'range':'技术推广服务；主体管理咨询；不得从事本市产业政策禁止和限制类项目的经营活动'
-          'range':'Technical service, business consulting'
+          'range':'技术推广服务；主体管理咨询；不得从事本市产业政策禁止和限制类项目的经营活动'
         },
         {
           'id':'ZCK',
           'name': 'ZuCheKa',
-          'nickname': 'Rent Card',
+          'nickname': '租车卡',
           'address':'23Sn....ixzs',
-          'body':'Shanghai Fengda Rental Company',
-          'issuer':'Shanghai Fengda Rental Company',
-          'explain':'Equity Intro',
-          'state':'Issuing',
+          'body':'上海丰达汽车租赁有限公司',
+          'issuer':'上海丰达汽车租赁有限公司',
+          'explain':'权益说明',
+          'state':'发行中',
           'proportion':'1%',
           'assets':'GUSD',
-          'mode':'Capital Increase Offering',
+          'mode':'增资发行',
           'issuetime':'2018/1/1',
           'endtime':'2019/7/28',
           'minnum':'5,000,000',
@@ -62,27 +61,27 @@ module.exports = function () {
           'purchasenum':'5,000',
           'initialprice':'0.01',
           'issueprice':'0.01',
-          'bodytype':'Company',
-          'residence':'Hebei, Shijiazhuang',
-          'businessaddress':'Beijing Changping District',
-          'person':'Wang Wu',
-          'capital':'1,000,000',
+          'bodytype':'企业',
+          'residence':'河北省石家庄市宇彤大街12号',
+          'businessaddress':'北京昌平区天长街101号',
+          'person':'王五',
+          'capital':'100万',
           'establishdate':'2011/11/11',
           'term':'2031-11-11  -  2032-11-10',
-          'range':'Technical service, business consulting'
+          'range':'技术推广服务；主体管理咨询'
         },
         {
           'id':'LD',
           'name': 'LaoDou',
-          'nickname': 'Dou Lao',
+          'nickname': '捞豆',
           'address':'33Sn....ix7c',
-          'body':'Beijing Doulao Restaurant',
-          'issuer':'Beijing Doulao Restaurant',
-          'explain':'Equity Intro',
-          'state':'In Circulation',
+          'body':'北京河底捞餐饮有限公司',
+          'issuer':'北京河底捞餐饮有限公司',
+          'explain':'权益说明',
+          'state':'流通中',
           'proportion':'10%',
           'assets':'USDT',
-          'mode':'Initial Offering',
+          'mode':'首次发行',
           'issuetime':'2018/4/1',
           'endtime':'2019/4/1',
           'minnum':'500,000',
@@ -91,14 +90,14 @@ module.exports = function () {
           'purchasenum':'5,000',
           'initialprice':'0.5',
           'issueprice':'0.5',
-          'bodytype':'Company',
-          'residence':'Beijing Shijingshan District',
-          'businessaddress':'Hebei Shijiazhuang',
-          'person':'Jia Ba',
-          'capital':'1,000,000',
+          'bodytype':'企业',
+          'residence':'北京市石景山区畅园2号222',
+          'businessaddress':'河北省石家庄市宇彤大街12号',
+          'person':'贾八',
+          'capital':'100万',
           'establishdate':'2012/12/12',
           'term':'2012-12-12-2032-12-11',
-          'range':'Restaurant Investment and Operation'
+          'range':'餐饮管理，经营投资；不得从事本市产业政策禁止和限制类项目的经营活动'
         },
         {
           'id':'PLD',
@@ -106,12 +105,12 @@ module.exports = function () {
           'nickname': 'PLD',
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
-          'state':'Issuing',
+          'state':'发行中',
           'address':'13Sn....q2ws',
-          'explain':'Equity Intro',
+          'explain':'权益说明',
           'proportion':'1%',
           'assets':'USDT',
-          'mode':'Initial Offering',
+          'mode':'首次发行',
           'issuetime':'2019/12/12',
           'endtime':'2021/12/11',
           'minnum':'2,500,000',
@@ -120,14 +119,14 @@ module.exports = function () {
           'purchasenum':'2,000',
           'initialprice':'0.01',
           'issueprice':'0.02',
-          'bodytype':'Company',
-          'residence':'Virgin Island',
-          'businessaddress':'Beijing Changping District',
-          'person':'Jia Ba',
-          'capital':'10,000,000,000',
+          'bodytype':'企业',
+          'residence':'维京群岛',
+          'businessaddress':'北京昌平区回龙观102号',
+          'person':'贾八',
+          'capital':'10000万',
           'establishdate':'2012/12/12',
           'term':'2012-12-12-2032-12-11',
-          'range':'Technical service, business consulting'
+          'range':'信息咨询类服务'
         },
       ]),
     asset:Mock.mock(
@@ -137,13 +136,13 @@ module.exports = function () {
           'name': 'USDT',
           'body':'Tether Ltd.',
           'issuer':'Tether Ltd.',
-          'state':'In Circulation',
+          'state':'流通中',
           'address':'13Sn....ix7c',
           'amount':'500',
-          'explain':'Equity Intro',
+          'explain':'权益说明',
           'proportion':'1%',
           'assets':'USD',
-          'mode':'Initial Offering',
+          'mode':'首次发行',
           'issuetime':'2019/12/12',
           'endtime':'2021/12/11',
           'minnum':'2,500,000',
@@ -160,11 +159,11 @@ module.exports = function () {
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
           'amount':'1500',
-          'explain':'Equity Intro',
-          'state':'Issuing',
+          'explain':'权益说明',
+          'state':'发行中',
           'proportion':'1%',
           'assets':'GUSD',
-          'mode':'Inital Offering',
+          'mode':'首次发行',
           'issuetime':'2018/1/1',
           'endtime':'2019/7/28',
           'minnum':'5,000,000',
@@ -174,7 +173,7 @@ module.exports = function () {
           'issueprice':'0.02'
         }
       ]),
-//  	地址簿接口
+//    地址簿接口
     address:Mock.mock({
       'data|4':[{
         'name': '@cname',
@@ -185,9 +184,9 @@ module.exports = function () {
     versionnum:Mock.mock({
       "version":'0.1',
       "force": 0,
-      "describe":'Upgrade Details'
+      "describe":'升级描述'
     }),
-//		资产列表接口
+//    资产列表接口
     list:Mock.mock({
       'data|4':[{
         'name': '@cname',

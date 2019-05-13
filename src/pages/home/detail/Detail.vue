@@ -10,8 +10,8 @@
         <span>{{$t('m.essentialinformation')}}</span>
       </div>
       <div class="pass-details-information-content">
-        <mt-cell :title="$t('m.passdetails')" :value="this.detail.id"></mt-cell>
-        <mt-cell :title="$t('m.nickname')" :value="this.detail.nickname"></mt-cell>
+        <mt-cell :title="$t('m.nickname')" :value="this.detail.id"></mt-cell>
+        <mt-cell :title="$t('m.tokenname')" :value="this.detail.nickname"></mt-cell>
         <mt-cell :title="$t('m.address')" :value="this.detail.address"></mt-cell>
         <mt-cell :title="$t('m.body')" :value="this.detail.body"  to="/subject" is-link></mt-cell>
         <mt-cell :title="$t('m.issuer')" :value="this.detail.issuer"></mt-cell>
@@ -19,7 +19,7 @@
     </div>
     <div class="pass-details-issue-data">
       <div class="pass-details-issue-data-header">
-        <span>发行数据</span>
+        <span>{{$t('m.issuedata')}}</span>
       </div>
       <div class="pass-details-issue-data-content">
         <mt-cell :title="$t('m.issuingstate')" :value="this.detail.state"></mt-cell>
@@ -32,13 +32,14 @@
         <mt-cell :title="$t('m.issuenum')" :value="this.detail.amountnum"></mt-cell>
         <mt-cell :title="$t('m.purchasenum')" :value="this.detail.purchasenum"></mt-cell>
         <mt-cell :title="$t('m.soldnum')" :value="this.detail.soldnum"></mt-cell>
-        <mt-cell :title="$t('m.initialprice')" :value="this.detail.initialprice"></mt-cell>
-        <mt-cell :title="$t('m.issueprice')" :value="this.detail.issueprice"></mt-cell>
+        <mt-cell :title="$t('m.initialprice')" :value="this.detail.soldnum"></mt-cell>
+        <mt-cell :title="$t('m.issueprice')" :value="this.detail.initialprice"></mt-cell>
+        <!-- <mt-cell :title="$t('m.issueprice')" :value="this.detail.issueprice"></mt-cell> -->
       </div>
     </div>
     <div class="pass-details-issue-btn" id="transaction">
       <router-link to="/deal">
-        <mt-button type="primary" size="large">去交易</mt-button>
+        <mt-button type="primary" size="large">{{$t('m.dealwith')}}</mt-button>
       </router-link>
     </div>
     <div class="pass-details-issue-btn" id="purchase">
@@ -74,7 +75,7 @@ export default {
     copy() {
           var clipboard = new Clipboard('.tag-read')
           clipboard.on('success', e => {
-            console.log('复制成功')
+            // console.log('复制成功')
             // 释放内存
             clipboard.destroy()
           })
@@ -90,10 +91,10 @@ export default {
       if(this.detail.state== '待发行'){
         document.getElementById("transaction").style.display="none"
         document.getElementById("purchase").style.display="none"
-      }else if(this.detail.state== '发行中'){
+      }else if(this.detail.state== 'Issuing'){
         document.getElementById("transaction").style.display="none"
         document.getElementById("purchase").style.display="block"
-      }else if(this.detail.state== '流通中'){
+      }else if(this.detail.state== 'In Circulation'){
         document.getElementById("purchase").style.display="none"
         document.getElementById("transaction").style.display="block"
       }

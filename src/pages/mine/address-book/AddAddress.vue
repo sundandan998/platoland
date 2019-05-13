@@ -70,20 +70,4 @@ export default {
 
 <style lang="scss">
 @import "../../../assets/scss/global"
-/*.formData {
-  margin-top: 50px !important;
-}
-.add-address .certificate-list-card {
-  padding-bottom: 10px;
-}
-.add-address .certificate-list-card li {
-  height: 70px;
-  width: 90%;
-  background-color: #fff;
-  margin: 10px auto;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-bottom: 1px solid #ccc;
-}*/
 </style>

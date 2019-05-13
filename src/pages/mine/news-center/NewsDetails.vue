@@ -1,7 +1,7 @@
 <template>
 	<div class="news-details">
 		<div class="news-details-header">
-			<mt-header fixed :title="$t('m.noticdetails')">
+			<mt-header fixed :title="$t('m.announcementcenter')">
 			  <router-link to="/news" slot="left">
 			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
@@ -30,5 +30,5 @@ export default{
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

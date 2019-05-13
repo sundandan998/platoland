@@ -9,12 +9,13 @@
 	  info="密码为 6 位数字"
 	  @focus="showKeyboard = true"
 	/>
-	
+
 	<!-- 数字键盘 -->
 	<van-number-keyboard
 	  :show="showKeyboard"
 	  @input="onInput"
 	  @delete="onDelete"
+    delete-button-text="Delete"
 	  @blur="showKeyboard = false"
 	/>
 	</div>
@@ -41,5 +42,5 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

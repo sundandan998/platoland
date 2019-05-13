@@ -48,7 +48,13 @@ export default{
 	//点击删除弹出的消息框
 	delBox(){
 //		console.log(this.detail)
-		this.$messagebox.confirm("确定删除该地址?")
+    this.$messagebox({
+      title: 'Tips',
+      message:'Are you sure to delete the address?',
+      cancelButtonText:'No',
+      confirmButtonText:'Yes',
+      showCancelButton: true
+    })
 		.then(action => {
 			this.$router.push({
 				path:'/book'
@@ -58,11 +64,22 @@ export default{
 	},
 	//点击返回弹出的消息框
 	saveBox(){
-		this.$messagebox.confirm("是否保存更改信息?")
+ //   MessageBox ({
+ //   title: '标题',
+ //   message: html,
+ //   confirmButtonText: '我知道了'
+ // })
+    // this.$messagebox.confirm("Are you sure to save the information?")
+		this.$messagebox({
+      title: 'Tips',
+      message:'Are you sure to save the information?',
+      cancelButtonText:'No',
+      confirmButtonText:'Yes',
+      showCancelButton: true
+    })
 		.then(action => {
 			this.$router.push({
 				path:'/book'
-
 			})
 		})
 	},

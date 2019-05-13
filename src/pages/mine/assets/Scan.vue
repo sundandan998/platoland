@@ -1,11 +1,11 @@
 <template>
 	<div class="scan">
 		<div class="scan-header">
-			<mt-header fixed title="扫一扫">
-			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">返回</mt-button>
+			<mt-header fixed :title="$t('m.scan')">
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			  <mt-button icon slot="right">
 	          	<router-link to="/">
-	            	<span>相册</span>
+	            	<span>{{$t('m.album')}}</span>
 	          	</router-link>
         	  </mt-button>
 			</mt-header>

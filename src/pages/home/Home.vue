@@ -6,31 +6,30 @@
     		<div class="home-header">
 		      <mt-header fixed  :title="$t('m.homepage')"></mt-header>
 		    </div>
-				<div class="home-investment" @click="issue('PLD')">
-				<img src="../../assets/images/gf.png" alt="" />
-				<div class="home-investment-content">
-    			<div class="home-investment-top fl">
-    				<img src="../../assets/images/icon-3.png" alt="" />
-    			</div>
-					<div class="home-investment-top-left">
-						<ul>
-						<li>{{this.plddata.name}}</li>
-						<li><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</li>
-					</ul>
-					</div>
-					<div class="home-investment-top-right fr">
-							<mt-button size="small" @click="issue('PLD')">{{$t('m.investment')}}</mt-button>
-					</div>
-					<p>{{this.plddata.Detail}}</p>
-				</div>
-				<div class="home-investment-bot">
+			 <div class="home-investment" @click="issue('PLD')">
+        <img src="../../assets/images/gf.png" alt="" />
+        <div class="home-investment-content">
+          <div class="home-investment-top fl">
+            <img src="../../assets/images/icon-3.png" alt="" />
+          </div>
+          <div class="home-investment-top-left">
+            <P>{{this.plddata.name}} ({{this.plddata.nickname}})<span><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</span></P>
+            <P>{{this.plddata.body}}</P>
+          </div>
+          <div class="home-investment-top-right fr">
+              <mt-button size="small" @click="issue('PLD')">{{$t('m.investment')}}</mt-button>
+          </div>
+          <!-- <p>{{this.plddata.Detail}}</p> -->
+        </div>
+        <div class="home-investment-bot">
           <span>{{$t('m.issueamount')}}:{{this.plddata.amountnum}}</span>
           <span>{{$t('m.issue')}}:{{this.plddata.soldnum}}</span>
-				</div>
-				<div class="home-investment-progress">
-						<mt-progress :value="20" :bar-height="5"></mt-progress>
-				</div>
-	    	</div>
+          <span>{{$t('m.completed')}}:{{this.plddata.proportion}}</span>
+        </div>
+        <div class="home-investment-progress">
+            <mt-progress :value="20" :bar-height="5"></mt-progress>
+        </div>
+        </div>
       		<!--/总资产-->
          	<!--land指数-->
          	<div class="home-land">
@@ -49,12 +48,13 @@
     		</div>
     		<div class="home-assets-subscription-content">
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
-					<img src="../../assets/images/u345.png"/>
+					<img src="../../assets/images/u345.png" />
 					<div class="assets-subscription-text fr">
 							<span class="home-name">{{items.id}}</span>
+              <p>{{items.nickname}}</p>
 					</div>
 					<div class="assets-subscription-title">
-						<p>{{items.state}}</p>
+						<p :class="state[index]">{{items.state}}</p>
 					</div>
 					<div class="assets-subscription-information">
 						<ul class="fl">
@@ -62,7 +62,7 @@
 							<li>{{$t('m.issueamount')}}</li>
 							<li>{{$t('m.initialprice')}}</li>
 						</ul>
-						<ul class="fr">
+						<ul class="fr text-right">
 							<li>{{items.issuetime}}</li>
 							<li>{{items.amountnum}}</li>
 							<li>{{items.initialprice}}</li>
@@ -73,9 +73,7 @@
     		<div class="home-assets-more">
     			<span>{{$t('m.morefunctions')}}</span>
     		</div>
-         	<!--/资产认购-->
         </mt-tab-container-item>
-
       </mt-tab-container>
     </div>
     <mt-tabbar v-model="message" fixed>
@@ -112,10 +110,22 @@ export default {
 			issuedata:[],
       datalist:[],
       animate:false,
+      state: [
+          "state0",
+          "state1",
+          "state2"
+        ],
       items:[
-          {name: "PLATOLAND生态获区块链协会创新应用大奖！1"},
-          {name:"PLATOLAND生态获区块链协会创新应用大奖！2"},
-          {name:"PLATOLAND生态获区块链协会创新应用大奖！3"}
+      // PLATOLAND won the innovation application award of Blockchain Association ！
+          {
+            name:'PLATOLAND won the innovation application！'
+        },
+          {
+            name:'PLATOLAND won the innovation application ！'
+        },
+          {
+            name:'PLATOLAND won the innovation application  ！'
+        }
       ]
     }
   },
@@ -148,14 +158,15 @@ creadte() {
     },
 //	  首页/发行中/待发行/沟通中渲染页面数据
 	  async	listissue(){
-				const url=this.$backStage('/query?type=0')
-			 	const res = await this.$http.get(url)
-			 	this.issuedata = res.data
+		  const url=this.$backStage('/query?type=0')
+			const res = await this.$http.get(url)
+			this.issuedata = res.data
+      console.log(this.issuedata[0].name)
+
       this.plddata = res.data[3]
-//			 	console.log(this.issuedata)
 //			 	console.log(this.issuedata[0].state)
 		},
-//		点击跳转通证详情接口
+    //		点击跳转通证详情接口
 		async issue(id){
 			const url=this.$backStage('/query?id='+id)
 		 	const res = await this.$http.get(url)

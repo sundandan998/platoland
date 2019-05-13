@@ -56,6 +56,9 @@ $color-primary: #1aad19;
 body{
     background-color: #f6f6f6;
 }
+// 文字超出出现省略号
+// .{
+// }
 //支付密码样式
 .mint-popup-bottom {
     width: 100%;
@@ -300,23 +303,32 @@ label.mint-button-text {
 }
 .home-investment-top-right{
     margin-right: 10px;
-    margin-top: -5px;
+    margin-top: -40px;
+    button{
+      background-color: #456DF1;
+      color:#fff;
+    }
+
 }
 .home-investment-content {
     margin-top: -20px;
     margin-left: 60px;
     height: 50px;
     p{
-        font-size: 0.9rem;
+        font-size: 0.78rem;
         color:#999;
         margin-left: 10px;
+        span{
+          margin-left: 20px;
+        }
     }
 }
 .home-investment-bot {
     height: 30px;
     span{
-      font-size: 0.8rem;
-      margin-left: 15px;
+        font-size: 0.8rem;
+        margin-left: 10px;
+        display: inline-block;
     }
 }
 .home-investment-progress{
@@ -361,14 +373,16 @@ label.mint-button-text {
     margin: 0 10px 0 10px;
     border-radius: 7px;
 }
-.home-assets-subscription-title{
-    height: 30px;
-    margin: 20px 5px 20px 5px;
+// .issue-state{
+//   color:red;
+// }
+.home-assets-subscription-title .mint-cell{
+  background-color: #f6f6f6 !important;
 }
 .home-assets-subscription-content{
     white-space: nowrap;
     overflow-x: auto;
-    margin: 20px 5px 0 5px;
+    margin: 10px 5px 0 5px;
 }
 .home-assets-subscription-content::-webkit-scrollbar{
     display: none;
@@ -380,6 +394,7 @@ label.mint-button-text {
     border-radius: 7px;
     font-size: 0.8rem;
     box-shadow: 1px 6px 5px #ccc;
+    margin-right: 15px;
       span{
           font-size: 0.7rem;
            color: #999;
@@ -393,16 +408,24 @@ label.mint-button-text {
 }
 .assets-subscription-text {
     margin:10px 15px 0 0px;
+    text-align:right;
       p{
          font-size: 0.7rem;
           color: #999;
       }
 }
 .assets-subscription-title{
-    p{
-          margin: 5px 0 0 10px;
-
+  margin-left: 4px;
+}
+.assets-subscription-title{
+    div{
+      margin: 5px 0 0 10px;
+      text-align: right;
+      color: #999;
     }
+}
+.text-right{
+   text-align: right;
 }
 .assets-subscription-information {
     ul{
@@ -431,6 +454,16 @@ label.mint-button-text {
 //首页/流通中/通证列表页
 
 //首页/流通中/通证详情页
+.state0{
+  color: red;
+  }
+.state1{
+  color: green;
+}
+.state2{
+  color: blue;
+}
+
 .pass-details-information{
     background-color: #fff;
     width: 100%;
@@ -675,7 +708,7 @@ element.style {
 }
 .Purchase-pass-tabbar input.mint-field-core{
     font-size: 0.89rem;
-    color:#999;
+    color:#000;
     top: -4px;
     position: relative;
 }

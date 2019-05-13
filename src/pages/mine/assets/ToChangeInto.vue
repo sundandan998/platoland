@@ -11,8 +11,8 @@
 			<div class="to-change-into-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
 				<ul>
-					<li>LD（捞豆）</li>
-					<li>北京河底捞餐饮有限公司</li>
+					<li>{{$t('m.intoname')}}</li>
+					<li>{{$t('m.intobody')}}</li>
 				</ul>
 				<div class="to-change-into-exhibition-adress">
 					<img src="../../../assets/images/u4780.png" alt="" class="fr tag-read"
@@ -25,7 +25,7 @@
 		<div class="to-change-into-qrcode">
 			<img src="../../../assets/images/qrcode.png" alt="" />
 			<!-- <p>{{$t('m.transfersuccess')}}</p> -->
-      <p>仅支持LD(捞豆)收款,请勿用于其他通证收款</p>
+      <p>{{$t('m.intotext')}}</p>
 		</div>
 	</div>
 </template>
@@ -43,7 +43,8 @@ export default{
           var clipboard = new Clipboard('.tag-read')
           clipboard.on('success', e => {
             this.$toast({
-            message: '复制成功'
+            message: 'Done Successfully',
+            duration:1800
           })
             // 释放内存
             clipboard.destroy()

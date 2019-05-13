@@ -47,6 +47,7 @@
         :show="showKeyboard"
         @input="onInput"
         @delete="onDelete"
+        delete-button-text="Delete"
         @blur="showKeyboard = false"
       />
     </van-popup>
@@ -77,6 +78,7 @@ export default {
     passwordShow(){
     	this.popupVisible = true
     }
+
   },
   computed:{
 	...mapGetters([
@@ -86,6 +88,9 @@ export default {
   watch:{
 	value(){
 		if(this.value.length==6){
+       this.$toast({
+          message: 'Done Successfully'
+        }),
 			this.$router.push({
 				path:'/detail'
 			})

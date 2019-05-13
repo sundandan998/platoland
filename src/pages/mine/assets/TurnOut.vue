@@ -13,8 +13,8 @@
 		<div class="turn-out-exhibition">
 			<div class="turn-out-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<span>LD（捞豆）</span>
-				<span>北京河底捞餐饮有限公司</span>
+				<span>{{$t('m.intoname')}}</span>
+				<span>{{$t('m.intobody')}}</span>
 			</div>
 		</div>
 		<div class="purchase-pass-input">
@@ -52,6 +52,7 @@
         :show="showKeyboard"
         @input="onInput"
         @delete="onDelete"
+        delete-button-text="Delete"
         @blur="showKeyboard = false"
       />
     </van-popup>
@@ -89,6 +90,9 @@ export default {
   watch:{
   value(){
     if(this.value.length==6){
+       this.$toast({
+        message: 'Done Successfully'
+      }),
       this.$router.push({
         path:'/assetsdetailed'
       })

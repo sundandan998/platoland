@@ -33,7 +33,7 @@
       </div>
 		</div>
 		<div class="about-our-contact">
-				<p> <b></b> 联系我们 </p>
+				<p> <b></b>{{$t('m.contact')}} </p>
         <mt-cell :title="$t('m.website')" to="http://www.platoland.com" is-link value="http://www.platoland.com"></mt-cell>
 				<mt-cell :title="$t('m.Twitter')" to="" ></mt-cell>
         <mt-cell title="reddit" to="" ></mt-cell>

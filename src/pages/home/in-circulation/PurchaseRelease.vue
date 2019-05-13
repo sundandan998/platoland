@@ -8,8 +8,10 @@
 		<div class="purchase-pass-buy-assets">
 			<span>{{$t('m.buyassets')}}</span>
 			<div class="purchase-pass-buy-information fr">
-				<img src="../../../assets/images/ld.png" alt="" /><span>LD（捞豆）</span>
-				<p>北京河底捞餐饮有限公司</p>
+				<img src="../../../assets/images/ld.png" alt="" /><span>LD（LaoDou）</span>
+				<p>{{$t('m.intobody')}}</p>
+        <!-- <span></span> -->
+        <!-- <span></span> -->
 			</div>
 		</div>
 		<div class="purchase-pass-valuation-assets">
@@ -40,6 +42,7 @@
         :show="showKeyboard"
         @input="onInput"
         @delete="onDelete"
+        delete-button-text="Delete"
         @blur="showKeyboard = false"
       />
     </van-popup>
@@ -87,6 +90,9 @@ export default{
 	watch:{
 		value(){
 			if(this.value.length==6){
+        this.$toast({
+         message: 'Done Successfully'
+        }),
 				this.$router.push({
 					path:'/deal'
 				})
@@ -97,5 +103,5 @@ export default{
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>
