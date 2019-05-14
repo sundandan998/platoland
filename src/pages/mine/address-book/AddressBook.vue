@@ -2,9 +2,7 @@
 	<div class="adress-book">
 		<div class="adress-book-header">
 			<mt-header fixed :title="$t('m.addressbook')">
-			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			   <mt-button icon="" slot="right">
 			   	<router-link to="add">
 			   		<img src="../../../assets/images/u2664.png" alt="" />

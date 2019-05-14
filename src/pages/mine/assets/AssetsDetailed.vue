@@ -2,9 +2,7 @@
 	<div class="assets-detailed">
 		<div class="assets-detailed-header">
 			<mt-header fixed :title="$t('m.assetdetails')">
-			  <router-link to="/assets" slot="left">
-			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
-			  </router-link>
+			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			   <mt-button icon="" slot="right">
 			   	<el-dropdown trigger="click">
 			      <span class="el-dropdown-link">
@@ -27,8 +25,8 @@
 		<div class="assets-detailed-exhibition-img" >
 			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
 			<ul>
-				<li>{{this.detail.id}}</li>
-				<!--<li>北京河底捞餐饮有限公司</li>-->
+				<li>{{this.detail.id}}({{this.detail.nickname}})</li>
+        <li><P>{{this.detail.body}}</P></li>
 			</ul>
 		</div>
 			<mt-cell :title="$t('m.availablenum')" value="50.000">
@@ -92,7 +90,13 @@ export default{
 	methods:{
 		//	点击移除弹出的消息框
 		remove(){
-			this.$messagebox.confirm("确定移除资产?")
+    this.$messagebox({
+      title: 'Tips',
+      message:'Are you sure to removal of assets?',
+      cancelButtonText:'No',
+      confirmButtonText:'Yes',
+      showCancelButton: true
+    })
 			.then(action => {
 				this.$router.push({
 				path:'/assets'

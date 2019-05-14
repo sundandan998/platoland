@@ -88,7 +88,7 @@ export default {
       },
     showbtn(){
 //      debugger
-      if(this.detail.state== '待发行'){
+      if(this.detail.state== 'Pending'){
         document.getElementById("transaction").style.display="none"
         document.getElementById("purchase").style.display="none"
       }else if(this.detail.state== 'Issuing'){

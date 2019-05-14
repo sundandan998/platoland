@@ -49,7 +49,6 @@
     		<div class="home-assets-subscription-content">
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
 					<!-- <img src="../../assets/images/u345.png" /> -->
-          <!-- <img v-bind:src="'../../assets/images/'+items.icon+'.png'"/> -->
           <img v-bind:src="'static/img/'+items.icon+'.png'"/>
 					<div class="assets-subscription-text fr">
 							<span class="home-name">{{items.id}}</span>
@@ -78,21 +77,21 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-    <mt-tabbar v-model="message" fixed>
+    <mt-tabbar v-model="message"  fixed>
       <mt-tab-item id="home">
-      	<img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
-      	<img slot="icon" src="../../assets/images/home.svg" v-else>
-      	{{$t('m.homepage')}}
+        <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
+        <img slot="icon" src="../../assets/images/home.svg" v-else>
+        {{$t('m.homepage')}}
       </mt-tab-item>
-	      <mt-tab-item id="explore">
-	      	<img slot="icon" src="../../assets/images/explore-b.svg" v-if="this.selected == 'explore'">
-	      	<img slot="icon" src="../../assets/images/explore.svg"v-else>
-	      	{{$t('m.explore')}}
-	      </mt-tab-item>
-      <mt-tab-item id="mine" >
-      	<img slot="icon" src="../../assets/images/mine-b.svg" v-if="this.selected == 'mine'">
-    	<img slot="icon" src="../../assets/images/mine.svg"v-else>
-      	{{$t('m.mine')}}
+      <mt-tab-item id="explore">
+        <img slot="icon" src="../../assets/images/explore-b.svg" v-if="this.selected == 'explore'">
+        <img slot="icon" src="../../assets/images/explore.svg"v-else>
+        {{$t('m.explore')}}
+      </mt-tab-item>
+      <mt-tab-item id="mine">
+        <img slot="icon" src="../../assets/images/mine-b.svg" v-if="this.selected == 'mine'">
+        <img slot="icon" src="../../assets/images/mine.svg"v-else>
+        {{$t('m.mine')}}
       </mt-tab-item>
     </mt-tabbar>
   </div>
@@ -115,7 +114,8 @@ export default {
       state: [
           "state0",
           "state1",
-          "state2"
+          "state2",
+          "state1"
         ],
       items:[
       // PLATOLAND won the innovation application award of Blockchain Association ！

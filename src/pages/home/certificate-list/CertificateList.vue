@@ -70,7 +70,7 @@ export default {
 		},
 		assetswitch(){
 				this.$toast({
-				  message: '添加资产成功'
+				  message: 'Done Successfully'
 				})
 		}
   }

@@ -113,10 +113,13 @@ body{
 .login-tab .mint-tab-item-label {
     margin: 20px 40px 20px 28px;
 }
-//.mint-navbar .mint-tab-item.is-selected {
+// .mint-navbar .mint-tab-item.is-selected {
 //  color: #000;
 //  border-bottom:none;
-//}
+// }
+.mint-tabbar > .mint-tab-item.is-selected{
+  background-color: #fbfbfb;
+}
 .login-tab .mint-tab-item-label {
     font-size: 0.8rem;
     font-weight: 400;
@@ -888,6 +891,9 @@ element.style {
     }
     img{
         margin: 10px;
+    }
+    p{
+      font-size: 0.8rem;
     }
 }
 .buy-password-show {

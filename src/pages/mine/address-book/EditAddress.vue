@@ -2,9 +2,7 @@
 	<div class="edit-adress">
 		<div class="edit-adress-header">
 			<mt-header fixed :title="$t('m.addressdetail')">
-			  <router-link to="/book" slot="left">
-			    <mt-button icon="back" @click="saveBox">{{$t('m.back')}}</mt-button>
-			  </router-link>
+			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)" @click="saveBox">{{$t('m.back')}}</mt-button>
 			   <mt-button icon="" slot="right" @click="delBox">
 			   	<img src="../../../assets/images/delete.png"  alt=""/><span>{{$t('m.delete')}}</span>
 			   </mt-button>
@@ -64,12 +62,6 @@ export default{
 	},
 	//点击返回弹出的消息框
 	saveBox(){
- //   MessageBox ({
- //   title: '标题',
- //   message: html,
- //   confirmButtonText: '我知道了'
- // })
-    // this.$messagebox.confirm("Are you sure to save the information?")
 		this.$messagebox({
       title: 'Tips',
       message:'Are you sure to save the information?',

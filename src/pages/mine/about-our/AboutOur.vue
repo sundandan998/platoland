@@ -2,9 +2,7 @@
 	<div class="about-our">
 		<div class="about-our-header">
 			<mt-header fixed :title="$t('m.our')">
-			  <router-link to="/mine" slot="left">
-			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
-			  </router-link>
+			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="about-our-logo">

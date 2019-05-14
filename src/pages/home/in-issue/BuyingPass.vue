@@ -8,7 +8,8 @@
 		<div class="buy-pass-name">
 			<img src="../../../assets/images/ld.png" alt="" class="fl" />
 			<div class="buy-pass-name-text">
-				<span>{{this.detail.id}}</span>
+				<span>{{this.detail.id}} ({{this.detail.nickname}})</span>
+        <p>{{this.detail.body}}</p>
 			</div>
 		</div>
 		<div class="buy-pass-name-price">

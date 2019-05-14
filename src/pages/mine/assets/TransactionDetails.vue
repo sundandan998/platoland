@@ -38,11 +38,10 @@
 				<li>2019-4-28</li>
 			</ul>
 		</div>
-
-		<div class="transaction-details-information-text">
+<!-- <div class="transaction-details-information-text">
 			<span>{{$t('m.transactionexplain')}}</span>
 			<div class="transaction-details-information-border"></div>
-		</div>
+		</div> -->
 	</div>
 </template>
 

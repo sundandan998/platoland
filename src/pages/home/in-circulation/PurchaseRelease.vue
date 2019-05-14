@@ -49,9 +49,9 @@
     </div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.transactionnum')}}</p>
-        <mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+        <mt-field type="number"></mt-field>
 			<p>{{$t('m.unitprice')}}</p>
-        <mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+        <mt-field type="number"></mt-field>
 			<span>{{$t('m.available')}}：10,000  USDT</span>
 		</div>
 

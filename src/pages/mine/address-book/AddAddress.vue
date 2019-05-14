@@ -2,9 +2,7 @@
   <div class="add-address">
     <div class="add-address-header">
       <mt-header fixed :title="$t('m.addaddress')">
-        <router-link to="/book" slot="left">
-          <mt-button icon="back">{{$t('m.back')}}</mt-button>
-        </router-link>
+          <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="add-adress-list formData">
