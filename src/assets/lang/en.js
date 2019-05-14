@@ -38,7 +38,7 @@ export const m = {
   explain:'Equity Detail',
   issuedata:'Details',
   issuingstate:'Status',
-  proportion:'Tokenlized Equity/Total Equity',
+  proportion:'Token Equity Ratio',
   valuationassets:'Valuation Unit',
   mode:'Issue Mode',
   issuetime:'Issue Date',

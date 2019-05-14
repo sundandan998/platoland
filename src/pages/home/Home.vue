@@ -48,7 +48,9 @@
     		</div>
     		<div class="home-assets-subscription-content">
 					<div class="assets-subscription" v-for="(items,index) in issuedata" @click="issue(items.id)">
-					<img src="../../assets/images/u345.png" />
+					<!-- <img src="../../assets/images/u345.png" /> -->
+          <!-- <img v-bind:src="'../../assets/images/'+items.icon+'.png'"/> -->
+          <img v-bind:src="'static/img/'+items.icon+'.png'"/>
 					<div class="assets-subscription-text fr">
 							<span class="home-name">{{items.id}}</span>
               <p>{{items.nickname}}</p>

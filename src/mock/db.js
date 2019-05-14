@@ -15,6 +15,7 @@ module.exports = function () {
         {
           'id':'WHZ',
           'name': 'WHZ',
+          'icon':'u383',
           'nickname': 'Celebrity Diamond',
           'body':'Beauty Makeup Office',
           'issuer':'Beauty Makeup Office',
@@ -44,6 +45,7 @@ module.exports = function () {
         },
         {
           'id':'ZCK',
+          'icon':'u365',
           'name': 'ZuCheKa',
           'nickname': 'Rent Card',
           'address':'23Sn....ixzs',
@@ -74,6 +76,7 @@ module.exports = function () {
         {
           'id':'LD',
           'name': 'LaoDou',
+          'icon':'ld',
           'nickname': 'Dou Lao',
           'address':'33Sn....ix7c',
           'body':'Beijing Doulao Restaurant',
@@ -103,6 +106,7 @@ module.exports = function () {
         {
           'id':'PLD',
           'name': 'PLD',
+          'icon':'u363',
           'nickname': 'PLD',
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
