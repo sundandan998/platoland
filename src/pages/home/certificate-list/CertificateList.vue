@@ -6,8 +6,8 @@
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for ="(item, index) in assetsdata">
-      <mt-cell :title="item.id" :value="item.name" :label="item.company" @click="issue(item.id)">
-          <img slot="icon" src="../../../assets/images/u345.png">
+      <mt-cell :title="item.id+ (item.nickname)" :value="item.name" :label="item.body" @click="issue(item.id)">
+          <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+item.icon+'.png'"/>
           <mt-switch v-model="item.isactive=='0'" class="asset-list-switch" @change="assetswitch"></mt-switch>
       </mt-cell>
     </div>

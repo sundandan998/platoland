@@ -84,14 +84,14 @@
 			    		</div>
 			    	</div>
 			    </div>
-			    <div class="subject-introduce-team">
+			  <!--   <div class="subject-introduce-team">
 			    	<div class="subject-introduce-team-title">
 			    		<h3>{{$t('m.teammanagement')}}</h3>
 			    	</div>
 			    	<div class="subject-introduce-team-content">
 			    		<p>{{$t('m.teamname')}}</p>
 			    	</div>
-			    </div>
+			    </div> -->
 			  </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
@@ -117,5 +117,5 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

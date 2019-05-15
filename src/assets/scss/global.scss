@@ -828,7 +828,7 @@ element.style {
         font-size: 0.78rem;
     }
     span{
-        margin-left: 15px;
+        margin-left: 25px;
         padding-bottom: 10px;
         display:block;
         color:#456df1;
@@ -1018,6 +1018,10 @@ element.style {
     margin-left: 16px;
     flex: 0px;
 }
+.assets-img{
+  position: relative;
+  top: 12px;
+}
 .transaction-flow-title{
     color:#fff;
     width: 100%;
@@ -1040,6 +1044,20 @@ element.style {
     margin-top: 50px;
 }
 //-----------------------我的/资产------------------
+.assets-icon{
+  position: relative;
+  top: 12px;
+}
+.mint-cell{
+  margin: 1px 0 1px 0;
+}
+.mint-cell-label {
+    color: #888;
+    display: block;
+    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 40px;
+}
 .certificate-list-header {
     margin-bottom: 41px;
 }
@@ -1159,7 +1177,7 @@ element.style {
     }
 }
 .assets-detailed-exhibition-img {
-    width: 55%;
+    width: 58%;
     margin: 0 auto;
     height: 80px;
     padding-top: 20px;

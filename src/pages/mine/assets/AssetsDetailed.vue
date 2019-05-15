@@ -12,7 +12,7 @@
 			      	 <router-link to="/scan">
 			        <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
 			        </router-link>
-			        <router-link to="/out">
+			        <router-link to="out">
 			        	<el-dropdown-item>{{$t('m.changeout')}}</el-dropdown-item>
 			        </router-link>
 			        <el-dropdown-item><span @click="remove">{{$t('m.remove')}}</span></el-dropdown-item>
@@ -23,10 +23,12 @@
 		</div>
 		<div class="assets-detailed-exhibition" >
 		<div class="assets-detailed-exhibition-img" >
-			<img src="../../../assets/images/ld.png" alt="" class="fl"   />
+			<img src="../../../assets/images/ld.png" alt="" class="fl" />
 			<ul>
-				<li>{{this.detail.id}}({{this.detail.nickname}})</li>
-        <li><P>{{this.detail.body}}</P></li>
+				<!-- <li>{{this.detail.id}}({{this.detail.nickname}})</li>
+        <li><P>{{this.detail.body}}</P></li> -->
+        <li>LD({{$t('m.intoname')}})</li>
+        <li>{{$t('m.intobody')}}</li>
 			</ul>
 		</div>
 			<mt-cell :title="$t('m.availablenum')" value="50.000">

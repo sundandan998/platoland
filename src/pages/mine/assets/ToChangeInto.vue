@@ -2,16 +2,14 @@
 	<div class="to-change-into">
 		<div class="to-change-into-header">
 			<mt-header fixed :title="$t('m.passdetails')">
-			  <router-link to="/assetsdetailed" slot="left">
-			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
-			  </router-link>
+			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="to-change-into-exhibition">
 			<div class="to-change-into-exhibition-img">
 				<img src="../../../assets/images/ld.png" alt="" class="fl" />
 				<ul>
-					<li>{{$t('m.intoname')}}</li>
+					<li>LD({{$t('m.intoname')}})</li>
 					<li>{{$t('m.intobody')}}</li>
 				</ul>
 				<div class="to-change-into-exhibition-adress">

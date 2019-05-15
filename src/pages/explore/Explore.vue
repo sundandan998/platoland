@@ -9,35 +9,38 @@
 	        	</div>
 	        	<div class="explore-navbar">
 	        		<van-tabs @click="tokenList">
-							  <van-tab :title="$t('m.whole')">
+                <!-- :title="$t('m.whole')" -->
+							  <van-tab  title="All">
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id" :label="items.body">
-                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
+                      <img class="assets-icon"slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 							  </van-tab>
-							  <van-tab :title="$t('m.incirculation')">
+                <!-- :title="$t('m.incirculation')" -->
+							  <van-tab  title="In Circulation">
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id" :label="items.body">
-                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
+                      <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 							  </van-tab>
-
-							  <van-tab :title="$t('m.inissue')">
+                <!-- :title="$t('m.inissue')" -->
+							  <van-tab title="Issuing">
 							   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id" :label="items.body">
-                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
+                      <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
 							  </van-tab>
-							  <van-tab :title="$t('m.tobeissued')">
+                <!-- :title="$t('m.tobeissued')" -->
+							  <van-tab title="Pending">
 						  	 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id" :label="items.body">
-                      <img slot="icon" src="../../assets/images/u345.png" width="24" height="24">
+                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
+                       <img class="assets-icon"slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>

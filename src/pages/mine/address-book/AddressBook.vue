@@ -10,20 +10,21 @@
 			   </mt-button>
 			</mt-header>
 		</div>
-		<div class="adress-book-list" v-for="(item,index) in book">
-			<mt-cell>
-				<div class="adress-book-content fl">
-					<p>{{item.name}}</p>
-					<p>{{item.address}}</p>
-				</div>
-				<!--<router-link to="/edit">-->
-					<div @click="editcontent">
-						<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
-					</div>
-
-				<!--</router-link>-->
-			</mt-cell>
-		</div>
+    <router-link to="out">
+  		<div class="adress-book-list" v-for="(item,index) in book">
+  			<mt-cell>
+  				<div class="adress-book-content fl">
+  					<p>{{item.name}}</p>
+  					<p>{{item.address}}</p>
+  				</div>
+          <router-link to="edit">
+  				<div @click="editcontent">
+  					<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
+  				</div>
+          </router-link>
+  			</mt-cell>
+  		</div>
+    </router-link>
 	</div>
 </template>
 <script>

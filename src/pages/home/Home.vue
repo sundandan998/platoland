@@ -13,7 +13,7 @@
             <img src="../../assets/images/icon-3.png" alt="" />
           </div>
           <div class="home-investment-top-left">
-            <P>{{this.plddata.name}} ({{this.plddata.nickname}})<span><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</span></P>
+            <P>{{this.plddata.name}} {{this.plddata.nickname}}<span><img src="../../assets/images/t.png"/> {{this.plddata.issueprice}}</span></P>
             <P>{{this.plddata.body}}</P>
           </div>
           <div class="home-investment-top-right fr">
@@ -196,15 +196,14 @@ creadte() {
 		 		this.upgrade(isForce)
 		 	}
 	  },
-
 		upgrade(isShow){
 			 this.$messagebox.confirm('', {
          closeOnClickModal:false,
          showCancelButton:isShow,
-				 message:"<div><p> 1.修复部分BUG</p><p>2.优化体验</p></div>",
-				 title: '新版本提醒', 
-				 confirmButtonText: '升级', 
-				 cancelButtonText: '取消' 
+				 message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
+				 title: 'New Edition Reminder', 
+				 confirmButtonText: 'Upgrade', 
+				 cancelButtonText: 'Cancel' 
 				 }).then(action => {
          if (window.plus) {
          plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');

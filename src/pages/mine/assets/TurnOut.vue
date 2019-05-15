@@ -2,7 +2,8 @@
 	<div class="turn-out">
 		<div class="turn-out-header">
 			<mt-header fixed :title="$t('m.changeout')">
-			    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- v-on:click="$router.go(-1)"@click="tz" -->
+			    <mt-button icon="back"slot="left"  v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			    	<mt-button icon="" slot="right">
 			    		<router-link to="/scan">
 			  			<img src="../../../assets/images/scan.png" alt="" />
@@ -19,7 +20,7 @@
 		</div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.payment')}}</p>
-      <mt-field type="text" :placeholder="$t('m.paymentaddress')" readonly="readonly">
+      <mt-field type="text" readonly="readonly" placeholder="Please choose the address">
         <router-link to="book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
@@ -28,7 +29,7 @@
 		<div class="purchase-pass-input">
 			<p>{{$t('m.turnnum')}}</p>
       <mt-field :placeholder="$t('m.buynum')" type="number"></mt-field>
-			<span>{{$t('m.available')}}：10,000  USDT</span>
+			<span>{{$t('m.available')}}：10,000  LD</span>
 			<span>{{$t('m.servicecharge')}}：0.00  PLD</span>
 		</div>
 		<div class="turn-out-exhibition-qrcode">
@@ -72,6 +73,7 @@ export default {
   data() {
     return {
       value: '',
+      show:'',
       showKeyboard: false,
       popupVisible: false
     }
@@ -85,19 +87,24 @@ export default {
     },
     passwordShow(){
       this.popupVisible = true
-    }
-  },
-  watch:{
-  value(){
-    if(this.value.length==6){
-       this.$toast({
-        message: 'Done Successfully'
-      }),
+    },
+    tz(){
       this.$router.push({
         path:'/assetsdetailed'
       })
     }
-  }
+  },
+  watch:{
+    value(){
+      if(this.value.length==6){
+         this.$toast({
+          message: 'Done Successfully'
+        }),
+        this.$router.push({
+          path:'/assetsdetailed'
+        })
+      }
+    }
   }
 }
 </script>
