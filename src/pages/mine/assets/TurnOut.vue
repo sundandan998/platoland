@@ -38,7 +38,7 @@
 			</router-link>
 		</div>
 		<div class="turn-out-exhibition-btn">
-				<mt-button type="primary" size="large" @click="passwordShow">{{$t('m.sure')}}</mt-button>
+				<mt-button type="primary" size="large" @click="passwordShow">{{$t('m.outbutton')}}</mt-button>
 		</div>
     <div>
     <van-popup class="popupbox" position="bottom"  v-model="popupVisible">

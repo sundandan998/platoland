@@ -49,10 +49,9 @@
 	        	</div>
 	        </div>
         </mt-tab-container-item>
-
       </mt-tab-container>
     </div>
-    <mt-tabbar v-model="message"  fixed>
+    <mt-tabbar v-model="message" fixed>
       <mt-tab-item id="home">
         <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
         <img slot="icon" src="../../assets/images/home.svg" v-else>
@@ -78,7 +77,7 @@ export default {
   data () {
     return {
       selected: 'explore',
-      message:this.selected,
+      message:'explore',
       issuedata:[]
     }
   },

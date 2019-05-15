@@ -57,7 +57,7 @@
 				   <span>-30000</span>
 				</mt-cell>
 				<router-link to="/into">
-					<mt-button size="large" type="primary">{{$t('m.change')}} </mt-button>
+					<mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
 				</router-link>
 			  </van-tab>
 			  <van-tab  :title="$t('m.changeout')">
@@ -68,7 +68,7 @@
 				   <span>-30000</span>
 				</mt-cell>
 				<router-link to="/out">
-					<mt-button size="large" type="primary">{{$t('m.change')}} </mt-button>
+					<mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
 				</router-link>
 			  </van-tab>
 			</van-tabs>

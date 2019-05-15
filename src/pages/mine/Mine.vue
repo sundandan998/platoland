@@ -59,7 +59,7 @@ export default {
   data () {
     return {
       selected: 'mine',
-			message:this.selected
+			message:'mine'
     }
   },
 	creadte() {

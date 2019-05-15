@@ -77,13 +77,13 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-    <mt-tabbar v-model="message"  fixed>
+  <mt-tabbar v-model="message" fixed>
       <mt-tab-item id="home">
         <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
         <img slot="icon" src="../../assets/images/home.svg" v-else>
         {{$t('m.homepage')}}
       </mt-tab-item>
-      <mt-tab-item id="explore">
+      <mt-tab-item id="explore" >
         <img slot="icon" src="../../assets/images/explore-b.svg" v-if="this.selected == 'explore'">
         <img slot="icon" src="../../assets/images/explore.svg"v-else>
         {{$t('m.explore')}}
@@ -101,11 +101,10 @@ import {mapActions} from 'vuex'
 import detail from './detail/Detail'
 import store from './../../store/modules/app.js'
 export default {
-  name: 'page-tabbar',
   data () {
     return {
       selected: 'home',
-			message:this.selected,
+			message:'home',
 			plddata:[],
 			data:[],
 			issuedata:[],

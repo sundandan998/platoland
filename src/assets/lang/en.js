@@ -123,6 +123,7 @@ export const m = {
   changeinto:'Transfer In',
   changeout:'Transfer Out',
   remove:'Delete',
+  outbutton:'Confirm',
   // ------------------------交易详情------------------
   transactiondetail:'Transaction Detail',
   transactionsuccess:'Success',

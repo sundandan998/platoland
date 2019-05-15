@@ -256,31 +256,31 @@ export default new Router({
 		{
       path: '/news',
       name: 'News',
-      component: News  
+      component: News
   	},
   	//我的/公告消息/详情
   	{
       path: '/newsdetails',
       name: 'NewsDetails',
-      component: NewsDetails  
+      component: NewsDetails
   	},
   	//我的/版本更新
   	{
       path: '/version',
       name: 'Version',
-      component: Version  
+      component: Version
   	},
   		//首页--通正详情
 	{
 	  path: '/detail',
 	  name: 'Detail',
-	  component: Detail  
+	  component: Detail
 	 },
 		//首页--通证列表
 	{
 	  path: '/list',
 	  name: 'List',
-	  component: List  
+	  component: List
 	 },
 //	  首页/流通中/通证详情
 	{
