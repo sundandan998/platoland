@@ -34,8 +34,8 @@
          	<!--land指数-->
          	<div class="home-land">
          		<router-link to="/news">
-		         	<div class="notice">
-                <div class="notice-list" ref="notice-list" :class="{anim:animate==true}" v-for='item in items'>
+		         	<div class="notice text-beyond">
+                <div class="notice-list text-beyond" ref="notice-list" :class="{anim:animate==true}" v-for='item in items'>
                   <img src="../../assets/images/horn.png"/><span> {{item.name}}</span>
                 </div>
 		        	</div>
@@ -77,7 +77,8 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-  <mt-tabbar v-model="message" fixed>
+     <!-- <app-tabber/> -->
+    <mt-tabbar v-model="message" fixed>
       <mt-tab-item id="home">
         <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
         <img slot="icon" src="../../assets/images/home.svg" v-else>
@@ -97,6 +98,7 @@
   </div>
 </template>
 <script>
+import Tabber from './../../assets/pub/Tabber.vue'
 import {mapActions} from 'vuex'
 import detail from './detail/Detail'
 import store from './../../store/modules/app.js'
@@ -104,7 +106,7 @@ export default {
   data () {
     return {
       selected: 'home',
-			message:'home',
+      message:'home',
 			plddata:[],
 			data:[],
 			issuedata:[],
@@ -119,16 +121,19 @@ export default {
       items:[
       // PLATOLAND won the innovation application award of Blockchain Association ！
           {
-            name:'PLATOLAND won the innovation application！'
+            name:'PLATOLAND won the innovation application award of Blockchain Association ！'
         },
           {
-            name:'PLATOLAND won the innovation application ！'
+            name:'PLATOLAND won the innovation application award of Blockchain Association ！'
         },
           {
-            name:'PLATOLAND won the innovation application  ！'
+            name:'PLATOLAND won the innovation application award of Blockchain Association ！'
         }
       ]
     }
+  },
+   components: {
+    'app-tabber': Tabber
   },
 creadte() {
 	 	_this.$indicator.open({
@@ -162,7 +167,7 @@ creadte() {
 		  const url=this.$backStage('/query?type=0')
 			const res = await this.$http.get(url)
 			this.issuedata = res.data
-      console.log(this.issuedata[0].name)
+      // console.log(this.issuedata[0].name)
 
       this.plddata = res.data[3]
 //			 	console.log(this.issuedata[0].state)

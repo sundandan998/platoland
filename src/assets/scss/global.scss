@@ -10,6 +10,12 @@
 //  font-weight: normal;
 //  font-style: normal;
 //}
+// 文字超出出现省略号
+.text-beyond {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 html,body {
     font-family: myFont, sans-serif;
     }
@@ -115,6 +121,13 @@ body{
 }
 .mint-tabbar > .mint-tab-item.is-selected{
   background-color: #fbfbfb !important;
+  color:#26a2ff;
+}
+.mint-tabbar{
+  background-image:none !important;
+}
+.mint-cell:last-child{
+   background-image:none !important;
 }
 .login-tab .mint-tab-item-label {
     font-size: 0.8rem;
@@ -812,6 +825,7 @@ element.style {
 .purchase-pass-input {
     height: auto;
     background-color: #fff;
+    margin-top: -1px;
     input{
         border-bottom: 1px solid #ccc;
         height: 40px;
@@ -1542,23 +1556,34 @@ img.fr.tag-read {
     padding-bottom: 10px;
 }
 .news-center-header{
-  margin-bottom: 41px;
+  margin-bottom: 19px;
 }
 .news-details-header{
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
-.news-details-list li:first-child{
-       font-size: 0.89rem;
+.news-details-list{
+  background-color: #fff;
+  margin-bottom: 1px;
 }
-.news-details-list {
-    margin-top: 1px;
-    background-color: #fff;
-    overflow: hidden;
-    margin-bottom: 10px;
-    p{
-      font-size:0.72rem;
-      padding: 2px 10px 2px 10px;
+.news-details-list-title{
+  margin-right: 12px;
+  margin-left: 15px;
+  span{
+      font-size: 1.0rem;
+  }
+  p{
+    font-size: 0.6rem;
+    color:#999;
+    span{
+       font-size: 0.6rem;
     }
+  }
+}
+.news-details-list-content{
+  margin-left: 15px;
+  span{
+    font-size: 0.78rem;
+  }
 }
 .notice{
     margin: 0 auto;
@@ -1567,7 +1592,7 @@ img.fr.tag-read {
     border-radius: 4px;
     background-color: #fff;
     border: 1px solid #f2f2f2;
-    font-size: 0.9rem
+    font-size: 0.8rem;
 }
 .anim{
     transition: all 1s;
@@ -1587,15 +1612,6 @@ img.fr.tag-read {
         margin-top: -3px;
 
     }
-}
-
-.news-center-list .mint-cell-title {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 //我的/版本更新
 .version-logo {

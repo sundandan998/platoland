@@ -212,7 +212,7 @@ export const m = {
   // -----------------------------公告详情-------------------------------
   noticdetails:'Announcement Details',
   notictitle:'PLATOLAND Won the innovation award at Korea',
-  noticsmalltitle:'Innovative',
+  noticsmalltitle:'PLATOLAND',
   noticcontentone:'3-28，Platoland joined the world blockchain summit at Silicon Valley。',
   noticcontenttwo:'Platoland reaches 1M users today',
   // --------------------------弹窗----------------------------

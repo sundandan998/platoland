@@ -33,6 +33,7 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
+     <!-- <app-tabber/> -->
     <mt-tabbar v-model="message"  fixed>
       <mt-tab-item id="home">
         <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
@@ -53,14 +54,17 @@
   </div>
 </template>
 <script>
+import Tabber from './../../assets/pub/Tabber.vue'
 import {mapActions, mapGetters,mapState} from 'vuex'
 export default {
-  name: 'page-tabbar',
   data () {
     return {
       selected: 'mine',
-			message:'mine'
+      message:'mine',
     }
+  },
+  components: {
+    'app-tabber': Tabber
   },
 	creadte() {
 		 	_this.$indicator.open({
