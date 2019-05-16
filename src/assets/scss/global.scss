@@ -62,9 +62,6 @@ $color-primary: #1aad19;
 body{
     background-color: #f6f6f6;
 }
-// 文字超出出现省略号
-// .{
-// }
 //支付密码样式
 .mint-popup-bottom {
     width: 100%;
@@ -97,6 +94,9 @@ body{
 }
 .mine-cell .mint-cell:last-child{
     background-image:none;
+}
+.mint-cell-wrapper{
+  background-image:none;
 }
 //登录页
 .login {

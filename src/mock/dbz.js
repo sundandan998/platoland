@@ -15,7 +15,7 @@ module.exports = function () {
         {
           'id':'WHZ',
           'name': 'WHZ',
-          'nickname': 'Celebrity Diamond',
+          'nickname': '(Celebrity Diamond)',
           'body':'Beauty Makeup Office',
           'issuer':'Beauty Makeup Office',
           'state':'Pending',
@@ -44,7 +44,7 @@ module.exports = function () {
         {
           'id':'ZCK',
           'name': 'ZuCheKa',
-          'nickname': '租车卡',
+          'nickname': '(租车卡)',
           'address':'23Sn....ixzs',
           'body':'上海丰达汽车租赁有限公司',
           'issuer':'上海丰达汽车租赁有限公司',
@@ -73,7 +73,7 @@ module.exports = function () {
         {
           'id':'LD',
           'name': 'LaoDou',
-          'nickname': '捞豆',
+          'nickname': '(捞豆)',
           'address':'33Sn....ix7c',
           'body':'北京河底捞餐饮有限公司',
           'issuer':'北京河底捞餐饮有限公司',
@@ -102,7 +102,7 @@ module.exports = function () {
         {
           'id':'PLD',
           'name': 'PLD',
-          'nickname': 'PLD',
+          'nickname': '(PLD)',
           'body':'Platland Ltd.',
           'issuer':'Platland Ltd.',
           'state':'发行中',

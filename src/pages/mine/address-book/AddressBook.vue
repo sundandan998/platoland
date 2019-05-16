@@ -45,7 +45,7 @@ export default{
 	 		const res = await this.$http.get(url)
 			const data = res
 			this.book = res.data.data
-//			console.log(this.book)
+			// console.log(this.book)
 			this.$store.commit('detail', res.data.data[0])
 		},
 //		点击编辑跳转

@@ -157,9 +157,9 @@ creadte() {
     scroll(){
        this.animate=true
        setTimeout(()=>{
-               this.items.push(this.items[0])
-               this.items.shift()
-               this.animate=false
+         this.items.push(this.items[0])
+         this.items.shift()
+         this.animate=false
        },500)
     },
 //	  首页/发行中/待发行/沟通中渲染页面数据
@@ -202,17 +202,17 @@ creadte() {
 	  },
 		upgrade(isShow){
 			 this.$messagebox.confirm('', {
-         closeOnClickModal:false,
-         showCancelButton:isShow,
-				 message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
-				 title: 'New Edition Reminder', 
-				 confirmButtonText: 'Upgrade', 
-				 cancelButtonText: 'Cancel' 
-				 }).then(action => {
-         if (window.plus) {
-         plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
-         plus.runtime.quit();
-         }},cancel => {})
+       closeOnClickModal:false,
+       showCancelButton:isShow,
+			 message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
+			 title: 'New Edition Reminder', 
+			 confirmButtonText: 'Upgrade', 
+			 cancelButtonText: 'Cancel' 
+			 }).then(action => {
+       if (window.plus) {
+       plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
+       plus.runtime.quit();
+       }},cancel => {})
 		}
 	},
 	watch: {

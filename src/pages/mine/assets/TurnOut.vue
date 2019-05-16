@@ -3,12 +3,13 @@
 		<div class="turn-out-header">
 			<mt-header fixed :title="$t('m.changeout')">
         <!-- v-on:click="$router.go(-1)"@click="tz" -->
-			    <mt-button icon="back"slot="left"  v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-			    	<mt-button icon="" slot="right">
-			    		<router-link to="/scan">
-			  			<img src="../../../assets/images/scan.png" alt="" />
-			  			  </router-link>
-			  		</mt-button>
+        <!-- v-on:click="$router.go(-1)" -->
+		    <mt-button icon="back"slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+	    	<mt-button icon="" slot="right">
+	    		<router-link to="/scan">
+	  			<img src="../../../assets/images/scan.png" alt="" />
+	  			  </router-link>
+	  		</mt-button>
 			</mt-header>
 		</div>
 		<div class="turn-out-exhibition">
@@ -20,7 +21,7 @@
 		</div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" placeholder="Please choose the address">
+      <mt-field type="text" readonly="readonly" :placeholder="this.detail.address">
         <router-link to="book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
@@ -69,6 +70,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -76,7 +78,21 @@ export default {
       show:'',
       showKeyboard: false,
       popupVisible: false
+
     }
+  },
+  computed:{
+    ...mapGetters([
+        'detail'
+      ])
+  },
+  beforeRouteEnter(to, from, next) {
+   next(vm=>{
+      if(from.path =='/book'){
+        // next({ path: '/assetsdetailed'})
+        window.history.go(-2)
+      }
+    })
   },
   methods: {
     onInput(key) {
@@ -87,11 +103,6 @@ export default {
     },
     passwordShow(){
       this.popupVisible = true
-    },
-    tz(){
-      this.$router.push({
-        path:'/assetsdetailed'
-      })
     }
   },
   watch:{

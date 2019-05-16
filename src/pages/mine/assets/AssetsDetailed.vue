@@ -67,7 +67,7 @@
 				<mt-cell to="/transaction" is-link label="2018-03-06  12:03">
 				   <span>-30000</span>
 				</mt-cell>
-				<router-link to="/out">
+				<router-link to="/into">
 					<mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
 				</router-link>
 			  </van-tab>

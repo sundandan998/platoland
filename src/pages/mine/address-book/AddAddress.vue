@@ -46,9 +46,6 @@ export default {
   created() {
   },
   methods: {
-//	showadd(){
-//		this.showadd= !this.showadd
-//	},
     addadress(){
     	const p = this.$route.path
     	this.$store.commit('refpath', p)
@@ -67,5 +64,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/scss/global"
+  @import "../../../assets/scss/global"
 </style>

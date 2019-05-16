@@ -16,10 +16,10 @@
 				<mt-switch v-model="value1"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4109.png">
 			</mt-cell>
-				<mt-cell :title="$t('m.paymentpwd')"to="/safetyverification" is-link value="-3000">
-				<mt-switch v-model="value"></mt-switch>
-				<img slot="icon" src="../../../assets/images/u4107.png">
-			</mt-cell>
+			<mt-cell :title="$t('m.paymentpwd')" to="/safetyverification" is-link value="-3000">
+  			<mt-switch v-model="value"></mt-switch>
+  			<img slot="icon" src="../../../assets/images/u4107.png">
+		  </mt-cell>
 		</div>
 	</div>
 </template>
