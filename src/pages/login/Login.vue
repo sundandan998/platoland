@@ -15,10 +15,10 @@
 		</mt-navbar>
 		<mt-tab-container v-model="active">
 		  <mt-tab-container-item id="login">
-			  <el-form :model="verification" ref="verification" :rules="rules" 				class="verification-input"
+			  <el-form :model="verification" ref="verification" :rules="rules" class="verification-input"
 			  	>
-			    <el-form-item prop="email">
-			      <el-input v-model="verification.email"
+			    <el-form-item prop="username">
+			      <el-input v-model="verification.username"
 			      	placeholder="邮箱"
 			      	>
 			        <i slot="prefix">
@@ -26,8 +26,8 @@
 			        </i>
 			      </el-input>
 			    </el-form-item>
-			    <el-form-item prop="pass">
-			      <el-input type="password" v-model="verification.pass" autocomplete="off"
+			    <el-form-item prop="password">
+			      <el-input type="password" v-model="verification.password" autocomplete="off"
 			      	placeholder="密码"
 			      	>
 			        <i slot="prefix">
@@ -36,21 +36,15 @@
 			      </el-input>
 			    </el-form-item>
   			</el-form>
-			<div class="login-checkbox" v-for="item of items">
-				<!--<input type="checkbox" v-model="item.state" v-on:click="loginCheckbox(item)"/>
-				<span>记住账号</span>-->
-				<router-link to="/password" class="fr">
-					<span>忘记密码?</span>
-				</router-link>
-			</div>
 			<div class="login-btn">
-				<mt-button id = "loginbtn" type="default" v-on:click="handleLogin">登&nbsp;录</mt-button>
+				<mt-button id = "loginbtn" type="default" @click="handleLogin">登&nbsp;录</mt-button>
 			</div>
 		  </mt-tab-container-item>
 		  <mt-tab-container-item id="register">
 			  <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
-			    <el-form-item prop="email">
-			      <el-input v-model="verification.email"
+			    <el-form-item prop="username">
+            <!-- verification.pass -->
+			      <el-input v-model="verification.username"
 			      	placeholder="邮箱"
 			      	>
 			        <i slot="prefix">
@@ -58,8 +52,9 @@
 			        </i>
 			      </el-input>
 			    </el-form-item>
-			    <el-form-item prop="pass" v-if="visible">
-			        <el-input type="password" v-model="verification.pass" placeholder="密码">
+			    <el-form-item prop="password" v-if="visible">
+            <!-- verification.pass -->
+			        <el-input type="password" v-model="verification.password" placeholder="密码">
 			            <i slot="suffix" title="隐藏密码" @click="changePass('show')">
 			            	<img src="../../assets/images/eye-close.png"/>
 			            </i>
@@ -68,8 +63,8 @@
 				        </i>
           			</el-input>
 			    </el-form-item>
-			    <el-form-item prop="pass" v-else >
-			      	<el-input type="text" v-model="verification.pass" placeholder="密码">
+			    <el-form-item prop="password" v-else >
+			      	<el-input type="text" v-model="verification.password" placeholder="密码">
 			            <i slot="suffix" title="显示密码" @click="changePass('hide')">
 			            	<img src="../../assets/images/eye-open.png"/>
 			            </i>
@@ -84,9 +79,9 @@
 				<span>注册即表示同意<a href="">《用户使用协议》</a></span>
 			</div>
 			<div class="login-btn">
-				<router-link to="reset">
-					<mt-button id = "regbtn" type="default">注&nbsp;册</mt-button>
-				</router-link>
+				<!-- <router-link to="reset"> -->
+					<mt-button id = "regbtn" type="default" @click="handleRegister">注&nbsp;册</mt-button>
+				<!-- </router-link> -->
 			</div>
 		  </mt-tab-container-item>
 		</mt-tab-container>
@@ -95,6 +90,7 @@
 
 <script>
 import pub from '@/assets/js/pub.js'
+import api from "@/api/login";
 export default{
 	data (){
 		var validatePass = (rule, value, callback) => {
@@ -110,22 +106,22 @@ export default{
 		return	{
 			visible: true,
 			active: 'login',
-	        items: [{
-	          state: false
-	        }],
+      items: [{
+        state: false
+      }],
 			verification: {
-				email: '',
-	    		pass: '',
-	    		checkPass: ''
+				username: '',
+    		password: '',
+    		checkPass: ''
 			},
 			rules: {
 		        // 校验邮箱
-		        email: [
+		        username: [
 		          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
 		          { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
 		        ],
 		        // 校验密码
-		        pass: [
+		        password: [
 		          { validator: validatePass, trigger: 'blur' },
 		          { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
 		        ]
@@ -133,30 +129,70 @@ export default{
 		}
 	},
 	methods:{
-		async handleLogin(){
-//			const res = await this.$http.get('/api/user')
-		 	const url=this.$backStage('/user')
-		 	const res = await this.$http.get(url)
-			const data = res
-//				 console.log(data)
-			if(data.status===200){
-				window.localStorage.setItem('data',JSON.stringify(data))
-				this.$router.push({
-					name: '/'
-				})
-				 this.$toast({
-				 	  message: '登录成功',
-					  duration: 3000
-				 })
-//					页面实时刷新
-				this.$router.go(0)
-//					loading加载
-				this.$Indicator.open({
-					text: '加载中...',
-					spinnerType: 'fading-circle'
-				})
-			}
-		},
+    // 登录
+// 		async handleLogin(){
+//       // debugger
+//       // console.log(this.verification)
+//       // console.log(this.token)
+// 			// const res = await this.$http.get('/api/user')
+// 		 	const url=this.$backStage('/authorization/user',this.verification)
+// 		 	const res = await this.$http.post(url)
+// 			const data = res
+// 			// console.log(data)
+// 			if(data.status===200){
+//         console.log(data)
+// 				window.localStorage.setItem('token',JSON.stringify(this.verification))
+//         // this.token = 'Bearer ' + res.data.data.tokenD
+//         // return JSON.parse(getUserInfo()).token
+// 				// this.$router.push({
+// 				// 	name: '/'
+// 				// })
+// 				 this.$toast({
+// 				 	  message: '登录成功',
+// 					  duration: 3000
+// 				 })
+// //					页面实时刷新
+// 				this.$router.go(0)
+// //					loading加载
+// 				this.$Indicator.open({
+// 					text: '加载中...',
+// 					spinnerType: 'fading-circle'
+// 				})
+// 			}
+// 		},
+//  登录
+    handleLogin(){
+      this.loading = true;
+      this.$store
+        .dispatch("loginByCode",this.verification)
+        .then(res => {
+           alert('成功')
+        })
+        .catch(() => {
+           alert('失败')
+        })
+    },
+    // 注册
+    async handleRegister(){
+//      const res = await this.$http.get('/api/user')
+      const url=this.$backStage('/user/register/',this.verification)
+      const res = await this.$http.post(url)
+      const data = res
+//         console.log(data)
+      if(data.status===200){
+        window.localStorage.setItem('data',JSON.stringify(data))
+        // this.token = 'Bearer ' + res.data.data.body.token
+
+        // return JSON.parse(getUserInfo()).token
+//          页面实时刷新
+        this.$router.go(0)
+//          loading加载
+        this.$Indicator.open({
+          text: '加载中...',
+          spinnerType: 'fading-circle'
+        })
+      }
+    },
 //		登录页/点击记住账号 button 改变颜色
 	  	loginCheckbox: function (item) {
 //		  	item.state = !item.state;
@@ -188,9 +224,5 @@ export default{
 </script>
 
 <style lang="scss">
-	.login{
-		height: 100%;
-		background-color: #fff !important;
-		}
 	@import '../../assets/scss/global'
 </style>

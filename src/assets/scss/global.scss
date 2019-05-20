@@ -166,7 +166,9 @@ body{
     }
 }
 .login-btn{
+    width: 100%;
     text-align: center;
+    display: inline-block;
     .mint-button{
         background-color: #ddd;
         color: #fff;

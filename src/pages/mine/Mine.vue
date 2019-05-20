@@ -33,8 +33,8 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-     <!-- <app-tabber/> -->
-    <mt-tabbar v-model="message"  fixed>
+     <app-tabber :message=selected></app-tabber>
+   <!--  <mt-tabbar v-model="message"  fixed>
       <mt-tab-item id="home">
         <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
         <img slot="icon" src="../../assets/images/home.svg" v-else>
@@ -50,7 +50,7 @@
         <img slot="icon" src="../../assets/images/mine.svg"v-else>
         {{$t('m.mine')}}
       </mt-tab-item>
-    </mt-tabbar>
+    </mt-tabbar> -->
   </div>
 </template>
 <script>
@@ -60,7 +60,6 @@ export default {
   data () {
     return {
       selected: 'mine',
-      message:'mine',
     }
   },
   components: {
@@ -79,22 +78,22 @@ export default {
 	},
   methods:{
 	},
-	watch: {
-	    message: function (val, oldVal) {
-        // 这里就可以通过 val 的值变更来确定去向
-        switch(val){
-            case 'home':
-                this.$router.push('/')
-            break;
-            case 'explore':
-                this.$router.push('/explore')
-            break;
-            case 'mine':
-                this.$router.push('/mine')
-            break
-	        }
-	    }
-    }
+	// watch: {
+	//     message: function (val, oldVal) {
+ //        // 这里就可以通过 val 的值变更来确定去向
+ //        switch(val){
+ //            case 'home':
+ //                this.$router.push('/')
+ //            break;
+ //            case 'explore':
+ //                this.$router.push('/explore')
+ //            break;
+ //            case 'mine':
+ //                this.$router.push('/mine')
+ //            break
+	//         }
+	//     }
+ //    }
  }
 //	computed:{
 //			...mapGetters([

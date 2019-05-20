@@ -77,24 +77,7 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-     <!-- <app-tabber/> -->
-    <mt-tabbar v-model="message" fixed>
-      <mt-tab-item id="home">
-        <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
-        <img slot="icon" src="../../assets/images/home.svg" v-else>
-        {{$t('m.homepage')}}
-      </mt-tab-item>
-      <mt-tab-item id="explore" >
-        <img slot="icon" src="../../assets/images/explore-b.svg" v-if="this.selected == 'explore'">
-        <img slot="icon" src="../../assets/images/explore.svg"v-else>
-        {{$t('m.explore')}}
-      </mt-tab-item>
-      <mt-tab-item id="mine">
-        <img slot="icon" src="../../assets/images/mine-b.svg" v-if="this.selected == 'mine'">
-        <img slot="icon" src="../../assets/images/mine.svg"v-else>
-        {{$t('m.mine')}}
-      </mt-tab-item>
-    </mt-tabbar>
+     <app-tabber :message=selected></app-tabber>
   </div>
 </template>
 <script>
@@ -105,8 +88,7 @@ import store from './../../store/modules/app.js'
 export default {
   data () {
     return {
-      selected: 'home',
-      message:'home',
+      selected:'home',
 			plddata:[],
 			data:[],
 			issuedata:[],
@@ -174,7 +156,8 @@ creadte() {
 		},
     //		点击跳转通证详情接口
 		async issue(id){
-			const url=this.$backStage('/query?id='+id)
+			// const url=this.$backStage('/query?id='+id)
+      const url=this.$backStage('/query?id='+id)
 		 	const res = await this.$http.get(url)
 			const data = res
 			this.$router.push({
@@ -187,7 +170,7 @@ creadte() {
 //	      ]),
 //	   版本升级
 	  async version(){
-	  	const url=this.$backStage('/versionnum')
+      const url=this.$backStage('/versionnum')
 		 	const res = await this.$http.get(url)
 		 	const data = res.data
 		 	const version =this.$version()
@@ -210,27 +193,11 @@ creadte() {
 			 cancelButtonText: 'Cancel' 
 			 }).then(action => {
        if (window.plus) {
-       plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk');
+       plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
        plus.runtime.quit();
        }},cancel => {})
 		}
-	},
-	watch: {
-	    message: function (val, oldVal) {
-        // 这里就可以通过 val 的值变更来确定去向
-        switch(val){
-            case 'home':
-                this.$router.push('/')
-            break;
-            case 'explore':
-                this.$router.push('/explore')
-            break;
-            case 'mine':
-                this.$router.push('/mine')
-            break;
-	        }
-	    }
-    }
+	}
  }
 </script>
 <style lang="scss">
