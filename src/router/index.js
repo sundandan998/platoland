@@ -1,346 +1,266 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import Home from '@/pages/Home'
-//测试页面
-import Cs from '@/pages/home/in-circulation/Cs'
-//登录页面
-import Login from '@/pages/login/Login'
-//登录页面--忘记密码
-import Password from '@/pages/login/forget-password/ForgetPassword'
-//登录页面--重置邮件发送
-import Reset from '@/pages/login/reset-mail/ResetMail'
-//注册页面
-import Register from '@/pages/register/Register'
-//注册页面/发送邮件
-import Send from '@/pages/register/send-mail/SendMail'
-//首页
-import Home from '@/pages/home/Home'
-//我的
-import Mine from '@/pages/mine/Mine'
-//探索
-import Explore from '@/pages/explore/Explore'
-//我的/关于我们
-import About from '@/pages/mine/about-our/AboutOur'
-//我的/资产
-import Assets from '@/pages/mine/assets/Assets'
-//首页/我的/资产/明细
-import DetailedList from '@/pages/mine/assets/DetailedList'
-//首页/我的/资产/资产详情
-import AssetsDetailed from '@/pages/mine/assets/AssetsDetailed'
-//首页/我的/资产/明细/交易详情
-import TransactionDetails from '@/pages/mine/assets/TransactionDetails'
-//首页/我的/资产/明细/转入
-import Into from '@/pages/mine/assets/ToChangeInto'
-//首页/我的/资产/明细/转出
-import Out from '@/pages/mine/assets/TurnOut'
-//首页/我的/资产/明细/扫一扫
-import Scan from '@/pages/mine/assets/Scan'
-//首页/我的/资产/明细/扫一扫详情
-import ScanDetail from '@/pages/mine/assets/ScanDetail'
-//我的/安全
-import Safety from '@/pages/mine/safety-center/SafetyCenter'
-//我的/安全/重置密码
-import Rest from '@/pages/mine/safety-center/RestPassWord'
-//我的/安全/开启信息验证
-import Open from '@/pages/mine/safety-center/OpenInformation'
-//我的/安全/关闭信息验证
-import Close from '@/pages/mine/safety-center/CloseInformation'
-//我的/安全/开启支付密码
-import PayPassWOrde from '@/pages/mine/safety-center/OpenPayPassWOrd'
-//我的/安全/安全验证
-import SafetyVerification from '@/pages/mine/safety-center/SafetyVerification'
-//我的/地址薄
-import Book from '@/pages/mine/address-book/AddressBook'
-//我的/地址薄/编辑地址
-import Edit from '@/pages/mine/address-book/EditAddress'
-//我的/地址薄/添加地址
-import Add from '@/pages/mine/address-book/AddAddress'
-//我的/公告消息
-import News from '@/pages/mine/news-center/NewsCenter'
-//我的/版本更新
-import Version from '@/pages/mine/version-update/Version'
-//我的/公告消息/详情
-import NewsDetails from '@/pages/mine/news-center/NewsDetails'
-//首页--通证详情
-import Detail from '@/pages/home/detail/Detail'
-//首页--通证列表
-import List from '@/pages/home/certificate-list/CertificateList'
-//首页/流通中/通证详情
-import Pass from '@/pages/home/in-circulation/PassDetails'
-//首页/流通中/主体详情页
-import Subject from '@/pages/home/in-circulation/SubjectDetails'
-//首页/流通中/去交易
-import Deal from '@/pages/home/in-circulation/ToDeal'
-//首页/流通中/去交易/购买通证
-import PurchasePass from '@/pages/home/in-circulation/PurchasePass'
-//首页/流通中/去交易/出售通证
-import Sell from '@/pages/home/in-circulation/Sell'
-//首页/流通中/去交易/买入发布
-import Purchase from '@/pages/home/in-circulation/PurchaseRelease'
-//首页/流通中/去交易/卖出发布
-import SellOut from '@/pages/home/in-circulation/SellRelease'
-//首页/发行中/通证详情
-import Details from '@/pages/home/in-issue/PassDetails'
-//首页/发行中/买入通证
-import Buy from '@/pages/home/in-issue/BuyingPass'
-//首页/待发行/入驻期
-import Issue from '@/pages/home/to-issue/ToIssue'
 Vue.use(Router)
-
 export default new Router({
-//mode:'history',
+  //mode:'history',
   routes: [
-//测试
-	{
+    //测试
+    {
       path: '/cs',
       name: 'Cs',
-      component: Cs
-  	},
-		//登录
-		{
+      component: () => import("@/pages/home/in-circulation/cs")
+    },
+    //登录
+    {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: () => import("@/pages/login/Login")
     },
-		//  登录/忘记密码
+    //  登录/忘记密码
     {
       path: '/password',
       name: 'Password',
-      component: Password
+      component: () => import("@/pages/login/forget-password/ForgetPassword")
     },
     //登录/重置邮件发送
     {
       path: '/reset',
       name: 'Reset',
-      component: Reset
+      component: () => import("@/pages/login/reset-mail/ResetMail")
     },
-		//  注册
-		{
+    //  注册
+    {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: () => import("@/pages/register/Register")
     },
     //  注册/发送邮件
     {
       path: '/send',
       name: 'Send',
-      component: Send
+      component: () => import("@/pages/register/send-mail/SendMail")
     },
-     // 首页
+    // 首页
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: () => import("@/pages/home/Home")
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: () => import("@/pages/home/Home")
     },
     //  我的
     {
       path: '/mine',
       name: 'Mine',
-      component: Mine
+      component: () => import("@/pages/mine/Mine")
     },
     // 探索
     {
       path: '/explore',
       name: 'Explore',
-      component: Explore
+      component: () => import("@/pages/explore/Explore")
     },
-		//  我的/关于我们
-		{
+    //  我的/关于我们
+    {
       path: '/about',
       name: 'About',
-      component: About
+      component: () => import("@/pages/mine/about-our/AboutOur")
     },
-		//  我的---资产
+    //  我的---资产
     {
       path: '/assets',
       name: 'Assets',
-      component: Assets
+      component: () => import("@/pages/mine/assets/Assets")
     },
     //  我的---资产/明细
     {
       path: '/detailedlist',
       name: 'DetailedList',
-      component: DetailedList
+      component: () => import("@/pages/mine/assets/DetailedList")
     },
     //  我的---资产/资产详情
     {
       path: '/assetsdetailed',
       name: 'AssetsDetailed',
-      component: AssetsDetailed
+      component: () => import("@/pages/mine/assets/AssetsDetailed")
     },
     //  我的---资产/明细/交易详情
     {
       path: '/transaction',
       name: 'TransactionDetails',
-      component: TransactionDetails
+      component: () => import("@/pages/mine/assets/TransactionDetails")
     },
     //首页/我的/资产/明细/转入
     {
       path: '/into',
       name: 'Into',
-      component: Into
+      component: () => import("@/pages/mine/assets/ToChangeInto")
     },
     //首页/我的/资产/明细/转出
     {
       path: '/out',
       name: 'Out',
-      component: Out
+      component: () => import("@/pages/mine/assets/TurnOut")
     },
     //首页/我的/资产/明细/扫一扫
     {
       path: '/scan',
       name: 'Scan',
-      component: Scan
+      component: () => import("@/pages/mine/assets/Scan")
     },
     //首页/我的/资产/明细/扫一扫详情
     {
       path: '/scandetail',
       name: 'ScanDetail',
-      component: ScanDetail
+      component: () => import("@/pages/mine/assets/ScanDetail")
     },
-     // 我的/安全
+    // 我的/安全
     {
       path: '/safety',
       name: 'Safety',
-      component: Safety
+      component: () => import("@/pages/mine/safety-center/SafetyCenter")
     },
     //  我的/安全/重置密码
     {
-    	path: '/rest',
+      path: '/rest',
       name: 'Rest',
-      component: Rest
+      component: () => import("@/pages/mine/safety-center/RestPassWord")
     },
     //  我的/安全/开启信息验证
     {
-    	path: '/open',
+      path: '/open',
       name: 'Open',
-      component: Open
+      component: () => import("@/pages/mine/safety-center/OpenInformation")
     },
-		//我的/安全/关闭信息验证
-		{
-    	path: '/close',
+    //我的/安全/关闭信息验证
+    {
+      path: '/close',
       name: 'Close',
-      component: Close
+      component: () => import("@/pages/mine/safety-center/CloseInformation")
     },
     //我的/安全/开启支付密码
     {
-    	path: '/paypassword',
+      path: '/paypassword',
       name: 'PayPassWOrde',
-      component: PayPassWOrde
+      component: () => import("@/pages/mine/safety-center/OpenPayPassWOrd")
     },
     //我的/安全/安全验证
     {
-    	path: '/safetyverification',
+      path: '/safetyverification',
       name: 'SafetyVerification',
-      component: SafetyVerification
+      component: () => import("@/pages/mine/safety-center/SafetyVerification")
     },
-		//  我的/地址薄
-		{
+    //  我的/地址薄
+    {
       path: '/book',
       name: 'Book',
-      component: Book
+      component: () => import("@/pages/mine/address-book/AddressBook")
     },
-    	//  我的/地址薄/编辑地址
-		{
+    //  我的/地址薄/编辑地址
+    {
       path: '/edit',
       name: 'Edit',
-      component: Edit
+      component: () => import("@/pages/mine/address-book/EditAddress")
     },
     //  我的/地址薄/添加地址
-		{
+    {
       path: '/add',
       name: 'Add',
-      component: Add
-   },
-		//我的--消息中心
-		{
+      component: () => import("@/pages/mine/address-book/AddAddress")
+    },
+    //我的--消息中心
+    {
       path: '/news',
       name: 'News',
-      component: News
-  	},
-  	//我的/公告消息/详情
-  	{
+      component: () => import("@/pages/mine/news-center/NewsCenter")
+    },
+    //我的/公告消息/详情
+    {
       path: '/newsdetails',
       name: 'NewsDetails',
-      component: NewsDetails
-  	},
-  	//我的/版本更新
-  	{
+      component: () => import("@/pages/mine/news-center/NewsDetails")
+    },
+    //我的/版本更新
+    {
       path: '/version',
       name: 'Version',
-      component: Version
-  	},
-  		//首页--通正详情
-	{
-	  path: '/detail',
-	  name: 'Detail',
-	  component: Detail
-	 },
-		//首页--通证列表
-	{
-	  path: '/list',
-	  name: 'List',
-	  component: List
-	 },
-//	  首页/流通中/通证详情
-	{
-		path: '/pass',
-		name: 'Pass',
-		component: Pass
-	},
-//	首页/流通中/主体详情
-	{
-		path: '/subject',
-		name: 'Subject',
-		component: Subject
-	},
-	//首页/流通中/去交易
-	{
-		path: '/deal',
-		name: 'Deal',
-		component: Deal
-	},
-	//首页/流通中/去交易/购买通证
-	{
-		path: '/purchase',
-		name: 'PurchasePass',
-		component: PurchasePass
-	},
-		//首页/流通中/去交易/出售通证
-	{
-		path: '/sell',
-		name: 'Sell',
-		component: Sell
-	},
-	//首页/流通中/去交易/买入发布
-	{
-		path: '/purchaserelease',
-		name: 'Purchase',
-		component: Purchase
-	},
-	//首页/流通中/去交易/卖出发布
-	{
-		path: '/sellrelease',
-		name: 'SellOut',
-		component: SellOut
-	},
-//	首页/发行中/通证详情
-	{
-		path: '/details',
-		name: 'Details',
-		component: Details
-	},
-//	首页/发行中/通证详情
-	{
-		path: '/buy',
-		name: 'Buy',
-		component: Buy
-	},
-//首页/待发行/入驻期
-	{
-		path: '/issue',
-		name: 'Issue',
-		component: Issue
-	}
-	]
+      component: () => import("@/pages/mine/version-update/Version")
+    },
+    //首页--通正详情
+    {
+      path: '/detail',
+      name: 'Detail',
+      component: () => import("@/pages/home/detail/Detail")
+    },
+    //首页--通证列表
+    {
+      path: '/list',
+      name: 'List',
+      component: () => import("@/pages/home/certificate-list/CertificateList")
+    },
+    //    首页/流通中/通证详情
+    {
+      path: '/pass',
+      name: 'Pass',
+      component: () => import("@/pages/home/in-circulation/PassDetails")
+    },
+    //  首页/流通中/主体详情
+    {
+      path: '/subject',
+      name: 'Subject',
+      component: () => import("@/pages/home/in-circulation/SubjectDetails")
+    },
+    //首页/流通中/去交易
+    {
+      path: '/deal',
+      name: 'Deal',
+      component: () => import("@/pages/home/in-circulation/ToDeal")
+    },
+    //首页/流通中/去交易/购买通证
+    {
+      path: '/purchase',
+      name: 'PurchasePass',
+      component: () => import("@/pages/home/in-circulation/PurchasePass")
+    },
+    //首页/流通中/去交易/出售通证
+    {
+      path: '/sell',
+      name: 'Sell',
+      component: () => import("@/pages/home/in-circulation/Sell")
+    },
+    //首页/流通中/去交易/买入发布
+    {
+      path: '/purchaserelease',
+      name: 'Purchase',
+      component: () => import("@/pages/home/in-circulation/PurchaseRelease")
+    },
+    //首页/流通中/去交易/卖出发布
+    {
+      path: '/sellrelease',
+      name: 'SellOut',
+      component: () => import("@/pages/home/in-circulation/SellRelease")
+    },
+    //  首页/发行中/通证详情
+    {
+      path: '/details',
+      name: 'Details',
+      component: () => import("@/pages/home/in-issue/PassDetails")
+    },
+    //  首页/发行中/通证详情
+    {
+      path: '/buy',
+      name: 'Buy',
+      component: () => import("@/pages/home/in-issue/BuyingPass")
+    },
+    //首页/待发行/入驻期
+    {
+      path: '/issue',
+      name: 'Issue',
+      component: () => import("@/pages/home/to-issue/ToIssue")
+    }
+  ]
 })
+

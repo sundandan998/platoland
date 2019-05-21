@@ -52,23 +52,6 @@
       </mt-tab-container>
     </div>
     <app-tabber :message=selected></app-tabber>
-<!--     <mt-tabbar v-model="message" fixed>
-      <mt-tab-item id="home">
-        <img slot="icon" src="../../assets/images/home-b.svg" v-if="this.selected == 'home'">
-        <img slot="icon" src="../../assets/images/home.svg" v-else>
-        {{$t('m.homepage')}}
-      </mt-tab-item>
-      <mt-tab-item id="explore">
-        <img slot="icon" src="../../assets/images/explore-b.svg" v-if="this.selected == 'explore'">
-        <img slot="icon" src="../../assets/images/explore.svg"v-else>
-        {{$t('m.explore')}}
-      </mt-tab-item>
-      <mt-tab-item id="mine">
-        <img slot="icon" src="../../assets/images/mine-b.svg" v-if="this.selected == 'mine'">
-        <img slot="icon" src="../../assets/images/mine.svg"v-else>
-        {{$t('m.mine')}}
-      </mt-tab-item>
-    </mt-tabbar> -->
   </div>
 </template>
 <script>
@@ -79,6 +62,7 @@ export default {
   data () {
     return {
       selected: 'explore',
+      message: 'explore',
       issuedata:[]
     }
   },

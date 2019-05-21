@@ -5,7 +5,6 @@
 				<img src="../../assets/images/cancel.png" alt="" />
 			</div>
 		</router-link>
-
 		<div class="logo">
 			<img src="../../assets/images/logo.png" alt="" />
 		</div>
@@ -90,7 +89,10 @@
 
 <script>
 import pub from '@/assets/js/pub.js'
-import api from "@/api/login";
+// 登录请求
+import login from "@/api/login.js"
+// 注册请求
+import register from "@/api/Register.js"
 export default{
 	data (){
 		var validatePass = (rule, value, callback) => {
@@ -129,70 +131,31 @@ export default{
 		}
 	},
 	methods:{
-    // 登录
-// 		async handleLogin(){
-//       // debugger
-//       // console.log(this.verification)
-//       // console.log(this.token)
-// 			// const res = await this.$http.get('/api/user')
-// 		 	const url=this.$backStage('/authorization/user',this.verification)
-// 		 	const res = await this.$http.post(url)
-// 			const data = res
-// 			// console.log(data)
-// 			if(data.status===200){
-//         console.log(data)
-// 				window.localStorage.setItem('token',JSON.stringify(this.verification))
-//         // this.token = 'Bearer ' + res.data.data.tokenD
-//         // return JSON.parse(getUserInfo()).token
-// 				// this.$router.push({
-// 				// 	name: '/'
-// 				// })
-// 				 this.$toast({
-// 				 	  message: '登录成功',
-// 					  duration: 3000
-// 				 })
-// //					页面实时刷新
-// 				this.$router.go(0)
-// //					loading加载
-// 				this.$Indicator.open({
-// 					text: '加载中...',
-// 					spinnerType: 'fading-circle'
-// 				})
-// 			}
-// 		},
-//  登录
+  //  登录
     handleLogin(){
-      this.loading = true;
       this.$store
         .dispatch("loginByCode",this.verification)
-        .then(res => {
-           alert('成功')
+        .then(() =>{
+            this.$router.push("/home")
+            this.$Indicator.open({
+              text: '加载中...',
+              spinnerType: 'fading-circle'
+          })
         })
         .catch(() => {
-           alert('失败')
+          console.log(err)
         })
     },
     // 注册
-    async handleRegister(){
-//      const res = await this.$http.get('/api/user')
-      const url=this.$backStage('/user/register/',this.verification)
-      const res = await this.$http.post(url)
-      const data = res
-//         console.log(data)
-      if(data.status===200){
-        window.localStorage.setItem('data',JSON.stringify(data))
-        // this.token = 'Bearer ' + res.data.data.body.token
-
-        // return JSON.parse(getUserInfo()).token
-//          页面实时刷新
-        this.$router.go(0)
-//          loading加载
-        this.$Indicator.open({
-          text: '加载中...',
-          spinnerType: 'fading-circle'
+      handleRegister(){
+        register.register(this.verification)
+        .then(()=>{
+          // this.$router.go(0)
         })
-      }
-    },
+        .catch(()=>{
+          console.log(err)
+        })
+      },
 //		登录页/点击记住账号 button 改变颜色
 	  	loginCheckbox: function (item) {
 //		  	item.state = !item.state;

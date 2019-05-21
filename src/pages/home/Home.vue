@@ -85,12 +85,18 @@ import Tabber from './../../assets/pub/Tabber.vue'
 import {mapActions} from 'vuex'
 import detail from './detail/Detail'
 import store from './../../store/modules/app.js'
+// 版本升级接口
+import version from "@/api/home/Version.js"
 export default {
   data () {
     return {
       selected:'home',
+      message: 'home',
 			plddata:[],
 			data:[],
+      versionCode:{
+        version_code:'2.0',
+      },
 			issuedata:[],
       datalist:[],
       animate:false,
@@ -154,7 +160,7 @@ creadte() {
       this.plddata = res.data[3]
 //			 	console.log(this.issuedata[0].state)
 		},
-    //		点击跳转通证详情接口
+    //点击跳转通证详情接口
 		async issue(id){
 			// const url=this.$backStage('/query?id='+id)
       const url=this.$backStage('/query?id='+id)
@@ -168,21 +174,24 @@ creadte() {
 //		 ...mapActions('detail',[
 //	          'app.detail'
 //	      ]),
-//	   版本升级
-	  async version(){
-      const url=this.$backStage('/versionnum')
-		 	const res = await this.$http.get(url)
-		 	const data = res.data
-		 	const version =this.$version()
-		 	this.$store.commit('version', res.data)
-		 	if(parseFloat(data.version)> parseFloat(version)){
-		 		let isForce = false
-		 		if(data.force===0){
+//	 版本升级
+    version(){
+      version.version(this.versionCode)
+      .then(()=>{
+        const version =this.$version()
+        this.$store.commit('version', res.data)
+        if(parseFloat(data.version)> parseFloat(version)){
+         let isForce = false
+         if(data.force===0){
           isForce = true
-		 		}
-		 		this.upgrade(isForce)
-		 	}
-	  },
+         }
+         this.upgrade(isForce)
+       }
+      })
+      .catch(()=>{
+        // console.log(err)
+      })
+    },
 		upgrade(isShow){
 			 this.$messagebox.confirm('', {
        closeOnClickModal:false,
