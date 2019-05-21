@@ -8,11 +8,11 @@
 							<mt-header fixed :title="$t('m.explore')"></mt-header>
 	        	</div>
 	        	<div class="explore-navbar">
-	        		<van-tabs @click="tokenList">
+	        		<van-tabs @click="list">
                 <!-- :title="$t('m.whole')" -->
 							  <van-tab  title="All">
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
+                    <mt-cell :title="items.id +items.nickname" :label="items.name">
                       <img class="assets-icon"slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
@@ -57,6 +57,8 @@
 <script>
 import Tabber from './../../assets/pub/Tabber.vue'
 import {mapActions, mapGetters,mapState} from 'vuex'
+// 列表接口
+import api from "@/api/token/Token.js"
 export default {
   name: 'page-tabbar',
   data () {
@@ -81,19 +83,27 @@ export default {
     setInterval(this.scroll,3000)
 	},
 	mounted(){
-    this.tokenList(0,'All')
+    this.list(0,'All')
 	},
   methods:{
     // 展示全部列表
-      async tokenList(index,title){
-        let u = '/query?type=0'
-        if(title != 'All'){
-          u = u + "&state=" + title
-        }
-        const url=this.$backStage(u)
-        const res = await this.$http.get(url)
+    list(){
+      api.tokenList().then(res=>{
         this.issuedata = res.data
-      },
+        // console.log(this.issuedata)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+      // async tokenList(index,title){
+      //   let u = '/query?type=0'
+      //   if(title != 'All'){
+      //     u = u + "&state=" + title
+      //   }
+      //   const url=this.$backStage(u)
+      //   const res = await this.$http.get(url)
+      //   this.issuedata = res.data
+      // },
       // 展示某一个详情
       async tokenDetail(id){
       const url=this.$backStage('/query?id='+id)

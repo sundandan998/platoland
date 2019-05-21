@@ -89,10 +89,8 @@
 
 <script>
 import pub from '@/assets/js/pub.js'
-// 登录请求
-import login from "@/api/login.js"
-// 注册请求
-import register from "@/api/Register.js"
+// 接口请求
+import api from "@/api/user/User.js"
 export default{
 	data (){
 		var validatePass = (rule, value, callback) => {
@@ -143,17 +141,17 @@ export default{
           })
         })
         .catch(() => {
-          console.log(err)
+          // console.log(err)
         })
     },
     // 注册
       handleRegister(){
-        register.register(this.verification)
+        api.register(this.verification)
         .then(()=>{
-          // this.$router.go(0)
+          this.$router.go(0)
         })
         .catch(()=>{
-          console.log(err)
+          // console.log(err)
         })
       },
 //		登录页/点击记住账号 button 改变颜色

@@ -78,7 +78,7 @@ service.interceptors.response.use(
         path: '/login'
       })
     }
-    message.error(errorJSON.ret_msg);
+    message.error(errorJSON.ret_msg)
     return Promise.reject(errorJSON)
   }
 );

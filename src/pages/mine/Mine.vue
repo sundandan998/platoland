@@ -61,30 +61,9 @@ export default {
     setInterval(this.scroll,3000)
 	},
   methods:{
-	},
-	// watch: {
-	//     message: function (val, oldVal) {
- //        // 这里就可以通过 val 的值变更来确定去向
- //        switch(val){
- //            case 'home':
- //                this.$router.push('/')
- //            break;
- //            case 'explore':
- //                this.$router.push('/explore')
- //            break;
- //            case 'mine':
- //                this.$router.push('/mine')
- //            break
-	//         }
-	//     }
- //    }
+	}
  }
-//	computed:{
-//			...mapGetters([
-//		      'app.isShow'
-//		    ])
-//		}
-//}
+
 </script>
 <style lang="scss">
 	  @import '../../assets/scss/global'

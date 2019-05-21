@@ -2,7 +2,7 @@
   <div class="pass-details-issue">
     <div class="pass-details-header">
       <mt-header fixed :title="$t('m.passdetails')">
-          <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="pass-details-information">
@@ -54,61 +54,73 @@
 import {mapActions} from 'vuex'
 import Clipboard from 'clipboard'
 import {mapGetters} from 'vuex'
+import api from '@/api/token/Token'
 export default {
   created(){
 //    console.log(this.$store.state.app.detail)
 //    console.log(this.$store.state.app.detail[0].id)
-  },
-  data() {
-      return {
-        detailslist:[],
-        data:[],
-        show:''
-      }
-  },
-  mounted() {
-    this.showbtn()
-  },
+},
+data() {
+  return {
+    detailslist:[],
+    data:[],
+    show:'',
+    detailId:{}
+  }
+},
+mounted() {
+  this.showbtn()
 
-  methods:{
+},
+created(){
+  this.detailId = this.$route.params
+  this.getDetail()
+},
+methods:{
+    //获取详情
+    getDetail(){
+      api.tokenDetail( this.$route.params)
+      .then(res=>{console.log(res)})
+      .catch(err=>{console.log(err)})
+    },
 //    复制
-    copy() {
-          var clipboard = new Clipboard('.tag-read')
-          clipboard.on('success', e => {
+copy() {
+  var clipboard = new Clipboard('.tag-read')
+  clipboard.on('success', e => {
             // console.log('复制成功')
             // 释放内存
             clipboard.destroy()
           })
-          clipboard.on('error', e => {
+  clipboard.on('error', e => {
             // 不支持复制
             console.log('该浏览器不支持自动复制')
             // 释放内存
             clipboard.destroy()
           })
-      },
-    showbtn(){
+},
+showbtn(){
 //      debugger
-      if(this.detail.state== 'Pending'){
-        document.getElementById("transaction").style.display="none"
-        document.getElementById("purchase").style.display="none"
-      }else if(this.detail.state== 'Issuing'){
-        document.getElementById("transaction").style.display="none"
-        document.getElementById("purchase").style.display="block"
-      }else if(this.detail.state== 'In Circulation'){
-        document.getElementById("purchase").style.display="none"
-        document.getElementById("transaction").style.display="block"
-      }
-    }
-  },
-  computed:{
-    ...mapGetters([
-        'detail'
-      ])
-  }
+if(this.detail.state== 'Pending'){
+  document.getElementById("transaction").style.display="none"
+  document.getElementById("purchase").style.display="none"
+}else if(this.detail.state== 'Issuing'){
+  document.getElementById("transaction").style.display="none"
+  document.getElementById("purchase").style.display="block"
+}else if(this.detail.state== 'In Circulation'){
+  document.getElementById("purchase").style.display="none"
+  document.getElementById("transaction").style.display="block"
+}
+}
+},
+computed:{
+  ...mapGetters([
+    'detail'
+    ])
+}
 }
 
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+@import '../../../assets/scss/global'
 </style>

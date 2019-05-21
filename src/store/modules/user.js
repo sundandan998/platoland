@@ -1,4 +1,4 @@
-import api from "@/api/login"
+import api from "@/api/user/User.js"
 let webTokenExpiredTime = 60 * 60 * 1000 // 前端控制，如果两个小时没有操作，退出登录。
 const user = {
   state: {

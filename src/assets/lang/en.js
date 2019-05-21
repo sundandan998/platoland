@@ -209,6 +209,8 @@ export const m = {
   // ------------------------公告中心----------------------------------
   announcementcenter:'Announcement',
   noticenews:'PLATOLAND Won the innovation award at Korea!',
+  // PLATOLAND生态获区块链协会创新应用大奖！
+  noitce:'PLATOLAND won the innovation application award of Blockchain Association',
   // -----------------------------公告详情-------------------------------
   noticdetails:'Announcement Details',
   notictitle:'PLATOLAND Won the innovation award at Korea',

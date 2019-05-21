@@ -21,16 +21,29 @@
 </template>
 
 <script>
+import api from "@/api/system/System.js"
 export default {
 	data(){
 		return {
 			selected: 'notice'
 		}
-	}
+	},
+  mounted(){
+    // this.notice()
+  },
+  methods:{
+    // notice(){
+    //   api.noticeDetail().then(res=>{
+    //     console.log('123')
+    //   }).catch(err=>{
+    //     console.log(err)
+    //   })
+    // }
+  }
 
 }
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global';
+	@import '../../../assets/scss/global'
 </style>

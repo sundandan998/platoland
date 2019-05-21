@@ -19,8 +19,8 @@
     </div>
     <router-link to="/assetsdetailed">
      	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset(item.id)">
-        <mt-cell :title="item.id + (item.nickname)":value="item.purchasenum" :label="item.body">
-          <!-- <p>{{item.nickname}}</p> -->
+        <mt-cell :title="item.id + (item.token.name)" :value="item.balance" :label="item.token.subject">
+          <!-- <p>{{item.id}}</p> -->
           <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+item.icon+'.png'"/>
           <!-- <img slot="icon" src="../../../assets/images/u345.png"> -->
         </mt-cell>
@@ -30,31 +30,42 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
+// 资产列表
+import api from "@/api/user/User.js"
 export default {
+  created(){
+    this.assetList()
+  },
   data() {
    return {
    		assetsdata:[]
    }
   },
-  created(){
-     this.toAsset()
-//   console.log(item)
-  },
   mounted(){
-  	this.toAsset()
+  	// this.assetList()
 //	this.$store.dispatch('detail')
   },
   watch:{
   },
   methods: {
-  	async toAsset(id){
-  		const url=this.$backStage('/query?isactive=0')
-		 	const res = await this.$http.get(url)
-			this.assetsdata = res.data
-//			console.log(this.assetsdata)
-//			})
-			this.$store.commit('detail', res.data[0])
-  	}
+    // 资产列表
+    assetList(){
+      api.assetList().then(res=>{
+        this.assetsdata = res.data
+        // console.log(this.assetsdata)
+        // this.$store.commit('detail', res.data[0])
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+//   	async toAsset(id){
+//   		const url=this.$backStage('/query?isactive=0')
+// 		 	const res = await this.$http.get(url)
+// 			this.assetsdata = res.data
+// //			console.log(this.assetsdata)
+// //			})
+// 			this.$store.commit('detail', res.data[0])
+//   	}
   }
 }
 </script>

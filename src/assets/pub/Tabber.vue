@@ -1,21 +1,21 @@
 <template>
-    <mt-tabbar v-model="message" fixed>
-      <mt-tab-item id="home"  @click.native="home">
-        <img slot="icon" src="../../assets/images/home-b.svg" v-if="message == 'home'">
-        <img slot="icon" src="../../assets/images/home.svg" v-else>
-        {{$t('m.homepage')}}
-      </mt-tab-item>
-      <mt-tab-item id="explore" @click.native="explore">
-        <img slot="icon" src="../../assets/images/explore-b.svg" v-if="message == 'explore'">
-        <img slot="icon" src="../../assets/images/explore.svg"v-else>
-        {{$t('m.explore')}}
-      </mt-tab-item>
-      <mt-tab-item id="mine"  @click.native="mine">
-        <img slot="icon" src="../../assets/images/mine-b.svg" v-if="message == 'mine'">
-        <img slot="icon" src="../../assets/images/mine.svg"v-else>
-        {{$t('m.mine')}}
-      </mt-tab-item>
-    </mt-tabbar>
+  <mt-tabbar  :selected.sync ="message" fixed>
+    <mt-tab-item id="home"  @click.native="home">
+      <img slot="icon" src="../../assets/images/home-b.svg" v-if="message == 'home'">
+      <img slot="icon" src="../../assets/images/home.svg" v-else>
+      <font :class="message === 'home'? 'color' :''">{{$t('m.homepage')}}</font>
+    </mt-tab-item>
+    <mt-tab-item id="explore" @click.native="explore">
+      <img slot="icon" src="../../assets/images/explore-b.svg" v-if="message == 'explore'">
+      <img slot="icon" src="../../assets/images/explore.svg"v-else>
+      <font :class="message === 'explore'? 'color' :''">{{$t('m.explore')}}</font>
+    </mt-tab-item>
+    <mt-tab-item id="mine"  @click.native="mine">
+      <img slot="icon" src="../../assets/images/mine-b.svg" v-if="message == 'mine'">
+      <img slot="icon" src="../../assets/images/mine.svg"v-else>
+      <font :class="message === 'mine'? 'color' :''">{{$t('m.mine')}}</font>
+    </mt-tab-item>
+  </mt-tabbar>
 </template>
 <script>
 export default {
@@ -25,7 +25,7 @@ export default {
       default:''
     }
   },
-data () {
+  data () {
     return {
     }
   },
@@ -33,14 +33,14 @@ data () {
     home(){
       this.$router.push({
         name:'Home'
-        })
-      },
-      explore(){
+      })
+    },
+    explore(){
       this.$router.push({
         name:'Explore'
-        })
-      },
-      mine(){
+      })
+    },
+    mine(){
       this.$router.push({
         name:'Mine'
       })
@@ -48,3 +48,6 @@ data () {
   }
 }
 </script>
+<style>
+.color{color:#1296DB;}
+</style>

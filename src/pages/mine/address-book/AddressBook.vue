@@ -15,7 +15,8 @@
   			<mt-cell>
   				<div class="adress-book-content fl">
   					<p>{{item.name}}</p>
-  					<p>{{item.address}}</p>
+            <p>{{item.remark}}</p>
+            <p>{{item.address}}</p>
   				</div>
           <router-link to="edit">
   				<div @click="editcontent">
@@ -29,6 +30,8 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
+// 地址列表接口
+import api from "@/api/user/User.js"
 export default{
 	created () {
     	this.address()
@@ -39,15 +42,24 @@ export default{
 		}
 	},
 	methods:{
-		async address (){
-//			const res = await this.$http.get('/api/address')
-			const url=this.$backStage('/address')
-	 		const res = await this.$http.get(url)
-			const data = res
-			this.book = res.data.data
-			// console.log(this.book)
-			this.$store.commit('detail', res.data.data[0])
-		},
+    // 地址列表
+    address(){
+      api.addressList().then(res=>{
+      this.book = res.data
+      // console.log(this.book)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+// 		async address (){
+// //			const res = await this.$http.get('/api/address')
+// 			const url=this.$backStage('/address')
+// 	 		const res = await this.$http.get(url)
+// 			const data = res
+// 			this.book = res.data.data
+// 			// console.log(this.book)
+// 			this.$store.commit('detail', res.data.data[0])
+// 		},
 //		点击编辑跳转
 		editcontent(){
 			this.$router.push({
