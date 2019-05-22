@@ -78,18 +78,29 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import api from "@/api/user/User.js"
 export default{
 	data(){
 		return{
-			data:{}
+			data:{},
+      assetDetailId:{}
 		}
 	},
 	created(){
-		this.asset
-		this.detail
-//		console.log(this.detail)
+    this.assetDetailId = this.$route.params
+    this.assetsDetail()
  	},
 	methods:{
+    assetsDetail(){
+      api.tokenDetail(this.$route.params)
+      .then(res=>{
+        console.log(res)
+        this.$store.commit('detail', res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
 		//	点击移除弹出的消息框
 		remove(){
     this.$messagebox({

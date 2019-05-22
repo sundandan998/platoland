@@ -10,11 +10,16 @@
         <span>{{$t('m.essentialinformation')}}</span>
       </div>
       <div class="pass-details-information-content">
-        <mt-cell :title="$t('m.nickname')" :value="this.detail.id"></mt-cell>
-        <mt-cell :title="$t('m.tokenname')" :value="this.detail.nickname"></mt-cell>
-        <mt-cell :title="$t('m.address')" :value="this.detail.address"></mt-cell>
-        <mt-cell :title="$t('m.body')" :value="this.detail.body"  to="/subject" is-link></mt-cell>
-        <mt-cell :title="$t('m.issuer')" :value="this.detail.issuer"></mt-cell>
+        <!-- 通证标识 -->
+        <mt-cell :title="$t('m.identitycard')" :value="detail.code+(detail.name)"></mt-cell>
+        <!-- 通证昵称 -->
+        <mt-cell :title="$t('m.nickname')" :value="detail.nickname"></mt-cell>
+        <!-- 合约地址 -->
+        <mt-cell :title="$t('m.address')" :value="detail.contract_address"></mt-cell>
+        <!-- 通证主体 -->
+        <mt-cell :title="$t('m.body')" :value="this.subject.name" to="/subject" is-link></mt-cell>
+        <!-- 发行方 -->
+        <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"></mt-cell>
       </div>
     </div>
     <div class="pass-details-issue-data">
@@ -22,19 +27,28 @@
         <span>{{$t('m.issuedata')}}</span>
       </div>
       <div class="pass-details-issue-data-content">
-        <mt-cell :title="$t('m.issuingstate')" :value="this.detail.state"></mt-cell>
-        <mt-cell :title="$t('m.proportion')" :value="this.detail.proportion"></mt-cell>
-        <mt-cell :title="$t('m.valuationassets')" :value="this.detail.assets"></mt-cell>
-        <mt-cell :title="$t('m.mode')" :value="this.detail.mode"></mt-cell>
-        <mt-cell :title="$t('m.issuetime')" :value="this.detail.issuetime"></mt-cell>
-        <mt-cell :title="$t('m.endtime')" :value="this.detail.endtime"></mt-cell>
-        <mt-cell :title="$t('m.minnum')" :value="this.detail.minnum"></mt-cell>
-        <mt-cell :title="$t('m.issuenum')" :value="this.detail.amountnum"></mt-cell>
-        <mt-cell :title="$t('m.purchasenum')" :value="this.detail.purchasenum"></mt-cell>
-        <mt-cell :title="$t('m.soldnum')" :value="this.detail.soldnum"></mt-cell>
-        <mt-cell :title="$t('m.initialprice')" :value="this.detail.soldnum"></mt-cell>
-        <mt-cell :title="$t('m.issueprice')" :value="this.detail.initialprice"></mt-cell>
-        <!-- <mt-cell :title="$t('m.issueprice')" :value="this.detail.issueprice"></mt-cell> -->
+        <!-- 发行状态 -->
+        <mt-cell :title="$t('m.issuingstate')" :value="this.release.status"></mt-cell>
+        <!-- 计价资产 -->
+        <mt-cell :title="$t('m.valuationassets')" :value="this.release.denominated_assets"></mt-cell>
+        <!-- 初始单价 -->
+        <mt-cell :title="$t('m.initialprice')" :value="this.release.init_price"></mt-cell>
+        <!-- 发行单价 -->
+        <mt-cell :title="$t('m.issueprice')" :value="this.release.issue_price"></mt-cell>
+        <!-- 发行总量 -->
+        <mt-cell :title="$t('m.issuenum')" :value="this.release.first_number"></mt-cell>
+        <!-- 起购数量 -->
+        <mt-cell :title="$t('m.purchasenum')" :value="this.release.purchase_number"></mt-cell>
+        <!-- 发行方式 -->
+        <mt-cell :title="$t('m.mode')" :value="this.release.issuance_method"></mt-cell>
+        <!-- 发行时间 -->
+        <mt-cell :title="$t('m.issuetime')" :value="this.release.publish_time"></mt-cell>
+        <!-- 截止时间 -->
+        <mt-cell :title="$t('m.endtime')" :value="this.release.end_time"></mt-cell>
+        <!-- 最小发行量 -->
+        <mt-cell :title="$t('m.minnum')" :value="this.release.minimum_number"></mt-cell>
+        <!-- 股权发行比例 -->
+        <mt-cell :title="$t('m.proportion')" :value="this.release.equity_issuance_ratio"></mt-cell>
       </div>
     </div>
     <div class="pass-details-issue-btn" id="transaction">
@@ -62,10 +76,11 @@ export default {
 },
 data() {
   return {
-    detailslist:[],
     data:[],
     show:'',
-    detailId:{}
+    detailId:{},
+    subject:{},
+    release:{}
   }
 },
 mounted() {
@@ -79,44 +94,50 @@ created(){
 methods:{
     //获取详情
     getDetail(){
-      api.tokenDetail( this.$route.params)
-      .then(res=>{console.log(res)})
-      .catch(err=>{console.log(err)})
+      api.tokenDetail(this.$route.params)
+      .then(res=>{
+        this.subject = res.data.subject
+        this.release = res.data.release
+        this.$store.commit('detail', res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
     },
+
 //    复制
-copy() {
-  var clipboard = new Clipboard('.tag-read')
-  clipboard.on('success', e => {
-            // console.log('复制成功')
-            // 释放内存
-            clipboard.destroy()
-          })
-  clipboard.on('error', e => {
-            // 不支持复制
-            console.log('该浏览器不支持自动复制')
-            // 释放内存
-            clipboard.destroy()
-          })
+  copy() {
+    var clipboard = new Clipboard('.tag-read')
+    clipboard.on('success', e => {
+        // 释放内存
+        clipboard.destroy()
+      })
+    clipboard.on('error', e => {
+      // 不支持复制
+      console.log('该浏览器不支持自动复制')
+      // 释放内存
+      clipboard.destroy()
+    })
+  },
+  showbtn(){
+  //      debugger
+  if(this.detail.state== 'Pending'){
+    document.getElementById("transaction").style.display="none"
+    document.getElementById("purchase").style.display="none"
+  }else if(this.detail.state== 'Issuing'){
+    document.getElementById("transaction").style.display="none"
+    document.getElementById("purchase").style.display="block"
+  }else if(this.detail.state== 'In Circulation'){
+    document.getElementById("purchase").style.display="none"
+    document.getElementById("transaction").style.display="block"
+  }
+  }
 },
-showbtn(){
-//      debugger
-if(this.detail.state== 'Pending'){
-  document.getElementById("transaction").style.display="none"
-  document.getElementById("purchase").style.display="none"
-}else if(this.detail.state== 'Issuing'){
-  document.getElementById("transaction").style.display="none"
-  document.getElementById("purchase").style.display="block"
-}else if(this.detail.state== 'In Circulation'){
-  document.getElementById("purchase").style.display="none"
-  document.getElementById("transaction").style.display="block"
-}
-}
-},
-computed:{
-  ...mapGetters([
-    'detail'
-    ])
-}
+  computed:{
+    ...mapGetters([
+      'detail'
+      ])
+  }
 }
 
 </script>

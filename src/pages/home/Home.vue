@@ -120,10 +120,10 @@ export default {
     spinnerType: 'fading-circle'
   })
   		 //关闭加载
-       _this.$indicator.close()
-       setInterval(this.scroll,3000)
-     },
-     mounted () {
+      _this.$indicator.close()
+      setInterval(this.scroll,3000)
+    },
+    mounted () {
       this.version(),
 		// this.listissue(),
     this.pld(),
@@ -140,18 +140,18 @@ methods:{
        this.animate=false
      },500)
    },
-//	  首页/发行中/待发行/沟通中渲染页面数据
-issue(id){
- console.log(id)
- api.home().then(res=>{
-  this.issuedata = res.data
-  this.$router.push('/detail/'+id)
-  this.$store.commit('detail', res.data)
-        // console.log(this.plddata)
-      }).catch(err=>{
-        console.log(err)
-      })
-    },
+    //	  首页/发行中/待发行/沟通中渲染页面数据
+    issue(id){
+     // console.log(id)
+     api.home().then(res=>{
+      this.issuedata = res.data
+      this.$router.push('/detail/'+id)
+      this.$store.commit('detail', res.data)
+          // console.log(this.plddata)
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
     pld(){
       api.home().then(res=>{
         this.issuedata = res.data
@@ -159,12 +159,12 @@ issue(id){
         this.pld = res.data.pld.release
         this.notice_list = res.data.notice_list
         this.token_list = res.data.token_list
-        // this.$router.push('/detail')
-        // console.log(this.notice_list.title)
-      }).catch(err=>{
-        console.log(err)
-      })
-    },
+          // this.$router.push('/detail')
+          // console.log(this.notice_list.title)
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
 // 	  async	listissue(){
 // 		  const url=this.$backStage('/query?type=0')
 // 			const res = await this.$http.get(url)

@@ -100,13 +100,25 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import api from '@/api/token/Token'
 export default {
 	data(){
 		return{
 			selected: 'information'
 		}
 	},
+  created(){
+    this.subject()
+},
 	methods:{
+    subject(id){
+      api.tokenSubject().then(res=>{
+        this.$router.push('/subject')
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
 	},
 	computed:{
 		...mapGetters([

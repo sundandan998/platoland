@@ -17,15 +17,15 @@
         <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addseets')}}</span>
       </router-link>
     </div>
-    <router-link to="/assetsdetailed">
-     	<div class="certificate-list-card" v-for="(item,index) in assetsdata" @click="toAsset(item.id)">
+    <!-- <router-link to="/assetsdetailed"> -->
+     	<div class="certificate-list-card" v-for="(item,index) in assetsdata"  @click="assetDetail(item.id)">
         <mt-cell :title="item.id + (item.token.name)" :value="item.balance" :label="item.token.subject">
           <!-- <p>{{item.id}}</p> -->
           <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+item.icon+'.png'"/>
           <!-- <img slot="icon" src="../../../assets/images/u345.png"> -->
         </mt-cell>
       </div>
-    </router-link>
+    <!-- </router-link> -->
   </div>
 </template>
 <script>
@@ -57,15 +57,17 @@ export default {
       }).catch(err=>{
         console.log(err)
       })
+    },
+    // 资产详情
+    assetDetail(id){
+      console.log(id)
+      api.assetDetail().then(res=>{
+        console.log(res)
+        this.$router.push('/assetsdetailed/'+id)
+      }).catch(err=>{
+        console.log(err)
+      })
     }
-//   	async toAsset(id){
-//   		const url=this.$backStage('/query?isactive=0')
-// 		 	const res = await this.$http.get(url)
-// 			this.assetsdata = res.data
-// //			console.log(this.assetsdata)
-// //			})
-// 			this.$store.commit('detail', res.data[0])
-//   	}
   }
 }
 </script>
