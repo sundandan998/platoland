@@ -34,7 +34,7 @@ export default {
   // 资产详情
   assetDetail(params = {}){
     return request({
-      url: "/user/asset/:id/detail/",
+      url: "/user/asset/"+params.id+"/detail/",
       method: "get",
       params: params
     })

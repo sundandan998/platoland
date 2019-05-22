@@ -63,6 +63,7 @@ export const m = {
   sure:'Buy',
   delete:'Delete',
   // -----------------通证主体-------------------------
+  bodyname:'Subject Name',
   bodyinformation:'Details',
   bodyintroduce:'Intro',
   type:'Type',

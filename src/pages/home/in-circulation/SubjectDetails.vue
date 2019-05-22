@@ -14,84 +14,52 @@
 			<mt-tab-container v-model="selected">
 			  <mt-tab-container-item id="information">
 			    <div class="information-content">
+            <!-- 主体名称： -->
 			    	<mt-cell :title="$t('m.bodyname')">
-			    		<span>{{this.detail.body}}</span>
+			    		<span>{{subjectData.name}}</span>
 			    	</mt-cell>
-			    	<mt-cell :title="$t('m.nickname')">
-			    		<span>{{this.detail.nickname}}</span>
+            <!-- 通证标识 -->
+			    	<mt-cell :title="$t('m.identitycard')">
+			    		<span><img :src="'http://'+subjectImg.icon"> {{subjectImg.code}} {{subjectImg.name}}</span>
 			    	</mt-cell>
-			  		<mt-cell :title="$t('m.identitycard')">
-			  			<!--<img src="../../../assets/images/u1429.png" alt="" />&nbsp;-->
-			  			<span>{{this.detail.id}}</span>
-
+            <!-- 通证昵称 -->
+			  		<mt-cell :title="$t('m.nickname')">
+			  			<span>{{subjectImg.nickname}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.type')" >
-			  			<span>{{this.detail.bodytype}}</span>
+            <!-- 注册住所 -->
+			  		<mt-cell :title="$t('m.residence')" >
+			  			<span>{{subjectData.registered_address}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.residence')">
-			  			<span>{{this.detail.residence}}</span>
+            <!-- 经营地址 -->
+			  		<mt-cell :title="$t('m.businessaddress')">
+			  			<span>{{subjectData.business_address}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.businessaddress')" >
-			  			<span>{{this.detail.businessaddress}}</span>
+            <!-- 法 人 -->
+			  		<mt-cell :title="$t('m.people')" >
+			  			<span>{{subjectData.legal_person}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.people')">
-			  			<span>{{this.detail.person}}</span>
+            <!-- 注册资本 -->
+			  		<mt-cell :title="$t('m.capital')">
+			  			<span>{{subjectData.registered_capital}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.capital')" >
-			  			<span>{{this.detail.capital}}</span>
-			  		</mt-cell>
+            <!-- 成立日期 -->
 			  		<mt-cell :title="$t('m.establishdate')" >
-			  			<span>{{this.detail.establishdate}}</span>
+			  			<span>{{subjectData.build_time}}</span>
 			  		</mt-cell>
-			  		<mt-cell :title="$t('m.term')" :value="detail.term">
+            <!-- 营业期限 -->
+			  		<mt-cell :title="$t('m.term')" >
+			  			<span>{{subjectData.start_time}}至{{subjectData.end_time}}</span>
 			  		</mt-cell>
-            <mt-cell :title="$t('m.range')" :value="detail.range">
+            <!-- 经营范围 -->
+            <mt-cell :title="$t('m.range')" >
+              <span>{{subjectData.business_scope}}</span>
             </mt-cell>
 			    </div>
 			  </mt-tab-container-item>
 			  <mt-tab-container-item id="introduce">
-			    <div class="subject-introduce-title">
-			    	<h2>{{$t('m.subjecttitle')}}</h2>
-			    </div>
-			    <div class="subject-introduce-img">
-			    	<img src="../../../assets/images/u1753.jpg" alt="" />
-			    </div>
-			    <div class="subject-introduce-introduction">
-			    	<div class="subject-introduce-introduction-title">
-			    		<h3>{{$t('m.mainbodyintroduction')}}</h3>
-			    	</div>
-			    	<div class="subject-introduce-introduction-content">
-			    		<div class="subject-introduce-introduction-content-img fl">
-			    			<img src="../../../assets/images/u2356.jpg" alt="" />
-			    		</div>
-						<div class="subject-introduce-introduction-content-text fr">
-							<span>{{$t('m.mainbodytextone')}}</span>
-						  <p>{{$t('m.mainbodytexttwo')}}</p>
-						</div>
-			    	</div>
-			    </div>
-			    <div class="subject-introduce-business">
-			    	<div class="subject-introduce-business-title">
-			    		<h3>{{$t('m.mainbusiness')}}</h3>
-			    	</div>
-			    	<div class="subject-introduce-business-content-text fl">
-							<span>{{$t('m.mainbusinessone')}}</span>
-						  <p>{{$t('m.mainbusinesstwo')}}</p>
-						</div>
-			    	<div class="subject-introduce-business-content">
-			    		<div class="subject-introduce-business-content-img fr">
-			    			<img src="../../../assets/images/u2356.jpg" alt="" />
-			    		</div>
-			    	</div>
-			    </div>
-			  <!--   <div class="subject-introduce-team">
-			    	<div class="subject-introduce-team-title">
-			    		<h3>{{$t('m.teammanagement')}}</h3>
-			    	</div>
-			    	<div class="subject-introduce-team-content">
-			    		<p>{{$t('m.teamname')}}</p>
-			    	</div>
-			    </div> -->
+        <!--   <div v-for="(item,index) in introduction">
+            <img :src="'http://'+item.introduction.jpg">
+          </div> -->
 			  </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
@@ -104,17 +72,23 @@ import api from '@/api/token/Token'
 export default {
 	data(){
 		return{
-			selected: 'information'
+			selected: 'information',
+      subjectId:{},
+      subjectData:{},
+      subjectImg:{},
+      // introduction:[]
 		}
 	},
   created(){
+    this.subjectId = this.$route.params
     this.subject()
 },
 	methods:{
     subject(id){
-      api.tokenSubject().then(res=>{
-        this.$router.push('/subject')
-        console.log(res)
+      api.tokenSubject(this.$route.params).then(res=>{
+        this.subjectData = res.subject
+        this.subjectImg = res.subject.token
+        // console.log(this.introduction)
       }).catch(err=>{
         console.log(err)
       })

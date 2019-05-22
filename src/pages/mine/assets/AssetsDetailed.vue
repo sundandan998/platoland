@@ -23,19 +23,18 @@
 		</div>
 		<div class="assets-detailed-exhibition" >
 		<div class="assets-detailed-exhibition-img" >
+      <p>{{this.assetsData.balance}}</p>
 			<img src="../../../assets/images/ld.png" alt="" class="fl" />
 			<ul>
-				<!-- <li>{{this.detail.id}}({{this.detail.nickname}})</li>
-        <li><P>{{this.detail.body}}</P></li> -->
-        <li>LD({{$t('m.intoname')}})</li>
-        <li>{{$t('m.intobody')}}</li>
+        <li>{{this.assetsToken.code}} {{this.assetsToken.nickname}}</li>
+        <li>{{this.assetsToken.subject}}</li>
+        <!-- <li>{{$t('m.intobody')}}</li> -->
 			</ul>
 		</div>
-			<mt-cell :title="$t('m.availablenum')" value="50.000">
-
+			<mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
 				 <img slot="icon" src="../../../assets/images/u4662.png">
 			</mt-cell>
-			<mt-cell :title="$t('m.frozen')" value="50.00">
+			<mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount">
 				<img slot="icon" src="../../../assets/images/u4666.png">
 			</mt-cell>
 		</div>
@@ -83,25 +82,26 @@ export default{
 	data(){
 		return{
 			data:{},
-      assetDetailId:{}
+      assetDetailId:{},
+      assetsData:{},
+      assetsToken:{}
 		}
 	},
 	created(){
     this.assetDetailId = this.$route.params
-    this.assetsDetail()
+    this.assetDetail()
  	},
 	methods:{
-    assetsDetail(){
-      api.tokenDetail(this.$route.params)
-      .then(res=>{
-        console.log(res)
-        this.$store.commit('detail', res.data)
-      })
-      .catch(err=>{
+    assetDetail(){
+      api.assetDetail(this.$route.params).then(res=>{
+        this.assetsData = res.data
+        this.assetsToken = res.data.token
+        // console.log(res)
+      }).catch(err=>{
         console.log(err)
       })
     },
-		//	点击移除弹出的消息框
+		//点击移除弹出的消息框
 		remove(){
     this.$messagebox({
       title: 'Tips',

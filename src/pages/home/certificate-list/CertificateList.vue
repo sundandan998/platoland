@@ -7,7 +7,7 @@
     </div>
     <div class="certificate-list-card" v-for ="(item, index) in assetsdata">
       <mt-cell :title="item.code+ (item.nickname)" :value="item.name" :label="item.subject" @click="issue(item.id)">
-          <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+item.icon+'.png'"/>
+           <img class="assets-icon" slot="icon" :src="'http://'+item.icon">
           <mt-switch v-model="item.isactive=='0'" class="asset-list-switch" @change="assetswitch"></mt-switch>
       </mt-cell>
     </div>
@@ -29,6 +29,7 @@ export default {
     }
   },
 	created () {
+    this.listassets()
 	  },
 	mounted () {
 		this.$store.dispatch('detail'),
@@ -66,6 +67,7 @@ export default {
     listassets(){
       api.tokenList().then(res=>{
         this.assetsdata = res.data
+        // console.log(this.assetsdata)
       }).catch(err=>{
         console.log(err)
       })

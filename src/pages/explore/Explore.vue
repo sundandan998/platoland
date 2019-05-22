@@ -11,18 +11,20 @@
 	        		<van-tabs @click="list">
                 <!-- :title="$t('m.whole')" -->
 							  <van-tab  title="All">
-                  <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id +items.nickname" :label="items.name">
-                      <img class="assets-icon"slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
-                    </mt-cell>
-                  </div>
+                    <div v-for="(items,index) in issuedata">
+                      <router-link :to="/detail/+ items.id">
+                        <mt-cell :title="items.code +items.nickname" :label="items.subject">
+                          <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                            <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
+                        </mt-cell>
+                      </router-link>
+                    </div>
 							  </van-tab>
                 <!-- :title="$t('m.incirculation')" -->
 							  <van-tab  title="In Circulation">
                   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
-                      <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
+                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                      <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
@@ -30,8 +32,8 @@
                 <!-- :title="$t('m.inissue')" -->
 							  <van-tab title="Issuing">
 							   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
-                      <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
+                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                      <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
@@ -39,8 +41,8 @@
                 <!-- :title="$t('m.tobeissued')" -->
 							  <van-tab title="Pending">
 						  	 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.id +(items.nickname)" :label="items.body">
-                       <img class="assets-icon"slot="icon" v-bind:src="'static/img/'+items.icon+'.png'"/>
+                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                       <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
                         <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </div>
@@ -105,15 +107,15 @@ export default {
       //   this.issuedata = res.data
       // },
       // 展示某一个详情
-      async tokenDetail(id){
-      const url=this.$backStage('/query?id='+id)
-      const res = await this.$http.get(url)
-      const data = res
-      this.$router.push({
-        name:'Detail',
-      })
-      this.$store.commit('detail', res.data[0])
-    }
+    //   async tokenDetail(id){
+    //   const url=this.$backStage('/query?id='+id)
+    //   const res = await this.$http.get(url)
+    //   const data = res
+    //   this.$router.push({
+    //     name:'Detail',
+    //   })
+    //   this.$store.commit('detail', res.data[0])
+    // }
 	}
  }
 </script>

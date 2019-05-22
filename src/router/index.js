@@ -191,7 +191,7 @@ export default new Router({
     },
     //首页--通正详情
     {
-      path: '/detail/:id',
+      path: '/detail/:code',
       name: 'Detail',
       component: () => import("@/pages/home/detail/Detail")
     },
@@ -209,7 +209,7 @@ export default new Router({
     },
     //  首页/流通中/主体详情
     {
-      path: '/subject',
+      path: '/subject/:id',
       name: 'Subject',
       component: () => import("@/pages/home/in-circulation/SubjectDetails")
     },

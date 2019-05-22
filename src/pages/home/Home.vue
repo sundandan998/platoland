@@ -47,9 +47,10 @@
         </div>
         <!-- 卡片部分 -->
         <div class="home-assets-subscription-content">
-         <div class="assets-subscription" v-for="(items,index) in token_list" @click="issue(items.id)">
+         <div class="assets-subscription" v-for="(items,index) in token_list" @click="issue(items.code)">
            <!-- <img src="../../assets/images/u345.png" /> -->
-           <img v-bind:src="'static/img/'+items.icon+'.png'"/>
+           <!-- <img v-bind:src="'static/img/'+items.icon+'.png'"/> -->
+           <img :src="'http://'+items.icon">
            <div class="assets-subscription-text fr">
              <span class="home-name">{{items.code}}{{items.name}}</span>
              <p>{{items.subject}}</p>
@@ -115,21 +116,20 @@ export default {
     'app-tabber': Tabber
   },
   creadte() {
-   _this.$indicator.open({
-    text: '充值中....',
-    spinnerType: 'fading-circle'
-  })
-  		 //关闭加载
-      _this.$indicator.close()
-      setInterval(this.scroll,3000)
-    },
-    mounted () {
+     // _this.$indicator.open({
+     //  text: '充值中....',
+     //  spinnerType: 'fading-circle'
+     //  })
+  		 // //关闭加载
+     //  _this.$indicator.close()
+     //  setInterval(this.scroll,3000)
+     //////////////////
       this.version(),
-		// this.listissue(),
-    this.pld(),
-    this.$store.dispatch('detail')
-//	  console.group(this.$store.state.app.showFooter)
-},
+      this.$store.dispatch('detail')
+    },
+  mounted () {
+      this.pld()
+    },
 methods:{
 		//	  公告通知
     scroll(){
@@ -140,88 +140,66 @@ methods:{
        this.animate=false
      },500)
    },
-    //	  首页/发行中/待发行/沟通中渲染页面数据
-    issue(id){
-     // console.log(id)
-     api.home().then(res=>{
+    //首页/发行中/待发行/沟通中渲染页面数据
+    issue(code){
+     // console.log(code)
+     api.home({code:code}).then(res=>{
       this.issuedata = res.data
-      this.$router.push('/detail/'+id)
+      this.$router.push('/detail/'+code)
       this.$store.commit('detail', res.data)
           // console.log(this.plddata)
         }).catch(err=>{
           console.log(err)
         })
       },
-    pld(){
-      api.home().then(res=>{
-        this.issuedata = res.data
-        this.plddata = res.data.pld
-        this.pld = res.data.pld.release
-        this.notice_list = res.data.notice_list
-        this.token_list = res.data.token_list
-          // this.$router.push('/detail')
-          // console.log(this.notice_list.title)
-        }).catch(err=>{
-          console.log(err)
-        })
-      },
-// 	  async	listissue(){
-// 		  const url=this.$backStage('/query?type=0')
-// 			const res = await this.$http.get(url)
-// 			this.issuedata = res.data
-//       // console.log(this.issuedata[0].name)
-
-//       this.plddata = res.data[3]
-// //			 	console.log(this.issuedata[0].state)
-// 		},
-    // 点击跳转通证详情接口
-    //
-		// async issue(id){
-		// 	// const url=this.$backStage('/query?id='+id)
-  //     const url=this.$backStage('/query?id='+id)
-		//  	const res = await this.$http.get(url)
-		// 	const data = res
-		// 	this.$router.push({
-		// 		name:'Detail',
-		// 	})
-		// 	this.$store.commit('detail', res.data[0])
-		// },
-   ...mapActions('detail',[
+      pld(){
+        api.home().then(res=>{
+          this.issuedata = res.data
+          this.plddata = res.data.pld
+          this.pld = res.data.pld.release
+          this.notice_list = res.data.notice_list
+          this.token_list = res.data.token_list
+        // this.$router.push('/detail')
+        // console.log(this.notice_list.title)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    ...mapActions('detail',[
      'app.detail'
      ]),
-//	 版本升级
-version(){
-  api.version(this.versionCode)
-  .then(res=>{
-    const version =this.$version()
-    this.$store.commit('version', res.data)
-                  // data.version
-                  if(parseFloat(version)> parseFloat(version)){
-                   let isForce = false
-                   if(data.force===0){
-                    isForce = true
-                  }
-                  this.upgrade(isForce)
-                }
-              })
-  .catch(err=>{
-    console.log(err)
+  //版本升级
+  version(){
+    api.version(this.versionCode)
+    .then(res=>{
+      const version =this.$version()
+      this.$store.commit('version', res.data)
+      if(parseFloat(version)> parseFloat(version)){
+       let isForce = false
+       if(data.force===0){
+        isForce = true
+      }
+      this.upgrade(isForce)
+    }
   })
-},
-upgrade(isShow){
-  this.$messagebox.confirm('', {
-   closeOnClickModal:false,
-   showCancelButton:isShow,
-    message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
-    title: 'New Edition Reminder', 
-    confirmButtonText: 'Upgrade', 
-    cancelButtonText: 'Cancel' 
-  }).then(action => {
-   if (window.plus) {
-     plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
-     plus.runtime.quit();
-   }},cancel => {})
-},
+    .catch(err=>{
+      console.log(err)
+    })
+  },
+  upgrade(isShow){
+    this.$messagebox.confirm('', {
+     closeOnClickModal:false,
+     showCancelButton:isShow,
+      message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
+      title: 'New Edition Reminder', 
+      confirmButtonText: 'Upgrade', 
+      cancelButtonText: 'Cancel' 
+    }).then(action => {
+     if (window.plus) {
+       plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+       plus.runtime.quit();
+     }},cancel => {})
+  },
     // 公告通知
     // notice(){
     //   api.notice().then(res=>{

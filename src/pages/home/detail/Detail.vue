@@ -17,7 +17,7 @@
         <!-- 合约地址 -->
         <mt-cell :title="$t('m.address')" :value="detail.contract_address"></mt-cell>
         <!-- 通证主体 -->
-        <mt-cell :title="$t('m.body')" :value="this.subject.name" to="/subject" is-link></mt-cell>
+        <mt-cell :title="$t('m.body')" :value="this.subject.name" :to="/subject/+subject.id" is-link></mt-cell>
         <!-- 发行方 -->
         <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"></mt-cell>
       </div>

@@ -552,66 +552,7 @@ table.el-table__body {
     border-bottom: 1px solid #26a2ff;
     color: #26a2ff;
   }
-.subject-details-content {
-    margin-top: 30px;
-    background-color: #fff;
-    height: auto;
-    p{
-        margin-top: 10px;
-    }
-}
-.subject-introduce-title
-    h2{
-        margin:20px auto;
-        text-align: center;
-    }
-.subject-introduce-img{
-   img{
-       width: 98%;
-       margin:0 auto;
-       display: block;
-   }
-}
-.subject-introduce-introduction-title {
-    margin: 20px 0 10px 5px;
-}
-.subject-introduce-introduction-content-text {
-    width: 62%;
-    font-size: 0.9rem;
-    margin-right: 5px;
-}
-.subject-introduce-introduction-content-img {
-    display: contents;
-    img{
-        width: 30%;
-        margin-left: 5px;
-    }
-}
-.subject-introduce-business-title {
-    margin: 20px 0 10px 5px;
-}
-.subject-introduce-business-content-text {
-    width: 60%;
-    font-size: 0.9rem;
-    margin-left: 5px;
-}
-.subject-introduce-business-content-img {
-    display: contents;
-    img{
-        width: 30%;
-        margin-left: 20px;
-    }
-}
-.subject-introduce-business-title {
-    margin: 20px 0 10px 5px;
-}
 
-element.style {
-}
-.subject-introduce-team {
-    display: inline-block;
-    margin-left: 5px;
-}
 //首页/流通中/通证详情页/通证主体/主体信息
 .subject-details-content .mint-tab-item-label {
     font-size: 0.88rem;

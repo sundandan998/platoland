@@ -17,15 +17,13 @@
         <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addseets')}}</span>
       </router-link>
     </div>
-    <!-- <router-link to="/assetsdetailed"> -->
-     	<div class="certificate-list-card" v-for="(item,index) in assetsdata"  @click="assetDetail(item.id)">
-        <mt-cell :title="item.id + (item.token.name)" :value="item.balance" :label="item.token.subject">
-          <!-- <p>{{item.id}}</p> -->
-          <img class="assets-icon" slot="icon" v-bind:src="'static/img/'+item.icon+'.png'"/>
-          <!-- <img slot="icon" src="../../../assets/images/u345.png"> -->
+    <div class="certificate-list-card" v-for="(item,index) in assetsdata">
+      <router-link :to="/assetsdetailed/+item.id">
+        <mt-cell :title="item.token.code + (item.token.name)" :value="item.balance" :label="item.token.subject">
+          <img class="assets-icon" slot="icon" :src="'http://'+item.token.icon">
         </mt-cell>
-      </div>
-    <!-- </router-link> -->
+      </router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -59,15 +57,7 @@ export default {
       })
     },
     // 资产详情
-    assetDetail(id){
-      console.log(id)
-      api.assetDetail().then(res=>{
-        console.log(res)
-        this.$router.push('/assetsdetailed/'+id)
-      }).catch(err=>{
-        console.log(err)
-      })
-    }
+
   }
 }
 </script>

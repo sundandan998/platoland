@@ -3,7 +3,7 @@ export default {
   // 通证详情
   tokenDetail(params = {}) {
       return request({
-          url: "/token/:id/detail/",
+          url: "/token/"+params.code+"/detail/",
           method: "get",
           params: params
       })
@@ -11,7 +11,7 @@ export default {
   // 通证主体
   tokenSubject(params = {}) {
     return request({
-        url: "/token/subject/detail/",
+        url: "/token/subject/"+params.id+"/detail/",
         method: "get",
         params: params
     })
