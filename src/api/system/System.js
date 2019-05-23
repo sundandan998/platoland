@@ -16,6 +16,14 @@ export default {
         params: params
     })
   },
+  // 公告详情
+   noticeDetail(params = {}) {
+    return request({
+        url: "/system/notice/"+params.id+"/detail/",
+        method: "get",
+        params: params
+    })
+  },
   // 升级
   version(params = {}) {
     return request({

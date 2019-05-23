@@ -33,7 +33,7 @@
           <!--/总资产-->
           <!--公告-->
           <div class="home-land">
-           <router-link to="/news">
+           <router-link to="news">
             <div class="notice text-beyond">
               <div class="notice-list text-beyond" ref="notice-list" :class="{anim:animate==true}" v-for='(item,index) in notice_list'>
                 <img src="../../assets/images/horn.png"/><span> {{item.title}}</span>
@@ -125,6 +125,7 @@ export default {
      //  setInterval(this.scroll,3000)
      //////////////////
       this.version(),
+      this.version_code = this.$route.params
       this.$store.dispatch('detail')
     },
   mounted () {
@@ -170,7 +171,7 @@ methods:{
      ]),
   //版本升级
   version(){
-    api.version(this.versionCode)
+    api.version(this.$route.params)
     .then(res=>{
       const version =this.$version()
       this.$store.commit('version', res.data)
@@ -199,16 +200,7 @@ methods:{
        plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
        plus.runtime.quit();
      }},cancel => {})
-  },
-    // 公告通知
-    // notice(){
-    //   api.notice().then(res=>{
-    //     this.notice_list = res.data
-    //     // console.log(this.notice_list[0].title)
-    //   }).catch(err=>{
-    //     console.log(err)
-    //   })
-    // }
+    }
   }
 }
 </script>

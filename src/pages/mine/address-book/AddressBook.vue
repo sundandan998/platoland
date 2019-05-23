@@ -18,10 +18,8 @@
             <p>{{item.remark}}</p>
             <p>{{item.address}}</p>
   				</div>
-          <router-link to="edit">
-  				<div @click="editcontent">
+           <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}">
   					<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
-  				</div>
           </router-link>
   			</mt-cell>
   		</div>
@@ -33,39 +31,30 @@ import {mapActions} from 'vuex'
 // 地址列表接口
 import api from "@/api/user/User.js"
 export default{
-	created () {
-    	this.address()
-  	},
 	data(){
 		return{
 			book:[]
 		}
-	},
+  },
+  created() {
+    this.address()
+  },
 	methods:{
     // 地址列表
     address(){
       api.addressList().then(res=>{
       this.book = res.data
+      this.$store.commit('detail', res.data)
       // console.log(this.book)
       }).catch(err=>{
         console.log(err)
       })
     },
-// 		async address (){
-// //			const res = await this.$http.get('/api/address')
-// 			const url=this.$backStage('/address')
-// 	 		const res = await this.$http.get(url)
-// 			const data = res
-// 			this.book = res.data.data
-// 			// console.log(this.book)
-// 			this.$store.commit('detail', res.data.data[0])
-// 		},
-//		点击编辑跳转
-		editcontent(){
-			this.$router.push({
-				path:'/edit'
-			})
-		}
+  // computed:{
+  //   ...mapGetters([
+  //     'detail'
+  //     ])
+  // }
 	}
 }
 </script>

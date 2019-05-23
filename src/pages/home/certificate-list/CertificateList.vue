@@ -30,7 +30,12 @@ export default {
   },
 	created () {
     this.listassets()
-	  },
+    // this.assetDetailId = this.$route.params
+    // this.$route.params={
+    //   page:this.page,
+    //   page_size:this.page_size
+    // }
+	 },
 	mounted () {
 		this.$store.dispatch('detail'),
 		this.listassets()
@@ -65,21 +70,14 @@ export default {
 		},
     // 列表信息
     listassets(){
-      api.tokenList().then(res=>{
+      console.log(this.$route.params)
+      api.tokenList(this.$route.params).then(res=>{
         this.assetsdata = res.data
         // console.log(this.assetsdata)
       }).catch(err=>{
         console.log(err)
       })
     },
-// 		async	listassets(){
-// 			const url=this.$backStage('/query')
-// 		 	const res = await this.$http.get(url)
-// 		 	const data = res.data
-// 		 	this.assetsdata = res.data
-// //		 	console.log(this.assetsdata[0].id)
-// 		 	this.$store.commit('detail', res.data[0])
-// 		},
 		assetswitch(){
 				this.$toast({
 				  message: 'Done Successfully'

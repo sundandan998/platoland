@@ -8,12 +8,8 @@
 			  </router-link>
 			</mt-header>
 		</div>
-		<div class="news-center-list">
-			<mt-cell :title="$t('m.noticenews')" label="2019-3-15" to="newsdetails"
-  is-link>
-			  <img slot="icon" src="../../../assets/images/u357.png">
-			</mt-cell>
-			<mt-cell :title="$t('m.noticenews')" label="2019-3-15" to="newsdetails"is-link>
+		<div class="news-center-list" v-for="(item,index) in noticeData">
+			<mt-cell :title="item.title" :label="item.create_time" :to="/newsdetails/+item.id" is-link>
 			  <img slot="icon" src="../../../assets/images/u357.png">
 			</mt-cell>
 		</div>
@@ -25,22 +21,24 @@ import api from "@/api/system/System.js"
 export default {
 	data(){
 		return {
-			selected: 'notice'
+			selected: 'notice',
+      noticeData:{}
 		}
 	},
   mounted(){
-    // this.notice()
+    this.notice()
+    this.page_size = this.$route.params
   },
   methods:{
-    // notice(){
-    //   api.noticeDetail().then(res=>{
-    //     console.log('123')
-    //   }).catch(err=>{
-    //     console.log(err)
-    //   })
-    // }
+    notice(){
+      api.notice(this.$route.params).then(res=>{
+        this.noticeData  = res.data
+        // console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
   }
-
 }
 </script>
 

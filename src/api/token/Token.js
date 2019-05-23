@@ -22,7 +22,7 @@ export default {
     return request({
         url: "/token/list/",
         method: "get",
-        params: params
+        params: "params"
     })
   }
 }

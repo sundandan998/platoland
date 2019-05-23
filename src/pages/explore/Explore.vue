@@ -4,57 +4,57 @@
       <mt-tab-container class="page-tabbar-container" v-model="selected">
         <mt-tab-container-item id="explore">
         	<div class="explore">
-	        	<div class="explore-header">
-							<mt-header fixed :title="$t('m.explore')"></mt-header>
-	        	</div>
-	        	<div class="explore-navbar">
-	        		<van-tabs @click="list">
-                <!-- :title="$t('m.whole')" -->
-							  <van-tab  title="All">
-                    <div v-for="(items,index) in issuedata">
-                      <router-link :to="/detail/+ items.id">
-                        <mt-cell :title="items.code +items.nickname" :label="items.subject">
-                          <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
-                            <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
-                        </mt-cell>
-                      </router-link>
-                    </div>
-							  </van-tab>
-                <!-- :title="$t('m.incirculation')" -->
-							  <van-tab  title="In Circulation">
-                  <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+            <div class="explore-header">
+             <mt-header fixed :title="$t('m.explore')"></mt-header>
+           </div>
+           <div class="explore-navbar">
+             <van-tabs @click="list">
+              <!-- :title="$t('m.whole')" -->
+              <van-tab  title="All">
+                <div v-for="(items,index) in issuedata">
+                  <router-link :to="/detail/+ items.id">
+                    <mt-cell :title="items.code +items.nickname" :label="items.subject">
                       <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
+                      <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
-                  </div>
-							  </van-tab>
-                <!-- :title="$t('m.inissue')" -->
-							  <van-tab title="Issuing">
-							   <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
-                      <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
-                    </mt-cell>
-                  </div>
-							  </van-tab>
-                <!-- :title="$t('m.tobeissued')" -->
-							  <van-tab title="Pending">
-						  	 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
-                    <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
-                       <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
-                        <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
-                    </mt-cell>
-                  </div>
-						  </van-tab>
-						</van-tabs>
-	        	</div>
-	        </div>
-        </mt-tab-container-item>
-      </mt-tab-container>
-    </div>
-    <app-tabber :message=selected></app-tabber>
-  </div>
+                  </router-link>
+                </div>
+              </van-tab>
+              <!-- :title="$t('m.incirculation')" -->
+              <van-tab  title="In Circulation">
+                <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                  <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                    <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                    <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
+                  </mt-cell>
+                </div>
+              </van-tab>
+              <!-- :title="$t('m.inissue')" -->
+              <van-tab title="Issuing">
+                <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                  <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                    <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                    <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
+                  </mt-cell>
+                </div>
+              </van-tab>
+              <!-- :title="$t('m.tobeissued')" -->
+              <van-tab title="Pending">
+                <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
+                  <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                   <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                   <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
+                 </mt-cell>
+               </div>
+             </van-tab>
+           </van-tabs>
+         </div>
+       </div>
+     </mt-tab-container-item>
+   </mt-tab-container>
+ </div>
+ <app-tabber :message=selected></app-tabber>
+</div>
 </template>
 <script>
 import Tabber from './../../assets/pub/Tabber.vue'
@@ -73,21 +73,21 @@ export default {
   components: {
     'app-tabber': Tabber
   },
-	creadte() {
-		 	_this.$indicator.open({
-	      text: '充值中....',
-	      spinnerType: 'fading-circle'
-			  })
+  creadte() {
+    _this.$indicator.open({
+     text: '充值中....',
+     spinnerType: 'fading-circle'
+   })
 			 //关闭加载
-			_this.$indicator.close()
-	},
-  created(){
-    setInterval(this.scroll,3000)
-	},
-	mounted(){
-    this.list(0,'All')
-	},
-  methods:{
+       _this.$indicator.close()
+     },
+     created(){
+      setInterval(this.scroll,3000)
+    },
+    mounted(){
+      this.list(0,'All')
+    },
+    methods:{
     // 展示全部列表
     list(){
       api.tokenList().then(res=>{
@@ -116,9 +116,9 @@ export default {
     //   })
     //   this.$store.commit('detail', res.data[0])
     // }
-	}
- }
+  }
+}
 </script>
 <style lang="scss">
-	  @import '../../assets/scss/global'
+@import '../../assets/scss/global'
 </style>

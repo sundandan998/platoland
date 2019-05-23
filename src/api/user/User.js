@@ -46,5 +46,13 @@ export default {
       method: "get",
       params: params
     })
-  }
+  },
+  // 修改地址信息
+  editAdress(params = {}) {
+    return request({
+      url: "/user/address/"+params.id+"/modify/",
+      method: "post",
+      data: params
+    })
+  },
 }

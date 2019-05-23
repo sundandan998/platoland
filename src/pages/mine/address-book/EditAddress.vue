@@ -11,14 +11,16 @@
 		<div class="add-adress-list">
 			<span>{{$t('m.remarks')}}</span>
 			<mt-field>
-				<span class="add-adress-name">{{this.detail.name}}</span>
+				<span class="add-adress-name">{{this.$route.params.name}}</span>
 			</mt-field>
 			<span>{{$t('m.describe')}}</span>
-			<mt-field ></mt-field>
+			<mt-field >
+        <span>{{this.$route.params.remark}}</span>
+      </mt-field>
 			<span>{{$t('m.usdtaddress')}}</span>
 			<mt-field >
 				<p class="to-change-into-exhibition-adress">
-				{{this.detail.address}}
+				{{this.$route.params.address}}
 				</p>
 			</mt-field>
 		</div>
@@ -33,16 +35,26 @@
 
 <script>
 import {mapGetters} from 'vuex'
+//接口
+import api from "@/api/user/User.js"
 export default{
 	data(){
 		return{
-			book:[]
+      editId:{}
 		}
 	},
 	created(){
-		console.log(this.detail)
+    this.edit()
+    this.editId = this.$route.params
 	},
 	methods:{
+    edit(){
+      api.editAdress(this.$route.params).then(res=>{
+        // console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
 	//点击删除弹出的消息框
 	delBox(){
 //		console.log(this.detail)
