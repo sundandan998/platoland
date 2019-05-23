@@ -70,10 +70,9 @@ export default {
 		},
     // 列表信息
     listassets(){
-      console.log(this.$route.params)
       api.tokenList(this.$route.params).then(res=>{
-        this.assetsdata = res.data
-        // console.log(this.assetsdata)
+      this.assetsdata = res.data
+      // console.log(this.assetsdata)
       }).catch(err=>{
         console.log(err)
       })

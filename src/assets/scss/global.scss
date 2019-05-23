@@ -1468,18 +1468,29 @@ img.fr.tag-read {
     }
 }
 //------------------------------我的/地址薄/添加--------------
-.add-address-content p{
-    margin-left: 45px;
+.add-address-header {
+    margin-bottom: 20px;
+}
+.addaddress-icon{
+    margin-left: 15px;
+}
+.add-address{
+  background-color: #fff;
 }
 .add-adress-list {
     margin-top: 1px;
-    background-color: #fff;
     padding-bottom: 20px;
     span{
         padding-left: 15px;
         color: #999;
         margin-top: 20px;
         display: inline-block;
+    }
+    img{
+      margin-top: 10px;
+      position: relative;
+      top: -36px;
+      left: -20px;
     }
 }
 .add-adress-list a.mint-cell.mint-field.is-nolabel {

@@ -3,7 +3,7 @@
 		<div class="edit-adress-header">
 			<mt-header fixed :title="$t('m.addressdetail')">
 			   <mt-button icon="back" slot="left"v-on:click="$router.go(-1)" @click="saveBox">{{$t('m.back')}}</mt-button>
-			   <mt-button icon="" slot="right" @click="delBox">
+			   <mt-button icon="" slot="right" @click="del">
 			   	<img src="../../../assets/images/delete.png"  alt=""/><span>{{$t('m.delete')}}</span>
 			   </mt-button>
 			</mt-header>
@@ -24,8 +24,8 @@
 				</p>
 			</mt-field>
 		</div>
-		<div class="edit-adress-btn ">
-			<mt-button type="primary" size="large">{{$t('m.preservation')}}</mt-button>
+		<div class="edit-adress-btn" >
+			<mt-button type="primary" size="large" @click="edit">{{$t('m.preservation')}}</mt-button>
 		</div>
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->
@@ -44,10 +44,11 @@ export default{
 		}
 	},
 	created(){
-    this.edit()
+    // this.edit()
     this.editId = this.$route.params
 	},
 	methods:{
+    // 编辑修改地址
     edit(){
       api.editAdress(this.$route.params).then(res=>{
         // console.log(res)
@@ -55,23 +56,26 @@ export default{
         console.log(err)
       })
     },
-	//点击删除弹出的消息框
-	delBox(){
-//		console.log(this.detail)
-    this.$messagebox({
-      title: 'Tips',
-      message:'Are you sure to delete the address?',
-      cancelButtonText:'No',
-      confirmButtonText:'Yes',
-      showCancelButton: true
-    })
-		.then(action => {
-			this.$router.push({
-				path:'/book'
-			})
-
-		})
-	},
+    // 删除地址
+    del(){
+      api.delAdress(this.$route.params).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+      // 删除地址弹框
+      this.$messagebox({
+        title: 'Tips',
+        message:'Are you sure to delete the address?',
+        cancelButtonText:'No',
+        confirmButtonText:'Yes',
+        showCancelButton: true
+        }).then(action => {
+        this.$router.push({
+          path:'/book'
+        })
+      })
+    },
 	//点击返回弹出的消息框
 	saveBox(){
 		this.$messagebox({
@@ -86,11 +90,7 @@ export default{
 				path:'/book'
 			})
 		})
-	},
-//	remove(index){
-//		console.log(this.detail)
-//		this.detail.splice(index,1)
-//	}
+	}
  },
 	computed:{
 		...mapGetters([

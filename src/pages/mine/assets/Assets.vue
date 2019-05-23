@@ -14,7 +14,7 @@
     </div>
     <div class="assets-list">
       <router-link to="/list">
-        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addseets')}}</span>
+        <img src="../../../assets/images/u3511.png" @click="addasset()" alt><span>{{$t('m.addseets')}}</span>
       </router-link>
     </div>
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">
@@ -31,13 +31,18 @@ import {mapActions} from 'vuex'
 // 资产列表
 import api from "@/api/user/User.js"
 export default {
-  created(){
-    this.assetList()
-  },
+
   data() {
    return {
-   		assetsdata:[]
+   	assetsdata:[],
+    addCode:{
+      code:'LD'
+    }
    }
+  },
+  created(){
+    this.assetList()
+    // this.addassetCode = this.$route.params
   },
   mounted(){
   	// this.assetList()
@@ -56,8 +61,13 @@ export default {
         console.log(err)
       })
     },
-    // 资产详情
-
+    // 添加资产
+    addasset(){
+      api.addasset(this.addCode).then(res=>{
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
   }
 }
 </script>

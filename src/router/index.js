@@ -201,12 +201,6 @@ export default new Router({
       name: 'List',
       component: () => import("@/pages/home/certificate-list/CertificateList")
     },
-    //    首页/流通中/通证详情
-    {
-      path: '/pass',
-      name: 'Pass',
-      component: () => import("@/pages/home/in-circulation/PassDetails")
-    },
     //  首页/流通中/主体详情
     {
       path: '/subject/:id',
@@ -245,21 +239,9 @@ export default new Router({
     },
     //  首页/发行中/通证详情
     {
-      path: '/details',
-      name: 'Details',
-      component: () => import("@/pages/home/in-issue/PassDetails")
-    },
-    //  首页/发行中/通证详情
-    {
       path: '/buy',
       name: 'Buy',
-      component: () => import("@/pages/home/in-issue/BuyingPass")
-    },
-    //首页/待发行/入驻期
-    {
-      path: '/issue',
-      name: 'Issue',
-      component: () => import("@/pages/home/to-issue/ToIssue")
+      component: () => import("@/pages/home/in-circulation/BuyingPass")
     }
     ]
   })

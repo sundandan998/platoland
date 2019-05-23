@@ -2,11 +2,11 @@ import request from "../../utils/request"
 export default {
   // 首页
   home(params = {}) {
-      return request({
-          url: "/system/home/",
-          method: "get",
-          params: params
-      })
+    return request({
+        url: "/system/home/",
+        method: "get",
+        params: params
+    })
   },
   // 公告
   notice(params = {}) {
@@ -17,7 +17,7 @@ export default {
     })
   },
   // 公告详情
-   noticeDetail(params = {}) {
+  noticeDetail(params = {}) {
     return request({
         url: "/system/notice/"+params.id+"/detail/",
         method: "get",

@@ -31,6 +31,14 @@ export default {
       params: params
     })
   },
+  // 添加资产
+  addasset(params = {}){
+    return request({
+      url: "/user/asset/add/",
+      method: "post",
+      data: params
+    })
+  },
   // 资产详情
   assetDetail(params = {}){
     return request({
@@ -47,6 +55,14 @@ export default {
       params: params
     })
   },
+  // 添加地址信息
+  addAdress(params = {}) {
+    return request({
+      url: "/user/address/add/",
+      method: "post",
+      data: params
+    })
+  },
   // 修改地址信息
   editAdress(params = {}) {
     return request({
@@ -55,4 +71,12 @@ export default {
       data: params
     })
   },
+  // 删除地址
+  delAdress(params = {}) {
+    return request({
+      url: "/user/address/"+params.id+"/delete/",
+      method: "post",
+      data: params
+    })
+  }
 }
