@@ -7,25 +7,25 @@
 		</div>
 		<div class="Purchase-pass-content">
 			<div class="Purchase-pass-content-top">
-				<img src="../../../assets/images/ld.png" alt="" class="fl" />
-				<span>LD（LaoDou）</span>
-				<span>{{$t('m.intobody')}}</span>
-				<p>han***@qq.com</p>
+        <!-- <img :src="'http://'+buyData.icon" class="fl"> -->
+				<span>{{buyData.code}}{{buyData.name}}</span>
+				<span>{{buyData.subject}}</span>
+				<p>{{buyName.publish_name}}</p>
 			</div>
 			<div class="Purchase-pass-content-bot">
-				<img src="../../../assets/images/t.png" alt=""/>
-				<span>6.00</span>
+				<!-- <img :src="'http://'+buyName.d_icon"> -->
+				<span>{{buyName.price}}</span>
 			</div>
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs>
 			  <van-tab :title="$t('m.number')">
-			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
-			  	<p>{{$t('m.available')}}：1,000  USDT</p>
+			  	<mt-field :placeholder = "buyName.low_number" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}:{{buyName.amount}} {{buyName.denominated_assets}}</p>
 			  </van-tab>
 			  <van-tab :title="$t('m.price')">
-			  	<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
-			  	<p>{{$t('m.available')}}：1,000  USDT</p>
+			  	<mt-field :placeholder="buyName.high_number" type="number"></mt-field>
+			  	<p>{{$t('m.available')}}:{{buyName.amount}} {{buyName.denominated_assets}}</p>
 			  </van-tab>
 			</van-tabs>
 		</div>
@@ -41,7 +41,6 @@
           :value="value"
           @focus="showKeyboard = true"
         />
-
         <!-- 数字键盘 -->
         <van-number-keyboard
           :show="showKeyboard"
@@ -56,13 +55,33 @@
 </template>
 
 <script>
+import api from '@/api/market/Market.js'
 export default {
     data() {
     return {
       value: '',
       showKeyboard: false,
-      popupVisible: false
+      popupVisible: false,
+      buyData:{},
+      buyName:{},
+      // 请求支付参数
+      reqPay:{
+        order_type:0,
+        transaction_id:111,
+        amount:'100.002',
+        action_type:0
+      },
+      // 确认支付参数
+      confirmPay:{
+        order_type:1,
+        payment_id:123,
+        pay_pwd:'123456'
+      }
     }
+  },
+  created(){
+    this.buyDetail()
+    this.buyDetailCode = this.$route.params
   },
   methods: {
     onInput(key) {
@@ -73,11 +92,35 @@ export default {
     },
     passwordShow(){
       this.popupVisible = true
+    // 请求支付
+      api.reqPay(this.reqPay).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    // 交易详情
+    buyDetail(){
+      api.buyDetail(this.$route.params).then(res=>{
+        // console.log(res)
+        this.buyName = res.data
+        this.buyName.high_number = String(res.data.high_number)
+        this.buyName.low_number = String(res.data.low_number)
+        this.buyData = res.data.token
+        // console.log(this.buyName)
+      }).catch(err=>{
+        console.log(err)
+      })
     }
   },
   watch:{
   	value(){
   		if(this.value.length==6){
+        api.confirmPay(this.confirmPay).then(res=>{
+          console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
         this.$toast({
         message: 'Done Successfully'
         }),

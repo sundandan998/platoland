@@ -1,7 +1,7 @@
 <template>
 	<div class="buy-pass">
 		<div class="buy-pass-header">
-			<mt-header fixed :title="$t('m.buyingpass')">
+			<mt-header fixed :title="$t('m.buyingpass99999')">
 			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>

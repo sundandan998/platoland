@@ -201,21 +201,21 @@ export default new Router({
       name: 'List',
       component: () => import("@/pages/home/certificate-list/CertificateList")
     },
-    //  首页/流通中/主体详情
+    //  首页/主体详情
     {
       path: '/subject/:id',
       name: 'Subject',
       component: () => import("@/pages/home/in-circulation/SubjectDetails")
     },
-    //首页/流通中/去交易
+    //首页/去交易
     {
       path: '/deal',
       name: 'Deal',
       component: () => import("@/pages/home/in-circulation/ToDeal")
     },
-    //首页/流通中/去交易/购买通证
+    //首页/去交易/购买通证
     {
-      path: '/purchase',
+      path: '/purchase/:id',
       name: 'PurchasePass',
       component: () => import("@/pages/home/in-circulation/PurchasePass")
     },
@@ -230,12 +230,6 @@ export default new Router({
       path: '/purchaserelease',
       name: 'Purchase',
       component: () => import("@/pages/home/in-circulation/PurchaseRelease")
-    },
-    //首页/流通中/去交易/卖出发布
-    {
-      path: '/sellrelease',
-      name: 'SellOut',
-      component: () => import("@/pages/home/in-circulation/SellRelease")
     },
     //  首页/发行中/通证详情
     {
