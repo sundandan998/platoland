@@ -41,15 +41,12 @@ export default {
   },
   created(){
     this.assetList()
-    // this.addassetCode = this.$route.params
   },
   methods: {
     // 资产列表
     assetList(){
       api.assetList().then(res=>{
         this.assetsdata = res.data
-        // console.log(this.assetsdata)
-        // this.$store.commit('detail', res.data[0])
       }).catch(err=>{
         console.log(err)
       })

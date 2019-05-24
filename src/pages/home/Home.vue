@@ -6,29 +6,32 @@
           <div class="home-header">
             <mt-header fixed  :title="$t('m.homepage')"></mt-header>
           </div>
-          <div class="home-investment" @click="issue('PLD')">
-            <img src="../../assets/images/gf.png" alt="" />
-            <div class="home-investment-content">
-              <div class="home-investment-top fl">
-                <img src="../../assets/images/icon-3.png" alt="" />
+          <div class="home-investment">
+            <router-link :to="/detail/+pld.code">
+              <img src="../../assets/images/gf.png" alt="" />
+              <div class="home-investment-content">
+                <div class="home-investment-top fl">
+                  <img :src="'http://'+pld.icon">
+                  <!-- <img src="../../assets/images/icon-3.png" alt="" /> -->
+                </div>
+                <div class="home-investment-top-left">
+                  <P>{{pld.code}} ({{pld.name}})<span>
+                   <img :src="'http://'+pldrelease.d_icon">{{pldrelease.issue_price}}</span></P>
+                   <P>{{pld.subject}}</P>
+                 </div>
+                 <div class="home-investment-top-right fr">
+                  <mt-button size="small">{{$t('m.investment')}}</mt-button>
+                </div>
               </div>
-              <div class="home-investment-top-left">
-                <P>{{this.plddata.code}} {{this.plddata.name}}<span><img src="../../assets/images/t.png"/>{{this.pld.issue_price}}</span></P>
-                <P>{{this.plddata.subject}}</P>
+              <div class="home-investment-bot">
+                <span>{{$t('m.issueamount')}}:{{pldrelease.first_number}}</span>
+                <span>{{$t('m.issue')}}:{{pldrelease.sold_number}}</span>
+                <span>{{$t('m.completed')}}:{{pldrelease.id}}</span>
               </div>
-              <div class="home-investment-top-right fr">
-                <mt-button size="small" @click="issue('PLD')">{{$t('m.investment')}}</mt-button>
+              <div class="home-investment-progress">
+                <mt-progress :value="20" :bar-height="5"></mt-progress>
               </div>
-              <!-- <p>{{this.plddata.Detail}}</p> -->
-            </div>
-            <div class="home-investment-bot">
-              <span>{{$t('m.issueamount')}}:{{this.pld.first_number}}</span>
-              <span>{{$t('m.issue')}}:{{this.pld.sold_number}}</span>
-              <span>{{$t('m.completed')}}:{{this.plddata.proportion}}</span>
-            </div>
-            <div class="home-investment-progress">
-              <mt-progress :value="20" :bar-height="5"></mt-progress>
-            </div>
+            </router-link>
           </div>
           <!--/总资产-->
           <!--公告-->
@@ -47,16 +50,16 @@
         </div>
         <!-- 卡片部分 -->
         <div class="home-assets-subscription-content">
-         <div class="assets-subscription" v-for="(items,index) in token_list" @click="issue(items.code)">
-           <!-- <img src="../../assets/images/u345.png" /> -->
-           <!-- <img v-bind:src="'static/img/'+items.icon+'.png'"/> -->
+         <!-- @click="issue(items.code) -->
+         <div class="assets-subscription" v-for="(items,index) in token_list">
+          <router-link :to="/detail/+items.code">
            <img :src="'http://'+items.icon">
            <div class="assets-subscription-text fr">
-             <span class="home-name">{{items.code}}{{items.name}}</span>
+             <span class="home-name">{{items.code}} ({{items.name}})</span>
              <p>{{items.subject}}</p>
            </div>
            <div class="assets-subscription-title">
-            <p :class="state[index]">{{items.state}}</p>
+            <p :class="state[index]">{{items.release.status}}</p>
           </div>
           <div class="assets-subscription-information">
             <ul class="fl">
@@ -65,18 +68,19 @@
              <li>{{$t('m.initialprice')}}</li>
            </ul>
            <ul class="fr text-right">
-             <li>{{items.issuetime}}</li>
-             <li>{{items.amountnum}}</li>
-             <li>{{items.initialprice}}</li>
+             <li>{{items.release.publish_time}}</li>
+             <li>{{items.release.sold_number}}</li>
+             <li>{{items.release.init_price}}</li>
            </ul>
          </div>
-       </div>
+       </router-link>
      </div>
-     <div class="home-assets-more">
-       <span>{{$t('m.morefunctions')}}</span>
-     </div>
-   </mt-tab-container-item>
- </mt-tab-container>
+   </div>
+   <div class="home-assets-more">
+     <span>{{$t('m.morefunctions')}}</span>
+   </div>
+ </mt-tab-container-item>
+</mt-tab-container>
 </div>
 <app-tabber :message=selected></app-tabber>
 </div>
@@ -93,14 +97,9 @@ export default {
     return {
       selected:'home',
       message: 'home',
-      plddata:[],
-      data:[],
       versionCode:{
         version_code:'2.0',
       },
-			// homedata:[],
-      issuedata:[],
-      datalist:[],
       animate:false,
       state: [
       "state0",
@@ -108,30 +107,26 @@ export default {
       "state2",
       "state1"
       ],
-      notice_list:[],
-      token_list:[]
+      pld:{},
+      pldrelease:{},
+      notice_list:{},
+      token_list:{}
     }
+  },
+  creadte() {
+    this.version(),
+    this.version_code = this.$route.params
+    this.$store.dispatch('detail')
+    this.home()
+    // JSON.stringify(status).replace(/0/g, '待发行')
+  },
+  mounted(){
+    this.home()
   },
   components: {
     'app-tabber': Tabber
   },
-  creadte() {
-     // _this.$indicator.open({
-     //  text: '充值中....',
-     //  spinnerType: 'fading-circle'
-     //  })
-  		 // //关闭加载
-     //  _this.$indicator.close()
-     //  setInterval(this.scroll,3000)
-     //////////////////
-      this.version(),
-      this.version_code = this.$route.params
-      this.$store.dispatch('detail')
-    },
-  mounted () {
-      this.pld()
-    },
-methods:{
+  methods:{
 		//	  公告通知
     scroll(){
      this.animate=true
@@ -141,34 +136,23 @@ methods:{
        this.animate=false
      },500)
    },
-    //首页/发行中/待发行/沟通中渲染页面数据
-    issue(code){
-     // console.log(code)
-     api.home({code:code}).then(res=>{
-      this.issuedata = res.data
-      this.$router.push('/detail/'+code)
-      this.$store.commit('detail', res.data)
-          // console.log(this.plddata)
-        }).catch(err=>{
-          console.log(err)
-        })
-      },
-      pld(){
-        api.home().then(res=>{
-          this.issuedata = res.data
-          this.plddata = res.data.pld
-          this.pld = res.data.pld.release
-          this.notice_list = res.data.notice_list
-          this.token_list = res.data.token_list
-        // this.$router.push('/detail')
-        // console.log(this.notice_list.title)
-      }).catch(err=>{
-        console.log(err)
-      })
-    },
-    ...mapActions('detail',[
-     'app.detail'
-     ]),
+   // 首页展示数据
+   home(){
+    api.home().then(res=>{
+      this.pld = res.data.pld
+      this.pldrelease = res.data.pld.release
+      this.notice_list = res.data.notice_list
+      this.token_list = res.data.token_list
+      this.token_list[0].release.status= '待发行'
+      this.token_list[1].release.status= '发行中'
+      this.token_list[2].release.status= '流通中'
+    }).catch(err=>{
+      console.log(err)
+    })
+  },
+  ...mapActions('detail',[
+   'app.detail'
+   ]),
   //版本升级
   version(){
     api.version(this.$route.params)
@@ -182,26 +166,25 @@ methods:{
       }
       this.upgrade(isForce)
     }
+  }).catch(err=>{
+    console.log(err)
   })
-    .catch(err=>{
-      console.log(err)
-    })
-  },
-  upgrade(isShow){
-    this.$messagebox.confirm('', {
-     closeOnClickModal:false,
-     showCancelButton:isShow,
-      message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
-      title: 'New Edition Reminder', 
-      confirmButtonText: 'Upgrade', 
-      cancelButtonText: 'Cancel' 
-    }).then(action => {
-     if (window.plus) {
-       plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
-       plus.runtime.quit();
-     }},cancel => {})
-    }
-  }
+},
+upgrade(isShow){
+  this.$messagebox.confirm('', {
+   closeOnClickModal:false,
+   showCancelButton:isShow,
+    message:"<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
+    title: 'New Edition Reminder', 
+    confirmButtonText: 'Upgrade', 
+    cancelButtonText: 'Cancel' 
+  }).then(action => {
+   if (window.plus) {
+     plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+     plus.runtime.quit();
+   }},cancel => {})
+}
+}
 }
 </script>
 <style lang="scss">
