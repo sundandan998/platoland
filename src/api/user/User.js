@@ -15,6 +15,14 @@ export default {
       params: params
     })
   },
+  // 忘记密码
+  forgetPassword(params ={}){
+    return request({
+      url: "/user/pwd/reset/",
+      method: "post",
+      data: params
+    })
+  },
   // 注册接口
   register(params = {}) {
     return request({
@@ -35,6 +43,22 @@ export default {
   addasset(params = {}){
     return request({
       url: "/user/asset/add/",
+      method: "post",
+      data: params
+    })
+  },
+  // 删除资产
+  delAsset(params={}){
+    return request({
+      url: "/user/asset/delete/",
+      method: "post",
+      data: params
+    })
+  },
+   // 转出资产
+   outAsset(params={}){
+    return request({
+      url: "/user/withdraw/",
       method: "post",
       data: params
     })

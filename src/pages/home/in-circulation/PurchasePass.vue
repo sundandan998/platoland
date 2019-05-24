@@ -66,7 +66,7 @@ export default {
       buyName:{},
       // 请求支付参数
       reqPay:{
-        order_type:0,
+        order_type:1,
         transaction_id:111,
         amount:'100.002',
         action_type:0
@@ -116,6 +116,7 @@ export default {
   watch:{
   	value(){
   		if(this.value.length==6){
+        // 确认支付
         api.confirmPay(this.confirmPay).then(res=>{
           console.log(res)
         }).catch(err=>{

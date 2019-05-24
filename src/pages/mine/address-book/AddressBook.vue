@@ -28,7 +28,7 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
-// 地址列表接口
+//接口
 import api from "@/api/user/User.js"
 export default{
 	data(){

@@ -31,7 +31,6 @@ import {mapActions} from 'vuex'
 // 资产列表
 import api from "@/api/user/User.js"
 export default {
-
   data() {
    return {
    	assetsdata:[],
@@ -43,12 +42,6 @@ export default {
   created(){
     this.assetList()
     // this.addassetCode = this.$route.params
-  },
-  mounted(){
-  	// this.assetList()
-//	this.$store.dispatch('detail')
-  },
-  watch:{
   },
   methods: {
     // 资产列表
