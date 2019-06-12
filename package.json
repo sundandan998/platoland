@@ -19,12 +19,13 @@
     "vant": "^1.6.13",
     "vue": "2.6.10",
     "vue-axios": "^2.1.4",
+    "vue-i18n": "^8.11.2",
     "vue-router": "3.0.1",
     "vuex": "3.0.1",
     "xlsx": "^0.12.5"
   },
   "devDependencies": {
-  	"jquery":"^2.2.1",
+    "jquery": "^2.2.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",

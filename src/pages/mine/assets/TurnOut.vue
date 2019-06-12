@@ -41,7 +41,7 @@
 </div>
 <div>
   <van-popup class="popupbox" position="bottom"  v-model="popupVisible">
-    <span class="paymentamount">1.00 LD</span>
+    <span class="paymentamount">2.00 LD</span>
     <van-password-input
     :value="value"
     @focus="showKeyboard = true"

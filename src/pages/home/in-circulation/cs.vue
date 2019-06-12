@@ -1,49 +1,36 @@
-
 <template>
   <div>
-    <input type="text" v-model="loginForm.username" placeholder="用户名"/>
-    <input type="text" v-model="loginForm.password" placeholder="密码"/>
-    <button @click="login">登录</button>
-  </div>
+    <van-password-input
+    :value="value"
+    info="密码为 6 位数字"
+    @focus="showKeyboard = true"
+  />
+  
+  <!-- 数字键盘 -->
+  <van-number-keyboard
+    :show="showKeyboard"
+    @input="onInput"
+    @delete="onDelete"
+    @blur="showKeyboard = false"
+  />
+</div>
 </template>
-
 <script>
-import { mapMutations } from 'vuex';
-export default {
-  data () {
-    return {
-      loginForm: {
-        username: '',
-        password: ''
+    export default {
+    data() {
+      return {
+        value: '123',
+        showKeyboard: true
+      };
+    },
+  
+    methods: {
+      onInput(key) {
+        this.value = (this.value + key).slice(0, 6);
       },
-      userToken: ''
-    };
-  },
-
-  methods: {
-    ...mapMutations(['changeLogin']),
-    login () {
-      let _this = this;
-      if (this.loginForm.username === '' || this.loginForm.password === '') {
-        alert('账号或密码不能为空');
-      } else {
-        this.axios({
-          method: 'POST',
-          url: 'http://111.230.221.200:9000/register',
-          data: _this.loginForm
-        }).then(res => {
-          console.log(res.data);
-          _this.userToken = 'Bearer ' + res.data.data.body.token;
-          // 将用户token保存到vuex中
-          _this.changeLogin({ Authorization: _this.userToken });
-          _this.$router.push('/home');
-          alert('登陆成功');
-        }).catch(error => {
-          alert('账号或密码错误');
-          console.log(error);
-        });
+      onDelete() {
+        this.value = this.value.slice(0, this.value.length - 1);
       }
     }
   }
-};
 </script>

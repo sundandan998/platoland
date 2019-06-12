@@ -24,9 +24,15 @@ export default new Router({
     },
     //登录/重置邮件发送
     {
-      path: '/reset',
+      path: '/reset/:email',
       name: 'Reset',
       component: () => import("@/pages/login/reset-mail/ResetMail")
+    },
+    // 重置登录密码
+    {
+      path: '/resetpwd',
+      name: 'ResetPwd',
+      component: () => import("@/pages/login/reset-mail/ResetPwd")
     },
     //  注册
     {

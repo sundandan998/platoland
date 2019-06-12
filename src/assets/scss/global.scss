@@ -11,6 +11,9 @@
 //  font-style: normal;
 //}
 // 文字超出出现省略号
+.mint-button{
+    background-color: #456DF1 !important;
+}
 .text-beyond {
   overflow: hidden;
   text-overflow:ellipsis;
@@ -58,7 +61,6 @@ a{
 h1{
     font-weight: 400;
 }
-$color-primary: #1aad19;
 body{
     background-color: #f6f6f6;
 }
@@ -67,7 +69,8 @@ body{
     width: 100%;
 }
 .van-number-keyboard{
-    position: unset;
+    // position: unset;
+    position: absolute;
     display: block !important;
 }
 .mint-popup {
@@ -180,6 +183,9 @@ body{
         border-radius: 45px;
     }
 }
+.forget-pwd{
+    margin-right: 10px;
+}
 //--------------------------============================
 input.el-input__inner {
     position: relative;
@@ -248,9 +254,14 @@ label.mint-button-text {
     width: 80%;
     text-align: center;
     margin:0 auto;
+    margin-bottom: 20px;
     img{
         margin-top: 10px;
         width: 50px;
+    }
+    .verification-code{
+        padding-bottom: 20px;
+        margin-top: 20px;
     }
 }
 .reset-mail-keyboard{
@@ -1287,6 +1298,7 @@ img.fr.tag-read {
     background-color: #fff;
     text-align: center;
     padding-bottom: 10px;
+    margin-top: 18px;
 }
 .rest-pass-word-from .mint-cell-wrapper {
     background-image: none;

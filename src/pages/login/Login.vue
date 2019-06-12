@@ -31,7 +31,7 @@
          </el-form-item>
        </el-form>
        <router-link to="password">
-        <span class="fr" @click="forgetPassword">忘记密码</span>
+        <span class="fr forget-pwd" @click="forgetPassword">忘记密码</span>
       </router-link>
       <div class="login-btn">
         <mt-button id = "loginbtn" type="default" @click="handleLogin">登&nbsp;录</mt-button>
@@ -113,9 +113,9 @@ export default{
     },
     // 忘记密码参数
     forgetPwd:{
-      username:'12345@qq.com',
-      new_pwd:'123456',
-      new_pwd2:'123456'
+      username:'',
+      new_pwd:'',
+      new_pwd2:''
     },
     rules:{
     // 校验邮箱
@@ -155,11 +155,12 @@ export default{
     },
     // 忘记密码
     forgetPassword(){
-      api.forgetPassword(this.forgetPwd).then(res=>{
-        console.log(res)
-      }).catch(err=>{
-        console.log(err)
-      })
+      
+      // api.forgetPassword(this.forgetPwd).then(res=>{
+      //   console.log(res)
+      // }).catch(err=>{
+      //   console.log(err)
+      // })
     },
     //登录页/点击记住账号 button 改变颜色
     loginCheckbox: function (item) {
