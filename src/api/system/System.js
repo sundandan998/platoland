@@ -39,5 +39,13 @@ export default {
       method: "get",
       params: params
     })
+  },
+  // 安全页面联合校验
+  safety(params = {}){
+    return request({
+      url: "/system/security/verification/",
+      method: "post",
+      data: params
+    })
   }
 }

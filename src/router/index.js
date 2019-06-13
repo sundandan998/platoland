@@ -141,12 +141,6 @@ export default new Router({
       name: 'Open',
       component: () => import("@/pages/mine/safety-center/OpenInformation")
     },
-    //我的/安全/关闭信息验证
-    {
-      path: '/close',
-      name: 'Close',
-      component: () => import("@/pages/mine/safety-center/CloseInformation")
-    },
     //我的/安全/开启支付密码
     {
       path: '/paypassword',

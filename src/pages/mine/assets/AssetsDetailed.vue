@@ -2,7 +2,7 @@
 	<div class="assets-detailed">
 		<div class="assets-detailed-header">
 			<mt-header fixed :title="$t('m.assetdetails')">
-        <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
          <el-dropdown trigger="click">
            <span class="el-dropdown-link">

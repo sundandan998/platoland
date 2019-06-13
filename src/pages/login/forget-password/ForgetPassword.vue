@@ -22,7 +22,7 @@
     </div>
     <div class="forget-password-btn">
       <!-- <router-link :to="{name:'Reset',params:{}}"> -->
-        <mt-button type="primary" @click="resetPwd" :disabled="disabled">下一步</mt-button>
+        <mt-button type="primary" @click="resetPwd" class="nextbtn":disabled="disabled">下一步</mt-button>
       <!-- </router-link> -->
     </div>
   </div>
@@ -56,6 +56,9 @@ export default {
             message: '邮箱未注册',
             position: 'top',
             className: 'zZindex'
+          })
+          this.$router.push({
+            name:'Login'
           })
         }else{
          this.$router.push({

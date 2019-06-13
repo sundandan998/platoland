@@ -11,9 +11,6 @@
 //  font-style: normal;
 //}
 // 文字超出出现省略号
-.mint-button{
-    background-color: #456DF1 !important;
-}
 .text-beyond {
   overflow: hidden;
   text-overflow:ellipsis;
@@ -173,7 +170,7 @@ body{
     text-align: center;
     display: inline-block;
     .mint-button{
-        background-color: #ddd;
+        background-color: #456dfe;
         color: #fff;
         font-size: 0.88rem;
         margin: 50px auto 10px auto;
@@ -239,7 +236,7 @@ label.mint-button-text {
 .forget-password-btn{
     text-align: center;
     .mint-button{
-        background-color: #ddd;
+        // background-color: #ddd;
         color: #fff;
         font-size: 0.88rem;
         margin: 50px auto 10px auto;
@@ -247,7 +244,10 @@ label.mint-button-text {
         -webkit-box-shadow:none;
         box-shadow: none;
         border-radius: 45px;
-	    }
+        }
+        .nextbtn{
+            background-color: #456dfe !important;
+        }
 }
 //-------------------------登录/重置邮件------------------
 .reset-mail-information{
@@ -1353,7 +1353,7 @@ img.fr.tag-read {
 }
 //我的/安全中心/安全验证
 .safety-verification-header {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .safety-verification{
     background-color: #fff;
@@ -1380,6 +1380,9 @@ img.fr.tag-read {
 }
 .open-information-header {
     margin-bottom: 19px;
+}
+.rest-pass-word-btn{
+    margin: 50px 0 20px 0;
 }
 
 //------------------------------我的/关于我们--------------

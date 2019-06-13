@@ -16,9 +16,17 @@ export default {
     })
   },
   // 忘记密码
-  forgetPassword(params ={}){
+  forgetPassword(params = {}) {
     return request({
       url: "/user/pwd/reset/",
+      method: "post",
+      data: params
+    })
+  },
+  // 修改登录密码
+  editPwd(params = {}) {
+    return request({
+      url: "/user/pwd/",
       method: "post",
       data: params
     })
@@ -40,7 +48,7 @@ export default {
     })
   },
   // 添加资产
-  addasset(params = {}){
+  addasset(params = {}) {
     return request({
       url: "/user/asset/add/",
       method: "post",
@@ -48,15 +56,15 @@ export default {
     })
   },
   // 删除资产
-  delAsset(params={}){
+  delAsset(params = {}) {
     return request({
       url: "/user/asset/delete/",
       method: "post",
       data: params
     })
   },
-   // 转出资产
-   outAsset(params={}){
+  // 转出资产
+  outAsset(params = {}) {
     return request({
       url: "/user/withdraw/",
       method: "post",
@@ -64,9 +72,9 @@ export default {
     })
   },
   // 资产详情
-  assetDetail(params = {}){
+  assetDetail(params = {}) {
     return request({
-      url: "/user/asset/"+params.id+"/detail/",
+      url: "/user/asset/" + params.id + "/detail/",
       method: "get",
       params: params
     })
@@ -90,7 +98,7 @@ export default {
   // 修改地址信息
   editAdress(params = {}) {
     return request({
-      url: "/user/address/"+params.id+"/modify/",
+      url: "/user/address/" + params.id + "/modify/",
       method: "post",
       data: params
     })
@@ -98,7 +106,7 @@ export default {
   // 删除地址
   delAdress(params = {}) {
     return request({
-      url: "/user/address/"+params.id+"/delete/",
+      url: "/user/address/" + params.id + "/delete/",
       method: "post",
       data: params
     })
