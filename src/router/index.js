@@ -24,7 +24,7 @@ export default new Router({
     },
     //登录/重置邮件发送
     {
-      path: '/reset/:email',
+      path: '/reset',
       name: 'Reset',
       component: () => import("@/pages/login/reset-mail/ResetMail")
     },
@@ -140,6 +140,12 @@ export default new Router({
       path: '/open',
       name: 'Open',
       component: () => import("@/pages/mine/safety-center/OpenInformation")
+    },
+    //  我的/安全/开启邮箱验证
+    {
+      path: '/email',
+      name: 'Email',
+      component: () => import("@/pages/mine/safety-center/OpenEmail")
     },
     //我的/安全/开启支付密码
     {

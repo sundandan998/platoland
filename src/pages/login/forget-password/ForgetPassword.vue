@@ -12,7 +12,7 @@
     <div class="login-content">
       <el-form :model="verification" ref="verification" v-model="verification.email" :rules="rules" class="verification-input">
         <el-form-item prop="email">
-          <el-input v-model="verification.email" placeholder="邮箱">
+          <el-input v-model="verification.username" placeholder="邮箱">
             <i slot="prefix">
               <img src="../../../assets/images/email.png" alt="">
             </i>
@@ -38,21 +38,26 @@ export default {
       value: '',
       disabled: true,
       showKeyboard: true,
+      username:{},
       verification: {
-        email: ''
+        username: ''
       },
       rules: {
         // 校验邮箱
-        email: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
+        username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
       }
     }
   },
   methods: {
     // 检测用户名是否唯一接口
-    resetPwd(email) {
-      api.is_use().then(res=>{
-        if(res.is_use === false){
-          Toast({
+    resetPwd() {
+      api.is_use({username:this.verification.username}).then(res=>{
+        if(res.is_use === true){
+          this.$router.push({
+           name:'ResetPwd'
+         })
+        }else{
+         Toast({
             message: '邮箱未注册',
             position: 'top',
             className: 'zZindex'
@@ -60,11 +65,6 @@ export default {
           this.$router.push({
             name:'Login'
           })
-        }else{
-         this.$router.push({
-           name:'resetpwd',
-           params:{email:verification.email}
-         })
         }
       }).catch(err=>{
         console.log(err)

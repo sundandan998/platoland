@@ -1,5 +1,13 @@
 import request from "../../utils/request"
 export default {
+  // 检测用户名是否唯一
+  is_use(params = {}) {
+    return request({
+      url: "/system/username/" + params.username + "/check/",
+      method: "get",
+      params: params
+    })
+  },
   // 登录接口
   loginByCode(params = {}) {
     return request({

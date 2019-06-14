@@ -66,9 +66,8 @@ body{
     width: 100%;
 }
 .van-number-keyboard{
-    // position: unset;
     position: absolute;
-    display: block !important;
+
 }
 .mint-popup {
     display: block!important;
@@ -262,6 +261,10 @@ label.mint-button-text {
     .verification-code{
         padding-bottom: 20px;
         margin-top: 20px;
+        span{
+            margin: 10px 15px 0 0;
+            color: #456DF1;
+        }
     }
 }
 .reset-mail-keyboard{

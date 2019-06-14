@@ -47,22 +47,20 @@
 		},
 		methods: {
 			next() {
-			if (this.nextParam.mobile != '' || this.nextParam.email != '' && this.nextParam.sms_code != '' || this.nextParam.email_code != '' && this.nextParam.password != '')
-				// this.disabled = false
-				var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
+				if (this.nextParam.mobile != '' || this.nextParam.email != '' && this.nextParam.sms_code != '' || this.nextParam.email_code != '' && this.nextParam.password != '')
+					// this.disabled = false
+					var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
 				var url = window.location.href.split('?')
 				api.safety(this.nextParam).then(res => {
 					// debugger
-					if (url[2]== "rest") {
+					if (url[2] == "rest") {
 						this.$router.push({
 							name: 'Rest'
 						})
 					} else {
-						if (url[2] == "pwd") {
-							this.$router.push({
-								name: 'Safety'
-							})
-						}
+						this.$router.push({
+							name: 'Safety'
+						})
 					}
 				}).catch(err => {
 					console.log(err)

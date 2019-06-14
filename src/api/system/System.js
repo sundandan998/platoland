@@ -35,9 +35,17 @@ export default {
   // 检测用户名是否唯一
   is_use(params = {}) {
     return request({
-      url: "/system/username/" + params.email + "/check/",
+      url: "/system/username/" + params.username + "/check/",
       method: "get",
       params: params
+    })
+  },
+  // 校验验证码
+  checkCode(params = {}){
+    return request({
+      url: "/system/code/verification/",
+      method: "post",
+      data: params
     })
   },
   // 安全页面联合校验

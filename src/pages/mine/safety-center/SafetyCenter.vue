@@ -9,27 +9,23 @@
 		</div>
 		<div class="safety-center-list">
 			<router-link to="/safetyVerification?rest">
-			<mt-cell :title="$t('m.loginpwd')" is-link>
-				<!-- <span>{{$t('m.modify')}}</span> -->
-				<img slot="icon" src="../../../assets/images/u4107.png">
-			</mt-cell>
-		</router-link>
+				<mt-cell :title="$t('m.loginpwd')" is-link>
+					<!-- <span>{{$t('m.modify')}}</span> -->
+					<img slot="icon" src="../../../assets/images/u4107.png">
+				</mt-cell>
+			</router-link>
 			<mt-cell :title="$t('m.paymentpwd')" value="-3000">
-				<router-link to="/safetyverification?pwd">
-				<mt-switch v-model="value" @click="payPwd"></mt-switch>
+				<router-link to="/safetyverification">
+					<mt-switch v-model="value"></mt-switch>
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
-			<mt-cell :title="$t('m.authentication')" to="/safetyverification" value="-3000">
-				<router-link to="/safetyverification?info">
-				<mt-switch v-model="value1"></mt-switch>
-			</router-link>
+			<mt-cell :title="$t('m.authentication')" value="-3000">
+				<mt-switch :value="infoData.sms_verify" @click.native="sms"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4109.png">
 			</mt-cell>
-			<mt-cell title="邮箱验证" to="/safetyverification" value="-3000">
-				<router-link to="/safetyverification">
-				<mt-switch v-model="value"></mt-switch>
-				</router-link>
+			<mt-cell title="邮箱验证" value="-3000">
+				<mt-switch :value="infoData.email_verify" @click.native="email"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
 		</div>
@@ -37,18 +33,55 @@
 </template>
 
 <script>
+import api from "@/api/user/User.js"
 	export default {
 		data() {
 			return {
-				value: true,
-				value1: false
+				infoData:'',
+				value: '',
+				next:{
+					action:''
+				}
 			}
+		
+		},
+		created(){
+			this.info()
 		},
 		methods: {
-			payPwd() {
-				this.$router.push({
-					name: 'SafetyVerification'
+			// 用户信息
+			info() {
+				api.getUserInfo().then(res => {
+					this.infoData = res.data
+					console.log(res)
+				}).catch(err => {
+					console.log(err)
 				})
+			},
+			// 信息跳转
+			sms() {
+				if (this.infoData.sms_verify == true) {
+					this.$router.push({
+						name: 'SafetyVerification',
+						// params:''
+					})
+				} else {
+					this.$router.push({
+						name: 'Open'
+					})
+				}
+			},
+			// 邮箱跳转
+			email() {
+				if (this.infoData.email_verify == true) {
+					this.$router.push({
+						name: 'SafetyVerification'
+					})
+				} else {
+					this.$router.push({
+						name: 'Email'
+					})
+				}
 			}
 		}
 	}
