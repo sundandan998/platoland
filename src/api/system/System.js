@@ -41,7 +41,7 @@ export default {
     })
   },
   // 校验验证码
-  checkCode(params = {}){
+  checkCode(params = {}) {
     return request({
       url: "/system/code/verification/",
       method: "post",
@@ -49,11 +49,27 @@ export default {
     })
   },
   // 安全页面联合校验
-  safety(params = {}){
+  safety(params = {}) {
     return request({
       url: "/system/security/verification/",
       method: "post",
       data: params
     })
-  }
+  },
+  // 发送邮件
+  email(params = {}) {
+    return request({
+      url: "/system//email/",
+      method: "post",
+      data: params
+    })
+  },
+  // 发送短信
+  sms(params = {}) {
+    return request({
+      url: "/system/sms_code/",
+      method: "post",
+      data: params
+    })
+  },
 }

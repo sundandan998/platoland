@@ -14,6 +14,15 @@
     </mt-navbar>
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="login">
+        <el-form :model="verification" ref="verification" :rules="rules1" class="verification-input">
+          <el-form-item prop="username" v-if="hide">
+            <el-input v-model="verification.username" placeholder="手机号" type="number">
+              <i slot="prefix">
+                <img src="../../assets/images/email.png" alt="">
+              </i>
+            </el-input>
+          </el-form-item>
+        </el-form>
         <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
           <el-form-item prop="username" v-if="show">
             <el-input v-model="verification.username" placeholder="邮箱">
@@ -22,13 +31,7 @@
               </i>
             </el-input>
           </el-form-item>
-          <el-form-item prop="mobile" v-if="hide">
-            <el-input v-model="verification.mobile" placeholder="手机号" type="number">
-              <i slot="prefix">
-                <img src="../../assets/images/email.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
+
           <el-form-item prop="password">
             <el-input type="password" v-model="verification.password" autocomplete="off" placeholder="密码">
               <i slot="prefix">
@@ -47,17 +50,18 @@
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="register">
-        <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
-          <el-form-item prop="username" v-if="show">
-            <!-- verification.pass -->
-            <el-input v-model="verification.username" placeholder="邮箱">
+        <el-form :model="verification" ref="verification" :rules="rules1" class="verification-input">
+          <el-form-item prop="username" v-if="hide">
+            <el-input v-model="verification.username" placeholder="手机号" type="number">
               <i slot="prefix">
                 <img src="../../assets/images/email.png" alt="">
               </i>
             </el-input>
           </el-form-item>
-          <el-form-item prop="mobile" v-if="hide">
-            <el-input v-model="verification.mobile" placeholder="手机号" type="number">
+        </el-form>
+        <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
+          <el-form-item prop="username" v-if="show">
+            <el-input v-model="verification.username" placeholder="邮箱">
               <i slot="prefix">
                 <img src="../../assets/images/email.png" alt="">
               </i>
@@ -104,135 +108,140 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui'
-import pub from '@/assets/js/pub.js'
-// 接口请求
-import api from "@/api/user/User.js"
-export default {
-  data() {
-    return {
-      disabled: true,
-      visible: true,
-      active: 'login',
-      hide: false,
-      show: true,
-      username: {},
-      action: {
-        account_type: null,
-        action: null
-      },
-      items: [{
-        state: false
-      }],
-      // 登录参数
-      verification: {
-        username: '',
-        password: ''
-      },
-      // 忘记密码参数
-      forgetPwd: {
-        username: '',
-        new_pwd: '',
-        new_pwd2: ''
-      },
-      rules: {
-        // 校验邮箱
-        username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
-        // 校验密码
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }],
-        // 手机号校验
-        mobile: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { type: 'number', pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
-      },
-    }
-  },
-  methods: {
-    //  登录
-    handleLogin() {
-      api.is_use({ username: this.verification.username }).then(res => {
-        if (res.is_use === true) {
-          this.$store.dispatch("loginByCode", this.verification).then(res => {
-            if (res.code == 0) {
-              Toast({
-                message: res.msg,
-                position: 'top',
-                className: 'zZindex'
-              })
-              this.$router.push("/home")
-              this.$Indicator.close()
-            }
-          }).catch(err => {
-            if (err.code !== 0) {
-              Toast({
-                message: err.msg,
-                position: 'top',
-                className: 'zZindex'
-              })
-            }
-            this.$Indicator.close()
-          })
-        } else {
-          Toast({
-            message: '邮箱未注册',
-            position: 'top',
-            className: 'zZindex'
-          })
-          this.$router.push({
-            name: 'Login'
-          })
+  import { Toast } from 'mint-ui'
+  import pub from '@/assets/js/pub.js'
+  // 接口请求
+  import api from "@/api/user/User.js"
+  export default {
+    data() {
+      return {
+        disabled: true,
+        visible: true,
+        active: 'login',
+        hide: false,
+        show: true,
+        username: {},
+        action: {
+          account_type: null,
+          action: null
+        },
+        items: [{
+          state: false
+        }],
+        // 登录参数
+        verification: {
+          username: '',
+          password: ''
+        },
+        // 忘记密码参数
+        forgetPwd: {
+          username: '',
+          new_pwd: '',
+          new_pwd2: ''
+        },
+        rules: {
+          // 校验邮箱
+          username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
+          // 校验密码
+          password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }],
+        },
+        rules1: {
+          // 手机号校验
+          username: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
         }
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    // 注册
-    handleRegister() {
-      if (this.verification.username.type != "number") {
-        this.action.account_type = 1
-      } else {
-        this.action.account_type = 1
       }
-      var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
-      api.register(this.verification).then(res => {
-        if (res.code == 0) {
-          this.$router.push({
-            name: 'Reset'
-          })
-          window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
-        }
-      })
-        .catch(err => {
+    },
+    methods: {
+      //  登录
+      handleLogin() {
+        api.is_use({ username: this.verification.username }).then(res => {
+          if (res.is_use === true) {
+            this.$store.dispatch("loginByCode", this.verification).then(res => {
+              if (res.code == 0) {
+                Toast({
+                  message: res.msg,
+                  position: 'top',
+                  className: 'zZindex'
+                })
+                this.$router.push("/home")
+                this.$Indicator.close()
+              }
+            }).catch(err => {
+              if (err.code !== 0) {
+                Toast({
+                  message: err.msg,
+                  position: 'top',
+                  className: 'zZindex'
+                })
+              }
+              this.$Indicator.close()
+            })
+          } else {
+            Toast({
+              message: '账号不存在',
+              position: 'top',
+              className: 'zZindex'
+            })
+            this.$router.push({
+              name: 'Login'
+            })
+          }
+        }).catch(err => {
           console.log(err)
         })
-    },
-    // 切换手机号登录
-    changeMobile() {
-      this.hide = true
-      this.show = false
-    },
+      },
+      // 注册
+      handleRegister() {
+        var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+        if (reg.test(this.verification.username)) {
+          this.action.account_type = 0
+          this.action.action = 1
+        } else {
+          this.action.account_type = 1
+          this.action.action = 2
+        }
+        var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
+        api.register(this.verification).then(res => {
+          if (res.code == 0) {
+            this.$router.push({
+              name: 'Reset'
+            })
+            window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
+          }
+        })
+          .catch(err => {
+            console.log(err)
+          })
+      },
+      // 切换手机号登录
+      changeMobile() {
+        this.hide = true
+        this.show = false
+      },
 
-    // 切换邮箱登陆
-    changeEmail() {
-      this.hide = false
-      this.show = true
+      // 切换邮箱登陆
+      changeEmail() {
+        this.hide = false
+        this.show = true
+      },
+      //显示与隐藏密码
+      changePass(value) {
+        this.visible = !(value === 'show')
+      }
     },
-    //显示与隐藏密码
-    changePass(value) {
-      this.visible = !(value === 'show')
-    }
-  },
-  watch: {
-    // 登录页当邮箱和密码全部输入，按钮变色
-    verification: {
-      immediate: true,
-      deep: true,
-      handler(val) {
-        // debugger
-        if (val.username != '' && val.password != '')
-          this.disabled = false
+    watch: {
+      // 登录页当邮箱和密码全部输入，按钮变色
+      verification: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          // debugger
+          if (val.username != '' && val.password != '')
+            this.disabled = false
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">

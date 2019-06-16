@@ -12,7 +12,7 @@
       <span>请输入验证码。</span>
       <div class="verification-code">
         <van-password-input :value="code.code" @focus="showKeyboard = true" />
-        <span class="fr">重新发送验证码</span>
+        <span class="fr" @click="renewCode">重新发送验证码</span>
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false"
         />
@@ -35,19 +35,38 @@ export default {
       showKeyboard: false,
       disabled: true,
       codeData: {},
+      // 短信参数
+      sms: {
+        mobiles:[],
+        action:null
+      },
+      // 邮箱参数
+      email:{
+        action:null,
+        emails:[]
+      },
       code: {
         account: '',
-        account_type: 1,
-        action: 2,
+        account_type:null,
+        action:null,
         code: ''
       }
     }
   },
   created() {
+     // 获取存在session中的verification数据
     var codeData = window.sessionStorage.getItem('verification')
     codeData = JSON.parse(codeData)
     this.code.account = codeData.username
-  },
+    // 获取存在session中的action数据
+    var type = window.sessionStorage.getItem('action')
+    type = JSON.parse(type)
+    this.sms.action = type.action
+    this.sms.mobiles = codeData.username
+    this.email.action = type.action
+    this.email.emails = codeData.username
+    console.log(this.email)
+    },
   methods: {
     // 校验验证码
     verification() {
@@ -63,8 +82,30 @@ export default {
           })
         }
       }).catch(err => {
-        console.log(err)
+      Toast({
+          message: err.msg,
+          position: 'top',
+          className: 'zZindex'
+        })
       })
+    },
+    // 重新发送验证码
+    renewCode(){
+    // 发送信息
+      if(this.account_type == '0'){
+        api.sms(this.this.sms).then(res=>{
+          console.log(res)
+        }).catch(err=>{
+          console.log(err)
+        })
+      }else{
+      // 发送邮箱
+       api.email(this.email).then(res=>{
+         console.log(res)
+       }).catch(err=>{
+         console.log(err)
+       })
+      }
     },
     onInput(key) {
       this.code.code = (this.code.code + key).slice(0, 6)
