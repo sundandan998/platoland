@@ -203,6 +203,11 @@
         var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
         api.register(this.verification).then(res => {
           if (res.code == 0) {
+            Toast({
+              message: res.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
             this.$router.push({
               name: 'Reset'
             })
@@ -210,7 +215,11 @@
           }
         })
           .catch(err => {
-            console.log(err)
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
           })
       },
       // 切换手机号登录
