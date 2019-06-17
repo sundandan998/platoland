@@ -1,4 +1,4 @@
-const msg = {
+export const message = {   
     0:'请求成功',
     1:'注册成功',
     2:'参数错误，请重新输入',
@@ -25,4 +25,3 @@ const msg = {
     23:'用户不存在，请先注册',
     24:'两次密码不一致，请重新输入',
 }
-export default msg

@@ -40,7 +40,7 @@
       </el-form>
     </div>
     <div class="rest-pass-word-btn">
-      <mt-button type="primary" size="large" :disabled = "disabled" @click="successToast">确认</mt-button>
+      <mt-button type="primary" size="large" :disabled="disabled" @click="successToast">确认</mt-button>
     </div>
     <div class="rest-pass-word-text">
       <p>注意：</p>
@@ -51,99 +51,95 @@
 </template>
 
 <script>
-  import { Toast } from 'mint-ui'
-  // 接口请求
-  import api from "@/api/user/User.js"
-  export default {
-    data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'))
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass')
-          }
-          callback();
+import { Toast } from 'mint-ui'
+// 接口请求
+import api from "@/api/user/User.js"
+import { message } from '@/assets/lang/message.js'
+export default {
+  data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
         }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        visible: true,
-        visible1:true,
-        disabled:true,
-        ruleForm: {
-          pass: '',
-          checkPass: ''
-        },
-        rules: {
-          pass: [
-            { validator: validatePass, trigger: 'blur'},
-            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ]
-        }
+        callback();
       }
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!')
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields()
-      },
-      //显示与隐藏密码
-      changePass(value) {
-        this.visible = !(value === 'show')
-      },
-      changePass1(value) {
-        this.visible1 = !(value === 'show')
-      },
-      //消息弹框
-      successToast() {
-      api.forgetPassword().then(res=>{
-        if(res.code == 0){
-          this.$toast({
-          message: res.msg,
-        })
-        }
-      }).catch(err=>{
-        this.$toast({
-          message:err.msg,
-        })
-      })
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
       }
-    },
-    watch:{
+    };
+    return {
+      visible: true,
+      visible1: true,
+      disabled: true,
       ruleForm: {
-        immediate: true,
-        deep:true,
-        handler(val) {
-          // debugger
-          if (val.pass != '' && val.checkPass != '')
-            this.disabled = false
+        pass: '',
+        checkPass: ''
+      },
+      rules: {
+        pass: [
+          { validator: validatePass, trigger: 'blur' },
+          { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
+        ],
+        checkPass: [
+          { validator: validatePass2, trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!')
+          return false;
         }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    },
+    //显示与隐藏密码
+    changePass(value) {
+      this.visible = !(value === 'show')
+    },
+    changePass1(value) {
+      this.visible1 = !(value === 'show')
+    },
+    //消息弹框
+    successToast() {
+      api.forgetPassword().then(res => {
+        if (res.code == 0) {
+          toast(res)
+        }
+      }).catch(err => {
+        toast(err)
+      })
+    }
+  },
+  watch: {
+    ruleForm: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        // debugger
+        if (val.pass != '' && val.checkPass != '')
+          this.disabled = false
       }
     }
   }
+}
 </script>
-
 <style lang="scss">
   @import '../../../assets/scss/global'
 </style>

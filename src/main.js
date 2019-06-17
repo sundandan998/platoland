@@ -11,8 +11,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'vant/lib/index.css'
 //各种组件集合
 import external from './external-components/index'
-//消息弹框
-import message from './assets/lang/message'
 import axios from 'axios'
 import store from './store'
 import { Indicator } from 'mint-ui'
@@ -30,7 +28,6 @@ Vue.prototype.$Indicator = Indicator
 require('./mock.js')
 Vue.use(VueAxios, axios)
 Vue.use(external)
-Vue.use(message)
 Vue.use(MintUI)
 Vue.use(Vuex)
 Vue.config.productionTip = false
@@ -40,7 +37,8 @@ const i18n = new VueI18n({
     //this.$i18n.locale // 通过切换locale的值来实现语言切换
     messages: {
       'zh-CN': require('./assets/lang/zh'),   // 中文语言包
-      'en-US': require('./assets/lang/en')  // 英文语言包
+      'en-US': require('./assets/lang/en'), // 英文语言包
+      'msg': require('./assets/lang/message') // 提示信息
     }
 })
 new Vue({

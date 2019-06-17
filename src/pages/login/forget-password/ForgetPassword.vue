@@ -38,7 +38,7 @@
 </template>
 <script>
   import { Toast } from 'mint-ui'
-  import pub from '@/assets/js/pub.js'
+  import { message } from '@/assets/lang/message.js'
   // 接口请求
   import api from "@/api/system/System.js"
   export default {

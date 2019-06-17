@@ -109,7 +109,8 @@
 
 <script>
   import { Toast } from 'mint-ui'
-  import pub from '@/assets/js/pub.js'
+  import {toast} from '@/assets/js/pub.js'
+  import { message } from '@/assets/lang/message.js'
   // 接口请求
   import api from "@/api/user/User.js"
   export default {
@@ -151,6 +152,9 @@
         }
       }
     },
+    created() {
+      // console.log(message)
+    },
     methods: {
       //  登录
       handleLogin() {
@@ -158,21 +162,14 @@
           if (res.is_use === true) {
             this.$store.dispatch("loginByCode", this.verification).then(res => {
               if (res.code == 0) {
-                Toast({
-                  message: res.msg,
-                  position: 'top',
-                  className: 'zZindex'
-                })
+                // 消息提示
+                toast(res)
                 this.$router.push("/home")
                 this.$Indicator.close()
               }
             }).catch(err => {
               if (err.code !== 0) {
-                Toast({
-                  message: err.msg,
-                  position: 'top',
-                  className: 'zZindex'
-                })
+              toast(err)
               }
               this.$Indicator.close()
             })
@@ -203,23 +200,14 @@
         var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
         api.register(this.verification).then(res => {
           if (res.code == 0) {
-            Toast({
-              message: res.msg,
-              position: 'top',
-              className: 'zZindex'
-            })
+            toast(res)
             this.$router.push({
               name: 'Reset'
             })
             window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
           }
-        })
-          .catch(err => {
-            Toast({
-              message: err.msg,
-              position: 'top',
-              className: 'zZindex'
-            })
+        }).catch(err => {
+          toast(err)
           })
       },
       // 切换手机号登录

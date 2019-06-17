@@ -24,6 +24,7 @@
 </template>
 <script>
   import { Toast } from 'mint-ui'
+  import { message } from '@/assets/lang/message.js'
   // 接口请求
   import api from "@/api/system/System.js"
   export default {
@@ -73,21 +74,14 @@
       verification() {
         api.checkCode(this.code).then(res => {
           if (res.code == 0) {
-            Toast({
-              message: res.msg,
-              position: 'top',
-              className: 'zZindex'
-            })
+           // 消息提示
+           toast(res)
             this.$router.push({
               name: 'Login'
             })
           }
         }).catch(err => {
-          Toast({
-            message: err.msg,
-            position: 'top',
-            className: 'zZindex'
-          })
+          toast(err)
         })
       },
       // 重新发送验证码
