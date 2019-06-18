@@ -61,7 +61,8 @@ export default {
     return request({
       url: "/system//email/",
       method: "post",
-      data: params
+      data: JSON.stringify(params),
+      
     })
   },
   // 发送短信
@@ -72,4 +73,12 @@ export default {
       data: params
     })
   },
+  // 绑定手机或邮箱
+  bind(params = {}){
+    return request({
+      url: "/user/bind/",
+      method: "post",
+      data: params
+    })
+  }
 }

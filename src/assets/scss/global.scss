@@ -1335,7 +1335,7 @@ img.fr.tag-read {
     span{
         position: relative;
         right: 30px;
-        top: 40px;
+        top: -5px;
         z-index: 1;
     }
 }
@@ -1353,6 +1353,9 @@ img.fr.tag-read {
     font-size: 0.8rem;
     margin: 10px;
     padding-bottom: 20px;
+}
+.demo-ruleForm input{
+    border-bottom:1px solid #333;
 }
 //我的/安全中心/安全验证
 .safety-verification-header {

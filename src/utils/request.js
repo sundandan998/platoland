@@ -30,7 +30,6 @@ const service = axios.create({
   // 是否跨域
   withCredentials: false
 });
-
 service.interceptors.request.use(
   config => {
     config.headers["Content-Type"] =
