@@ -1,8 +1,10 @@
 <template>
   <div class="forget-password">
-    <div class="login-cancel">
-      <img src="../../../assets/images/cancel.png" alt="" />
-    </div>
+    <router-link to="login">
+      <div class="login-cancel">
+        <img src="../../../assets/images/cancel.png" alt="" />
+      </div>
+    </router-link>
     <div class="logo">
       <img src="../../../assets/images/logo.png" alt="" />
     </div>
@@ -10,7 +12,7 @@
       <h1>重置登录密码</h1>
     </div>
     <div class="login-content">
-      <el-form v-if="show":model="verification" ref="verification" v-model="verification.email" :rules="rules" class="verification-input">
+      <el-form v-if="show" :model="verification" ref="verification" v-model="verification.email" :rules="rules" class="verification-input">
         <el-form-item prop="email">
           <el-input v-model="verification.username" placeholder="邮箱">
             <i slot="prefix">
@@ -19,7 +21,7 @@
           </el-input>
         </el-form-item>
       </el-form>
-      <el-form  v-if="hide" :model="verification" ref="verification" :rules="rules1" class="verification-input">
+      <el-form v-if="hide" :model="verification" ref="verification" :rules="rules1" class="verification-input">
         <el-form-item prop="username">
           <el-input v-model="verification.username" placeholder="手机号" type="number">
             <i slot="prefix">
@@ -45,11 +47,11 @@
     data() {
       return {
         value: '',
-        show:true,
-        hide:false,
+        show: true,
+        hide: false,
         disabled: true,
         showKeyboard: true,
-        showPwd:'',
+        showPwd: '',
         username: {},
         verification: {
           username: ''
@@ -64,12 +66,12 @@
         }
       }
     },
-    created(){
-     var showPwd = window.sessionStorage.getItem('action')
-     showPwd = JSON.parse(showPwd)
-     this.showPwd = showPwd.action
-     console.log(this.showPwd)
-     this.showInput()
+    created() {
+      var showPwd = window.sessionStorage.getItem('action')
+      showPwd = JSON.parse(showPwd)
+      this.showPwd = showPwd.action
+      console.log(this.showPwd)
+      this.showInput()
     },
     methods: {
       // 检测用户名是否唯一接口
@@ -94,9 +96,9 @@
         })
       },
       // 控制显示手机或邮箱
-      showInput(){
+      showInput() {
         // debugger
-        if(this.showPwd !== 2){
+        if (this.showPwd !== 2) {
           this.hide = true
           this.show = false
         }

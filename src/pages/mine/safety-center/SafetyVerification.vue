@@ -8,12 +8,12 @@
 			</mt-header>
 		</div>
 		<div class="safety-verification-list">
-			<span>138....1214</span>
-			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">{{$t('m.send')}}</mt-field>
+			<span>{{nextParam.mobile}}</span>
+			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code"  type="number"><span @click="sms_code">{{$t('m.send')}}</span></mt-field>
 		</div>
 		<div class="safety-verification-list">
-			<span>han****@163.com</span>
-			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">{{$t('m.send')}}</mt-field>
+			<span>{{nextParam.email}}</span>
+			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code"type="number"><span @click="email_code">{{$t('m.send')}}</span></mt-field>
 		</div>
 		<!-- <router-link to="/open"> -->
 		<div class="safety-verification-btn">
@@ -34,22 +34,41 @@
 	export default {
 		data() {
 			return {
-				disabled: false,
+				disabled: true,
+				nextData: {},
 				// 下一步接口参数
 				nextParam: {
-					mobile: '18713351004',
-					email: '12345@qq.com',
-					sms_code: '123456',
-					email_code: '234566',
-					password: 'sanbap6537'
-				}
+					mobile: '',
+					email: '',
+					sms_code: '',
+					email_code: '',
+					action: 'email'
+				},
+				// 短信参数
+				sms: {
+					mobiles: [],
+					action: 2
+				},
+				// 邮箱参数
+				email: {
+					action: 2,
+					emails: []
+				},
 			}
 		},
+		created() {
+			// 获取用户名信息
+			var nextData = window.sessionStorage.getItem('userInfo')
+			nextData = JSON.parse(nextData)
+			this.nextParam.mobile = nextData.data.mobile
+			this.nextParam.email = nextData.data.email
+			this.sms.mobiles = nextData.data.mobile
+			this.sms.emails = nextData.data.email
+		},
 		methods: {
+			// 下一步按钮
 			next() {
-				if (this.nextParam.mobile != '' || this.nextParam.email != '' && this.nextParam.sms_code != '' || this.nextParam.email_code != '' && this.nextParam.password != '')
-					// this.disabled = false
-					var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
+				var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
 				var url = window.location.href.split('?')
 				api.safety(this.nextParam).then(res => {
 					// debugger
@@ -65,6 +84,33 @@
 				}).catch(err => {
 					console.log(err)
 				})
+			},
+			// 发送信息
+			sms_code(){
+				api.sms(this.sms).then(res=>{
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 发送邮件
+			email_code(){
+				api.email(this.email).then(res=>{
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+			}
+		},
+		watch: {
+			nextParam: {
+				immediate: true,
+				deep: true,
+				handler(val) {
+					if (val.sms_code != '' && val.email_code != '') {
+						this.disabled = false
+					}
+				}
 			}
 		}
 	}

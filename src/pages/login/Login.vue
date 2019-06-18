@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <router-link to="/">
+    <router-link to="login">
       <div class="login-cancel">
         <img src="../../assets/images/cancel.png" alt="" />
       </div>
@@ -31,7 +31,6 @@
               </i>
             </el-input>
           </el-form-item>
-
           <el-form-item prop="password">
             <el-input type="password" v-model="verification.password" autocomplete="off" placeholder="密码">
               <i slot="prefix">
