@@ -16,6 +16,8 @@ import store from './store'
 import { Indicator } from 'mint-ui'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
+// 提示消息
+import { message } from '@/assets/lang/message.js'
 //引入jquery
 import $ from 'jquery'
 //api接口
@@ -30,6 +32,7 @@ Vue.use(VueAxios, axios)
 Vue.use(external)
 Vue.use(MintUI)
 Vue.use(Vuex)
+Vue.use(message)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 const i18n = new VueI18n({

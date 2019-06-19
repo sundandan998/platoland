@@ -21,11 +21,11 @@
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
 			<mt-cell :title="$t('m.authentication')" value="-3000">
-				<mt-switch :value="infoData.sms_verify" @click.native="sms"></mt-switch>
+				<mt-switch :value="infoData.mobile_active" @click.native="sms"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4109.png">
 			</mt-cell>
 			<mt-cell title="邮箱验证" value="-3000">
-				<mt-switch :value="infoData.email_verify" @click.native="email"></mt-switch>
+				<mt-switch :value="infoData.email_active" @click.native="email"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
 		</div>
@@ -34,16 +34,16 @@
 
 <script>
 import api from "@/api/user/User.js"
+import {toast} from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
-				infoData:'',
+				infoData:{},
 				value: '',
 				next:{
 					action:''
 				}
 			}
-		
 		},
 		created(){
 			this.info()
@@ -53,14 +53,14 @@ import api from "@/api/user/User.js"
 			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
-					console.log(res)
+					// toast(res)
 				}).catch(err => {
-					console.log(err)
+					// toast(err)
 				})
 			},
 			// 信息跳转
 			sms() {
-				if (this.infoData.sms_verify == true) {
+				if (this.infoData.mobile_active == true) {
 					this.$router.push({
 						name: 'SafetyVerification',
 						// params:''
@@ -73,7 +73,7 @@ import api from "@/api/user/User.js"
 			},
 			// 邮箱跳转
 			email() {
-				if (this.infoData.email_verify == true) {
+				if (this.infoData.email_active == true) {
 					this.$router.push({
 						name: 'SafetyVerification'
 					})

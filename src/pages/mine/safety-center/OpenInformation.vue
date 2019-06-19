@@ -11,7 +11,7 @@
 			<el-form class="demo-ruleForm">
 				<el-form-item :label="$t('m.phonenumber')">
 					<br>
-					<mt-field v-model="openinformation.mobiles" placeholder="请输入手机号码" type="number" :attr="{ oninput: 'if(value.length>11)value=value.slice(0,11)' }"></mt-field>
+					<mt-field v-model="openinformation.mobile" placeholder="请输入手机号码" type="number" :attr="{ oninput: 'if(value.length>11)value=value.slice(0,11)' }"></mt-field>
 				</el-form-item>
 				<el-form-item :label="$t('m.smsverification')">
 					<br>
@@ -35,15 +35,13 @@
 <script>
 	// 接口请求
 	import api from "@/api/system/System.js"
-	// import { Toast } from 'mint-ui'
 	import {toast} from '@/assets/js/pub.js'
-  import { message } from '@/assets/lang/message.js'
 	export default {
 		data() {
 			return {
 				disabled: true,
 				openinformation: {
-					mobiles: '',
+					mobile: '',
 					code: '',
 					action: 2
 				},
@@ -57,14 +55,14 @@
 			// 发送信息
 			smsCode() {
 				api.sms(this.openinformation).then(res => {
-					console.log(res)
+					toast(res)
 				}).catch(eerr => {
-					console.log(err)
+					toast(err)
 				})
 			},
 			// 点击确定
 			information(){
-				this.bindParam.account = this.openinformation.mobiles
+				this.bindParam.account = this.openinformation.mobile
 				this.bindParam.code = this.openinformation.code
 				api.bind(this.bindParam).then(res=>{
 					if (res.code == 0) {
@@ -80,7 +78,7 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.mobiles != '' && val.code != '') {
+					if (val.mobile != '' && val.code != '') {
 						this.disabled = false
 					}
 				}

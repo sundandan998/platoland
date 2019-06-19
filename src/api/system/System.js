@@ -59,9 +59,9 @@ export default {
   // 发送邮件
   email(params = {}) {
     return request({
-      url: "/system//email/",
+      url: "/system/email/",
       method: "post",
-      data: JSON.stringify(params),
+      data: params,
       
     })
   },

@@ -37,13 +37,13 @@
         codeData: {},
         // 短信参数
         sms: {
-          mobiles: [],
+          mobile: [],
           action: ''
         },
         // 邮箱参数
         email: {
           action: '',
-          emails: []
+          email: []
         },
         code: {
           account: '',
@@ -64,9 +64,9 @@
       this.code.action = type.action
       this.code.account_type = type.account_type
       this.sms.action = type.action
-      this.sms.mobiles = codeData.username
+      this.sms.mobile = codeData.username
       this.email.action = type.action
-      this.email.emails = codeData.username
+      this.email.email = codeData.username
       // console.log(this.email)
     },
     methods: {

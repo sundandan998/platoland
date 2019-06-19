@@ -31,6 +31,7 @@
 <script>
 	// 接口请求
 	import api from "@/api/system/System.js"
+	import {toast} from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
@@ -46,13 +47,13 @@
 				},
 				// 短信参数
 				sms: {
-					mobiles: [],
+					mobile: [],
 					action: 2
 				},
 				// 邮箱参数
 				email: {
 					action: 2,
-					emails: []
+					email: []
 				},
 			}
 		},
@@ -62,8 +63,8 @@
 			nextData = JSON.parse(nextData)
 			this.nextParam.mobile = nextData.data.mobile
 			this.nextParam.email = nextData.data.email
-			this.sms.mobiles = nextData.data.mobile
-			this.sms.emails = nextData.data.email
+			this.sms.mobile = nextData.data.mobile
+			this.sms.email = nextData.data.email
 		},
 		methods: {
 			// 下一步按钮
@@ -71,7 +72,7 @@
 				var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
 				var url = window.location.href.split('?')
 				api.safety(this.nextParam).then(res => {
-					// debugger
+					toast(res)
 					if (url[2] == "rest") {
 						this.$router.push({
 							name: 'Rest'
@@ -82,23 +83,23 @@
 						})
 					}
 				}).catch(err => {
-					console.log(err)
+					toast(err)
 				})
 			},
 			// 发送信息
 			sms_code(){
 				api.sms(this.sms).then(res=>{
-					console.log(res)
+					toast(res)
 				}).catch(err=>{
-					console.log(err)
+					toast(err)
 				})
 			},
 			// 发送邮件
 			email_code(){
-				api.email(this.email).then(res=>{
-					console.log(res)
+				api.email(this.sms).then(res=>{
+					toast(res)
 				}).catch(err=>{
-					console.log(err)
+					toast(err)
 				})
 			}
 		},
