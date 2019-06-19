@@ -23,8 +23,7 @@
   </div>
 </template>
 <script>
-  import { Toast } from 'mint-ui'
-  import { message } from '@/assets/lang/message.js'
+  import {toast} from '@/assets/js/pub.js'
   // 接口请求
   import api from "@/api/system/System.js"
   export default {

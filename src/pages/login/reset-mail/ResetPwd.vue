@@ -51,10 +51,9 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui'
+import {toast} from '@/assets/js/pub.js'
 // 接口请求
 import api from "@/api/user/User.js"
-import { message } from '@/assets/lang/message.js'
 export default {
   data() {
     var validatePass = (rule, value, callback) => {

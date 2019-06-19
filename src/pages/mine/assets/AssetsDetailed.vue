@@ -1,157 +1,159 @@
 <template>
-	<div class="assets-detailed">
-		<div class="assets-detailed-header">
-			<mt-header fixed :title="$t('m.assetdetails')">
+  <div class="assets-detailed">
+    <div class="assets-detailed-header">
+      <mt-header fixed :title="$t('m.assetdetails')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
-         <el-dropdown trigger="click">
-           <span class="el-dropdown-link">
-            <img slot="icon" src="../../../assets/images/gd.png">
-          </span>
-          <el-dropdown-menu slot="dropdown">
-           <router-link to="/scan">
-             <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
-           </router-link>
-
-           <router-link :to="{name:'Out'}">
-            <el-dropdown-item><span @click="outAsset">{{$t('m.changeout')}}</span></el-dropdown-item>
+          <el-dropdown trigger="click">
+            <span class="el-dropdown-link">
+              <img slot="icon" src="../../../assets/images/gd.png">
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <router-link to="/scan">
+                <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
+              </router-link>
+              <router-link :to="{name:'Out'}">
+                <el-dropdown-item>
+                  <span @click="outAsset">{{$t('m.changeout')}}</span>
+                </el-dropdown-item>
+              </router-link>
+              <el-dropdown-item>
+                <span @click="remove">{{$t('m.remove')}}</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </mt-button>
+      </mt-header>
+    </div>
+    <div class="assets-detailed-exhibition">
+      <div class="assets-detailed-exhibition-img">
+        <p>{{this.assetsData.balance}}</p>
+        <img :src="this.assetsToken.icon" alt="" class="fl" />
+        <ul>
+          <li>{{this.assetsToken.code}} {{this.assetsToken.nickname}}</li>
+          <li>{{this.assetsToken.subject}}</li>
+        </ul>
+      </div>
+      <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
+        <img slot="icon" src="../../../assets/images/u4662.png">
+      </mt-cell>
+      <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount">
+        <img slot="icon" src="../../../assets/images/u4666.png">
+      </mt-cell>
+    </div>
+    <div class="assets-detailed-whole">
+      <div class="assets-detailed-whole-header">
+        <span class="fl">{{$t('m.assetsdetail')}}</span>
+        <router-link to="/detailedlist">
+          <span class="fr">{{$t('m.whole')}} ></span>
+        </router-link>
+      </div>
+    </div>
+    <div class="assets-detailed-tabbar">
+      <van-tabs>
+        <van-tab :title="$t('m.changeinto')">
+          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
+            <span>-30000</span>
+          </mt-cell>
+          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
+            <span>-30000</span>
+          </mt-cell>
+          <router-link to="/into">
+            <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
           </router-link>
-          <el-dropdown-item><span @click="remove">{{$t('m.remove')}}</span></el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </mt-button>
-  </mt-header>
-</div>
-<div class="assets-detailed-exhibition" >
-  <div class="assets-detailed-exhibition-img" >
-    <p>{{this.assetsData.balance}}</p>
-    <img src="../../../assets/images/ld.png" alt="" class="fl" />
-    <ul>
-      <li>{{this.assetsToken.code}} {{this.assetsToken.nickname}}</li>
-      <li>{{this.assetsToken.subject}}</li>
-      <!-- <li>{{$t('m.intobody')}}</li> -->
-    </ul>
+        </van-tab>
+        <van-tab :title="$t('m.changeout')">
+          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
+            <span>-30000</span>
+          </mt-cell>
+          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
+            <span>-30000</span>
+          </mt-cell>
+          <router-link to="/into">
+            <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
+          </router-link>
+        </van-tab>
+      </van-tabs>
+    </div>
   </div>
-  <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
-   <img slot="icon" src="../../../assets/images/u4662.png">
- </mt-cell>
- <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount">
-  <img slot="icon" src="../../../assets/images/u4666.png">
-</mt-cell>
-</div>
-<div class="assets-detailed-whole">
- <div class="assets-detailed-whole-header">
-  <span class="fl">{{$t('m.assetsdetail')}}</span>
-  <router-link to="/detailedlist">
-   <span class="fr">{{$t('m.whole')}} ></span>
- </router-link>
-</div>
-</div>
-<div class="assets-detailed-tabbar">
- <van-tabs>
-   <van-tab :title="$t('m.changeinto')">
-    <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-     <span>-30000</span>
-   </mt-cell>
-   <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-     <span>-30000</span>
-   </mt-cell>
-   <router-link to="/into">
-     <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
-   </router-link>
- </van-tab>
- <van-tab  :title="$t('m.changeout')">
-  <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-   <span>-30000</span>
- </mt-cell>
- <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-   <span>-30000</span>
- </mt-cell>
- <router-link to="/into">
-   <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
- </router-link>
-</van-tab>
-</van-tabs>
-</div>
-</div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import api from "@/api/user/User.js"
-export default{
-	data(){
-		return{
-			data:{},
-      assetDetailId:{},
-      assetsData:{},
-      assetsToken:{},
-      // 删除资产参数
-      delasset:{
-        code:'LD'
-      },
-       // 转出资产参数
-      outParam:{
-        token:'LD',
-        address:'de12sdfe',
-        amount:1000
+  import { mapGetters } from 'vuex'
+  import api from "@/api/user/User.js"
+  export default {
+    data() {
+      return {
+        data: {},
+        // assetDetailId:{},
+        assetsData: {},
+        assetsToken: {},
+        // 删除资产参数
+        delasset: {
+          code: 'LD'
+        },
+        // 转出资产参数
+        outParam: {
+          token: 'LD',
+          address: 'de12sdfe',
+          amount: 1000
+        }
       }
-    }
-  },
-  created(){
-    this.assetDetailId = this.$route.params
-    this.assetDetail()
-  },
-  methods:{
-    // 资产详情
-    assetDetail(){
-      api.assetDetail(this.$route.params).then(res=>{
-        this.assetsData = res.data
-        this.assetsToken = res.data.token
-        this.$store.commit('detail', res.data)
-      }).catch(err=>{
-        console.log(err)
-      })
     },
-		//点击移除弹出的消息框
-		remove(){
-      // 删除资产接口
-      api.delAsset(this.delasset).then(res=>{
-        // console.log(res)
-      }).catch(err=>{
-        console.log(err)
-      })
-      this.$messagebox({
-        title: 'Tips',
-        message:'Are you sure to removal of assets?',
-        cancelButtonText:'No',
-        confirmButtonText:'Yes',
-        showCancelButton: true
-      })
-      .then(action => {
-        this.$router.push({
-          path:'/assets'
+    created() {
+      // this.assetDetailId = this.$route.params
+      this.assetDetail()
+    },
+    methods: {
+      // 资产详情
+      assetDetail() {
+        api.assetDetail(this.$route.params).then(res => {
+          this.assetsData = res.data
+          this.assetsToken = res.data.token
+          this.$store.commit('detail', res.data)
+        }).catch(err => {
+          console.log(err)
         })
-      })
+      },
+      //点击移除弹出的消息框
+      remove() {
+        // 删除资产接口
+        api.delAsset(this.delasset).then(res => {
+          // console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+        this.$messagebox({
+          title: 'Tips',
+          message: 'Are you sure to removal of assets?',
+          cancelButtonText: 'No',
+          confirmButtonText: 'Yes',
+          showCancelButton: true
+        })
+          .then(action => {
+            this.$router.push({
+              path: '/assets'
+            })
+          })
+      },
+      // 转出资产
+      outAsset() {
+        api.outAsset(this.outParam).then(res => {
+          // console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     },
-    // 转出资产
-    outAsset(){
-      api.outAsset(this.outParam).then(res=>{
-        // console.log(res)
-      }).catch(err=>{
-        console.log(err)
-      })
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
-  },
-  computed:{
-    ...mapGetters([
-     'detail'
-     ])
-  }
 
-}
+  }
 </script>
 
 <style lang="scss">
-@import '../../../assets/scss/global'
+  @import '../../../assets/scss/global'
 </style>

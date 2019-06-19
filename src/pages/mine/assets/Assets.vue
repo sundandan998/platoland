@@ -20,7 +20,7 @@
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">
       <router-link :to="/assetsdetailed/+item.id">
         <mt-cell :title="item.token.code + (item.token.name)" :value="item.balance" :label="item.token.subject">
-          <img class="assets-icon" slot="icon" :src="'http://'+item.token.icon">
+          <img class="assets-icon" slot="icon" :src="item.token.icon">
         </mt-cell>
       </router-link>
     </div>
@@ -35,7 +35,7 @@ export default {
    return {
    	assetsdata:[],
     addCode:{
-      code:'LD'
+      code:''
     }
    }
   },

@@ -11,12 +11,12 @@
               <img src="../../assets/images/gf.png" alt="" />
               <div class="home-investment-content">
                 <div class="home-investment-top fl">
-                  <img :src="'http://'+pld.icon">
+                  <img :src="pld.icon">
                   <!-- <img src="../../assets/images/icon-3.png" alt="" /> -->
                 </div>
                 <div class="home-investment-top-left">
                   <P>{{pld.code}} ({{pld.name}})<span>
-                   <img :src="'http://'+pldrelease.d_icon">{{pldrelease.issue_price}}</span></P>
+                   <img :src="pldrelease.d_icon">{{pldrelease.issue_price}}</span></P>
                    <P>{{pld.subject}}</P>
                  </div>
                  <div class="home-investment-top-right fr">
@@ -53,7 +53,7 @@
          <!-- @click="issue(items.code) -->
          <div class="assets-subscription" v-for="(items,index) in token_list">
           <router-link :to="/detail/+items.code">
-           <img :src="'http://'+items.icon">
+           <img :src="items.icon">
            <div class="assets-subscription-text fr">
              <span class="home-name">{{items.code}} ({{items.name}})</span>
              <p>{{items.subject}}</p>
