@@ -107,135 +107,138 @@
 </template>
 
 <script>
-  import {toast} from '@/assets/js/pub.js'
-  // 接口请求
-  import api from "@/api/user/User.js"
-  export default {
-    data() {
-      return {
-        disabled: true,
-        visible: true,
-        active: 'login',
-        hide: false,
-        show: true,
-        username: {},
-        action: {
-          account_type: null,
-          action: null
-        },
-        items: [{
-          state: false
-        }],
-        // 登录参数
-        verification: {
-          username: '',
-          password: ''
-        },
-        // 忘记密码参数
-        forgetPwd: {
-          username: '',
-          new_pwd: '',
-          new_pwd2: ''
-        },
-        rules: {
-          // 校验邮箱
-          username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
-          // 校验密码
-          password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }],
-        },
-        rules1: {
-          // 手机号校验
-          username: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
-        }
-      }
-    },
-    created() {
-      // console.log(message)
-    },
-    methods: {
-      //  登录
-      handleLogin() {
-        api.is_use({ username: this.verification.username }).then(res => {
-          if (res.is_use === true) {
-            this.$store.dispatch("loginByCode", this.verification).then(res => {
-              if (res.code == 0) {
-                // 消息提示
-                toast(res)
-                this.$router.push("/home")
-                this.$Indicator.close()
-              }
-            }).catch(err => {
-              if (err.code !== 0) {
-              toast(err)
-              }
-              this.$Indicator.close()
-            })
-          } else {
-            Toast({
-              message: '账号不存在',
-              position: 'top',
-              className: 'zZindex'
-            })
-            this.$router.push({
-              name: 'Login'
-            })
-          }
-        }).catch(err => {
-          console.log(err)
-        })
+import { toast } from '@/assets/js/pub.js'
+// 接口请求
+import api from "@/api/user/User.js"
+export default {
+  data() {
+    return {
+      disabled: true,
+      visible: true,
+      active: 'login',
+      hide: false,
+      show: true,
+      username: {},
+      action: {
+        account_type: null,
+        action: null
       },
-      // 注册
-      handleRegister() {
-        var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-        if (reg.test(this.verification.username)) {
-          this.action.account_type = 0
-          this.action.action = 1
-        } else {
-          this.action.account_type = 1
-          this.action.action = 2
-        }
-        var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
-        api.register(this.verification).then(res => {
-          if (res.code == 0) {
-            toast(res)
-            this.$router.push({
-              name: 'Reset'
-            })
-            window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
-          }
-        }).catch(err => {
-          toast(err)
-          })
-      },
-      // 切换手机号登录
-      changeMobile() {
-        this.hide = true
-        this.show = false
-      },
-
-      // 切换邮箱登陆
-      changeEmail() {
-        this.hide = false
-        this.show = true
-      },
-      //显示与隐藏密码
-      changePass(value) {
-        this.visible = !(value === 'show')
-      }
-    },
-    watch: {
-      // 登录页当邮箱和密码全部输入，按钮变色
+      items: [{
+        state: false
+      }],
+      // 登录参数
       verification: {
-        immediate: true,
-        deep: true,
-        handler(val) {
-          // debugger
-          if (val.username != '' && val.password != '')
-            this.disabled = false
+        username: '15701644059',
+        password: 'wwwwwww1'
+      },
+      // 忘记密码参数
+      forgetPwd: {
+        username: '',
+        new_pwd: '',
+        new_pwd2: ''
+      },
+      rules: {
+        // 校验邮箱
+        username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
+        // 校验密码
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }],
+      },
+      rules1: {
+        // 手机号校验
+        username: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
+      }
+    }
+  },
+  created() {
+    // console.log(message)
+  },
+  methods: {
+    //  登录
+    handleLogin() {
+      api.is_use({ username: this.verification.username }).then(res => {
+        if (res.is_use === true) {
+          this.$store.dispatch("loginByCode", this.verification).then(res => {
+            if (res.code == 0) {
+              // 消息提示
+              toast(res)
+              this.$router.push("/home")
+              this.$Indicator.close()
+            }
+          }).catch(err => {
+            if (err.code !== 0) {
+              toast(err)
+            }
+            this.$Indicator.close()
+          })
+        } else {
+          Toast({
+            message: '账号不存在',
+            position: 'top',
+            className: 'zZindex'
+          })
+          this.$router.push({
+            name: 'Login'
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    // 注册
+    handleRegister() {
+      var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+      if (reg.test(this.verification.username)) {
+        this.action.account_type = 0
+        this.action.action = 1
+      } else {
+        this.action.account_type = 1
+        this.action.action = 2
+      }
+      var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
+      api.register(this.verification).then(res => {
+        if (res.code == 0) {
+          toast(res)
+          this.$router.push({
+            name: 'Reset'
+          })
+          window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
+        }
+      }).catch(err => {
+        toast(err)
+      })
+    },
+    // 切换手机号登录
+    changeMobile() {
+      this.hide = true
+      this.show = false
+    },
+
+    // 切换邮箱登陆
+    changeEmail() {
+      this.hide = false
+      this.show = true
+    },
+    //显示与隐藏密码
+    changePass(value) {
+      this.visible = !(value === 'show')
+    }
+  },
+  watch: {
+    // 登录页当邮箱和密码全部输入，按钮变色
+    verification: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        // debugger
+        if (val.username != '' && val.password != '') {
+          this.disabled = false
+        } else {
+          this.disabled = true
         }
       }
     }
   }
+}
 </script>
 
 <style lang="scss">

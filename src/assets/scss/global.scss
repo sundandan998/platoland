@@ -12,9 +12,17 @@
 //}
 // 文字超出出现省略号
 .text-beyond {
+  width: 101%;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
+}
+// 超出折行
+.overflow-text{
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
 }
 html,body {
     font-family: myFont, sans-serif;
@@ -1202,7 +1210,12 @@ table.el-table__body {
 }
 img.fr.tag-read {
     float: right;
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-right: -50px;
+}
+.to-change-into-exhibition-adress{
+    margin-top: 10px;
+    width: 101%;
 }
 //我的/资产/资产详情/转出
 .turn-out-exhibition {
@@ -1499,10 +1512,10 @@ img.fr.tag-read {
         display: inline-block;
     }
     img{
-      margin-top: 10px;
-      position: relative;
-      top: -36px;
-      left: -20px;
+        margin-top: -30px;
+        position: relative;
+        float: right;
+        margin-right: 20px;
     }
 }
 .add-adress-list a.mint-cell.mint-field.is-nolabel {

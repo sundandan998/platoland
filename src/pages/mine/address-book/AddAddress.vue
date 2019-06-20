@@ -61,11 +61,12 @@
         this.addAddress.token_code = this.$route.params.code
         api.addAdress(this.addAddress).then(res => {
           toast(res)
-          this.$router.push('book')
+          this.$router.push({
+            name:'Book'
+          })
         }).catch(err => {
           toast(err)
         })
-        this.addAddress=''
       }
     },
     watch:{

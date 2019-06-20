@@ -2,7 +2,7 @@
 	<div class="scandetail">
 		<div class="scandetail-header">
 			<mt-header fixed title="扫一扫">
-			  <router-link to="/assetsdetailed" slot="left">
+			  <router-link to="assetsdetailed" slot="left">
 			    <mt-button icon="back">返回</mt-button>
 			  </router-link>
 			</mt-header>

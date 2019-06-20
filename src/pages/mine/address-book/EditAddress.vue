@@ -2,7 +2,7 @@
 	<div class="edit-adress">
 		<div class="edit-adress-header">
 			<mt-header fixed :title="$t('m.addressdetail')">
-					<!-- @click="saveBox" -->
+				<!-- @click="saveBox" -->
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 				<mt-button icon="" slot="right" @click="del">
 					<img src="../../../assets/images/delete.png" alt="" />
@@ -13,13 +13,16 @@
 		<div class="add-adress-list">
 			<span>{{$t('m.remarks')}}</span>
 			<!-- v-model="editparams.name" -->
-			<mt-field  v-model="editparams.name" ></mt-field>
+			<mt-field v-model="editparams.name"></mt-field>
 			<span>{{$t('m.describe')}}</span>
 			<!--  -->
-			<mt-field  v-model="editparams.remark" > </mt-field>
+			<mt-field v-model="editparams.remark"> </mt-field>
 			<span>{{$t('m.usdtaddress')}}</span>
 			<!-- v-model="editparams.address" -->
-			<mt-field v-model="editparams.address" ></mt-field>
+			<mt-field v-model="editparams.address"></mt-field>
+			<router-link to="/scan">
+				<img src="../../../assets/images/scan.png" alt="">
+			</router-link>
 		</div>
 		<div class="edit-adress-btn">
 			<mt-button type="primary" size="large" @click="edit" :disabled="disabled">{{$t('m.preservation')}}</mt-button>
@@ -57,7 +60,7 @@
 				api.editAdress(this.editparams).then(res => {
 					toast(res)
 					this.$router.push({
-						name:'Book'
+						name: 'Book'
 					})
 					// this.$route.params.name = this.editparams.name
 				}).catch(err => {
@@ -102,19 +105,19 @@
 			// 		})
 			// }
 		},
-		watch:{
-      editparams:{
-        immediate: true,
-        deep: true,
-        handler(val){
-          if(val.name =='' || val.address ==''){
-            this.disabled = true
-          }else{
+		watch: {
+			editparams: {
+				immediate: true,
+				deep: true,
+				handler(val) {
+					if (val.name == '' || val.address == '') {
+						this.disabled = true
+					} else {
 						this.disabled = false
 					}
-        }
-      }
-    }
+				}
+			}
+		}
 	}
 </script>
 

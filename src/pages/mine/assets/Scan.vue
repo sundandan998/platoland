@@ -16,10 +16,10 @@
         <p class="tip">...载入中...</p>
       </div>
       <footer>
-        <!-- <button @click="startRecognize">1.创建控件</button>
+        <button @click="startRecognize">1.创建控件</button>
         <button @click="startScan">2.开始扫描</button>
         <button @click="cancelScan">3.结束扫描</button>
-        <button @click="closeScan">4.关闭控件</button> -->
+        <button @click="closeScan">4.关闭控件</button>
       </footer>
     </div>
     <div class="scan-button">
@@ -30,70 +30,80 @@
   </div>
 </template>
 <script>
-let scan = null
-export default {
-  data() {
-    return {
-      codeUrl: '',
-    }
-  },
-  created() {
-    //进入页面就调取扫一扫
-    this.startRecognize()
-    this.startScan()
-  },
-  methods: {
-    //创建扫描控件
-    startRecognize() {
-      let that = this
-      if (!window.plus) return
-      scan = new plus.barcode.Barcode('bcid')
-      scan.onmarked = onmarked
-      function onmarked(type, result, file) {
-        switch (type) {
-          case plus.barcode.QR:
-            type = 'QR'
-            break
-          case plus.barcode.EAN13:
-            type = 'EAN13'
-            break
-          case plus.barcode.EAN8:
-            type = 'EAN8'
-            break
-          default:
-            type = '其它' + type
-            break
-        }
-        result = result.replace(/\n/g, '')
-        that.codeUrl = result
-        alert(result)
-        that.closeScan()
-
+  let scan = null
+  export default {
+    data() {
+      return {
+        codeUrl: '',
       }
     },
-    //开始扫描
-    startScan() {
-      if (!window.plus) return
-      scan.start()
+    created() {
+      //进入页面就调取扫一扫
+      this.startRecognize()
+      this.startScan()
+var src1 = window.location.href
+    var src2 = this.$route.path
+    var src3 = src1.replace(src2,'/download')
+    this.appSrc = src3
+      
     },
-    //关闭扫描
-    cancelScan() {
-      if (!window.plus) return
-      scan.cancel()
+    methods: {
+      //创建扫描控件
+      startRecognize() {
+        let that = this
+        if (!window.plus) return
+        scan = new plus.barcode.Barcode('bcid')
+        scan.onmarked = onmarked
+        function onmarked(type, result, file) {
+          switch (type) {
+            case plus.barcode.QR:
+              type = 'QR'
+              break
+            case plus.barcode.EAN13:
+              type = 'EAN13'
+              break
+            case plus.barcode.EAN8:
+              type = 'EAN8'
+              break
+            default:
+              type = '其它' + type
+              break
+          }
+          result = result.replace(/\n/g, '')
+          that.codeUrl = result
+          alert(result)
+          that.closeScan()
+        }
+      },
+      //开始扫描
+      startScan() {
+        if (!window.plus) return
+        scan.start()
+        this.$router.push({
+          name:'ScanDetail'
+        })
+      },
+      //关闭扫描
+      cancelScan() {
+        if (!window.plus) return
+        scan.cancel()
+      },
+      //关闭条码识别控件
+      closeScan() {
+        if (!window.plus) return
+        scan.close()
+      },
     },
-    //关闭条码识别控件
-    closeScan() {
-      if (!window.plus) return
-      scan.close()
-    },
+    // beforeDestroy(){}
   }
-}
 </script>
 <style lang="scss">
   /* @import '../../../assets/scss/global' */
+
   .scan {
     height: 100%;
   }
+
   .scan #bcid {
     width: 100%;
     position: absolute;
