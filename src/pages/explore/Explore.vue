@@ -14,7 +14,7 @@
                 <div v-for="(items,index) in issuedata">
                   <router-link :to="/detail/+ items.id">
                     <mt-cell :title="items.code +items.nickname" :label="items.subject">
-                      <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                      <img class="assets-icon" slot="icon" :src="items.icon">
                       <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                     </mt-cell>
                   </router-link>
@@ -24,7 +24,7 @@
               <van-tab  title="In Circulation">
                 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                   <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
-                    <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                    <img class="assets-icon" slot="icon" :src="items.icon">
                     <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                   </mt-cell>
                 </div>
@@ -33,7 +33,7 @@
               <van-tab title="Issuing">
                 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                   <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
-                    <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                    <img class="assets-icon" slot="icon" :src="items.icon">
                     <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                   </mt-cell>
                 </div>
@@ -42,7 +42,7 @@
               <van-tab title="Pending">
                 <div  v-for="(items,index) in issuedata" @click="tokenDetail(items.id)">
                   <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
-                   <img class="assets-icon" slot="icon" :src="'http://'+items.icon">
+                   <img class="assets-icon" slot="icon" :src="items.icon">
                    <mt-button size="small" type="primary" class="fr" @click="tokenDetail(items.id)">{{$t('m.detail')}}</mt-button>
                  </mt-cell>
                </div>

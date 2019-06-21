@@ -39,13 +39,8 @@
     },
     created() {
       //进入页面就调取扫一扫
-      this.startRecognize()
-      this.startScan()
-var src1 = window.location.href
-    var src2 = this.$route.path
-    var src3 = src1.replace(src2,'/download')
-    this.appSrc = src3
-      
+      // that.startRecognize()
+      // that.startScan()
     },
     methods: {
       //创建扫描控件
@@ -71,17 +66,16 @@ var src1 = window.location.href
           }
           result = result.replace(/\n/g, '')
           that.codeUrl = result
-          alert(result)
           that.closeScan()
+          // alert(result)
+          location.href = result
+          
         }
       },
       //开始扫描
       startScan() {
         if (!window.plus) return
         scan.start()
-        this.$router.push({
-          name:'ScanDetail'
-        })
       },
       //关闭扫描
       cancelScan() {

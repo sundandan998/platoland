@@ -7,15 +7,14 @@
     </div>
     <div class="to-change-into-exhibition">
       <div class="to-change-into-exhibition-img">
-        <img src="../../../assets/images/ld.png" alt="" class="fl" />
+        <img class="fl" slot="icon" :src="this.detail.token.icon">
         <ul>
-          <li>LD({{$t('m.intoname')}})</li>
-          <li>{{$t('m.intobody')}}</li>
+          <li>{{this.detail.token.code}}({{this.detail.token.nickname}})</li>
+          <li>{{this.detail.token.subject}}</li>
         </ul>
         <div class="to-change-into-exhibition-adress">
-            <span class="overflow-text fl">{{this.detail.contract_address}}</span>
-          <img src="../../../assets/images/u4780.png" alt="" class="fr tag-read" @click="copy" 
-          :data-clipboard-text="this.detail.contract_address"
+          <span class="overflow-text fl">{{this.detail.address}}</span>
+          <img src="../../../assets/images/u4780.png" alt="" class="fr tag-read" @click="copy" :data-clipboard-text="this.detail.address"
           />
         </div>
       </div>
@@ -33,12 +32,11 @@
 <script>
   import Clipboard from 'clipboard'
   import qrcode from 'qrcode'
-  import {mapGetters} from 'vuex'
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
-        codes: '',
-        text:''
+        codes: ''
       }
     },
     components: {
@@ -65,24 +63,23 @@
       },
       // 生成二维码
       useqrcode() {
-        
         var canvas = document.getElementById('canvas')
-        qrcode.toCanvas(canvas, this.detail.contract_address, function (error) {
+        qrcode.toCanvas(canvas, this.detail.address, function (error) {
           if (error) console.error(error)
-          console.log('success!')
+          // console.log('success!')
           // qrcode.makeCode("http://www.google.com")
         })
-        
+
       }
     },
     mounted() {
       this.useqrcode()
     },
-    computed:{
-    ...mapGetters([
-      'detail'
+    computed: {
+      ...mapGetters([
+        'detail'
       ])
-  }
+    }
   }
 </script>
 

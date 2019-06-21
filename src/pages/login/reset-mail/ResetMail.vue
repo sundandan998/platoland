@@ -80,7 +80,9 @@
             })
           }
         }).catch(err => {
-          toast(err)
+          if(err.code != 0){
+            toast(err)
+          }
         })
       },
       // 重新发送验证码

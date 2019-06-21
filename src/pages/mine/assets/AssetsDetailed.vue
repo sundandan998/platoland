@@ -14,7 +14,7 @@
               </router-link>
               <router-link :to="{name:'Out'}">
                 <el-dropdown-item>
-                  <span @click="outAsset">{{$t('m.changeout')}}</span>
+                  <span>{{$t('m.changeout')}}</span>
                 </el-dropdown-item>
               </router-link>
               <el-dropdown-item>
@@ -30,7 +30,7 @@
         <p>{{this.assetsData.balance}}</p>
         <img :src="this.assetsToken.icon" alt="" class="fl" />
         <ul>
-          <li>{{this.assetsToken.code}} {{this.assetsToken.nickname}}</li>
+          <li>{{this.assetsToken.code}} ({{this.assetsToken.nickname}})</li>
           <li>{{this.assetsToken.subject}}</li>
         </ul>
       </div>
@@ -129,28 +129,18 @@
           cancelButtonText: 'No',
           confirmButtonText: 'Yes',
           showCancelButton: true
-        })
-          .then(action => {
+        }).then(action => {
             this.$router.push({
               path: '/assets'
             })
           })
       },
-      // 转出资产
-      outAsset() {
-        api.outAsset(this.outParam).then(res => {
-          // console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      }
     },
     computed: {
       ...mapGetters([
         'detail'
       ])
     }
-
   }
 </script>
 
