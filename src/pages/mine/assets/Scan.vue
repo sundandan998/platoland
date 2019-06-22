@@ -13,13 +13,13 @@
     <div class="scan">
       <div id="bcid">
         <div style="height:40%"></div>
-        <p class="tip">...载入中...</p>
+        <!-- <p class="tip">...载入中...</p> -->
       </div>
       <footer>
-        <button @click="startRecognize">1.创建控件</button>
-        <button @click="startScan">2.开始扫描</button>
-        <button @click="cancelScan">3.结束扫描</button>
-        <button @click="closeScan">4.关闭控件</button>
+        <p @click="startRecognize"></p>
+        <p @click="startScan"></p>
+        <p @click="cancelScan"></p>
+        <p @click="closeScan"></p>
       </footer>
     </div>
     <div class="scan-button">
@@ -37,10 +37,11 @@
         codeUrl: '',
       }
     },
-    created() {
-      //进入页面就调取扫一扫
-      // that.startRecognize()
-      // that.startScan()
+    // 进入页面就开始扫描
+    mounted() {
+      this.startRecognize()
+      this.startScan()
+      // this.isShow = true;
     },
     methods: {
       //创建扫描控件
@@ -64,12 +65,13 @@
               type = '其它' + type
               break
           }
+          console.log('1')
           result = result.replace(/\n/g, '')
           that.codeUrl = result
           that.closeScan()
           // alert(result)
           location.href = result
-          
+
         }
       },
       //开始扫描

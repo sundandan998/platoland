@@ -11,7 +11,7 @@
       </div>
       <div class="pass-details-information-content">
         <!-- 通证标识 -->
-        <mt-cell :title="$t('m.identitycard')" :value="detail.code+(detail.name)"></mt-cell>
+        <mt-cell :title="$t('m.identitycard')" :value="detail.code +'('+detail.name+')'"></mt-cell>
         <!-- 通证昵称 -->
         <mt-cell :title="$t('m.nickname')" :value="detail.nickname"></mt-cell>
         <!-- 合约地址 -->
@@ -94,8 +94,7 @@ created(){
 methods:{
     //获取详情
     getDetail(){
-      api.tokenDetail(this.$route.params)
-      .then(res=>{
+      api.tokenDetail(this.$route.params).then(res=>{
         this.subject = res.data.subject
         this.release = res.data.release
         this.$store.commit('detail', res.data)

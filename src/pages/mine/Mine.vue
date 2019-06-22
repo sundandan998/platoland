@@ -6,7 +6,7 @@
 					<div class="mine-head">
 						<div class="mine-head-portrait">
 							<img src="../../assets/images/u2496.png" alt="" />
-							<p>{{infoData.email}}</p>
+							<p>{{infoData.mobile}}{{infoData.email}}</p>
 						</div>
 					</div>
 					<div class="mine-cell mine">
@@ -58,7 +58,6 @@
 			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
-					// console.log(res)
 				}).catch(err=>{
 					console.log(err)
 				})

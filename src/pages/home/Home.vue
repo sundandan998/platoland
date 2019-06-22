@@ -8,15 +8,13 @@
           </div>
           <div class="home-investment">
             <router-link :to="/detail/+pld.code">
-              <img src="../../assets/images/gf.png" alt="" />
+              <img :src="pld.icon" alt="" />
               <div class="home-investment-content">
                 <div class="home-investment-top fl">
-                  <img :src="pld.icon">
-                  <!-- <img src="../../assets/images/icon-3.png" alt="" /> -->
                 </div>
                 <div class="home-investment-top-left">
-                  <P>{{pld.code}} ({{pld.name}})<span>
-                   <img :src="pldrelease.d_icon">{{pldrelease.issue_price}}</span></P>
+                  <P>{{pld.code}} ({{pld.nickname}})<span>
+                   <img :src="pldRelease.d_icon">{{pldRelease.issue_price}}</span></P>
                    <P>{{pld.subject}}</P>
                  </div>
                  <div class="home-investment-top-right fr">
@@ -24,9 +22,9 @@
                 </div>
               </div>
               <div class="home-investment-bot">
-                <span>{{$t('m.issueamount')}}:{{pldrelease.first_number}}</span>
-                <span>{{$t('m.issue')}}:{{pldrelease.sold_number}}</span>
-                <span>{{$t('m.completed')}}:{{pldrelease.id}}</span>
+                <span>{{$t('m.issueamount')}}:{{parseInt(pldRelease.first_number)}}</span>
+                <span>已售数量:{{parseInt(pldRelease.sold_number)}}</span>
+                <span>{{$t('m.completed')}}:{{pldRelease.id}}</span>
               </div>
               <div class="home-investment-progress">
                 <mt-progress :value="20" :bar-height="5"></mt-progress>
@@ -38,7 +36,8 @@
           <div class="home-land">
            <router-link to="news">
             <div class="notice text-beyond">
-              <div class="notice-list text-beyond" ref="notice-list" :class="{anim:animate==true}" v-for='(item,index) in notice_list'>
+              <div class="notice-list text-beyond" ref="notice-list" :class="{anim:animate==true}" 
+              v-for='item in notice'>
                 <img src="../../assets/images/horn.png"/><span> {{item.title}}</span>
               </div>
             </div>
@@ -51,16 +50,17 @@
         <!-- 卡片部分 -->
         <div class="home-assets-subscription-content">
          <!-- @click="issue(items.code) -->
-         <div class="assets-subscription" v-for="(items,index) in token_list">
+         <div class="assets-subscription" v-for="items in tokens_list">
           <router-link :to="/detail/+items.code">
            <img :src="items.icon">
            <div class="assets-subscription-text fr">
-             <span class="home-name">{{items.code}} ({{items.name}})</span>
+             <span class="home-name">{{items.code}} ({{items.nickname}})</span>
              <p>{{items.subject}}</p>
            </div>
            <div class="assets-subscription-title">
-            <p :class="state[index]">{{items.release.status}}</p>
-          </div>
+             <p :style="{color:items.release.status == 0?'red':items.release.status == 1?'green':'blue'}">
+               {{items.release.status == 0?'待发行':items.release.status == 1?'发行中':'流通中'}}</p>
+          </div> 
           <div class="assets-subscription-information">
             <ul class="fl">
              <li>{{$t('m.issuetime')}}</li>
@@ -88,8 +88,9 @@
 <script>
 import Tabber from './../../assets/pub/Tabber.vue'
 import {mapActions} from 'vuex'
-import detail from './detail/Detail'
+// import detail from './detail/Detail'
 import store from './../../store/modules/app.js'
+import { toast } from '@/assets/js/pub.js'
 // 接口
 import api from "@/api/system/System.js"
 export default {
@@ -101,27 +102,20 @@ export default {
         version_code:'2.0',
       },
       animate:false,
-      state: [
-      "state0",
-      "state1",
-      "state2",
-      "state1"
-      ],
       pld:{},
-      pldrelease:{},
-      notice_list:{},
-      token_list:{}
+      pldRelease:{},
+      notice:{},
+      tokens_list:[],
+      listRelease:{}
     }
   },
-  creadte() {
+  created() {
+    this.home()
     this.version(),
     this.version_code = this.$route.params
-    this.$store.dispatch('detail')
-    this.home()
+  
+   
     // JSON.stringify(status).replace(/0/g, '待发行')
-  },
-  mounted(){
-    this.home()
   },
   components: {
     'app-tabber': Tabber
@@ -136,20 +130,19 @@ export default {
        this.animate=false
      },500)
    },
-   // 首页展示数据
    home(){
-    api.home().then(res=>{
-      this.pld = res.data.pld
-      this.pldrelease = res.data.pld.release
-      this.notice_list = res.data.notice_list
-      this.token_list = res.data.token_list
-      this.token_list[0].release.status= '待发行'
-      this.token_list[1].release.status= '发行中'
-      this.token_list[2].release.status= '流通中'
-    }).catch(err=>{
-      console.log(err)
-    })
-  },
+     api.home().then(res=>{
+      //  pld接口
+       this.pld = res.data.pld
+       this.pldRelease = this.pld.release
+      //  公告通知
+      this.notice = res.data.notice_list
+      // 卡片
+      this.tokens_list = res.data.token_list
+     }).catch(err=>{
+       console.log(err)
+     })
+   },
   ...mapActions('detail',[
    'app.detail'
    ]),
@@ -167,7 +160,7 @@ export default {
       this.upgrade(isForce)
     }
   }).catch(err=>{
-    console.log(err)
+    // console.log(err)
   })
 },
 upgrade(isShow){
