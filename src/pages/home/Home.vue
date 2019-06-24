@@ -24,7 +24,7 @@
               <div class="home-investment-bot">
                 <span>{{$t('m.issueamount')}}:{{parseInt(pldRelease.first_number)}}</span>
                 <span>已售数量:{{parseInt(pldRelease.sold_number)}}</span>
-                <span>{{$t('m.completed')}}:{{pldRelease.id}}</span>
+                <span>已达成:{{(pldRelease.sold_number/pldRelease.first_number*100).toFixed(3)}}%</span>
               </div>
               <div class="home-investment-progress">
                 <mt-progress :value="20" :bar-height="5"></mt-progress>
@@ -113,9 +113,6 @@ export default {
     this.home()
     this.version(),
     this.version_code = this.$route.params
-  
-   
-    // JSON.stringify(status).replace(/0/g, '待发行')
   },
   components: {
     'app-tabber': Tabber

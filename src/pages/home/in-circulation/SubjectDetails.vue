@@ -16,19 +16,19 @@
 			    <div class="information-content">
             <!-- 主体名称： -->
 			    	<mt-cell :title="$t('m.bodyname')">
-			    		<span>{{subjectData.name}}</span>
+			    		<span>{{detail.name}}</span>
 			    	</mt-cell>
             <!-- 通证标识 -->
 			    	<mt-cell :title="$t('m.identitycard')">
-			    		<span><img :src="'http://'+subjectImg.icon"> {{subjectImg.code}} {{subjectImg.name}}</span>
+			    		<span><img :src="detail.icon"> {{subjectImg.code}} {{subjectImg.name}}</span>
 			    	</mt-cell>
             <!-- 通证昵称 -->
 			  		<mt-cell :title="$t('m.nickname')">
-			  			<span>{{subjectImg.nickname}}</span>
+			  			<span>{{detail.nickname}}</span>
 			  		</mt-cell>
             <!-- 注册住所 -->
 			  		<mt-cell :title="$t('m.residence')" >
-			  			<span>{{subjectData.registered_address}}</span>
+			  			<span>{{detail.registered_address}}</span>
 			  		</mt-cell>
             <!-- 经营地址 -->
 			  		<mt-cell :title="$t('m.businessaddress')">
@@ -36,23 +36,23 @@
 			  		</mt-cell>
             <!-- 法 人 -->
 			  		<mt-cell :title="$t('m.people')" >
-			  			<span>{{subjectData.legal_person}}</span>
+			  			<span>{{detail.legal_person}}</span>
 			  		</mt-cell>
             <!-- 注册资本 -->
 			  		<mt-cell :title="$t('m.capital')">
-			  			<span>{{subjectData.registered_capital}}</span>
+			  			<span>{{detail.registered_capital}}</span>
 			  		</mt-cell>
             <!-- 成立日期 -->
 			  		<mt-cell :title="$t('m.establishdate')" >
-			  			<span>{{subjectData.build_time}}</span>
+			  			<span>{{detail.build_time}}</span>
 			  		</mt-cell>
             <!-- 营业期限 -->
 			  		<mt-cell :title="$t('m.term')" >
-			  			<span>{{subjectData.start_time}}至{{subjectData.end_time}}</span>
+			  			<span>{{detail.start_time}}至{{detail.end_time}}</span>
 			  		</mt-cell>
             <!-- 经营范围 -->
             <mt-cell :title="$t('m.range')" >
-              <span>{{subjectData.business_scope}}</span>
+              <span>{{detail.business_scope}}</span>
             </mt-cell>
 			    </div>
 			  </mt-tab-container-item>

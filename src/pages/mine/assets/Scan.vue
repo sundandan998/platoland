@@ -95,7 +95,6 @@
 </script>
 <style lang="scss">
   /* @import '../../../assets/scss/global' */
-
   .scan {
     height: 100%;
   }

@@ -209,7 +209,7 @@ export default new Router({
     },
     //  首页/主体详情
     {
-      path: '/subject/:id',
+      path: '/subject',
       name: 'Subject',
       component: () => import("@/pages/home/in-circulation/SubjectDetails")
     },

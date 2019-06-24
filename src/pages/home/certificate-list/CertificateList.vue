@@ -7,11 +7,11 @@
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsdata">
         <!-- @click="issue(item.id)" -->
-      <mt-cell :title="item.code+ (item.nickname)" :value="item.name"  :label="item.subject">
+      <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
         <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
         <!-- v-model="item.isactive=='0'" -->
-        <mt-switch class="asset-list-switch" @change="assetswitch"></mt-switch>
+        <mt-switch class="asset-list-switch" @change="assetswitch" :value="value"></mt-switch>
         </router-link>
       </mt-cell>
     </div>
@@ -65,7 +65,7 @@
           // this.$store.commit('detail', res.data[0])
         }
       },
-      // 列表信息
+      //列表信息
       listassets() {
         api.tokenList(this.$route.params).then(res => {
           this.assetsdata = res.data

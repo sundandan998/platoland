@@ -44,7 +44,7 @@
         <span class="paymentamount">2.00 LD</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
+        <van-number-keyboard v-model="turnOut.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
         />
       </van-popup>
     </div>

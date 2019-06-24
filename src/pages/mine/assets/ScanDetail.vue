@@ -6,7 +6,7 @@
 			</mt-header>
 		</div>
 		<div class="scandetail-information">
-			<mt-cell title="付款给" value="50.000">
+			<mt-cell title="付款给" value="- -">
 				<img slot="icon" src="../../../assets/images/u4662.png">
 			</mt-cell>
 			<mt-cell title="地址" :value="this.detail.address">

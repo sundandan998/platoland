@@ -81,6 +81,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
+  import { toast } from '@/assets/js/pub.js'
   export default {
     data() {
       return {
@@ -90,7 +91,7 @@
         assetsToken: {},
         // 删除资产参数
         delasset: {
-          code: 'LD'
+          code: ''
         },
         // 转出资产参数
         outParam: {
@@ -117,23 +118,27 @@
       },
       //点击移除弹出的消息框
       remove() {
-        // 删除资产接口
-        api.delAsset(this.delasset).then(res => {
-          // console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
         this.$messagebox({
-          title: 'Tips',
-          message: 'Are you sure to removal of assets?',
-          cancelButtonText: 'No',
-          confirmButtonText: 'Yes',
+          title: '提示',
+          message: '你确定要移除资产吗？',
+          cancelButtonText: '取消',
+          confirmButtonText: '确认',
           showCancelButton: true
         }).then(action => {
-            this.$router.push({
-              path: '/assets'
+          if (action === 'confirm') {
+            // 删除资产接口
+            this.delasset.code = this.detail.id
+            api.delAsset(this.delasset).then(res => {
+              if (res.code == 0) {
+                toast(res)
+              }
+            }).catch(err => {
+              if (err.code != 0) {
+                toast(err)
+              }
             })
-          })
+          }
+        })
       },
     },
     computed: {

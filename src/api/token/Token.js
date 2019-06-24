@@ -11,7 +11,7 @@ export default {
   // 通证主体
   tokenSubject(params = {}) {
     return request({
-        url: "/token/subject/"+params.id+"/detail/",
+        url: "/token/subject/"+params.code+"/detail/",
         method: "get",
         params: params
     })
