@@ -118,5 +118,20 @@ export default {
       method: "post",
       data: params
     })
+  },
+  // 明细列表接口
+  transactionList(params = {}){
+    return request({
+      url: "/user/transaction/list/",
+      method: "get",
+      params: params
+    })
+  },
+  listDetail(params = {}){
+    return request({
+      url: "/user/transaction/detail/",
+      method: "post",
+      data: params
+    })
   }
 }

@@ -11,15 +11,17 @@
       </div>
       <div class="pass-details-information-content">
         <!-- 通证标识 -->
-        <mt-cell :title="$t('m.identitycard')" :value="detail.code +'('+detail.name+')'"></mt-cell>
+        <mt-cell :title="$t('m.identitycard')">
+          <img :src="detail.icon" alt="">
+          {{detail.code +'('+detail.name+')'}}
+        </mt-cell>
         <!-- 通证昵称 -->
         <mt-cell :title="$t('m.nickname')" :value="detail.nickname"></mt-cell>
         <!-- 合约地址 -->
         <mt-cell :title="$t('m.address')" :value="detail.contract_address"></mt-cell>
         <!-- 通证主体 -->
-        <router-link :to="{name:'Subject', params:{code:this.detail.code}}">
-        <mt-cell :title="$t('m.body')" :value="this.subject.name"is-link></mt-cell>
-        </router-link>
+        <mt-cell :title="$t('m.body')" :value="this.subject.name" 
+        :to="{name:'Subject', params:{id:this.subject.id}}" is-link></mt-cell>
         <!-- 发行方 -->
         <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"></mt-cell>
       </div>
@@ -79,7 +81,8 @@
         detailId: {},
         subject: {},
         release: {},
-        status: ''
+        status: '',
+        // id:{}
       }
     },
     created() {

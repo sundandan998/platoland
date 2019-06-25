@@ -15,20 +15,23 @@
 			  <mt-tab-container-item id="information">
 			    <div class="information-content">
             <!-- 主体名称： -->
-			    	<mt-cell :title="$t('m.bodyname')">
-			    		<span>{{detail.name}}</span>
+			    	<mt-cell title="主体名称">
+			    		<span>{{subjectData.name}}</span>
 			    	</mt-cell>
             <!-- 通证标识 -->
 			    	<mt-cell :title="$t('m.identitycard')">
-			    		<span><img :src="detail.icon"> {{subjectImg.code}} {{subjectImg.name}}</span>
+							<span>
+								<img :src="subject.icon">
+								 {{subject.code+'('+subject.name+')'}} 
+							</span>
 			    	</mt-cell>
             <!-- 通证昵称 -->
 			  		<mt-cell :title="$t('m.nickname')">
-			  			<span>{{detail.nickname}}</span>
+			  			<span>{{subject.nickname}}</span>
 			  		</mt-cell>
             <!-- 注册住所 -->
 			  		<mt-cell :title="$t('m.residence')" >
-			  			<span>{{detail.registered_address}}</span>
+			  			<span>{{subjectData.registered_address}}</span>
 			  		</mt-cell>
             <!-- 经营地址 -->
 			  		<mt-cell :title="$t('m.businessaddress')">
@@ -36,23 +39,23 @@
 			  		</mt-cell>
             <!-- 法 人 -->
 			  		<mt-cell :title="$t('m.people')" >
-			  			<span>{{detail.legal_person}}</span>
+			  			<span>{{subjectData.legal_person}}</span>
 			  		</mt-cell>
             <!-- 注册资本 -->
 			  		<mt-cell :title="$t('m.capital')">
-			  			<span>{{detail.registered_capital}}</span>
+			  			<span>{{subjectData.registered_capital}}</span>
 			  		</mt-cell>
             <!-- 成立日期 -->
 			  		<mt-cell :title="$t('m.establishdate')" >
-			  			<span>{{detail.build_time}}</span>
+			  			<span>{{subjectData.build_time}}</span>
 			  		</mt-cell>
             <!-- 营业期限 -->
 			  		<mt-cell :title="$t('m.term')" >
-			  			<span>{{detail.start_time}}至{{detail.end_time}}</span>
+			  			<span>{{subjectData.start_time}} 至 {{subjectData.end_time}}</span>
 			  		</mt-cell>
             <!-- 经营范围 -->
-            <mt-cell :title="$t('m.range')" >
-              <span>{{detail.business_scope}}</span>
+            <mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
+              <!-- <span class="fr rang">{{}}</span> -->
             </mt-cell>
 			    </div>
 			  </mt-tab-container-item>
@@ -86,9 +89,8 @@ export default {
 	methods:{
     subject(id){
       api.tokenSubject(this.$route.params).then(res=>{
-        this.subjectData = res.subject
-        this.subjectImg = res.subject.token
-        // console.log(this.introduction)
+			this.subjectData = res.data
+			this.subject = res.data.token
       }).catch(err=>{
         console.log(err)
       })
