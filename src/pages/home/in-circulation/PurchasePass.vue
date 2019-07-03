@@ -2,7 +2,7 @@
 	<div class="Purchase-pass">
 		<div class="Purchase-pass-header">
 			<mt-header fixed :title="$t('m.purchasepass')">
-			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)"><span>{{$t('m.back')}}</span></mt-button>
+			    <mt-button icon="back"slot="left"v-on:click="$router.go(-1)"><span>{{$t('m.back121')}}</span></mt-button>
 			</mt-header>
 		</div>
 		<div class="Purchase-pass-content">

@@ -8,7 +8,7 @@
           </div>
           <div class="home-investment">
             <router-link :to="/detail/+pld.code">
-              <img :src="pld.icon" alt="" />
+              <img :src="pld.icon" alt="" class="pld-img"/>
               <div class="home-investment-content">
                 <div class="home-investment-top fl">
                 </div>
@@ -69,7 +69,8 @@
            </ul>
            <ul class="fr text-right">
              <li>{{items.release.publish_time}}</li>
-             <li>{{items.release.sold_number}}</li>
+             <li>{{parseInt(items.release.sold_number)}}</li>
+             <!-- <li>{{(items.release.init_price)}}</li> -->
              <li>{{items.release.init_price}}</li>
            </ul>
          </div>

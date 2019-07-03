@@ -1,9 +1,17 @@
 import request from "../../utils/request"
 export default {
-    // 添加地址信息
-    addAdress(params = {}) {
+    // 添加资产
+    addAsset(params = {}) {
         return request({
-            url: "/user/address/add/",
+            url: "/user/asset/add/",
+            method: "post",
+            data: params
+        })
+    },
+    // 删除资产
+    delAsset(params = {}) {
+        return request({
+            url: "/user/asset/delete/",
             method: "post",
             data: params
         })

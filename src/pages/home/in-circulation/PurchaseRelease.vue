@@ -28,16 +28,6 @@
 				</van-tab>
 			</van-tabs>
 		</div>
-		<!-- 数字键盘 -->
-		<div>
-			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
-				<span class="paymentamount">1.00 USDT</span>
-				<van-password-input :value="value" @focus="showKeyboard = true" />
-				<!-- 数字键盘 -->
-				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
-				/>
-			</van-popup>
-		</div>
 		<div class="purchase-pass-input">
 			<p>{{$t('m.transactionnum')}}</p>
 			<mt-field type="number" v-model="releaseData.amount"></mt-field>
@@ -45,7 +35,6 @@
 			<mt-field type="number" v-model="releaseData.price"></mt-field>
 			<span>{{$t('m.available')}}：10,000 USDT</span>
 		</div>
-
 		<div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
 			<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input"></mt-field>
@@ -54,7 +43,16 @@
 		<div class="purchase-pass-btn">
 			<mt-button size="large" :disabled="disabled" type="primary" @click="release">{{$t('m.release')}}</mt-button>
 		</div>
-
+		<!-- 数字键盘 -->
+		<div>
+			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
+				<span class="paymentamount">1.00 USDT</span>
+				<van-password-input :value="value" @focus="showKeyboard = true" />
+				<!-- 数字键盘 -->
+				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+				 @blur="showKeyboard = false" />
+			</van-popup>
+		</div>
 	</div>
 </template>
 
@@ -66,23 +64,32 @@
 		data() {
 			return {
 				value: '',
-				disabled:true,
+				disabled: true,
 				showKeyboard: false,
 				popupVisible: false,
-				// 发布参数
+				// 发布参数/购买
 				releaseData: {
-          token_code: '',
-          publish_type: 0,
-          amount: '',
-          price: '',
-          low_number: '',
-          high_number: ''
+					token_code: '',
+					publish_type: 0,
+					amount: '',
+					price: '',
+					low_number: '',
+					high_number: ''
+				},
+				// 发布参数/出售
+				sellData: {
+					token_code: '',
+					publish_type: 1,
+					amount: '',
+					price: '',
+					low_number: '',
+					high_number: ''
 				},
 				// 确认支付参数
-				confirm:{
-					order_type:1,
-					payment_id:'',
-					pay_pwd:''
+				confirm: {
+					order_type: 1,
+					payment_id: '',
+					pay_pwd: ''
 				}
 			}
 		},
@@ -96,7 +103,7 @@
 			// 发布接口
 			release() {
 				this.popupVisible = true
-				this.releaseData.token_code = this.detail.id
+				this.releaseData.token_code = this.detail.code
 				api.release(this.releaseData).then(res => {
 					if (res.code == 0) {
 						toast(res)
@@ -112,28 +119,28 @@
 			value() {
 				if (this.value.length == 6) {
 					this.confirm.payment_id = this.detail.id
-					api.confirmPay(this.confirm).then(res=>{
-						if(res.code==0){
+					api.confirmPay(this.confirm).then(res => {
+						if (res.code == 0) {
 							toast(res)
 						}
-					}).catch(err=>{
-						if(err.code!=0){
+					}).catch(err => {
+						if (err.code != 0) {
 							toast(err)
 						}
 					})
 				}
 			},
-			releaseData:{
-				immediate:true,
-				deep:true,
-				handler(val){
-					if(val.amount !='' && val.price != '' && val.low_number!=''&& val.high_number!=''){
+			releaseData: {
+				immediate: true,
+				deep: true,
+				handler(val) {
+					if (val.amount != '' && val.price != '' && val.low_number != '' && val.high_number != '') {
 						this.disabled = false
-					}else{
+					} else {
 						this.disabled = true
 					}
 				}
-			}
+			},
 		},
 		computed: {
 			...mapGetters([
