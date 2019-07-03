@@ -6,7 +6,8 @@
 					<div class="mine-head">
 						<div class="mine-head-portrait">
 							<img src="../../assets/images/u2496.png" alt="" />
-							<p>{{infoData.mobile}}{{infoData.email}}</p>
+							<p>{{infoData.mobile}}</p>
+							<P>{{infoData.email}}</P>
 						</div>
 					</div>
 					<div class="mine-cell mine">

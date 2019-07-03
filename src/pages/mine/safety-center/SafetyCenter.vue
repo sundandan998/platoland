@@ -15,8 +15,8 @@
 				</mt-cell>
 			</router-link>
 			<mt-cell :title="$t('m.paymentpwd')" value="-3000">
-				<router-link to="/safetyverification">
-					<mt-switch v-model="value"></mt-switch>
+				<router-link :to="{path:'/safetyVerification',query: {id: 1}}">
+					<mt-switch :value="infoData.pay_pwd_active"></mt-switch>
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
@@ -39,7 +39,7 @@ import {toast} from '@/assets/js/pub.js'
 		data() {
 			return {
 				infoData:{},
-				value: '',
+				// value: '',
 				next:{
 					action:''
 				}
@@ -82,7 +82,7 @@ import {toast} from '@/assets/js/pub.js'
 						name: 'Email'
 					})
 				}
-			}
+			},
 		}
 	}
 </script>

@@ -6,7 +6,7 @@
 			</mt-header>
 		</div>
 		<div class="purchase-pass-buy-assets">
-			<span>{{$t('m.buyassets')}}</span>
+			<span>交易资产</span>
 			<div class="purchase-pass-buy-information fr">
 				<img :src="this.detail.icon" alt="" />
 				<span>{{this.detail.code}}({{this.detail.nickname}})</span>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="to-deal-navbar">
-			<van-tabs>
+			<van-tabs @click="index">
 				<van-tab :title="$t('m.purchasebuy')">
 				</van-tab>
 				<van-tab :title="$t('m.sell')">
@@ -33,7 +33,8 @@
 			<mt-field type="number" v-model="releaseData.amount"></mt-field>
 			<p>{{$t('m.unitprice')}}</p>
 			<mt-field type="number" v-model="releaseData.price"></mt-field>
-			<span>{{$t('m.available')}}：10,000 USDT</span>
+			<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</span>
+			<span v-if="show">手续费 : 0.00PLD</span>
 		</div>
 		<div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
@@ -64,22 +65,19 @@
 		data() {
 			return {
 				value: '',
+				show:false,
 				disabled: true,
 				showKeyboard: false,
 				popupVisible: false,
+				balData:'',
+				// 获取资产余额参数
+				balanceData:{
+					token_code:''
+				},
 				// 发布参数/购买
 				releaseData: {
 					token_code: '',
 					publish_type: 0,
-					amount: '',
-					price: '',
-					low_number: '',
-					high_number: ''
-				},
-				// 发布参数/出售
-				sellData: {
-					token_code: '',
-					publish_type: 1,
 					amount: '',
 					price: '',
 					low_number: '',
@@ -93,6 +91,9 @@
 				}
 			}
 		},
+		created(){
+			this.balance()
+		},
 		methods: {
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6);
@@ -100,13 +101,33 @@
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1);
 			},
+			// tab切换
+			index(index,title){
+				// debugger
+				if (index == 0){
+					this.releaseData.publish_type = 0
+					this.show = false
+				}else{
+					this.releaseData.publish_type = 1
+					this.show = true
+				}
+			},
+			// 获取资产余额
+			balance(){
+				this.balanceData.token_code = this.detail.code
+				api.balance(this.balanceData).then(res=>{
+					this.balData = res.data
+				}).catch(err=>{
+					// if(err)
+					toast(err)
+				})
+			},
 			// 发布接口
 			release() {
-				this.popupVisible = true
 				this.releaseData.token_code = this.detail.code
 				api.release(this.releaseData).then(res => {
 					if (res.code == 0) {
-						toast(res)
+						this.popupVisible = true
 					}
 				}).catch(err => {
 					if (err.code != 0) {

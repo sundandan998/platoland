@@ -120,16 +120,25 @@ export default {
     })
   },
   // 明细列表接口
-  transactionList(params = {}){
+  transactionList(params = {}) {
     return request({
       url: "/user/transaction/list/",
       method: "get",
       params: params
     })
   },
-  listDetail(params = {}){
+  // 明细详情接口
+  listDetail(params = {}) {
     return request({
       url: "/user/transaction/detail/",
+      method: "post",
+      data: params
+    })
+  },
+  // 设置支付密码
+  payPwd(params = {}){
+    return request({
+      url: "/user/pay_pwd/",
       method: "post",
       data: params
     })

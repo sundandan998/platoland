@@ -150,8 +150,8 @@ export default new Router({
     //我的/安全/开启支付密码
     {
       path: '/paypassword',
-      name: 'PayPassWOrde',
-      component: () => import("@/pages/mine/safety-center/OpenPayPassWOrd")
+      name: 'PayPassWorde',
+      component: () => import("@/pages/mine/safety-center/OpenPayPassWord")
     },
     //我的/安全/安全验证
     {
