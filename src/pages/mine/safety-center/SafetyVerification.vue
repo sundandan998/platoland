@@ -80,7 +80,6 @@
 		methods: {
 			// / 下一步按钮
 			next() {
-				debugger
 				this.payPwd.sms_code = this.nextParam.sms_code
 				this.payPwd.email_code = this.nextParam.email_code
 				var pwdUrl = window.location.href.split("?")

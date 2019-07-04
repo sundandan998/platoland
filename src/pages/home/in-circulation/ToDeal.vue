@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="to-deal-navbar">
-      <van-tabs @click="dealList">
+      <van-tabs @click="index">
         <van-tab :title="$t('m.purchasebuy')">
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
             <router-link :to="/purchase/+item.id">
@@ -56,38 +56,35 @@
     data() {
       return {
         dealListData: {},
-        // 购买参数
-        buy: {
+        // 市场列表参数
+        dealData: {
           publish_type: 0
         },
-        // 出售参数
-        sell: {
-          publish_type: 1
-        }
       }
     },
     created() {
       this.dealList()
     },
     methods: {
-      //市场列表/购买
-      dealList(index, title) {
+    //  tab栏展示
+      index(index, title) {
         if (index == 0) {
-          api.dealList(this.buy).then(res => {
-            this.dealListData = res.data
-          }).catch(err => {
-            console.log(err)
-          })
+          this.dealData.publish_type = 0
+          this.dealList()
         } else {
           if (index == 1) {
-            //市场列表/出售
-            api.dealList(this.sell).then(res => {
-              this.dealListData = res.data
-            }).catch(err => {
-              console.log(err)
-            })
+            this.dealData.publish_type = 1
+            this.dealList()
           }
         }
+      },
+      //市场列表
+      dealList() {
+        api.dealList(this.dealData).then(res => {
+          this.dealListData = res.data
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }

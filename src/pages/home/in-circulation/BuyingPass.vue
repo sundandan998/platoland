@@ -20,27 +20,34 @@
 			</div>
 		</div>
 		<div class="Purchase-pass-tabbar">
-			<van-tabs>
+			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount"></mt-field>
+					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="600,000起购"></mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>：1,000 USDT</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} USDT</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="$t('m.purchase')" type="number"></mt-field>
+					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购起购"></mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>：1,000 USDT</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} USDT</p>
 				</van-tab>
 			</van-tabs>
 			<div class="buy-pass-time">
 				<p>{{$t('m.surplus')}}
-					<span>700000</span>
+					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
 				</p>
-				<!-- <p>距发行结束剩 <span>90天</span></p> -->
 				<p>{{$t('m.date')}}
-					<span> 2021-01-01</span>
+					<span> {{this.detail.release.end_time}}</span>
 				</p>
 			</div>
+			<!-- <div class="buy-pass-time">
+				<p>{{$t('m.surplus')}}
+					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
+				</p>
+				<p>距发行结束剩
+					<span>{{this.detail.release.end_time}}</span>
+				</p>
+			</div> -->
 		</div>
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
@@ -58,10 +65,12 @@
 </template>
 
 <script>
+	import $ from 'jquery'
 	import { toast } from '@/assets/js/pub.js'
 	import { mapGetters } from 'vuex'
 	// 接口请求
 	import api from "@/api/market/Market.js"
+
 	export default {
 		data() {
 			return {
@@ -71,18 +80,26 @@
 				popupVisible: false,
 				// 请求参数
 				requsetPay: {
-					order_type: 1,
+					order_type: 0,
 					transaction_id: '',
 					amount: '',
-					action_type: 1
+					action_type: 0
 				},
 				// 确认支付参数
 				confirm: {
 					order_type: 1,
 					payment_id: '',
-					// pay_pwd:''
-				}
+					pay_pwd: ''
+				},
+				balData: '',
+				// 获取资产余额参数
+				balanceData: {
+					token_code: ''
+				},
 			}
+		},
+		created() {
+			this.balance()
 		},
 		methods: {
 			onInput(key) {
@@ -91,6 +108,17 @@
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1)
 			},
+			getActionType(index, title) {
+				console.log(index)
+				if (index == 0) {
+					this.requsetPay.action_type = 0
+				} else {
+					if(index == 1){
+						this.requsetPay.action_type = 1
+					}
+				}
+			},
+			// 点击确定按钮
 			passwordShow() {
 				this.popupVisible = true
 				this.requsetPay.transaction_id = this.detail.id
@@ -100,7 +128,17 @@
 						toast(err)
 					}
 				})
-			}
+			},
+			// 获取资产余额
+			balance() {
+				this.balanceData.token_code = this.detail.code
+				api.balance(this.balanceData).then(res => {
+					this.balData = res.data
+				}).catch(err => {
+					// if(err)
+					toast(err)
+				})
+			},
 		},
 		computed: {
 			...mapGetters([
@@ -111,14 +149,19 @@
 			value() {
 				if (this.value.length == 6) {
 					this.popupVisible = false
+					// 清空密码输入框
+					this.value = ''
 					this.confirm.payment_id = this.detail.id
+					var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
+					this.confirm.pay_pwd = passWord.pwd
+					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
 							toast(res)
 							this.$router.push({
 								name: 'Detail',
-								params:{
-									code:this.detail.code
+								params: {
+									code: this.detail.code
 								}
 							})
 						}

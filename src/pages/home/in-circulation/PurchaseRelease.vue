@@ -33,8 +33,13 @@
 			<mt-field type="number" v-model="releaseData.amount"></mt-field>
 			<p>{{$t('m.unitprice')}}</p>
 			<mt-field type="number" v-model="releaseData.price"></mt-field>
-			<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</span>
-			<span v-if="show">手续费 : 0.00PLD</span>
+			<div v-if="fee">
+				<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</span>
+				<span>手续费 : {{releaseData.amount*0.002}} PLD</span>
+			</div>
+			<div v-else>
+				<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</span>
+			</div>
 		</div>
 		<div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
@@ -47,7 +52,11 @@
 		<!-- 数字键盘 -->
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
-				<span class="paymentamount">1.00 USDT</span>
+				<!-- 数字键盘表头 -->
+				<span v-if="payTitle" class="paymentamount">{{releaseData.amount * releaseData.price }}{{this.detail.release.denominated_assets}}
+				</span>
+				<!-- 数字键盘表头 -->
+				<span v-else class="paymentamount">{{releaseData.amount}} {{this.detail.code}}</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
 				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -65,14 +74,17 @@
 		data() {
 			return {
 				value: '',
-				show:false,
+				// 展示数字键盘表头
+				payTitle: true,
+				// 是否显示手续费
+				fee: false,
 				disabled: true,
 				showKeyboard: false,
 				popupVisible: false,
-				balData:'',
+				balData: '',
 				// 获取资产余额参数
-				balanceData:{
-					token_code:''
+				balanceData: {
+					token_code: ''
 				},
 				// 发布参数/购买
 				releaseData: {
@@ -91,8 +103,8 @@
 				}
 			}
 		},
-		created(){
-			this.balance()
+		created() {
+			this.index(0, '111')
 		},
 		methods: {
 			onInput(key) {
@@ -102,24 +114,40 @@
 				this.value = this.value.slice(0, this.value.length - 1);
 			},
 			// tab切换
-			index(index,title){
-				// debugger
-				if (index == 0){
+			index(index, title) {
+				if (index == 0) {
 					this.releaseData.publish_type = 0
-					this.show = false
-				}else{
-					this.releaseData.publish_type = 1
-					this.show = true
+					// 是否显示手续费
+					this.hide = false
+					// 数字键盘表头
+					this.payTitle = true
+					// 当发布是购买的时候，可用部分是计价资产
+					this.balanceData.token_code = this.detail.release.denominated_assets
+					this.balance()
+				} else {
+					if (index == 1) {
+						this.releaseData.publish_type = 1
+						// 是否显示手续费
+						this.hide = true
+						// 数字键盘表头
+						this.payTitle = false
+						// 当发布是出售的时候，可用部分是pld和ld
+						this.balanceData.token_code = this.detail.code
+						this.balance()
+					}
 				}
 			},
 			// 获取资产余额
-			balance(){
-				this.balanceData.token_code = this.detail.code
-				api.balance(this.balanceData).then(res=>{
+			balance() {
+				// this.balanceData.token_code = this.detail.release.denominated_assets
+				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
-				}).catch(err=>{
-					// if(err)
-					toast(err)
+				}).catch(err => {
+					if (err.code == 4003) {
+						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
+					} else {
+						toast(err)
+					}
 				})
 			},
 			// 发布接口
@@ -128,6 +156,8 @@
 				api.release(this.releaseData).then(res => {
 					if (res.code == 0) {
 						this.popupVisible = true
+						this.confirm.order_type = res.order_type
+						this.confirm.payment_id = res.transaction_id
 					}
 				}).catch(err => {
 					if (err.code != 0) {
@@ -139,10 +169,17 @@
 		watch: {
 			value() {
 				if (this.value.length == 6) {
-					this.confirm.payment_id = this.detail.id
+					// 清空密码输入框
+					this.value = ''
+					var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
+					this.confirm.pay_pwd = passWord.pwd
+					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
 							toast(res)
+							this.$router.push({
+								name: 'Deal'
+							})
 						}
 					}).catch(err => {
 						if (err.code != 0) {
