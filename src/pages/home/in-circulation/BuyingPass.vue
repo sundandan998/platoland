@@ -24,12 +24,12 @@
 				<van-tab :title="$t('m.number')">
 					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="600,000起购"></mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} USDT</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购起购"></mt-field>
+					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购"></mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} USDT</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
 				</van-tab>
 			</van-tabs>
 			<div class="buy-pass-time">
@@ -51,7 +51,9 @@
 		</div>
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
-				<span class="paymentamount">1.00 USDT</span>
+				<!-- 展示键盘弹起的title -->
+				<span class="paymentamount" v-if="numTitle">{{this.detail.release.issue_price*requsetPay.amount}}{{this.detail.release.denominated_assets}}</span>
+				<span class="paymentamount" v-else>{{requsetPay.amount}} {{this.detail.release.denominated_assets}}</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
 				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -75,6 +77,8 @@
 		data() {
 			return {
 				value: '',
+				// 键盘上标题显隐
+				numTitle: true,
 				disabled: true,
 				showKeyboard: false,
 				popupVisible: false,
@@ -87,7 +91,7 @@
 				},
 				// 确认支付参数
 				confirm: {
-					order_type: 1,
+					order_type: 0,
 					payment_id: '',
 					pay_pwd: ''
 				},
@@ -109,12 +113,17 @@
 				this.value = this.value.slice(0, this.value.length - 1)
 			},
 			getActionType(index, title) {
-				console.log(index)
 				if (index == 0) {
 					this.requsetPay.action_type = 0
+					// 键盘上标题显隐
+					this.numTitle = true
+					this.balance()
 				} else {
-					if(index == 1){
+					if (index == 1) {
 						this.requsetPay.action_type = 1
+						// 键盘上标题显隐
+						this.numTitle = false
+						this.balance()
 					}
 				}
 			},
@@ -123,6 +132,10 @@
 				this.popupVisible = true
 				this.requsetPay.transaction_id = this.detail.id
 				api.reqPay(this.requsetPay).then(res => {
+					if (res.code == 0) {
+						this.confirm.order_type = res.order_type
+						this.confirm.payment_id = res.transaction_id
+					}
 				}).catch(err => {
 					if (err.code != 0) {
 						toast(err)
@@ -131,11 +144,10 @@
 			},
 			// 获取资产余额
 			balance() {
-				this.balanceData.token_code = this.detail.code
+				this.balanceData.token_code = this.detail.release.denominated_assets
 				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
 				}).catch(err => {
-					// if(err)
 					toast(err)
 				})
 			},
@@ -151,7 +163,7 @@
 					this.popupVisible = false
 					// 清空密码输入框
 					this.value = ''
-					this.confirm.payment_id = this.detail.id
+					// this.confirm.payment_id = this.detail.id
 					var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
 					this.confirm.pay_pwd = passWord.pwd
 					// 确认支付接口

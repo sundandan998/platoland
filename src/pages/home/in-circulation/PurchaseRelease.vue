@@ -97,7 +97,7 @@
 				},
 				// 确认支付参数
 				confirm: {
-					order_type: 1,
+					order_type: 4,
 					payment_id: '',
 					pay_pwd: ''
 				}
