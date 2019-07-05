@@ -27,7 +27,7 @@
     </div>
     <div class="assets-detailed-exhibition">
       <div class="assets-detailed-exhibition-img">
-        <p>{{this.assetsData.balance}}</p>
+        <p>{{parseInt(this.assetsData.balance)}}</p>
         <img :src="this.assetsToken.icon" alt="" class="fl" />
         <ul>
           <li>{{this.assetsToken.code}} ({{this.assetsToken.nickname}})</li>

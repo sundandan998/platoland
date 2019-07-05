@@ -5,14 +5,16 @@
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
-		<div class="assets-detailed-list" @click="listDetail">
-			<!-- <router-link to="/transaction"> -->
-			<mt-cell :title="$t('m.changeout')" to="/transaction" is-link label="2018-03-06  12:03">
-				<span>-30000</span>
-			</mt-cell>
-			<p>USDT</p>
-			<!-- </router-link> -->
+
+		<div class="assets-detailed-list" v-for="item in listData">
+			<router-link :to="{name:'TransactionDetails',params:{order_id:item.order_id,order_type:item.order_type}}">
+				<mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link label="2018-03-06  12:03">
+					<span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+				</mt-cell>
+				<p>{{item.token.code}}</p>
+			</router-link>
 		</div>
+
 	</div>
 </template>
 
@@ -25,10 +27,6 @@
 			return {
 				listData: {
 				},
-				detailData: {
-					order_id: '',
-					order_type: 1
-				}
 			}
 		},
 		created() {
@@ -38,23 +36,12 @@
 			// 明细接口
 			list() {
 				api.transactionList().then(res => {
-					console.log(res)
+					this.listData = res.data
 				}).catch(err => {
 					console.log(err)
 				})
 			},
-			// 明细详情接口
-			listDetail() {
-				api.listDetail(this.detailData).then(res => {
-					if (res.code == 0) {
-						toast(res)
-					}
-				}).catch(err => {
-					if (err.code != 0) {
-						toast(err)
-					}
-				})
-			}
+
 		}
 	}
 </script>

@@ -160,7 +160,7 @@ export default {
           this.$store.dispatch("loginByCode", this.verification).then(res => {
             if (res.code == 0) {
               // 消息提示
-              toast(res)
+              // toast(res)
               this.$router.push("/home")
               this.$Indicator.close()
             }

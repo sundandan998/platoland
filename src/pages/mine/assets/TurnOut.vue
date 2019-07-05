@@ -13,14 +13,14 @@
     <div class="turn-out-exhibition">
       <div class="turn-out-exhibition-img">
         <img :src="this.detail.token.icon" alt="" class="fl">
-        <span>{{this.detail.token.code}}{{this.detail.token.name}}</span>
+        <span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
         <span>{{this.detail.token.subject}}</span>
       </div>
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
       <mt-field type="text" readonly="readonly" :placeholder="this.detail.address">
-        <router-link to="book">
+        <router-link to="/book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
       </mt-field>
@@ -29,7 +29,7 @@
       <p>{{$t('m.turnnum')}}</p>
       <mt-field :placeholder="$t('m.buynum')" v-model="turnOut.amount" type="number"></mt-field>
       <span>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</span>
-      <span>{{$t('m.servicecharge')}}：{{this.detail.available_amount}} PLD</span>
+      <span>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</span>
     </div>
     <div class="turn-out-exhibition-qrcode">
       <router-link to="/scan">
@@ -41,7 +41,7 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">2.00 LD</span>
+        <span class="paymentamount">{{turnOut.amount}} LD</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard v-model="turnOut.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
@@ -105,9 +105,11 @@
     watch: {
       value() {
         if (this.value.length == 6) {
+          this.value = ''
+          var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
           this.turnOut.token = this.detail.token.code
           this.turnOut.address = this.detail.address
-          // this.turnOut.pay_pwd = this.detail.token.code
+					this.turnOut.pay_pwd = passWord.pwd
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)

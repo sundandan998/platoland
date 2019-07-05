@@ -2,7 +2,7 @@
 	<div class="adress-book">
 		<div class="adress-book-header">
 			<mt-header fixed :title="$t('m.addressbook')">
-			    <mt-button icon="back" slot="left"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+			    <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			   <mt-button icon="" slot="right">
 			   	<router-link to="list">
 			   		<img src="../../../assets/images/u2664.png" alt="" />
@@ -50,11 +50,6 @@ export default{
         console.log(err)
       })
     },
-  // computed:{
-  //   ...mapGetters([
-  //     'detail'
-  //     ])
-  // }
 	}
 }
 </script>
