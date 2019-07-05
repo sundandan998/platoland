@@ -139,7 +139,6 @@
 			},
 			// 获取资产余额
 			balance() {
-				// this.balanceData.token_code = this.detail.release.denominated_assets
 				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
 				}).catch(err => {

@@ -50,25 +50,26 @@
       </div>
     </div>
     <div class="assets-detailed-tabbar">
-      <van-tabs>
+      <van-tabs @click="indexTab">
         <van-tab :title="$t('m.changeinto')">
-          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-            <span>-30000</span>
-          </mt-cell>
-          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-            <span>-30000</span>
-          </mt-cell>
+          <div class="assets-detailed-list" v-for="item in listData">
+            <router-link :to="{name:'TransactionDetails',params:{order_id:item.order_id,order_type:item.order_type}}">
+              <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
+                <span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+              </mt-cell>
+              <p>{{item.token.code}}</p>
+            </router-link>
+          </div>
           <router-link to="/into">
             <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
           </router-link>
         </van-tab>
         <van-tab :title="$t('m.changeout')">
-          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-            <span>-30000</span>
-          </mt-cell>
-          <mt-cell to="/transaction" is-link label="2018-03-06  12:03">
-            <span>-30000</span>
-          </mt-cell>
+          <div v-for="item in listData">
+            <mt-cell to="/transaction" is-link :label="item.create_time">
+              <span>{{item.amount}}</span>
+            </mt-cell>
+          </div>
           <router-link to="/into">
             <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
           </router-link>
@@ -86,32 +87,37 @@
     data() {
       return {
         data: {},
-        // assetDetailId:{},
         assetsData: {},
         assetsToken: {},
+        // 明细参数
+        details: {
+          code: '',
+          transaction_type: ''
+        },
+        listData: {},
         // 删除资产参数
         delasset: {
-          code: ''
+          code: '',
+          transaction_type: ''
         },
-        // 转出资产参数
-        outParam: {
-          token: 'LD',
-          address: 'de12sdfe',
-          amount: 1000
-        }
       }
     },
-    created() {
-      // this.assetDetailId = this.$route.params
+    created(){
+      // this.list()
+      // this.indexTab(0,'1')
+    },
+    mounted() {
       this.assetDetail()
+      this.indexTab(0,'1')
     },
     methods: {
       // 资产详情
       assetDetail() {
+        // debugger
         api.assetDetail(this.$route.params).then(res => {
           this.assetsData = res.data
           this.assetsToken = res.data.token
-          this.$store.commit('detail', res.data)
+          this.$store.commit('detail',res.data)
         }).catch(err => {
           console.log(err)
         })
@@ -139,6 +145,27 @@
             })
           }
         })
+      },
+      // 明细接口
+      list() {
+        // debugger
+        this.details.code = this.detail.token.code
+        api.transactionList(this.details).then(res => {
+          this.listData = res.data
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      // tab栏切换
+      indexTab(index, title) {
+        console.log(index)
+        if (index == 0) {
+          this.details.transaction_type = 0
+          this.list()
+        } else {
+          this.details.transaction_type = 1
+          this.list()
+        }
       },
     },
     computed: {

@@ -8,7 +8,7 @@
               <mt-header fixed :title="$t('m.explore')"></mt-header>
             </div>
             <div class="explore-navbar">
-              <van-tabs @click="list">
+              <van-tabs @click="index">
                 <!-- :title="$t('m.whole')" -->
                 <van-tab title="全部">
                   <div v-for="(items,index) in issuedata">
@@ -74,26 +74,20 @@
         selected: 'explore',
         message: 'explore',
         issuedata: [],
-        circulation: {
-          status: 2,
+        listParams: {
+          status: ''
         },
-        issue: {
-          status: 1
-        },
-        pending: {
-          status: 0
-        }
       }
     },
     components: {
       'app-tabber': Tabber
     },
     mounted() {
-      this.list(0, 'All')
+      this.index(0, 'All')
     },
     methods: {
       // 展示全部列表
-      list(index, title) {
+      index(index, title) {
         if (index == 0) {
           api.tokenList().then(res => {
             this.issuedata = res.data
@@ -102,29 +96,27 @@
           })
         } else {
           if (index == 1) {
-            api.tokenList(this.circulation).then(res => {
-              this.issuedata = res.data
-            }).catch(err => {
-              console.log(err)
-            })
+            this.listParams.status = 2
+            this.list()
           } else {
             if (index == 2) {
-              api.tokenList(this.issue).then(res => {
-                this.issuedata = res.data
-              }).catch(err => {
-                console.log(err)
-              })
+              this.listParams.status = 1
+              this.list()
             } else {
               if (index == 3) {
-                api.tokenList(this.pending).then(res => {
-                  this.issuedata = res.data
-                }).catch(err => {
-                  console.log(err)
-                })
+                this.listParams.status = 0
+                this.list()
               }
             }
           }
         }
+      },
+      list() {
+        api.tokenList(this.listParams).then(res => {
+          this.issuedata = res.data
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
