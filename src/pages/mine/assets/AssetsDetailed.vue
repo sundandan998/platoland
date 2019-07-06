@@ -65,10 +65,13 @@
           </router-link>
         </van-tab>
         <van-tab :title="$t('m.changeout')">
-          <div v-for="item in listData">
-            <mt-cell to="/transaction" is-link :label="item.create_time">
-              <span>{{item.amount}}</span>
-            </mt-cell>
+          <div class="assets-detailed-list" v-for="item in listData">
+            <router-link :to="{name:'TransactionDetails',params:{order_id:item.order_id,order_type:item.order_type}}">
+              <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
+                <span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+              </mt-cell>
+              <p>{{item.token.code}}</p>
+            </router-link>
           </div>
           <router-link to="/into">
             <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
@@ -78,7 +81,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
@@ -92,7 +94,7 @@
         // 明细参数
         details: {
           code: '',
-          transaction_type: ''
+          transaction_type: 0
         },
         listData: {},
         // 删除资产参数
@@ -104,7 +106,8 @@
     },
     created(){
       this.assetDetail()
-      this.indexTab(0,'123')
+      // this.indexTab(0,'123')
+      
     },
     methods: {
       // 资产详情
@@ -114,6 +117,8 @@
           this.assetsData = res.data
           this.assetsToken = res.data.token
           this.$store.commit('detail',res.data)
+          this.details.code = this.assetsToken.code
+          this.list()
         }).catch(err => {
           console.log(err)
         })
@@ -144,7 +149,6 @@
       },
       // 明细接口
       list() {
-        this.details.code = this.$route.params.code
         api.transactionList(this.details).then(res => {
           this.listData = res.data
         }).catch(err => {
@@ -153,7 +157,6 @@
       },
       // tab栏切换
       indexTab(index, title) {
-        console.log(index)
         if (index == 0) {
           this.details.transaction_type = 0
           this.list()

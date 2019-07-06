@@ -89,7 +89,7 @@ export default new Router({
     },
     //  我的---资产/资产详情
     {
-      path: '/assetsdetailed',
+      path: '/assetsdetailed/:id',
       name: 'AssetsDetailed',
       component: () => import("@/pages/mine/assets/AssetsDetailed")
     },

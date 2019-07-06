@@ -10,12 +10,12 @@
       <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
         <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
-          <div v-if="show">
+          <div v-if="refpath=='/book'">
             <mt-switch class="asset-list-switch" :value="value"></mt-switch>
           </div>
         </router-link>
-        <div v-if="hide" @click.prevent="addAsset(item.code,item.is_collection)">
-          <mt-switch  class="asset-list-switch" v-model="item.is_collection"></mt-switch>
+        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection)">
+          <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
         </div>
       </mt-cell>
     </div>
@@ -29,11 +29,9 @@
   export default {
     data() {
       return {
-        show: false,
-        hide: true,
         popupVisible: true,
         data: [],
-        is_collection:true,
+        is_collection: true,
         value: false,
         assetsData: [],
         // 添加资产参数
@@ -44,11 +42,15 @@
     },
     created() {
       this.list()
-      this.listassets()
+    },
+    computed: {
+      refpath() {
+        return window.sessionStorage.getItem('refpath')
+      }
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        var refpath = window.sessionStorage.setItem('refpath', JSON.stringify(from.path))
+        window.sessionStorage.setItem('refpath', from.path)
       })
     },
     methods: {
@@ -62,21 +64,8 @@
           console.log(err)
         })
       },
-      listassets() {
-        var url = JSON.parse(window.sessionStorage.getItem('refpath'))
-        if (url == "/assets") {
-          this.show = false
-          this.hide = true
-        } else {
-          if (url == "/book") {
-            this.value = false
-            this.show = true
-            this.hide = false
-          }
-        }
-      },
       // 添加/删除资产
-      addAsset(code,is_collection) {
+      addAsset(code, is_collection) {
         // debugger
         if (is_collection == true) {
           this.addCode.code = code

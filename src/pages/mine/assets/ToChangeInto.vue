@@ -42,6 +42,9 @@
     components: {
       qrcode: qrcode
     },
+    mounted() {
+      this.useqrcode()
+    },
     methods: {
       //复制
       copy() {
@@ -70,11 +73,9 @@
           // qrcode.makeCode("http://www.google.com")
         })
 
-      }
+      },
     },
-    mounted() {
-      this.useqrcode()
-    },
+
     computed: {
       ...mapGetters([
         'detail'
