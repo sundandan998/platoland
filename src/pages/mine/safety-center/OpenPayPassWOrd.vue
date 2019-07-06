@@ -73,7 +73,6 @@
 			payPwd() {
 				api.payPwd(this.pass).then(res => {
 					toast(res)
-					window.sessionStorage.setItem('payPwd', JSON.stringify(this.pass))
 					console.log(this.pass)
 				}).catch(err => {
 					toast(err)

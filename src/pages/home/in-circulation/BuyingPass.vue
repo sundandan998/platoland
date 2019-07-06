@@ -22,14 +22,18 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="600,000起购"></mt-field>
+					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="600,000起购">
+					</mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
+					</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购"></mt-field>
+					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购">
+					</mt-field>
 					<p>
-						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
+					</p>
 				</van-tab>
 			</van-tabs>
 			<div class="buy-pass-time">
@@ -52,12 +56,13 @@
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
 				<!-- 展示键盘弹起的title -->
-				<span class="paymentamount" v-if="numTitle">{{this.detail.release.issue_price*requsetPay.amount}}{{this.detail.release.denominated_assets}}</span>
+				<span class="paymentamount"
+					v-if="numTitle">{{this.detail.release.issue_price*requsetPay.amount}}{{this.detail.release.denominated_assets}}</span>
 				<span class="paymentamount" v-else>{{requsetPay.amount}} {{this.detail.release.denominated_assets}}</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
-				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
-				 @blur="showKeyboard = false" />
+				<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+					@blur="showKeyboard = false" />
 			</van-popup>
 		</div>
 		<div class="buy-pass-btn">
@@ -161,11 +166,9 @@
 			value() {
 				if (this.value.length == 6) {
 					this.popupVisible = false
+					this.confirm.pay_pwd = this.value
 					// 清空密码输入框
 					this.value = ''
-					// this.confirm.payment_id = this.detail.id
-					var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
-					this.confirm.pay_pwd = passWord.pwd
 					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
@@ -182,9 +185,7 @@
 							toast(err)
 						}
 					})
-
 				}
-
 			},
 			requsetPay: {
 				immediate: true,

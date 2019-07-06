@@ -59,7 +59,7 @@
 				<span v-else class="paymentamount">{{releaseData.amount}} {{this.detail.code}}</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
-				<van-number-keyboard v-model="confirm.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+				<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
 				 @blur="showKeyboard = false" />
 			</van-popup>
 		</div>
@@ -168,10 +168,9 @@
 		watch: {
 			value() {
 				if (this.value.length == 6) {
-					// 清空密码输入框
+					this.confirm.pay_pwd = this.value
+						// 清空密码输入框
 					this.value = ''
-					var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
-					this.confirm.pay_pwd = passWord.pwd
 					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
