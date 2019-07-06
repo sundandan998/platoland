@@ -103,12 +103,8 @@
       }
     },
     created(){
-      // this.list()
-      // this.indexTab(0,'1')
-    },
-    mounted() {
       this.assetDetail()
-      this.indexTab(0,'1')
+      this.indexTab(0,'123')
     },
     methods: {
       // 资产详情
@@ -148,8 +144,7 @@
       },
       // 明细接口
       list() {
-        // debugger
-        this.details.code = this.detail.token.code
+        this.details.code = this.$route.params.code
         api.transactionList(this.details).then(res => {
           this.listData = res.data
         }).catch(err => {
