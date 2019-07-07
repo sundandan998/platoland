@@ -10,7 +10,7 @@
         <img :src="buyDataToken.icon" alt="" class="fl" />
         <span>{{buyDataToken.code}}({{buyDataToken.nickname}})</span>
         <span>{{buyDataToken.subject}}</span>
-        <!-- <p>{{infoData}}</p> -->
+        <p>{{buyData.publish_name}}</p>
         <!-- <P>{{infoData}}</P> -->
       </div>
       <div class="Purchase-pass-content-bot">
@@ -35,7 +35,8 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">1.00 USDT</span>
+          <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}{{buyDataToken.code}}</span>
+					<span v-else class="paymentamount">{{reqPay.amount}}{{buyData.denominated_assets}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -57,6 +58,8 @@
         buyData: {},
         buyDataToken: {},
         buyName: {},
+        // 键盘上标题
+        buyTitle:true,
         disabled: true,
         // 请求支付参数
         reqPay: {
@@ -87,9 +90,11 @@
       // 获取tab中index
       buyIndex(index, title) {
         if (index == 0) {
+          this.buyTitle = true
           this.reqPay.action_type = 0
         } else {
           this.reqPay.action_type = 1
+          this.buyTitle = false
         }
       },
       // 点击确定发送请求

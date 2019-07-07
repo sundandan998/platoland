@@ -31,19 +31,19 @@
           </div>
         </van-tab>
         <van-tab :title="$t('m.sell')">
-          <router-link to="/sell">
-            <div class="to-deal-purchase" v-for="(item,index) in dealListData">
-              <div class="to-deal-purchase-top">
-                <span>{{item.publish_name}}</span>
-              </div>
-              <div class="to-deal-purchase-bot">
-                <span>{{$t('m.transactionnum')}}:{{item.amount}}</span>
-                <span>
-                  <img :src="item.d_icon">{{item.price}}</span>
-                <p>{{$t('m.quota')}}:{{item.low_number}} -{{item.high_number}}</p>
-              </div>
+          <div class="to-deal-purchase" v-for="(item,index) in dealListData">
+            <router-link :to="/sell/+item.id">
+            <div class="to-deal-purchase-top">
+              <span>{{item.publish_name}}</span>
             </div>
-          </router-link>
+            <div class="to-deal-purchase-bot">
+              <span>{{$t('m.transactionnum')}}:{{item.amount}}</span>
+              <span>
+                <img :src="item.d_icon">{{item.price}}</span>
+              <p>{{$t('m.quota')}}:{{item.low_number}} -{{item.high_number}}</p>
+            </div>
+            </router-link>
+          </div>
         </van-tab>
       </van-tabs>
     </div>
@@ -66,7 +66,7 @@
       this.dealList()
     },
     methods: {
-    //  tab栏展示
+      //  tab栏展示
       index(index, title) {
         if (index == 0) {
           this.dealData.publish_type = 0

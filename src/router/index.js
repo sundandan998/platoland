@@ -227,7 +227,7 @@ export default new Router({
     },
     //首页/流通中/去交易/出售通证
     {
-      path: '/sell',
+      path: '/sell/:id',
       name: 'Sell',
       component: () => import("@/pages/home/in-circulation/Sell")
     },
