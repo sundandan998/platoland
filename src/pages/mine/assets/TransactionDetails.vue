@@ -2,7 +2,7 @@
 	<div class="transaction-details">
 		<div class="transaction-details-header">
 			<div class="assets-detailed-header">
-				<mt-header fixed :title="$t('m.transactiondetail')">
+				<mt-header fixed title="明细详情">
 					<router-link to="/detailedlist" slot="left">
 						<mt-button icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 					</router-link>

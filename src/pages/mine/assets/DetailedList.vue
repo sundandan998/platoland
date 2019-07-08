@@ -1,7 +1,7 @@
 <template>
 	<div class="assets-detailed">
 		<div class="assets-detailed-header">
-			<mt-header fixed :title="$t('m.passdetails')">
+			<mt-header fixed title="明细">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>

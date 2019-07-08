@@ -1,5 +1,22 @@
 import request from "../../utils/request"
 export default {
+   // 发送邮件
+   email(params = {}) {
+    return request({
+      url: "/system/email/",
+      method: "post",
+      data: params,
+      
+    })
+  },
+  // 发送短信
+  sms(params = {}) {
+    return request({
+      url: "/system/sms_code/",
+      method: "post",
+      data: params
+    })
+  },
   // 检测用户名是否唯一
   is_use(params = {}) {
     return request({

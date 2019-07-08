@@ -45,7 +45,7 @@
 					email: '',
 					sms_code: '',
 					email_code: '',
-					action: 'email'
+					action: ''
 				},
 				payPwd: {
 					mobile: '',
@@ -80,18 +80,26 @@
 		methods: {
 			// / 下一步按钮
 			next() {
+				var nextData = window.sessionStorage.getItem('userInfo')
+				nextData = JSON.parse(nextData)
+				this.nextParam.mobile = nextData.data.mobile
+				this.nextParam.email = nextData.data.email
 				this.payPwd.sms_code = this.nextParam.sms_code
 				this.payPwd.email_code = this.nextParam.email_code
 				var pwdUrl = window.location.href.split("?")
 				// 根据id判断跳转设置支付密码页或解绑
 				if (pwdUrl[1] == 'id=1') {
 					api.safety(this.payPwd).then(res => {
-						toast(res)
-						this.$router.push({
-							name: 'PayPassWorde'
-						})
+						if (res.code == 0) {
+							toast(res)
+							this.$router.push({
+								name: 'PayPassWorde'
+							})
+						}
 					}).catch(err => {
-						toast(err)
+						if (err.code != 0) {
+							toast(err)
+						}
 					})
 				} else {
 					var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
@@ -99,16 +107,21 @@
 					api.safety(this.nextParam).then(res => {
 						toast(res)
 						if (url[2] == "rest") {
-							this.$router.push({
-								name: 'Rest'
-							})
-						} else {
-							this.$router.push({
-								name: 'Safety'
-							})
+							if (res.code == 0) {
+								toast(res)
+								this.$router.push({
+									name: 'Rest'
+								})
+							} else {
+								this.$router.push({
+									name: 'Safety'
+								})
+							}
 						}
 					}).catch(err => {
-						toast(err)
+						if (err.code != 0) {
+							toast(err)
+						}
 					})
 				}
 			},

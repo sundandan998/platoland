@@ -2,7 +2,7 @@
 	<div class="news-center">
 		<!--顶部标题-->
 		<div class="news-center-header">
-			<mt-header fixed  :title="$t('m.announcementcenter')">
+			<mt-header fixed  title="公告中心">
 			  <router-link to="/" slot="left">
 			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>

@@ -36,9 +36,9 @@
         <!-- 计价资产 -->
         <mt-cell :title="$t('m.valuationassets')" :value="release.denominated_assets"></mt-cell>
         <!-- 初始单价 -->
-        <mt-cell :title="$t('m.initialprice')" :value="parseInt(release.init_price)"></mt-cell>
+        <mt-cell :title="$t('m.initialprice')" :value="release.init_price"></mt-cell>
         <!-- 发行单价 -->
-        <mt-cell :title="$t('m.issueprice')" :value="parseInt(release.issue_price)"></mt-cell>
+        <mt-cell :title="$t('m.issueprice')" :value="release.issue_price"></mt-cell>
         <!-- 发行总量 -->
         <mt-cell :title="$t('m.issuenum')" :value="parseInt(release.first_number)"></mt-cell>
         <!-- 起购数量 -->

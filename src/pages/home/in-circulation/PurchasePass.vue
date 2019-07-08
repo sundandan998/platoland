@@ -22,11 +22,11 @@
       <van-tabs @click="buyIndex">
         <van-tab :title="$t('m.number')">
           <mt-field :placeholder="buyName.low_number" type="number" v-model="reqPay.amount"></mt-field>
-          <p>{{$t('m.available')}}: {{buyData.amount}}{{buyData.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
           <mt-field :placeholder="buyName.high_number" type="number" V-model="reqPay.amount"></mt-field>
-          <p>{{$t('m.available')}}: {{buyData.amount}}{{buyData.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
     </div>
@@ -35,8 +35,8 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-          <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}{{buyDataToken.code}}</span>
-					<span v-else class="paymentamount">{{reqPay.amount}}{{buyData.denominated_assets}}</span>
+        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}{{buyDataToken.code}}</span>
+        <span v-else class="paymentamount">{{reqPay.amount}}{{buyData.denominated_assets}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -59,7 +59,7 @@
         buyDataToken: {},
         buyName: {},
         // 键盘上标题
-        buyTitle:true,
+        buyTitle: true,
         disabled: true,
         // 请求支付参数
         reqPay: {
@@ -73,7 +73,12 @@
           order_type: '',
           payment_id: '',
           pay_pwd: ''
-        }
+        },
+        // 获取资产余额参数
+        balanceData: {
+          token_code: ''
+        },
+        balData: '',
       }
     },
     created() {
@@ -122,7 +127,16 @@
         }).catch(err => {
           console.log(err)
         })
-      }
+      },
+      // 获取资产余额
+      balance() {
+        this.balanceData.token_code = this.detail.release.denominated_assets
+        api.balance(this.balanceData).then(res => {
+          this.balData = res.data
+        }).catch(err => {
+          toast(err)
+        })
+      },
     },
     watch: {
       value() {

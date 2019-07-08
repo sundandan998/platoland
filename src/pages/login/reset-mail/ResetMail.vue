@@ -18,14 +18,15 @@
       </div>
     </div>
     <div class="login-btn">
-      <mt-button type="default" @click="verification" :disabled="disabled">确&nbsp;定</mt-button>
+      <mt-button type="default" @click="register" :disabled="disabled">确&nbsp;定</mt-button>
     </div>
   </div>
 </template>
 <script>
-  import {toast} from '@/assets/js/pub.js'
+  import { toast } from '@/assets/js/pub.js'
   // 接口请求
-  import api from "@/api/system/System.js"
+  // import api from "@/api/system/System.js"
+  import api from "@/api/user/User.js"
   export default {
     data() {
       return {
@@ -33,73 +34,80 @@
         show: true,
         showKeyboard: false,
         disabled: true,
-        codeData: {},
         // 短信参数
         sms: {
-          mobile: [],
+          mobile: '',
           action: ''
         },
         // 邮箱参数
         email: {
           action: '',
-          email: []
+          email: ''
+        },
+        // 注册参数
+        registerParsms: {
+          username: '',
+          password: '',
+          code: ''
         },
         code: {
-          account: '',
-          account_type: '',
-          action: '',
           code: ''
         }
       }
     },
     created() {
-      // 获取存在session中的verification数据
-      var codeData = window.sessionStorage.getItem('verification')
-      codeData = JSON.parse(codeData)
-      this.code.account = codeData.username
-      // 获取存在session中的action数据
-      var type = window.sessionStorage.getItem('action')
-      type = JSON.parse(type)
-      this.code.action = type.action
-      this.code.account_type = type.account_type
-      this.sms.action = type.action
-      this.sms.mobile = codeData.username
-      this.email.action = type.action
-      this.email.email = codeData.username
-      // console.log(this.email)
     },
     methods: {
-      // 校验验证码
-      verification() {
-        api.checkCode(this.code).then(res => {
+      // 注册
+      register() {
+        var registerData = window.sessionStorage.getItem('verification')
+        registerData = JSON.parse(registerData)
+        this.registerParsms.username = registerData.username
+        this.registerParsms.password = registerData.password
+        this.registerParsms.code = this.code.code
+        api.register(this.registerParsms).then(res => {
           if (res.code == 0) {
-           // 消息提示
-           toast(res)
+            toast(res)
             this.$router.push({
               name: 'Login'
             })
           }
         }).catch(err => {
-          if(err.code != 0){
-            toast(err)
-          }
+          toast(err)
         })
       },
       // 重新发送验证码
       renewCode() {
+        var registerData = window.sessionStorage.getItem('verification')
+        var actionData = window.sessionStorage.getItem('action')
+        registerData = JSON.parse(registerData)
+        actionData = JSON.parse(actionData)
+        this.account_type = actionData.account_type
+        this.sms.action = actionData.action
+        this.sms.mobile = registerData.username
+        this.email.action = actionData.action
+        this.email.email = registerData.username
         // 发送信息
         if (this.account_type == '0') {
-          api.sms(this.this.sms).then(res => {
-            console.log(res)
+          api.sms(this.sms).then(res => {
+            if (res.code = 0) {
+              toast(res)
+            }
           }).catch(err => {
-            console.log(err)
+            if (err.code != 0) {
+              toast(err)
+            }
           })
         } else {
           // 发送邮箱
           api.email(this.email).then(res => {
-            console.log(res)
+            if (res.code= 0) {
+              toast(res)
+            }
           }).catch(err => {
-            console.log(err)
+            if (err.code != 0) {
+              toast(err)
+            }
           })
         }
       },

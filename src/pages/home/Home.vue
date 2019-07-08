@@ -52,6 +52,7 @@
          <!-- @click="issue(items.code) -->
          <div class="assets-subscription" v-for="items in tokens_list">
           <router-link :to="/detail/+items.code">
+            <!-- <div class="home-assets-subscription-content"> -->
            <img :src="items.icon">
            <div class="assets-subscription-text fr">
              <span class="home-name">{{items.code}} ({{items.nickname}})</span>
@@ -74,6 +75,7 @@
              <li>{{items.release.init_price}}</li>
            </ul>
          </div>
+         <!-- </div> -->
        </router-link>
      </div>
    </div>

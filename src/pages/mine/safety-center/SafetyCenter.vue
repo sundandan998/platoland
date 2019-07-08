@@ -14,38 +14,42 @@
 					<img slot="icon" src="../../../assets/images/u4107.png">
 				</mt-cell>
 			</router-link>
-			<mt-cell :title="$t('m.paymentpwd')" value="-3000">
+			<mt-cell :title="$t('m.paymentpwd')">
 				<router-link :to="{path:'/safetyVerification',query: {id: 1}}">
 					<mt-switch :value="infoData.pay_pwd_active"></mt-switch>
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
-			<mt-cell :title="$t('m.authentication')" value="-3000">
+			<mt-cell :title="$t('m.authentication')" >
 				<mt-switch :value="infoData.mobile_active" @click.native="sms"></mt-switch>
 				<img slot="icon" src="../../../assets/images/u4109.png">
 			</mt-cell>
-			<mt-cell title="邮箱验证" value="-3000">
-				<mt-switch :value="infoData.email_active" @click.native="email"></mt-switch>
+
+			<mt-cell title="邮箱验证">
+				<router-link to="/safetyVerification">
+					<mt-switch :value="infoData.email_active"></mt-switch>
+				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
+
 		</div>
 	</div>
 </template>
 
 <script>
-import api from "@/api/user/User.js"
-import {toast} from '@/assets/js/pub.js'
+	import api from "@/api/user/User.js"
+	import { toast } from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
-				infoData:{},
+				infoData: {},
 				// value: '',
-				next:{
-					action:''
-				}
+				next: {
+					action: ''
+				},
 			}
 		},
-		created(){
+		created() {
 			this.info()
 		},
 		methods: {
@@ -53,36 +57,35 @@ import {toast} from '@/assets/js/pub.js'
 			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
-					// toast(res)
 				}).catch(err => {
 					// toast(err)
 				})
 			},
 			// 信息跳转
-			sms() {
-				if (this.infoData.mobile_active == true) {
-					this.$router.push({
-						name: 'SafetyVerification',
-						// params:''
-					})
-				} else {
-					this.$router.push({
-						name: 'Open'
-					})
-				}
-			},
+			// sms() {
+			// 	if (this.infoData.mobile_active == true) {
+			// 		this.$router.push({
+			// 			name: 'SafetyVerification',
+			// 			// params:''
+			// 		})
+			// 	} else {
+			// 		this.$router.push({
+			// 			name: 'Open'
+			// 		})
+			// 	}
+			// },
 			// 邮箱跳转
-			email() {
-				if (this.infoData.email_active == true) {
-					this.$router.push({
-						name: 'SafetyVerification'
-					})
-				} else {
-					this.$router.push({
-						name: 'Email'
-					})
-				}
-			},
+			// email() {
+			// 	if (this.infoData.email_active == true) {
+			// 		this.$router.push({
+			// 			name: 'SafetyVerification'
+			// 		})
+			// 	} else {
+			// 		this.$router.push({
+			// 			name: 'Email'
+			// 		})
+			// 	}
+			// },
 		}
 	}
 </script>
