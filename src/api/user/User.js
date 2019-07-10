@@ -1,12 +1,19 @@
 import request from "../../utils/request"
 export default {
-   // 发送邮件
-   email(params = {}) {
+  // 校验验证码
+  checkCode(params = {}) {
+    return request({
+      url: "/system/code/verification/",
+      method: "post",
+      data: params
+    })
+  },
+  // 发送邮件
+  email(params = {}) {
     return request({
       url: "/system/email/",
       method: "post",
       data: params,
-      
     })
   },
   // 发送短信
@@ -33,6 +40,7 @@ export default {
       data: params
     })
   },
+  // 用户信息
   getUserInfo(params = {}) {
     return request({
       url: "/user/info/",
@@ -153,7 +161,7 @@ export default {
     })
   },
   // 设置支付密码
-  payPwd(params = {}){
+  payPwd(params = {}) {
     return request({
       url: "/user/pay_pwd/",
       method: "post",

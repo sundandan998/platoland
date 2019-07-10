@@ -7,23 +7,21 @@
 				</router-link>
 			</mt-header>
 		</div>
-		<div class="safety-verification-list">
-			<span>{{nextParam.mobile}}</span>
+		<div class="safety-verification-list" v-if="show.mobile">
+			<span>{{infoData.mobile}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">
 				<span @click="sms_code">{{$t('m.send')}}</span>
 			</mt-field>
 		</div>
-		<div class="safety-verification-list">
-			<span>{{nextParam.email}}</span>
+		<div class="safety-verification-list" v-if="show.email">
+			<span>{{infoData.email}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">
 				<span @click="email_code">{{$t('m.send')}}</span>
 			</mt-field>
 		</div>
-		<!-- <router-link to="/open"> -->
 		<div class="safety-verification-btn">
 			<mt-button type="primary" size="large" @click.native="next" :disabled="disabled">{{$t('m.next')}}</mt-button>
 		</div>
-		<!-- </router-link> -->
 		<div class="safety-verification-text">
 			<p>{{$t('m.becareful')}}</p>
 			<p>{{$t('m.securityverificationone')}}</p>
@@ -39,6 +37,11 @@
 			return {
 				disabled: true,
 				nextData: {},
+				infoData: {},
+				show: {
+					'mobile': true,
+					'email': true
+				},
 				// 下一步接口参数
 				nextParam: {
 					mobile: '',
@@ -46,12 +49,6 @@
 					sms_code: '',
 					email_code: '',
 					action: ''
-				},
-				payPwd: {
-					mobile: '',
-					email: '',
-					sms_code: '',
-					email_code: '',
 				},
 				// 短信参数
 				sms: {
@@ -66,62 +63,77 @@
 			}
 		},
 		created() {
-			// this.payPwd()
+			this.info()
 			// 获取用户名信息
-			var nextData = window.sessionStorage.getItem('userInfo')
-			nextData = JSON.parse(nextData)
-			this.nextParam.mobile = nextData.data.mobile
-			this.nextParam.email = nextData.data.email
-			this.payPwd.mobile = nextData.data.mobile
-			this.payPwd.email = nextData.data.email
-			this.sms.mobile = nextData.data.mobile
-			this.sms.email = nextData.data.email
+			// console.log(this.$route.params.active)
+			// var nextData = window.sessionStorage.getItem('userInfo')
+			// nextData = JSON.parse(nextData)
+			// this.nextParam.mobile = nextData.data.mobile
+			// this.nextParam.email = nextData.data.email
+			// this.sms.mobile = nextData.data.mobile
+			// this.sms.email = nextData.data.email
 		},
 		methods: {
-			// / 下一步按钮
+			// 用户信息
+			info() {
+				api.getUserInfo().then(res => {
+					this.infoData = res.data
+					this.nextParam.mobile =  this.infoData.mobile
+					this.nextParam.email = this.infoData.email
+					this.sms.mobile = this.infoData.mobile
+					this.sms.email = this.infoData.email
+					// 判断展示的是邮箱还是手机号
+					if (this.infoData.mobile_active == true) {
+						this.show.mobile = true
+					} else {
+						this.show.mobile = false
+					}
+					if (this.infoData.email_active == true) {
+						this.show.email = true
+					} else {
+						this.show.email = false
+					}
+				}).catch(err => {
+					// toast(err)
+				})
+			},
+			// 解绑微信或信息
 			next() {
-				var nextData = window.sessionStorage.getItem('userInfo')
-				nextData = JSON.parse(nextData)
-				this.nextParam.mobile = nextData.data.mobile
-				this.nextParam.email = nextData.data.email
-				this.payPwd.sms_code = this.nextParam.sms_code
-				this.payPwd.email_code = this.nextParam.email_code
-				var pwdUrl = window.location.href.split("?")
-				// 根据id判断跳转设置支付密码页或解绑
-				if (pwdUrl[1] == 'id=1') {
-					api.safety(this.payPwd).then(res => {
+				// 判断是解绑还是绑定/如果this.$route.params.active == true,
+				// switch是开,即解绑
+				console.log(this.nextParam.mobile)
+				if (this.$route.params.active == true) {
+					this.nextParam.action = this.$route.params.action
+					api.safety(this.nextParam).then(res => {
 						if (res.code == 0) {
-							toast(res)
 							this.$router.push({
-								name: 'PayPassWorde'
+								name: 'Safety'
 							})
+							toast(res)
 						}
 					}).catch(err => {
 						if (err.code != 0) {
 							toast(err)
 						}
 					})
+					//switch是关,即绑定
 				} else {
-					var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
-					var url = window.location.href.split('?')
 					api.safety(this.nextParam).then(res => {
-						toast(res)
-						if (url[2] == "rest") {
-							if (res.code == 0) {
-								toast(res)
+						if (res.code == 0) {
+							// 发送成功后,开始绑定,判断跳转到开启信息页面还是跳转到开启邮箱页面
+							if (this.$route.params.action == 'email') {
 								this.$router.push({
-									name: 'Rest'
+									name: 'Email'
 								})
 							} else {
 								this.$router.push({
-									name: 'Safety'
+									name: 'Open'
 								})
 							}
+							toast(res)
 						}
 					}).catch(err => {
-						if (err.code != 0) {
-							toast(err)
-						}
+						toast(err)
 					})
 				}
 			},

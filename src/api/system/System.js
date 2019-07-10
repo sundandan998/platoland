@@ -61,8 +61,7 @@ export default {
     return request({
       url: "/system/email/",
       method: "post",
-      data: params,
-      
+      data: params
     })
   },
   // 发送短信
@@ -80,5 +79,13 @@ export default {
       method: "post",
       data: params
     })
-  }
+  },
+  // 用户信息
+  getUserInfo(params = {}) {
+    return request({
+      url: "/user/info/",
+      method: "get",
+      params: params
+    })
+  },
 }

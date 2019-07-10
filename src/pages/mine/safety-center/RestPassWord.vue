@@ -81,7 +81,6 @@
 					new_pwd: '',
 					new_pwd2: ''
 				},
-
 				rules: {
 					new_pwd: [
 						{ validator: validatePass, trigger: 'blur' },

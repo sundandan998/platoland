@@ -32,10 +32,9 @@
 
   </div>
 </template>
-
 <script>
   import api from "@/api/system/System.js"
-  import {toast} from '@/assets/js/pub.js'
+  import { toast } from '@/assets/js/pub.js'
   export default {
     data() {
       return {
@@ -55,9 +54,13 @@
       // 发送邮件
       sendEmail() {
         api.email(this.email).then(res => {
-          console.log(res)
+          if (res.code == 0) {
+            toast(res)
+          }
         }).catch(err => {
-          console.log(err)
+          if (err.cose != 0) {
+            toast(err)
+          }
         })
       },
       // 点击确定
@@ -66,7 +69,7 @@
         this.bindParam.code = this.email.code
         api.bind(this.bindParam).then(res => {
           if (res.code == 0) {
-          toast(res)
+            toast(res)
           }
         }).catch(err => {
           toast(err)

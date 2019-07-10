@@ -8,10 +8,13 @@
     </div>
     <div class="reset-mail-information">
       <img src="../../../assets/images/r-email.png" alt="" />
-      <p>已向{{this.code.account}}发送验证信息</p>
+      <!-- 注册时展示 -->
+      <p v-if="showRegister">已向{{this.registerParsms.username}}发送验证信息</p>
+      <!-- 忘记密码时展示 -->
+      <p v-if="showPwd">已向{{ this.checkCode.account}}发送验证信息</p>
       <span>请输入验证码。</span>
       <div class="verification-code">
-        <van-password-input :value="code.code" @focus="showKeyboard = true" />
+        <van-password-input :value="registerParsms.code" @focus="showKeyboard = true" />
         <span class="fr" @click="renewCode">重新发送验证码</span>
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
@@ -30,6 +33,8 @@
   export default {
     data() {
       return {
+        showRegister: false,
+        showPwd: false,
         value: '',
         show: true,
         showKeyboard: false,
@@ -50,31 +55,67 @@
           password: '',
           code: ''
         },
-        code: {
+        // 校验验证码参数
+        checkCode: {
+          account: '',
+          account_type: '',
+          action: 0,
           code: ''
         }
       }
     },
     created() {
+      // 展示reset页面中显示电话还是邮箱
+      this.showInformation()
+      // 走注册时发送验证码，获取注册时填写的用户名及密码
+      var registerData = window.sessionStorage.getItem('verification')
+      registerData = JSON.parse(registerData)
+      this.registerParsms.username = registerData.username
+      this.registerParsms.password = registerData.password
+      // 走获取忘记密码的手机号或邮箱
+      var forgetData = window.sessionStorage.getItem('forgetUsername')
+      forgetData = JSON.parse(forgetData)
+      this.checkCode.account = forgetData
     },
     methods: {
-      // 注册
+      // 展示reset页面中显示电话还是邮箱
+      showInformation() {
+        if (this.$route.params.action == 0) {
+          this.showPwd = true
+        } else {
+          this.showRegister = true
+        }
+      },
       register() {
-        var registerData = window.sessionStorage.getItem('verification')
-        registerData = JSON.parse(registerData)
-        this.registerParsms.username = registerData.username
-        this.registerParsms.password = registerData.password
-        this.registerParsms.code = this.code.code
-        api.register(this.registerParsms).then(res => {
-          if (res.code == 0) {
-            toast(res)
-            this.$router.push({
-              name: 'Login'
+        // 判断走重置登录密码页面还是走注册
+        // 走重置登录密码
+        this.checkCode.account_type = this.$route.params.account_type
+        this.checkCode.code = this.registerParsms.code
+        if (this.$route.params.action == 0) {
+          api.checkCode(this.checkCode).then(res => {
+            if (res.code == 0) {
+              this.$router.push({
+                name: 'ResetPwd'
+              })
+            }
+          }).catch(err => {
+            toast(err)
+          })
+          // 走注册
+        } else {
+          if (this.$route.params.action != 0) {
+            api.register(this.registerParsms).then(res => {
+              if (res.code == 0) {
+                toast(res)
+                this.$router.push({
+                  name: 'Login'
+                })
+              }
+            }).catch(err => {
+              toast(err)
             })
           }
-        }).catch(err => {
-          toast(err)
-        })
+        }
       },
       // 重新发送验证码
       renewCode() {
@@ -101,7 +142,7 @@
         } else {
           // 发送邮箱
           api.email(this.email).then(res => {
-            if (res.code= 0) {
+            if (res.code = 0) {
               toast(res)
             }
           }).catch(err => {
@@ -112,17 +153,17 @@
         }
       },
       onInput(key) {
-        this.code.code = (this.code.code + key).slice(0, 6)
+        this.registerParsms.code = (this.registerParsms.code + key).slice(0, 6)
       },
       onDelete() {
-        this.code.code = this.code.code.slice(0, this.code.code.length - 1)
+        this.registerParsms.code = this.registerParsms.code.slice(0, this.registerParsms.code.length - 1)
       },
       back() {
         window.history.back()
       }
     },
     watch: {
-      code: {
+      registerParsms: {
         immediate: true,
         deep: true,
         handler(val) {

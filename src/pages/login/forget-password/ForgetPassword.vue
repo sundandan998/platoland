@@ -12,18 +12,10 @@
       <h1>重置登录密码</h1>
     </div>
     <div class="login-content">
-      <el-form v-if="show" :model="verification" ref="verification" v-model="verification.email" :rules="rules" class="verification-input">
-        <el-form-item prop="email">
-          <el-input v-model="verification.username" placeholder="邮箱">
-            <i slot="prefix">
-              <img src="../../../assets/images/email.png" alt="">
-            </i>
-          </el-input>
-        </el-form-item>
-      </el-form>
-      <el-form v-if="hide" :model="verification" ref="verification" :rules="rules1" class="verification-input">
-        <el-form-item prop="username">
-          <el-input v-model="verification.username" placeholder="手机号" type="number">
+      <el-form :model="verification" ref="verification" v-model="verification.emails" :rules="rules"
+        class="verification-input">
+        <el-form-item prop="emails">
+          <el-input v-model="verification.username" placeholder="邮箱/手机号">
             <i slot="prefix">
               <img src="../../../assets/images/email.png" alt="">
             </i>
@@ -39,25 +31,33 @@
   </div>
 </template>
 <script>
- import {toast} from '@/assets/js/pub.js'
+  import { toast } from '@/assets/js/pub.js'
   // 接口请求
   import api from "@/api/system/System.js"
   export default {
     data() {
       return {
         value: '',
-        show: true,
-        hide: false,
         disabled: true,
         showKeyboard: true,
         showPwd: '',
         username: {},
         verification: {
-          username: ''
+          username: '',
+        },
+        // 信息参数
+        sms: {
+          mobile: '',
+          action: 0
+        },
+        // 邮箱参数
+        email:{
+          email: '',
+          action: 0
         },
         rules: {
           // 校验邮箱
-          username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
+          username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'emails', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]
         },
         rules1: {
           // 手机号校验
@@ -66,42 +66,58 @@
       }
     },
     created() {
-      var showPwd = window.sessionStorage.getItem('action')
-      showPwd = JSON.parse(showPwd)
-      this.showPwd = showPwd.action
-      console.log(this.showPwd)
-      this.showInput()
     },
     methods: {
       // 检测用户名是否唯一接口
       resetPwd() {
         api.is_use({ username: this.verification.username }).then(res => {
+          window.sessionStorage.setItem('forgetUsername', JSON.stringify(this.verification.username))
           if (res.is_use === true) {
-            this.$router.push({
-              name: 'ResetPwd'
-            })
+            // 发送信息或邮件
+            var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+            if (reg.test(this.verification.username)) {
+              this.email.email = this.verification.username
+              api.email(this.email).then(res => {
+                if (res.code == 0) {
+                  toast(res)
+                  this.$router.push({
+                    name: 'Reset',
+                    params:{action:0,account_type:1}
+                  })
+                }
+              }).catch(err => {
+                if (err.code != 0) {
+                  toast(err)
+                }
+              })
+            } else {
+              this.sms.mobile = this.verification.username
+              api.sms(this.sms).then(res => {
+                if (res.code == 0) {
+                  toast(res)
+                  this.$router.push({
+                    name: 'Reset',
+                    params:{action:0,account_type:0}
+                  })
+                }
+              }).catch(err => {
+                if (err.code != 0) {
+                  toast(err)
+                }
+              })
+            }
           } else {
-            Toast({
-              message: '邮箱未注册',
-              position: 'top',
-              className: 'zZindex'
-            })
+            toast(res)
             this.$router.push({
               name: 'Login'
             })
           }
         }).catch(err => {
-          console.log(err)
+          if (err.code != 0) {
+            toast(err)
+          }
         })
       },
-      // 控制显示手机或邮箱
-      showInput() {
-        // debugger
-        if (this.showPwd !== 2) {
-          this.hide = true
-          this.show = false
-        }
-      }
     },
     watch: {
       verification: {

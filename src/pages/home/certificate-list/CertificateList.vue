@@ -6,7 +6,6 @@
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData">
-      <!-- @click="issue(item.id)" -->
       <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
         <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">

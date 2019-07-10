@@ -9,29 +9,29 @@
     </div>
     <div class="rest-pass-word-from">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-        <el-form-item label="新登录密码" prop="pass" v-if="visible">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off">
+        <el-form-item label="新登录密码" prop="new_pwd" v-if="visible">
+          <el-input type="password" v-model="ruleForm.new_pwd" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass('show')">
               <img src="../../../assets/images/eye-close.png" />
             </i>
           </el-input>
         </el-form-item>
-        <el-form-item label="新登录密码" prop="pass" v-else>
-          <el-input type="text" v-model="ruleForm.pass">
+        <el-form-item label="新登录密码" prop="new_pwd" v-else>
+          <el-input type="text" v-model="ruleForm.new_pwd">
             <i slot="suffix" title="显示密码" @click="changePass('hide')">
               <img src="../../../assets/images/eye-open.png" />
             </i>
           </el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass" v-if="visible1">
-          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off">
+        <el-form-item label="确认密码" prop="new_pwd2" v-if="visible1">
+          <el-input type="password" v-model="ruleForm.new_pwd2" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass1('show')">
               <img src="../../../assets/images/eye-close.png" />
             </i>
           </el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass" v-else>
-          <el-input type="text" v-model="ruleForm.checkPass" autocomplete="off">
+        <el-form-item label="确认密码" prop="new_pwd2" v-else>
+          <el-input type="text" v-model="ruleForm.new_pwd2" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass1('hide')">
               <img src="../../../assets/images/eye-open.png" />
             </i>
@@ -51,93 +51,102 @@
 </template>
 
 <script>
-import {toast} from '@/assets/js/pub.js'
-// 接口请求
-import api from "@/api/user/User.js"
-export default {
-  data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
-        }
-        callback();
-      }
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'));
-      } else {
-        callback();
-      }
-    };
-    return {
-      visible: true,
-      visible1: true,
-      disabled: true,
-      ruleForm: {
-        pass: '',
-        checkPass: ''
-      },
-      rules: {
-        pass: [
-          { validator: validatePass, trigger: 'blur' },
-          { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
-        ],
-        checkPass: [
-          { validator: validatePass2, trigger: 'blur' }
-        ]
-      }
-    }
-  },
-  methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!');
+  import { toast } from '@/assets/js/pub.js'
+  // 接口请求
+  import api from "@/api/user/User.js"
+  export default {
+    data() {
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'))
         } else {
-          console.log('error submit!!')
-          return false;
+          if (this.ruleForm.new_pwd2 !== '') {
+            this.$refs.ruleForm.validateField('new_pwd2')
+          }
+          callback();
         }
-      });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
-    //显示与隐藏密码
-    changePass(value) {
-      this.visible = !(value === 'show')
-    },
-    changePass1(value) {
-      this.visible1 = !(value === 'show')
-    },
-    //消息弹框
-    successToast() {
-      api.forgetPassword().then(res => {
-        if (res.code == 0) {
-          toast(res)
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.ruleForm.new_pwd) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
         }
-      }).catch(err => {
-        toast(err)
-      })
-    }
-  },
-  watch: {
-    ruleForm: {
-      immediate: true,
-      deep: true,
-      handler(val) {
-        // debugger
-        if (val.pass != '' && val.checkPass != '')
-          this.disabled = false
+      };
+      return {
+        visible: true,
+        visible1: true,
+        disabled: true,
+        ruleForm: {
+          username: '',
+          new_pwd: '',
+          new_pwd2: ''
+        },
+        rules: {
+          new_pwd: [
+            { validator: validatePass, trigger: 'blur' },
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
+          ],
+          new_pwd2: [
+            { validator: validatePass2, trigger: 'blur' }
+          ]
+        }
+      }
+    },
+    created() {
+
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!')
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
+      },
+      //显示与隐藏密码
+      changePass(value) {
+        this.visible = !(value === 'show')
+      },
+      changePass1(value) {
+        this.visible1 = !(value === 'show')
+      },
+      //消息弹框
+      successToast() {
+        let username = window.sessionStorage.getItem('forgetUsername')
+        this.ruleForm.username = JSON.parse(username)
+        api.forgetPassword(this.ruleForm).then(res => {
+          if (res.code == 0) {
+            this.$router.push({
+              name: 'Login'
+            })
+            toast(res)
+          }
+        }).catch(err => {
+          toast(err)
+        })
+      }
+    },
+    watch: {
+      ruleForm: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          // debugger
+          if (val.new_pwd != '' && val.new_pwd2 != '')
+            this.disabled = false
+        }
       }
     }
   }
-}
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global'

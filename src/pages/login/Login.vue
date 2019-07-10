@@ -181,11 +181,7 @@
               this.$Indicator.close()
             })
           } else {
-            Toast({
-              message: '账号不存在',
-              position: 'top',
-              className: 'zZindex'
-            })
+            toast(res)
             this.$router.push({
               name: 'Login'
             })
