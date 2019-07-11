@@ -8,14 +8,14 @@
 			</mt-header>
 		</div>
 		<div class="safety-center-list">
-			<router-link to="/safetyVerification?rest">
+			<router-link :to="{name:'SafetyVerification',params: {id: 'loginPwd'}}">
 				<mt-cell :title="$t('m.loginpwd')" is-link>
 					<!-- <span>{{$t('m.modify')}}</span> -->
 					<img slot="icon" src="../../../assets/images/u4107.png">
 				</mt-cell>
 			</router-link>
 			<mt-cell :title="$t('m.paymentpwd')">
-				<router-link :to="{path:'/safetyVerification',query: {id: 1}}">
+				<router-link :to="{name:'SafetyVerification',params: {id: 'pwd'}}">
 					<mt-switch :value="infoData.pay_pwd_active"></mt-switch>
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
@@ -37,7 +37,6 @@
 		</div>
 	</div>
 </template>
-
 <script>
 	import api from "@/api/user/User.js"
 	import { toast } from '@/assets/js/pub.js'

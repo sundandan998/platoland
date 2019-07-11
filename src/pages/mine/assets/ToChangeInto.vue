@@ -14,7 +14,8 @@
         </ul>
         <div class="to-change-into-exhibition-adress">
           <span class="overflow-text fl">{{this.detail.address}}</span>
-          <img src="../../../assets/images/u4780.png" alt="" class="fr tag-read" @click="copy" :data-clipboard-text="this.detail.address"
+          <img src="../../../assets/images/u4780.png" alt="" class="fr tag-read" 
+          @click="copy" :data-clipboard-text="this.detail.address"
           />
         </div>
       </div>

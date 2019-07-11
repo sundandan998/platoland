@@ -22,14 +22,14 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="600,000起购">
+					<mt-field :placeholder="this.detail.release.purchase_number+'起购'" type="number" v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
 					</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="requsetPay.amount" placeholder="100,000起购">
+					<mt-field :placeholder="this.detail.release.purchase_number+'起购'" type="number" v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+	import Clipboard from 'clipboard'
 	import $ from 'jquery'
 	import { toast } from '@/assets/js/pub.js'
 	import { mapGetters } from 'vuex'
@@ -111,6 +112,7 @@
 			this.balance()
 		},
 		methods: {
+			// 点击复制
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6)
 			},
@@ -134,10 +136,10 @@
 			},
 			// 点击确定按钮
 			passwordShow() {
-				this.popupVisible = true
 				this.requsetPay.transaction_id = this.detail.id
 				api.reqPay(this.requsetPay).then(res => {
 					if (res.code == 0) {
+						this.popupVisible = true
 						this.confirm.order_type = res.order_type
 						this.confirm.payment_id = res.transaction_id
 					}
@@ -165,6 +167,7 @@
 		watch: {
 			value() {
 				if (this.value.length == 6) {
+					// debugger
 					this.popupVisible = false
 					this.confirm.pay_pwd = this.value
 					// 清空密码输入框
@@ -191,7 +194,7 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.amount != '') {
+					if (val.amount != '' && val.amount !=0 ) {
 						this.disabled = false
 					} else {
 						this.disabled = true

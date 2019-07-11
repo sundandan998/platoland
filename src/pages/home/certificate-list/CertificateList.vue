@@ -55,8 +55,8 @@
     methods: {
       // 列表信息
       list() {
-        // debugger
-        api.tokenList(this.$route.params).then(res => {
+        // this.$route.params
+        api.tokenList({category:'all'}).then(res => {
           this.assetsData = res.data
           this.$store.commit('detail', res.data.is_collection)
         }).catch(err => {

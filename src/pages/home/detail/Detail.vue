@@ -18,10 +18,12 @@
         <!-- 通证昵称 -->
         <mt-cell :title="$t('m.nickname')" :value="detail.nickname"></mt-cell>
         <!-- 合约地址 -->
-        <mt-cell :title="$t('m.address')" :value="detail.contract_address"></mt-cell>
+        <span @click="copy" class=" tag-read" :data-clipboard-text="this.detail.contract_address">
+          <mt-cell :title="$t('m.address')" :value="this.detail.contract_address"></mt-cell>
+        </span>
         <!-- 通证主体 -->
-        <mt-cell :title="$t('m.body')" :value="this.subject.name" 
-        :to="{name:'Subject', params:{id:this.subject.id}}" is-link></mt-cell>
+        <mt-cell :title="$t('m.body')" :value="this.subject.name" :to="{name:'Subject', params:{id:this.subject.id}}"
+          is-link></mt-cell>
         <!-- 发行方 -->
         <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"></mt-cell>
       </div>
@@ -118,6 +120,10 @@
       copy() {
         var clipboard = new Clipboard('.tag-read')
         clipboard.on('success', e => {
+          this.$toast({
+            message: '复制成功',
+            duration: 1800
+          })
           // 释放内存
           clipboard.destroy()
         })
@@ -127,7 +133,7 @@
           // 释放内存
           clipboard.destroy()
         })
-      }
+      },
     },
     computed: {
       ...mapGetters([

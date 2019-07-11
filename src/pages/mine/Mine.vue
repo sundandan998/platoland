@@ -56,7 +56,7 @@
 		},
 		methods: {
 			// 用户信息
-			info() {
+				info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
 				}).catch(err=>{

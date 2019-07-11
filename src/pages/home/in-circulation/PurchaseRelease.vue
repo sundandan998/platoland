@@ -43,8 +43,10 @@
 		</div>
 		<div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
-			<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input"></mt-field>
-			<mt-field placeholder="卖方最高出售数量" v-model="releaseData.high_number" type="number" class="purchase-pass-quota-input"></mt-field>
+			<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input">
+			</mt-field>
+			<mt-field placeholder="卖方最高出售数量" v-model="releaseData.high_number" type="number"
+				class="purchase-pass-quota-input"></mt-field>
 		</div>
 		<div class="purchase-pass-btn">
 			<mt-button size="large" :disabled="disabled" type="primary" @click="release">{{$t('m.release')}}</mt-button>
@@ -53,14 +55,15 @@
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
 				<!-- 数字键盘表头 -->
-				<span v-if="payTitle" class="paymentamount">{{releaseData.amount * releaseData.price }}{{this.detail.release.denominated_assets}}
+				<span v-if="payTitle"
+					class="paymentamount">{{releaseData.amount * releaseData.price }}{{this.detail.release.denominated_assets}}
 				</span>
 				<!-- 数字键盘表头 -->
 				<span v-else class="paymentamount">{{releaseData.amount}} {{this.detail.code}}</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
 				<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
-				 @blur="showKeyboard = false" />
+					@blur="showKeyboard = false" />
 			</van-popup>
 		</div>
 	</div>
@@ -169,7 +172,7 @@
 			value() {
 				if (this.value.length == 6) {
 					this.confirm.pay_pwd = this.value
-						// 清空密码输入框
+					// 清空密码输入框
 					this.value = ''
 					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {

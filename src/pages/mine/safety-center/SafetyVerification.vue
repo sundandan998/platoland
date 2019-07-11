@@ -64,21 +64,13 @@
 		},
 		created() {
 			this.info()
-			// 获取用户名信息
-			// console.log(this.$route.params.active)
-			// var nextData = window.sessionStorage.getItem('userInfo')
-			// nextData = JSON.parse(nextData)
-			// this.nextParam.mobile = nextData.data.mobile
-			// this.nextParam.email = nextData.data.email
-			// this.sms.mobile = nextData.data.mobile
-			// this.sms.email = nextData.data.email
 		},
 		methods: {
 			// 用户信息
 			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
-					this.nextParam.mobile =  this.infoData.mobile
+					this.nextParam.mobile = this.infoData.mobile
 					this.nextParam.email = this.infoData.email
 					this.sms.mobile = this.infoData.mobile
 					this.sms.email = this.infoData.email
@@ -96,45 +88,59 @@
 				}).catch(err => {
 					// toast(err)
 				})
+				// }
 			},
-			// 解绑微信或信息
+			// 点击下一步
 			next() {
-				// 判断是解绑还是绑定/如果this.$route.params.active == true,
-				// switch是开,即解绑
-				console.log(this.nextParam.mobile)
-				if (this.$route.params.active == true) {
-					this.nextParam.action = this.$route.params.action
-					api.safety(this.nextParam).then(res => {
-						if (res.code == 0) {
-							this.$router.push({
-								name: 'Safety'
-							})
-							toast(res)
-						}
-					}).catch(err => {
-						if (err.code != 0) {
-							toast(err)
-						}
+				// 判断跳到哪里 如果是从登录密码跳转过来，跳转到reset里，
+				// 如果是从支付密码跳过来，需要跳转到设置支付密码页
+				// 如果是从短信或邮箱验证跳转过来，需要进行验证
+				if (this.$route.params.id == 'loginPwd') {
+					this.$router.push({
+						name: 'Rest'
 					})
-					//switch是关,即绑定
+					// 如果是从支付密码跳过来，需要跳转到设置支付密码页
+				} else if (this.$route.params.id == 'pwd') {
+					this.$router.push({
+						name: 'PayPassWorde'
+					})
 				} else {
-					api.safety(this.nextParam).then(res => {
-						if (res.code == 0) {
-							// 发送成功后,开始绑定,判断跳转到开启信息页面还是跳转到开启邮箱页面
-							if (this.$route.params.action == 'email') {
+					// 判断是解绑还是绑定/如果this.$route.params.active == true,
+					// 	// switch是开,即解绑
+					if (this.$route.params.active == true) {
+						this.nextParam.action = this.$route.params.action
+						api.safety(this.nextParam).then(res => {
+							if (res.code == 0) {
 								this.$router.push({
-									name: 'Email'
+									name: 'Safety'
 								})
-							} else {
-								this.$router.push({
-									name: 'Open'
-								})
+								toast(res)
 							}
-							toast(res)
-						}
-					}).catch(err => {
-						toast(err)
-					})
+						}).catch(err => {
+							if (err.code != 0) {
+								toast(err)
+							}
+						})
+						//switch是关,即绑定
+					} else {
+						api.safety(this.nextParam).then(res => {
+							if (res.code == 0) {
+								// 发送成功后,开始绑定,判断跳转到开启信息页面还是跳转到开启邮箱页面
+								if (this.$route.params.action == 'email') {
+									this.$router.push({
+										name: 'Email'
+									})
+								} else {
+									this.$router.push({
+										name: 'Open'
+									})
+								}
+								toast(res)
+							}
+						}).catch(err => {
+							toast(err)
+						})
+					}
 				}
 			},
 			// 发送信息

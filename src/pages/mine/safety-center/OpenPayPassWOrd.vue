@@ -12,7 +12,8 @@
 				<span>设置6位数字支付密码</span>
 			</div>
 			<!-- 密码输入框 -->
-			<van-password-input :value="pass.pwd" :mask="true" info="支付密码不能是重复、连续的数字" @focus="passIndex" />
+			<!-- info="支付密码不能是重复、连续的数字" -->
+			<van-password-input :value="pass.pwd" :mask="true"  @focus="passIndex" />
 			<div class="open-pay-password-keyboard-title">
 				<span>再次输入支付密码</span>
 			</div>
@@ -67,13 +68,17 @@
 				} else {
 					this.pass.pwd2 = this.pass.pwd2.slice(0, this.pass.pwd2.length - 1)
 				}
-
 			},
 			// 设置支付密码
 			payPwd() {
 				api.payPwd(this.pass).then(res => {
-					toast(res)
-					console.log(this.pass)
+					if(res.code==0){
+						toast(res)
+						this.$router.push({
+							name:'Safety'
+						})
+					}
+					
 				}).catch(err => {
 					toast(err)
 				})

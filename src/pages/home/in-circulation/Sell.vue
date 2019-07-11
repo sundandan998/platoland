@@ -21,11 +21,11 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="buyIndex">
 				<van-tab :title="$t('m.numsale')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{buyData.amount}}{{buyDataToken.code}}</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
-					<mt-field :placeholder="$t('m.purchase')" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{buyData.price}}</p>
 					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}{{buyData.denominated_assets}}</p>
 				</van-tab>
@@ -91,15 +91,13 @@
 				this.value = this.value.slice(0, this.value.length - 1)
 			},
 			passwordShow() {
-				this.popupVisible = true
 				// 请求支付
 				this.reqPay.transaction_id = this.$route.params.id
 				api.reqPay(this.reqPay).then(res => {
 					if (res.code == 0) {
+						this.popupVisible = true
 						this.confirmPay.order_type = res.order_type
 						this.confirmPay.payment_id = res.transaction_id
-						console.log(this.confirmPay.order_type)
-						// toast(res)
 					}
 				}).catch(err => {
 					if (err.code != 0) {
