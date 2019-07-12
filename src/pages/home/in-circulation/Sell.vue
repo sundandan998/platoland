@@ -32,7 +32,7 @@
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
-			<mt-button size="large" type="primary" @click="passwordShow" :disabled="disabled">{{$t('m.sure')}}</mt-button>
+			<mt-button size="large" type="primary" @click="sell" :disabled="disabled">{{$t('m.sure')}}</mt-button>
 		</div>
 		<div class="payment">
 			<div class="payment-header">
@@ -50,8 +50,8 @@
 		</div>
 	</div>
 </template>
-
 <script>
+	import { Toast } from 'mint-ui'
 	import api from '@/api/market/Market.js'
 	import { toast } from '@/assets/js/pub.js'
 	export default {
@@ -90,20 +90,34 @@
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1)
 			},
-			passwordShow() {
-				// 请求支付
-				this.reqPay.transaction_id = this.$route.params.id
-				api.reqPay(this.reqPay).then(res => {
-					if (res.code == 0) {
-						this.popupVisible = true
-						this.confirmPay.order_type = res.order_type
-						this.confirmPay.payment_id = res.transaction_id
-					}
-				}).catch(err => {
-					if (err.code != 0) {
-						toast(err)
-					}
-				})
+			// 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
+			// 如果是false表示已为设置支付密码，不弹遮罩层，直接弹提示
+			// 点击确定按钮发请求
+			sell() {
+				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+				if (pay_pwd == 'true') {
+					this.popupVisible = true
+					// 请求支付
+					this.reqPay.transaction_id = this.$route.params.id
+					api.reqPay(this.reqPay).then(res => {
+						// 清空密码输入框
+						this.value = ''
+						if (res.code == 0) {
+							this.confirmPay.order_type = res.order_type
+							this.confirmPay.payment_id = res.transaction_id
+						}
+					}).catch(err => {
+						if (err.code != 0) {
+							toast(err)
+						}
+					})
+				} else {
+					this.popupVisible = false
+					Toast({
+						message: '请先设置支付密码',
+						position: 'top',
+					})
+				}
 			},
 			buyIndex(index, title) {
 				if (index == 0) {
@@ -128,8 +142,6 @@
 			value() {
 				if (this.value.length == 6) {
 					this.confirmPay.pay_pwd = this.value
-					// 清空密码输入框
-					this.value = ''
 					// 确认支付
 					api.confirmPay(this.confirmPay).then(res => {
 						if (res.code == 0) {
@@ -147,7 +159,7 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.amount != '') {
+					if (val.amount != '' && val.amount != 0) {
 						this.disabled = false
 					}
 				}

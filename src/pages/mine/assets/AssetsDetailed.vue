@@ -82,7 +82,6 @@
   </div>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
   import { toast } from '@/assets/js/pub.js'
   export default {
@@ -106,8 +105,7 @@
     },
     created(){
       this.assetDetail()
-      // this.indexTab(0,'123')
-      
+     
     },
     methods: {
       // 资产详情
@@ -166,11 +164,11 @@
         }
       },
     },
-    computed: {
-      ...mapGetters([
-        'detail'
-      ])
-    }
+    // computed: {
+    //   ...mapGetters([
+    //     'detail'
+    //   ])
+    // }
   }
 </script>
 

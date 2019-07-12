@@ -15,7 +15,7 @@
 		<div class="buy-pass-name-price">
 			<p>{{$t('m.unitprice')}}</p>
 			<div class="buy-pass-name-price-text fr">
-				<span>{{parseInt(this.detail.release.issue_price)}}</span>
+				<span>{{this.detail.release.issue_price}}</span>
 				<span>{{this.detail.release.denominated_assets}}</span>
 			</div>
 		</div>
@@ -74,11 +74,11 @@
 <script>
 	import Clipboard from 'clipboard'
 	import $ from 'jquery'
+	import { Toast } from 'mint-ui'
 	import { toast } from '@/assets/js/pub.js'
 	import { mapGetters } from 'vuex'
 	// 接口请求
 	import api from "@/api/market/Market.js"
-
 	export default {
 		data() {
 			return {
@@ -112,13 +112,13 @@
 			this.balance()
 		},
 		methods: {
-			// 点击复制
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6)
 			},
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1)
 			},
+			// tab栏展示
 			getActionType(index, title) {
 				if (index == 0) {
 					this.requsetPay.action_type = 0
@@ -136,18 +136,33 @@
 			},
 			// 点击确定按钮
 			passwordShow() {
-				this.requsetPay.transaction_id = this.detail.id
-				api.reqPay(this.requsetPay).then(res => {
-					if (res.code == 0) {
-						this.popupVisible = true
-						this.confirm.order_type = res.order_type
-						this.confirm.payment_id = res.transaction_id
-					}
-				}).catch(err => {
-					if (err.code != 0) {
-						toast(err)
-					}
-				})
+				// 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
+				// 如果是false表示已为设置支付密码，不弹遮罩层，直接弹提示
+				// 点击确定按钮发请求
+				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+				if (pay_pwd == 'true') {
+					this.popupVisible = true
+					this.requsetPay.transaction_id = this.detail.id
+					api.reqPay(this.requsetPay).then(res => {
+						this.value = ''
+						if (res.code == 0) {
+							this.popupVisible = true
+							this.confirm.order_type = res.order_type
+							this.confirm.payment_id = res.transaction_id
+						}
+					}).catch(err => {
+						if (err.code != 0) {
+							toast(err)
+						}
+					})
+				} else {
+					this.popupVisible = false
+					Toast({
+						message: '请先设置支付密码',
+						position: 'top',
+					})
+				}
+
 			},
 			// 获取资产余额
 			balance() {
@@ -194,7 +209,7 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.amount != '' && val.amount !=0 ) {
+					if (val.amount != '' && val.amount != 0) {
 						this.disabled = false
 					} else {
 						this.disabled = true

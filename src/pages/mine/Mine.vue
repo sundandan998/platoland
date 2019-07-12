@@ -45,7 +45,7 @@
 			return {
 				selected: 'mine',
 				message: 'mine',
-				infoData:{}
+				infoData: {}
 			}
 		},
 		components: {
@@ -56,14 +56,15 @@
 		},
 		methods: {
 			// 用户信息
-				info() {
+			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
-				}).catch(err=>{
+					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+				}).catch(err => {
 					console.log(err)
 				})
 			}
-		}
+		},
 	}
 
 </script>

@@ -45,8 +45,8 @@
     </div>
   </div>
 </template>
-
 <script>
+	import { Toast } from 'mint-ui'
   import api from '@/api/market/Market.js'
   import { toast } from '@/assets/js/pub.js'
   export default {
@@ -104,20 +104,30 @@
       },
       // 点击确定发送请求
       passwordShow() {
-        this.popupVisible = true
-        // 请求支付
-        this.reqPay.transaction_id = this.$route.params.id
-        api.reqPay(this.reqPay).then(res => {
-          if (res.code == 0) {
-            this.confirmPay.order_type = res.order_type
-            this.confirmPay.payment_id = res.transaction_id
-            // toast(res)
-          }
-        }).catch(err => {
-          if (err.code != 0) {
-            toast(err)
-          }
-        })
+        // 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
+        // 如果是false表示已为设置支付密码，不弹遮罩层，直接弹提示
+        // 点击确定按钮发请求
+        let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+        if (pay_pwd == 'true') {
+          this.popupVisible = true
+          // 请求支付
+          this.reqPay.transaction_id = this.$route.params.id
+          api.reqPay(this.reqPay).then(res => {
+            if (res.code == 0) {
+              this.confirmPay.order_type = res.order_type
+              this.confirmPay.payment_id = res.transaction_id
+            }
+          }).catch(err => {
+            if (err.code != 0) {
+              toast(err)
+            }
+          })
+        } else {
+          Toast({
+            message: '请先设置支付密码',
+            position: 'top',
+          })
+        }
       },
       // 交易详情
       buyDetail() {

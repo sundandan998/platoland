@@ -71,6 +71,7 @@
 
 <script>
 	import api from '@/api/market/Market.js'
+	import { Toast } from 'mint-ui'
 	import { toast } from '@/assets/js/pub.js'
 	import { mapGetters } from 'vuex'
 	export default {
@@ -152,28 +153,43 @@
 					}
 				})
 			},
-			// 发布接口
+
 			release() {
-				this.releaseData.token_code = this.detail.code
-				api.release(this.releaseData).then(res => {
-					if (res.code == 0) {
-						this.popupVisible = true
-						this.confirm.order_type = res.order_type
-						this.confirm.payment_id = res.transaction_id
-					}
-				}).catch(err => {
-					if (err.code != 0) {
-						toast(err)
-					}
-				})
-			}
+				// 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
+				// 如果是false表示已为设置支付密码，不弹遮罩层，直接弹提示
+				// 点击确定按钮发请求
+				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+				if (pay_pwd == 'true') {
+					this.popupVisible = true
+					// 发布接口
+					this.releaseData.token_code = this.detail.code
+					api.release(this.releaseData).then(res => {
+						// 清空密码输入框
+						this.value = ''
+						if (res.code == 0) {
+							// this.popupVisible = true
+							this.confirm.order_type = res.order_type
+							this.confirm.payment_id = res.transaction_id
+						}
+					}).catch(err => {
+						if (err.code != 0) {
+							toast(err)
+						}
+					})
+				} else {
+					this.popupVisible = false
+					Toast({
+						message: '请先设置支付密码',
+						position: 'top',
+					})
+				}
+			},
+
 		},
 		watch: {
 			value() {
 				if (this.value.length == 6) {
 					this.confirm.pay_pwd = this.value
-					// 清空密码输入框
-					this.value = ''
 					// 确认支付接口
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
@@ -193,7 +209,7 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.amount != '' && val.price != '' && val.low_number != '' && val.high_number != '') {
+					if (val.amount != '' && val.price != '' && val.low_number != '' && val.high_number != '' && val.amount != 0 && val.price != 0 && val.low_number != 0 && val.high_number != 0) {
 						this.disabled = false
 					} else {
 						this.disabled = true

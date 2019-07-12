@@ -13,7 +13,7 @@
             <mt-switch class="asset-list-switch" :value="value"></mt-switch>
           </div>
         </router-link>
-        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection)">
+        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
           <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
         </div>
       </mt-cell>
@@ -30,7 +30,6 @@
       return {
         popupVisible: true,
         data: [],
-        is_collection: true,
         value: false,
         assetsData: [],
         // 添加资产参数
@@ -56,7 +55,7 @@
       // 列表信息
       list() {
         // this.$route.params
-        api.tokenList({category:'all'}).then(res => {
+        api.tokenList({ category: 'all' }).then(res => {
           this.assetsData = res.data
           this.$store.commit('detail', res.data.is_collection)
         }).catch(err => {
@@ -64,14 +63,16 @@
         })
       },
       // 添加/删除资产
-      addAsset(code, is_collection) {
+      addAsset(code, is_collection, index) {
         // debugger
+        console.log(index)
         if (is_collection == true) {
           this.addCode.code = code
           api.delAsset(this.addCode).then(res => {
             if (res.code == 0) {
               toast(res)
-              this.is_collection = false
+              // 改变switch实时状态
+              this.assetsData[index].is_collection = false
             }
           }).catch(err => {
             if (err.code != 0) {
@@ -84,7 +85,8 @@
             api.addAsset(this.addCode).then(res => {
               if (res.code == 0) {
                 toast(res)
-                this.is_collection = true
+                // 改变switch实时状态
+                this.assetsData[index].is_collection = true
               }
             }).catch(err => {
               if (err.code != 0) {
@@ -97,8 +99,6 @@
     },
   }
 </script>
-
-
 <style lang="scss">
   @import "../../../assets/scss/global"
 </style>
