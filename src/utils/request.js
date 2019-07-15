@@ -29,7 +29,8 @@ const service = axios.create({
   ],
   // 是否跨域
   withCredentials: false,
-  // loading:true
+  // loading加载
+  loading: true
 });
 service.interceptors.request.use(
   config => {
@@ -45,15 +46,10 @@ service.interceptors.request.use(
     console.log(error);
     Promise.reject(error);
   }
-);
-
+)
 service.interceptors.response.use(
   response => {
-    // console.log(response.config.loading)
-    if (response.config.loading) {
-      store.dispatch("setLoading", false)
-    }
-    let data = JSON.parse(response.data);
+    let data = JSON.parse(response.data)
     if (data.code === 0) {
       return data;
     } else {
@@ -65,7 +61,7 @@ service.interceptors.response.use(
     // 为了保持统一的错误处理，修改了浏览器报错的格式，与接口返回的失败格式一致
     let response = errorReponse.response;
     if (response.config.loading) {
-      store.dispatch("setLoading", false);
+      store.dispatch("setLoading", false)
     }
     let errorJSON = {
       ret_code: response.status,

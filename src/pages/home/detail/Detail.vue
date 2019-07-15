@@ -42,9 +42,9 @@
         <!-- 发行单价 -->
         <mt-cell :title="$t('m.issueprice')" :value="release.issue_price"></mt-cell>
         <!-- 发行总量 -->
-        <mt-cell :title="$t('m.issuenum')" :value="parseInt(release.first_number)"></mt-cell>
+        <mt-cell :title="$t('m.issuenum')" :value="(parseInt(release.first_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
         <!-- 起购数量 -->
-        <mt-cell :title="$t('m.purchasenum')" :value="parseInt(release.purchase_number)"></mt-cell>
+        <mt-cell :title="$t('m.purchasenum')" :value="(parseInt(release.purchase_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
         <!-- 发行方式 -->
         <mt-cell :title="$t('m.mode')" :value="release.issuance_method"></mt-cell>
         <!-- 发行时间 -->
@@ -52,7 +52,7 @@
         <!-- 截止时间 -->
         <mt-cell :title="$t('m.endtime')" :value="release.end_time"></mt-cell>
         <!-- 最小发行量 -->
-        <mt-cell :title="$t('m.minnum')" :value="parseInt(release.minimum_number)"></mt-cell>
+        <mt-cell :title="$t('m.minnum')" :value="(parseInt(release.minimum_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
         <!-- 股权发行比例 -->
         <mt-cell :title="$t('m.proportion')" :value="release.equity_issuance_ratio+'%'"></mt-cell>
       </div>

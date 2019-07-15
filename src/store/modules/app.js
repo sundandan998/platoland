@@ -6,7 +6,8 @@ const app = {
     refpath: '',
     //  版本
     version: '',
-    // loading:false,
+    // loading加載
+    loading:false,
   },
   mutations: {
     detail: (state, detail) => {
@@ -18,10 +19,9 @@ const app = {
     version: (state, version) => {
       state.version = version
     },
-    // LOADING: (state, loading) => {
-    //   console.log(loading)
-    //   state.loading = loading
-    // },
+    set_loading: (state, loading) => {
+      state.loading = loading
+    },
   },
   actions: {
     detail: ({ commit }, detail) => {
@@ -33,9 +33,9 @@ const app = {
     version: ({ commit }, version) => {
       commit('version', version)
     },
-    // setLoading: ({ commit }, loading) => {
-    //   commit('loading', loading)
-    // }
+    setLoading: ({ commit }, loading) => {
+      commit('set_loading', loading)
+    }
   }
 }
 export default app

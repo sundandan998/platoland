@@ -27,7 +27,7 @@
     </div>
     <div class="assets-detailed-exhibition">
       <div class="assets-detailed-exhibition-img">
-        <p>{{parseInt(this.assetsData.balance)}}</p>
+        <p>{{(parseInt(this.assetsData.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}}</p>
         <img :src="this.assetsToken.icon" alt="" class="fl" />
         <ul>
           <li>{{this.assetsToken.code}} ({{this.assetsToken.nickname}})</li>
@@ -105,7 +105,6 @@
     },
     created(){
       this.assetDetail()
-     
     },
     methods: {
       // 资产详情
