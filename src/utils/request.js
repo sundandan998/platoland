@@ -4,15 +4,15 @@ import qs from "qs"
 import store from "@/store/index"
 import baseURL from "./baseURL"
 import router from "@/router/index.js"
-
+import NProgress from "nprogress";
+import 'nprogress/nprogress.css'
 const service = axios.create({
   baseURL: baseURL,
   timeout: 30000,
   //`transformRequest`选项允许我们在请求发送到服务器之前对请求的数据做出一些改动
   //该选项只适用于以下请求方式：`put/post/patch`
   //数组里面的最后一个函数必须返回一个字符串、-一个`ArrayBuffer`或者`Stream`
-  transformRequest: [
-    function (data) {
+  transformRequest: [    function (data) {
       return qs.stringify(data);
     }
   ],
@@ -22,8 +22,7 @@ const service = axios.create({
   },
   //`transformResponse`选项允许我们在数据传送到`then/catch`方法之前对数据进行改动
   // 在此处可以判断data里的status
-  transformResponse: [
-    function (data) {
+  transformResponse: [    function (data) {
       return data;
     }
   ],
@@ -40,6 +39,10 @@ service.interceptors.request.use(
     if (store.getters.token) {
       config.headers["Authorization"] = "JWT " + store.getters.token
     }
+    if (config.loading) {
+      store.dispatch("setLoading", true);
+      NProgress.start()
+  }
     return config;
   },
   error => {
@@ -50,6 +53,10 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     let data = JSON.parse(response.data)
+    if (response.config.loading) {
+      store.dispatch("setLoading", false);
+      NProgress.done()
+    }
     if (data.code === 0) {
       return data;
     } else {
@@ -62,6 +69,7 @@ service.interceptors.response.use(
     let response = errorReponse.response;
     if (response.config.loading) {
       store.dispatch("setLoading", false)
+      NProgress.done()
     }
     let errorJSON = {
       ret_code: response.status,
@@ -70,7 +78,6 @@ service.interceptors.response.use(
       result: errorReponse.response
     }
     if (errorJSON.ret_code === 403 || errorJSON.ret_code === 401) {
-      store.dispatch("setLoginDialog", true);
       router.push({
         path: '/login'
       })

@@ -51,10 +51,14 @@
           <div class="home-assets-subscription-content">
             <div class="assets-subscription" v-for="items in tokens_list">
               <div @click="handleJump(items.code)">
-                <img :src="items.icon">
-                <div class="assets-subscription-text fr">
-                  <span class="home-name">{{items.code}} ({{items.nickname}})</span>
-                  <p class="overflow-text">{{items.subject}}</p>
+                <div class="home-card-title">
+                  <div class="fl">
+                    <img :src="items.icon">
+                  </div>
+                  <div class=" home-card-title-subject fr">
+                    <span>{{items.code}} ({{items.nickname}})</span>
+                    <span class="home-subject">{{items.subject}}</span>
+                  </div>
                 </div>
                 <div class="assets-subscription-title">
                   <p :style="{color:items.release.status == 0?'red':items.release.status == 1?'green':'blue'}">
@@ -65,11 +69,11 @@
                     <li class="childFlex"><span>{{$t('m.issuetime')}}</span><span>{{items.release.publish_time}}</span>
                     </li>
                     <li class="childFlex">
-                      <span>{{$t('m.issueamount')}}</span><span>{{parseInt(items.release.sold_number)}}</span></li>
+                      <span>{{$t('m.issueamount')}}</span><span>{{(parseInt(items.release.sold_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}}</span>
+                    </li>
                     <li class="childFlex"><span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price}}</span>
                     </li>
                   </ul>
-
                 </div>
               </div>
               <!-- </router-link> -->
@@ -192,9 +196,28 @@
 </script>
 <style lang="scss">
   @import '../../assets/scss/global';
+
+  /* 卡片部分 */
   .childFlex {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+  }
+
+  .home-card-title {
+    height: 40px;
+  }
+
+  .home-card-title-subject {
+    text-align: right;
+    margin-right: 5px;
+    width: 66%;
+  }
+  .home-subject {
+    display: block;
+    width: 80%;
+    word-break: normal;
+    white-space: pre-wrap;
+    overflow: hidden
   }
 </style>
