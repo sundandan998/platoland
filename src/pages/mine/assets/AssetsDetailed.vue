@@ -99,7 +99,6 @@
         // 删除资产参数
         delasset: {
           code: '',
-          transaction_type: ''
         },
       }
     },
@@ -131,7 +130,7 @@
         }).then(action => {
           if (action === 'confirm') {
             // 删除资产接口
-            this.delasset.code = this.detail.id
+            this.delasset.code = this.$route.params.code
             api.delAsset(this.delasset).then(res => {
               if (res.code == 0) {
                 toast(res)
