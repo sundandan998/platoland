@@ -30,12 +30,12 @@
 			  			<span>{{subject.nickname}}</span>
 			  		</mt-cell>
             <!-- 注册住所 -->
-			  		<mt-cell :title="$t('m.residence')" >
-			  			<span>{{subjectData.registered_address}}</span>
+			  		<mt-cell :title="$t('m.residence')" :label="subjectData.registered_address" >
+			  			<!-- <span>{{subjectData.registered_address}}</span> -->
 			  		</mt-cell>
             <!-- 经营地址 -->
-			  		<mt-cell :title="$t('m.businessaddress')">
-			  			<span>{{subjectData.business_address}}</span>
+			  		<mt-cell :title="$t('m.businessaddress')" :label="subjectData.business_address">
+			  			<!-- <span>{{}}</span> -->
 			  		</mt-cell>
             <!-- 法 人 -->
 			  		<mt-cell :title="$t('m.people')" >
@@ -53,9 +53,9 @@
 			  		<mt-cell :title="$t('m.term')" >
 			  			<span>{{subjectData.start_time}} 至 {{subjectData.end_time}}</span>
 			  		</mt-cell>
-            <!-- 经营范围 -->
+						<!-- 经营范围 -->
             <mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-              <!-- <span class="fr rang">{{}}</span> -->
+              <!-- <span class="rang">{{subjectData.business_scope}}</span> -->
             </mt-cell>
 			    </div>
 			  </mt-tab-container-item>

@@ -21,11 +21,11 @@
     <div class="Purchase-pass-tabbar">
       <van-tabs @click="buyIndex">
         <van-tab :title="$t('m.number')">
-          <mt-field :placeholder="buyName.low_number" type="number" v-model="reqPay.amount"></mt-field>
+          <mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
-          <mt-field :placeholder="buyName.high_number" type="number" V-model="reqPay.amount"></mt-field>
+          <mt-field :placeholder="buyData.high_number+'起购'" type="number" V-model="reqPay.amount"></mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
@@ -46,7 +46,8 @@
   </div>
 </template>
 <script>
-	import { Toast } from 'mint-ui'
+  import { mapGetters } from 'vuex'
+  import { Toast } from 'mint-ui'
   import api from '@/api/market/Market.js'
   import { toast } from '@/assets/js/pub.js'
   export default {
@@ -82,7 +83,9 @@
       }
     },
     created() {
+      this.balance()
       this.buyDetail()
+      this.buyIndex(0, '111')
       this.buyDetailCode = this.$route.params
     },
     methods: {
@@ -97,9 +100,11 @@
         if (index == 0) {
           this.buyTitle = true
           this.reqPay.action_type = 0
+          this.balance()
         } else {
           this.reqPay.action_type = 1
           this.buyTitle = false
+          this.balance()
         }
       },
       // 点击确定发送请求
@@ -109,17 +114,18 @@
         // 点击确定按钮发请求
         let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
         if (pay_pwd == 'true') {
-          this.popupVisible = true
           // 请求支付
           this.reqPay.transaction_id = this.$route.params.id
           api.reqPay(this.reqPay).then(res => {
             if (res.code == 0) {
+              this.popupVisible = true
               this.confirmPay.order_type = res.order_type
               this.confirmPay.payment_id = res.transaction_id
             }
           }).catch(err => {
             if (err.code != 0) {
               toast(err)
+              this.popupVisible = false
             }
           })
         } else {
@@ -147,6 +153,11 @@
           toast(err)
         })
       },
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     },
     watch: {
       value() {

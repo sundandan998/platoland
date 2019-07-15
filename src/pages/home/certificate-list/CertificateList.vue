@@ -64,8 +64,6 @@
       },
       // 添加/删除资产
       addAsset(code, is_collection, index) {
-        // debugger
-        console.log(index)
         if (is_collection == true) {
           this.addCode.code = code
           api.delAsset(this.addCode).then(res => {

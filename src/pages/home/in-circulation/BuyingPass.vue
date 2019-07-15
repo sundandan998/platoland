@@ -141,9 +141,9 @@
 				// 点击确定按钮发请求
 				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
 				if (pay_pwd == 'true') {
-					this.popupVisible = true
 					this.requsetPay.transaction_id = this.detail.id
 					api.reqPay(this.requsetPay).then(res => {
+						console.log(res.code)
 						this.value = ''
 						if (res.code == 0) {
 							this.popupVisible = true
@@ -153,6 +153,7 @@
 					}).catch(err => {
 						if (err.code != 0) {
 							toast(err)
+							this.popupVisible = false
 						}
 					})
 				} else {
@@ -162,7 +163,6 @@
 						position: 'top',
 					})
 				}
-
 			},
 			// 获取资产余额
 			balance() {

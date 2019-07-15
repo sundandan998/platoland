@@ -26,14 +26,14 @@
 		<div class="transaction-details-information">
 			<ul class="fl">
 				<li>{{$t('m.ordernumber')}}</li>
-				<li>{{$t('m.unitprice')}}</li>
+				<!-- <li>{{$t('m.unitprice')}}</li> -->
 				<li>{{$t('m.transactionnum')}}</li>
 				<li>{{$t('m.transactiontime')}}</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
 				<li>{{details.order_id}}</li>
 				<!--<li> <img src="../../../assets/images/ld.png" alt="" />10000</li>-->
-				<li>{{details.price}} {{details.exchange_token}}</li>
+				<!-- <li>{{details.price}} {{details.exchange_token}}</li> -->
 				<li>{{details.amount}} {{detailsCode.code}}</li>
 				<li>{{details.create_time}}</li>
 			</ul>
@@ -51,7 +51,7 @@
 				detailsCode:{},
 				// 详情接口
 				detailData: {
-					order_id: '',
+					id: '',
 					order_type: ''
 				}
 			}
@@ -64,7 +64,7 @@
 			listDetail() {
 				// debugger
 				this.detailData.order_type = this.$route.params.order_type
-				this.detailData.order_id = this.$route.params.order_id
+				this.detailData.id = this.$route.params.id
 				api.listDetail(this.detailData).then(res => {
 					if (res.code == 0) {
 						this.details = res.data

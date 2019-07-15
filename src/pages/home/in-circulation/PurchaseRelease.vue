@@ -20,26 +20,18 @@
 				<span>{{this.detail.release.denominated_assets}}</span>
 			</div>
 		</div>
-		<div class="to-deal-navbar">
+		<div class="purchase-pass-input">
 			<van-tabs @click="index">
-				<van-tab :title="$t('m.purchasebuy')">
+				<van-tab title="购买">
+					<mt-field type="number" v-model="releaseData.amount"></mt-field>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
 				</van-tab>
-				<van-tab :title="$t('m.sell')">
+				<van-tab title="出售">
+						<mt-field type="number" v-model="releaseData.price"></mt-field>
+						<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+						<p>手续费 : {{releaseData.price*0.002}} PLD</p>
 				</van-tab>
 			</van-tabs>
-		</div>
-		<div class="purchase-pass-input">
-			<p>{{$t('m.transactionnum')}}</p>
-			<mt-field type="number" v-model="releaseData.amount"></mt-field>
-			<p>{{$t('m.unitprice')}}</p>
-			<mt-field type="number" v-model="releaseData.price"></mt-field>
-			<div v-if="fee">
-				<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</span>
-				<span>手续费 : {{releaseData.amount*0.002}} PLD</span>
-			</div>
-			<div v-else>
-				<span>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</span>
-			</div>
 		</div>
 		<div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
@@ -153,27 +145,26 @@
 					}
 				})
 			},
-
 			release() {
 				// 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
 				// 如果是false表示已为设置支付密码，不弹遮罩层，直接弹提示
 				// 点击确定按钮发请求
 				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
 				if (pay_pwd == 'true') {
-					this.popupVisible = true
 					// 发布接口
 					this.releaseData.token_code = this.detail.code
 					api.release(this.releaseData).then(res => {
 						// 清空密码输入框
 						this.value = ''
 						if (res.code == 0) {
-							// this.popupVisible = true
+							this.popupVisible = true
 							this.confirm.order_type = res.order_type
 							this.confirm.payment_id = res.transaction_id
 						}
 					}).catch(err => {
 						if (err.code != 0) {
 							toast(err)
+							this.popupVisible = false
 						}
 					})
 				} else {

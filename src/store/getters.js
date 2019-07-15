@@ -8,6 +8,7 @@ const getters = {
     detail: state => state.app.detail,
     refpath: state => state.app.refpath,
     version: state => state.app.version,
+    loading: state => state.app.loading,
     token: state => {
         let stroageToken = window.sessionStorage.getItem("token");
         if ((!state.user.token || state.user.token === "") && stroageToken) {

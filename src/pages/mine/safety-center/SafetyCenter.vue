@@ -54,28 +54,11 @@
 			info() {
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
+					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 				}).catch(err => {
 					// toast(err)
 				})
 			},
-			// 信息跳转
-			// sms() {
-			// 	if (this.infoData.mobile_active == true) {
-			// 		this.$router.push({
-			// 			name: 'SafetyVerification',
-			// 			params: 'mobile'
-			// 		})
-			// 	}
-			// },
-			// // 邮箱跳转
-			// email() {
-			// 	if (this.infoData.email_active == true) {
-			// 		this.$router.push({
-			// 			name: 'SafetyVerification',
-			// 			params: 'email'
-			// 		})
-			// 	}
-			// },
 		}
 	}
 </script>

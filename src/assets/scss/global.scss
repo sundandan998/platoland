@@ -580,11 +580,20 @@ table.el-table__body {
 .information-content span {
     font-size: 0.72rem;
 }
+.subject-details-content {
+    margin-top: 20px;
+    span.mint-cell-label {
+        width: 55%;
+        float: right;
+    }
+}
+
 .information-title{
     margin: 20px 24px 20px 24px;
     font-size: 0.72rem;
     color: #666;
 }
+
 //首页/流通中/去交易
 .to-deal-header {
     margin-bottom: 40px;
@@ -808,8 +817,6 @@ table.el-table__body {
         margin-left: 25px;
         padding-bottom: 10px;
         display:block;
-        color:#456df1;
-        font-size: 0.67rem;
     }
 }
 .purchase-pass-quota {

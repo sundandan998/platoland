@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="assets-detailed-list" v-for="item in listData">
-			<router-link :to="{name:'TransactionDetails',params:{order_id:item.order_id,order_type:item.order_type}}">
+			<router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
 				<mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
 					<span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
 				</mt-cell>

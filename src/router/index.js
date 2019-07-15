@@ -107,7 +107,7 @@ export default new Router({
     },
     //首页/我的/资产/明细/转出
     {
-      path: '/out/:id',
+      path: '/out',
       name: 'Out',
       component: () => import("@/pages/mine/assets/TurnOut")
     },

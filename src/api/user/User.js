@@ -156,8 +156,8 @@ export default {
   listDetail(params = {}) {
     return request({
       url: "/user/transaction/detail/",
-      method: "post",
-      data: params
+      method: "get",
+      params: params
     })
   },
   // 设置支付密码

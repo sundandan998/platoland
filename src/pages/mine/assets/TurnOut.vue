@@ -19,7 +19,7 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" :placeholder="this.detail.address">
+      <mt-field type="text" readonly="readonly" :value="this.$route.params.address">
         <router-link to="/book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
@@ -37,14 +37,14 @@
       </router-link>
     </div>
     <div class="turn-out-exhibition-btn">
-      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">{{$t('m.outbutton')}}</mt-button>
+      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
         <span class="paymentamount">{{turnOut.amount}} LD</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
-        <van-number-keyboard v-model="turnOut.pay_pwd" :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
+        <van-number-keyboard  :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
         />
       </van-popup>
     </div>
@@ -78,6 +78,9 @@
         },
       }
     },
+    created () {
+      // console.log(this.detail.token)
+    },
     computed: {
       ...mapGetters([
         'detail'
@@ -105,11 +108,9 @@
     watch: {
       value() {
         if (this.value.length == 6) {
-          this.value = ''
-          var passWord = JSON.parse(window.sessionStorage.getItem('payPwd'))
           this.turnOut.token = this.detail.token.code
           this.turnOut.address = this.detail.address
-					this.turnOut.pay_pwd = passWord.pwd
+					this.turnOut.pay_pwd = this.value
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)

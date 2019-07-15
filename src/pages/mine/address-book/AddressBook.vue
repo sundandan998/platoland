@@ -10,8 +10,9 @@
 			   </mt-button>
 			</mt-header>
 		</div>
-    <router-link to="out">
-  		<div class="adress-book-list" v-for="(item,index) in book">
+  		<div class="adress-book-list" v-for="(item,index) in book" >
+				<router-link :to="{name:'Out',params:{address:item.address}}">
+				<!-- <router-link :to="{name:'Out', params:{address:item.address}"> -->
   			<mt-cell>
   				<div class="adress-book-content fl">
   					<p>{{item.name}}</p>
@@ -21,9 +22,10 @@
            <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}">
   					<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
           </router-link>
-  			</mt-cell>
+				</mt-cell>
+				</router-link>
   		</div>
-    </router-link>
+    
 	</div>
 </template>
 <script>
@@ -44,12 +46,12 @@ export default{
     address(){
       api.addressList().then(res=>{
       this.book = res.data
-      this.$store.commit('detail', res.data)
+      // this.$store.commit('detail', res.data)
       // console.log(this.book)
       }).catch(err=>{
         console.log(err)
       })
-    },
+		},
 	}
 }
 </script>

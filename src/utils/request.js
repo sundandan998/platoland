@@ -28,7 +28,8 @@ const service = axios.create({
     }
   ],
   // 是否跨域
-  withCredentials: false
+  withCredentials: false,
+  // loading:true
 });
 service.interceptors.request.use(
   config => {
@@ -48,6 +49,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
+    // console.log(response.config.loading)
     if (response.config.loading) {
       store.dispatch("setLoading", false)
     }

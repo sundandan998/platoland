@@ -1,7 +1,7 @@
 <template>
   <div class="to-change-into">
     <div class="to-change-into-header">
-      <mt-header fixed :title="$t('m.passdetails')">
+      <mt-header fixed  title="转入">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -26,7 +26,7 @@
         <div id='code'></div>
         <canvas id="canvas"></canvas>
       </div>
-      <p>{{$t('m.intotext')}}</p>
+      <p>仅支持LD（捞豆）收款，请勿用于其他通证收款</p>
     </div>
   </div>
 </template>

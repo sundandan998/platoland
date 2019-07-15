@@ -119,6 +119,7 @@
       },
       // 重新发送验证码
       renewCode() {
+        this.registerParsms.code = ''
         var registerData = window.sessionStorage.getItem('verification')
         var actionData = window.sessionStorage.getItem('action')
         registerData = JSON.parse(registerData)
@@ -131,7 +132,7 @@
         // 发送信息
         if (this.account_type == '0') {
           api.sms(this.sms).then(res => {
-            if (res.code = 0) {
+            if (res.code == 0) {
               toast(res)
             }
           }).catch(err => {
@@ -142,7 +143,7 @@
         } else {
           // 发送邮箱
           api.email(this.email).then(res => {
-            if (res.code = 0) {
+            if (res.code == 0) {
               toast(res)
             }
           }).catch(err => {

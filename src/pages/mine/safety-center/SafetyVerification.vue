@@ -92,17 +92,38 @@
 			},
 			// 点击下一步
 			next() {
+
+			},
+			next() {
 				// 判断跳到哪里 如果是从登录密码跳转过来，跳转到reset里，
 				// 如果是从支付密码跳过来，需要跳转到设置支付密码页
 				// 如果是从短信或邮箱验证跳转过来，需要进行验证
 				if (this.$route.params.id == 'loginPwd') {
-					this.$router.push({
-						name: 'Rest'
+					api.safety(this.nextParam).then(res => {
+						if (res.code == 0) {
+							this.$router.push({
+								name: 'Rest'
+							})
+							toast(res)
+						}
+					}).catch(err => {
+						if (err.code != 0) {
+							toast(err)
+						}
 					})
 					// 如果是从支付密码跳过来，需要跳转到设置支付密码页
 				} else if (this.$route.params.id == 'pwd') {
-					this.$router.push({
-						name: 'PayPassWorde'
+					api.safety(this.nextParam).then(res => {
+						if (res.code == 0) {
+							this.$router.push({
+								name: 'PayPassWorde'
+							})
+							toast(res)
+						}
+					}).catch(err => {
+						if (err.code != 0) {
+							toast(err)
+						}
 					})
 				} else {
 					// 判断是解绑还是绑定/如果this.$route.params.active == true,

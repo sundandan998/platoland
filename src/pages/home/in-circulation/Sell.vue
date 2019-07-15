@@ -22,17 +22,18 @@
 			<van-tabs @click="buyIndex">
 				<van-tab :title="$t('m.numsale')">
 					<mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
-					<p>{{$t('m.available')}}：{{buyData.amount}}{{buyDataToken.code}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</p>
+					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
 					<mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
-					<p>{{$t('m.available')}}：{{buyData.price}}</p>
-					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}{{buyData.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}}{{this.detail.code}}</p>
+					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>
 			</van-tabs>
 		</div>
 		<div class="Purchase-pass-btn">
-			<mt-button size="large" type="primary" @click="sell" :disabled="disabled">{{$t('m.sure')}}</mt-button>
+			<mt-button size="large" type="primary" @click.native="sell" :disabled="disabled">{{$t('m.sure')}}</mt-button>
 		</div>
 		<div class="payment">
 			<div class="payment-header">
@@ -51,6 +52,7 @@
 	</div>
 </template>
 <script>
+	import { mapGetters } from 'vuex'
 	import { Toast } from 'mint-ui'
 	import api from '@/api/market/Market.js'
 	import { toast } from '@/assets/js/pub.js'
@@ -77,11 +79,17 @@
 					order_type: '',
 					payment_id: '',
 					pay_pwd: ''
-				}
+				},
+				balData: '',
+				// 获取资产余额参数
+				balanceData: {
+					token_code: ''
+				},
 			}
 		},
 		created() {
 			this.buyDetail()
+			this.buyIndex(0, '111')
 		},
 		methods: {
 			onInput(key) {
@@ -96,19 +104,20 @@
 			sell() {
 				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
 				if (pay_pwd == 'true') {
-					this.popupVisible = true
 					// 请求支付
 					this.reqPay.transaction_id = this.$route.params.id
 					api.reqPay(this.reqPay).then(res => {
 						// 清空密码输入框
 						this.value = ''
 						if (res.code == 0) {
+							this.popupVisible = true
 							this.confirmPay.order_type = res.order_type
 							this.confirmPay.payment_id = res.transaction_id
 						}
 					}).catch(err => {
 						if (err.code != 0) {
 							toast(err)
+							this.popupVisible = false
 						}
 					})
 				} else {
@@ -123,9 +132,11 @@
 				if (index == 0) {
 					this.buyTitle = true
 					this.reqPay.action_type = 0
+					this.balance()
 				} else {
 					this.buyTitle = false
 					this.reqPay.action_type = 1
+					this.balance()
 				}
 			},
 			// 交易详情
@@ -136,7 +147,26 @@
 				}).catch(err => {
 					console.log(err)
 				})
-			}
+			},
+			// 获取资产余额
+			balance() {
+				this.balanceData.token_code = this.detail.code
+				api.balance(this.balanceData).then(res => {
+					this.balData = res.data
+					if (res.code == 0) {
+						// toast(res)
+					}
+				}).catch(err => {
+					if (err.code == 4003) {
+						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
+					}
+				})
+			},
+		},
+		computed: {
+			...mapGetters([
+				'detail'
+			])
 		},
 		watch: {
 			value() {

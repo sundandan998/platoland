@@ -6,28 +6,36 @@ const app = {
     refpath: '',
     //  版本
     version: '',
+    // loading:false,
   },
   mutations: {
-    detail: (state, data) => {
-      state.detail = data
+    detail: (state, detail) => {
+      state.detail = detail
     },
-    refpath: (state, data) => {
-      state.refpath = data
+    refpath: (state, refpath) => {
+      state.refpath = refpath
     },
-    version: (state, data) => {
-      state.version = data
+    version: (state, version) => {
+      state.version = version
     },
+    // LOADING: (state, loading) => {
+    //   console.log(loading)
+    //   state.loading = loading
+    // },
   },
   actions: {
     detail: ({ commit }, detail) => {
       commit('detail', detail)
     },
-    refpath: ({ commit }, detail) => {
-      commit('refpath', detail)
+    refpath: ({ commit }, refpath) => {
+      commit('refpath', refpath)
     },
-    version: ({ commit }, detail) => {
-      commit('version', detail)
+    version: ({ commit }, version) => {
+      commit('version', version)
     },
+    // setLoading: ({ commit }, loading) => {
+    //   commit('loading', loading)
+    // }
   }
 }
 export default app
