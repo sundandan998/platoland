@@ -36,6 +36,18 @@
 				book: []
 			}
 		},
+		// beforeRouteEnter(to, from, next) {
+    //   next(vm => {
+    //     if (from.path == '/book') {
+		// 			next('Login')
+		// 			// console.log('123')
+    //       // this.$router.push({
+    //       //   name:'Login',
+    //       //   params:{id:item.id}
+    //       // })
+    //     }
+    //   })
+    // },
 		created() {
 			this.address()
 		},
@@ -44,8 +56,6 @@
 			address() {
 				api.addressList().then(res => {
 					this.book = res.data
-					// this.$store.commit('detail', res.data)
-					// console.log(this.book)
 				}).catch(err => {
 					console.log(err)
 				})

@@ -21,14 +21,16 @@
   }
 
   .loadingbox {
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    height:100%;
+    background:#fff;
+    /* background: rgba(0, 0, 0, 0.5); */
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0px;
     bottom: 0;
     right: 0;
     z-index: 99;
+    
   }
 
   .loading_show {

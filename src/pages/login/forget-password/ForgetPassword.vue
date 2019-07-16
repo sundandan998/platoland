@@ -15,7 +15,7 @@
       <el-form :model="verification" ref="verification" v-model="verification.emails" :rules="rules"
         class="verification-input">
         <el-form-item prop="emails">
-          <el-input v-model="verification.username" placeholder="邮箱/手机号">
+          <el-input v-model="verification.username" placeholder="邮箱">
             <i slot="prefix">
               <img src="../../../assets/images/email.png" alt="">
             </i>
@@ -51,7 +51,7 @@
           action: 0
         },
         // 邮箱参数
-        email:{
+        email: {
           email: '',
           action: 0
         },
@@ -82,7 +82,7 @@
                   toast(res)
                   this.$router.push({
                     name: 'Reset',
-                    params:{action:0,account_type:1}
+                    params: { action: 0, account_type: 1 }
                   })
                 }
               }).catch(err => {
@@ -97,7 +97,7 @@
                   toast(res)
                   this.$router.push({
                     name: 'Reset',
-                    params:{action:0,account_type:0}
+                    params: { action: 0, account_type: 0 }
                   })
                 }
               }).catch(err => {
@@ -125,12 +125,15 @@
         deep: true,
         handler(val) {
           // debugger
-          if (val.username != '')
+          var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          if (val.username != '' && email.test(val.username)) {
             this.disabled = false
+          } else {
+            this.disabled = true
+          }
         }
       }
     }
-
   }
 </script>
 

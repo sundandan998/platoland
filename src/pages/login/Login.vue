@@ -44,8 +44,8 @@
         </router-link>
         <div class="login-btn">
           <mt-button type="default" @click="handleLogin" :disabled="disabled">登&nbsp;录</mt-button>
-          <p @click="changeMobile" v-if="show">手机号登陆 ></p>
-          <p v-if="hide" @click="changeEmail">邮箱登陆 ></p>
+          <!-- <p @click="changeMobile" v-if="show">手机号登陆 ></p>
+          <p v-if="hide" @click="changeEmail">邮箱登陆 ></p> -->
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="register">
@@ -98,8 +98,8 @@
           <router-link to="reset">
             <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
           </router-link>
-          <p @click="changeMobile" v-if="show">手机号注册 ></p>
-          <p v-if="hide" @click="changeEmail">邮箱注册 ></p>
+          <!-- <p @click="changeMobile" v-if="show">手机号注册 ></p>
+          <p v-if="hide" @click="changeEmail">邮箱注册 ></p> -->
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
@@ -129,7 +129,7 @@
         // 登录参数
         verification: {
           username: '',
-          password: ''
+          password: '',
         },
         // 忘记密码参数
         forgetPwd: {
@@ -239,7 +239,9 @@
         deep: true,
         handler(val) {
           // debugger
-          if (val.username != '' && val.password != '') {
+          var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+          if (val.username != ''&&email.test(val.username) && val.password != ''&&pass.test(val.password)) {
             this.disabled = false
           } else {
             this.disabled = true
