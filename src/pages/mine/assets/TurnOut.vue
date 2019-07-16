@@ -103,6 +103,7 @@
         this.value = ''
         this.hide = !(hide === 'show')
         this.popupVisible = !(false === 'true')
+        this.value = ''
       }
     },
     watch: {

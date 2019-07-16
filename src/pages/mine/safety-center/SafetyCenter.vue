@@ -20,12 +20,12 @@
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4107.png">
 			</mt-cell>
-			<mt-cell :title="$t('m.authentication')">
+			<!-- <mt-cell :title="$t('m.authentication')">
 				<router-link :to="{name:'SafetyVerification',params: {action: 'mobile',active:infoData.mobile_active}}">
 					<mt-switch :value="infoData.mobile_active"></mt-switch>
 				</router-link>
 				<img slot="icon" src="../../../assets/images/u4109.png">
-			</mt-cell>
+			</mt-cell> -->
 			<mt-cell title="邮箱验证">
 				<router-link :to="{name:'SafetyVerification',params: {action: 'email',active:infoData.email_active}}">
 					<mt-switch :value="infoData.email_active"></mt-switch>

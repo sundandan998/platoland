@@ -25,7 +25,7 @@
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
-          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" V-model="reqPay.amount"></mt-field>
+          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount"></mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
@@ -130,10 +130,11 @@
             }
           })
         } else {
-          Toast({
-            message: '请先设置支付密码',
-            position: 'top',
-          })
+          toast(msg)
+          // Toast({
+          //   message: '请先设置支付密码',
+          //   position: 'top',
+          // })
         }
       },
       // 交易详情
@@ -185,6 +186,8 @@
         handler(val) {
           if (val.amount != '') {
             this.disabled = false
+          }else{
+            this.disabled = true
           }
         }
       }

@@ -132,36 +132,36 @@
         registerData = JSON.parse(registerData)
         actionData = JSON.parse(actionData)
         this.account_type = actionData.account_type
-        this.sms.action = actionData.action
-        this.sms.mobile = registerData.username
+        // this.sms.action = actionData.action
+        // this.sms.mobile = registerData.username
         this.email.action = actionData.action
         this.email.email = registerData.username
         // 发送信息
-        if (this.account_type == '0') {
-          api.sms(this.sms).then(res => {
-            if (res.code == 0) {
-              toast(res)
-              const TIME_COUNT = 60;
-              if (!this.timer) {
-                this.count = TIME_COUNT;
-                this.showTimer = false;
-                this.timer = setInterval(() => {
-                  if (this.count > 0 && this.count <= TIME_COUNT) {
-                    this.count--;
-                  } else {
-                    this.showTimer = true;
-                    clearInterval(this.timer);
-                    this.timer = null;
-                  }
-                }, 1000)
-              }
-            }
-          }).catch(err => {
-            if (err.code != 0) {
-              toast(err)
-            }
-          })
-        } else {
+        // if (this.account_type == '0') {
+        //   api.sms(this.sms).then(res => {
+        //     if (res.code == 0) {
+        //       toast(res)
+        //       const TIME_COUNT = 60;
+        //       if (!this.timer) {
+        //         this.count = TIME_COUNT;
+        //         this.showTimer = false;
+        //         this.timer = setInterval(() => {
+        //           if (this.count > 0 && this.count <= TIME_COUNT) {
+        //             this.count--;
+        //           } else {
+        //             this.showTimer = true;
+        //             clearInterval(this.timer);
+        //             this.timer = null;
+        //           }
+        //         }, 1000)
+        //       }
+        //     }
+        //   }).catch(err => {
+        //     if (err.code != 0) {
+        //       toast(err)
+        //     }
+        //   })
+        // } else {
           // 发送邮箱
           api.email(this.email).then(res => {
             if (res.code == 0) {
@@ -172,7 +172,7 @@
               toast(err)
             }
           })
-        }
+        // }
       },
       onInput(key) {
         this.registerParsms.code = (this.registerParsms.code + key).slice(0, 6)
