@@ -19,7 +19,7 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field id="outAddress" type="text" readonly="readonly" v-model="this.$route.params.address">
+      <mt-field  type="text" readonly="readonly" v-model="this.$route.params.address">
         <router-link to="/book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
