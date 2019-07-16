@@ -42,7 +42,7 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{turnOut.amount}} LD</span>
+        <span class="paymentamount">{{turnOut.amount}}{{this.detail.token.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -61,7 +61,8 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
-  import { toast } from '@/assets/js/pub.js'
+	import { Toast } from 'mint-ui'
+	import { toast } from '@/assets/js/pub.js'
   export default {
     data() {
       return {
@@ -110,13 +111,23 @@
         this.hide = !(hide === 'show')
         this.popupVisible = !(false === 'true')
         this.value = ''
+        let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+        if (pay_pwd == 'true') {
+          this.popupVisible = true
+        } else {
+          this.popupVisible = false
+          Toast({
+            message: '请先设置支付密码',
+            position: 'top',
+          })
+        }
       }
     },
     watch: {
       value() {
         if (this.value.length == 6) {
           this.turnOut.token = this.detail.token.code
-          this.turnOut.address = this.detail.address
+          this.turnOut.address = this.$route.params.address
           this.turnOut.pay_pwd = this.value
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {

@@ -11,11 +11,11 @@
 		</div>
 		<div class="transaction-details-number">
 			<span>{{details.transaction_type ==1?'-'+details.amount :'+'+details.amount}}</span>
-			<p>{{$t('m.transactionsuccess')}}</p>
+			<p>{{details.status}}</p>
 		</div>
 		<div class="transaction-details-adress">
 			<ul class="fl">
-				<li>{{$t('m.transactionparty')}}</li>
+				<li>交易方</li>
 				<li>{{$t('m.transactionadreess')}}</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
@@ -29,13 +29,15 @@
 				<!-- <li>{{$t('m.unitprice')}}</li> -->
 				<li>{{$t('m.transactionnum')}}</li>
 				<li>{{$t('m.transactiontime')}}</li>
+				<li>可用余额</li>
+				<li>冻结余额</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
 				<li>{{details.order_id}}</li>
-				<!--<li> <img src="../../../assets/images/ld.png" alt="" />10000</li>-->
-				<!-- <li>{{details.price}} {{details.exchange_token}}</li> -->
 				<li>{{details.amount}} {{detailsCode.code}}</li>
 				<li>{{details.create_time}}</li>
+				<li>{{details.available_amt}}</li>
+				<li>{{details.freeze_amt}}</li>
 			</ul>
 		</div>
 	</div>

@@ -1089,7 +1089,7 @@ table.el-table__body {
 .transaction-details-information{
      font-size: 0.72rem;
      background-color: #fff;
-    height:130px;
+    height:150px;
     padding: 0 10px 0 20px;
     margin-top: 10px;
     li{
@@ -1160,6 +1160,8 @@ table.el-table__body {
 }
 .assets-detailed-tabbar button{
     margin-top: 20px;
+    position: fixed;
+    bottom: 0;
 }
 //我的/资产/资产详情/转入
 .to-change-into-exhibition{
@@ -1204,7 +1206,7 @@ img.fr.tag-read {
 .turn-out-exhibition {
     background-color: #fff;
     height: 70px;
-    margin: 50px 0 10px 0;
+    margin: 20px 0 10px 0;
 }
 .turn-out-exhibition-img{
     margin-left: 15px;
