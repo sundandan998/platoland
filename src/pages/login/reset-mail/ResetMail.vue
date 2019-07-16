@@ -15,7 +15,8 @@
       <span>请输入验证码。</span>
       <div class="verification-code">
         <van-password-input :value="registerParsms.code" @focus="showKeyboard = true" />
-        <span class="fr" @click="renewCode">重新发送验证码</span>
+        <span v-show="showTimer" class="fr" @click="renewCode">重新发送验证码</span>
+				<span v-show="!showTimer" class="count fr">{{count}} s</span>
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
       </div>
@@ -33,6 +34,10 @@
   export default {
     data() {
       return {
+        // 60s倒计时
+        showTimer: true,
+        count: '',
+        timer: null,
         showRegister: false,
         showPwd: false,
         value: '',
@@ -66,8 +71,8 @@
     },
     created() {
       // 展示reset页面中显示电话还是邮箱
-      this.showInformation()
       // 走注册时发送验证码，获取注册时填写的用户名及密码
+      this.showInformation()
       var registerData = window.sessionStorage.getItem('verification')
       registerData = JSON.parse(registerData)
       this.registerParsms.username = registerData.username
@@ -76,6 +81,8 @@
       var forgetData = window.sessionStorage.getItem('forgetUsername')
       forgetData = JSON.parse(forgetData)
       this.checkCode.account = forgetData
+      console.log(forgetData)
+
     },
     methods: {
       // 展示reset页面中显示电话还是邮箱
@@ -134,6 +141,20 @@
           api.sms(this.sms).then(res => {
             if (res.code == 0) {
               toast(res)
+              const TIME_COUNT = 60;
+              if (!this.timer) {
+                this.count = TIME_COUNT;
+                this.showTimer = false;
+                this.timer = setInterval(() => {
+                  if (this.count > 0 && this.count <= TIME_COUNT) {
+                    this.count--;
+                  } else {
+                    this.showTimer = true;
+                    clearInterval(this.timer);
+                    this.timer = null;
+                  }
+                }, 1000)
+              }
             }
           }).catch(err => {
             if (err.code != 0) {

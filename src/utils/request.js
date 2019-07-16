@@ -29,7 +29,7 @@ const service = axios.create({
   // 是否跨域
   withCredentials: false,
   // loading加载
-  loading: true
+  // loading: true
 });
 service.interceptors.request.use(
   config => {

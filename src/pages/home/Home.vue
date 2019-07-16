@@ -211,7 +211,6 @@
   .home-card-title-subject {
     text-align: right;
     margin-right: 5px;
-    width: 66%;
   }
   .home-subject {
     display: block;

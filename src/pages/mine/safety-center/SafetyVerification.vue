@@ -10,7 +10,8 @@
 		<div class="safety-verification-list" v-if="show.mobile">
 			<span>{{infoData.mobile}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">
-				<span @click="sms_code">{{$t('m.send')}}</span>
+				<span v-show="showTimer" @click="sms_code">发送</span>
+				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-list" v-if="show.email">
@@ -32,9 +33,14 @@
 	// 接口请求
 	import api from "@/api/system/System.js"
 	import { toast } from '@/assets/js/pub.js'
+	// import { getCode } from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
+				// 60s倒计时
+				showTimer: true,
+				count: '',
+				timer: null,
 				disabled: true,
 				nextData: {},
 				infoData: {},
@@ -164,6 +170,21 @@
 			sms_code() {
 				api.sms(this.sms).then(res => {
 					toast(res)
+					// getCode()
+					const TIME_COUNT = 60;
+					if (!this.timer) {
+						this.count = TIME_COUNT;
+						this.showTimer = false;
+						this.timer = setInterval(() => {
+							if (this.count > 0 && this.count <= TIME_COUNT) {
+								this.count--;
+							} else {
+								this.showTimer = true;
+								clearInterval(this.timer);
+								this.timer = null;
+							}
+						}, 1000)
+					}
 				}).catch(err => {
 					toast(err)
 				})
@@ -172,6 +193,20 @@
 			email_code() {
 				api.email(this.sms).then(res => {
 					toast(res)
+					const TIME_COUNT = 60;
+					if (!this.timer) {
+						this.count = TIME_COUNT;
+						this.showTimer = false;
+						this.timer = setInterval(() => {
+							if (this.count > 0 && this.count <= TIME_COUNT) {
+								this.count--;
+							} else {
+								this.showTimer = true;
+								clearInterval(this.timer);
+								this.timer = null;
+							}
+						}, 1000)
+					}
 				}).catch(err => {
 					toast(err)
 				})

@@ -68,7 +68,6 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import {mapGetters} from 'vuex'
 import api from '@/api/token/Token'

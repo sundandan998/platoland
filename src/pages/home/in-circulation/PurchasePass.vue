@@ -118,6 +118,7 @@
           this.reqPay.transaction_id = this.$route.params.id
           api.reqPay(this.reqPay).then(res => {
             if (res.code == 0) {
+              this.value = ''
               this.popupVisible = true
               this.confirmPay.order_type = res.order_type
               this.confirmPay.payment_id = res.transaction_id

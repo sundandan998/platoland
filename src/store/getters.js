@@ -19,7 +19,7 @@ const getters = {
     userInfo: state => {
         let stroageUserInfo = JSON.parse(
             window.sessionStorage.getItem("userInfo")
-        );
+        )
         if (
             (!state.user.userInfo ||
                 JSON.stringify(state.user.userInfo) === "{}") &&

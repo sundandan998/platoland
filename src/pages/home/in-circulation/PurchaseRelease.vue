@@ -23,13 +23,19 @@
 		<div class="purchase-pass-input">
 			<van-tabs @click="index">
 				<van-tab title="购买">
+					<span class="purchase-pass-input-title">数量</span>
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
+					<span class="purchase-pass-input-title">单价</span>
+					<mt-field type="number" v-model="releaseData.price"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
 				</van-tab>
 				<van-tab title="出售">
-						<mt-field type="number" v-model="releaseData.price"></mt-field>
-						<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
-						<p>手续费 : {{releaseData.price*0.002}} PLD</p>
+					<span class="purchase-pass-input-title">数量</span>
+					<mt-field type="number" v-model="releaseData.amount"></mt-field>
+					<span class="purchase-pass-input-title">单价</span>
+					<mt-field type="number" v-model="releaseData.price"></mt-field>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+					<p>手续费 : {{releaseData.price*0.002}} PLD</p>
 				</van-tab>
 			</van-tabs>
 		</div>
@@ -217,5 +223,13 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+/* 购买出售tab栏 */
+	.purchase-pass-input-title {
+		font-size: 0.78rem;
+		margin-left: 25px;
+		color: #999;
+		margin-top: 20px;
+		display: block;
+	}
 </style>
