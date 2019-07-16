@@ -27,9 +27,9 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="$t('m.buynum')" v-model="turnOut.amount" type="number"></mt-field>
-      <span>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</span>
-      <span>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</span>
+      <mt-field :placeholder="'最小转出数量'+parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number"></mt-field>
+      <p>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</p>
+      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
     </div>
     <div class="turn-out-exhibition-qrcode">
       <router-link to="/scan">

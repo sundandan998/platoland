@@ -25,7 +25,7 @@
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
-          <mt-field :placeholder="buyData.high_number+'起购'" type="number" V-model="reqPay.amount"></mt-field>
+          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" V-model="reqPay.amount"></mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
