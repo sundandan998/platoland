@@ -29,7 +29,7 @@ const service = axios.create({
   // 是否跨域
   withCredentials: false,
   // loading加载
-  // loading: true
+  loading: true
 });
 service.interceptors.request.use(
   config => {
@@ -41,7 +41,6 @@ service.interceptors.request.use(
     }
     if (config.loading) {
       store.dispatch("setLoading", true);
-      NProgress.start()
   }
     return config;
   },
@@ -55,7 +54,6 @@ service.interceptors.response.use(
     let data = JSON.parse(response.data)
     if (response.config.loading) {
       store.dispatch("setLoading", false);
-      NProgress.done()
     }
     if (data.code === 0) {
       return data;
@@ -69,7 +67,6 @@ service.interceptors.response.use(
     let response = errorReponse.response;
     if (response.config.loading) {
       store.dispatch("setLoading", false)
-      NProgress.done()
     }
     let errorJSON = {
       ret_code: response.status,
