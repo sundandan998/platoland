@@ -27,7 +27,7 @@
                 <span>已达成:{{(pldRelease.sold_number/pldRelease.first_number*100).toFixed(3)}}%</span>
               </div>
               <div class="home-investment-progress">
-                <mt-progress :value="20" :bar-height="5"></mt-progress>
+                <mt-progress :value="pldRelease.sold_number/pldRelease.first_number*100" :bar-height="5"></mt-progress>
               </div>
             </router-link>
           </div>

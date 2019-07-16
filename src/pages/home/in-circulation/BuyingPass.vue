@@ -143,7 +143,6 @@
 				if (pay_pwd == 'true') {
 					this.requsetPay.transaction_id = this.detail.id
 					api.reqPay(this.requsetPay).then(res => {
-						console.log(res.code)
 						this.value = ''
 						if (res.code == 0) {
 							this.popupVisible = true
