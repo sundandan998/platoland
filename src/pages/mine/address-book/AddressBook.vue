@@ -11,7 +11,7 @@
 			</mt-header>
 		</div>
 		<div class="adress-book-list" v-for="(item,index) in book">
-			<router-link :to="{name:'Out', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}">
+			<router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}">
 				<mt-cell>
 					<div class="adress-book-content fl">
 						<p>{{item.name}}</p>
