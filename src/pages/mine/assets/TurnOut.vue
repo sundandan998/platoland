@@ -19,7 +19,7 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" :value="this.$route.params.address">
+      <mt-field id="outAddress" type="text" readonly="readonly" v-model="this.$route.params.address">
         <router-link to="/book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
@@ -27,9 +27,9 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="$t('m.buynum')" v-model="turnOut.amount" type="number"></mt-field>
-      <span>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</span>
-      <span>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</span>
+      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number"></mt-field>
+      <p>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</p>
+      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
     </div>
     <div class="turn-out-exhibition-qrcode">
       <router-link to="/scan">
@@ -79,7 +79,6 @@
       }
     },
     created () {
-      // console.log(this.detail.token)
     },
     computed: {
       ...mapGetters([
@@ -101,6 +100,7 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       passwordShow(hide) {
+        this.value = ''
         this.hide = !(hide === 'show')
         this.popupVisible = !(false === 'true')
       }
@@ -127,7 +127,8 @@
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.amount != '') {
+          let outAddress = document.getElementById('outAddress')
+          if (val.amount != ''&& val.amount != 0 ) {
             this.disabled = false
           } else {
             this.disabled = true

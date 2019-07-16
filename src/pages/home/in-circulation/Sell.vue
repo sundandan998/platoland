@@ -26,7 +26,7 @@
 					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
-					<mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="buyData.low_number*buyData.price+'起购'" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount}}{{this.detail.code}}</p>
 					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>

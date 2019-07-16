@@ -5,7 +5,6 @@
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
-
 		<div class="assets-detailed-list" v-for="item in listData">
 			<router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
 				<mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
