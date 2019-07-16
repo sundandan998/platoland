@@ -19,7 +19,7 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field  type="text" readonly="readonly" v-model="this.$route.params.address">
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address">
         <router-link to="/book">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
@@ -27,7 +27,8 @@
     </div>
     <div class="purchase-pass-input">
       <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number"></mt-field>
+      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
+      </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</p>
       <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
     </div>
@@ -44,8 +45,8 @@
         <span class="paymentamount">{{turnOut.amount}} LD</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
-        <van-number-keyboard  :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete" @blur="showKeyboard = false"
-        />
+        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+          @blur="showKeyboard = false" />
       </van-popup>
     </div>
     <div class="turn-out-exhibition-text">
@@ -78,7 +79,12 @@
         },
       }
     },
+<<<<<<< HEAD
     created () {
+=======
+    created() {
+      // console.log(this.detail.token)
+>>>>>>> develop-0000-sdd
     },
     computed: {
       ...mapGetters([
@@ -111,7 +117,7 @@
         if (this.value.length == 6) {
           this.turnOut.token = this.detail.token.code
           this.turnOut.address = this.detail.address
-					this.turnOut.pay_pwd = this.value
+          this.turnOut.pay_pwd = this.value
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)
