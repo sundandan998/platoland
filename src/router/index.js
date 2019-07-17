@@ -167,7 +167,7 @@ export default new Router({
     },
     //  我的/地址薄/编辑地址
     {
-      path: '/edit/:id',
+      path: '/edit',
       name: 'Edit',
       component: () => import("@/pages/mine/address-book/EditAddress")
     },

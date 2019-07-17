@@ -11,20 +11,20 @@
 			</mt-header>
 		</div>
 		<div class="adress-book-list" v-for="(item,index) in book">
-				<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
-			<router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}">
-				<mt-cell>
-					<div class="adress-book-content fl">
-						<p>{{item.name}}</p>
-						<p>{{item.remark}}</p>
-						<p>{{item.address}}</p>
-					</div>
-					<router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
-						icon:item.token.icon,subject:item.token.subject,code:item.token.code}}">
-						<mt-button size="small" type="primary" @click="address">{{$t('m.edit')}}</mt-button>
-					</router-link>
-				</mt-cell>
-			</router-link>
+			<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
+			<!-- <router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}"> -->
+			<mt-cell @click.native="routerLink(item)">
+				<div class="adress-book-content fl" >
+					<p>{{item.name}}</p>
+					<p>{{item.remark}}</p>
+					<p>{{item.address}}</p>
+				</div>
+				<router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
+							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}">
+					<mt-button size="small" type="primary" @click.native="address">{{$t('m.edit')}}</mt-button>
+				</router-link>
+			</mt-cell>
+			<!-- </router-link> -->
 		</div>
 	</div>
 </template>
@@ -38,20 +38,13 @@
 				book: []
 			}
 		},
-		// beforeRouteEnter(to, from, next) {
-    //   next(vm => {
-    //     if (from.path == '/book') {
-		// 			next('Login')
-		// 			// console.log('123')
-    //       // this.$router.push({
-    //       //   name:'Login',
-    //       //   params:{id:item.id}
-    //       // })
-    //     }
-    //   })
-    // },
 		created() {
 			this.address()
+		},
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				window.sessionStorage.setItem('refpath', from.path)
+			})
 		},
 		methods: {
 			// 地址列表
@@ -62,6 +55,18 @@
 					console.log(err)
 				})
 			},
+			routerLink(item) {
+				// debugger
+				let refpath  = window.sessionStorage.getItem('refpath')
+				if(refpath=='/out'){
+					this.$router.push({
+						name:'Out',
+						params:{id:item.id,address:item.address}
+					})
+				}
+		
+				window.sessionStorage.setItem('refpath','')
+			}
 		}
 	}
 </script>
