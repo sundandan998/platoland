@@ -80,12 +80,7 @@
         },
       }
     },
-<<<<<<< HEAD
     created () {
-=======
-    created() {
-      // console.log(this.detail.token)
->>>>>>> develop-0000-sdd
     },
     computed: {
       ...mapGetters([
