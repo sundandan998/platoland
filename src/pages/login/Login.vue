@@ -89,13 +89,12 @@
           </el-form-item>
         </el-form>
         <div class="login-checkbox" v-for="item of items">
-          <!--<input type="checkbox" v-model="item.state" v-on:click="regCheckbox(item)"/>-->
           <span>注册即表示同意
             <a href="">《用户使用协议》</a>
           </span>
         </div>
         <div class="login-btn">
-          <router-link to="reset">
+          <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}">
             <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
           </router-link>
           <!-- <p @click="changeMobile" v-if="show">手机号注册 ></p>
@@ -213,8 +212,6 @@
             toast(err)
           })
         }
-        window.sessionStorage.setItem('verification', JSON.stringify(this.verification))
-        var type = window.sessionStorage.setItem('action', JSON.stringify(this.action))
       },
       // 切换手机号登录
       changeMobile() {
@@ -241,7 +238,7 @@
           // debugger
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
           var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if (val.username != ''&&email.test(val.username) && val.password != ''&&pass.test(val.password)) {
+          if (val.username != '' && email.test(val.username) && val.password != '' && pass.test(val.password)) {
             this.disabled = false
           } else {
             this.disabled = true

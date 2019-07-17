@@ -82,7 +82,7 @@
                   toast(res)
                   this.$router.push({
                     name: 'Reset',
-                    params: { action: 0, account_type: 1 }
+                    params: { action: 0, account_type: 1,username:this.verification.username}
                   })
                 }
               }).catch(err => {

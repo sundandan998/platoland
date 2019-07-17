@@ -9,14 +9,13 @@
     <div class="reset-mail-information">
       <img src="../../../assets/images/r-email.png" alt="" />
       <!-- 注册时展示 -->
-      <p v-if="showRegister">已向{{this.registerParsms.username}}发送验证信息</p>
-      <!-- 忘记密码时展示 -->
-      <p v-if="showPwd">已向{{ this.checkCode.account}}发送验证信息</p>
+      <!-- <p></p> -->
+      <p>已向{{this.$route.params.username}}发送验证信息</p>
       <span>请输入验证码。</span>
       <div class="verification-code">
         <van-password-input :value="registerParsms.code" @focus="showKeyboard = true" />
         <span v-show="showTimer" class="fr" @click="renewCode">重新发送验证码</span>
-				<span v-show="!showTimer" class="count fr">{{count}} s</span>
+        <span v-show="!showTimer" class="count fr">{{count}} s</span>
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
       </div>
@@ -70,34 +69,14 @@
       }
     },
     created() {
-      // 展示reset页面中显示电话还是邮箱
-      // 走注册时发送验证码，获取注册时填写的用户名及密码
-      this.showInformation()
-      var registerData = window.sessionStorage.getItem('verification')
-      registerData = JSON.parse(registerData)
-      this.registerParsms.username = registerData.username
-      this.registerParsms.password = registerData.password
-      // 走获取忘记密码的手机号或邮箱
-      var forgetData = window.sessionStorage.getItem('forgetUsername')
-      forgetData = JSON.parse(forgetData)
-      this.checkCode.account = forgetData
-      console.log(forgetData)
-
     },
     methods: {
-      // 展示reset页面中显示电话还是邮箱
-      showInformation() {
-        if (this.$route.params.action == 0) {
-          this.showPwd = true
-        } else {
-          this.showRegister = true
-        }
-      },
       register() {
         // 判断走重置登录密码页面还是走注册
         // 走重置登录密码
         this.checkCode.account_type = this.$route.params.account_type
         this.checkCode.code = this.registerParsms.code
+        this.checkCode.account = this.$route.params.username
         if (this.$route.params.action == 0) {
           api.checkCode(this.checkCode).then(res => {
             if (res.code == 0) {
@@ -110,6 +89,8 @@
           })
           // 走注册
         } else {
+          this.registerParsms.username = this.$route.params.username
+          this.registerParsms.password = this.$route.params.password
           if (this.$route.params.action != 0) {
             api.register(this.registerParsms).then(res => {
               if (res.code == 0) {
@@ -162,16 +143,30 @@
         //     }
         //   })
         // } else {
-          // 发送邮箱
-          api.email(this.email).then(res => {
-            if (res.code == 0) {
-              toast(res)
+        // 发送邮箱
+        api.email(this.email).then(res => {
+          if (res.code == 0) {
+            toast(res)
+            const TIME_COUNT = 60;
+            if (!this.timer) {
+              this.count = TIME_COUNT;
+              this.showTimer = false;
+              this.timer = setInterval(() => {
+                if (this.count > 0 && this.count <= TIME_COUNT) {
+                  this.count--;
+                } else {
+                  this.showTimer = true;
+                  clearInterval(this.timer);
+                  this.timer = null;
+                }
+              }, 1000)
             }
-          }).catch(err => {
-            if (err.code != 0) {
-              toast(err)
-            }
-          })
+          }
+        }).catch(err => {
+          if (err.code != 0) {
+            toast(err)
+          }
+        })
         // }
       },
       onInput(key) {
