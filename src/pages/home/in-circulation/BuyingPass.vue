@@ -22,14 +22,14 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="this.detail.release.purchase_number+'起购'" type="number" v-model="requsetPay.amount">
+					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number" type="number" v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
 					</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="this.detail.release.purchase_number*this.detail.release.issue_price+'起购'" type="number" v-model="requsetPay.amount">
+					<mt-field :placeholder="'最低购买金额'+this.detail.release.purchase_number*this.detail.release.issue_price" type="number" v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}

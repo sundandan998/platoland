@@ -27,14 +27,14 @@
 			<ul class="fl">
 				<li>{{$t('m.ordernumber')}}</li>
 				<!-- <li>{{$t('m.unitprice')}}</li> -->
-				<li>{{$t('m.transactionnum')}}</li>
+				<!-- <li>{{$t('m.transactionnum')}}</li> -->
 				<li>{{$t('m.transactiontime')}}</li>
 				<li>可用余额</li>
 				<li>冻结余额</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
 				<li>{{details.order_id}}</li>
-				<li>{{details.amount}} {{detailsCode.code}}</li>
+				<!-- <li>{{details.amount}} {{detailsCode.code}}</li> -->
 				<li>{{details.create_time}}</li>
 				<li>{{details.available_amt}}</li>
 				<li>{{details.freeze_amt}}</li>

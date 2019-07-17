@@ -29,13 +29,13 @@
 			  		<mt-cell :title="$t('m.nickname')">
 			  			<span>{{subject.nickname}}</span>
 			  		</mt-cell>
-            <!-- 注册住所 -->
-			  		<mt-cell :title="$t('m.residence')" :label="subjectData.registered_address" >
-			  			<!-- <span>{{subjectData.registered_address}}</span> -->
+						<!-- 注册住所 -->
+						<!-- :label="subjectData.registered_address" -->
+			  		<mt-cell :title="$t('m.residence')" :label="subjectData.registered_address">
+							<!-- <span class="subject-address">{{subjectData.registered_address}}</span> -->
 			  		</mt-cell>
             <!-- 经营地址 -->
 			  		<mt-cell :title="$t('m.businessaddress')" :label="subjectData.business_address">
-			  			<!-- <span>{{}}</span> -->
 			  		</mt-cell>
             <!-- 法 人 -->
 			  		<mt-cell :title="$t('m.people')" >
@@ -55,14 +55,8 @@
 			  		</mt-cell>
 						<!-- 经营范围 -->
             <mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-              <!-- <span class="rang">{{subjectData.business_scope}}</span> -->
             </mt-cell>
 			    </div>
-			  </mt-tab-container-item>
-			  <mt-tab-container-item id="introduce">
-        <!--   <div v-for="(item,index) in introduction">
-            <img :src="'http://'+item.introduction.jpg">
-          </div> -->
 			  </mt-tab-container-item>
 			</mt-tab-container>
 		</div>
@@ -104,5 +98,11 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.subject-address{
+		width:80%;word-break:normal;
+		display:block;
+		word-wrap : break-word;
+		overflow:hidden;
+	}
 </style>

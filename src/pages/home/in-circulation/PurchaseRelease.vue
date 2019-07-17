@@ -34,7 +34,7 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</p>
 					<p>手续费 : {{releaseData.price*0.002}} PLD</p>
 				</van-tab>
 			</van-tabs>

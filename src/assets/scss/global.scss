@@ -567,6 +567,7 @@ table.el-table__body {
     span.mint-cell-label {
         width: 55%;
         float: right;
+        text-align: right;
     }
 }
 
@@ -623,11 +624,11 @@ table.el-table__body {
     left: 56px;
 }
 .to-deal-purchase-bot{
-    margin-left: 18px;
+    
     span{
+        padding-left: 15px;
         font-size: 0.67rem;
         color:#999;
-        margin-right: 50px;
         img{
             width: 20px;
             position: relative;
@@ -635,6 +636,7 @@ table.el-table__body {
         }
     }
     p{
+        padding-left: 15px;
         font-size: 0.67rem;
         color: #999;
         margin-top: 10px;
@@ -1334,6 +1336,7 @@ img.fr.tag-read {
 //我的/安全中心/开启支付密码
 .open-pay-password{
     background-color: #fff;
+    padding-top: 20px;
 }
 .open-pay-password-keyboard-title {
     margin: 15px;

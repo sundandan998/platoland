@@ -10,15 +10,17 @@
 				</mt-button>
 			</mt-header>
 		</div>
+		<div class="edit-title">
+			<img :src="editparams.icon" alt="" class="fl" />
+			<span>{{editparams.code}}</span>
+			<p>{{editparams.subject}}</p>
+		</div>
 		<div class="add-adress-list">
 			<span>{{$t('m.remarks')}}</span>
-			<!-- v-model="editparams.name" -->
 			<mt-field v-model="editparams.name"></mt-field>
 			<span>{{$t('m.describe')}}</span>
-			<!--  -->
 			<mt-field v-model="editparams.remark"> </mt-field>
-			<span>{{$t('m.usdtaddress')}}</span>
-			<!-- v-model="editparams.address" -->
+			<span>地址</span>
 			<mt-field v-model="editparams.address"></mt-field>
 			<router-link to="/scan">
 				<img src="../../../assets/images/scan.png" alt="">
@@ -42,6 +44,7 @@
 			return {
 				disabled: false,
 				editId: {},
+				editData: {},
 				// 修改地址参数
 				editparams: {
 					name: '',
@@ -62,7 +65,6 @@
 					this.$router.push({
 						name: 'Book'
 					})
-					// this.$route.params.name = this.editparams.name
 				}).catch(err => {
 					console.log(err)
 				})
@@ -122,5 +124,17 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+
+	.edit-title {
+		margin: 20px 0 0 20px;
+	}
+	.edit-title span{
+		display: block;
+		padding: 10px 0px 0 10px;
+	}
+	.edit-title img{
+		/* display: block; */
+		padding: 10px 10px 0 10px;
+	}
 </style>

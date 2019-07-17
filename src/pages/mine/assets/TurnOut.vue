@@ -127,6 +127,9 @@
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)
+              this.$router.push({
+                name:'Assetsdetailed'
+              })
             }
           }).catch(err => {
             if (err.code != 0) {
