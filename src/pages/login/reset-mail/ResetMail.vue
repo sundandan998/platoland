@@ -112,7 +112,6 @@
         var actionData = window.sessionStorage.getItem('action')
         registerData = JSON.parse(registerData)
         actionData = JSON.parse(actionData)
-        this.account_type = actionData.account_type
         // this.sms.action = actionData.action
         // this.sms.mobile = registerData.username
         this.email.action = actionData.action
@@ -167,7 +166,6 @@
             toast(err)
           }
         })
-        // }
       },
       onInput(key) {
         this.registerParsms.code = (this.registerParsms.code + key).slice(0, 6)

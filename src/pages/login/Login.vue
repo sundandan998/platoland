@@ -187,6 +187,7 @@
         }).catch(err => {
           console.log(err)
         })
+        // window.sessionStorage.setItem('action', this.verification.username)
       },
       // 发送验证码
       sendCode() {

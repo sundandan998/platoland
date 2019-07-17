@@ -7,6 +7,11 @@
       <mt-spinner class="loading_show" :size="28" color="#1989fa" type="fading-circle"><span
           style="color:#1989fa">加载中...</span></mt-spinner>
     </div>
+    <div class="loadingbox" v-if="num==5 && loading">
+      <p class="loading_show">
+        <mt-button size="small" @click="handleJump" type="default">网络不给力,请重新加载</mt-button>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -21,8 +26,8 @@
   }
 
   .loadingbox {
-    height:100%;
-    background:#fff;
+    height: 100%;
+    background: #fff;
     /* background: rgba(0, 0, 0, 0.5); */
     position: absolute;
     left: 0;
@@ -30,11 +35,11 @@
     bottom: 0;
     right: 0;
     z-index: 99;
-    
+
   }
 
   .loading_show {
-
+    color: #ccc;
     height: 100%;
     display: flex;
     align-items: center;
@@ -46,7 +51,8 @@
   export default {
     data() {
       return {
-        loading: false
+        loading: false,
+        num:0
       };
     },
     computed: {},
@@ -54,7 +60,24 @@
     created() {
     },
     mounted() { },
-    methods: {},
-    watch: {}
+    methods: {
+      handleJump() {
+        this.$router.go(0)
+      }
+    },
+    watch: {
+      num: {
+        deep: true,
+        immediate: true,
+        handler(val) {
+          this.loading = this.$store.getters.loading
+          if (this.num < 5) {
+            setTimeout(() => {
+              this.num++
+            }, 1000)
+          }
+        }
+      }
+    }
   };
 </script>
