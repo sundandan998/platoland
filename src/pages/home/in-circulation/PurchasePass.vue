@@ -130,11 +130,11 @@
             }
           })
         } else {
-          toast(msg)
-          // Toast({
-          //   message: '请先设置支付密码',
-          //   position: 'top',
-          // })
+          // toast(msg)
+          Toast({
+            message: '请先设置支付密码',
+            position: 'top',
+          })
         }
       },
       // 交易详情

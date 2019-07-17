@@ -13,7 +13,7 @@
         </mt-header>
       </div>
     </div>
-    <div class="to-deal-navbar">
+    <div>
       <van-tabs @click="index">
         <van-tab :title="$t('m.purchasebuy')">
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">

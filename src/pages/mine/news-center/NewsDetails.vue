@@ -1,7 +1,7 @@
 <template>
 	<div class="news-details">
 		<div class="news-details-header">
-			<mt-header fixed :title="$t('m.noticdetails')">
+			<mt-header fixed title="公告详情">
 			  <router-link to="/news" slot="left">
 			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>

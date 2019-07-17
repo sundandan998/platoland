@@ -96,7 +96,6 @@
       }
     },
     created() {
-
     },
     methods: {
       submitForm(formName) {
@@ -141,8 +140,12 @@
         deep: true,
         handler(val) {
           // debugger
-          if (val.new_pwd != '' && val.new_pwd2 != '')
+          var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+          if (val.new_pwd != '' && pass.test(val.new_pwd) && val.new_pwd2 != '' && pass.test(val.new_pwd2)) {
             this.disabled = false
+          } else {
+            this.disabled = true
+          }
         }
       }
     }
