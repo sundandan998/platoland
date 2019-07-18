@@ -16,7 +16,7 @@
         </span>
       </div>
       <div class="news-details-list-content">
-        <span>{{this.detailData.content}}</span>
+        <span v-html="this.detailData.content"></span>
       </div>
     </div>
 	</div>
@@ -47,5 +47,6 @@ export default{
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+ 
 </style>

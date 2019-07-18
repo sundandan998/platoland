@@ -13,7 +13,7 @@
                 <van-tab title="全部">
                   <div v-for="(items,index) in issuedata">
                     <router-link :to="/detail/+ items.code">
-                      <mt-cell :title="items.code +items.nickname" :label="items.subject">
+                      <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                       </mt-cell>
@@ -24,7 +24,7 @@
                 <van-tab title="流通中">
                   <div v-for="(items,index) in issuedata">
                     <router-link :to="/detail/+ items.code">
-                      <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                      <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                       </mt-cell>
@@ -35,7 +35,7 @@
                 <van-tab title="发行中">
                   <div v-for="(items,index) in issuedata">
                     <router-link :to="/detail/+ items.code">
-                      <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                      <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                       </mt-cell>
@@ -46,7 +46,7 @@
                 <van-tab title="待发行">
                   <div v-for="(items,index) in issuedata">
                     <router-link :to="/detail/+ items.code">
-                      <mt-cell :title="items.code +(items.nickname)" :label="items.subject">
+                      <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
                       </mt-cell>

@@ -55,7 +55,7 @@
 		},
 		created() {
 			this.editparams = this.$route.params
-			console.log(this.$route.params)
+			// console.log(this.$route.params.id)
 		},
 		methods: {
 			// 编辑修改地址
