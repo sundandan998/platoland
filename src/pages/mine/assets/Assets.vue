@@ -18,8 +18,10 @@
       </router-link>
     </div>
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">
-        <router-link :to="{name:'AssetsDetailed',params:{id:item.id,code:item.token.code}}">
-        <mt-cell :title="item.token.code + '('+item.token.name+')'" :value="(parseInt(item.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')" :label="item.token.subject">
+      <router-link :to="{name:'AssetsDetailed',params:{id:item.id,code:item.token.code}}">
+        <mt-cell :title="item.token.code + '('+item.token.name+')'"
+          :value="(parseInt(item.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"
+          :label="item.token.subject">
           <img class="assets-icon" slot="icon" :src="item.token.icon">
         </mt-cell>
       </router-link>
@@ -27,31 +29,35 @@
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
-// 接口
-import api from "@/api/user/User.js"
-export default {
-  data() {
-   return {
-   	assetsdata:[],
-   }
-  },
-  created(){
-    this.assetList()
-  },
-  methods: {
-    // 资产列表
-    assetList(){
-      api.assetList().then(res=>{
-        this.assetsdata = res.data
-      }).catch(err=>{
-        console.log(err)
-      })
+  import { mapActions } from 'vuex'
+  // 接口
+  import api from "@/api/user/User.js"
+  export default {
+    data() {
+      return {
+        assetsdata: [],
+      }
     },
+    created() {
+      this.assetList()
+    },
+    methods: {
+      // 资产列表
+      assetList() {
+        api.assetList().then(res => {
+          this.assetsdata = res.data
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+    }
   }
-}
 </script>
 
 <style lang="scss">
-@import "../../../assets/scss/global"
+  @import "../../../assets/scss/global";
+
+  .assest-header {
+    margin-bottom: 28px;
+  }
 </style>

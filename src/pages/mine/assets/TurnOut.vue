@@ -87,13 +87,6 @@
         'detail'
       ])
     },
-    beforeRouteEnter(to, from, next) {
-      next(vm => {
-        if (from.path == '/book') {
-          window.history.go(-2)
-        }
-      })
-    },
     methods: {
       onInput(key) {
         this.value = (this.value + key).slice(0, 6)

@@ -34,6 +34,12 @@ export default new Router({
       name: 'ResetPwd',
       component: () => import("@/pages/login/reset-mail/ResetPwd")
     },
+    // 注册协议
+    {
+      path: '/agreement',
+      name: 'Agreement',
+      component: () => import("@/pages/login/agreement-details/AgreementDetails")
+    },
     //  注册
     {
       path: '/register',

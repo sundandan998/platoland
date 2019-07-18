@@ -90,7 +90,9 @@
         </el-form>
         <div class="login-checkbox" v-for="item of items">
           <span>注册即表示同意
+            <router-link to="agreement">
             <a href="">《用户使用协议》</a>
+          </router-link>
           </span>
         </div>
         <div class="login-btn">
