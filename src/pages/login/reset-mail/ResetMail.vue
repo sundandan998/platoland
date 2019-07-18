@@ -108,14 +108,7 @@
       // 重新发送验证码
       renewCode() {
         this.registerParsms.code = ''
-        var registerData = window.sessionStorage.getItem('verification')
-        var actionData = window.sessionStorage.getItem('action')
-        registerData = JSON.parse(registerData)
-        actionData = JSON.parse(actionData)
-        // this.sms.action = actionData.action
-        // this.sms.mobile = registerData.username
-        this.email.action = actionData.action
-        this.email.email = registerData.username
+        this.email.email = this.$route.params.username
         // 发送信息
         // if (this.account_type == '0') {
         //   api.sms(this.sms).then(res => {

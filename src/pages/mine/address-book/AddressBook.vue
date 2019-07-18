@@ -19,10 +19,10 @@
 					<p>{{item.remark}}</p>
 					<p>{{item.address}}</p>
 				</div>
-				<router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
-							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}">
-					<mt-button size="small" type="primary" @click.native="address">{{$t('m.edit')}}</mt-button>
-				</router-link>
+				<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
+							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}"> -->
+					<mt-button size="small" type="primary" @click.native="address(item)">{{$t('m.edit')}}</mt-button>
+				<!-- </router-link> -->
 			</mt-cell>
 			<!-- </router-link> -->
 		</div>
@@ -48,9 +48,18 @@
 		},
 		methods: {
 			// 地址列表
-			address() {
+			address(item) {
+				// debugger
 				api.addressList().then(res => {
-					this.book = res.data
+					// if(res.code == 0){
+						this.book = res.data
+						this.$router.push({
+							name:'Edit',
+							params:{id:item.id,address:item.address,name:item.name,remark:item.remark,
+							icon:item.token.icon,subject:item.token.subject,code:item.token.code}
+						})
+					// }
+			
 				}).catch(err => {
 					console.log(err)
 				})
@@ -58,14 +67,13 @@
 			routerLink(item) {
 				// debugger
 				let refpath  = window.sessionStorage.getItem('refpath')
-				if(refpath=='/out'){
+				if(refpath=='/out'||refpath=='/edit'){
 					this.$router.push({
 						name:'Out',
 						params:{id:item.id,address:item.address}
 					})
 				}
-		
-				window.sessionStorage.setItem('refpath','')
+				// window.sessionStorage.setItem('refpath','')
 			}
 		}
 	}
