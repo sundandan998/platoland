@@ -16,11 +16,11 @@
 		<div class="transaction-details-adress">
 			<ul class="fl">
 				<li>交易方</li>
-				<li>{{$t('m.transactionadreess')}}</li>
+				<li>交易类型</li>
 			</ul>
 			<ul class="fr transaction-details-information-right">
 				<li>{{details.other}}</li>
-				<li>{{details.other_address}}</li>
+				<li>{{details.detail_type}}</li>
 			</ul>
 		</div>
 		<div class="transaction-details-information">

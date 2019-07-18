@@ -26,7 +26,7 @@
         <div id='code'></div>
         <canvas id="canvas"></canvas>
       </div>
-      <p>仅支持LD（捞豆）收款，请勿用于其他通证收款</p>
+      <p>仅支持{{this.detail.token.code}}({{this.detail.token.nickname}}) 收款，请勿用于其他通证收款</p>
     </div>
   </div>
 </template>
@@ -86,5 +86,6 @@
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+
 </style>

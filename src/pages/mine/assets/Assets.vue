@@ -20,7 +20,7 @@
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">
       <router-link :to="{name:'AssetsDetailed',params:{id:item.id,code:item.token.code}}">
         <mt-cell :title="item.token.code + '('+item.token.name+')'"
-          :value="(parseInt(item.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"
+          :value="item.balance"
           :label="item.token.subject">
           <img class="assets-icon" slot="icon" :src="item.token.icon">
         </mt-cell>

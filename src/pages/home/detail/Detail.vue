@@ -35,6 +35,8 @@
       <div class="pass-details-issue-data-content">
         <!-- 发行状态 -->
         <mt-cell :title="$t('m.issuingstate')" :value="release.status==0?'待发行':release.status==1?'发行中':'流通中'"></mt-cell>
+        <!-- 锁定期限 -->
+        <mt-cell  v-if="release.freeze_days != 0" title="锁定期限" :value="release.freeze_days+'天'"></mt-cell>
         <!-- 计价资产 -->
         <mt-cell :title="$t('m.valuationassets')" :value="release.denominated_assets"></mt-cell>
         <!-- 初始单价 -->
@@ -42,9 +44,9 @@
         <!-- 发行单价 -->
         <mt-cell :title="$t('m.issueprice')" :value="release.issue_price"></mt-cell>
         <!-- 发行总量 -->
-        <mt-cell :title="$t('m.issuenum')" :value="(parseInt(release.first_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
+        <mt-cell :title="$t('m.issuenum')" :value="release.first_number"></mt-cell>
         <!-- 起购数量 -->
-        <mt-cell :title="$t('m.purchasenum')" :value="(parseInt(release.purchase_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
+        <mt-cell :title="$t('m.purchasenum')" :value="release.purchase_number"></mt-cell>
         <!-- 发行方式 -->
         <mt-cell :title="$t('m.mode')" :value="release.issuance_method"></mt-cell>
         <!-- 发行时间 -->
@@ -52,7 +54,7 @@
         <!-- 截止时间 -->
         <mt-cell :title="$t('m.endtime')" :value="release.end_time"></mt-cell>
         <!-- 最小发行量 -->
-        <mt-cell :title="$t('m.minnum')" :value="(parseInt(release.minimum_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')"></mt-cell>
+        <mt-cell :title="$t('m.minnum')" :value="release.minimum_number"></mt-cell>
         <!-- 股权发行比例 -->
         <mt-cell :title="$t('m.proportion')" :value="release.equity_issuance_ratio+'%'"></mt-cell>
       </div>

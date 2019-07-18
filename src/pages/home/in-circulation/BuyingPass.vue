@@ -36,22 +36,22 @@
 					</p>
 				</van-tab>
 			</van-tabs>
-			<div class="buy-pass-time">
+			<!-- <div class="buy-pass-time">
 				<p>{{$t('m.surplus')}}
 					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
 				</p>
 				<p>{{$t('m.date')}}
 					<span> {{this.detail.release.end_time}}</span>
 				</p>
-			</div>
-			<!-- <div class="buy-pass-time">
+			</div> -->
+			<div class="buy-pass-time">
 				<p>{{$t('m.surplus')}}
 					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
 				</p>
 				<p>距发行结束剩
 					<span>{{this.detail.release.end_time}}</span>
 				</p>
-			</div> -->
+			</div>
 		</div>
 		<div>
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
@@ -110,6 +110,7 @@
 		},
 		created() {
 			this.balance()
+			console.log(this.detail)
 		},
 		methods: {
 			onInput(key) {
