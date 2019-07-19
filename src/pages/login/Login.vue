@@ -12,6 +12,8 @@
       <mt-tab-item id="login">登录</mt-tab-item>
       <mt-tab-item id="register">注册</mt-tab-item>
     </mt-navbar>
+    <!-- <mt-field label="邮箱" placeholder="请输入邮箱" v-model="verification.username" type="email" state="success"></mt-field> -->
+    <!-- <mt-field label="密码" placeholder="请输入密码"  v-model="verification.password"type="password" state="success"></mt-field> -->
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="login">
         <el-form :model="verification" ref="verification" :rules="rules1" class="verification-input">
@@ -232,6 +234,15 @@
         this.visible = !(value === 'show')
       }
     },
+    // 邮箱校验
+    // emailCheck(){
+    //   var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+    //   if(!email.test(this.verification.username)){
+    //     console.log('123')
+    //   }else{
+    //     console.log('456')
+    //   }
+    // },
     watch: {
       // 登录页当邮箱和密码全部输入，按钮变色
       verification: {

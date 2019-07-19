@@ -248,7 +248,13 @@ export default new Router({
       path: '/buy',
       name: 'Buy',
       component: () => import("@/pages/home/in-circulation/BuyingPass")
-    }
+    },
+    // 买入记录
+    {
+      path: '/buyrecord',
+      name: 'BuyRecord',
+      component: () => import("@/pages/home/in-circulation/BuyRecord")
+    },
     ]
   })
 

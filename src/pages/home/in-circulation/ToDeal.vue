@@ -25,7 +25,7 @@
                 <span>{{$t('m.transactionnum')}}:{{item.amount}}</span>
                 <span>
                   <img :src="item.d_icon">{{item.price}}</span>
-                <p>{{$t('m.quota')}}:{{item.low_number}} -{{item.high_number}}</p>
+                <p>{{$t('m.quota')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
               </div>
             </router-link>
           </div>
@@ -33,15 +33,15 @@
         <van-tab :title="$t('m.sell')">
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
             <router-link :to="/sell/+item.id">
-            <div class="to-deal-purchase-top">
-              <span>{{item.publish_name}}</span>
-            </div>
-            <div class="to-deal-purchase-bot">
-              <span>{{$t('m.transactionnum')}}:{{item.amount}}</span>
-              <span>
-                <img :src="item.d_icon">{{item.price}}</span>
-              <p>{{$t('m.quota')}}:{{item.low_number}} -{{item.high_number}}</p>
-            </div>
+              <div class="to-deal-purchase-top">
+                <span>{{item.publish_name}}</span>
+              </div>
+              <div class="to-deal-purchase-bot">
+                <span>{{$t('m.transactionnum')}}:{{item.amount}}</span>
+                <span>
+                  <img :src="item.d_icon">{{item.price}}</span>
+                <p>{{$t('m.quota')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
+              </div>
             </router-link>
           </div>
         </van-tab>
@@ -85,6 +85,13 @@
         }).catch(err => {
           console.log(err)
         })
+      }
+    },
+    // 保留两位小数
+    filters: {
+      keepTwoNum(value) {
+        value = Number(value)
+        return value.toFixed(2)
       }
     }
   }

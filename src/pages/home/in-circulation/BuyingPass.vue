@@ -3,6 +3,11 @@
 		<div class="buy-pass-header">
 			<mt-header fixed :title="$t('m.buyingpass')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+				<mt-button icon slot="right">
+					<router-link to="/buyrecord">
+						<span>交易记录</span>
+					</router-link>
+				</mt-button>
 			</mt-header>
 		</div>
 		<div class="buy-pass-name">
@@ -19,17 +24,23 @@
 				<span>{{this.detail.release.denominated_assets}}</span>
 			</div>
 		</div>
+		<!-- 消息提示 -->
+		<div class="prompt">
+			<el-alert title="该通证自买入成功起将锁定180天" type="warning" show-icon :closable="false"></el-alert>
+		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number" type="number" v-model="requsetPay.amount">
+					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number" type="number"
+						v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
 					</p>
 				</van-tab>
 				<van-tab :title="$t('m.price')">
-					<mt-field :placeholder="'最低购买金额'+this.detail.release.purchase_number*this.detail.release.issue_price" type="number" v-model="requsetPay.amount">
+					<mt-field :placeholder="'最低购买金额'+this.detail.release.purchase_number*this.detail.release.issue_price"
+						type="number" v-model="requsetPay.amount">
 					</mt-field>
 					<p>
 						<span>{{$t('m.available')}}</span>:{{balData.available_amount}} {{this.detail.release.denominated_assets}}
@@ -110,7 +121,6 @@
 		},
 		created() {
 			this.balance()
-			console.log(this.detail)
 		},
 		methods: {
 			onInput(key) {
@@ -221,5 +231,12 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+
+	/* 消息提示 */
+	.prompt {
+		height: 60px;
+		background-color: #fff;
+		padding: 0 10px;
+	}
 </style>
