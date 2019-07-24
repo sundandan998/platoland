@@ -59,7 +59,7 @@
         <mt-cell :title="$t('m.proportion')" :value="release.equity_issuance_ratio+'%'"></mt-cell>
       </div>
     </div>
-    <div class="pass-details-issue-btn" id="transaction">
+    <div class="pass-details-issue-btn" id="transaction" >
       <router-link to="/deal">
         <mt-button type="primary" size="large">{{$t('m.dealwith')}}</mt-button>
       </router-link>

@@ -126,15 +126,16 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-
 	.edit-title {
 		margin: 20px 0 0 20px;
 	}
-	.edit-title span{
+
+	.edit-title span {
 		display: block;
 		padding: 10px 0px 0 10px;
 	}
-	.edit-title img{
+
+	.edit-title img {
 		/* display: block; */
 		padding: 10px 10px 0 10px;
 	}

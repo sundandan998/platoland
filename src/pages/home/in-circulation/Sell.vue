@@ -40,8 +40,8 @@
 			</div>
 			<div>
 				<van-popup class="popupbox" position="bottom" v-model="popupVisible">
-					<span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}{{buyDataToken.code}}</span>
-					<span v-else class="paymentamount">{{reqPay.amount}}{{buyData.denominated_assets}}</span>
+					<span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}&nbsp;({{buyDataToken.code}})</span>
+					<span v-else class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
 					<van-password-input :value="value" @focus="showKeyboard = true" />
 					<!-- 数字键盘 -->
 					<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"

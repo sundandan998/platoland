@@ -12,89 +12,32 @@
       <mt-tab-item id="login">登录</mt-tab-item>
       <mt-tab-item id="register">注册</mt-tab-item>
     </mt-navbar>
-    <!-- <mt-field label="邮箱" placeholder="请输入邮箱" v-model="verification.username" type="email" state="success"></mt-field> -->
-    <!-- <mt-field label="密码" placeholder="请输入密码"  v-model="verification.password"type="password" state="success"></mt-field> -->
+    <div class="login-form">
+      <mt-field label="邮箱" placeholder="请输入邮箱" v-model="verification.username" type="email"
+        @blur.native.capture="emailCheck" :state="emailStatus">
+      </mt-field>
+      <img src="../../assets/images/email.png" alt="" class="login-icon">
+      <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" 
+      :type="pwdType"@blur.native.capture="pwdCheck" :state="pwdlStatus">
+        <img :src="seen?openeye:nopeneye" @click="changeType()" />
+      </mt-field>
+      <img src="../../assets/images/pass.png" alt="" class="login-icon">
+    </div>
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="login">
-        <el-form :model="verification" ref="verification" :rules="rules1" class="verification-input">
-          <el-form-item prop="username" v-if="hide">
-            <el-input v-model="verification.username" placeholder="手机号" type="number">
-              <i slot="prefix">
-                <img src="../../assets/images/email.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-        </el-form>
-        <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
-          <el-form-item prop="username" v-if="show">
-            <el-input v-model="verification.username" placeholder="邮箱">
-              <i slot="prefix">
-                <img src="../../assets/images/email.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input type="password" v-model="verification.password" autocomplete="off" placeholder="密码">
-              <i slot="prefix">
-                <img src="../../assets/images/pass.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-        </el-form>
         <router-link to="password">
           <span class="fr forget-pwd">忘记密码</span>
         </router-link>
         <div class="login-btn">
           <mt-button type="default" @click="handleLogin" :disabled="disabled">登&nbsp;录</mt-button>
-          <!-- <p @click="changeMobile" v-if="show">手机号登陆 ></p>
-          <p v-if="hide" @click="changeEmail">邮箱登陆 ></p> -->
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="register">
-        <el-form :model="verification" ref="verification" :rules="rules1" class="verification-input">
-          <el-form-item prop="username" v-if="hide">
-            <el-input v-model="verification.username" placeholder="手机号" type="number">
-              <i slot="prefix">
-                <img src="../../assets/images/email.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-        </el-form>
-        <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
-          <el-form-item prop="username" v-if="show">
-            <el-input v-model="verification.username" placeholder="邮箱">
-              <i slot="prefix">
-                <img src="../../assets/images/email.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password" v-if="visible">
-            <!-- verification.pass -->
-            <el-input type="password" v-model="verification.password" placeholder="密码">
-              <i slot="suffix" title="隐藏密码" @click="changePass('show')">
-                <img src="../../assets/images/eye-close.png" />
-              </i>
-              <i slot="prefix">
-                <img src="../../assets/images/pass.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password" v-else>
-            <el-input type="text" v-model="verification.password" placeholder="密码">
-              <i slot="suffix" title="显示密码" @click="changePass('hide')">
-                <img src="../../assets/images/eye-open.png" />
-              </i>
-              <i slot="prefix">
-                <img src="../../assets/images/pass.png" alt="">
-              </i>
-            </el-input>
-          </el-form-item>
-        </el-form>
         <div class="login-checkbox" v-for="item of items">
           <span>注册即表示同意
             <router-link to="agreement">
-            <a href="">《用户使用协议》</a>
-          </router-link>
+              <a href="">《用户使用协议》</a>
+            </router-link>
           </span>
         </div>
         <div class="login-btn">
@@ -117,10 +60,9 @@
     data() {
       return {
         disabled: true,
-        visible: true,
+        emailStatus: '',
+        pwdlStatus: '',
         active: 'login',
-        hide: false,
-        show: true,
         username: {},
         action: {
           account_type: null,
@@ -129,6 +71,11 @@
         items: [{
           state: false
         }],
+        // 显示与隐藏密码
+        seen: '',
+        pwdType: "password",
+        openeye: require('../../assets/images/eye-open.png'), //图片地址
+        nopeneye: require('../../assets/images/eye-close.png'), //图片地址
         // 登录参数
         verification: {
           username: '',
@@ -150,16 +97,6 @@
           action: 1,
           email: []
         },
-        rules: {
-          // 校验邮箱
-          username: [{ required: true, message: '请输入邮箱地址', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
-          // 校验密码
-          password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }],
-        },
-        rules1: {
-          // 手机号校验
-          username: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
-        }
       }
     },
     created() {
@@ -218,31 +155,31 @@
           })
         }
       },
-      // 切换手机号登录
-      changeMobile() {
-        this.hide = true
-        this.show = false
+      // 邮箱校验
+      emailCheck() {
+        var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+        if (!email.test(this.verification.username)) {
+          this.emailStatus = 'error'
+        } else {
+          this.emailStatus = 'success'
+        }
       },
-
-      // 切换邮箱登陆
-      changeEmail() {
-        this.hide = false
-        this.show = true
+      // 密码校验
+      pwdCheck() {
+        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+        if (!password.test(this.verification.password)) {
+          this.pwdlStatus = 'error'
+        } else {
+          this.pwdlStatus = 'success'
+        }
       },
-      //显示与隐藏密码
-      changePass(value) {
-        this.visible = !(value === 'show')
+      // 隐藏与显示密码
+      changeType() {
+        this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
+        this.seen = !this.seen
       }
     },
-    // 邮箱校验
-    // emailCheck(){
-    //   var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-    //   if(!email.test(this.verification.username)){
-    //     console.log('123')
-    //   }else{
-    //     console.log('456')
-    //   }
-    // },
+
     watch: {
       // 登录页当邮箱和密码全部输入，按钮变色
       verification: {
@@ -264,5 +201,31 @@
 </script>
 
 <style lang="scss">
-  @import '../../assets/scss/global'
+  @import '../../assets/scss/global';
+  body{
+    height: 100%;
+    background-color: #fff;
+  }
+
+  .login-form {
+    .mint-field .mint-cell-title {
+      width: 40px;
+    }
+
+    .mint-cell-text {
+      color: #999;
+      margin-left: 10px;
+    }
+
+    .mint-cell-wrapper {
+      border-bottom: 1px solid #f6f6f6;
+      margin: 0 20px;
+    }
+
+    .login-icon {
+      top: -32px;
+      left: 28px;
+      position: relative;
+    }
+  }
 </style>
