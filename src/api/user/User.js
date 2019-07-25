@@ -167,5 +167,13 @@ export default {
       method: "post",
       data: params
     })
-  }
+  },
+  // 订单
+  order(params = {}) {
+    return request({
+      url: "/user/order/list/",
+      method: "get",
+      params: params
+    })
+  },
 }

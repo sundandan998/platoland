@@ -8,7 +8,8 @@
 		<div class="details-search">
 			<!-- @search="onSearch" -->
 			<van-search placeholder="请输入资产代码" show-action shape="round">
-				<div slot="action" @click="onSearch">搜索</div>
+				<div slot="action" >搜索</div>
+				<!-- @click="onSearch" -->
 			</van-search>
 		</div>
 		<van-pull-refresh v-model="isLoading" @refresh="onRefresh">

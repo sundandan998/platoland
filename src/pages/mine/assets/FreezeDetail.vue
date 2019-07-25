@@ -6,7 +6,7 @@
       </mt-header>
     </div>
     <div class="freeze-down-menu">
-  
+      <span>交易类型 </span> <span>解冻时间</span>
     </div>
   </div>
 </template>
