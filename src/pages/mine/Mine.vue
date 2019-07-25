@@ -14,6 +14,9 @@
 						<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
 							<img slot="icon" src="../../assets/images/zc.png">
 						</mt-cell>
+						<mt-cell title="订单" to="/order" is-link class="mine-cell-list">
+							<img slot="icon" src="../../assets/images/zc.png">
+						</mt-cell>
 						<div class="mine-safety">
 							<mt-cell :title="$t('m.addressbook')" to="/book" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/dzb.png">

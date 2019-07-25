@@ -2,7 +2,7 @@
 import{Table,TableColumn,Form,FormItem,Input,Dropdown,DropdownMenu,DropdownItem,Alert} from 'element-ui'
 //vant框架
 import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, 
-	TabbarItem,Button,Popup,Loading,List,PullRefresh} from 'vant'
+	TabbarItem,Button,Popup,Loading,List,PullRefresh,Search} from 'vant'
 const external = {
 	install: function(Vue){
 		Vue.use(Table)
@@ -14,6 +14,7 @@ const external = {
 		Vue.use(DropdownMenu)
 		Vue.use(DropdownItem)
 		Vue.use(Alert)
+		
 //		-----------------------------------
 		Vue.use(PasswordInput).use(NumberKeyboard)
 		Vue.use(Tab).use(Tabs)
@@ -26,6 +27,7 @@ const external = {
 		Vue.use(Loading)
 		Vue.use(List)
 		Vue.use(PullRefresh)
+		Vue.use(Search)
 	}
 }
 export default external

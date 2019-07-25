@@ -38,7 +38,8 @@
       <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
         <img slot="icon" src="../../../assets/images/u4662.png">
       </mt-cell>
-      <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount">
+      <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount" to="freeze"
+      is-link>
         <img slot="icon" src="../../../assets/images/u4666.png">
       </mt-cell>
     </div>

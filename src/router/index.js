@@ -63,6 +63,7 @@ export default new Router({
       name: 'Home',
       component: () => import("@/pages/home/Home")
     },
+
     //  我的
     {
       path: '/mine',
@@ -81,6 +82,12 @@ export default new Router({
       name: 'About',
       component: () => import("@/pages/mine/about-our/AboutOur")
     },
+    // 订单
+    {
+      path: '/order',
+      name: 'Order',
+      component: () => import("@/pages/mine/order/Order")
+    },
     //  我的---资产
     {
       path: '/assets',
@@ -98,6 +105,12 @@ export default new Router({
       path: '/assetsdetailed/:id',
       name: 'AssetsDetailed',
       component: () => import("@/pages/mine/assets/AssetsDetailed")
+    },
+    //  我的---资产/冻结详情
+    {
+      path: '/freeze',
+      name: 'FreezeDetail',
+      component: () => import("@/pages/mine/assets/FreezeDetail")
     },
     //  我的---资产/明细/交易详情
     {
@@ -255,6 +268,6 @@ export default new Router({
       name: 'BuyRecord',
       component: () => import("@/pages/home/in-circulation/BuyRecord")
     },
-    ]
-  })
+  ]
+})
 
