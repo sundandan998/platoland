@@ -88,6 +88,12 @@ export default new Router({
       name: 'Order',
       component: () => import("@/pages/mine/order/Order")
     },
+     // 订单详情
+     {
+      path: '/orderdetail',
+      name: 'OrderDetail',
+      component: () => import("@/pages/mine/order/OrderDetail")
+    },
     //  我的---资产
     {
       path: '/assets',

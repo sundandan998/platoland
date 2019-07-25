@@ -176,4 +176,13 @@ export default {
       params: params
     })
   },
+  // 冻结详情
+  freeze(params = {}) {
+    return request({
+      url: "/user/order/freeze/list/",
+      method: "get",
+      params: params
+    })
+  },
+  
 }

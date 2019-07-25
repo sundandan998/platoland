@@ -62,7 +62,8 @@
   import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
 	import { Toast } from 'mint-ui'
-	import { toast } from '@/assets/js/pub.js'
+  import { toast } from '@/assets/js/pub.js'
+	import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
@@ -103,10 +104,19 @@
         if (pay_pwd == 'true') {
           this.popupVisible = true
         } else {
-          this.popupVisible = false
-          Toast({
-            message: '请先设置支付密码',
-            position: 'top',
+          this.$messagebox({
+            title: '提示',
+            message: `请先设置支付密码再进行操作`,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              this.$router.push({
+                name: 'Safety'
+                // params: { id: 'reservation' }
+              })
+            }
           })
         }
       }

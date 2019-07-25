@@ -69,7 +69,8 @@
 				<!-- 展示键盘弹起的title -->
 				<span class="paymentamount"
 					v-if="numTitle">{{this.detail.release.issue_price*requsetPay.amount}}&nbsp;({{this.detail.release.denominated_assets}})</span>
-				<span class="paymentamount" v-else>{{requsetPay.amount}}&nbsp;({{this.detail.release.denominated_assets}})</span>
+				<span class="paymentamount"
+					v-else>{{requsetPay.amount}}&nbsp;({{this.detail.release.denominated_assets}})</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
 				<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -88,6 +89,7 @@
 	import { Toast } from 'mint-ui'
 	import { toast } from '@/assets/js/pub.js'
 	import { mapGetters } from 'vuex'
+	import { MessageBox } from 'mint-ui'
 	// 接口请求
 	import api from "@/api/market/Market.js"
 	export default {
@@ -167,10 +169,19 @@
 						}
 					})
 				} else {
-					this.popupVisible = false
-					Toast({
-						message: '请先设置支付密码',
-						position: 'top',
+					this.$messagebox({
+						title: '提示',
+						message: `请先设置支付密码再进行操作`,
+						cancelButtonText: '取消',
+						confirmButtonText: '确定',
+						showCancelButton: true
+					}).then(action => {
+						if (action == 'confirm') {
+							this.$router.push({
+								name: 'Safety'
+								// params: { id: 'reservation' }
+							})
+						}
 					})
 				}
 			},

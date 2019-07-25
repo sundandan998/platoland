@@ -25,7 +25,8 @@
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
-          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount"></mt-field>
+          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount">
+          </mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
@@ -50,6 +51,7 @@
   import { Toast } from 'mint-ui'
   import api from '@/api/market/Market.js'
   import { toast } from '@/assets/js/pub.js'
+	import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
@@ -130,10 +132,19 @@
             }
           })
         } else {
-          // toast(msg)
-          Toast({
-            message: '请先设置支付密码',
-            position: 'top',
+          this.$messagebox({
+            title: '提示',
+            message: `请先设置支付密码再进行操作`,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              this.$router.push({
+                name: 'Safety'
+                // params: { id: 'reservation' }
+              })
+            }
           })
         }
       },
@@ -186,7 +197,7 @@
         handler(val) {
           if (val.amount != '') {
             this.disabled = false
-          }else{
+          } else {
             this.disabled = true
           }
         }

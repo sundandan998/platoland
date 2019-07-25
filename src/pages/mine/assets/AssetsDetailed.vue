@@ -27,7 +27,7 @@
     </div>
     <div class="assets-detailed-exhibition">
       <div class="assets-detailed-exhibition-img">
-          <!-- {{(parseInt(this.assetsData.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}} -->
+        <!-- {{(parseInt(this.assetsData.balance)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}} -->
         <p>{{this.assetsData.balance}}</p>
         <img :src="this.assetsToken.icon" alt="" class="fl" />
         <ul>
@@ -38,10 +38,11 @@
       <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
         <img slot="icon" src="../../../assets/images/u4662.png">
       </mt-cell>
-      <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount" to="freeze"
-      is-link>
-        <img slot="icon" src="../../../assets/images/u4666.png">
-      </mt-cell>
+      <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code}}">
+        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount"  is-link>
+          <img slot="icon" src="../../../assets/images/u4666.png">
+        </mt-cell>
+      </router-link>
     </div>
     <div class="assets-detailed-whole">
       <div class="assets-detailed-whole-header">
@@ -57,7 +58,8 @@
           <div class="assets-detailed-list" v-for="item in listData">
             <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
               <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
-                <span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+                <span
+                  :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
               </mt-cell>
               <p>{{item.token.code}}</p>
             </router-link>
@@ -70,7 +72,8 @@
           <div class="assets-detailed-list" v-for="item in listData">
             <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
               <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
-                <span :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+                <span
+                  :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
               </mt-cell>
               <p>{{item.token.code}}</p>
             </router-link>
@@ -104,7 +107,7 @@
         },
       }
     },
-    created(){
+    created() {
       this.assetDetail()
     },
     methods: {
@@ -114,7 +117,7 @@
         api.assetDetail(this.$route.params).then(res => {
           this.assetsData = res.data
           this.assetsToken = res.data.token
-          this.$store.commit('detail',res.data)
+          this.$store.commit('detail', res.data)
           this.details.code = this.assetsToken.code
           this.list()
         }).catch(err => {

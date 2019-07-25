@@ -56,6 +56,8 @@
 	import { Toast } from 'mint-ui'
 	import api from '@/api/market/Market.js'
 	import { toast } from '@/assets/js/pub.js'
+	import { MessageBox } from 'mint-ui'
+
 	export default {
 		data() {
 			return {
@@ -121,11 +123,20 @@
 						}
 					})
 				} else {
-					this.popupVisible = false
-					Toast({
-						message: '请先设置支付密码',
-						position: 'top',
-					})
+					this.$messagebox({
+            title: '提示',
+            message: `请先设置支付密码再进行操作`,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              this.$router.push({
+                name: 'Safety'
+                // params: { id: 'reservation' }
+              })
+            }
+          })
 				}
 			},
 			buyIndex(index, title) {
