@@ -184,5 +184,20 @@ export default {
       params: params
     })
   },
-  
+  // 订单详情
+  orderDetail(params = {}) {
+    return request({
+      url: "/user/order/"+ params.order_id + "/detail/",
+      method: "get",
+      params: params
+    })
+  },
+  // 撤销
+  cancel(params = {}){
+    return request({
+      url: "/market/otc/publish/undo/",
+      method: "post",
+      data: params
+    })
+  }
 }

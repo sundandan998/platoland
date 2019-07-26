@@ -90,9 +90,15 @@ export default new Router({
     },
      // 订单详情
      {
-      path: '/orderdetail',
+      path: '/orderdetail/:order_id',
       name: 'OrderDetail',
       component: () => import("@/pages/mine/order/OrderDetail")
+    },
+    // 订单详情列表
+    {
+      path: '/orderdetaillist',
+      name: 'OrderDetailList',
+      component: () => import("@/pages/mine/order/OrderDetailList")
     },
     //  我的---资产
     {
@@ -114,7 +120,7 @@ export default new Router({
     },
     //  我的---资产/冻结详情
     {
-      path: '/freeze',
+      path: '/freeze/:code',
       name: 'FreezeDetail',
       component: () => import("@/pages/mine/assets/FreezeDetail")
     },

@@ -15,36 +15,66 @@
         </span>
       </div>
       <div class="freeze-content" v-for="item in freezeData">
-          <router-link :to="{name:'OrderDetail',params:{order_id:item.order_id}}">
+        <!-- <router-link :to="{name:'OrderDetail',params:{order_id:item.order_id}}"> -->
+        <router-link :to="/orderdetail/+item.order_id">
+          <!-- 发行买入 -->
+          <div class="buy" v-if="item.flow_type=='发行买入'">
             <p>{{item.flow_type}}</p>
-            <p class="freeze-amount"><span>{{item.amount}}</span>
-              <!-- 发行买入 -->
-              <span class="fr" v-if="item.flow_type!='转出'&& item.flow_type=='发行买入'">还剩{{}}天解冻</span>
-              <!-- 转出 -->
-              <span class="fr" v-if="item.flow_type=='转出'"><img src="../../../assets/images/go.svg" alt="">
-                <span>{{item.status}}</span>
-              </span>
-              <!-- 售出 -->
-              <span class="fr" v-if="item.flow_type!='转出'&& item.flow_type!='发行买入'">
-                <mt-button size="small" type="primary">撤销</mt-button>
+            <p><span>{{item.amount}}</span><span class="fr">还剩{{}}天解冻</span> </p>
+            <p>
+              <mt-progress :value="20" :bar-height="5"></mt-progress>
+            </p>
+            <p>还剩{{}}天解冻</p>
+          </div>
+          <!-- OTC发布出售 -->
+          <div class="buy" v-if="item.flow_type=='OTC发布出售'">
+            <p>{{item.flow_type}}</p>
+            <p><span>{{item.amount}}</span><span class="fr">
+                <mt-button size="small" type="primary" @click.native="cancel">撤销</mt-button>
+              </span> </p>
+            <p>
+              <mt-progress :value="20" :bar-height="5"></mt-progress>
+            </p>
+            <p>{{item.flow_type}}{{item.trade_amount}}</p>
+          </div>
+          <!-- OTC发布买入 -->
+          <!-- <div class="buy" v-if="item.flow_type=='OTC发布买入'">
+            <p>{{item.flow_type}}</p>
+            <p><span>{{item.amount}}</span><span class="fr">
+                <mt-button size="small" type="primary" @click.native="cancel">撤销</mt-button>
+              </span> </p>
+            <p>
+              <mt-progress :value="20" :bar-height="5"></mt-progress>
+            </p>
+            <p>{{item.flow_type}}{{item.trade_amount}}</p>
+          </div> -->
+          <!-- 转出 -->
+          <div class="buy" v-if="item.flow_type=='转出'">
+            <p>{{item.flow_type}}</p>
+            <p><span>{{item.amount}}</span><span class="fr"><img style="position: relative;top: 2px;"
+                  src="../../../assets/images/go.svg" alt="">
+                <span>{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
               </span>
             </p>
             <p>
-              <mt-progress :value="20" :bar-height="5" v-if="item.flow_type!='转出'&& item.flow_type=='发行买入'">
-              </mt-progress>
-              <!-- 转出 -->
-              <el-steps :space="300" :active="item.status" finish-status="finish" align-center
-                v-if="item.flow_type!='发行买入'">
+              <el-steps :space="300" :active="item.status == 5 ?1:item.status == 0?2:0" finish-status="finish"
+                align-center>
                 <el-step title="发起申请"></el-step>
                 <el-step title="审核中"></el-step>
                 <el-step title="进行中"></el-step>
                 <el-step title="审核结果"></el-step>
               </el-steps>
             </p>
-            <!-- 发行买入 -->
-            <p v-if="item.flow_type!='转出'&& item.flow_type=='发行买入'">还剩{{}}天</p>
-            <p v-if="item.flow_type!='转出'">{{item.flow_type}}{{item.trade_amount}}</p>
-          </router-link>
+          </div>
+          <!-- 待支付 -->
+          <div class="buy" v-if="item.flow_type!='转出'">
+            <p>{{item.flow_type}}</p>
+            <p><span>{{item.amount}}</span>
+              <span class="fr"><img style="position: relative;top: 2px;" src="../../../assets/images/go.svg" alt="">
+                {{item.status==3?'待支付':item.status==0?'进行中':''}}</span></p>
+            <p>待支付订单在30分钟后自动取消</p>
+          </div>
+        </router-link>
       </div>
       <!-- </router-link> -->
     </div>
@@ -68,10 +98,8 @@
     created() {
       this.freeze()
     },
-    // mounted () {
-    //   this.freeze()      
-    // },
     methods: {
+      // 冻结详情
       freeze() {
         this.freezeParams.code = this.$route.params.code
         api.freeze(this.freezeParams).then(res => {
@@ -80,6 +108,27 @@
           }
         }).catch(err => {
 
+        })
+      },
+      // 撤销
+      cancel() {
+        this.$messagebox({
+          title: '温馨提示',
+          message: `确定撤销这笔已发布的广告？`,
+          confirmButtonText: '撤销发布',
+          cancelButtonText: '我再想想',
+          showCancelButton: true
+        }).then(action => {
+          if (action == 'confirm') {
+            api.cancel({ order_id: this.orderData.order_id }).then(res => {
+              if (res.code == 0) {
+                this.$router.push({
+                  name: 'FreezeDetail'
+                })
+              }
+            }).catch(err => {
+            })
+          }
         })
       }
     }

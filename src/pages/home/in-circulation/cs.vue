@@ -18,6 +18,8 @@
         isshow: false
       }
     },
+    created(){
+    },
     methods: {
       close() {
         this.isshow = false

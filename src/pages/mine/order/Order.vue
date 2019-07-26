@@ -12,9 +12,10 @@
     </div>
     <!-- 下拉刷新 -->
     <!-- <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> -->
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
-        :error.sync="error" error-text="请求失败，点击重新加载">
-        <div class="order-list" v-for="item in orderList">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+      :error.sync="error" error-text="请求失败，点击重新加载">
+      <div class="order-list" v-for="item in orderList">
+        <router-link :to="{name:'OrderDetail',params:{order_id: item.order_id}}">
           <div class="order-list-data">
             <p class="order-list-date"><span>{{item.transaction_time}}</span><span class="fr">{{item.status}}</span></p>
             <p class="order-list-type">{{item.order_type}} <span
@@ -24,8 +25,9 @@
             </p>
           </div>
           <img class="fr" src="../../../assets/images/right.svg" alt="">
-        </div>
-      </van-list>
+        </router-link> 
+      </div>
+    </van-list>
     <!-- </van-pull-refresh> -->
   </div>
 </template>
@@ -71,9 +73,11 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .order-header {
     margin-bottom: 20px;
   }
+
   .order-list {
     background-color: #fff;
     height: auto;
@@ -82,7 +86,7 @@
     img {
       position: relative;
       top: -64px;
-      right: 10px;
+      right: 0px;
     }
 
     .order-list-data {
