@@ -14,17 +14,19 @@
           冻结时间<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
       </div>
+      <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p>
       <div class="freeze-content" v-for="item in freezeData">
         <!-- <router-link :to="{name:'OrderDetail',params:{order_id:item.order_id}}"> -->
         <router-link :to="/orderdetail/+item.order_id">
           <!-- 发行买入 -->
           <div class="buy" v-if="item.flow_type=='发行买入'">
             <p>{{item.flow_type}}</p>
-            <p><span>{{item.amount}}</span><span class="fr">还剩{{}}天解冻</span> </p>
+            <p><span>{{item.amount}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
+            </p>
             <p>
               <mt-progress :value="20" :bar-height="5"></mt-progress>
             </p>
-            <p>还剩{{}}天解冻</p>
+            <p>还剩{{item.unfreeze_date | days}}天解冻</p>
           </div>
           <!-- OTC发布出售 -->
           <div class="buy" v-if="item.flow_type=='OTC发布出售'">
@@ -38,7 +40,7 @@
             <p>{{item.flow_type}}{{item.trade_amount}}</p>
           </div>
           <!-- OTC发布买入 -->
-          <!-- <div class="buy" v-if="item.flow_type=='OTC发布买入'">
+          <div class="buy" v-if="item.flow_type=='OTC发布买入'">
             <p>{{item.flow_type}}</p>
             <p><span>{{item.amount}}</span><span class="fr">
                 <mt-button size="small" type="primary" @click.native="cancel">撤销</mt-button>
@@ -47,7 +49,7 @@
               <mt-progress :value="20" :bar-height="5"></mt-progress>
             </p>
             <p>{{item.flow_type}}{{item.trade_amount}}</p>
-          </div> -->
+          </div>
           <!-- 转出 -->
           <div class="buy" v-if="item.flow_type=='转出'">
             <p>{{item.flow_type}}</p>
@@ -67,7 +69,7 @@
             </p>
           </div>
           <!-- 待支付 -->
-          <div class="buy" v-if="item.flow_type!='转出'">
+          <div class="buy" v-if="item.flow_type=='待支付'">
             <p>{{item.flow_type}}</p>
             <p><span>{{item.amount}}</span>
               <span class="fr"><img style="position: relative;top: 2px;" src="../../../assets/images/go.svg" alt="">
@@ -98,8 +100,20 @@
     created() {
       this.freeze()
     },
+    filters: {
+      days(unfreeze_date) {
+        let today = new Date() 
+        today.setHours(0, 0, 0, 0)
+        let date = new Date(unfreeze_date + ' 00:00:00')
+
+        let days_number = date - today
+        return days_number / (24 * 3600 * 1000)
+      }
+    },
+  
     methods: {
       // 冻结详情
+      
       freeze() {
         this.freezeParams.code = this.$route.params.code
         api.freeze(this.freezeParams).then(res => {
@@ -107,7 +121,6 @@
             this.freezeData = res.data
           }
         }).catch(err => {
-
         })
       },
       // 撤销
@@ -141,6 +154,16 @@
     margin-bottom: 20px;
   }
 
+  .freeze {
+
+    .null-data {
+      text-align: center;
+      margin: 50px auto;
+      font-size: 20px;
+      color: #999;
+    }
+  }
+
   .freeze-down-menu {
     padding: 10px 15px;
   }
@@ -158,12 +181,8 @@
       border-bottom: 10px solid #f6f6f6;
       border-top: 1px solid #f6f6f6;
 
-      .freeze-amount {
-        margin-bottom: 15px;
-
-        .mint-button--small {
-          height: 25px;
-        }
+      .buy button {
+        height: 25px;
       }
     }
   }

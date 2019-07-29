@@ -39,8 +39,8 @@
         <img slot="icon" src="../../../assets/images/u4662.png">
       </mt-cell>
       <!-- <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code}}"> -->
-          <router-link :to="/freeze/+this.assetsToken.code">
-        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount"  is-link>
+      <router-link :to="/freeze/+this.assetsToken.code">
+        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount" is-link>
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
       </router-link>
@@ -54,36 +54,48 @@
       </div>
     </div>
     <div class="assets-detailed-tabbar">
-      <van-tabs @click="indexTab">
-        <van-tab :title="$t('m.changeinto')">
-          <div class="assets-detailed-list" v-for="item in listData">
-            <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
-              <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
+      <!-- <van-tabs @click="indexTab"> -->
+      <!-- <van-tab :title="$t('m.changeinto')"> -->
+      <div class="assets-detailed-list" v-for="item in listData">
+        <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
+          <!-- <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
                 <span
                   :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
               </mt-cell>
-              <p>{{item.token.code}}</p>
-            </router-link>
+              <p>{{item.token.code}}</p> -->
+          <div class="details">
+            <div class="list-title">
+              <span>{{item.flow_type}}</span><span class="fr list-num">{{item.available_change}}</span>
+            </div>
+            <div class="list-deta">
+              <span>{{item.create_time}}</span>
+              <span class="list-code">{{item.token.code}}</span>
+              <span class="fr list-num">{{item.freeze_change}}</span>
+            </div>
+            <img class="fr" src="../../../assets/images/right.svg" alt="">
           </div>
-          <router-link to="/into">
-            <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
-          </router-link>
-        </van-tab>
-        <van-tab :title="$t('m.changeout')">
-          <div class="assets-detailed-list" v-for="item in listData">
-            <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
-              <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
-                <span
-                  :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
-              </mt-cell>
-              <p>{{item.token.code}}</p>
-            </router-link>
-          </div>
-          <router-link to="/into">
-            <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
-          </router-link>
-        </van-tab>
-      </van-tabs>
+
+        </router-link>
+      </div>
+      <router-link to="/into">
+        <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
+      </router-link>
+      </van-tab>
+      <!-- <van-tab :title="$t('m.changeout')"> -->
+      <div class="assets-detailed-list" v-for="item in listData">
+        <router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
+          <!-- <mt-cell :title="item.transaction_type == 1 ? '转出':'转入'" is-link :label="item.create_time">
+            <span
+              :style="{'color':item.transaction_type ==1?'red':'blue'}">{{item.transaction_type ==1?'-'+item.amount :'+'+item.amount}}</span>
+          </mt-cell>
+          <p>{{item.token.code}}</p> -->
+        </router-link>
+      </div>
+      <router-link to="/into">
+        <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
+      </router-link>
+      <!-- </van-tab> -->
+      <!-- </van-tabs> -->
     </div>
   </div>
 </template>
@@ -158,15 +170,15 @@
         })
       },
       // tab栏切换
-      indexTab(index, title) {
-        if (index == 0) {
-          this.details.transaction_type = 0
-          this.list()
-        } else {
-          this.details.transaction_type = 1
-          this.list()
-        }
-      },
+      // indexTab(index, title) {
+      //   if (index == 0) {
+      //     this.details.transaction_type = 0
+      //     this.list()
+      //   } else {
+      //     this.details.transaction_type = 1
+      //     this.list()
+      //   }
+      // },
     },
     // computed: {
     //   ...mapGetters([
@@ -178,4 +190,27 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
+
+  .details {
+    background-color: #fff;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+
+    .list-title {
+      font-size: 0.78rem;
+      padding: 5px 30px 5px 15px;
+    }
+
+    .list-deta {
+      font-size: 0.78rem;
+      padding: 5px 30px 5px 15px;
+    }
+
+    img {
+      position: relative;
+      right: 6px;
+      top: -40px;
+      width: 20px;
+    }
+  }
 </style>

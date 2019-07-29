@@ -4,9 +4,9 @@
 			<mt-header fixed :title="$t('m.buyingpass')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 				<mt-button icon slot="right">
-					<router-link to="/buyrecord">
+					<!-- <router-link to="/buyrecord">
 						<span>交易记录</span>
-					</router-link>
+					</router-link> -->
 				</mt-button>
 			</mt-header>
 		</div>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<!-- 消息提示 -->
-		<div class="prompt">
+		<div class="prompt" v-if="this.detail.release.freeze_days == 0">
 			<el-alert title="该通证自买入成功起将锁定180天" type="warning" show-icon :closable="false"></el-alert>
 		</div>
 		<div class="Purchase-pass-tabbar">
@@ -212,8 +212,9 @@
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
 							toast(res)
+							// if()
 							this.$router.push({
-								name: 'Detail',
+								name: 'Home',
 								params: {
 									code: this.detail.code
 								}
@@ -247,7 +248,8 @@
 	/* 消息提示 */
 	.prompt {
 		height: 60px;
-		background-color: #fff;
-		padding: 0 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    margin: 9px 0;
 	}
 </style>

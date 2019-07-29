@@ -199,5 +199,14 @@ export default {
       method: "post",
       data: params
     })
+  },
+  // 交易记录
+  transaction(params={}){
+    return request({
+      url: "/user/transaction/list/",
+      method: "get",
+      params: params
+    })
   }
+
 }

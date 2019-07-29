@@ -1,60 +1,32 @@
 <template>
   <div class="drawer">
-    <div @click="open()">11111</div>
-  
+    <div>11111</div>
+
     <div class="setbox" :class="{show: isshow}">
       <div class="header">
         <p class="fl">标题</p>
-        <button class="off" @click="close">关闭</button>
+        <button class="off">{{date}}</button>
       </div>
     </div>
   </div>
 </template>
 <script>
   export default {
-    name:'demo',
     data() {
       return {
-        isshow: false
-      }
+        date: new Date()
+      };
     },
-    created(){
+    mounted() {
+      let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
+      this.timer = setInterval(() => {
+        _this.date = new Date(); // 修改数据date
+      }, 1000)
     },
-    methods: {
-      close() {
-        this.isshow = false
-      },
-      open(){
-        this.isshow = true
+    beforeDestroy() {
+      if (this.timer) {
+        clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
       }
     }
-  }
+  };
 </script>
-<style lang="scss" scoped>
-  .drawer {
-    height: 500px;
-    width:100%;
-    display:flex;
-    display:-webkit-flex;
-    flex-direction:column;  
-    .setbox{
-        position:fixed;
-        z-index:1000;
-        top:0px;
-        bottom:0px;
-        width:50%;
-        height:100%;
-        background:gray;
-        border-left: 1px solid #CFD8DC!important;
-        box-shadow:0px 3px 12px rgba(0,0,0,0.12);
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        right:-460px;
-        padding:0px 0px 0px 20px;
-    }
-    .show {
-     right: 0;
-    }
-  }
-
-</style>

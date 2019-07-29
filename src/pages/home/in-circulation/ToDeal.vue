@@ -58,7 +58,8 @@
         dealListData: {},
         // 市场列表参数
         dealData: {
-          publish_type: 0
+          publish_type: 0,
+          code:'',
         },
       }
     },
@@ -80,6 +81,7 @@
       },
       //市场列表
       dealList() {
+        this.dealData.code=this.$route.params.code
         api.dealList(this.dealData).then(res => {
           this.dealListData = res.data
         }).catch(err => {

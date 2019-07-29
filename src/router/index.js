@@ -246,7 +246,7 @@ export default new Router({
     },
     //首页/去交易
     {
-      path: '/deal',
+      path: '/deal/:code',
       name: 'Deal',
       component: () => import("@/pages/home/in-circulation/ToDeal")
     },

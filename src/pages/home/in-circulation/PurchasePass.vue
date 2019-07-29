@@ -22,12 +22,12 @@
       <van-tabs @click="buyIndex">
         <van-tab :title="$t('m.number')">
           <mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
-          <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount}} {{buyData.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
           <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount">
           </mt-field>
-          <p>{{$t('m.available')}}: {{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount}} {{buyData.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
     </div>
@@ -36,7 +36,7 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}&nbsp;({{buyDataToken.code}})</span>
+        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
         <span v-else class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->

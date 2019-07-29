@@ -18,7 +18,7 @@
         <!-- 通证昵称 -->
         <mt-cell :title="$t('m.nickname')" :value="detail.nickname"></mt-cell>
         <!-- 合约地址 -->
-        <span @click="copy" class=" tag-read" :data-clipboard-text="this.detail.contract_address">
+        <span @click="copy" class=" overflow-text tag-read" :data-clipboard-text="this.detail.contract_address">
           <mt-cell :title="$t('m.address')" :value="this.detail.contract_address"></mt-cell>
         </span>
         <!-- 通证主体 -->
@@ -60,7 +60,8 @@
       </div>
     </div>
     <div class="pass-details-issue-btn" id="transaction" >
-      <router-link to="/deal">
+      <!-- <router-link :to="/deal/+detailData.code"> -->
+        <router-link :to="{name:'Deal',params:{code:this.detailData.code}}">
         <mt-button type="primary" size="large">{{$t('m.dealwith')}}</mt-button>
       </router-link>
     </div>
@@ -82,6 +83,7 @@
       return {
         data: [],
         show: '',
+        detailData:{},
         detailId: {},
         subject: {},
         release: {},
@@ -90,6 +92,7 @@
       }
     },
     created() {
+      console.log(this.$route.params.id)
       this.detailId = this.$route.params
       this.getDetail()
     },
@@ -110,6 +113,7 @@
       //获取详情
       getDetail() {
         api.tokenDetail(this.$route.params).then(res => {
+          this.detailData = res.data
           this.subject = res.data.subject
           this.release = res.data.release
           this.$store.commit('detail', res.data)
@@ -146,5 +150,14 @@
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .overflow-text{
+    /* float: right; */
+    /* display:block;
+    width: 200px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden; */
+}
+  
 </style>

@@ -22,12 +22,12 @@
 			<van-tabs @click="buyIndex">
 				<van-tab :title="$t('m.numsale')">
 					<mt-field :placeholder="'最低出售数量'+ buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{buyDataToken.code}}</p>
 					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
 					<mt-field :placeholder="'最低出售金额'+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}}{{this.detail.code}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}}{{buyDataToken.code}}</p>
 					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
 				</van-tab>
 			</van-tabs>

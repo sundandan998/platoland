@@ -21,7 +21,7 @@
             <p class="order-list-type">{{item.order_type}} <span
                 v-if="item.order_type !='转出'&&item.order_type !='转入'">-{{item.token}}/{{item.exchange_token}}</span>
             </p>
-            <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr">总额：{{item.total_amount}}</span>
+            <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr" v-if="item.order_type!='转出'&&item.order_type!='转入'">总额：{{item.total_amount}}</span>
             </p>
           </div>
           <img class="fr" src="../../../assets/images/right.svg" alt="">

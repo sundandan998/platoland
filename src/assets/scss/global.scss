@@ -19,7 +19,8 @@
 }
 // 超出折行
 .overflow-text{
-    width: 100%;
+    // display:block;
+    width: 200px;
     word-wrap: break-word;
     word-break: break-all;
     overflow: hidden;
@@ -865,7 +866,6 @@ table.el-table__body {
     height: 50px;
     margin-top: 1px;
     line-height: 50px;
-    margin-bottom: 30px;
     p{
         margin-left: 30px;
         color:#666;

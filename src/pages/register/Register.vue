@@ -1,9 +1,9 @@
 <template>
 	<div class="login">
 		<router-link to="/">
-			<div class="login-cancel">
+			<!-- <div class="login-cancel">
 				<img src="../../assets/images/cancel.png" alt="" />
-			</div>
+			</div> -->
 		</router-link>
 		<div class="logo">
 			<img src="../../assets/images/logo.png" alt="" />
