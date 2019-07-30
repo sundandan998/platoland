@@ -12,8 +12,8 @@
                 <!-- :title="$t('m.whole')" -->
                 <van-tab title="全部">
                   <div v-for="(items,index) in issuedata">
-                    <!-- <router-link :to="/detail/+ items.code"> -->
-                    <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}">
+                    <router-link :to="/detail/+ items.code">
+                      <!-- <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}"> -->
                       <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
@@ -24,8 +24,8 @@
                 <!-- :title="$t('m.incirculation')" -->
                 <van-tab title="流通中">
                   <div v-for="(items,index) in issuedata">
-                    <!-- <router-link :to="/detail/+ items.code"> -->
-                    <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}">
+                    <router-link :to="/detail/+ items.code">
+                      <!-- <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}"> -->
                       <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
@@ -36,9 +36,8 @@
                 <!-- :title="$t('m.inissue')" -->
                 <van-tab title="发行中">
                   <div v-for="(items,index) in issuedata">
-                    <!-- <router-link :to="/detail/+ items.code"> -->
-                    <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}"></router-link>
-                    <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}">
+                    <router-link :to="/detail/+ items.code">
+                      <!-- <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}"> -->
                       <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>
@@ -49,7 +48,7 @@
                 <!-- :title="$t('m.tobeissued')" -->
                 <van-tab title="待发行">
                   <div v-for="(items,index) in issuedata">
-                    <router-link :to="{name:'Detail',params:{code:items.code,id:'explore'}}">
+                    <router-link :to="/detail/+ items.code">
                       <mt-cell :title="items.code +'('+items.nickname+')'" :label="items.subject">
                         <img class="assets-icon" slot="icon" :src="items.icon">
                         <mt-button size="small" type="primary" class="fr">{{$t('m.detail')}}</mt-button>

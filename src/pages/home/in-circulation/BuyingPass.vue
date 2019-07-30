@@ -124,6 +124,13 @@
 		created() {
 			this.balance()
 		},
+		// 保留两位小数
+			// filters: {
+			// 	keepTwoNum(value) {
+			// 		value = Number(value)
+			// 		return value.toFixed(2)
+			// 	}
+			// },
 		methods: {
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6)

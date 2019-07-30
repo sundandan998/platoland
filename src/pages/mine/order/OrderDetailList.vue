@@ -178,14 +178,11 @@
     .buy-content {
       border-top: 1px solid #f6f6f6;
       border-bottom: 10px solid #f6f6f6;
-  
       p:first-child {
         font-size: 1.2rem;
       }
-  
       p {
         margin: 10px 15px;
-  
         span:first-child {
           color: #979EAC;
         }

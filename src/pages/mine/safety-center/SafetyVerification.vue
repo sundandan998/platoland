@@ -17,8 +17,8 @@
 		<div class="safety-verification-list" v-if="show.email">
 			<span>{{infoData.email}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">
-					<span v-show="showTimer" @click="email_code">发送</span>
-					<span v-show="!showTimer" class="count">{{count}} s</span>
+				<span v-show="showTimer" @click="email_code">发送</span>
+				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-btn">
@@ -34,7 +34,6 @@
 	// 接口请求
 	import api from "@/api/system/System.js"
 	import { toast } from '@/assets/js/pub.js'
-	// import { getCode } from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
@@ -118,9 +117,15 @@
 				} else if (this.$route.params.id == 'pwd') {
 					api.safety(this.nextParam).then(res => {
 						if (res.code == 0) {
-							this.$router.push({
-								name: 'PayPassWorde'
-							})
+							if (this.infoData.pay_pwd_active == true) {
+								this.$router.push({
+									name: 'Modify'
+								})
+							} else {
+								this.$router.push({
+									name: 'PayPassWorde'
+								})
+							}
 							toast(res)
 						}
 					}).catch(err => {

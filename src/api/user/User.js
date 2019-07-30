@@ -200,6 +200,14 @@ export default {
       data: params
     })
   },
+    // 交易市场/购买/确认支付
+    confirmPay(params = {}) {
+      return request({
+        url: "/market/transcation/confirm/",
+        method: "post",
+        data: params
+      })
+    },
   // 交易记录
   transaction(params={}){
     return request({

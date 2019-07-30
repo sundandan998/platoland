@@ -119,7 +119,7 @@
 					}).catch(err => {
 						if (err.code != 0) {
 							toast(err)
-							this.popupVisible = false
+							this.value = ''
 						}
 					})
 				} else {

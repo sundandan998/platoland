@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import { Toast } from 'mint-ui'
+	import { toast } from '@/assets/js/pub.js'
 	// 接口请求
 	import api from "@/api/user/User.js"
 	export default {
@@ -113,15 +113,14 @@
 			//消息弹框
 			successToast() {
 				api.editPwd(this.ruleForm).then(res => {
-					console.log(res)
-					this.$toast({
-						message: '重置密码成功',
-						duration: 3000
-					})
+					if (res.code == 0) {
+						this.$router.push({
+							name: 'Login'
+						})
+						Toast(res)
+					}
 				}).catch(err => {
-					console.log(err)
 				})
-
 			}
 		},
 		watch: {

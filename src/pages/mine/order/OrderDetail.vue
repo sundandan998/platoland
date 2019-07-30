@@ -28,6 +28,8 @@
         <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
       </div>
     </div>
+    <!-- <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="cancel">去支付
+    </mt-button> -->
     <!-- otc发布--出售 -->
     <div class="buy" v-if="orderData.flow_type=='OTC发布出售'">
       <div class="buy-title">
@@ -57,8 +59,8 @@
         </p>
       </div>
     </div>
-    <mt-button @click="cancel" v-if="orderData.flow_type=='OTC发布出售'" class="sell-btn" size="large" type="primary">撤销
-    </mt-button>
+    <!-- <mt-button @click="cancel" v-if="orderData.flow_type=='OTC发布出售'" class="sell-btn" size="large" type="primary">撤销
+    </mt-button> -->
     <!-- otc买入 -->
     <div class="buy" v-if="orderData.flow_type=='OTC买入'">
       <div class="buy-title">
@@ -147,8 +149,7 @@
         </p>
       </div>
     </div>
-    <mt-button v-if="orderData.flow_type=='OTC发布买入'" class="sell-btn" size="large" type="primary" @click="cancel">撤销
-    </mt-button>
+
     <!-- OTC售出 -->
     <div class="buy" v-if="orderData.flow_type=='OTC售出'">
       <div class="buy-title">
@@ -171,6 +172,20 @@
         <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
       </div>
     </div>
+    <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="popupVisible=true">去支付
+    </mt-button>
+    <mt-button v-if="orderData.is_undo==true" class="sell-btn" size="large" type="primary" @click="cancel">撤销
+    </mt-button>
+    <!-- 数字键盘 -->
+    <div>
+      <van-popup class="popupbox" position="bottom" v-model="popupVisible">
+        <span class="paymentamount">{{orderData.amount}}({{orderData.exchange_token}})</span>
+        <van-password-input :value="value" @focus="showKeyboard = true" />
+        <!-- 数字键盘 -->
+        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+          @blur="showKeyboard = false" />
+      </van-popup>
+    </div>
   </div>
 </template>
 <script>
@@ -180,13 +195,31 @@
   export default {
     data() {
       return {
-        orderData: {}
+        value: '',
+        orderData: {},
+        showKeyboard: false,
+        popupVisible: false,
+        // 支付键盘中标题
+        buyTitle: true,
+        // 确认支付参数
+        confirmPay: {
+          order_type: '',
+          payment_id: '',
+          pay_pwd: ''
+        },
       }
     },
     created() {
       this.orderDetail()
     },
     methods: {
+      onInput(key) {
+        this.value = (this.value + key).slice(0, 6)
+      },
+      onDelete() {
+        this.value = this.value.slice(0, this.value.length - 1)
+      },
+      // 订单详情
       orderDetail() {
         api.orderDetail({ order_id: this.$route.params.order_id }).then(res => {
           if (res.code == 0) {
@@ -208,21 +241,43 @@
         }).then(action => {
           if (action == 'confirm') {
             api.cancel({ order_id: this.orderData.order_id }).then(res => {
-              if(res.code==0){
+              if (res.code == 0) {
                 this.$router.push({
-                  name:'FreezeDetail'
+                  name: 'FreezeDetail',
+                  params:{code:this.orderData.order_id}
                 })
               }
             }).catch(err => {
             })
           }
         })
+      },
+    },
+    // 去支付
+    watch: {
+      value() {
+        if (this.value.length == 6) {
+          this.confirmPay.pay_pwd = this.value
+          this.confirmPay.order_type = this.orderData.order_type
+          this.confirmPay.payment_id = this.orderData.id
+          // 确认支付
+          api.confirmPay(this.confirmPay).then(res => {
+            if (res.code == 0) {
+              toast(res)
+              this.popupVisible = false
+              location.reload() 
+            }
+          }).catch(err => {
+            toast(err)
+          })
+        }
       }
     }
   }
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .order-detail-header {
     margin-bottom: 18px;
   }

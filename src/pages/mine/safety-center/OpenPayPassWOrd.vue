@@ -75,7 +75,7 @@
 					if(res.code==0){
 						toast(res)
 						this.$router.push({
-							name:'Safety'
+							name:'Mine'
 						})
 					}
 					

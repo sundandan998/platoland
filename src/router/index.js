@@ -184,6 +184,12 @@ export default new Router({
       name: 'PayPassWorde',
       component: () => import("@/pages/mine/safety-center/OpenPayPassWord")
     },
+    // 修改支付密码
+    {
+      path: '/modify',
+      name: 'Modify',
+      component: () => import("@/pages/mine/safety-center/ModifyPwd")
+    },
     //我的/安全/安全验证
     {
       path: '/safetyverification',

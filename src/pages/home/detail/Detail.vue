@@ -36,7 +36,7 @@
         <!-- 发行状态 -->
         <mt-cell :title="$t('m.issuingstate')" :value="release.status==0?'待发行':release.status==1?'发行中':'流通中'"></mt-cell>
         <!-- 锁定期限 -->
-        <mt-cell  v-if="release.freeze_days != 0" title="锁定期限" :value="release.freeze_days+'天'"></mt-cell>
+        <mt-cell v-if="release.freeze_days != 0" title="锁定期限" :value="release.freeze_days+'天'"></mt-cell>
         <!-- 计价资产 -->
         <mt-cell :title="$t('m.valuationassets')" :value="release.denominated_assets"></mt-cell>
         <!-- 初始单价 -->
@@ -59,14 +59,15 @@
         <mt-cell :title="$t('m.proportion')" :value="release.equity_issuance_ratio+'%'"></mt-cell>
       </div>
     </div>
-    <div class="pass-details-issue-btn" id="transaction" >
+    <div class="pass-details-issue-btn" id="transaction">
       <!-- <router-link :to="/deal/+detailData.code"> -->
-        <router-link :to="{name:'Deal',params:{code:this.detailData.code}}">
+      <router-link :to="{name:'Deal',params:{code:this.detailData.code}}">
         <mt-button type="primary" size="large">{{$t('m.dealwith')}}</mt-button>
       </router-link>
     </div>
     <div class="pass-details-issue-btn" id="purchase">
-      <router-link to="/buy">
+      <!-- <router-link to="/buy"> -->
+      <router-link :to="{name:'Buy',params:{id:'explore'}}">
         <mt-button type="primary" size="large">{{$t('m.buy')}}</mt-button>
       </router-link>
     </div>
@@ -83,7 +84,7 @@
       return {
         data: [],
         show: '',
-        detailData:{},
+        detailData: {},
         detailId: {},
         subject: {},
         release: {},
@@ -151,13 +152,11 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
-  .overflow-text{
-    /* float: right; */
-    /* display:block;
-    width: 200px;
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow: hidden; */
-}
-  
+  .pass-details-information-content {
+    .overflow-text {
+      .mint-cell-value{
+        width: 40%;
+      }
+    }
+  }
 </style>
