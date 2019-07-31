@@ -1,5 +1,5 @@
 //element框架
-import{Table,TableColumn,Form,FormItem,Input,Dropdown,DropdownMenu,DropdownItem,Alert,Steps,Step} from 'element-ui'
+import{Table,TableColumn,Form,FormItem,Input,Dropdown,DropdownMenu,DropdownItem,Alert,Steps,Step,Progress} from 'element-ui'
 //vant框架
 import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, 
 	TabbarItem,Button,Popup,Loading,List,PullRefresh,Search} from 'vant'
@@ -16,6 +16,7 @@ const external = {
 		Vue.use(Alert)
 		Vue.use(Steps)
 		Vue.use(Step)
+		Vue.use(Progress)
 //		-----------------------------------
 		Vue.use(PasswordInput).use(NumberKeyboard)
 		Vue.use(Tab).use(Tabs)
@@ -29,6 +30,7 @@ const external = {
 		Vue.use(List)
 		Vue.use(PullRefresh)
 		Vue.use(Search)
+	
 	}
 }
 export default external

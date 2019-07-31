@@ -25,8 +25,9 @@
 			</div>
 		</div>
 		<!-- 消息提示 -->
-		<div class="prompt" v-if="this.detail.release.freeze_days == 0">
-			<el-alert title="该通证自买入成功起将锁定180天" type="warning" show-icon :closable="false"></el-alert>
+		<div class="prompt" v-if="this.detail.release.freeze_days !=0">
+			<img src="../../../assets/images/alert.svg" alt="" class="alert-img">
+			<el-alert type="warning" show-icon :closable="false">该通证自买入成功起将锁定{{this.detail.release.freeze_days}}天</el-alert>
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
@@ -59,7 +60,7 @@
 				<p>{{$t('m.surplus')}}
 					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
 				</p>
-				<p>距发行结束剩
+				<p>发行截止日期
 					<span>{{this.detail.release.end_time}}</span>
 				</p>
 			</div>
@@ -125,12 +126,12 @@
 			this.balance()
 		},
 		// 保留两位小数
-			// filters: {
-			// 	keepTwoNum(value) {
-			// 		value = Number(value)
-			// 		return value.toFixed(2)
-			// 	}
-			// },
+		// filters: {
+		// 	keepTwoNum(value) {
+		// 		value = Number(value)
+		// 		return value.toFixed(2)
+		// 	}
+		// },
 		methods: {
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6)
@@ -251,12 +252,21 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-
+body{
+	background-color: #fff;
+}
 	/* 消息提示 */
 	.prompt {
 		height: 60px;
-    background-color: #fff;
-    padding: 0 10px;
-    margin: 9px 0;
+		background-color: #fff;
+		padding: 0 10px;
+		margin: 10px 0 40px 0;
+
+		.alert-img {
+			position: relative;
+			top: 43px;
+			z-index: 1;
+			left: 14px;
+		}
 	}
 </style>

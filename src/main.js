@@ -44,6 +44,16 @@ const i18n = new VueI18n({
       'msg': require('./assets/lang/message') // 提示信息
     }
 })
+// 全局过滤
+Vue.filter('number', function (value) {
+  if(value==0.0){
+    value = Number(value)
+    return value.toFixed(2)
+  }else{
+    value = Number(value)
+    return value
+  }
+})
 new Vue({
   el: '#app',
   router,

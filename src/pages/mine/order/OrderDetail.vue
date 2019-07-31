@@ -39,7 +39,7 @@
       <div class="buy-content">
         <p>{{orderData.amount}} {{orderData.token}}</p>
         <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee}}{{orderData.exchange_token}}</span></p>
+        <p><span>手续费</span><span class="fr">{{orderData.fee}}PLD</span></p>
       </div>
       <div class="buy-numbering">
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
@@ -90,7 +90,7 @@
       </div>
       <div class="buy-content">
         <p>{{orderData.amount}}{{orderData.token}}</p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee}}{{orderData.exchange_token}}</span></p>
+        <p><span>手续费</span><span class="fr">{{orderData.fee}} PLD</span></p>
       </div>
       <div class="buy-numbering">
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
@@ -159,7 +159,7 @@
       <div class="buy-content">
         <p>{{orderData.amount}} {{orderData.token}}</p>
         <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee}} {{orderData.exchange_token}}</span></p>
+        <p><span>手续费</span><span class="fr">{{orderData.fee}} PLD</span></p>
       </div>
       <div class="buy-numbering">
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>

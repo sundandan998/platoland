@@ -40,13 +40,13 @@
         <!-- 计价资产 -->
         <mt-cell :title="$t('m.valuationassets')" :value="release.denominated_assets"></mt-cell>
         <!-- 初始单价 -->
-        <mt-cell :title="$t('m.initialprice')" :value="release.init_price"></mt-cell>
+        <mt-cell :title="$t('m.initialprice')" :value="release.init_price|number"></mt-cell>
         <!-- 发行单价 -->
-        <mt-cell :title="$t('m.issueprice')" :value="release.issue_price"></mt-cell>
+        <mt-cell :title="$t('m.issueprice')" :value="release.issue_price|number"></mt-cell>
         <!-- 发行总量 -->
-        <mt-cell :title="$t('m.issuenum')" :value="release.first_number"></mt-cell>
+        <mt-cell :title="$t('m.issuenum')" :value="release.first_number|number"></mt-cell>
         <!-- 起购数量 -->
-        <mt-cell :title="$t('m.purchasenum')" :value="release.purchase_number"></mt-cell>
+        <mt-cell :title="$t('m.purchasenum')" :value="release.purchase_number|number"></mt-cell>
         <!-- 发行方式 -->
         <mt-cell :title="$t('m.mode')" :value="release.issuance_method"></mt-cell>
         <!-- 发行时间 -->

@@ -64,7 +64,8 @@
 				api.editAdress(this.editparams).then(res => {
 					toast(res)
 					this.$router.push({
-						name: 'Book'
+						name: 'Book',
+						params:{id:'edit'}
 					})
 				}).catch(err => {
 					console.log(err)

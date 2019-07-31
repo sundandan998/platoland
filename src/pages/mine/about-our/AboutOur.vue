@@ -32,11 +32,12 @@
 		</div>
 		<div class="about-our-contact">
 				<p> <b></b>{{$t('m.contact')}} </p>
-        <mt-cell :title="$t('m.website')" to="http://www.platoland.com" is-link value="http://www.platoland.com"></mt-cell>
-				<mt-cell :title="$t('m.Twitter')" to="" ></mt-cell>
-        <mt-cell title="reddit" to="" ></mt-cell>
-        <mt-cell title="Facebook" to="" is-link></mt-cell>
-        <mt-cell title="Telegram" to="" is-link></mt-cell>
+				<!-- to="http://www.platoland.com" is-link -->
+        <mt-cell :title="$t('m.website')"  value="http://www.platoland.com"></mt-cell>
+				<mt-cell :title="$t('m.Twitter')" ></mt-cell>
+        <mt-cell title="reddit" ></mt-cell>
+        <mt-cell title="Facebook"></mt-cell>
+        <mt-cell title="Telegram"></mt-cell>
 		</div>
 	</div>
 </template>

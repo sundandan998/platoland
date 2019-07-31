@@ -8,13 +8,13 @@
           </div>
           <div class="home-investment">
             <router-link :to="/detail/+pld.code">
-              <img :src="pld.icon" alt="" class="pld-img" />
+              <div class="pld-img"><img :src="pld.icon" alt="" /></div>
               <div class="home-investment-content">
                 <div class="home-investment-top fl">
                 </div>
                 <div class="home-investment-top-left">
                   <P>{{pld.code}} ({{pld.nickname}})<span>
-                      <img :src="pldRelease.d_icon">{{pldRelease.issue_price}}</span></P>
+                      <img :src="pldRelease.d_icon">{{pldRelease.issue_price|number}}</span></P>
                   <P>{{pld.subject}}</P>
                 </div>
                 <div class="home-investment-top-right fr">
@@ -197,11 +197,38 @@
 <style lang="scss">
   @import '../../assets/scss/global';
 
+  .home-investment {
+    .pld-img {
+      position: relative;
+      left: 15px;
+      top: 25px;
+      width: 10%;
+    }
+  }
+  .home-investment-bot {
+    height: 30px;
+    width: 100%;
+    margin-left: 15px;
+    display: flex;
+}
+  .home-investment-content {
+    margin-top: -20px;
+    margin-left: 50px;
+    height: 50px;
+    width: 85%;
+  }
+
   /* 卡片部分 */
   .childFlex {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+  }
+
+  .home-investment-bot {
+    height: 30px;
+    width: 100%;
+    margin-left: 15px;
   }
 
   .home-card-title {
@@ -212,6 +239,7 @@
     text-align: right;
     margin-right: 5px;
   }
+
   .home-subject {
     display: block;
     width: 80%;

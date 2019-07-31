@@ -5,10 +5,10 @@
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <div class="addaddress-icon" >
+    <div class="addaddress-icon">
       <img class="assets-icon" slot="icon" :src="this.$route.params.icon">
       <span>{{this.$route.params.code}}({{this.$route.params.name}})</span>
-      <p>{{this.$route.params.subject}}</p>
+      <p class="add-subject">{{this.$route.params.subject}}</p>
     </div>
     <div class="add-adress-list formData">
       <span>姓名:</span>
@@ -18,8 +18,8 @@
       <span>地址:</span>
       <mt-field v-model="addAddress.address"></mt-field>
       <router-link to="scan">
-      <img class="fr" src="../../../assets/images/scan.png" alt="">
-    </router-link>
+        <img class="fr" src="../../../assets/images/scan.png" alt="">
+      </router-link>
     </div>
     <div class="add-adress-btn">
       <!-- <router-link to="/book"> -->
@@ -37,46 +37,49 @@
 
 <script>
   import store from './../../../store/modules/app.js'
-  import {toast} from '@/assets/js/pub.js'
+  import { toast } from '@/assets/js/pub.js'
   //接口
   import api from "@/api/user/User.js"
   export default {
     data() {
       return {
-        disabled:true,
+        disabled: true,
         // 添加地址
         addAddress: {
           name: '',
           token_code: '',
           address: '',
-          remark:''
+          remark: ''
         }
       }
     },
     created() {
+      this.addAddress = this.$route.params
     },
     methods: {
       // 添加地址
       addadress() {
+				this.addAddress.id = this.$route.params.id
         this.addAddress.token_code = this.$route.params.code
         api.addAdress(this.addAddress).then(res => {
           toast(res)
           this.$router.push({
-            name:'Book'
+            name: 'Book',
+            params:{id:'out'}
           })
         }).catch(err => {
-          toast(err)
+          // toast(err)
         })
       }
     },
-    watch:{
-      addAddress:{
+    watch: {
+      addAddress: {
         immediate: true,
         deep: true,
-        handler(val){
-          if(val.name!=''&& val.address!=''){
+        handler(val) {
+          if (val.name != '' && val.address != '') {
             this.disabled = false
-          }else{
+          } else {
             this.disabled = true
           }
         }
@@ -86,5 +89,11 @@
 </script>
 
 <style lang="scss">
-  @import "../../../assets/scss/global"
+  @import "../../../assets/scss/global";
+
+  .add-address {
+    .add-subject {
+      margin-top: 16px;
+    }
+  }
 </style>

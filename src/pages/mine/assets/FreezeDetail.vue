@@ -7,12 +7,12 @@
     </div>
     <div class="freeze-information">
       <div class="freeze-down-menu">
-        <span class="el-dropdown-link">
+        <span class="el-dropdown-link" index="type" @click="handleType(index)">
           交易类型<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
-        <span class="el-dropdown-link fr">
+        <!-- <span class="el-dropdown-link fr" index="time">
           冻结时间<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
+        </span> -->
       </div>
       <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p>
       <!-- 上拉加载 -->
@@ -26,9 +26,11 @@
               <p><span>{{item.amount}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
               <p>
-                <mt-progress :value="20" :bar-height="5"></mt-progress>
+                  <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress>
+                <!-- <mt-progress :value="item.unfreeze_date | days  " :bar-height="5"></mt-progress> -->
               </p>
-              <p>还剩{{item.unfreeze_date | days}}天解冻</p>
+              <!-- <p>还剩{{item.unfreeze_date | days}}天解冻</p> -->
+              <!-- <p>还剩{{item.unfreeze_date | days}}天解冻</p> -->
             </div>
           </router-link>
           <!-- OTC发布出售 -->
@@ -43,7 +45,7 @@
                   </span>
                 </p>
                 <p>
-                  <mt-progress v-if="item.is_undo==true" :value="20" :bar-height="5"></mt-progress>
+                  <mt-progress v-if="item.is_undo==true" :value="item.amount" :bar-height="5"></mt-progress>
                 </p>
                 <p v-if="item.is_undo==true">已售出{{item.trade_amount}}</p>
                 <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
@@ -64,7 +66,7 @@
                         src="../../../assets/images/go.svg" alt="">{{item.status|status}}</span>
                   </span> </p>
                 <p>
-                  <mt-progress :value="20" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
+                  <mt-progress :value="item.amount" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
                 </p>
                 <p v-if="item.is_undo==true">已买入：{{item.trade_amount}}</p>
                 <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
@@ -107,7 +109,6 @@
     data() {
       return {
         data: '',
-        order_id: '',
         freezeData: [],
         // 上拉加载
         loading: false,
@@ -117,7 +118,7 @@
         freezeParams: {
           // pageNum: 1,
           page: 1,
-          page_size:10,
+          page_size: 10,
           code: '',
           ordering: ''
         }
@@ -141,7 +142,6 @@
           : status == 5 ? '审核中' : status == 6 ? '审核未通过' : status == 7 ? '锁仓中' : '已撤销'
       }
     },
-
     methods: {
       // 上拉加载
       onLoad() {
@@ -149,7 +149,7 @@
           this.freezeParams.code = this.$route.params.code
           api.freeze(this.freezeParams).then(res => {
             if (res.code == 0) {
-              // this.freezeData = res.data
+              // 冻结详情
               this.freezeData.push.apply(this.freezeData, res.data)
               this.loading = false
               if (res.has_next == true) {
@@ -165,16 +165,6 @@
           })
         }, 100)
       },
-      // 冻结详情
-      // freeze() {
-      //   this.freezeParams.code = this.$route.params.code
-      //   api.freeze(this.freezeParams).then(res => {
-      //     if (res.code == 0) {
-      //       this.freezeData = res.data
-      //     }
-      //   }).catch(err => {
-      //   })
-      // },
       // 撤销
       cancel(order_id) {
         this.$messagebox({
@@ -189,9 +179,6 @@
               if (res.code == 0) {
                 toast(res)
                 history.go(0)
-                // this.$router.push({
-                //   name: 'FreezeDetail',
-                // })
               }
             }).catch(err => {
               if (err.code !== 0) {
@@ -200,8 +187,25 @@
             })
           }
         })
-        return false;
-        // event.preventDefault(); 
+      },
+      // 按交易类型排序
+      handleType(index) {
+        if (index = 'type') {
+          this.freezeParams.code = this.$route.params.code
+          if (this.freezeParams.ordering == '') {
+            this.freezeParams.ordering = 'order_type,-transaction_time'
+          } else {
+            this.freezeParams.ordering = ''
+          }
+          api.freeze(this.freezeParams).then(res => {
+            this.freezeData = res.data
+          }).catch()
+        } else {
+        }
+      },
+      format(percentage) {
+        // return percentage === 100 ? '满' : `${percentage}%`;
+        return percentage ='已持有'+`${180-percentage}`+'天'
       }
     }
   }
@@ -258,4 +262,14 @@
     font-size: 0.78rem;
     line-height: 38px;
   }
+  .el-progress-bar__outer {
+    background-color: #1989FA;
+}
+.el-progress-bar__inner {
+    background-color: #ccc;
+}
+.el-progress__text {
+    font-size: 10px !important;
+    color: #ccc;
+}
 </style>

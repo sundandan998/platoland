@@ -20,7 +20,7 @@
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
       <mt-field type="text" readonly="readonly" v-model="this.$route.params.address">
-        <router-link to="/book">
+        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
       </mt-field>
@@ -119,7 +119,7 @@
             }
           })
         }
-      }
+      },
     },
     watch: {
       value() {
@@ -151,7 +151,8 @@
             this.disabled = true
           }
         }
-      }
+      },
+     
     }
   }
 </script>
