@@ -225,7 +225,6 @@
           if (res.code == 0) {
             this.orderData = res.data
             this.orderList = res.data.otc_order
-            console.log(orderList)
           }
         }).catch(err => {
         })
