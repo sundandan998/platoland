@@ -22,8 +22,10 @@
       </router-link>
     </div>
     <div class="add-adress-btn">
-      <!-- <router-link to="/book"> -->
-      <mt-button type="primary" size="large" @click="addadress()" :disabled="disabled">{{$t('m.add')}}</mt-button>
+      <!-- <router-link  :to="/book/+this.$route.params.code"> -->
+
+      <mt-button type="primary" size="large" :disabled="disabled" @click="addadress">
+        {{$t('m.add')}}</mt-button>
       <!-- </router-link> -->
     </div>
     <div class="edit-adress-text">
@@ -44,6 +46,7 @@
     data() {
       return {
         disabled: true,
+        addressData:[],
         // 添加地址
         addAddress: {
           name: '',
@@ -59,14 +62,18 @@
     methods: {
       // 添加地址
       addadress() {
-				this.addAddress.id = this.$route.params.id
+        this.addAddress.id = this.$route.params.id
         this.addAddress.token_code = this.$route.params.code
         api.addAdress(this.addAddress).then(res => {
-          toast(res)
-          this.$router.push({
-            name: 'Book',
-            params:{id:'out'}
-          })
+          if (res.code == 0) {
+            this.addressData = res.data
+            toast(res)
+            this.$router.push({
+              name: 'Book',
+              // params:{id:'out'}
+            })
+          }
+
         }).catch(err => {
           // toast(err)
         })

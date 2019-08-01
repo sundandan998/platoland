@@ -23,6 +23,7 @@
       <p>{{$t('m.payment')}}</p>
       <mt-field type="text" readonly="readonly" v-model="this.$route.params.address">
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
+        <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
       </mt-field>
@@ -63,9 +64,9 @@
 <script>
   import { mapGetters } from 'vuex'
   import api from "@/api/user/User.js"
-	import { Toast } from 'mint-ui'
+  import { Toast } from 'mint-ui'
   import { toast } from '@/assets/js/pub.js'
-	import { MessageBox } from 'mint-ui'
+  import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
@@ -83,7 +84,7 @@
         },
       }
     },
-    created () {
+    created() {
       this.addAddress = this.$route.params
     },
     computed: {
@@ -148,14 +149,14 @@
         deep: true,
         handler(val) {
           let outAddress = document.getElementById('outAddress')
-          if (val.amount != ''&& val.amount != 0 ) {
+          if (val.amount != '' && val.amount != 0) {
             this.disabled = false
           } else {
             this.disabled = true
           }
         }
       },
-     
+
     }
   }
 </script>

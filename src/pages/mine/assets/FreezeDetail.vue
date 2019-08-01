@@ -18,7 +18,7 @@
       <!-- 上拉加载 -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
-        <div class="freeze-content" v-for="item in freezeData">
+        <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
             <div class="buy" v-if="item.flow_type=='发行买入'">
@@ -26,11 +26,10 @@
               <p><span>{{item.amount|number}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
               <p>
-                  <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress>
-                <!-- <mt-progress :value="item.unfreeze_date | days  " :bar-height="5"></mt-progress> -->
+                <van-slider disabled :value="item.unfreeze_date | days" />
+                <!-- <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress> -->
               </p>
-              <!-- <p>还剩{{item.unfreeze_date | days}}天解冻</p> -->
-              <!-- <p>还剩{{item.unfreeze_date | days}}天解冻</p> -->
+              <p>已持有{{item.transaction_time | holding}}天</p>
             </div>
           </router-link>
           <!-- OTC发布出售 -->
@@ -52,7 +51,7 @@
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click.native="cancel(item.order_id)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
               </mt-button>
             </div>
           </div>
@@ -73,7 +72,7 @@
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click.native="cancel(item.order_id)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
               </mt-button>
             </div>
           </div>
@@ -108,6 +107,7 @@
   export default {
     data() {
       return {
+        value: '',
         data: '',
         freezeData: [],
         // 上拉加载
@@ -136,6 +136,14 @@
 
         let days_number = date - today
         return days_number / (24 * 3600 * 1000)
+      },
+      holding(transaction_time) {
+        let today = new Date()
+        today.setHours(0, 0, 0, 0)
+        let date = new Date(transaction_time.split(' ')[0] + ' 00:00:00')
+        let holding_days = today - date
+        return holding_days / (24 * 3600 * 1000)
+
       },
       status(status) {
         return status == 0 ? '进行中' : status == 1 ? '已完成' : status == 2 ? '失败' : status == 3 ? '待支付' : status == 4 ? '已取消'
@@ -166,7 +174,8 @@
         }, 100)
       },
       // 撤销
-      cancel(order_id) {
+      cancel(order_id, index) {
+        // debugger
         this.$messagebox({
           title: '温馨提示',
           message: `确定撤销这笔已发布的广告？`,
@@ -178,7 +187,7 @@
             api.cancel({ order_id: order_id }).then(res => {
               if (res.code == 0) {
                 toast(res)
-                history.go(0)
+                this.freezeData.splice(index, 1)
               }
             }).catch(err => {
               if (err.code !== 0) {
@@ -203,10 +212,13 @@
         } else {
         }
       },
-      format(percentage) {
-        // return percentage === 100 ? '满' : `${percentage}%`;
-        return percentage ='已持有'+`${180-percentage}`+'天'
-      }
+      onChange(value) {
+        return value = '已持有' + `${180 - value}` + '天'
+      },
+      // format(percentage) {
+      //   // return percentage === 100 ? '满' : `${percentage}%`;
+      //   return percentage = '已持有' + `${180 - percentage}` + '天'
+      // }
     }
   }
 </script>
@@ -262,14 +274,15 @@
     font-size: 0.78rem;
     line-height: 38px;
   }
-  .el-progress-bar__outer {
+  .van-slider, .van-slider__bar {
     background-color: #1989FA;
 }
-.el-progress-bar__inner {
+.van-slider__bar {
+    border-radius: inherit;
     background-color: #ccc;
 }
-.el-progress__text {
+  .el-progress__text {
     font-size: 10px !important;
     color: #ccc;
-}
+  }
 </style>

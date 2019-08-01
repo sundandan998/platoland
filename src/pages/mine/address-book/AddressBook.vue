@@ -62,7 +62,7 @@
 				this.bookParams.token_code = this.$route.params.token_code
 				api.addressList(this.bookParams).then(res => {
 					// if(res.code == 0){
-					this.book = res.data
+						this.book = res.data
 					// this.$store.commit('detail', res.data)
 					this.$router.push({
 						name: 'Edit',

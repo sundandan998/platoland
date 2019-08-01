@@ -15,7 +15,7 @@
 				<p><span>冻结额</span><b>{{details.freeze_change}}</b></p>
 			</div>
 			<div class="transaction-details-token">
-				<p><span>交易通证</span><span><img :src="details.token.icon" alt="">{{details.token.code}}</span></p>
+				<p><span>交易通证</span><span><img :src="detailsCode.icon" alt="">{{detailsCode.code}}</span></p>
 				<p><span>交易类型</span><span>{{details.flow_type}}</span></p>
 				<p><span>解锁时间</span><span>{{details.unfreeze_date}}</span></p>
 			</div>
