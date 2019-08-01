@@ -9,14 +9,14 @@
               <img slot="icon" src="../../../assets/images/gd.png">
             </span>
             <el-dropdown-menu slot="dropdown">
-              <router-link to="/scan">
+              <!-- <router-link to="/scan">
                 <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
-              </router-link>
-              <router-link :to="{name:'Out',params:{min_limit:this.assetsToken.min_limit}}">
+              </router-link> -->
+              <!-- <router-link :to="{name:'Out',params:{min_limit:this.assetsToken.min_limit}}">
                 <el-dropdown-item>
                   <span>{{$t('m.changeout')}}</span>
                 </el-dropdown-item>
-              </router-link>
+              </router-link> -->
               <el-dropdown-item>
                 <span @click="remove">{{$t('m.remove')}}</span>
               </el-dropdown-item>
@@ -77,9 +77,9 @@
 
         </router-link>
       </div>
-      <router-link to="/into">
+      <!-- <router-link to="/into">
         <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
-      </router-link>
+      </router-link> -->
       </van-tab>
       <!-- <van-tab :title="$t('m.changeout')"> -->
       <div class="assets-detailed-list" v-for="item in listData">
@@ -91,11 +91,9 @@
           <p>{{item.token.code}}</p> -->
         </router-link>
       </div>
-      <router-link to="/into">
+      <!-- <router-link to="/into">
         <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
-      </router-link>
-      <!-- </van-tab> -->
-      <!-- </van-tabs> -->
+      </router-link> -->
     </div>
   </div>
 </template>
