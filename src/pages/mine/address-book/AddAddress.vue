@@ -23,7 +23,7 @@
     </div>
     <div class="add-adress-btn">
       <!-- <router-link to="/book"> -->
-      <mt-button type="primary" size="large" @click="addadress" :disabled="disabled">{{$t('m.add')}}</mt-button>
+      <mt-button type="primary" size="large" @click="addadress()" :disabled="disabled">{{$t('m.add')}}</mt-button>
       <!-- </router-link> -->
     </div>
     <div class="edit-adress-text">

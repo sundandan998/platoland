@@ -54,7 +54,7 @@
         <!-- 截止时间 -->
         <mt-cell :title="$t('m.endtime')" :value="release.end_time"></mt-cell>
         <!-- 最小发行量 -->
-        <mt-cell :title="$t('m.minnum')" :value="release.minimum_number"></mt-cell>
+        <mt-cell :title="$t('m.minnum')" :value="release.minimum_number|number"></mt-cell>
         <!-- 股权发行比例 -->
         <mt-cell :title="$t('m.proportion')" :value="release.equity_issuance_ratio+'%'"></mt-cell>
       </div>
@@ -152,10 +152,13 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .pass-details-information-content {
     .overflow-text {
-      .mint-cell-value{
+      .mint-cell-value {
         width: 40%;
+        text-align: right;
+        display: inline-block;
       }
     }
   }

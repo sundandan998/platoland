@@ -14,7 +14,7 @@
           冻结时间<i class="el-icon-arrow-down el-icon--right"></i>
         </span> -->
       </div>
-      <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p>
+      <!-- <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p> -->
       <!-- 上拉加载 -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
@@ -23,7 +23,7 @@
             <!-- 发行买入 -->
             <div class="buy" v-if="item.flow_type=='发行买入'">
               <p>{{item.flow_type}}</p>
-              <p><span>{{item.amount}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
+              <p><span>{{item.amount|number}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
               <p>
                   <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress>
@@ -38,7 +38,7 @@
             <router-link :to="/orderdetail/+item.order_id">
               <div>
                 <p>{{item.flow_type}}</p>
-                <p><span>{{item.amount}}</span>
+                <p><span>{{item.amount|number}}</span>
                   <span class="fr">
                     <span v-if="item.is_pay==true"><img style="position: relative;top: 2px;"
                         src="../../../assets/images/go.svg" alt="">{{item.status|status}}</span>
@@ -52,7 +52,7 @@
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click.native="cancel(item.order_id)">撤销
               </mt-button>
             </div>
           </div>
@@ -61,19 +61,19 @@
             <router-link :to="/orderdetail/+item.order_id">
               <div>
                 <p>{{item.flow_type}}</p>
-                <p><span>{{item.amount}}</span><span class="fr">
+                <p><span>{{item.amount|number}}</span><span class="fr">
                     <span v-if="item.is_pay==true"><img style="position: relative;top: 2px;"
                         src="../../../assets/images/go.svg" alt="">{{item.status|status}}</span>
                   </span> </p>
                 <p>
                   <mt-progress :value="item.amount" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
                 </p>
-                <p v-if="item.is_undo==true">已买入：{{item.trade_amount}}</p>
+                <p v-if="item.is_undo==true">已买入：{{item.trade_amount|number}}</p>
                 <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click.native="cancel(item.order_id)">撤销
               </mt-button>
             </div>
           </div>
@@ -81,7 +81,7 @@
           <router-link :to="/orderdetail/+item.order_id">
             <div class="buy" v-if="item.flow_type=='转出'">
               <p>{{item.flow_type}}</p>
-              <p><span>{{item.amount}}</span><span class="fr"><img style="position: relative;top: 2px;"
+              <p><span>{{item.amount|number}}</span><span class="fr"><img style="position: relative;top: 2px;"
                     src="../../../assets/images/go.svg" alt="">
                   <span>{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
                 </span>

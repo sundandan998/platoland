@@ -15,6 +15,8 @@
         <img :src="this.detail.token.icon" alt="" class="fl">
         <span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
         <span>{{this.detail.token.subject}}</span>
+        <!-- <span>{{this.$route.params.token.code}}({{this.$route.params.token.nickname}})</span>
+        <span>{{this.$route.params.token.subject}}</span> -->
       </div>
     </div>
     <div class="purchase-pass-input">
@@ -82,6 +84,7 @@
       }
     },
     created () {
+      this.addAddress = this.$route.params
     },
     computed: {
       ...mapGetters([

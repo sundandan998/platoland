@@ -71,7 +71,7 @@
                     <li class="childFlex">
                       <span>{{$t('m.issueamount')}}</span><span>{{(parseInt(items.release.sold_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}}</span>
                     </li>
-                    <li class="childFlex"><span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price}}</span>
+                    <li class="childFlex"><span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price|number}}</span>
                     </li>
                   </ul>
                 </div>

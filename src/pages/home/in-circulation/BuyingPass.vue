@@ -25,14 +25,15 @@
 			</div>
 		</div>
 		<!-- 消息提示 -->
-		<div class="prompt" v-if="this.detail.release.freeze_days !=0">
+		<div class="alert" v-if="this.detail.release.freeze_days !=0">
 			<img src="../../../assets/images/alert.svg" alt="" class="alert-img">
-			<el-alert type="warning" show-icon :closable="false">该通证自买入成功起将锁定{{this.detail.release.freeze_days}}天</el-alert>
+			该通证自买入成功起将锁定{{this.detail.release.freeze_days}}天
+			<!-- <el-alert type="warning" show-icon :closable="false"></el-alert> -->
 		</div>
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number" type="number"
+					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number|number" type="number"
 						v-model="requsetPay.amount">
 					</mt-field>
 					<p>
@@ -58,7 +59,7 @@
 			</div> -->
 			<div class="buy-pass-time">
 				<p>{{$t('m.surplus')}}
-					<span>{{this.detail.release.first_number-this.detail.release.sold_number}}</span>
+					<span>{{this.detail.release.first_number-this.detail.release.sold_number|val}}</span>
 				</p>
 				<p>发行截止日期
 					<span>{{this.detail.release.end_time}}</span>
@@ -252,21 +253,26 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-body{
-	background-color: #fff;
-}
-	/* 消息提示 */
-	.prompt {
-		height: 60px;
+
+	body {
 		background-color: #fff;
-		padding: 0 10px;
-		margin: 10px 0 40px 0;
+	}
+
+	/* 消息提示 */
+	.alert {
+		height: 40px;
+		background-color: #FEF0F0;
+		margin: 10px 10px 30px 10px;
+		line-height: 40px;
+		border-radius: 7px;
+		color:#E6A23C;
 
 		.alert-img {
 			position: relative;
-			top: 43px;
+			top: 7px;
 			z-index: 1;
 			left: 14px;
+			padding-right: 20px;
 		}
 	}
 </style>

@@ -36,31 +36,35 @@ Vue.use(message)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 const i18n = new VueI18n({
-    locale: 'zh-CN',  // 语言标识
-    //this.$i18n.locale // 通过切换locale的值来实现语言切换
-    messages: {
-      'zh-CN': require('./assets/lang/zh'),   // 中文语言包
-      'en-US': require('./assets/lang/en'), // 英文语言包
-      'msg': require('./assets/lang/message') // 提示信息
-    }
+  locale: 'zh-CN',  // 语言标识
+  //this.$i18n.locale // 通过切换locale的值来实现语言切换
+  messages: {
+    'zh-CN': require('./assets/lang/zh'),   // 中文语言包
+    'en-US': require('./assets/lang/en'), // 英文语言包
+    'msg': require('./assets/lang/message') // 提示信息
+  }
 })
 // 全局过滤
 Vue.filter('number', function (value) {
-  if(value==0.0){
+  if (value == 0.0) {
     value = Number(value)
     return value.toFixed(2)
-  }else{
+  } else {
     value = Number(value)
     return value
   }
 })
+// 全局过滤
+Vue.filter('val', function (value) {
+  if (typeof (value) === 'number') {
+    return (value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
+}),
 new Vue({
   el: '#app',
   router,
-	store,
+  store,
   i18n,
   components: { App },
   template: '<App/>',
 })
-
-

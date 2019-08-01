@@ -13,7 +13,7 @@
 				</mt-button>
 			</mt-header>
 		</div>
-		
+
 		<div class="adress-book-list" v-for="(item,index) in book">
 			<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
 			<!-- <router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}"> -->
@@ -63,6 +63,7 @@
 				api.addressList(this.bookParams).then(res => {
 					// if(res.code == 0){
 					this.book = res.data
+					// this.$store.commit('detail', res.data)
 					this.$router.push({
 						name: 'Edit',
 						params: {
@@ -70,18 +71,18 @@
 							icon: item.token.icon, subject: item.token.subject, code: item.token.code
 						}
 					})
-					// }
-
 				}).catch(err => {
+					console.log(err)
 				})
 			},
 			routerLink(item) {
 				// debugger
 				let refpath = window.sessionStorage.getItem('refpath')
+				// refpath == '/add'
 				if (refpath == '/out' || refpath == '/edit') {
 					this.$router.push({
 						name: 'Out',
-						params: { id: item.id, address: item.address }
+						params: { id: item.id, address: item.address}
 					})
 				}
 				// window.sessionStorage.setItem('refpath','')
@@ -97,8 +98,8 @@
 					})
 				}
 
-			}
-		}
+			},
+		},
 	}
 </script>
 <style lang="scss">
