@@ -26,7 +26,8 @@
               <p><span>{{item.amount|number}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
               <p>
-                <van-slider disabled :value="item.unfreeze_date | days" />
+                <!--  -->
+                <van-slider disabled :value="item.unfreeze_date | total_days(item.transaction_time)" />
                 <!-- <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress> -->
               </p>
               <p>已持有{{item.transaction_time | holding}}天</p>
@@ -129,21 +130,35 @@
       // console.log(this.freezeData)/
     },
     filters: {
+      // 到期时间
       days(unfreeze_date) {
         let today = new Date()
         today.setHours(0, 0, 0, 0)
         let date = new Date(unfreeze_date + ' 00:00:00')
-
         let days_number = date - today
         return days_number / (24 * 3600 * 1000)
       },
+      // 创建时间
       holding(transaction_time) {
         let today = new Date()
         today.setHours(0, 0, 0, 0)
         let date = new Date(transaction_time.split(' ')[0] + ' 00:00:00')
         let holding_days = today - date
         return holding_days / (24 * 3600 * 1000)
-
+      },
+      total_days(unfreeze_date, transaction_time) {
+        let today = new Date()
+        today.setHours(0, 0, 0, 0)
+        let date = new Date(unfreeze_date + ' 00:00:00')
+        let days_number = date - today
+        let freeze_days = days_number / (24 * 3600 * 1000)
+        let transaction_date = new Date(transaction_time.split(' ')[0] + ' 00:00:00')
+        let holding_days = today - transaction_date
+        holding_days = holding_days / (24 * 3600 * 1000)
+        let percent = holding_days / (freeze_days + holding_days) * 100
+        return percent
+        // return
+        
       },
       status(status) {
         return status == 0 ? '进行中' : status == 1 ? '已完成' : status == 2 ? '失败' : status == 3 ? '待支付' : status == 4 ? '已取消'
@@ -270,19 +285,13 @@
     }
   }
 
-  .el-step__title {
-    font-size: 0.78rem;
-    line-height: 38px;
-  }
-  .van-slider, .van-slider__bar {
+  .van-slider,
+  .van-slider__bar {
     background-color: #1989FA;
-}
-.van-slider__bar {
+  }
+
+  .van-slider__bar {
     border-radius: inherit;
     background-color: #ccc;
-}
-  .el-progress__text {
-    font-size: 10px !important;
-    color: #ccc;
   }
 </style>

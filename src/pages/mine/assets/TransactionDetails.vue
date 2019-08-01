@@ -95,6 +95,7 @@
 
 			span:last-child {
 				float: right;
+				display: flex;
 			}
 		}
 

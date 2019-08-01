@@ -22,7 +22,7 @@
     <div class="purchase-pass-input">
       <p>{{$t('m.payment')}}</p>
       <mt-field type="text" readonly="readonly" v-model="this.$route.params.address">
-        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
+        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
         <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>

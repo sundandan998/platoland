@@ -33,7 +33,7 @@
 		<div class="Purchase-pass-tabbar">
 			<van-tabs @click="getActionType">
 				<van-tab :title="$t('m.number')">
-					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number|number" type="number"
+					<mt-field :placeholder="'最低购买数量'+this.detail.release.purchase_number" type="number"
 						v-model="requsetPay.amount">
 					</mt-field>
 					<p>

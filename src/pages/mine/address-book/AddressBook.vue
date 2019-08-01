@@ -62,7 +62,7 @@
 				this.bookParams.token_code = this.$route.params.token_code
 				api.addressList(this.bookParams).then(res => {
 					// if(res.code == 0){
-						this.book = res.data
+					this.book = res.data
 					// this.$store.commit('detail', res.data)
 					this.$router.push({
 						name: 'Edit',
@@ -82,8 +82,12 @@
 				if (refpath == '/out' || refpath == '/edit') {
 					this.$router.push({
 						name: 'Out',
-						params: { id: item.id, address: item.address}
+						params: { id: item.id, address: item.address,
+							code: item.token.code,subject: item.token.subject,
+							nickname:item.token.nickname
+						}
 					})
+					// this.$store.commit('detail')
 				}
 				// window.sessionStorage.setItem('refpath','')
 			},

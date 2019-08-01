@@ -12,7 +12,7 @@
 		</div>
 		<div class="edit-title">
 			<img :src="editparams.icon" alt="" class="fl" />
-			<span>{{editparams.code}}</span>
+			<span>{{editparams.code}} ({{editparams.name}})</span>
 			<p>{{editparams.subject}}</p>
 		</div>
 		<div class="add-adress-list">
