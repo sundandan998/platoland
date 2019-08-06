@@ -3,7 +3,7 @@ import{Table,TableColumn,Form,FormItem,Input,Dropdown,
 	DropdownMenu,DropdownItem,Alert,Steps,Step} from 'element-ui'
 //vant框架
 import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, 
-	TabbarItem,Button,Popup,Loading,List,PullRefresh,Search,Slider } from 'vant'
+	TabbarItem,Button,Popup,Loading,List,PullRefresh,Search,Slider} from 'vant'
 const external = {
 	install: function(Vue){
 		Vue.use(Table)

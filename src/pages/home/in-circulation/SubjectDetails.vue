@@ -56,12 +56,12 @@
 						<!-- 经营范围 -->
 						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
 						</mt-cell>
-						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
+					<!-- 	<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
 						</mt-cell>
 						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
 						</mt-cell>
 						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-						</mt-cell>
+						</mt-cell> -->
 					</div>
 				</mt-tab-container-item>
 			</mt-tab-container>

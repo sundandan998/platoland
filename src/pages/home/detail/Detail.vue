@@ -93,7 +93,7 @@
       }
     },
     created() {
-      console.log(this.$route.params.id)
+      // console.log(this.$route.params.id)
       this.detailId = this.$route.params
       this.getDetail()
     },

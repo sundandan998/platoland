@@ -14,7 +14,8 @@
                 </div>
                 <div class="home-investment-top-left">
                   <P>{{pld.code}} ({{pld.nickname}})<span>
-                      <img :src="pldRelease.d_icon">{{pldRelease.issue_price|number}}</span></P>
+                      <img :src="pldRelease.d_icon"><span
+                        class="issue-price">{{pldRelease.issue_price|number}}</span></span></P>
                   <P>{{pld.subject}}</P>
                 </div>
                 <div class="home-investment-top-right fr">
@@ -71,7 +72,8 @@
                     <li class="childFlex">
                       <span>{{$t('m.issueamount')}}</span><span>{{(parseInt(items.release.sold_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}}</span>
                     </li>
-                    <li class="childFlex"><span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price|number}}</span>
+                    <li class="childFlex">
+                      <span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price|number}}</span>
                     </li>
                   </ul>
                 </div>
@@ -90,6 +92,7 @@
 </template>
 <script>
   import Tabber from './../../assets/pub/Tabber.vue'
+  import { version } from './../../assets/pub/version.js'
   import { mapActions } from 'vuex'
   // import detail from './detail/Detail'
   import store from './../../store/modules/app.js'
@@ -101,9 +104,10 @@
       return {
         selected: 'home',
         message: 'home',
-        versionCode: {
-          version_code: '2.0',
-        },
+        versionData: '',
+        // versionCode: {
+        version_code: version,
+        // },
         animate: false,
         pld: {},
         pldRelease: {},
@@ -137,7 +141,7 @@
           this.infoData = res.data
           window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
         }).catch(err => {
-          console.log(err)
+          // console.log(err)
         })
       },
       home() {
@@ -161,38 +165,54 @@
       },
       //版本升级
       version() {
-        api.version(this.$route.params)
-          .then(res => {
-            const version = this.$version()
-            this.$store.commit('version', res.data)
-            if (parseFloat(version) > parseFloat(version)) {
-              let isForce = false
-              if (data.force === 0) {
-                isForce = true
+        api.version(this.version_code).then(res => {
+          let isForce = false
+          if (res.code == 0) {
+            isForce = true
+            this.versionData = res
+            if (this.versionData.is_force_update == true) {
+              this.$messagebox({
+                title: '版本升级',
+                message: this.versionData.version_info,
+                closeOnClickModal: false,
+                // cancelButtonText: '否',
+                confirmButtonText: '去更新',
+                // showCancelButton: true
+              }).then(action => {
+                // console.log(this.versionData.update_url)
+                if (window.plus) {
+                  plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+                  plus.runtime.quit()
+                  // console.log(this.versionData.update_url)
+                }
+              })
+            } else {
+              if (this.versionData.is_update == true) {
+                // isForce = true
+                // this.versionData = res
+                this.$messagebox({
+                  title: '版本升级',
+                  message: this.versionData.version_info,
+                  cancelButtonText: '否',
+                  confirmButtonText: '是',
+                  showCancelButton: true
+                }).then(action => {
+                  if (action === 'confirm') {
+                    if (window.plus) {
+                      // console.log(this.versionData.update_url)
+                      plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+                      plus.runtime.quit()
+                    }
+                  }
+                })
               }
-              this.upgrade(isForce)
             }
-          }).catch(err => {
-            // console.log(err)
-          })
-      },
-      upgrade(isShow) {
-        this.$messagebox.confirm('', {
-          closeOnClickModal: false,
-          showCancelButton: isShow,
-          message: "<div><p> 1.Repair part of BUG</p><p>2.Optimization experience</p></div>",
-          title: 'New Edition Reminder',
-          confirmButtonText: 'Upgrade',
-          cancelButtonText: 'Cancel'
-        }).then(action => {
-          if (window.plus) {
-            plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
-            plus.runtime.quit();
           }
-        }, cancel => { })
+        })
       }
-    },
+    }
   }
+
 </script>
 <style lang="scss">
   @import '../../assets/scss/global';
@@ -205,12 +225,22 @@
       width: 10%;
     }
   }
+
+  .home-investment-top-left {
+    .issue-price {
+      position: relative;
+      top: -7px;
+      left: -10px;
+    }
+  }
+
   .home-investment-bot {
     height: 30px;
     width: 100%;
     margin-left: 15px;
     display: flex;
-}
+  }
+
   .home-investment-content {
     margin-top: -20px;
     margin-left: 50px;
