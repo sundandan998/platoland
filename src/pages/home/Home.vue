@@ -187,7 +187,7 @@
                 }
               })
             } else {
-              if (this.versionData.is_update == true) {
+              if (this.versionData.is_update == false) {
                 // isForce = true
                 // this.versionData = res
                 this.$messagebox({
