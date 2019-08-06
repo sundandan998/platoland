@@ -170,7 +170,7 @@
           if (res.code == 0) {
             isForce = true
             this.versionData = res
-            if (this.versionData.is_force_update == true) {
+            if (this.versionData.is_force_update == false) {
               this.$messagebox({
                 title: '版本升级',
                 message: this.versionData.version_info,
@@ -181,7 +181,7 @@
               }).then(action => {
                 // console.log(this.versionData.update_url)
                 if (window.plus) {
-                  plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+                  plus.runtime.openURL(this.versionData.update_url)
                   plus.runtime.quit()
                   // console.log(this.versionData.update_url)
                 }
@@ -200,7 +200,7 @@
                   if (action === 'confirm') {
                     if (window.plus) {
                       // console.log(this.versionData.update_url)
-                      plus.runtime.openURL('http://www.platoland.com/downloads/pld-latest.apk')
+                      plus.runtime.openURL(this.versionData.update_url)
                       plus.runtime.quit()
                     }
                   }
