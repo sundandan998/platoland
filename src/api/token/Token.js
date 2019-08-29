@@ -40,5 +40,13 @@ export default {
             method: "get",
             params: params
         })
-    }
+    },
+    // 转让
+    transfer(params = {}) {
+        return request({
+            url: "/token/transfer/",
+            method: "post",
+            data: params
+        })
+    },
 }

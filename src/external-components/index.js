@@ -1,11 +1,9 @@
-//element框架
-import{Table,TableColumn,Form,FormItem,Input,Dropdown,
-	DropdownMenu,DropdownItem,Alert,Steps,Step} from 'element-ui'
-//vant框架
-import { PasswordInput, NumberKeyboard,Tab, Tabs,NoticeBar,Toast,Dialog,Tabbar, 
-	TabbarItem,Button,Popup,Loading,List,PullRefresh,Search,Slider} from 'vant'
+// element框架
+import {Table, TableColumn, Form, FormItem, Input, Dropdown, DropdownMenu, DropdownItem, Alert, Steps, Step} from 'element-ui'
+// vant框架
+import {PasswordInput, NumberKeyboard, Tab, Tabs, NoticeBar, Toast, Dialog, Tabbar,TabbarItem, Button, Popup, Loading, List, PullRefresh, Search, Slider} from 'vant'
 const external = {
-	install: function(Vue){
+	install: function (Vue) {
 		Vue.use(Table)
 		Vue.use(TableColumn)
 		Vue.use(Form)
@@ -17,22 +15,20 @@ const external = {
 		Vue.use(Alert)
 		Vue.use(Steps)
 		Vue.use(Step)
-		// Vue.use(Progress)
-//		-----------------------------------
+		//		-----------------------------------
 		Vue.use(PasswordInput).use(NumberKeyboard)
 		Vue.use(Tab).use(Tabs)
 		Vue.use(NoticeBar)
 		Vue.use(Toast)
 		Vue.use(Dialog)
 		Vue.use(Tabbar).use(TabbarItem)
-    Vue.use(Button)
+		Vue.use(Button)
 		Vue.use(Popup)
 		Vue.use(Loading)
 		Vue.use(List)
 		Vue.use(PullRefresh)
 		Vue.use(Search)
 		Vue.use(Slider)
-	
 	}
 }
 export default external

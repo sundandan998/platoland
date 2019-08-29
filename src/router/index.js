@@ -124,6 +124,24 @@ export default new Router({
       name: 'FreezeDetail',
       component: () => import("@/pages/mine/assets/FreezeDetail")
     },
+    // 冻结转让
+    {
+      path: '/freezetransfer/:order_id',
+      name: 'FreezeTransfer',
+      component: () => import("@/pages/mine/assets/FreezeTransfer")
+    },
+     // 可用转让
+     {
+      path: '/availabletransfer/:code',
+      name: 'AvailableTransfer',
+      component: () => import("@/pages/mine/assets/AvailableTransfer")
+    },
+     // 确认转让
+     {
+      path: '/confirmtransfer',
+      name: 'ConfirmTransfer',
+      component: () => import("@/pages/mine/assets/ConfirmTransfer")
+    },
     //  我的---资产/明细/交易详情
     {
       path: '/transaction',

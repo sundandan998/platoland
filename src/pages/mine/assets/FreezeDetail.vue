@@ -22,13 +22,16 @@
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
             <div class="buy" v-if="item.flow_type=='发行买入'">
+              <router-link :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
+                <div class="issue-buy">
+                  <mt-button size="small" type="primary" class="fr transfer">转让</mt-button>
+                </div>
+              </router-link>
               <p>{{item.flow_type}}</p>
               <p><span>{{item.amount|number}}</span><span class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
               <p>
-                <!--  -->
                 <van-slider disabled :value="item.unfreeze_date | total_days(item.transaction_time)" />
-                <!-- <el-progress :stroke-width="10"  :format="format" :percentage="item.unfreeze_date | days " background-color="#1989FA"></el-progress> -->
               </p>
               <p>已持有{{item.transaction_time | holding}}天</p>
             </div>
@@ -105,6 +108,7 @@
 <script>
   import api from "@/api/user/User.js"
   import { toast } from '@/assets/js/pub.js'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -121,13 +125,12 @@
           page: 1,
           page_size: 10,
           code: '',
-          ordering: ''
+          ordering: '',
         }
       }
     },
     created() {
-      // this.onLoad()
-      // console.log(this.freezeData)/
+    
     },
     filters: {
       // 到期时间
@@ -158,7 +161,7 @@
         let percent = holding_days / (freeze_days + holding_days) * 100
         return percent
         // return
-        
+
       },
       status(status) {
         return status == 0 ? '进行中' : status == 1 ? '已完成' : status == 2 ? '失败' : status == 3 ? '待支付' : status == 4 ? '已取消'
@@ -230,11 +233,12 @@
       onChange(value) {
         return value = '已持有' + `${180 - value}` + '天'
       },
-      // format(percentage) {
-      //   // return percentage === 100 ? '满' : `${percentage}%`;
-      //   return percentage = '已持有' + `${180 - percentage}` + '天'
-      // }
-    }
+    },
+    // computed: {
+    //   ...mapGetters([
+    //     'detail'
+    //   ])
+    // },
   }
 </script>
 <style lang="scss">
@@ -259,12 +263,11 @@
   }
 
   .freeze-information {
-
     height: auto;
     background-color: #fff;
 
     p {
-      margin: 5px 15px;
+      margin: 15px 15px;
     }
 
     .freeze-content {
@@ -279,6 +282,10 @@
         right: 15px;
       }
 
+      .issue-buy button {
+        top: 0px;
+      }
+
       .to-pay {
         border-top: 10px solid #f6f6f6;
       }
@@ -288,6 +295,10 @@
   .van-slider,
   .van-slider__bar {
     background-color: #1989FA;
+  }
+
+  .van-slider--disabled {
+    opacity: unset !important;
   }
 
   .van-slider__bar {

@@ -35,11 +35,13 @@
           <li>{{this.assetsToken.subject}}</li>
         </ul>
       </div>
-      <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount">
-        <img slot="icon" src="../../../assets/images/u4662.png">
-      </mt-cell>
-      <!-- <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code}}"> -->
-      <router-link :to="/freeze/+this.assetsToken.code">
+      <router-link :to="{name:'AvailableTransfer',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
+        <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount" is-link>
+          <img slot="icon" src="../../../assets/images/u4662.png">
+        </mt-cell>
+      </router-link>
+      <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
+        <!-- <router-link :to="/freeze/+this.assetsToken.code"> -->
         <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount" is-link>
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
@@ -120,6 +122,7 @@
     },
     created() {
       this.assetDetail()
+      
     },
     methods: {
       // 资产详情
@@ -127,6 +130,7 @@
         // debugger
         api.assetDetail(this.$route.params).then(res => {
           this.assetsData = res.data
+          // console.log( )
           this.assetsToken = res.data.token
           this.$store.commit('detail', res.data)
           this.details.code = this.assetsToken.code
