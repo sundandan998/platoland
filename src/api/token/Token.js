@@ -49,4 +49,12 @@ export default {
             data: params
         })
     },
+    // 订单详情
+  detail(params = {}) {
+    return request({
+      url: "/user/order/"+params.order_id+"/detail/",
+      method: "get",
+      params: params
+    })
+  },
 }

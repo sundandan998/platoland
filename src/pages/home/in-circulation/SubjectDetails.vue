@@ -31,37 +31,31 @@
 						</mt-cell>
 						<!-- 注册住所 -->
 						<!-- :label="subjectData.registered_address" -->
-						<mt-cell :title="$t('m.residence')" :label="subjectData.registered_address">
+						<!-- <mt-cell :title="$t('m.residence')" :label="subjectData.registered_address"> -->
 							<!-- <span class="subject-address">{{subjectData.registered_address}}</span> -->
-						</mt-cell>
+						<!-- </mt-cell> -->
 						<!-- 经营地址 -->
-						<mt-cell :title="$t('m.businessaddress')" :label="subjectData.business_address">
-						</mt-cell>
+						<!-- <mt-cell :title="$t('m.businessaddress')" :label="subjectData.business_address">
+						</mt-cell> -->
 						<!-- 法 人 -->
-						<mt-cell :title="$t('m.people')">
+						<!-- <mt-cell :title="$t('m.people')">
 							<span>{{subjectData.legal_person}}</span>
-						</mt-cell>
+						</mt-cell> -->
 						<!-- 注册资本 -->
-						<mt-cell :title="$t('m.capital')">
+						<!-- <mt-cell :title="$t('m.capital')">
 							<span>{{subjectData.registered_capital}}万</span>
-						</mt-cell>
+						</mt-cell> -->
 						<!-- 成立日期 -->
-						<mt-cell :title="$t('m.establishdate')">
+						<!-- <mt-cell :title="$t('m.establishdate')">
 							<span>{{subjectData.build_time}}</span>
-						</mt-cell>
+						</mt-cell> -->
 						<!-- 营业期限 -->
-						<mt-cell :title="$t('m.term')">
+						<!-- <mt-cell :title="$t('m.term')">
 							<span>{{subjectData.start_time}} 至 {{subjectData.end_time}}</span>
-						</mt-cell>
+						</mt-cell> -->
 						<!-- 经营范围 -->
 						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
 						</mt-cell>
-					<!-- 	<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-						</mt-cell>
-						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-						</mt-cell>
-						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
-						</mt-cell> -->
 					</div>
 				</mt-tab-container-item>
 			</mt-tab-container>

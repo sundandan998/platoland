@@ -170,7 +170,7 @@
           if (res.code == 0) {
             isForce = true
             this.versionData = res
-            if (this.versionData.is_force_update == false) {
+            if (this.versionData.is_force_update == true) {
               this.$messagebox({
                 title: '版本升级',
                 message: this.versionData.version_info,
@@ -187,7 +187,7 @@
                 }
               })
             } else {
-              if (this.versionData.is_update == false) {
+              if (this.versionData.is_update == true) {
                 // isForce = true
                 // this.versionData = res
                 this.$messagebox({

@@ -27,6 +27,7 @@
 </template>
 <script>
   import { mapActions } from 'vuex'
+  import { mapGetters } from 'vuex'
   // 接口
   import api from "@/api/user/User.js"
   export default {
@@ -54,13 +55,12 @@
         value = Number(value)
         return value.toFixed(2)
       }
-    }
+    },
   }
 </script>
 
 <style lang="scss">
   @import "../../../assets/scss/global";
-
   .assest-header {
     margin-bottom: 28px;
   }

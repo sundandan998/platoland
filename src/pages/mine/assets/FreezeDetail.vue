@@ -21,7 +21,7 @@
         <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
-            <div class="buy" v-if="item.flow_type=='发行买入'">
+            <div class="buy" v-if="item.flow_type=='发行买入'||item.flow_type=='受让'">
               <router-link :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
                 <div class="issue-buy">
                   <mt-button size="small" type="primary" class="fr transfer">转让</mt-button>
@@ -108,7 +108,6 @@
 <script>
   import api from "@/api/user/User.js"
   import { toast } from '@/assets/js/pub.js'
-  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -130,7 +129,6 @@
       }
     },
     created() {
-    
     },
     filters: {
       // 到期时间
@@ -160,8 +158,6 @@
         holding_days = holding_days / (24 * 3600 * 1000)
         let percent = holding_days / (freeze_days + holding_days) * 100
         return percent
-        // return
-
       },
       status(status) {
         return status == 0 ? '进行中' : status == 1 ? '已完成' : status == 2 ? '失败' : status == 3 ? '待支付' : status == 4 ? '已取消'
@@ -234,11 +230,6 @@
         return value = '已持有' + `${180 - value}` + '天'
       },
     },
-    // computed: {
-    //   ...mapGetters([
-    //     'detail'
-    //   ])
-    // },
   }
 </script>
 <style lang="scss">
@@ -294,7 +285,7 @@
 
   .van-slider,
   .van-slider__bar {
-    background-color: #1989FA;
+    background-color: #1989FA !important;
   }
 
   .van-slider--disabled {
@@ -303,6 +294,6 @@
 
   .van-slider__bar {
     border-radius: inherit;
-    background-color: #ccc;
+    background-color: #ccc !important;
   }
 </style>

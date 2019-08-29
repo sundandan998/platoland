@@ -36,7 +36,7 @@ export const m = {
 	explain:'权益说明',
 	issuedata:'发行数据',
 	issuingstate:'发行状态',
-	proportion:'股权发行比例',
+	proportion:'股权锁定',
 	valuationassets:'计价资产',
 	mode:'发行方式',
 	issuetime:'发行日期',

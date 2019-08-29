@@ -1,5 +1,10 @@
 <template>
   <div class="confirm-transfer">
+    <div class="freeze-header">
+      <mt-header fixed title="确认转让">
+        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+      </mt-header>
+    </div>
     <div class="confirm-transfer-notice">
       <van-notice-bar :scrollable="false">
         请仔细核实交易信息,交易成功后资产无法撤回
@@ -8,17 +13,20 @@
     <div class="confirm-transfer-info">
       <mt-cell title="收款人" :value="this.$route.params.transferParams.email"></mt-cell>
       <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
-      <mt-cell title="手续费" :value="this.$route.params.token"></mt-cell>
+      <mt-cell title="手续费" value="0"></mt-cell>
     </div>
     <div class="confirm-transfer-progress" v-if="this.$route.params.transferParams.action=='freeze'">
       <span class="confirm-transfer-type">{{this.$route.params.transferParams.type}}</span>
-      <p><span>{{this.$route.params.transferParams.num}}</span><span class="fr">还剩{{}}天解冻</span></p>
+      <p><span>{{this.$route.params.transferParams.num}}</span><span
+          class="fr">还剩{{freezeData.unfreeze_date|days}}天解冻</span></p>
       <div class="confirm-transfer-num">
-        <van-slider disabled />
+        <van-slider disabled :value="freezeData.unfreeze_date | total_days(freezeData.transaction_time)" />
       </div>
       <span>到期日 {{this.$route.params.transferParams.date}}</span>
     </div>
-    <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button>
+    <div class="confirm-transfer-button">
+      <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button>
+    </div>
     <!-- 数字键盘 -->
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
@@ -38,7 +46,6 @@
   export default {
     data() {
       return {
-        // pay_pwd: '',
         value: '',
         showKeyboard: false,
         popupVisible: false,
@@ -47,13 +54,15 @@
           email: this.$route.params.transferParams.email,
           amount: this.$route.params.transferParams.amount,
           code: this.$route.params.transferParams.code,
-          pay_pwd:'',
+          pay_pwd: '',
           order_id: this.$route.params.transferParams.order_id
-        }
+        },
+        freezeData: []
       }
     },
     created() {
       document.title = '确认转让'
+      this.freeze()
     },
     methods: {
       onInput(key) {
@@ -64,8 +73,55 @@
       },
       //转让
       transfer() {
-        this.popupVisible = true
+        let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
+        if (pay_pwd == 'true') {
+          this.popupVisible = true
+        } else {
+          this.$messagebox({
+            title: '提示',
+            message: `请先设置支付密码再进行操作`,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              this.$router.push({
+                name: 'Safety'
+                // params: { id: 'reservation' }
+              })
+            }
+          })
+        }
+      },
+      // 冻结详情
+      freeze() {
+        api.detail({ order_id: this.$route.params.transferParams.order_id }).then(res => {
+          this.freezeData = res.data
+        }).catch(err => {
+        })
       }
+    },
+    filters: {
+      // 到期时间
+      days(unfreeze_date) {
+        let today = new Date()
+        today.setHours(0, 0, 0, 0)
+        let date = new Date(unfreeze_date + ' 00:00:00')
+        let days_number = date - today
+        return days_number / (24 * 3600 * 1000)
+      },
+      total_days(unfreeze_date, transaction_time) {
+        let today = new Date()
+        today.setHours(0, 0, 0, 0)
+        let date = new Date(unfreeze_date + ' 00:00:00')
+        let days_number = date - today
+        let freeze_days = days_number / (24 * 3600 * 1000)
+        let transaction_date = new Date(transaction_time.split(' ')[0] + ' 00:00:00')
+        let holding_days = today - transaction_date
+        holding_days = holding_days / (24 * 3600 * 1000)
+        let percent = holding_days / (freeze_days + holding_days) * 100
+        return percent
+      },
     },
     watch: {
       value() {
@@ -74,6 +130,10 @@
           api.transfer(this.confirmTransfer).then(res => {
             if (res.code === 0) {
               toast(res)
+              this.$router.push({
+                name: 'OrderDetail',
+                params: { order_id: res.order_id,path:'confirm' }
+              })
             }
           }).catch(err => {
             if (err.code !== 0) {
@@ -89,14 +149,17 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   body {
     background-color: #fff;
   }
 
   .confirm-transfer {
-    button {
-      position: fixed;
-      bottom: 10px;
+    .confirm-transfer-button {
+      button {
+        position: fixed;
+        bottom: 10px;
+      }
     }
   }
 
@@ -110,6 +173,11 @@
 
     .confirm-transfer-num {
       margin: 15px 0 20px 0px;
+    }
+
+    .van-slider__bar {
+      border-radius: inherit;
+      background-color: #ccc !important;
     }
   }
 </style>

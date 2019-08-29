@@ -12,9 +12,9 @@ const service = axios.create({
   //`transformRequest`选项允许我们在请求发送到服务器之前对请求的数据做出一些改动
   //该选项只适用于以下请求方式：`put/post/patch`
   //数组里面的最后一个函数必须返回一个字符串、-一个`ArrayBuffer`或者`Stream`
-  transformRequest: [    function (data) {
-      return qs.stringify(data);
-    }
+  transformRequest: [function (data) {
+    return qs.stringify(data);
+  }
   ],
   //`paramsSerializer`是一个可选的函数，起作用是让参数（params）序列化
   paramsSerializer: function (params) {
@@ -22,9 +22,9 @@ const service = axios.create({
   },
   //`transformResponse`选项允许我们在数据传送到`then/catch`方法之前对数据进行改动
   // 在此处可以判断data里的status
-  transformResponse: [    function (data) {
-      return data;
-    }
+  transformResponse: [function (data) {
+    return data;
+  }
   ],
   // 是否跨域
   withCredentials: false,
@@ -41,7 +41,7 @@ service.interceptors.request.use(
     }
     if (config.loading) {
       store.dispatch("setLoading", true);
-  }
+    }
     return config;
   },
   error => {
@@ -51,10 +51,17 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
+    if (response.status == 401 || response.status == 403) {
+      window.localStorage.removeItem('token')
+      router.push({
+        path: '/login'
+      })
+    }
     let data = JSON.parse(response.data)
     if (response.config.loading) {
       store.dispatch("setLoading", false);
     }
+
     if (data.code === 0) {
       return data;
     } else {

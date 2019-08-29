@@ -41,7 +41,6 @@
         </mt-cell>
       </router-link>
       <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
-        <!-- <router-link :to="/freeze/+this.assetsToken.code"> -->
         <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount" is-link>
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
@@ -122,7 +121,6 @@
     },
     created() {
       this.assetDetail()
-      
     },
     methods: {
       // 资产详情

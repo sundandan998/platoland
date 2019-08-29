@@ -10,11 +10,13 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
-      window.sessionStorage.setItem("token", token);
+      // window.sessionStorage.setItem("token", token);
+      window.localStorage.setItem("token", token);
     },
     SET_USERINFO: (state, userInfo) => {
       state.userInfo = userInfo;
-      window.sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+      // window.sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+      window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
     },
     SET_ROLEROUTER: (state, roleRouter) => {
       state.roleRouter = roleRouter;

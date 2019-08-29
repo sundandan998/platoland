@@ -2,12 +2,12 @@
   <div class="order">
     <div class="order-header">
       <mt-header fixed title="订单">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button icon slot="right">
+        <mt-button icon="back" slot="left" @click.native="back">{{$t('m.back')}}</mt-button>
+        <!-- <mt-button icon slot="right">
           <router-link to="/detailedlist">
             <span>筛选</span><img src="../../../assets/images/filter.svg" alt>
           </router-link>
-        </mt-button>
+        </mt-button> -->
       </mt-header>
     </div>
     <!-- 下拉刷新 -->
@@ -19,7 +19,7 @@
           <div class="order-list-data">
             <p class="order-list-date"><span>{{item.transaction_time}}</span><span class="fr">{{item.status}}</span></p>
             <p class="order-list-type">{{item.order_type}} <span
-                v-if="item.order_type !='转出'&&item.order_type !='转入'">-{{item.token}}/{{item.exchange_token}}</span>
+                v-if="item.order_type !='转出'&&item.order_type !='转入'&&item.order_type !='受让'&&item.order_type !='转让'">-{{item.token}}/{{item.exchange_token}}</span>
             </p>
             <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr" v-if="item.order_type!='转出'&&item.order_type!='转入'">总额：{{item.total_amount}}</span>
             </p>
@@ -68,6 +68,11 @@
           })
         }, 100)
       },
+      back(){
+        this.$router.push({
+          name:'Mine'
+        })
+      }
     }
   } 
 </script>

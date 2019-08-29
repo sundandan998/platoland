@@ -2,9 +2,7 @@
   <div>
     <div class="turn-out-header">
       <mt-header fixed title="用户使用协议">
-        <router-link to="/login" slot="left">
-          <mt-button icon="back">返回</mt-button>
-        </router-link>
+        <mt-button icon="back" v-on:click="$router.go(-1)" slot="left">返回</mt-button>
       </mt-header>
     </div>
     <div class="agreement-content">
@@ -41,16 +39,19 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .agreement-content {
     height: auto;
     padding: 10px;
     margin-top: 20px;
     background-color: #fff;
   }
+
   .agreement-content p {
     text-indent: 2em;
     font-size: 0.78rem;
   }
+
   .agreement-content span {
     font-size: 0.78rem;
     font-weight: 700;
