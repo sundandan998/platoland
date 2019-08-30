@@ -70,12 +70,14 @@
   import { mapActions, mapGetters } from 'vuex'
   // 列表接口
   import api from "@/api/token/Token.js"
+  import system from "@/api/system/System.js"
   export default {
     name: 'page-tabbar',
     data() {
       return {
         selected: 'explore',
         message: 'explore',
+        versionData: '',
         issuedata: [],
         listParams: {
           status: ''
@@ -87,6 +89,9 @@
     },
     mounted() {
       this.index(0, 'All')
+    },
+    created() {
+      this.version()
     },
     methods: {
       // 展示全部列表
@@ -119,6 +124,52 @@
           this.issuedata = res.data
         }).catch(err => {
           console.log(err)
+        })
+      },
+      version() {
+        let vcode = this.$version()
+        system.version({ 'version_code': vcode }).then(res => {
+          if (res.code == 0) {
+            this.versionData = res
+            if(this.versionData.is_update == false) return
+            if (this.versionData.is_force_update == true) {
+              this.$messagebox({
+                title: '版本升级',
+                message: this.versionData.version_info,
+                closeOnClickModal: false,
+                // cancelButtonText: '否',
+                confirmButtonText: '去更新',
+                // showCancelButton: true
+              }).then(action => {
+                // console.log(this.versionData.update_url)
+                if (window.plus) {
+                  plus.runtime.openURL(this.versionData.update_url)
+                  plus.runtime.quit()
+                  // console.log(this.versionData.update_url)
+                }
+              })
+            } else {
+              
+                // isForce = true
+                // this.versionData = res
+                this.$messagebox({
+                  title: '版本升级',
+                  message: this.versionData.version_info,
+                  cancelButtonText: '否',
+                  confirmButtonText: '是',
+                  showCancelButton: true
+                }).then(action => {
+                  if (action === 'confirm') {
+                    if (window.plus) {
+                      // console.log(this.versionData.update_url)
+                      plus.runtime.openURL(this.versionData.update_url)
+                      plus.runtime.quit()
+                    }
+                  }
+                })
+             
+            }
+          }
         })
       }
     }

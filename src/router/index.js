@@ -56,12 +56,12 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import("@/pages/home/Home")
+      component: () => import("@/pages/explore/Explore")
     },
     {
       path: '/home',
-      name: 'Home',
-      component: () => import("@/pages/home/Home")
+      name: 'MyHome',
+      component: () => import("@/pages/explore/Explore")
     },
 
     //  我的
