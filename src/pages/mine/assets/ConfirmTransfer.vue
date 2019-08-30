@@ -12,7 +12,7 @@
     </div>
     <div class="confirm-transfer-info">
       <mt-cell title="收款人" :value="this.$route.params.transferParams.email"></mt-cell>
-      <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
+      <mt-cell title="数量" :value="this.$route.params.transferParams.amount+'('+this.$route.params.transferParams.code+')'"></mt-cell>
       <mt-cell title="手续费" value="0"></mt-cell>
     </div>
     <div class="confirm-transfer-progress" v-if="this.$route.params.transferParams.action=='freeze'">

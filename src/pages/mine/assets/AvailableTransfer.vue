@@ -8,7 +8,7 @@
     <div class="transfer-content">
       <div class="transfer-progress-name">
         <span>收款人</span>
-        <mt-field v-model="transferParams.email" type="email" @blur.native.capture="emailCheck" :state="emailStatus">
+        <mt-field v-model="transferParams.email" placeholder="请输入收款人邮箱" type="email" @blur.native.capture="emailCheck" :state="emailStatus">
         </mt-field>
       </div>
       <div class="transfer-progress-amount">

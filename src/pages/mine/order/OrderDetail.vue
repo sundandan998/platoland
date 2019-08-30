@@ -36,24 +36,16 @@
       </div>
       <div class="buy-content">
         <p>{{orderData.amount}} {{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
       </div>
       <div class="buy-numbering">
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-        <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
-        <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
         <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
       </div>
-    </div>
-    <!-- 受让 -->
-    <div class="buy" v-if="orderData.flow_type=='受让'">
-      <div class="buy-title">
+      <div class="buy-date">
+        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+      </div>
+      <!-- <div class="buy-title">
         <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
             alt="">{{orderData.status}}</span>
       </div>
@@ -72,6 +64,44 @@
         <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
         <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
         <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+      </div> -->
+    </div>
+    <!-- 受让 -->
+    <div class="buy" v-if="orderData.flow_type=='受让'">
+      <!-- <div class="buy-title">
+        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+            alt="">{{orderData.status}}</span>
+      </div>
+      <div class="buy-content">
+        <p>{{orderData.amount}} {{orderData.token}}</p>
+        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+      </div>
+      <div class="buy-numbering">
+        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+        <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+        <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
+        <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
+        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+      </div>
+      <div class="buy-date">
+        <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
+        <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
+        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+      </div> -->
+      <div class="buy-title">
+        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+            alt="">{{orderData.status}}</span>
+      </div>
+      <div class="buy-content">
+        <p>{{orderData.amount}} {{orderData.token}}</p>
+      </div>
+      <div class="buy-numbering">
+        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+      </div>
+      <div class="buy-date">
+        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
       </div>
     </div>
     <!-- <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="cancel">去支付
@@ -266,13 +296,13 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       // 返回
-      back(){
-        if(this.$route.params.path=='confirm'){
+      back() {
+        if (this.$route.params.path == 'confirm') {
           this.$router.push({
-            name:'Order',
+            name: 'Order',
             // params:{id:}
           })
-        }else{
+        } else {
           this.$router.go(-1)
         }
       },
