@@ -21,7 +21,6 @@ const getters = {
         let stroageUserInfo = JSON.parse(
             window.sessionStorage.getItem("userInfo")
             // window.localStorage.getItem("userInfo")
-
         )
         if (
             (!state.user.userInfo ||
@@ -32,18 +31,18 @@ const getters = {
         }
         return state.user.userInfo;
     },
-    roleRouter: state => {
-        let stroageRoleRouter = JSON.parse(
-            window.sessionStorage.getItem("roleRouter")
-        );
-        if (
-            state.user.roleRouter.length === 0 &&
-            (stroageRoleRouter && stroageRoleRouter.length > 0)
-        ) {
-            store.dispatch("setRoleRouter", stroageRoleRouter);
-        }
-        return state.user.roleRouter;
-    },
+    // roleRouter: state => {
+    //     let stroageRoleRouter = JSON.parse(
+    //         window.sessionStorage.getItem("roleRouter")
+    //     );
+    //     if (
+    //         state.user.roleRouter.length === 0 &&
+    //         (stroageRoleRouter && stroageRoleRouter.length > 0)
+    //     ) {
+    //         store.dispatch("setRoleRouter", stroageRoleRouter);
+    //     }
+    //     return state.user.roleRouter;
+    // },
     tokenExpiredTime: state => {
         let stroageTokenExpiredTime = window.sessionStorage.getItem(
             "tokenExpiredTime"

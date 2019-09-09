@@ -117,10 +117,10 @@
       }
     },
     created() {
-      this.info()
       this.home()
       this.version(),
-        this.version_code = this.$route.params
+      this.version_code = this.$route.params
+      this.info()
     },
     components: {
       'app-tabber': Tabber

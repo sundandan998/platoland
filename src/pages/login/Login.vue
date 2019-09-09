@@ -17,8 +17,8 @@
         @blur.native.capture="emailCheck" :state="emailStatus">
       </mt-field>
       <img src="../../assets/images/email.png" alt="" class="login-icon">
-      <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" 
-      :type="pwdType"@blur.native.capture="pwdCheck" :state="pwdlStatus">
+      <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" :type="pwdType"
+        @blur.native.capture="pwdCheck" :state="pwdlStatus">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/pass.png" alt="" class="login-icon">
@@ -177,7 +177,7 @@
       changeType() {
         this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
         this.seen = !this.seen
-      }
+      },
     },
 
     watch: {
@@ -202,7 +202,8 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
-  body{
+
+  body {
     height: 100%;
     background-color: #fff;
   }

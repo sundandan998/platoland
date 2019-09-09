@@ -32,7 +32,7 @@
 						<!-- 注册住所 -->
 						<!-- :label="subjectData.registered_address" -->
 						<!-- <mt-cell :title="$t('m.residence')" :label="subjectData.registered_address"> -->
-							<!-- <span class="subject-address">{{subjectData.registered_address}}</span> -->
+						<!-- <span class="subject-address">{{subjectData.registered_address}}</span> -->
 						<!-- </mt-cell> -->
 						<!-- 经营地址 -->
 						<!-- <mt-cell :title="$t('m.businessaddress')" :label="subjectData.business_address">
@@ -58,6 +58,11 @@
 						</mt-cell>
 					</div>
 				</mt-tab-container-item>
+				<mt-tab-container-item id="introduce">
+					<div class="information-introduction" v-for="(img,index) in subjectData.introduction">
+						<img :src="img" alt="">
+					</div>
+				</mt-tab-container-item>
 			</mt-tab-container>
 		</div>
 	</div>
@@ -71,8 +76,6 @@
 				selected: 'information',
 				subjectId: {},
 				subjectData: {},
-				subjectImg: {},
-				// introduction:[]
 			}
 		},
 		created() {
@@ -106,5 +109,11 @@
 		display: block;
 		word-wrap: break-word;
 		overflow: hidden;
+	}
+
+	.information-introduction {
+		img {
+			width: 100%;
+		}
 	}
 </style>

@@ -61,7 +61,6 @@ service.interceptors.response.use(
     if (response.config.loading) {
       store.dispatch("setLoading", false);
     }
-
     if (data.code === 0) {
       return data;
     } else {
