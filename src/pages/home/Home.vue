@@ -92,7 +92,6 @@
 </template>
 <script>
   import Tabber from './../../assets/pub/Tabber.vue'
-  import { version } from './../../assets/pub/version.js'
   import { mapActions } from 'vuex'
   // import detail from './detail/Detail'
   import store from './../../store/modules/app.js'
@@ -105,9 +104,6 @@
         selected: 'home',
         message: 'home',
         versionData: '',
-        // versionCode: {
-        version_code: version,
-        // },
         animate: false,
         pld: {},
         pldRelease: {},
@@ -165,11 +161,11 @@
       },
       //版本升级
       version() {
-        api.version(this.version_code).then(res => {
-          let isForce = false
+        let vcode = this.$version()
+        api.version({ 'version_code': vcode }).then(res => {
           if (res.code == 0) {
-            isForce = true
             this.versionData = res
+            if(this.versionData.is_update == false) return
             if (this.versionData.is_force_update == true) {
               this.$messagebox({
                 title: '版本升级',
@@ -187,7 +183,7 @@
                 }
               })
             } else {
-              if (this.versionData.is_update == true) {
+              
                 // isForce = true
                 // this.versionData = res
                 this.$messagebox({
@@ -205,7 +201,7 @@
                     }
                   }
                 })
-              }
+             
             }
           }
         })

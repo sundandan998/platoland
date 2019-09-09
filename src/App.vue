@@ -14,7 +14,23 @@
     </div>
   </div>
 </template>
-
+<script>
+import api from "@/api/system/System.js"
+  export default { 
+  data() {
+      return {
+        versionData: '',
+      }
+    }, 
+mounted() {
+      this.version()
+    },
+methods: {
+  //版本升级
+      
+}
+}    
+</script>      
 <style lang="scss">
   /* prettier-ignore */
   #app {

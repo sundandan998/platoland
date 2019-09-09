@@ -5,7 +5,7 @@
 				<mt-tab-container-item id="mine" class="home-index">
 					<div class="mine-head">
 						<div class="mine-head-portrait">
-							<img src="../../assets/images/u2496.png" alt="" />
+							<img src="../../assets/images/avatar.png" alt="" />
 							<p>{{infoData.mobile}}</p>
 							<P>{{infoData.email}}</P>
 						</div>

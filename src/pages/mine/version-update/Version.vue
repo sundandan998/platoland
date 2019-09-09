@@ -32,9 +32,7 @@ export default{
 	methods:{
 	},
 	computed:{
-	...mapGetters([
-      'version'
-    ])
+
   },
 }
 </script>
