@@ -18,8 +18,7 @@
 		</mt-navbar>
 		<mt-tab-container v-model="active">
 		  <mt-tab-container-item id="login">
-			  <el-form :model="verification" ref="verification" :rules="rules" 				class="verification-input"
-			  	>
+			  <el-form :model="verification" ref="verification" :rules="rules" class="verification-input">
 			    <el-form-item prop="email">
 			      <el-input v-model="verification.email"
 			      	placeholder="邮箱"

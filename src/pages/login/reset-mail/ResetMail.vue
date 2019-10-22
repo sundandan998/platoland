@@ -69,6 +69,7 @@
       }
     },
     created() {
+      console.log(this.$route.params.account_type)
     },
     methods: {
       register() {
@@ -107,58 +108,61 @@
       },
       // 重新发送验证码
       renewCode() {
+        // debugger
         this.registerParsms.code = ''
-        this.email.email = this.$route.params.username
+        this.sms.mobile = this.$route.params.username
         // 发送信息
-        // if (this.account_type == '0') {
-        //   api.sms(this.sms).then(res => {
-        //     if (res.code == 0) {
-        //       toast(res)
-        //       const TIME_COUNT = 60;
-        //       if (!this.timer) {
-        //         this.count = TIME_COUNT;
-        //         this.showTimer = false;
-        //         this.timer = setInterval(() => {
-        //           if (this.count > 0 && this.count <= TIME_COUNT) {
-        //             this.count--;
-        //           } else {
-        //             this.showTimer = true;
-        //             clearInterval(this.timer);
-        //             this.timer = null;
-        //           }
-        //         }, 1000)
-        //       }
-        //     }
-        //   }).catch(err => {
-        //     if (err.code != 0) {
-        //       toast(err)
-        //     }
-        //   })
-        // } else {
-        // 发送邮箱
-        api.email(this.email).then(res => {
-          if (res.code == 0) {
-            toast(res)
-            const TIME_COUNT = 60;
-            if (!this.timer) {
-              this.count = TIME_COUNT;
-              this.showTimer = false;
-              this.timer = setInterval(() => {
-                if (this.count > 0 && this.count <= TIME_COUNT) {
-                  this.count--;
-                } else {
-                  this.showTimer = true;
-                  clearInterval(this.timer);
-                  this.timer = null;
-                }
-              }, 1000)
+        if (this.$route.params.account_type == '0') {
+          api.sms(this.sms).then(res => {
+            if (res.code == 0) {
+              toast(res)
+              const TIME_COUNT = 60;
+              if (!this.timer) {
+                this.count = TIME_COUNT;
+                this.showTimer = false;
+                this.timer = setInterval(() => {
+                  if (this.count > 0 && this.count <= TIME_COUNT) {
+                    this.count--;
+                  } else {
+                    this.showTimer = true;
+                    clearInterval(this.timer);
+                    this.timer = null;
+                  }
+                }, 1000)
+              }
             }
-          }
-        }).catch(err => {
-          if (err.code != 0) {
-            toast(err)
-          }
-        })
+          }).catch(err => {
+            if (err.code != 0) {
+              toast(err)
+            }
+          })
+        } else {
+          // 发送邮箱
+          this.email.email = this.$route.params.username
+          api.email(this.email).then(res => {
+            if (res.code == 0) {
+              toast(res)
+              const TIME_COUNT = 60;
+              if (!this.timer) {
+                this.count = TIME_COUNT;
+                this.showTimer = false;
+                this.timer = setInterval(() => {
+                  if (this.count > 0 && this.count <= TIME_COUNT) {
+                    this.count--;
+                  } else {
+                    this.showTimer = true;
+                    clearInterval(this.timer);
+                    this.timer = null;
+                  }
+                }, 1000)
+              }
+            }
+          }).catch(err => {
+            if (err.code != 0) {
+              toast(err)
+            }
+          })
+        }
       },
       onInput(key) {
         this.registerParsms.code = (this.registerParsms.code + key).slice(0, 6)

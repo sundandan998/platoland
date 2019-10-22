@@ -7,13 +7,13 @@
 				</router-link>
 			</mt-header>
 		</div>
-		<!-- <div class="safety-verification-list" v-if="show.mobile">
+		<div class="safety-verification-list" v-if="show.mobile">
 			<span>{{infoData.mobile}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">
 				<span v-show="showTimer" @click="sms_code">发送</span>
 				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
-		</div> -->
+		</div>
 		<div class="safety-verification-list" v-if="show.email">
 			<span>{{infoData.email}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">

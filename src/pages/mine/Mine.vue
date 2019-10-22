@@ -6,11 +6,14 @@
 					<div class="mine-head">
 						<div class="mine-head-portrait">
 							<img src="../../assets/images/avatar.png" alt="" />
-							<p>{{infoData.mobile}}</p>
-							<P>{{infoData.email}}</P>
+							<p>{{infoData.email||infoData.mobile}}</p>
+							<!-- <P>{{infoData.email}}</P> -->
 						</div>
 					</div>
 					<div class="mine-cell mine">
+						<!-- <mt-cell title="邀请新人" to="/invite" is-link class="mine-cell-list">
+							<img slot="icon" src="../../assets/images/people.svg">
+						</mt-cell> -->
 						<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
 							<img slot="icon" src="../../assets/images/zc.png">
 						</mt-cell>

@@ -70,6 +70,12 @@ export default new Router({
       name: 'Mine',
       component: () => import("@/pages/mine/Mine")
     },
+    // 邀请新人
+    {
+      path: '/invite',
+      name: 'Invite',
+      component: () => import("@/pages/mine/invite-people/InvitePeople")
+    },
     // 探索
     {
       path: '/explore',
