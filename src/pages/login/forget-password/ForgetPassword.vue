@@ -2,11 +2,12 @@
   <div class="forget-password">
     <router-link to="login">
       <div class="login-cancel">
-        <img src="../../../assets/images/cancel.png" alt="" />
+        <img src="../../../assets/images/back.svg" alt="" />
+        <span>返回</span>
       </div>
     </router-link>
     <div class="logo">
-      <img src="../../../assets/images/logo.png" alt="" />
+      <img src="../../../assets/images/login-logo.png" alt="" />
     </div>
     <div class="forget-password-title">
       <h1>重置登录密码</h1>
@@ -14,7 +15,8 @@
     <div class="login-content">
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- v-model="" -->
-      <mt-field label="邮箱/手机号" v-model="verification.username"placeholder="请输入邮箱或手机号"  @blur.native.capture="check" :state="status"></mt-field>
+      <mt-field label="邮箱/手机号" v-model="verification.username" placeholder="请输入邮箱或手机号" @blur.native.capture="check"
+        :state="status"></mt-field>
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- <mt-field label="手机号" v-model="verification.username" placeholder="请输入手机号"  type="tel" @blur.native.capture="telCheck" :state="telStatus"></mt-field> -->
       <!-- <el-form :model="verification" ref="verification" v-model="verification.emails" :rules="rules"
@@ -56,7 +58,7 @@
         disabled: true,
         showKeyboard: true,
         showPwd: '',
-        status:'',
+        status: '',
         username: {},
         verification: {
           username: '',
@@ -113,7 +115,7 @@
                   toast(res)
                   this.$router.push({
                     name: 'Reset',
-                    params: { action: 0, account_type: 0,username: this.verification.username}
+                    params: { action: 0, account_type: 0, username: this.verification.username }
                   })
                 }
               }).catch(err => {
@@ -134,11 +136,11 @@
           }
         })
       },
-       // 邮箱校验或手机号校验
-       check() {
+      // 邮箱校验或手机号校验
+      check() {
         var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
         var tel = /^1[23456789]\d{9}$/
-        if (!email.test(this.verification.username)&&!tel.test(this.verification.username)) {
+        if (!email.test(this.verification.username) && !tel.test(this.verification.username)) {
           this.status = 'error'
         } else {
           this.status = 'success'
@@ -153,7 +155,7 @@
           // debugger
           var tel = /^1[23456789]\d{9}$/
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-          if (val.username != '' && email.test(val.username)||tel.test(val.username)) {
+          if (val.username != '' && email.test(val.username) || tel.test(val.username)) {
             this.disabled = false
           } else {
             this.disabled = true
@@ -167,12 +169,28 @@
 <style lang="scss">
   @import '../../../assets/scss/global';
 
-  .login-content {
-    img {
-      position: relative;
-      top: 39px;
-      z-index: 1;
-      left: 15px;
+  .forget-password {
+    .login-cancel {
+      img{
+        margin-left: 15px;
+      }
+      span {
+        color: #333;
+      }
+    }
+    .logo{
+      img {
+      width: 60%;
+      margin: 0 auto;
+    }
+    }
+    .login-content {
+      img {
+        position: relative;
+        top: 39px;
+        z-index: 1;
+        left: 15px;
+      }
     }
   }
 </style>

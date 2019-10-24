@@ -2,47 +2,52 @@
   <div class="login">
     <router-link to="home">
       <div class="login-cancel">
+        <img src="../../assets/images/back.svg" alt="" />
+        <span>登录</span>
         <!-- <img src="../../assets/images/cancel.png" alt="" /> -->
       </div>
     </router-link>
     <div class="logo">
       <img src="../../assets/images/login-logo.png" alt="" />
     </div>
-    <div class="login-title">
-      <span>登录</span>
+    <div class="register-tab login-form">
+      <van-tabs v-model="active" @click="clear">
+        <van-tab title="手机号注册">
+          <mt-field label="手机" placeholder="请输入手机号" v-model="verification.username" type="tel"
+            @blur.native.capture="telCheck" :state="telStatus">
+          </mt-field>
+          <img src="../../assets/images/tel.svg" alt="" class="login-icon">
+        </van-tab>
+        <van-tab title="邮箱注册">
+          <mt-field label="邮箱" placeholder="请输入邮箱" v-model="verification.username" type="email"
+            @blur.native.capture="emailCheck" :state="emailStatus">
+          </mt-field>
+          <img src="../../assets/images/email.png" alt="" class="login-icon">
+        </van-tab>
+      </van-tabs>
     </div>
     <div class="login-form">
-      <mt-field label="账号" placeholder="请输入手机号/邮箱" v-model="verification.username" type="email"
-        @blur.native.capture="check" :state="status">
-      </mt-field>
-      <img src="../../assets/images/login-mine.svg" alt="" class="login-icon">
       <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" :type="pwdType"
         @blur.native.capture="pwdCheck" :state="pwdlStatus">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/pass.png" alt="" class="login-icon">
     </div>
-    <mt-tab-container v-model="active">
-      <mt-tab-container-item id="login">
-        <router-link to="password">
-          <span class="fr forget-pwd">忘记密码</span>
+    <div class="login-checkbox">
+      <span>注册即表示同意
+        <router-link to="agreement">
+          <a href="">《用户使用协议》</a>
         </router-link>
-
-        <div class="login-btn">
-          <mt-button type="default" @click="handleLogin" :disabled="disabled">登&nbsp;录</mt-button>
-        </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="register">
-        <div class="login-btn">
-          <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}">
-            <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
-          </router-link>
-        </div>
-      </mt-tab-container-item>
-    </mt-tab-container>
+      </span>
+    </div>
+    <div class="login-btn">
+      <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}">
+        <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
+      </router-link>
+    </div>
     <div class="login-switch">
-      <router-link to="/register">
-        <p>没有账号？去注册</p>
+      <router-link to="/login">
+        <p>已有账号？去登录</p>
       </router-link>
     </div>
   </div>
@@ -57,9 +62,11 @@
     data() {
       return {
         disabled: true,
-        status: '',
+        emailStatus: '',
+        telStatus: '',
         pwdlStatus: '',
-        active: 'login',
+        active: 0,
+        // active: 'login',
         username: {},
         hide: false,
         show: true,
@@ -154,18 +161,32 @@
           })
         }
       },
-      // 邮箱/手机号校验
-      check() {
+      // 邮箱校验
+      emailCheck() {
         var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-        var tel = /^1[23456789]\d{9}$/
-        if (!email.test(this.verification.username) && !tel.test(this.verification.username)) {
-          // this.status = 'error'
+        if (!email.test(this.verification.username)) {
+          // this.emailStatus = 'error'
           Toast({
-            message: '请填写正确的手机号或邮箱地址',
+            message: '请填写正确的邮箱地址',
             className: 'zZindex'
           })
         } else {
-          // this.status = 'success'
+          // this.emailStatus = 'success'
+        }
+      },
+      // 手机号校验
+      telCheck() {
+        var tel = /^1[23456789]\d{9}$/
+        if (!tel.test(this.verification.username)) {
+          this.verification.username = ''
+          // this.telStatus = 'error'
+          Toast({
+            message: '请填写正确手机号',
+            className: 'zZindex'
+          })
+        } else {
+          // this.telStatus = 'success'
+
         }
       },
       // 密码校验
@@ -185,8 +206,12 @@
       changeType() {
         this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
         this.seen = !this.seen
+      },
+      clear(index){
+        this.verification={}
       }
     },
+
     watch: {
       // 登录页当邮箱和密码全部输入，按钮变色
       verification: {
@@ -216,24 +241,39 @@
     height: 100%;
     background-color: #fff;
   }
+  .login-checkbox{
+      a{
+        color:#036EB8;
+      }
+    }
 
   .logo {
     .mint-cell-wrapper {
-      background-image: none;
+      background-image:none;
     }
-
     img {
       width: 60%;
       margin: 0 auto;
     }
+    
   }
-
-  .login-title {
-    margin-bottom: 50px;
-
-    span {
+  .login-cancel{
+   img{
+     margin:10px 0 -3px 15px;
+   }
+   span{
+    color: #333;
+   }
+  }
+  .register-tab {
+    margin-top: 50px;
+    .van-tab {
+      flex: none;
       margin-left: 15px;
-      font-size: 1.8rem;
+    }
+
+    .van-tabs__content {
+      margin-top: 40px;
     }
   }
 

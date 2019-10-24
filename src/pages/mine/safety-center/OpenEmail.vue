@@ -11,7 +11,7 @@
       <el-form class="demo-ruleForm">
         <el-form-item label="邮箱">
           <br>
-          <mt-field v-model="email.email" placeholder="请输入邮箱"></mt-field>
+          <mt-field v-model="email.email" placeholder="请输入邮箱" @blur.native.capture="emailCheck" ></mt-field>
         </el-form-item>
         <el-form-item label="邮箱验证">
           <br>
@@ -35,6 +35,7 @@
 <script>
   import api from "@/api/system/System.js"
   import { toast } from '@/assets/js/pub.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
@@ -74,14 +75,25 @@
         }).catch(err => {
           toast(err)
         })
-      }
+      },
+       // 邮箱校验
+       emailCheck() {
+        var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+        if (!email.test(this.email.email)) {
+          Toast({
+            message: '请填写正确的邮箱地址',
+            className: 'zZindex'
+          })
+        } 
+      },
     },
     watch: {
       email: {
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.email != '' && val.code != '') {
+          var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          if (val.email != '' && val.code != ''&&email.test(val.email)) {
             this.disabled = false
           }
         }

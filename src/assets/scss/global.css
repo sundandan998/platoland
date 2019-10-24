@@ -70,10 +70,6 @@ h1 {
   font-weight: 400;
 }
 
-body {
-  background-color: #f6f6f6;
-}
-
 .mint-popup-bottom {
   width: 100%;
 }
@@ -102,23 +98,19 @@ body {
 }
 
 .van-tabs__line {
-  background-color: #456DF1 !important;
+  background-color: #036EB8 !important;
 }
 
 .mine-cell .mint-cell-wrapper {
-  background-image: none;
+  background-image: none  !important;
 }
 
 .mine-cell .mint-cell:last-child {
-  background-image: none;
+  background-image: none  !important;
 }
 
 .mint-cell-wrapper {
-  background-image: none;
-}
-
-.login-cancel img {
-  margin: 10px;
+  background-image: none !important;
 }
 
 .logo {
@@ -175,13 +167,8 @@ body {
 .login-checkbox span {
   font-size: 0.77rem;
   margin-left: 28px;
-  float: right;
   margin-top: 4px;
   margin-right: 28px;
-}
-
-.login-checkbox span a {
-  color: #456dfe;
 }
 
 .login-checkbox .fr span {
@@ -201,7 +188,7 @@ body {
   color: #fff;
   font-size: 0.88rem;
   margin: 50px auto 10px auto;
-  width: 60%;
+  width: 90%;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 45px;
@@ -209,6 +196,7 @@ body {
 
 .forget-pwd {
   margin-right: 10px;
+  font-size: 0.78rem;
 }
 
 input.el-input__inner {
@@ -239,7 +227,6 @@ input.el-input__inner {
 }
 
 label.mint-button-text {
-  font-size: 0.79rem;
   margin-right: 10px;
 }
 
@@ -1376,7 +1363,7 @@ img.fr.tag-read {
 }
 
 .safety-center-list .mint-cell-wrapper {
-  background-image: none;
+  background-image: none  !important;
 }
 
 .safety-center-list {
@@ -1401,7 +1388,7 @@ img.fr.tag-read {
 }
 
 .rest-pass-word-from .mint-cell-wrapper {
-  background-image: none;
+  background-image: none  !important;
 }
 
 .rest-pass-word-from label {
@@ -1536,6 +1523,20 @@ img.fr.tag-read {
   margin: 0 10px 0 10px;
   padding-bottom: 10px;
 }
+
+.about-our-contact {
+  background-color: #fff;
+  width: 98%;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.about-our-contact p {
+  margin-left: 10px;
+}
+
 .adress-book-header {
   margin-bottom: 45px;
 }
@@ -1629,7 +1630,7 @@ img.fr.tag-read {
 }
 
 .add-adress-list .mint-cell-wrapper {
-  background-image: none;
+  background-image: none  !important;
 }
 
 .add-adress-btn {

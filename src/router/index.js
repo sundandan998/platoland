@@ -44,7 +44,7 @@ export default new Router({
     {
       path: '/register',
       name: 'Register',
-      component: () => import("@/pages/register/Register")
+      component: () => import("@/pages/login/Register")
     },
     //  注册/发送邮件
     {

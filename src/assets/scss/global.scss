@@ -68,7 +68,7 @@ h1{
     font-weight: 400;
 }
 body{
-    background-color: #f6f6f6;
+    // background-color: #f6f6f6;
 }
 
 //支付密码样式
@@ -96,20 +96,20 @@ body{
     margin-top: 15px;
 }
 .van-tabs__line {
-    background-color: #456DF1 !important;
+    background-color: #036EB8 !important;
 }
 .mine-cell .mint-cell-wrapper{
-    background-image:none;
+    background-image:none  !important;
 }
 .mine-cell .mint-cell:last-child{
-    background-image:none;
+    background-image:none  !important;
 }
 .mint-cell-wrapper{
-  background-image:none;
+  background-image:none !important;
 }
 //登录页
 .login-cancel img {
-    margin: 10px;
+    // margin: 10px;
 }
 .logo{
     text-align: center;
@@ -156,12 +156,12 @@ body{
     span{
         font-size: 0.77rem;
         margin-left: 28px;
-        float: right;
+        // float: right;
         margin-top: 4px;
         margin-right: 28px;
-        a{
-            color: #456dfe;
-        }
+        // a{
+        //     color: #456dfe;
+        // }
     }
     .fr span{
         margin-right: 28px;
@@ -178,7 +178,7 @@ body{
         color: #fff;
         font-size: 0.88rem;
         margin: 50px auto 10px auto;
-        width: 60%;
+        width: 90%;
         -webkit-box-shadow:none;
         box-shadow: none;
         border-radius: 45px;
@@ -186,6 +186,7 @@ body{
 }
 .forget-pwd{
     margin-right: 10px;
+    font-size:0.78rem
 }
 //--------------------------============================
 input.el-input__inner {
@@ -211,7 +212,7 @@ input.el-input__inner {
     top: 16px;
 }
 label.mint-button-text {
-    font-size: 0.79rem;
+    // font-size: 0.79rem;
     margin-right: 10px;
     img{
         position: relative;
@@ -1200,7 +1201,7 @@ img.fr.tag-read {
     margin:5px 0px 5px 0;
   }
  .safety-center-list .mint-cell-wrapper {
-    background-image:none;
+    background-image:none  !important;
  }
  .safety-center-list {
     margin-top: 45px;
@@ -1223,7 +1224,7 @@ img.fr.tag-read {
     margin-top: 18px;
 }
 .rest-pass-word-from .mint-cell-wrapper {
-    background-image: none;
+    background-image: none  !important;
 }
 .rest-pass-word-from label{
     margin-left: 15px;
@@ -1436,7 +1437,7 @@ img.fr.tag-read {
     margin: 0 20px;
 }
 .add-adress-list .mint-cell-wrapper {
-    background-image: none;
+    background-image: none  !important;
 }
 .add-adress-btn{
     margin: 20px 0 20px 0;
