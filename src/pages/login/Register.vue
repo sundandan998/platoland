@@ -27,8 +27,8 @@
       </van-tabs>
     </div>
     <div class="login-form">
-      <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" :type="pwdType"
-        @blur.native.capture="pwdCheck" :state="pwdlStatus">
+      <!-- @blur.native.capture="pwdCheck" -->
+      <mt-field label="密码" placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/pass.png" alt="" class="login-icon">
@@ -41,9 +41,9 @@
       </span>
     </div>
     <div class="login-btn">
-      <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}">
-        <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
-      </router-link>
+      <!-- <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}"> -->
+      <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
+      <!-- </router-link> -->
     </div>
     <div class="login-switch">
       <router-link to="/login">
@@ -64,7 +64,6 @@
         disabled: true,
         emailStatus: '',
         telStatus: '',
-        pwdlStatus: '',
         active: 0,
         // active: 'login',
         username: {},
@@ -138,28 +137,38 @@
       },
       // 发送验证码
       sendCode() {
-        // 发送信息
-        var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-        if (reg.test(this.verification.username)) {
-          this.action.account_type = 1
-          this.action.action = 2
-          //发送邮箱
-          this.email.email = this.verification.username
-          api.email(this.email).then(res => {
-            toast(res)
-          }).catch(err => {
-            toast(err)
+        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
+        if (!password.test(this.verification.password)) {
+          Toast({
+            message: '请输入6-16位数字加字母组合密码',
+            className: 'zZindex'
           })
         } else {
-          // 发送短信
-          this.action.account_type = 0
-          this.action.action = 1
-          this.sms.mobile = this.verification.username
-          api.sms(this.sms).then(res => {
-          }).catch(err => {
-            toast(err)
-          })
+          this.router()
+          // 发送信息
+          var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          if (reg.test(this.verification.username)) {
+            this.action.account_type = 1
+            this.action.action = 2
+            //发送邮箱
+            this.email.email = this.verification.username
+            api.email(this.email).then(res => {
+              toast(res)
+            }).catch(err => {
+              toast(err)
+            })
+          } else {
+            // 发送短信
+            this.action.account_type = 0
+            this.action.action = 1
+            this.sms.mobile = this.verification.username
+            api.sms(this.sms).then(res => {
+            }).catch(err => {
+              toast(err)
+            })
+          }
         }
+
       },
       // 邮箱校验
       emailCheck() {
@@ -178,7 +187,6 @@
       telCheck() {
         var tel = /^1[23456789]\d{9}$/
         if (!tel.test(this.verification.username)) {
-          this.verification.username = ''
           // this.telStatus = 'error'
           Toast({
             message: '请填写正确手机号',
@@ -189,26 +197,33 @@
 
         }
       },
-      // 密码校验
-      pwdCheck() {
-        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-        if (!password.test(this.verification.password)) {
-          // this.pwdlStatus = 'error'
-          Toast({
-            message: '请输入8-16位数字加字母组合密码',
-            className: 'zZindex'
-          })
-        } else {
-          // this.pwdlStatus = 'success'
-        }
+      router(){
+        this.$router.push({
+          name:'Reset',
+          params:{username:this.verification.username,password:this.verification.password}
+        })
       },
+      // 密码校验
+      // pwdCheck() {
+      //   var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+      //   if (!password.test(this.verification.password)) {
+      //     // this.pwdlStatus = 'error'
+      //     Toast({
+      //       message: '请输入8-16位数字加字母组合密码',
+      //       className: 'zZindex'
+      //     })
+      //   } else {
+      //     // this.pwdlStatus = 'success'
+      //   }
+      // },
       // 隐藏与显示密码
       changeType() {
         this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
         this.seen = !this.seen
       },
-      clear(index){
-        this.verification={}
+      clear(index) {
+        this.verification.username = ''
+        this.verification.password = ''
       }
     },
 
@@ -221,11 +236,11 @@
           // debugger
           var tel = /^1[23456789]\d{9}$/
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-          var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if(val.username != ''&&val.password!=''&& pass.test(val.password)&&(email.test(val.username)||tel.test(val.username))){
+          // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+          if (val.username != '' && val.password != '' && (email.test(val.username) || tel.test(val.username))) {
             // 高亮
             this.disabled = false
-          }else{
+          } else {
             this.disabled = true
           }
         }
@@ -241,32 +256,38 @@
     height: 100%;
     background-color: #fff;
   }
-  .login-checkbox{
-      a{
-        color:#036EB8;
-      }
+
+  .login-checkbox {
+    a {
+      color: #036EB8;
     }
+  }
 
   .logo {
     .mint-cell-wrapper {
-      background-image:none;
+      background-image: none;
     }
+
     img {
       width: 60%;
       margin: 0 auto;
     }
-    
+
   }
-  .login-cancel{
-   img{
-     margin:10px 0 -3px 15px;
-   }
-   span{
-    color: #333;
-   }
+
+  .login-cancel {
+    img {
+      margin: 10px 0 -3px 15px;
+    }
+
+    span {
+      color: #333;
+    }
   }
+
   .register-tab {
     margin-top: 50px;
+
     .van-tab {
       flex: none;
       margin-left: 15px;
@@ -301,7 +322,7 @@
 
   .login-switch {
     p {
-      font-size:0.79rem;
+      font-size: 0.79rem;
       text-align: center;
       color: #036EB8;
     }

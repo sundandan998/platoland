@@ -16,8 +16,8 @@
         @blur.native.capture="check" :state="status">
       </mt-field>
       <img src="../../assets/images/login-mine.svg" alt="" class="login-icon">
-      <mt-field label="密码" placeholder="请输入8-16位数字加字母组合密码" v-model="verification.password" :type="pwdType"
-        @blur.native.capture="pwdCheck" :state="pwdlStatus">
+      <!-- @blur.native.capture="pwdCheck" :state="pwdlStatus" -->
+      <mt-field label="密码" placeholder="请输入登录密码" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/pass.png" alt="" class="login-icon">
@@ -27,16 +27,8 @@
         <router-link to="password">
           <span class="fr forget-pwd">忘记密码</span>
         </router-link>
-
         <div class="login-btn">
           <mt-button type="default" @click="handleLogin" :disabled="disabled">登&nbsp;录</mt-button>
-        </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="register">
-        <div class="login-btn">
-          <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}">
-            <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
-          </router-link>
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
@@ -58,7 +50,6 @@
       return {
         disabled: true,
         status: '',
-        pwdlStatus: '',
         active: 'login',
         username: {},
         hide: false,
@@ -169,18 +160,18 @@
         }
       },
       // 密码校验
-      pwdCheck() {
-        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-        if (!password.test(this.verification.password)) {
-          // this.pwdlStatus = 'error'
-          Toast({
-            message: '请输入8-16位数字加字母组合密码',
-            className: 'zZindex'
-          })
-        } else {
-          // this.pwdlStatus = 'success'
-        }
-      },
+      // pwdCheck() {
+      //   var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+      //   if (!password.test(this.verification.password)) {
+      //     // this.pwdlStatus = 'error'
+      //     Toast({
+      //       message: '请输入8-16位数字加字母组合密码',
+      //       className: 'zZindex'
+      //     })
+      //   } else {
+      //     // this.pwdlStatus = 'success'
+      //   }
+      // },
       // 隐藏与显示密码
       changeType() {
         this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
@@ -196,8 +187,8 @@
           // debugger
           var tel = /^1[23456789]\d{9}$/
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-          var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if(val.username != ''&&val.password!=''&& pass.test(val.password)&&(email.test(val.username)||tel.test(val.username))){
+          // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+          if(val.username != ''&&val.password!=''&&(email.test(val.username)||tel.test(val.username))){
             // 高亮
             this.disabled = false
           }else{

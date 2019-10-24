@@ -69,7 +69,6 @@
       }
     },
     created() {
-      console.log(this.$route.params.account_type)
     },
     methods: {
       register() {
