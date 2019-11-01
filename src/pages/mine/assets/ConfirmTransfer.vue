@@ -2,7 +2,8 @@
   <div class="confirm-transfer">
     <div class="freeze-header">
       <mt-header fixed title="确认转让">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- v-on:click="$router.go(-2)" -->
+        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-2)">取消</mt-button>
       </mt-header>
     </div>
     <div class="confirm-transfer-notice">
@@ -12,7 +13,8 @@
     </div>
     <div class="confirm-transfer-info">
       <mt-cell title="收款人" :value="this.$route.params.transferParams.email"></mt-cell>
-      <mt-cell title="数量" :value="this.$route.params.transferParams.amount+'('+this.$route.params.transferParams.code+')'"></mt-cell>
+      <mt-cell title="数量"
+        :value="this.$route.params.transferParams.amount+'('+this.$route.params.transferParams.code+')'"></mt-cell>
       <mt-cell title="手续费" value="0"></mt-cell>
     </div>
     <div class="confirm-transfer-progress" v-if="this.$route.params.transferParams.action=='freeze'">
@@ -26,6 +28,7 @@
     </div>
     <div class="confirm-transfer-button">
       <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button>
+      <!-- <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button> -->
     </div>
     <!-- 数字键盘 -->
     <div>
@@ -55,7 +58,8 @@
           amount: this.$route.params.transferParams.amount,
           code: this.$route.params.transferParams.code,
           pay_pwd: '',
-          order_id: this.$route.params.transferParams.order_id
+          order_id: this.$route.params.transferParams.order_id,
+          out: this.$route.params.transferParams.out
         },
         freezeData: []
       }
@@ -63,6 +67,8 @@
     created() {
       document.title = '确认转让'
       this.freeze()
+      // console.log(this.$route.params.transferParams)
+      console.log(this.$route.params.transferParams.code)
     },
     methods: {
       onInput(key) {
@@ -71,8 +77,8 @@
       onDelete() {
         this.value = this.value.slice(0, this.value.length - 1)
       },
-      //转让
-      transfer() {
+      // 判断是否设置支付密码
+      setPwd() {
         let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
         if (pay_pwd == 'true') {
           this.popupVisible = true
@@ -93,13 +99,34 @@
           })
         }
       },
+      //转让
+      transfer() {
+        // 判断是否转到千企商城
+        if (this.$route.params.transferParams.out == true) {
+          this.$messagebox({
+            title: '提示',
+            message: `将转让至收款人千企商城账号是否继续?`,
+            cancelButtonText: '取消',
+            confirmButtonText: '继续',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              // 调用
+              this.setPwd()
+            }
+          })
+        } else {
+          // 调用
+          this.setPwd()
+        }
+      },
       // 冻结详情
       freeze() {
         api.detail({ order_id: this.$route.params.transferParams.order_id }).then(res => {
           this.freezeData = res.data
         }).catch(err => {
         })
-      }
+      },
     },
     filters: {
       // 到期时间
@@ -132,7 +159,7 @@
               toast(res)
               this.$router.push({
                 name: 'OrderDetail',
-                params: { order_id: res.order_id,path:'confirm' }
+                params: { order_id: res.order_id, path: 'confirm' }
               })
             }
           }).catch(err => {
@@ -160,6 +187,10 @@
         position: fixed;
         bottom: 10px;
       }
+    }
+
+    .freeze-header {
+      margin-bottom: 20px;
     }
   }
 

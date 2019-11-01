@@ -88,4 +88,12 @@ export default {
       params: params
     })
   },
+  // 检测是否是第三方账号和通证是否合法---外部转让
+  verify(params = {}) {
+    return request({
+      url: 'system/verify/third/username/',
+      method: 'post',
+      data: params
+    })
+  },
 }

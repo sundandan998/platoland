@@ -5,10 +5,17 @@
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
+    <mt-cell title="商城账户">
+      <mt-switch v-model="transferParams.out"></mt-switch>
+    </mt-cell>
+    <p v-if="transferParams.out==true" class="transfer-prompt">
+      <img src="../../../assets/images/alert.svg" alt="">
+      请确认收款人账号已在商城注册
+    </p>
     <div class="transfer-content">
       <div class="transfer-progress-name">
         <span>收款人</span>
-        <mt-field v-model="transferParams.email" placeholder="请输入收款人邮箱" type="email" @blur.native.capture="emailCheck" :state="emailStatus">
+        <mt-field v-model="transferParams.email" placeholder="请输入收款人账号" @blur.native.capture="check">
         </mt-field>
       </div>
       <div class="transfer-progress-amount">
@@ -24,10 +31,13 @@
 </template>
 <script>
   import { Toast } from 'mint-ui'
+  import { toast } from '@/assets/js/pub.js'
+  import api from "@/api/system/System.js"
   export default {
     data() {
       return {
-        emailStatus: '',
+        // value:false,
+        checkStatus: '',
         transferParams: {
           id: this.$route.params.id,
           code: this.$route.params.code,
@@ -37,15 +47,22 @@
           type: this.$route.params.type,
           num: this.$route.params.num,
           date: this.$route.params.date,
-          order_id: this.$route.params.order_id
+          order_id: this.$route.params.order_id,
+          // 是否是向商城用户转让参数
+          out: false,
         },
         // 解决底部按钮被弹起问题
         clientHeight: document.documentElement.clientHeight,
         showBtn: true,  // 控制按钮盒子显示隐藏
+        verifyParams: {
+          username: '',
+          code: ''
+        },
       }
     },
     created() {
       document.title = '转让'
+      // console.log(this.$route.params.confirmTransfer)
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -66,20 +83,54 @@
             className: 'zZindex'
           })
         } else {
-          this.$router.push({
-            name: 'ConfirmTransfer',
-            params: { transferParams: this.transferParams }
-          })
+          // 外部转让
+          if (this.transferParams.out == true) {
+            this.verifyParams.username = this.transferParams.email
+            this.verifyParams.code = this.transferParams.code
+            api.verify(this.verifyParams).then(res => {
+              if (res.code == 0) {
+                this.$router.push({
+                  name: 'ConfirmTransfer',
+                  // params: { transferParams: this.transferParams }
+                  params: { transferParams: this.transferParams, code: this.transferParams.code }
+                })
+              }
+            }).catch(err => {
+              if (err.code == 4001) {
+                toast(err)
+              }
+            })
+          }else{
+            // 内部转让
+            api.is_use({username:this.transferParams.email}).then(res=>{
+              if(res.is_use==true){
+                this.$router.push({
+                  name: 'ConfirmTransfer',
+                  // params: { transferParams: this.transferParams }
+                  params: { transferParams: this.transferParams, code: this.transferParams.code }
+                })
+              }else{
+                toast(res)
+              }
+            }).catch(err=>{
+
+            })
+          }
         }
 
       },
-      // 邮箱校验
-      emailCheck() {
+      // 邮箱手机号校验
+      check() {
         var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-        if (!email.test(this.transferParams.email)) {
-          this.emailStatus = 'error'
+        var tel = /^1[23456789]\d{9}$/
+        if (!email.test(this.transferParams.email) && !tel.test(this.transferParams.email)) {
+          // this.status = 'error'
+          Toast({
+            message: '请填写正确的手机号或邮箱地址',
+            className: 'zZindex'
+          })
         } else {
-          this.emailStatus = 'success'
+          // this.status = 'success'
         }
       },
     }
@@ -93,6 +144,29 @@
   }
 
   .transfer {
+    .freeze-header {
+      margin-bottom: 20px;
+    }
+
+    .transfer-prompt {
+      background-color: #FFFBE6;
+      width: 90%;
+      color: #5A5951;
+      border-radius: 5px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #FFE58F;
+      margin-left: 20px;
+      margin-bottom: 10px;
+
+      img {
+        width: 20px;
+        margin-left: 10px;
+        position: relative;
+        top: 5px;
+      }
+    }
+
     .transfer-button {
       button {
         position: fixed;
