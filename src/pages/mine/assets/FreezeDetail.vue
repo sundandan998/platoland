@@ -22,7 +22,8 @@
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
             <div class="buy" v-if="item.flow_type=='发行买入'||item.flow_type=='受让'">
-              <router-link :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
+              <router-link
+                :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
                 <div class="issue-buy">
                   <mt-button size="small" type="primary" class="fr transfer">转让</mt-button>
                 </div>
@@ -129,6 +130,7 @@
       }
     },
     created() {
+      console.log(this.freezeParams)
     },
     filters: {
       // 到期时间
@@ -173,6 +175,7 @@
             if (res.code == 0) {
               // 冻结详情
               this.freezeData.push.apply(this.freezeData, res.data)
+              // this.$store.commit('detail', res.this.freezePara)
               this.loading = false
               if (res.has_next == true) {
                 this.freezeParams.page++

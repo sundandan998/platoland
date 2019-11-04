@@ -42,7 +42,7 @@
         <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
       </div>
       <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+        <p  v-if="orderData.other!=null"><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
         <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
       </div>
       <!-- <div class="buy-title">

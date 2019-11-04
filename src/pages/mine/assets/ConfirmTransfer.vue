@@ -3,7 +3,7 @@
     <div class="freeze-header">
       <mt-header fixed title="确认转让">
         <!-- v-on:click="$router.go(-2)" -->
-        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-2)">取消</mt-button>
+        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-1)">取消</mt-button>
       </mt-header>
     </div>
     <div class="confirm-transfer-notice">
@@ -13,18 +13,21 @@
     </div>
     <div class="confirm-transfer-info">
       <mt-cell title="收款人" :value="this.$route.params.transferParams.email"></mt-cell>
-      <mt-cell title="数量"
-        :value="this.$route.params.transferParams.amount+'('+this.$route.params.transferParams.code+')'"></mt-cell>
-      <mt-cell title="手续费" value="0"></mt-cell>
+      <mt-cell title="数量"v-if="this.$route.params.code!=undefined"
+        :value="this.$route.params.transferParams.amount+'('+this.$route.params.code+')'"></mt-cell>
+        <mt-cell title="数量" v-if="this.$route.params.code==undefined"
+        :value="this.$route.params.transferParams.amount+'('+confirmTransfer.code+')'"></mt-cell>
+      <mt-cell title="手续费" value="推广期暂免手续费"></mt-cell>
     </div>
     <div class="confirm-transfer-progress" v-if="this.$route.params.transferParams.action=='freeze'">
-      <span class="confirm-transfer-type">{{this.$route.params.transferParams.type}}</span>
-      <p><span>{{this.$route.params.transferParams.num}}</span><span
+      <span class="confirm-transfer-type">{{this.$route.params.transferParams.type||freezeData.flow_type}}</span>
+      <!-- <span class="confirm-transfer-type">{{}}</span> -->
+      <p><span>{{this.$route.params.transferParams.num||freezeData.amount}}</span><span
           class="fr">还剩{{freezeData.unfreeze_date|days}}天解冻</span></p>
       <div class="confirm-transfer-num">
         <van-slider disabled :value="freezeData.unfreeze_date | total_days(freezeData.transaction_time)" />
       </div>
-      <span>到期日 {{this.$route.params.transferParams.date}}</span>
+      <span v-if="this.$route.params.transferParams.date!=null">到期日 {{this.$route.params.transferParams.date}}</span>
     </div>
     <div class="confirm-transfer-button">
       <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button>
@@ -34,7 +37,7 @@
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
         <span
-          class="paymentamount">{{this.$route.params.transferParams.amount}}({{this.$route.params.transferParams.code}})</span>
+          class="paymentamount">{{this.$route.params.transferParams.amount}}({{this.$route.params.transferParams.code||this.$route.params.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -56,7 +59,7 @@
           action: this.$route.params.transferParams.action,
           email: this.$route.params.transferParams.email,
           amount: this.$route.params.transferParams.amount,
-          code: this.$route.params.transferParams.code,
+          code: this.$route.params.transferParams.code||this.$route.params.code,
           pay_pwd: '',
           order_id: this.$route.params.transferParams.order_id,
           out: this.$route.params.transferParams.out
@@ -67,8 +70,6 @@
     created() {
       document.title = '确认转让'
       this.freeze()
-      // console.log(this.$route.params.transferParams)
-      console.log(this.$route.params.transferParams.code)
     },
     methods: {
       onInput(key) {

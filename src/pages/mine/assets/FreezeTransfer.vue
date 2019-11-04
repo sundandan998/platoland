@@ -33,6 +33,7 @@
   import { Toast } from 'mint-ui'
   import { toast } from '@/assets/js/pub.js'
   import api from "@/api/system/System.js"
+  import {mapActions,mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -62,7 +63,7 @@
     },
     created() {
       document.title = '转让'
-      // console.log(this.$route.params.confirmTransfer)
+      // console.log(this.detail.token.code)
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -86,13 +87,13 @@
           // 外部转让
           if (this.transferParams.out == true) {
             this.verifyParams.username = this.transferParams.email
-            this.verifyParams.code = this.transferParams.code
+            this.verifyParams.code = this.detail.token.code||this.transferParams.code
             api.verify(this.verifyParams).then(res => {
               if (res.code == 0) {
                 this.$router.push({
                   name: 'ConfirmTransfer',
-                  // params: { transferParams: this.transferParams }
-                  params: { transferParams: this.transferParams, code: this.transferParams.code }
+                  params: { detail:this.detail,transferParams: this.transferParams, code:this.detail.token.code||this.transferParams.code}
+
                 })
               }
             }).catch(err => {
@@ -107,7 +108,7 @@
                 this.$router.push({
                   name: 'ConfirmTransfer',
                   // params: { transferParams: this.transferParams }
-                  params: { transferParams: this.transferParams, code: this.transferParams.code }
+                  params: { detail:this.detail,transferParams: this.transferParams, code: this.transferParams.code||this.detail.token.code }
                 })
               }else{
                 toast(res)
@@ -133,6 +134,11 @@
           // this.status = 'success'
         }
       },
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>

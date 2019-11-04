@@ -131,7 +131,7 @@
         system.version({ 'version_code': vcode }).then(res => {
           if (res.code == 0) {
             this.versionData = res
-            if(this.versionData.is_update == false) return
+            if (this.versionData.is_update == false) return
             if (this.versionData.is_force_update == true) {
               this.$messagebox({
                 title: '版本升级',
@@ -149,25 +149,24 @@
                 }
               })
             } else {
-              
-                // isForce = true
-                // this.versionData = res
-                this.$messagebox({
-                  title: '版本升级',
-                  message: this.versionData.version_info,
-                  cancelButtonText: '否',
-                  confirmButtonText: '是',
-                  showCancelButton: true
-                }).then(action => {
-                  if (action === 'confirm') {
-                    if (window.plus) {
-                      // console.log(this.versionData.update_url)
-                      plus.runtime.openURL(this.versionData.update_url)
-                      plus.runtime.quit()
-                    }
+
+              // isForce = true
+              // this.versionData = res
+              this.$messagebox({
+                title: '版本升级',
+                message: this.versionData.version_info,
+                cancelButtonText: '否',
+                confirmButtonText: '是',
+                showCancelButton: true
+              }).then(action => {
+                if (action === 'confirm') {
+                  if (window.plus) {
+                    // console.log(this.versionData.update_url)
+                    plus.runtime.openURL(this.versionData.update_url)
+                    plus.runtime.quit()
                   }
-                })
-             
+                }
+              })
             }
           }
         })

@@ -33,6 +33,7 @@
   import { Toast } from 'mint-ui'
   import { toast } from '@/assets/js/pub.js'
   import api from "@/api/system/System.js"
+  import {mapActions,mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -80,12 +81,12 @@
           // 外部转让
           if (this.transferParams.out == true) {
             this.verifyParams.username = this.transferParams.email
-            this.verifyParams.code = this.transferParams.code
+            this.verifyParams.code = this.detail.token.code||this.transferParams.code
             api.verify(this.verifyParams).then(res => {
               if (res.code == 0) {
                 this.$router.push({
                   name: 'ConfirmTransfer',
-                  params: { transferParams: this.transferParams }
+                  params: { detail:this.detail,transferParams: this.transferParams }
                 })
               }
             }).catch(err => {
@@ -99,7 +100,7 @@
               if (res.is_use == true) {
                 this.$router.push({
                   name: 'ConfirmTransfer',
-                  params: { transferParams: this.transferParams }
+                  params: {detail:this.detail, transferParams: this.transferParams }
                 })
               } else {
                 toast(res)
@@ -122,6 +123,11 @@
           // this.status = 'success'
         }
       },
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>

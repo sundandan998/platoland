@@ -112,15 +112,15 @@
         listRelease: {}
       }
     },
+    components: {
+			'app-tabber': Tabber
+		},
     created() {
       this.info()
       this.home()
       // this.version(),
       // this.version_code = this.$route.params
       this.version()
-    },
-    components: {
-      'app-tabber': Tabber
     },
     methods: {
       //公告通知

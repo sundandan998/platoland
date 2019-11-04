@@ -75,9 +75,8 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import {mapActions,mapGetters } from 'vuex'
   import Clipboard from 'clipboard'
-  import { mapGetters } from 'vuex'
   import api from '@/api/token/Token'
   export default {
     data() {

@@ -1,8 +1,13 @@
 <template>
   <mt-tabbar  :selected.sync ="message" fixed>
-    <mt-tab-item id="home"  @click.native="home">
-      <img slot="icon" src="../../assets/images/home-b.svg" v-if="message == 'explore'">
+    <!-- <mt-tab-item id="home"  @click.native="home">
+      <img slot="icon" src="../../assets/images/home-b.svg" v-if="message == 'home'">
       <img slot="icon" src="../../assets/images/home.svg" v-else>
+      <font :class="message === 'home'? 'color' :''">{{$t('m.homepage')}}</font>
+    </mt-tab-item> -->
+    <mt-tab-item id="home"  @click.native="home">
+      <img slot="icon" src="../../assets/images/home-b.svg" v-if="message == 'home'">
+      <img slot="icon" src="../../assets/images/home.svg"v-else>
       <font :class="message === 'home'? 'color' :''">{{$t('m.homepage')}}</font>
     </mt-tab-item>
     <!-- mt-tab-item id="explore" @click.native="explore">
