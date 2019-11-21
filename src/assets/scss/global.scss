@@ -3,6 +3,9 @@
     padding:0;
     margin:0;
 }
+body{
+    background-color: #f2f2f2;
+}
 //字体样式
 //@font-face {
 //  font-family: 'myFont';
@@ -305,162 +308,162 @@ label.mint-button-text {
     top: -35px;
 }
 //-------------------------------首页-------------------
-.home-logo {
-    width: 100%;
-    background-color: #fff;
-    text-align: center;
-    img{
-        width: 150px;
-        vertical-align: -webkit-baseline-middle;
-    }
-}
-.home-investment{
-    width: 98%;
-    background-color: #fff;
-    margin: 56px auto;
-    height: auto;
-    border-radius: 4px;
-    border: 1px solid #f2f2f2;
-}
-.home-investment-top-left li{
-    float: left;
-    margin-right: 18px;
-    font-size: 0.8rem;
-    margin-left: 10px;
-}
-.home-investment-top-right{
-    margin-right: 10px;
-    margin-top: -40px;
-    button{
-      background-color: #456DF1;
-      color:#fff;
-    }
-
-}
-.home-investment-content {
-    margin-top: -20px;
-    margin-left: 60px;
-    height: 50px;
-    p{
-        font-size: 0.78rem;
-        color:#999;
-        margin-left: 10px;
-        span{
-          margin-left: 20px;
-        }
-    }
-}
-.home-investment-bot {
-    height: 30px;
-    width: 100%;
-    span{
-        font-size: 0.8rem;
-    }
-}
-.home-investment-progress{
-    width: 93%;
-   margin-left: 15px;
-}
-
-.home-land{
-    width: 98%;
-    margin:0 auto;
-    margin-top: -35px;
-}
-.home-land .van-notice-bar{
-    background-color: #fff;
-    color:#000;
-    border-radius: 4px;
-}
-.home-popularity-content{
-    background-color: #fff;
-    width: 98%;
-    height: 130px;
-    margin:0 auto;
-    border-radius: 7px;
-    margin-top: 10px;
-    li{
-        float: left;
-        margin:20px 10px 0 10px;
-        font-size: 0.8rem;
-    }
-}
-.home-popularity-content-top{
-    height: 70px;
-    p{
-       font-size: 0.8rem;
-    }
-}
-.home-popularity-content-bot{
-    width: 100%;
-    height: 37px;
-}
-.home-popularity-progress {
-    margin: 0 10px 0 10px;
-    border-radius: 7px;
-}
-// .issue-state{
-//   color:red;
+// .home-logo {
+//     width: 100%;
+//     background-color: #fff;
+//     text-align: center;
+//     img{
+//         width: 150px;
+//         vertical-align: -webkit-baseline-middle;
+//     }
 // }
-.home-assets-subscription-title .mint-cell{
-  background-color: #f6f6f6 !important;
-}
-.home-assets-subscription-content{
-  white-space: nowrap;
-  overflow-x: auto;
-  margin: 0px 5px 0 5px;
-  position: relative;
-  top: -10px;
-}
-.home-assets-subscription-content::-webkit-scrollbar{
-    display: none;
-}
-.assets-subscription{
-    width: auto;
-    display:inline-block;
-    background-color: #fff;
-    border-radius: 7px;
-    font-size: 0.8rem;
-    box-shadow: 1px 6px 5px #ccc;
-    margin-right: 15px;
-      span{
-          font-size: 0.7rem;
-           color: #999;
-      }
+// .home-investment{
+//     width: 98%;
+//     background-color: #fff;
+//     margin: 56px auto;
+//     height: auto;
+//     border-radius: 4px;
+//     border: 1px solid #f2f2f2;
+// }
+// .home-investment-top-left li{
+//     float: left;
+//     margin-right: 18px;
+//     font-size: 0.8rem;
+//     margin-left: 10px;
+// }
+// .home-investment-top-right{
+//     margin-right: 10px;
+//     margin-top: -40px;
+//     button{
+//       background-color: #456DF1;
+//       color:#fff;
+//     }
 
-}
-.assets-subscription{
-    img{
-       margin:10px 0px 0 10px;
-    }
-}
-.text-right{
-   text-align: right;
-}
-.assets-subscription-information {
-    ul{
-        color: #000;
-        font-size: 0.7rem;
-        margin-left: 5px;
-        margin-right: 5px;
-        li{
-            margin-bottom: 10px;
-        }
-    }
-}
-.home-assets-more{
-    width: 98%;
-    background-color: #fff;
-    margin:20px auto;
-    border-radius:5px;
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
-    box-shadow: 1px 5px 5px #ccc;
-    span{
-        font-size: 0.8rem;
-    }
-}
+// }
+// .home-investment-content {
+//     margin-top: -20px;
+//     margin-left: 60px;
+//     height: 50px;
+//     p{
+//         font-size: 0.78rem;
+//         color:#999;
+//         margin-left: 10px;
+//         span{
+//           margin-left: 20px;
+//         }
+//     }
+// }
+// .home-investment-bot {
+//     height: 30px;
+//     width: 100%;
+//     span{
+//         font-size: 0.8rem;
+//     }
+// }
+// .home-investment-progress{
+//     width: 93%;
+//    margin-left: 15px;
+// }
+
+// .home-land{
+//     width: 98%;
+//     margin:0 auto;
+//     margin-top: -35px;
+// }
+// .home-land .van-notice-bar{
+//     background-color: #fff;
+//     color:#000;
+//     border-radius: 4px;
+// }
+// .home-popularity-content{
+//     background-color: #fff;
+//     width: 98%;
+//     height: 130px;
+//     margin:0 auto;
+//     border-radius: 7px;
+//     margin-top: 10px;
+//     li{
+//         float: left;
+//         margin:20px 10px 0 10px;
+//         font-size: 0.8rem;
+//     }
+// }
+// .home-popularity-content-top{
+//     height: 70px;
+//     p{
+//        font-size: 0.8rem;
+//     }
+// }
+// .home-popularity-content-bot{
+//     width: 100%;
+//     height: 37px;
+// }
+// .home-popularity-progress {
+//     margin: 0 10px 0 10px;
+//     border-radius: 7px;
+// }
+// // .issue-state{
+// //   color:red;
+// // }
+// .home-assets-subscription-title .mint-cell{
+//   background-color: #f6f6f6 !important;
+// }
+// .home-assets-subscription-content{
+//   white-space: nowrap;
+//   overflow-x: auto;
+//   margin: 0px 5px 0 5px;
+//   position: relative;
+//   top: -10px;
+// }
+// .home-assets-subscription-content::-webkit-scrollbar{
+//     display: none;
+// }
+// .assets-subscription{
+//     width: auto;
+//     display:inline-block;
+//     background-color: #fff;
+//     border-radius: 7px;
+//     font-size: 0.8rem;
+//     box-shadow: 1px 6px 5px #ccc;
+//     margin-right: 15px;
+//       span{
+//           font-size: 0.7rem;
+//            color: #999;
+//       }
+
+// }
+// .assets-subscription{
+//     img{
+//        margin:10px 0px 0 10px;
+//     }
+// }
+// .text-right{
+//    text-align: right;
+// }
+// .assets-subscription-information {
+//     ul{
+//         color: #000;
+//         font-size: 0.7rem;
+//         margin-left: 5px;
+//         margin-right: 5px;
+//         li{
+//             margin-bottom: 10px;
+//         }
+//     }
+// }
+// .home-assets-more{
+//     width: 98%;
+//     background-color: #fff;
+//     margin:20px auto;
+//     border-radius:5px;
+//     text-align: center;
+//     height: 50px;
+//     line-height: 50px;
+//     box-shadow: 1px 5px 5px #ccc;
+//     span{
+//         font-size: 0.8rem;
+//     }
+// }
 //首页/流通中/通证列表页
 //首页/流通中/通证详情页
 .state0{

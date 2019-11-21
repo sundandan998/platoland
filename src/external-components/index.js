@@ -1,7 +1,7 @@
 // element框架
 import {Table, TableColumn, Form, FormItem, Input, Dropdown, DropdownMenu, DropdownItem, Alert, Steps, Step} from 'element-ui'
 // vant框架
-import {PasswordInput, NumberKeyboard, Tab, Tabs, NoticeBar, Toast, Dialog, Tabbar,TabbarItem, Button, Popup, Loading, List, PullRefresh, Search, Slider} from 'vant'
+import {PasswordInput,Swipe, SwipeItem, NumberKeyboard, Tab, Tabs, NoticeBar, Toast, Dialog, Tabbar,TabbarItem, Button, Popup, Loading, List, PullRefresh, Search, Slider} from 'vant'
 const external = {
 	install: function (Vue) {
 		Vue.use(Table)
@@ -29,6 +29,7 @@ const external = {
 		Vue.use(PullRefresh)
 		Vue.use(Search)
 		Vue.use(Slider)
+		Vue.use(Swipe).use(SwipeItem)
 	}
 }
 export default external

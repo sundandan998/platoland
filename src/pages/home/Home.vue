@@ -1,277 +1,336 @@
 <template>
-  <div class="exchange">
-    <div class="page-wrap">
-      <mt-tab-container class="page-tabbar-container" v-model="selected">
-        <mt-tab-container-item id="home" class="home-index">
-          <div class="home-header">
-            <mt-header fixed :title="$t('m.homepage')"></mt-header>
-          </div>
-          <div class="home-investment">
-            <router-link :to="/detail/+pld.code">
-              <div class="pld-img"><img :src="pld.icon" alt="" /></div>
-              <div class="home-investment-content">
-                <div class="home-investment-top fl">
-                </div>
-                <div class="home-investment-top-left">
-                  <P>{{pld.code}} ({{pld.nickname}})<span>
-                      <img :src="pldRelease.d_icon"><span
-                        class="issue-price">{{pldRelease.issue_price|number}}</span></span></P>
-                  <P>{{pld.subject}}</P>
-                </div>
-                <div class="home-investment-top-right fr">
-                  <mt-button size="small">{{$t('m.investment')}}</mt-button>
-                </div>
-              </div>
-              <div class="home-investment-bot">
-                <span>{{$t('m.issueamount')}}:{{parseInt(pldRelease.first_number)}}</span>
-                <span>已售数量:{{parseInt(pldRelease.sold_number)}}</span>
-                <span>已达成:{{(pldRelease.sold_number/pldRelease.first_number*100).toFixed(3)}}%</span>
-              </div>
-              <div class="home-investment-progress">
-                <mt-progress :value="pldRelease.sold_number/pldRelease.first_number*100" :bar-height="5"></mt-progress>
-              </div>
-            </router-link>
-          </div>
-          <!--/总资产-->
-          <!--公告-->
-          <div class="home-land">
-            <router-link to="news">
-              <div class="notice text-beyond">
-                <div class="notice-list text-beyond" ref="notice-list" :class="{anim:animate==true}"
-                  v-for='item in notice'>
-                  <img src="../../assets/images/horn.png" /><span> {{item.title}}</span>
-                </div>
-              </div>
-            </router-link>
-          </div>
-          <!-- 全部 -->
-          <div class="home-assets-subscription-title">
-            <mt-cell :title="$t('m.opportunity')" to="/explore" is-link :value="$t('m.whole')"> </mt-cell>
-          </div>
-          <!-- 卡片部分 -->
-          <div class="home-assets-subscription-content">
-            <div class="assets-subscription" v-for="items in tokens_list">
-              <div @click="handleJump(items.code)">
-                <div class="home-card-title">
-                  <div class="fl">
-                    <img :src="items.icon">
-                  </div>
-                  <div class=" home-card-title-subject fr">
-                    <span>{{items.code}} ({{items.nickname}})</span>
-                    <span class="home-subject">{{items.subject}}</span>
-                  </div>
-                </div>
-                <div class="assets-subscription-title">
-                  <p :style="{color:items.release.status == 0?'red':items.release.status == 1?'green':'blue'}">
-                    {{items.release.status == 0?'待发行':items.release.status == 1?'发行中':'流通中'}}</p>
-                </div>
-                <div class="assets-subscription-information">
-                  <ul>
-                    <li class="childFlex"><span>{{$t('m.issuetime')}}</span><span>{{items.release.publish_time}}</span>
-                    </li>
-                    <li class="childFlex">
-                      <span>{{$t('m.issueamount')}}</span><span>{{(parseInt(items.release.sold_number)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}}</span>
-                    </li>
-                    <li class="childFlex">
-                      <span>{{$t('m.initialprice')}}</span><span>{{items.release.init_price|number}}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <!-- </router-link> -->
-            </div>
-          </div>
-          <div class="home-assets-more">
-            <span>{{$t('m.morefunctions')}}</span>
-          </div>
-        </mt-tab-container-item>
-      </mt-tab-container>
+  <div class="home">
+    <!-- 头部标题 -->
+    <div class="home-header">
+      <mt-header fixed title="P L A T O L A N D"></mt-header>
     </div>
+    <!-- 轮播部分 -->
+    <div class="home-banner">
+      <van-swipe :autoplay="3000" indicator-color="white">
+        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+      </van-swipe>
+    </div>
+    <!-- 交易部分 -->
+    <div class="home-transaction">
+      <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
+      <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
+      <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
+      <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
+    </div>
+    <!-- 最新发行 -->
+    <div class="home-latest-release">
+      <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
+      <div class="home-latest-release-token">
+        <div class="home-pub-token">
+          <img src="../../assets/images/pld-icon.png" alt="" class="fl icon">
+          <span><b>PLD</b>(PLD) <p>柏拉图兰</p></span>
+          <img src="../../assets/images/publicity.png" alt="" class="fr publicity">
+          <!-- <img src="../../assets/images/issued.png" alt="" class="fr publicity"> -->
+        </div>
+        <div class="home-latest-release-token-bot">
+          <div class="home-latest-release-token-bot-text fl">
+            <span>第 2 期</span>
+            <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> 80 天</span>
+          </div>
+          <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> 0.02</span>
+        </div>
+      </div>
+    </div>
+    <!-- 分利宝 -->
+    <div class="home-divided-treasure">
+      <p class="home-pub-title">分利宝<span class="fr">全部></span></p>
+      <div class="home-divided-treasure-token">
+        <div class="home-pub-token">
+          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
+          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+        </div>
+        <div class="home-divided-treasure-token-bot">
+          <p>锁仓期限 30 天 <span class="fr home-percentage">10%</span></p>
+          <p>最高可投 32,000 <span class="fr">年化利率</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- 市场交易 -->
+    <div class="home-market-transaction">
+      <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
+      <div class="home-market-transaction-token">
+        <div class="home-pub-token">
+          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
+          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+        </div>
+        <div class="home-market-transaction-con">
+          <div class="fl home-market-transaction-num">
+            <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt=""> 0.12</p></span>
+            <span class="fr">数量<p>0.12</p></span>
+          </div>
+          <van-button class="fr" type="default">立 即 出 售</van-button>
+        </div>
+        <div class="home-market-transaction-bot">
+          <div class="fl home-market-transaction-bot-num">
+            <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+            <span class="fr">数量<p> 0.12</p></span>
+          </div>
+          <van-button class="fr" type="danger">立 即 购 买</van-button>
+        </div>
+      </div>
+    </div>
+    <div class="home-market-transaction">
+        <div class="home-market-transaction-token">
+          <div class="home-pub-token">
+            <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
+            <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+          </div>
+          <div class="home-market-transaction-con">
+            <div class="fl home-market-transaction-num">
+              <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+              <span class="fr">数量<p>0.12</p></span>
+            </div>
+            <van-button class="fr" type="default">立 即 出 售</van-button>
+          </div>
+          <div class="home-market-transaction-bot">
+            <div class="fl home-market-transaction-bot-num">
+              <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+              <span class="fr"> 数量<p>0.12</p></span>
+            </div>
+            <van-button class="fr" type="danger">立 即 购 买</van-button>
+          </div>
+        </div>
+      </div>
+    <!-- Tabber部分 -->
     <app-tabber :message=selected></app-tabber>
   </div>
 </template>
 <script>
+  // Tabber栏
   import Tabber from './../../assets/pub/Tabber.vue'
-  import { mapActions } from 'vuex'
-  // import detail from './detail/Detail'
-  import store from './../../store/modules/app.js'
-  import { toast } from '@/assets/js/pub.js'
-  // 接口
-  import api from "@/api/system/System.js"
+  import { Grid, GridItem } from 'vant'
   export default {
     data() {
       return {
         selected: 'home',
         message: 'home',
-        versionData: '',
-        animate: false,
-        pld: {},
-        pldRelease: {},
-        notice: {},
-        tokens_list: [],
-        listRelease: {}
       }
     },
     components: {
-			'app-tabber': Tabber
-		},
-    created() {
-      this.info()
-      this.home()
-      // this.version(),
-      // this.version_code = this.$route.params
-      this.version()
+      'app-tabber': Tabber
     },
-    methods: {
-      //公告通知
-      scroll() {
-        this.animate = true
-        setTimeout(() => {
-          this.notice_list.push(this.notice_list)
-          this.notice_list.shift()
-          this.animate = false
-        }, 500)
-      },
-      // 用户信息
-      info() {
-        api.getUserInfo().then(res => {
-          this.infoData = res.data
-          window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
-        }).catch(err => {
-          // console.log(err)
-        })
-      },
-      home() {
-        api.home().then(res => {
-          //  pld接口
-          this.pld = res.data.pld
-          this.pldRelease = this.pld.release
-          //  公告通知
-          this.notice = res.data.notice_list
-          // 卡片
-          this.tokens_list = res.data.token_list
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-      ...mapActions('detail', [
-        'app.detail'
-      ]),
-      handleJump(id) {
-        this.$router.push('/detail/' + id)
-      },
-      //版本升级
-      version() {
-        let vcode = this.$version()
-        api.version({ 'version_code': vcode }).then(res => {
-          if (res.code == 0) {
-            this.versionData = res
-            if(this.versionData.is_update == false) return
-            if (this.versionData.is_force_update == true) {
-              this.$messagebox({
-                title: '版本升级',
-                message: this.versionData.version_info,
-                closeOnClickModal: false,
-                // cancelButtonText: '否',
-                confirmButtonText: '去更新',
-                // showCancelButton: true
-              }).then(action => {
-                // console.log(this.versionData.update_url)
-                if (window.plus) {
-                  plus.runtime.openURL(this.versionData.update_url)
-                  plus.runtime.quit()
-                  // console.log(this.versionData.update_url)
-                }
-              })
-            } else {
-              
-                // isForce = true
-                // this.versionData = res
-                this.$messagebox({
-                  title: '版本升级',
-                  message: this.versionData.version_info,
-                  cancelButtonText: '否',
-                  confirmButtonText: '是',
-                  showCancelButton: true
-                }).then(action => {
-                  if (action === 'confirm') {
-                    if (window.plus) {
-                      // console.log(this.versionData.update_url)
-                      plus.runtime.openURL(this.versionData.update_url)
-                      plus.runtime.quit()
-                    }
-                  }
-                })
-             
-            }
-          }
-        })
-      }
-    }
   }
-
 </script>
 <style lang="scss">
   @import '../../assets/scss/global';
 
-  .home-investment {
-    .pld-img {
-      position: relative;
-      left: 15px;
-      top: 25px;
-      width: 10%;
+  .home {
+    height:auto;
+    margin-bottom: 100px;
+    /* 公共标题部分 /发行专区/分利宝/市场交易 */
+    .home-pub-title {
+      height: 90px;
+      line-height: 90px;
+      font-size: 30px;
+
+      span {
+        font-size: 24px;
+        color: #959595;
+      }
     }
-  }
 
-  .home-investment-top-left {
-    .issue-price {
-      position: relative;
-      top: -7px;
-      left: -10px;
+    /* 公共token部分 */
+    .home-pub-token {
+      height: 160px;
+
+      .icon {
+        height: 60px;
+        margin: 55px 10px 0 45px;
+      }
+
+      .publicity {
+        height: 100px;
+      }
+
+      span {
+        display: inline-block;
+        margin-top: 52px;
+        font-size: 16px;
+        color: #959595;
+
+        b {
+          font-size: 24px;
+          color: #333;
+          margin-right: 10px;
+        }
+
+        p {
+          font-size: 24px;
+        }
+      }
     }
-  }
 
-  .home-investment-bot {
-    height: 30px;
-    width: 100%;
-    margin-left: 15px;
-    display: flex;
-  }
+    /* 公共button */
+    button{
+      height: 60px;
+      width: 165px;
+      line-height: 60px;
+      border-radius: 10px;
+      font-size:24px;
+    }
+    .home-header {
+      height: 44px;
+      background-color: #fff;
 
-  .home-investment-content {
-    margin-top: -20px;
-    margin-left: 50px;
-    height: 50px;
-    width: 85%;
-  }
+      .mint-header-title {
+        font-size: 28px;
+        margin-top: 40px;
+      }
+    }
 
-  /* 卡片部分 */
-  .childFlex {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
+    .home-banner {
+      margin: 20px 24px;
 
-  .home-investment-bot {
-    height: 30px;
-    width: 100%;
-    margin-left: 15px;
-  }
+      /* background: url("../../assets/images/bg.png");
+      background-size: 100% 100%;
+      background-position: center center; */
+      img {
+        width: 100%;
+        border-radius: 10px;
+      }
+    }
 
-  .home-card-title {
-    height: 40px;
-  }
+    .home-transaction {
+      height: 200px;
+      background-color: #fff;
+      margin: 0px 24px;
+      border-radius: 10px;
 
-  .home-card-title-subject {
-    text-align: right;
-    margin-right: 5px;
-  }
+      span {
+        width: 24%;
+        display: inline-block;
+        border-right: 1px solid #f2f2f2;
+        height: 100%;
+        text-align: center;
+        font-size: 24px;
+        color: #959595;
 
-  .home-subject {
-    display: block;
-    width: 80%;
-    word-break: normal;
-    white-space: pre-wrap;
-    overflow: hidden
+        img {
+          height: 80px;
+          margin: 30px auto 15px auto;
+          display: block;
+        }
+      }
+    }
+
+    .home-transaction span:last-child {
+      border-right: none;
+    }
+
+    /* 最新发行 */
+    .home-latest-release {
+      margin: 0px 24px;
+
+      .home-latest-release-token {
+        overflow: hidden;
+        height: 260px;
+        background-color: #fff;
+        border-radius: 10px;
+
+        .home-latest-release-token-bot {
+          margin: 0 45px;
+
+          span {
+            font-size: 28px;
+            color: #1d92ec;
+            display: inline-block;
+          }
+
+          .home-latest-release-token-bot-text {
+            width: 60%;
+          }
+        }
+      }
+    }
+
+    /* 分利宝 */
+    .home-divided-treasure {
+      margin: 0px 24px;
+
+      .home-divided-treasure-token {
+        height: 310px;
+        background-color: #fff;
+        border-radius: 10px;
+
+        .home-divided-treasure-token-bot {
+          p {
+            margin: 20px 30px 0 45px;
+            font-size: 24px;
+            color: #959595;
+
+            .home-percentage {
+              color: #eb4545;
+              font-size: 68px;
+              margin-top: -40px;
+            }
+          }
+        }
+      }
+    }
+
+    /* 市场交易 */
+    .home-market-transaction {
+      margin: 0 24px 20px 24px;
+      .home-market-transaction-token {
+        height: 450px;
+        background-color: #fff;
+        border-radius: 10px;
+
+        .home-market-transaction-con {
+          margin: 0 30px 0 45px;
+          height: 130px;
+
+          .home-market-transaction-num {
+            width: 50%;
+
+            span {
+              color: #1abc9c;
+              font-size: 24px;
+
+              p {
+                color: #333;
+                margin-top: 5px;
+              }
+              img{
+                height: 30px;
+                margin:5px 10px 0 0;
+              }
+            }
+          }
+          button {
+            background-color: #1abc9c;
+            color: #fff;
+          }
+        }
+
+        .home-market-transaction-bot {
+          margin: 0 30px 0 45px;
+          height: 120px;
+          .home-market-transaction-bot-num {
+            width: 50%;
+            span {
+              color: #eb4545;
+              font-size: 24px;
+              p {
+                color: #333;
+                margin-top: 5px;
+              }
+              img{
+                height: 30px;
+                margin:5px 10px 0 0;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 </style>
