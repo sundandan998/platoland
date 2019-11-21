@@ -24,6 +24,8 @@ import $ from 'jquery'
 import AppConfig from './appconfig'
 // 国际化
 import VueI18n from 'vue-i18n'
+// 适配
+import 'lib-flexible'
 Vue.use(VueI18n)
 Vue.use(new AppConfig())
 Vue.prototype.$Indicator = Indicator

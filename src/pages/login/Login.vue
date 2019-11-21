@@ -221,10 +221,9 @@
 
   .login-title {
     margin-bottom: 50px;
-
     span {
       margin-left: 15px;
-      font-size: 1.8rem;
+      font-size: 60px;
     }
   }
 
@@ -252,7 +251,6 @@
 
   .login-switch {
     p {
-      font-size:0.79rem;
       text-align: center;
       color: #036EB8;
     }
