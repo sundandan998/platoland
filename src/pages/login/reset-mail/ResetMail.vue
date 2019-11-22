@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="login-btn">
-      <mt-button type="default" @click="register" :disabled="disabled">确&nbsp;定</mt-button>
+      <mt-button type="default" @click="register" :disabled="disabled" size="large">确&nbsp;定</mt-button>
     </div>
   </div>
 </template>
@@ -67,6 +67,14 @@
           code: ''
         }
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     created() {
     },
@@ -189,5 +197,21 @@
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .reset-mail{
+    .login-cancel{
+      margin:10px 54px;
+    }
+    .logo{
+      img{
+        display:block;
+        width:60%;
+        margin:0 auto;
+      }
+    }
+    .login-btn{
+      margin-top: 50px;
+    }
+  }
+
 </style>

@@ -33,7 +33,6 @@ li {
 input {
   border: none;
   outline: none;
-  text-indent: 1.5rem;
 }
 
 .fl {
@@ -47,6 +46,21 @@ input {
 a {
   text-decoration: none;
   color: #979EAC;
+}
+
+.mint-field-core {
+  margin-left: 20px;
+  font-size: 26px;
+  color: #333;
+}
+
+.mint-button--large {
+  width: 82%;
+  height: 80px;
+  margin: 0 auto;
+  font-size: 32px;
+  color: #fff;
+  background-color: #036EB8;
 }
 
 .el-input__inner {
@@ -74,6 +88,24 @@ h1 {
   font-weight: 400;
 }
 
+.mintui {
+  font-size: 30px;
+}
+
+.mint-field-state .mintui {
+  font-size: 30px;
+}
+
+.van-password-input__security {
+  height: 100px;
+}
+
+.van-key {
+  height: 100px;
+  line-height: 100px;
+  font-size: 30px;
+}
+
 .mint-popup-bottom {
   width: 100%;
 }
@@ -96,7 +128,6 @@ h1 {
 .paymentamount {
   text-align: center;
   display: block;
-  font-size: 1.2rem;
   margin-bottom: 15px;
   margin-top: 15px;
 }
@@ -117,100 +148,9 @@ h1 {
   background-image: none !important;
 }
 
-.logo {
-  text-align: center;
-  margin: 40px 0 24px 0;
-}
-
-.login-tab .mint-navbar {
-  text-align: unset;
-}
-
-.login-tab a.mint-tab-item {
-  display: contents;
-}
-
-.login-tab .mint-tab-item-label {
-  margin: 20px 40px 20px 28px;
-}
-
-.mint-tabbar > .mint-tab-item.is-selected {
-  background-color: #fbfbfb !important;
-  color: #26a2ff;
-}
-
-.mint-tabbar {
-  background-image: none !important;
-}
-
-.mint-cell:last-child {
-  background-image: none !important;
-}
-
-.login-tab .mint-tab-item-label {
-  font-size: 0.8rem;
-  font-weight: 400;
-}
-
-.login-content .mint-cell {
-  border-bottom: 1px solid #f6f6f6;
-  width: 95%;
-  border-radius: 5px;
-  margin: 0 auto;
-}
-
-.verification-input {
-  text-align: center;
-}
-
-.el-form-item__error {
-  position: absolute;
-  left: 20px;
-}
-
-.login-checkbox span {
-  font-size: 0.77rem;
-  margin-left: 28px;
-  margin-top: 4px;
-  margin-right: 28px;
-}
-
-.login-checkbox .fr span {
-  margin-right: 28px;
-  color: #000;
-  font-size: 0.8rem;
-}
-
-.login-btn {
-  width: 100%;
-  text-align: center;
-  display: inline-block;
-}
-
-.login-btn .mint-button {
-  background-color: #456dfe;
-  color: #fff;
-  font-size: 0.88rem;
-  margin: 50px auto 10px auto;
-  width: 90%;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 45px;
-}
-
-.forget-pwd {
-  margin-right: 10px;
-  font-size: 0.78rem;
-}
-
 input.el-input__inner {
   position: relative;
   top: 5px;
-}
-
-.el-input--prefix .el-input__inner {
-  font-size: 0.77rem;
-  padding-left: 6px;
 }
 
 .el-input__prefix {
@@ -246,36 +186,6 @@ label.mint-button-text img {
   position: relative;
 }
 
-.forget-password {
-  background-color: #fff;
-}
-
-.forget-password-title {
-  margin: 20px;
-}
-
-.forget-password-title h1 {
-  font-size: 1.0rem;
-}
-
-.forget-password-btn {
-  text-align: center;
-}
-
-.forget-password-btn .mint-button {
-  color: #fff;
-  font-size: 0.88rem;
-  margin: 50px auto 10px auto;
-  width: 60%;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 45px;
-}
-
-.forget-password-btn .nextbtn {
-  background-color: #456dfe !important;
-}
-
 .reset-mail-information {
   width: 80%;
   text-align: center;
@@ -304,46 +214,6 @@ label.mint-button-text img {
 
 .reset-mail {
   background-color: #fff;
-}
-
-.register-footer {
-  margin: 50px 0px 0px 0px;
-  text-align: center;
-}
-
-.register-footer ul {
-  display: inline-block;
-  overflow: auto;
-  margin-left: -70px;
-}
-
-.register-footer ul li {
-  display: inline;
-  float: left;
-  margin-left: 20px;
-}
-
-.register-footer p {
-  margin-top: -20px;
-}
-
-.register-eye {
-  float: right;
-  margin-right: 30px;
-  position: relative;
-  top: -35px;
-}
-
-.state0 {
-  color: red;
-}
-
-.state1 {
-  color: green;
-}
-
-.state2 {
-  color: blue;
 }
 
 .pass-details-information {
@@ -376,21 +246,12 @@ label.mint-button-text img {
   font-weight: 700;
 }
 
-.mint-cell-text {
-  font-size: 0.72rem;
-}
-
-.mint-cell-value {
-  font-size: 0.72rem;
-}
-
 table.el-table__header {
   width: auto !important;
 }
 
 table.el-table__body {
   width: auto !important;
-  font-size: 0.8rem;
 }
 
 .pass-details-issue-form {
@@ -419,20 +280,11 @@ table.el-table__body {
 .pass-details-issue-trend-title span {
   margin: 10px 0 10px 10px;
   display: inline-block;
-  font-size: 0.8rem;
 }
 
 .mint-navbar .mint-tab-item.is-selected {
   border-bottom: 1px solid #26a2ff;
   color: #26a2ff;
-}
-
-.subject-details-content .mint-tab-item-label {
-  font-size: 0.88rem;
-}
-
-.information-content span {
-  font-size: 0.72rem;
 }
 
 .subject-details-content {
@@ -447,7 +299,6 @@ table.el-table__body {
 
 .information-title {
   margin: 20px 24px 20px 24px;
-  font-size: 0.72rem;
   color: #666;
 }
 
@@ -486,7 +337,6 @@ table.el-table__body {
   margin: 5px 18px 5px 18px;
   height: 40px;
   line-height: 40px;
-  font-size: 0.78rem;
   color: #333;
 }
 
@@ -498,7 +348,6 @@ table.el-table__body {
 
 .to-deal-purchase-bot span:nth-child(2) {
   color: #1A8EEE;
-  font-size: 1.1rem;
   position: relative;
   top: 10px;
   left: 56px;
@@ -506,7 +355,6 @@ table.el-table__body {
 
 .to-deal-purchase-bot span {
   padding-left: 15px;
-  font-size: 0.67rem;
   color: #999;
 }
 
@@ -518,7 +366,6 @@ table.el-table__body {
 
 .to-deal-purchase-bot p {
   padding-left: 15px;
-  font-size: 0.67rem;
   color: #999;
   margin-top: 10px;
   padding-bottom: 5px;
@@ -540,17 +387,14 @@ table.el-table__body {
 
 .Purchase-pass-content-top span {
   display: block;
-  font-size: 0.89rem;
   padding-top: 6px;
 }
 
 .Purchase-pass-content-top p {
   margin: 20px 0 0 28px;
-  font-size: 0.89rem;
 }
 
 .Purchase-pass-content-bot {
-  font-size: 1.0rem;
   margin: 16px 0 0 36px;
   padding-bottom: 10px;
 }
@@ -566,7 +410,6 @@ table.el-table__body {
 }
 
 .Purchase-pass-tabbar input.mint-field-core {
-  font-size: 0.89rem;
   color: #000;
   top: -4px;
   position: relative;
@@ -581,7 +424,6 @@ table.el-table__body {
   height: 20px;
   background-color: #fff;
   padding: 10px 0 10px 50px;
-  font-size: 0.67rem;
   color: #456df1;
 }
 
@@ -642,13 +484,11 @@ table.el-table__body {
   line-height: 80px;
   margin-left: 15px;
   color: #979eac;
-  font-size: 0.78rem;
 }
 
 .purchase-pass-buy-information {
   margin-top: 10px;
   margin-right: 28px;
-  font-size: 0.78rem;
 }
 
 .purchase-pass-buy-information span {
@@ -665,7 +505,6 @@ table.el-table__body {
 .purchase-pass-valuation-assets span:first-child {
   color: #979eac;
   margin-left: 15px;
-  font-size: 0.78rem;
 }
 
 .purchase-pass-valuation-assets {
@@ -687,7 +526,6 @@ table.el-table__body {
 .purchase-pass-valuation-assets-img span {
   position: relative;
   top: -2px;
-  font-size: 0.78rem;
 }
 
 .purchase-pass-input {
@@ -706,7 +544,6 @@ table.el-table__body {
 .purchase-pass-input p {
   padding: 10px 0 0 15px;
   color: #979eac;
-  font-size: 0.78rem;
 }
 
 .purchase-pass-quota {
@@ -721,7 +558,6 @@ table.el-table__body {
   height: 40px;
   color: #000;
   border-radius: 5px;
-  font-size: 0.61rem;
   text-indent: initial;
   margin-left: 15px;
   margin-top: 10px;
@@ -731,7 +567,6 @@ table.el-table__body {
 .purchase-pass-quota p {
   margin-left: 15px;
   color: #979eac;
-  font-size: 0.78rem;
   padding-top: 10px;
 }
 
@@ -768,15 +603,10 @@ table.el-table__body {
 
 .buy-pass-name span {
   display: block;
-  font-size: 0.8rem;
 }
 
 .buy-pass-name img {
   margin: 10px;
-}
-
-.buy-pass-name p {
-  font-size: 0.8rem;
 }
 
 .buy-password-show {
@@ -798,7 +628,6 @@ table.el-table__body {
   margin-left: 30px;
   color: #666;
   display: inline-block;
-  font-size: 0.78rem;
 }
 
 .buy-pass-name-price span {
@@ -807,7 +636,6 @@ table.el-table__body {
 }
 
 .buy-pass-name-price-text.fr span {
-  font-size: 0.89rem;
   color: #333;
 }
 
@@ -818,7 +646,6 @@ table.el-table__body {
 }
 
 .buy-pass-time p {
-  font-size: 0.78rem;
   color: #000;
   padding: 1px 0 0 50px;
 }
@@ -912,7 +739,6 @@ table.el-table__body {
 }
 
 .mine span.mint-cell-text {
-  font-size: 0.78rem;
   margin-left: 6px;
 }
 
@@ -946,7 +772,6 @@ table.el-table__body {
 
 .transaction-flow-title fl {
   margin-right: 30px;
-  font-size: 0.8rem;
 }
 
 .transaction-flow-list {
@@ -965,7 +790,6 @@ table.el-table__body {
 .mint-cell-label {
   color: #888;
   display: block;
-  font-size: 12px;
   margin-top: 6px;
   margin-left: 40px;
 }
@@ -992,7 +816,6 @@ table.el-table__body {
 }
 
 .assets-list span {
-  font-size: 0.78rem;
   position: relative;
   top: -4px;
 }
@@ -1002,7 +825,6 @@ table.el-table__body {
   text-align: center;
   position: relative;
   top: -10px;
-  font-size: 0.78rem;
 }
 
 .assets-list-right {
@@ -1018,17 +840,12 @@ table.el-table__body {
 }
 
 .assets-detailed-exhibition span {
-  font-size: 0.8rem;
   color: #999;
 }
 
 .assets-detailed-exhibition-text {
   text-align: center;
   padding-top: 30px;
-}
-
-.assets-detailed-exhibition-text span {
-  font-size: 1.5rem;
 }
 
 .assets-detailed-exhibition-img {
@@ -1039,7 +856,6 @@ table.el-table__body {
 }
 
 .assets-detailed-exhibition-img li {
-  font-size: 0.8rem;
   margin-left: 50px;
   margin-top: 5px;
 }
@@ -1051,7 +867,6 @@ table.el-table__body {
 
 .assets-detailed-whole-header span {
   margin: 10px 10px 0 10px;
-  font-size: 0.9rem;
 }
 
 .assets-detailed-tabbar button {
@@ -1068,7 +883,6 @@ table.el-table__body {
 }
 
 .to-change-into-exhibition span {
-  font-size: 1.0rem;
   text-align: center;
 }
 
@@ -1079,10 +893,6 @@ table.el-table__body {
   padding-top: 20px;
 }
 
-.to-change-into-exhibition-img li {
-  font-size: 0.8rem;
-}
-
 .to-change-into-qrcode {
   background-color: #fff;
   margin-top: -1px;
@@ -1090,7 +900,6 @@ table.el-table__body {
 }
 
 .to-change-into-qrcode p {
-  font-size: 0.8rem;
   color: #999;
   padding-bottom: 20px;
 }
@@ -1119,7 +928,6 @@ img.fr.tag-read {
 
 .turn-out-exhibition-img span {
   display: block;
-  font-size: 0.8rem;
 }
 
 .turn-out-exhibition-img img {
@@ -1135,7 +943,6 @@ img.fr.tag-read {
 }
 
 .turn-out-exhibition-text p {
-  font-size: 0.8rem;
   color: #999;
   margin-left: 10px;
   margin-top: 10px;
@@ -1171,7 +978,6 @@ img.fr.tag-read {
 
 .scandetail-num p {
   color: blue;
-  font-size: 0.8rem;
 }
 
 .scandetail-btn {
@@ -1179,7 +985,6 @@ img.fr.tag-read {
 }
 
 .scandetail-text {
-  font-size: 0.8rem;
   margin-left: 15px;
   margin-top: 20px;
   color: #999;
@@ -1227,7 +1032,6 @@ img.fr.tag-read {
 }
 
 .rest-pass-word-text p {
-  font-size: 0.8rem;
   color: #999;
   margin-left: 15px;
 }
@@ -1263,7 +1067,6 @@ img.fr.tag-read {
 }
 
 .open-pay-password-keyboard-text {
-  font-size: 0.8rem;
   margin: 10px;
   padding-bottom: 20px;
 }
@@ -1295,7 +1098,6 @@ img.fr.tag-read {
 }
 
 .safety-verification-text {
-  font-size: 0.8rem;
   color: #999;
   padding: 10px 0 20px 10px;
 }
@@ -1337,12 +1139,10 @@ img.fr.tag-read {
 }
 
 .about-our-text p {
-  font-size: 0.8rem;
   margin-left: 8px;
 }
 
 .about-our-text span {
-  font-size: 1.0rem;
   margin-left: 0px;
 }
 
@@ -1395,7 +1195,6 @@ img.fr.tag-read {
 }
 
 .edit-adress-text {
-  font-size: 0.8rem;
   color: #999;
   margin-left: 15px;
   padding-bottom: 20px;
@@ -1416,7 +1215,6 @@ img.fr.tag-read {
 }
 
 .adress-book-content p {
-  font-size: 0.8rem;
   line-height: 20px;
 }
 
@@ -1485,25 +1283,12 @@ img.fr.tag-read {
   padding-left: 5px;
 }
 
-.news-details-list-title span {
-  font-size: 1.0rem;
-}
-
 .news-details-list-title p {
-  font-size: 0.6rem;
   color: #999;
-}
-
-.news-details-list-title p span {
-  font-size: 0.6rem;
 }
 
 .news-details-list-content {
   margin-left: 15px;
-}
-
-.news-details-list-content span {
-  font-size: 0.78rem;
 }
 
 .notice {
@@ -1513,7 +1298,6 @@ img.fr.tag-read {
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #f2f2f2;
-  font-size: 0.8rem;
 }
 
 .anim {
@@ -1531,7 +1315,6 @@ img.fr.tag-read {
   height: 32px;
   margin-right: 5px;
   color: #000;
-  font-size: 0.72rem;
   margin-top: -3px;
 }
 
@@ -1586,10 +1369,6 @@ img.fr.tag-read {
   height: auto;
 }
 
-button.mint-button.popup-btn.mint-button--primary.mint-button--large {
-  margin: 0 auto;
-}
-
 .payment-result-header h3 {
   text-align: center;
 }
@@ -1612,15 +1391,10 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
   height: auto;
 }
 
-.payment-result-success span {
-  font-size: 2.4rem;
-}
-
 .payment-result-success i {
   display: block;
   font-weight: 400;
   text-decoration: line-through;
-  font-size: 2.0rem;
   color: #CCCCCC;
 }
 

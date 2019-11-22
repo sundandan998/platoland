@@ -10,28 +10,28 @@
 				<el-form-item label="新登录密码" prop="new_pwd" v-if="visible">
 					<el-input type="password" v-model="ruleForm.new_pwd" autocomplete="off">
 						<i slot="suffix" title="隐藏密码" @click="changePass('show')">
-							<img src="../../../assets/images/eye-close.png" />
+							<img src="../../../assets/images/eye-close.svg" />
 						</i>
 					</el-input>
 				</el-form-item>
 				<el-form-item label="新登录密码" prop="new_pwd" v-else>
 					<el-input type="text" v-model="ruleForm.new_pwd">
 						<i slot="suffix" title="显示密码" @click="changePass('hide')">
-							<img src="../../../assets/images/eye-open.png" />
+							<img src="../../../assets/images/eye-open.svg" />
 						</i>
 					</el-input>
 				</el-form-item>
 				<el-form-item label="确认密码" prop="new_pwd2" v-if="visible">
 					<el-input type="password" v-model="ruleForm.new_pwd2" autocomplete="off">
 						<i slot="suffix" title="隐藏密码" @click="changePass('show')">
-							<img src="../../../assets/images/eye-close.png" />
+							<img src="../../../assets/images/eye-close.svg" />
 						</i>
 					</el-input>
 				</el-form-item>
 				<el-form-item label="确认密码" prop="new_pwd2" v-else>
 					<el-input type="text" v-model="ruleForm.new_pwd2" autocomplete="off">
 						<i slot="suffix" title="显示密码" @click="changePass('hide')">
-							<img src="../../../assets/images/eye-open.png" />
+							<img src="../../../assets/images/eye-open.svg" />
 						</i>
 					</el-input>
 				</el-form-item>

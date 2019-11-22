@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <router-link to="home">
+  <div class="register">
+    <router-link to="login">
       <div class="login-cancel">
         <img src="../../assets/images/back.svg" alt="" />
         <span>登录</span>
@@ -13,13 +13,13 @@
     <div class="register-tab login-form">
       <van-tabs v-model="active" @click="clear">
         <van-tab title="手机号注册">
-          <mt-field label="手机" placeholder="请输入手机号" v-model="verification.username" type="tel"
+          <mt-field  placeholder="请输入手机号" v-model="verification.username" type="tel"
             @blur.native.capture="telCheck" :state="telStatus">
           </mt-field>
           <img src="../../assets/images/tel.svg" alt="" class="login-icon">
         </van-tab>
         <van-tab title="邮箱注册">
-          <mt-field label="邮箱" placeholder="请输入邮箱" v-model="verification.username" type="email"
+          <mt-field placeholder="请输入邮箱" v-model="verification.username" type="email"
             @blur.native.capture="emailCheck" :state="emailStatus">
           </mt-field>
           <img src="../../assets/images/email.png" alt="" class="login-icon">
@@ -28,10 +28,10 @@
     </div>
     <div class="login-form">
       <!-- @blur.native.capture="pwdCheck" -->
-      <mt-field label="密码" placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
+      <mt-field  placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
-      <img src="../../assets/images/pass.png" alt="" class="login-icon">
+      <img src="../../assets/images/password.svg" alt="" class="login-icon">
     </div>
     <div class="login-checkbox">
       <span>注册即表示同意
@@ -42,7 +42,7 @@
     </div>
     <div class="login-btn">
       <!-- <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}"> -->
-      <mt-button type="default" @click="sendCode" :disabled="disabled">注&nbsp;册</mt-button>
+      <mt-button type="default" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
       <!-- </router-link> -->
     </div>
     <div class="login-switch">
@@ -79,8 +79,8 @@
         // 显示与隐藏密码
         seen: '',
         pwdType: "password",
-        openeye: require('../../assets/images/eye-open.png'), //图片地址
-        nopeneye: require('../../assets/images/eye-close.png'), //图片地址
+        openeye: require('../../assets/images/eye-open.svg'), //图片地址
+        nopeneye: require('../../assets/images/eye-close.svg'), //图片地址
         // 登录参数
         verification: {
           username: '',
@@ -105,6 +105,14 @@
       }
     },
     created() {
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     methods: {
       //  登录
@@ -251,58 +259,53 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
-
-  body {
-    height: 100%;
-    background-color: #fff;
+  .register{
+    .login-cancel {
+    margin:10px 0 30px 54px;
+    img {
+      height: 25px;
+    }
+    span {
+      position: relative;
+      top:-5px;
+      color: #333;
+    }
   }
-
+    .logo{
+      img {
+      width: 60%;
+      margin: 50px auto 150px auto;
+      display: block;
+    }
+    }
   .login-checkbox {
+    margin:50px 0 10px 64px;
     a {
       color: #036EB8;
     }
   }
 
-  .logo {
-    .mint-cell-wrapper {
-      background-image: none;
-    }
-
-    img {
-      width: 60%;
-      margin: 0 auto;
-    }
-
-  }
-
-  .login-cancel {
-    img {
-      margin: 10px 0 -3px 15px;
-    }
-
-    span {
-      color: #333;
-    }
-  }
-
+ 
   .register-tab {
     margin-top: 50px;
-
     .van-tab {
       flex: none;
       margin-left: 15px;
     }
 
     .van-tabs__content {
-      margin-top: 40px;
+      margin-top: 60px;
     }
   }
 
   .login-form {
-    .mint-field .mint-cell-title {
-      width: 40px;
+    margin:0 54px;
+    .van-ellipsis{
+      font-size: 26px;
     }
-
+    .van-tabs__wrap.van-hairline--top-bottom{
+      height: 60px;
+    }
     .mint-cell-text {
       color: #999;
       margin-left: 10px;
@@ -314,18 +317,28 @@
     }
 
     .login-icon {
-      top: -32px;
-      left: 28px;
+      top: -50px;
       position: relative;
     }
+  .van-tabs__wrap.van-hairline--top-bottom {
+      height: unset;
+  }
+  [class*=van-hairline]::after{
+    border:none;
+  }
+  .van-tabs__nav--line {
+    padding-bottom: 0.4rem;
+}  
   }
 
   .login-switch {
     p {
-      font-size: 0.79rem;
+      font-size: 24px;
       text-align: center;
       color: #036EB8;
+      margin-top: 10px;
     }
 
   }
+}
 </style>

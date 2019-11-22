@@ -12,23 +12,26 @@
       <span>登录</span>
     </div>
     <div class="login-form">
-      <mt-field label="账号" placeholder="请输入手机号/邮箱" v-model="verification.username" type="email"
-        @blur.native.capture="check" :state="status">
+      <mt-field placeholder="请输入手机号/邮箱" v-model="verification.username" type="email" @blur.native.capture="check"
+        :state="status">
       </mt-field>
       <img src="../../assets/images/login-mine.svg" alt="" class="login-icon">
       <!-- @blur.native.capture="pwdCheck" :state="pwdlStatus" -->
-      <mt-field label="密码" placeholder="请输入登录密码" v-model="verification.password" :type="pwdType">
+      <mt-field placeholder="请输入登录密码" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
-      <img src="../../assets/images/pass.png" alt="" class="login-icon">
+      <img src="../../assets/images/password.svg" alt="" class="login-icon">
+      <router-link to="password">
+        <p class=" fr forget-pwd">忘记密码 ?</p>
+      </router-link>
     </div>
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="login">
-        <router-link to="password">
-          <span class="fr forget-pwd">忘记密码</span>
-        </router-link>
+        <!-- <router-link to="password">
+          <p class=" fr forget-pwd">忘记密码</p>
+        </router-link> -->
         <div class="login-btn">
-          <mt-button type="default" @click="handleLogin" :disabled="disabled">登&nbsp;录</mt-button>
+          <mt-button type="default" @click="handleLogin" :disabled="disabled" size="large">登&nbsp;录</mt-button>
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
@@ -64,8 +67,8 @@
         // 显示与隐藏密码
         seen: '',
         pwdType: "password",
-        openeye: require('../../assets/images/eye-open.png'), //图片地址
-        nopeneye: require('../../assets/images/eye-close.png'), //图片地址
+        openeye: require('../../assets/images/eye-open.svg'), //图片地址
+        nopeneye: require('../../assets/images/eye-close.svg'), //图片地址
         // 登录参数
         verification: {
           username: '',
@@ -90,6 +93,14 @@
       }
     },
     created() {
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     methods: {
       //  登录
@@ -188,10 +199,10 @@
           var tel = /^1[23456789]\d{9}$/
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
           // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if(val.username != ''&&val.password!=''&&(email.test(val.username)||tel.test(val.username))){
+          if (val.username != '' && val.password != '' && (email.test(val.username) || tel.test(val.username))) {
             // 高亮
             this.disabled = false
-          }else{
+          } else {
             this.disabled = true
           }
         }
@@ -203,57 +214,84 @@
 <style lang="scss">
   @import '../../assets/scss/global';
 
-  body {
-    height: 100%;
-    background-color: #fff;
-  }
+  .login {
+    .logo {
+      .mint-cell-wrapper {
+        background-image: none;
+      }
 
-  .logo {
-    .mint-cell-wrapper {
-      background-image: none;
+      img {
+        width: 60%;
+        margin: 0 auto 100px auto;
+        display: block;
+      }
     }
 
-    img {
-      width: 60%;
+    .login-title {
+      margin: 0 0 100px 54px;
+
+      span {
+        font-size: 60px;
+      }
+    }
+
+    .login-form {
+      margin: 150px 54px 100px 54px;
+      .mint-field .mint-cell-title {
+        width: 40px;
+      }
+
+      .mint-cell-text {
+        color: #999;
+        margin-left: 10px;
+      }
+
+      .mint-cell-wrapper {
+        border-bottom: 1px solid #f6f6f6;
+        margin: 0 20px;
+      }
+
+      .login-icon {
+        top: -50px;
+        position: relative;
+      }
+
+      /* .mint-field-core {
+        margin-left: 20px;
+        font-size: 26px;
+        color: #333;
+      } */
+
+    }
+
+    .forget-pwd {
+      margin-top: 10px;
+      font-size: 26px;
+      color:#333;
+    }
+
+    .login-btn {
+      width: 100%;
+      display: inline-block;
+    }
+
+    .login-switch {
+      p {
+        text-align: center;
+        color: #036EB8;
+        font-size: 26px;
+        margin-top: 10px;
+      }
+
+    }
+
+    .mint-button--large {
+      width: 82%;
+      height: 80px;
       margin: 0 auto;
+      font-size: 32px;
+      color: #fff;
+      background-color: #036EB8;
     }
-  }
-
-  .login-title {
-    margin-bottom: 50px;
-    span {
-      margin-left: 15px;
-      font-size: 60px;
-    }
-  }
-
-  .login-form {
-    .mint-field .mint-cell-title {
-      width: 40px;
-    }
-
-    .mint-cell-text {
-      color: #999;
-      margin-left: 10px;
-    }
-
-    .mint-cell-wrapper {
-      border-bottom: 1px solid #f6f6f6;
-      margin: 0 20px;
-    }
-
-    .login-icon {
-      top: -32px;
-      left: 28px;
-      position: relative;
-    }
-  }
-
-  .login-switch {
-    p {
-      text-align: center;
-      color: #036EB8;
-    }
-
   }
 </style>

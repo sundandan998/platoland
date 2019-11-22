@@ -37,7 +37,6 @@ li{
 input{
     border:none;
     outline:none;
-    text-indent: 1.5rem;
 }
 .fl{
     float: left;
@@ -49,6 +48,20 @@ a{
     text-decoration: none;
     color:#979EAC;
 }
+.mint-field-core {
+    margin-left: 20px;
+    font-size: 26px;
+    color: #333;
+  }
+ 
+  .mint-button--large {
+    width: 82%;
+    height: 80px;
+    margin: 0 auto;
+    font-size: 32px;
+    color: #fff;
+    background-color: #036EB8;
+  }
 .el-input__inner{
     border: none !important;
     border-bottom: 1px solid #e4e4e4 !important;
@@ -70,17 +83,27 @@ a{
 h1{
     font-weight: 400;
 }
-body{
-    // background-color: #f6f6f6;
+.mintui{
+    font-size: 30px;
 }
-
+.mint-field-state .mintui {
+    font-size: 30px;
+}
 //支付密码样式
+.van-password-input__security{
+    height: 100px;
+}
+.van-key{
+    height: 100px;
+    line-height:100px;
+    font-size: 30px;
+        
+}
 .mint-popup-bottom {
     width: 100%;
 }
 .van-number-keyboard{
     position: absolute;
-
 }
 .mint-popup {
     display: block!important;
@@ -94,7 +117,7 @@ body{
 .paymentamount{
     text-align: center;
     display: block;
-    font-size: 1.2rem;
+    // font-size: 1.2rem;
     margin-bottom: 15px;
     margin-top: 15px;
 }
@@ -109,96 +132,11 @@ body{
 }
 .mint-cell-wrapper{
   background-image:none !important;
-}
-//登录页
-.login-cancel img {
-    // margin: 10px;
-}
-.logo{
-    text-align: center;
-    margin: 40px 0 24px 0;
-}
-.login-tab .mint-navbar {
-    text-align: unset;
-}
-.login-tab a.mint-tab-item {
-    display: contents;
-}
-.login-tab .mint-tab-item-label {
-    margin: 20px 40px 20px 28px;
-}
-.mint-tabbar > .mint-tab-item.is-selected{
-  background-color: #fbfbfb !important;
-  color:#26a2ff;
-}
-.mint-tabbar{
-  background-image:none !important;
-}
-.mint-cell:last-child{
-   background-image:none !important;
-}
-.login-tab .mint-tab-item-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-}
-.login-content .mint-cell{
-    border-bottom:1px solid #f6f6f6;
-    width: 95%;
-    border-radius: 5px;
-    margin: 0 auto;
-}
-.verification-input{
-    text-align: center;
-
-}
-.el-form-item__error {
-    position: absolute;
-    left: 20px;
-}
-.login-checkbox{
-    span{
-        font-size: 0.77rem;
-        margin-left: 28px;
-        // float: right;
-        margin-top: 4px;
-        margin-right: 28px;
-        // a{
-        //     color: #456dfe;
-        // }
-    }
-    .fr span{
-        margin-right: 28px;
-         color:#000;
-        font-size:0.8rem;
-    }
-}
-.login-btn{
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    .mint-button{
-        background-color: #456dfe;
-        color: #fff;
-        font-size: 0.88rem;
-        margin: 50px auto 10px auto;
-        width: 90%;
-        -webkit-box-shadow:none;
-        box-shadow: none;
-        border-radius: 45px;
-    }
-}
-.forget-pwd{
-    margin-right: 10px;
-    font-size:0.78rem
-}
+} 
 //--------------------------============================
 input.el-input__inner {
     position: relative;
     top: 5px;
-}
-.el-input--prefix .el-input__inner {
-    font-size: 0.77rem;
-    padding-left: 6px;
 }
 .el-input__prefix {
     top: 8px;
@@ -229,35 +167,7 @@ label.mint-button-text {
     position: relative;
 }
 //-------------------------登录/忘记密码------------------
-.forget-password {
-    background-color: #fff;
-}
-.forget-password-title {
-    margin: 20px;
-}
-.forget-password-title h1{
-  font-size: 1.0rem;
-}
-//.forget-password-btn .mint-button--primary {
-//  background-color: #0B6FBA;
-//  margin: 50px auto 50px auto;
-//}
-.forget-password-btn{
-    text-align: center;
-    .mint-button{
-        // background-color: #ddd;
-        color: #fff;
-        font-size: 0.88rem;
-        margin: 50px auto 10px auto;
-        width: 60%;
-        -webkit-box-shadow:none;
-        box-shadow: none;
-        border-radius: 45px;
-        }
-        .nextbtn{
-            background-color: #456dfe !important;
-        }
-}
+
 //-------------------------登录/重置邮件------------------
 .reset-mail-information{
     width: 80%;
@@ -284,198 +194,11 @@ label.mint-button-text {
     background-color: #fff;
 }
 //----------------------注册---------------
-.register-footer{
-    margin:50px 0px 0px 0px;
-    text-align: center;
-    ul{
-        display: inline-block;
-        overflow: auto;
-        margin-left: -70px;
-        li{
-            display: inline;
-            float: left;
-            margin-left: 20px;
-        }
-    }
-    p{
-        margin-top: -20px;
-    }
-}
-.register-eye {
-    float: right;
-    margin-right: 30px;
-    position: relative;
-    top: -35px;
-}
+
+
 //-------------------------------首页-------------------
-// .home-logo {
-//     width: 100%;
-//     background-color: #fff;
-//     text-align: center;
-//     img{
-//         width: 150px;
-//         vertical-align: -webkit-baseline-middle;
-//     }
-// }
-// .home-investment{
-//     width: 98%;
-//     background-color: #fff;
-//     margin: 56px auto;
-//     height: auto;
-//     border-radius: 4px;
-//     border: 1px solid #f2f2f2;
-// }
-// .home-investment-top-left li{
-//     float: left;
-//     margin-right: 18px;
-//     font-size: 0.8rem;
-//     margin-left: 10px;
-// }
-// .home-investment-top-right{
-//     margin-right: 10px;
-//     margin-top: -40px;
-//     button{
-//       background-color: #456DF1;
-//       color:#fff;
-//     }
-
-// }
-// .home-investment-content {
-//     margin-top: -20px;
-//     margin-left: 60px;
-//     height: 50px;
-//     p{
-//         font-size: 0.78rem;
-//         color:#999;
-//         margin-left: 10px;
-//         span{
-//           margin-left: 20px;
-//         }
-//     }
-// }
-// .home-investment-bot {
-//     height: 30px;
-//     width: 100%;
-//     span{
-//         font-size: 0.8rem;
-//     }
-// }
-// .home-investment-progress{
-//     width: 93%;
-//    margin-left: 15px;
-// }
-
-// .home-land{
-//     width: 98%;
-//     margin:0 auto;
-//     margin-top: -35px;
-// }
-// .home-land .van-notice-bar{
-//     background-color: #fff;
-//     color:#000;
-//     border-radius: 4px;
-// }
-// .home-popularity-content{
-//     background-color: #fff;
-//     width: 98%;
-//     height: 130px;
-//     margin:0 auto;
-//     border-radius: 7px;
-//     margin-top: 10px;
-//     li{
-//         float: left;
-//         margin:20px 10px 0 10px;
-//         font-size: 0.8rem;
-//     }
-// }
-// .home-popularity-content-top{
-//     height: 70px;
-//     p{
-//        font-size: 0.8rem;
-//     }
-// }
-// .home-popularity-content-bot{
-//     width: 100%;
-//     height: 37px;
-// }
-// .home-popularity-progress {
-//     margin: 0 10px 0 10px;
-//     border-radius: 7px;
-// }
-// // .issue-state{
-// //   color:red;
-// // }
-// .home-assets-subscription-title .mint-cell{
-//   background-color: #f6f6f6 !important;
-// }
-// .home-assets-subscription-content{
-//   white-space: nowrap;
-//   overflow-x: auto;
-//   margin: 0px 5px 0 5px;
-//   position: relative;
-//   top: -10px;
-// }
-// .home-assets-subscription-content::-webkit-scrollbar{
-//     display: none;
-// }
-// .assets-subscription{
-//     width: auto;
-//     display:inline-block;
-//     background-color: #fff;
-//     border-radius: 7px;
-//     font-size: 0.8rem;
-//     box-shadow: 1px 6px 5px #ccc;
-//     margin-right: 15px;
-//       span{
-//           font-size: 0.7rem;
-//            color: #999;
-//       }
-
-// }
-// .assets-subscription{
-//     img{
-//        margin:10px 0px 0 10px;
-//     }
-// }
-// .text-right{
-//    text-align: right;
-// }
-// .assets-subscription-information {
-//     ul{
-//         color: #000;
-//         font-size: 0.7rem;
-//         margin-left: 5px;
-//         margin-right: 5px;
-//         li{
-//             margin-bottom: 10px;
-//         }
-//     }
-// }
-// .home-assets-more{
-//     width: 98%;
-//     background-color: #fff;
-//     margin:20px auto;
-//     border-radius:5px;
-//     text-align: center;
-//     height: 50px;
-//     line-height: 50px;
-//     box-shadow: 1px 5px 5px #ccc;
-//     span{
-//         font-size: 0.8rem;
-//     }
-// }
 //首页/流通中/通证列表页
 //首页/流通中/通证详情页
-.state0{
-  color: red;
-  }
-.state1{
-  color: green;
-}
-.state2{
-  color: blue;
-}
-
 .pass-details-information{
     background-color: #fff;
     width: 100%;
@@ -505,10 +228,10 @@ label.mint-button-text {
     font-weight: 700;
 }
 .mint-cell-text {
-    font-size: 0.72rem;
+    // font-size: 0.72rem;
 }
 .mint-cell-value{
-  font-size: 0.72rem;
+//   font-size: 0.72rem;
   span{
 
   }
@@ -518,7 +241,7 @@ table.el-table__header {
 }
 table.el-table__body {
      width: auto !important;
-     font-size: 0.8rem;
+    //  font-size: 0.8rem;
 }
 .pass-details-issue-form {
     margin-top: 10px;
@@ -542,7 +265,7 @@ table.el-table__body {
     span{
         margin: 10px 0 10px 10px;
         display: inline-block;
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
     }
 }
 //首页/流通中/通证详情页/通证主体/主体介绍
@@ -553,10 +276,10 @@ table.el-table__body {
 
 //首页/流通中/通证详情页/通证主体/主体信息
 .subject-details-content .mint-tab-item-label {
-    font-size: 0.88rem;
+    // font-size: 0.88rem;
 }
 .information-content span {
-    font-size: 0.72rem;
+    // font-size: 0.72rem;
 }
 .subject-details-content {
     margin-top: 20px;
@@ -569,7 +292,7 @@ table.el-table__body {
 
 .information-title{
     margin: 20px 24px 20px 24px;
-    font-size: 0.72rem;
+    // font-size: 0.72rem;
     color: #666;
 }
 
@@ -604,7 +327,7 @@ table.el-table__body {
     margin: 5px 18px 5px 18px;
     height: 40px;
     line-height: 40px;
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
     color: #333;
     img{
         width: 25px;
@@ -614,7 +337,7 @@ table.el-table__body {
 }
 .to-deal-purchase-bot span:nth-child(2){
     color:#1A8EEE;
-    font-size: 1.1rem;
+    // font-size: 1.1rem;
     position: relative;
     top: 10px;
     left: 56px;
@@ -623,7 +346,7 @@ table.el-table__body {
     
     span{
         padding-left: 15px;
-        font-size: 0.67rem;
+        // font-size: 0.67rem;
         color:#999;
         img{
             width: 20px;
@@ -633,7 +356,7 @@ table.el-table__body {
     }
     p{
         padding-left: 15px;
-        font-size: 0.67rem;
+        // font-size: 0.67rem;
         color: #999;
         margin-top: 10px;
         padding-bottom: 5px;
@@ -654,16 +377,16 @@ table.el-table__body {
     }
     span{
         display: block;
-        font-size: 0.89rem;
+        // font-size: 0.89rem;
         padding-top: 6px;
     }
     p{
         margin: 20px 0 0 28px;
-        font-size: 0.89rem;
+        // font-size: 0.89rem;
     }
 }
 .Purchase-pass-content-bot {
-    font-size: 1.0rem;
+    // font-size: 1.0rem;
     margin: 16px 0 0 36px;
     padding-bottom: 10px;
     span{
@@ -676,7 +399,7 @@ table.el-table__body {
     margin: 24px 20px 2px 20px;
 }
 .Purchase-pass-tabbar input.mint-field-core{
-    font-size: 0.89rem;
+    // font-size: 0.89rem;
     color:#000;
     top: -4px;
     position: relative;
@@ -689,7 +412,7 @@ table.el-table__body {
     height: 20px;
     background-color: #fff;
     padding:10px 0 10px 50px;
-    font-size: 0.67rem;
+    // font-size: 0.67rem;
     color:#456df1;
 }
 .Purchase-pass-tabbar .mint-cell-wrapper {
@@ -739,12 +462,12 @@ table.el-table__body {
     line-height: 80px;
     margin-left: 15px;
     color:#979eac;
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
 }
 .purchase-pass-buy-information{
     margin-top: 10px;
     margin-right: 28px;
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
     span{
         position: relative;
         top: -15px;
@@ -758,7 +481,7 @@ table.el-table__body {
 .purchase-pass-valuation-assets span:first-child{
     color:#979eac;
     margin-left: 15px;
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
 }
 .purchase-pass-valuation-assets {
     height: 50px;
@@ -775,7 +498,7 @@ table.el-table__body {
     span{
         position: relative;
         top: -2px;
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
     }
 }
 .purchase-pass-input {
@@ -791,7 +514,7 @@ table.el-table__body {
     p{
         padding: 10px 0 0 15px;
         color:#979eac;
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
     }
 }
 .purchase-pass-quota {
@@ -804,7 +527,7 @@ table.el-table__body {
         height: 40px;
         color: #000;
         border-radius: 5px;
-        font-size: 0.61rem;
+        // font-size: 0.61rem;
         text-indent: initial;
         margin-left: 15px;
         margin-top: 10px;
@@ -813,7 +536,7 @@ table.el-table__body {
     p{
         margin-left: 15px;
         color:#979eac;
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
         padding-top: 10px;
     }
 }
@@ -846,13 +569,13 @@ table.el-table__body {
     padding-left: 15px;
     span{
         display: block;
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
     }
     img{
         margin: 10px;
     }
     p{
-      font-size: 0.8rem;
+    //   font-size: 0.8rem;
     }
 }
 .buy-password-show {
@@ -870,7 +593,7 @@ table.el-table__body {
         margin-left: 30px;
         color:#666;
         display:inline-block;
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
     }
     span{
         margin-right: 10px;
@@ -878,7 +601,7 @@ table.el-table__body {
     }
 }
 .buy-pass-name-price-text.fr span {
-    font-size: 0.89rem;
+    // font-size: 0.89rem;
     color: #333;
 }
 .buy-pass-time {
@@ -886,7 +609,7 @@ table.el-table__body {
     padding-top: 10px;
     background-color: #fff;
     p{
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
         color: #000;
         padding: 1px 0 0 50px;
     }
@@ -969,7 +692,7 @@ table.el-table__body {
     margin: 8px 0 8px 0px;
 }
 .mine span.mint-cell-text {
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
     margin-left: 6px;
 }
 .mint-cell-title {
@@ -995,7 +718,7 @@ table.el-table__body {
     }
     fl{
         margin-right: 30px;
-        font-size:0.8rem;
+        // font-size:0.8rem;
     }
 }
 .transaction-flow-list{
@@ -1012,7 +735,7 @@ table.el-table__body {
 .mint-cell-label {
     color: #888;
     display: block;
-    font-size: 12px;
+    // font-size: 12px;
     margin-top: 6px;
     margin-left: 40px;
 }
@@ -1033,7 +756,7 @@ table.el-table__body {
         margin-top: 2px;
     }
     span{
-        font-size: 0.78rem;
+        // font-size: 0.78rem;
         position: relative;
         top: -4px;
     }
@@ -1044,7 +767,7 @@ table.el-table__body {
     text-align: center;
     position: relative;
     top: -10px;
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
 }
 .assets-list-right {
     margin: -30px 10px 0 0;
@@ -1056,7 +779,7 @@ table.el-table__body {
 .assets-detailed-exhibition {
     background-color: #fff;
     span{
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
         color:#999;
     }
 }
@@ -1064,7 +787,7 @@ table.el-table__body {
     text-align: center;
     padding-top: 30px;
     span{
-        font-size: 1.5rem;
+        // font-size: 1.5rem;
 
     }
 }
@@ -1074,7 +797,7 @@ table.el-table__body {
     height: 80px;
     padding-top: 20px;
     li{
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
         margin-left: 50px;
         margin-top: 5px;
     }
@@ -1086,7 +809,7 @@ table.el-table__body {
 .assets-detailed-whole-header {
     span{
         margin:10px 10px 0 10px;
-        font-size: 0.9rem;
+        // font-size: 0.9rem;
     }
 }
 .assets-detailed-tabbar button{
@@ -1101,7 +824,7 @@ table.el-table__body {
     height: auto;
     padding-bottom: 20px;
     span{
-        font-size: 1.0rem;
+        // font-size: 1.0rem;
         text-align: center;
     }
 }
@@ -1111,7 +834,7 @@ table.el-table__body {
     height: 80px;
     padding-top: 20px;
     li{
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
     }
 }
 .to-change-into-qrcode {
@@ -1119,7 +842,7 @@ table.el-table__body {
     margin-top: -1px;
     text-align: center;
     p{
-      font-size: 0.8rem;
+    //   font-size: 0.8rem;
       color:#999;
       padding-bottom: 20px;
     }
@@ -1144,7 +867,7 @@ img.fr.tag-read {
     padding-top: 14px;
     span{
       display: block;
-      font-size: 0.8rem;
+    //   font-size: 0.8rem;
     }
     img{
         margin-right: 15px;
@@ -1158,7 +881,7 @@ img.fr.tag-read {
     line-height: 50px;
 }
 .turn-out-exhibition-text p{
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     color:#999;
     margin-left: 10px;
     margin-top: 10px;
@@ -1187,14 +910,14 @@ img.fr.tag-read {
     }
     p{
         color:blue;
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
     }
 }
 .scandetail-btn{
     margin-top: 20px;
 }
 .scandetail-text {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     margin-left: 15px;
     margin-top: 20px;
     color: #999;
@@ -1235,7 +958,7 @@ img.fr.tag-read {
 .rest-pass-word-text{
     margin-top: 20px;
     p{
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
         color: #999;
         margin-left: 15px;
     }
@@ -1274,7 +997,7 @@ img.fr.tag-read {
     padding-bottom: 20px;
 }
 .open-pay-password-keyboard-text {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     margin: 10px;
     padding-bottom: 20px;
 }
@@ -1300,7 +1023,7 @@ img.fr.tag-read {
     right: 10px;
 }
 .safety-verification-text {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     color: #999;
     padding:10px 0 20px 10px;
 }
@@ -1336,11 +1059,11 @@ img.fr.tag-read {
     border-radius: 5px;
     margin-top: 10px;
     p{
-      font-size: 0.8rem;
+    //   font-size: 0.8rem;
       margin-left: 8px;
     }
     span{
-      font-size: 1.0rem;
+    //   font-size: 1.0rem;
       margin-left: 0px
     }
 }
@@ -1386,7 +1109,7 @@ img.fr.tag-read {
     margin: 20px 0 20px 0;
 }
 .edit-adress-text {
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     color: #999;
     margin-left: 15px;
     padding-bottom: 20px;
@@ -1405,7 +1128,7 @@ img.fr.tag-read {
 }
 .adress-book-content{
     p{
-      font-size:0.8rem;
+    //   font-size:0.8rem;
       line-height: 20px;
     }
 }
@@ -1465,20 +1188,20 @@ img.fr.tag-read {
 }
 .news-details-list-title{
   span{
-      font-size: 1.0rem;
+    //   font-size: 1.0rem;
   }
   p{
-    font-size: 0.6rem;
+    // font-size: 0.6rem;
     color:#999;
     span{
-       font-size: 0.6rem;
+    //    font-size: 0.6rem;
     }
   }
 }
 .news-details-list-content{
   margin-left: 15px;
   span{
-    font-size: 0.78rem;
+    // font-size: 0.78rem;
   }
 }
 .notice{
@@ -1488,7 +1211,7 @@ img.fr.tag-read {
     border-radius: 4px;
     background-color: #fff;
     border: 1px solid #f2f2f2;
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
 }
 .anim{
     transition: all 1s;
@@ -1504,7 +1227,7 @@ img.fr.tag-read {
         height: 32px;
         margin-right: 5px;
         color:#000;
-        font-size: 0.72rem;
+        // font-size: 0.72rem;
         margin-top: -3px;
 
     }
@@ -1552,9 +1275,7 @@ img.fr.tag-read {
         height: auto;
     }
 }
-button.mint-button.popup-btn.mint-button--primary.mint-button--large {
-    margin: 0 auto;
-}
+
 //-------------首页/支付结果-------------
 .payment-result-header h3{
     text-align: center;
@@ -1573,13 +1294,13 @@ button.mint-button.popup-btn.mint-button--primary.mint-button--large {
         height: auto;
     }
     span{
-        font-size: 2.4rem;
+        // font-size: 2.4rem;
     }
     i{
          display: block;
         font-weight: 400;
         text-decoration:line-through;
-        font-size: 2.0rem;
+        // font-size: 2.0rem;
         color:#CCCCCC;
     }
 }

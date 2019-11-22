@@ -42,7 +42,7 @@
     </div>
     <div class="forget-password-btn">
       <!-- <router-link :to="{name:'Reset',params:{}}"> -->
-      <mt-button type="primary" @click="resetPwd" class="nextbtn" :disabled="disabled">下一步</mt-button>
+      <mt-button type="primary" @click="resetPwd" class="nextbtn" :disabled="disabled" size="large">下一步</mt-button>
       <!-- </router-link> -->
     </div>
   </div>
@@ -82,6 +82,14 @@
         //   username: [{ required: true, message: '请输入手机号码', trigger: 'blur' }, { pattern: 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/, message: '请输入正确的手机号码' }]
         // }
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     created() {
     },
@@ -168,28 +176,44 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
-
   .forget-password {
     .login-cancel {
       img{
-        margin-left: 15px;
+        margin-left:54px;
+        width: 25px;
       }
       span {
         color: #333;
+        position: relative;
+        top:-5px;
       }
     }
     .logo{
       img {
       width: 60%;
-      margin: 0 auto;
+      margin: 50px auto;
+      display: block;
     }
+    
+    }
+    .forget-password-title{
+      margin:50px 0 100px 54px;
     }
     .login-content {
+      margin:0 54px 50px 54px;
       img {
         position: relative;
         top: 39px;
         z-index: 1;
         left: 15px;
+      }
+      .mint-field-core{
+        margin-left: 50px;
+      }
+      .mint-cell-text{
+        width: 250px;
+        font-size: 24px;
+        display: block;
       }
     }
   }

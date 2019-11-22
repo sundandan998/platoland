@@ -85,8 +85,8 @@
           // 显示与隐藏密码
           seen: '',
           pwdType: "password",
-          openeye: require('../../assets/images/eye-open.png'), //图片地址
-          nopeneye: require('../../assets/images/eye-close.png'), //图片地址
+          openeye: require('../../assets/images/eye-open.svg'), //图片地址
+          nopeneye: require('../../assets/images/eye-close.svg'), //图片地址
           // 登录参数
           verification: {
             username: '',

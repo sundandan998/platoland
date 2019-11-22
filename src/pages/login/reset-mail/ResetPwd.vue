@@ -12,28 +12,28 @@
         <el-form-item label="新登录密码" prop="new_pwd" v-if="visible">
           <el-input type="password" v-model="ruleForm.new_pwd" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass('show')">
-              <img src="../../../assets/images/eye-close.png" />
+              <img src="../../../assets/images/eye-close.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item label="新登录密码" prop="new_pwd" v-else>
           <el-input type="text" v-model="ruleForm.new_pwd">
             <i slot="suffix" title="显示密码" @click="changePass('hide')">
-              <img src="../../../assets/images/eye-open.png" />
+              <img src="../../../assets/images/eye-open.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="new_pwd2" v-if="visible1">
           <el-input type="password" v-model="ruleForm.new_pwd2" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass1('show')">
-              <img src="../../../assets/images/eye-close.png" />
+              <img src="../../../assets/images/eye-close.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="new_pwd2" v-else>
           <el-input type="text" v-model="ruleForm.new_pwd2" autocomplete="off">
             <i slot="suffix" title="隐藏密码" @click="changePass1('hide')">
-              <img src="../../../assets/images/eye-open.png" />
+              <img src="../../../assets/images/eye-open.svg" />
             </i>
           </el-input>
         </el-form-item>
@@ -97,6 +97,14 @@
     },
     created() {
     },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
+    },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -152,5 +160,14 @@
   }
 </script>
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .rest-pass-word{
+    margin: 0 24px;
+    .rest-pass-word-header{
+      margin-top: 10px;
+    }
+    .rest-pass-word-from{
+      margin-top:50px;
+    }
+  }
 </style>

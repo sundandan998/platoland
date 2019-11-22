@@ -188,7 +188,6 @@
 
     .home-banner {
       margin: 20px 24px;
-
       /* background: url("../../assets/images/bg.png");
       background-size: 100% 100%;
       background-position: center center; */
