@@ -16,6 +16,8 @@ import store from './store'
 import { Indicator } from 'mint-ui'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
+// 适配
+import 'lib-flexible'
 // 提示消息
 import { message } from '@/assets/lang/message.js'
 //引入jquery
@@ -24,8 +26,7 @@ import $ from 'jquery'
 import AppConfig from './appconfig'
 // 国际化
 import VueI18n from 'vue-i18n'
-// 适配
-import 'lib-flexible'
+
 Vue.use(VueI18n)
 Vue.use(new AppConfig())
 Vue.prototype.$Indicator = Indicator

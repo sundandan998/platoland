@@ -7,7 +7,7 @@ const packageConfig = require('../package.json')
 const px2remLoader = {
   loader: 'px2rem-loader',
   options: {
-  remUnit: 75
+  remUnit: 37.5,
   }
  }
 exports.assetsPath = function (_path) {
@@ -38,7 +38,6 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader,px2remLoader] : [cssLoader]
-
     if (loader) {
       loaders.push({
         loader: loader + '-loader',

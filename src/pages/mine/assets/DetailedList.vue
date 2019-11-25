@@ -96,7 +96,7 @@
 	@import '../../../assets/scss/global';
 
 	.details-list {
-		font-size: 0.78rem;
+		/* font-size: 0.78rem; */
 		border-bottom: 1px solid #f2f2f2;
 		padding: 10px 15px;
 		.list-num{

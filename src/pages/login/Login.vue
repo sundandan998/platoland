@@ -219,10 +219,9 @@
       .mint-cell-wrapper {
         background-image: none;
       }
-
       img {
         width: 60%;
-        margin: 0 auto 100px auto;
+        margin: 10px auto 100px auto;
         display: block;
       }
     }
@@ -283,15 +282,6 @@
         margin-top: 10px;
       }
 
-    }
-
-    .mint-button--large {
-      width: 82%;
-      height: 80px;
-      margin: 0 auto;
-      font-size: 32px;
-      color: #fff;
-      background-color: #036EB8;
     }
   }
 </style>

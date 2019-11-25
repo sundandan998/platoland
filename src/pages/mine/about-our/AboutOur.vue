@@ -41,7 +41,7 @@
 
 	.about-our-contact {
 		mint-cell-text {
-			font-size: 0.8rem;
+			/* font-size: 0.8rem; */
 		}
 	}
 	.about-our-text {

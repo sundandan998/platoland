@@ -371,11 +371,6 @@
   /* --------------发行买入--------- */
   .buy {
     background-color: #fff;
-
-    p {
-      font-size: 0.78rem;
-    }
-
   }
 
   .buy-title {
@@ -387,7 +382,7 @@
     border-bottom: 10px solid #f6f6f6;
 
     p:first-child {
-      font-size: 1.2rem;
+      /* font-size: 1.2rem; */
     }
 
     p {

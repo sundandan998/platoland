@@ -210,11 +210,6 @@
       .mint-field-core{
         margin-left: 50px;
       }
-      .mint-cell-text{
-        width: 250px;
-        font-size: 24px;
-        display: block;
-      }
     }
   }
 </style>

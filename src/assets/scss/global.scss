@@ -48,17 +48,9 @@ a{
     text-decoration: none;
     color:#979EAC;
 }
-.mint-field-core {
-    margin-left: 20px;
-    font-size: 26px;
-    color: #333;
-  }
- 
   .mint-button--large {
     width: 82%;
-    height: 80px;
     margin: 0 auto;
-    font-size: 32px;
     color: #fff;
     background-color: #036EB8;
   }
@@ -83,22 +75,11 @@ a{
 h1{
     font-weight: 400;
 }
-.mintui{
-    font-size: 30px;
-}
 .mint-field-state .mintui {
     font-size: 30px;
 }
 //支付密码样式
-.van-password-input__security{
-    height: 100px;
-}
-.van-key{
-    height: 100px;
-    line-height:100px;
-    font-size: 30px;
-        
-}
+
 .mint-popup-bottom {
     width: 100%;
 }
@@ -306,15 +287,6 @@ table.el-table__body {
 .sell-pass {
     position: relative;
     top: -40px;
-}
-.van-tabs__line {
-    z-index: 1;
-    left: 0;
-    bottom: 15px;
-    height: 3px;
-    position: absolute;
-    border-radius: 3px;
-    background-color: #456DF1;
 }
 .to-deal-purchase {
     width: 100%;

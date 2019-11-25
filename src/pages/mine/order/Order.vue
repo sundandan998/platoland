@@ -106,7 +106,7 @@
         }
 
         span {
-          font-size: 0.78rem;
+          /* font-size: 0.78rem; */
           color: #999;
         }
       }
@@ -119,7 +119,7 @@
         padding: 5px 0;
 
         span {
-          font-size: 0.78rem;
+          /* font-size: 0.78rem; */
           color: #999;
         }
       }

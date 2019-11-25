@@ -87,12 +87,7 @@
 		p {
 			height: 25px;
 			margin: 10px 20px;
-			font-size: 0.78rem;
-
-			span {
-				font-size: 0.78rem;
-			}
-
+			/* font-size: 0.78rem; */
 			span:last-child {
 				float: right;
 				display: flex;
@@ -105,7 +100,7 @@
 
 			p {
 				b {
-					font-size: 1.4rem;
+					/* font-size: 1.4rem; */
 					font-weight: 400;
 					margin-left: 40px;
 				}

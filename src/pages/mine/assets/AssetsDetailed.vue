@@ -197,12 +197,12 @@
     border-bottom: 1px solid #ccc;
 
     .list-title {
-      font-size: 0.78rem;
+      /* font-size: 0.78rem; */
       padding: 5px 30px 5px 15px;
     }
 
     .list-deta {
-      font-size: 0.78rem;
+      /* font-size: 0.78rem; */
       padding: 5px 30px 5px 15px;
     }
 

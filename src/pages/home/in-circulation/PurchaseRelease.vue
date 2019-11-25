@@ -237,7 +237,7 @@
 	@import '../../../assets/scss/global';
 /* 购买出售tab栏 */
 	.purchase-pass-input-title {
-		font-size: 0.78rem;
+		/* font-size: 0.78rem; */
 		margin-left: 25px;
 		color: #999;
 		margin-top: 20px;

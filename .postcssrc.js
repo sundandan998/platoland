@@ -6,12 +6,16 @@ module.exports = {
     "postcss-url": {},
     // to edit target browsers: use "browserslist" field in package.json
     "autoprefixer": {
-      // browsers:["Android>=4.0","ios>=7"]
+      browsers:["Android>=4.0","ios>=7"]
     },
-    // "postcss-pxtorem":{
-    //   rootValue:75,
-    //   propList:["*"],
-    //   selectorBlackList:[".van",".mint"]
+    "postcss-pxtorem":{
+      rootValue:75,
+      propList:["*"],
+      selectorBlackList:[".van",".mint"]
+    },
+    // "postcss-px2rem-exclude": {
+    //   remUnit: 75,
+    //   exclude: /node_modules|folder_name/i
     // }
   }
 }

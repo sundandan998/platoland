@@ -300,9 +300,6 @@
 
   .login-form {
     margin:0 54px;
-    .van-ellipsis{
-      font-size: 26px;
-    }
     .van-tabs__wrap.van-hairline--top-bottom{
       height: 60px;
     }
@@ -327,7 +324,7 @@
     border:none;
   }
   .van-tabs__nav--line {
-    padding-bottom: 0.4rem;
+    /* padding-bottom: 0.4rem; */
 }  
   }
 

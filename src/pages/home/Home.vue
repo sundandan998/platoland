@@ -179,11 +179,6 @@
     .home-header {
       height: 44px;
       background-color: #fff;
-
-      .mint-header-title {
-        font-size: 28px;
-        margin-top: 40px;
-      }
     }
 
     .home-banner {
