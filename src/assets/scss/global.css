@@ -688,24 +688,6 @@ table.el-table__body {
 }
 
 /*------------------------我的---------------------*/
-.mine-head {
-  height: 0;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.mine-cell {
-  margin-top: 150px;
-}
-
-.mine-cell-list {
-  margin-top: 1px;
-}
-
-.mine-safety {
-  margin: 8px 0 8px 0px;
-}
-
 .mine span.mint-cell-text {
   margin-left: 6px;
 }

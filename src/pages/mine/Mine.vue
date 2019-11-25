@@ -4,38 +4,43 @@
 			<mt-tab-container class="page-tabbar-container" v-model="selected">
 				<mt-tab-container-item id="mine" class="home-index">
 					<div class="mine-head">
-						<div class="mine-head-portrait">
-							<img src="../../assets/images/avatar.png" alt="" />
-							<p>{{infoData.email||infoData.mobile}}</p>
-							<!-- <P>{{infoData.email}}</P> -->
-						</div>
+						<img src="../../assets/images/avatar.png" alt="" />
+						<p>{{infoData.email||infoData.mobile}}</p>
+						<!-- <P>{{infoData.email}}</P> -->
 					</div>
 					<div class="mine-cell mine">
 						<!-- <mt-cell title="邀请新人" to="/invite" is-link class="mine-cell-list">
 							<img slot="icon" src="../../assets/images/people.svg">
 						</mt-cell> -->
-						<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
-							<img slot="icon" src="../../assets/images/zc.png">
-						</mt-cell>
-						<mt-cell title="订单" to="/order" is-link class="mine-cell-list">
-							<img slot="icon" src="../../assets/images/zc.png">
-						</mt-cell>
-						<div class="mine-safety">
+						<div class="mine-border-radius">
+							<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
+								<img slot="icon" src="../../assets/images/zc.svg">
+							</mt-cell>
+							<mt-cell title="订单" to="/order" is-link class="mine-cell-list">
+								<img slot="icon" src="../../assets/images/dd.svg">
+							</mt-cell>
+						</div>
+						<div class="mine-safety mine-border-radius">
 							<mt-cell :title="$t('m.addressbook')" to="/book" is-link class="mine-cell-list">
-								<img slot="icon" src="../../assets/images/dzb.png">
+								<img slot="icon" src="../../assets/images/dzb.svg">
 							</mt-cell>
 							<mt-cell :title="$t('m.security')" to="/safety" is-link class="mine-cell-list">
-								<img slot="icon" src="../../assets/images/aq.png" alt="" />
+								<img slot="icon" src="../../assets/images/aq.svg" alt="" />
 							</mt-cell>
 						</div>
-						<div class="mine-our">
+						<div class="mine-our mine-border-radius">
 							<mt-cell :title="$t('m.version')" to="/version" is-link class="mine-cell-list">
-								<img slot="icon" src="../../assets/images/bb.png" alt="" />
+								<img slot="icon" src="../../assets/images/bb.svg" alt="" />
 							</mt-cell>
 							<mt-cell :title="$t('m.our')" to="/about" is-link class="mine-cell-list">
-								<img slot="icon" src="../../assets/images/gy.png" alt="" />
+								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
 							</mt-cell>
 						</div>
+						<div class="mine-safety mine-token">
+						<mt-cell title="我的通证" to="/about" is-link class="mine-cell-list">
+							<img slot="icon" src="../../assets/images/tz.svg" alt="" />
+						</mt-cell>
+					</div>
 					</div>
 				</mt-tab-container-item>
 			</mt-tab-container>
@@ -76,4 +81,46 @@
 </script>
 <style lang="scss">
 	@import '../../assets/scss/global';
+
+	.exchange {
+		.mine-head {
+			img {
+				display: block;
+				margin: 30px auto;
+			}
+
+			p {
+				text-align: center;
+				margin-bottom: 50px;
+				font-size: 26px;
+			}
+		}
+
+		.mine-cell {
+			margin: 0 24px;
+
+			.mine-border-radius {
+				a.mint-cell.mine-cell-list {
+					border-top-left-radius: 10px;
+					border-top-right-radius: 10px;
+				}
+
+				a.mint-cell.mine-cell-list:last-child {
+					border-bottom-left-radius: 10px;
+					border-bottom-right-radius: 10px;
+					border-top-left-radius: unset;
+					border-top-right-radius: unset;
+				}
+			}
+
+			.mine-safety {
+				margin: 20px 0 20px 0px;
+			}
+			.mine-token{
+				a.mint-cell.mine-cell-list{
+					border-radius: 10px;
+				}
+			}
+		}
+	}
 </style>
