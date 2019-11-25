@@ -76,6 +76,10 @@ a {
   color: #000 !important;
 }
 
+.header {
+  margin-bottom: 80px;
+}
+
 h1 {
   font-weight: 400;
 }
@@ -162,6 +166,44 @@ label.mint-button-text img {
   top: -3px;
   left: -3px;
   position: relative;
+}
+
+.van-button--primary {
+  background-color: #036EB8;
+  height: 24px;
+  line-height: 24px;
+  border: none;
+}
+
+/* 公共token部分 */
+.home-pub-token {
+  height: 160px;
+}
+
+.home-pub-token .icon {
+  height: 60px;
+  margin: 55px 10px 0 45px;
+}
+
+.home-pub-token .publicity {
+  height: 100px;
+}
+
+.home-pub-token span {
+  display: inline-block;
+  margin-top: 52px;
+  font-size: 16px;
+  color: #959595;
+}
+
+.home-pub-token span b {
+  font-size: 24px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.home-pub-token span p {
+  font-size: 24px;
 }
 
 .reset-mail-information {
@@ -1266,15 +1308,6 @@ img.fr.tag-read {
   margin-right: 5px;
   color: #000;
   margin-top: -3px;
-}
-
-.version-logo {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.version-update {
-  margin-top: 100px;
 }
 
 .pass-information {

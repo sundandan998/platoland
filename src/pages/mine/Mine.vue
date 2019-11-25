@@ -37,7 +37,7 @@
 							</mt-cell>
 						</div>
 						<div class="mine-safety mine-token">
-						<mt-cell title="我的通证" to="/about" is-link class="mine-cell-list">
+						<mt-cell title="我的通证" to="/certificate" is-link class="mine-cell-list">
 							<img slot="icon" src="../../assets/images/tz.svg" alt="" />
 						</mt-cell>
 					</div>

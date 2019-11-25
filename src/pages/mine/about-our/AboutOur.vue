@@ -1,6 +1,6 @@
 <template>
 	<div class="about-our">
-		<div class="about-our-header">
+		<div class="about-our-header header">
 			<mt-header fixed :title="$t('m.our')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
@@ -30,20 +30,25 @@
 </template>
 
 <script>
+  export default {
+		data () {
+			return {}
+		},
+		created() {},
+		beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
+    }
+	}
+
 </script>
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-
-	body {
-		background-color: #fff;
-	}
-
-	.about-our-contact {
-		mint-cell-text {
-			/* font-size: 0.8rem; */
-		}
-	}
 	.about-our-text {
 		margin: 30px 0 40px 0;
 	}

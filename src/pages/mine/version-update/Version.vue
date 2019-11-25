@@ -1,10 +1,10 @@
 <template>
 	<div class="version">
-		<div class="version-header">
+		<div class="version-header header">
 			<mt-header fixed :title="$t('m.versionupdate')">
-			  <router-link to="/mine" slot="left" >
-			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
-			  </router-link>
+				<router-link to="/mine" slot="left">
+					<mt-button icon="back">{{$t('m.back')}}</mt-button>
+				</router-link>
 			</mt-header>
 		</div>
 		<div class="version-logo">
@@ -18,24 +18,33 @@
 	</div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
-export default{
-	data(){
-		return{
+	import { mapGetters } from 'vuex'
+	export default {
+		data() {
+			return {
 
-		}
-	},
-	created(){
-	},
-	mounted(){
-	},
-	methods:{
-	},
-	computed:{
-  },
-}
+			}
+		},
+		created() {
+		},
+		mounted() {
+		},
+		methods: {
+		},
+		computed: {
+		},
+	}
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+
+	.version {
+		.version-logo {
+			text-align: center;
+			img{
+				margin:50px auto;
+			}
+		}
+	}
 </style>

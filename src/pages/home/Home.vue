@@ -106,7 +106,6 @@
 <script>
   // Tabber栏
   import Tabber from './../../assets/pub/Tabber.vue'
-  import { Grid, GridItem } from 'vant'
   export default {
     data() {
       return {
@@ -130,48 +129,16 @@
       height: 90px;
       line-height: 90px;
       font-size: 30px;
-
       span {
         font-size: 24px;
         color: #959595;
       }
     }
 
-    /* 公共token部分 */
-    .home-pub-token {
-      height: 160px;
-
-      .icon {
-        height: 60px;
-        margin: 55px 10px 0 45px;
-      }
-
-      .publicity {
-        height: 100px;
-      }
-
-      span {
-        display: inline-block;
-        margin-top: 52px;
-        font-size: 16px;
-        color: #959595;
-
-        b {
-          font-size: 24px;
-          color: #333;
-          margin-right: 10px;
-        }
-
-        p {
-          font-size: 24px;
-        }
-      }
-    }
-
     /* 公共button */
     button{
       height: 60px;
-      width: 165px;
+      width: 180px;
       line-height: 60px;
       border-radius: 10px;
       font-size:24px;
@@ -231,7 +198,6 @@
 
         .home-latest-release-token-bot {
           margin: 0 45px;
-
           span {
             font-size: 28px;
             color: #1d92ec;

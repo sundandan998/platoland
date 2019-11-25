@@ -76,6 +76,12 @@ export default new Router({
       name: 'Invite',
       component: () => import("@/pages/mine/invite-people/InvitePeople")
     },
+    // 我的通证
+    {
+      path: '/certificate',
+      name: 'Certificate',
+      component: () => import("@/pages/mine/my-certificate/MyCertificate")
+    },
     // 探索
     {
       path: '/explore',
