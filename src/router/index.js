@@ -82,6 +82,12 @@ export default new Router({
       name: 'Certificate',
       component: () => import("@/pages/mine/my-certificate/MyCertificate")
     },
+    // 发布分利计划
+    {
+      path: '/release',
+      name: 'Release',
+      component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
+    },
     // 探索
     {
       path: '/explore',

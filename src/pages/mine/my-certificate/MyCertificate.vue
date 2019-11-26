@@ -43,15 +43,30 @@
           <p class="fr">共2份</p>
         </div>
       </div>
-
     </div>
     <!-- 分利计划 -->
-    <div class=" token-recently-released">
+    <div class=" token-recently-released plan">
       <mt-cell title="分利计划" to="" is-link>全部 </mt-cell>
-      <div class="no-records">
-        <p>暂无分利计划</p>
-        <van-button type="primary" class="button">去 发 布</van-button>
-      </div>
+      <router-link to="release">
+        <div class="no-records">
+          <p>暂无分利计划</p>
+          <van-button type="primary" class="button">去 发 布</van-button>
+        </div>
+      </router-link>
+      <!-- <div class="home-pub-token">
+        <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
+        <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+        <div class="home-pub-token-days">
+          <div class="home-pub-token-days-top">
+            <p>锁仓期限 30 天</span>
+              <p class="fr percentage">2%</p>
+          </div>
+          <div>
+            <p>最高转入100份</p>
+            <p class="fr">年化利率</p>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -79,8 +94,7 @@
       background-color: #fff;
       margin: 20px 24px;
       border-radius: 10px;
-      height: 360px;
-
+      height: auto;
       .mint-cell {
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
@@ -97,8 +111,6 @@
 
       .home-pub-token {
         margin-top: -50px;
-        height: 250px;
-
         .token-days {
           margin-right: 40px;
           font-size: 24px;
@@ -134,14 +146,37 @@
         }
 
         .token-total {
-          margin: 0 40px 0 50px;
+          margin: 0 40px 0px 50px;
+          p {
+            display: inline-block;
+            color: #999;
+            padding-bottom: 20px;
+          }
+        }
+
+        .home-pub-token-days {
+          margin: 20px 40px 0 55px;
 
           p {
-            display: inline;
-            color: #CDCDCD;
+            display: inline-block;
+            color: #999;
+            margin-bottom: 10px;
+          }
+
+          .percentage {
+            color: #5186F4;
+            font-size: 40px;
+          }
+
+          .home-pub-token-days-top {
+            margin-bottom: 20px;
           }
         }
       }
     }
+  }
+
+  .token-recently-released.plan {
+    height: auto;
   }
 </style>
