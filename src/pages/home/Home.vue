@@ -16,7 +16,9 @@
     <!-- 交易部分 -->
     <div class="home-transaction">
       <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
+      <router-link to="bao">
       <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
+    </router-link>
       <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
       <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
     </div>

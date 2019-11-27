@@ -63,7 +63,18 @@ export default new Router({
       name: 'Home',
       component: () => import("@/pages/home/Home")
     },
-
+    // 分利宝
+    {
+      path: '/bao',
+      name: 'Bao',
+      component: () => import("@/pages/home/fenlibao/FenLibao")
+    },
+    // 转入分利宝
+    {
+      path: '/transferflb',
+      name: 'Transferflb',
+      component: () => import("@/pages/home/fenlibao/TransferIntoflb")
+    },
     //  我的
     {
       path: '/mine',
@@ -88,6 +99,7 @@ export default new Router({
       name: 'Release',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
     },
+
     // 探索
     {
       path: '/explore',
@@ -106,8 +118,8 @@ export default new Router({
       name: 'Order',
       component: () => import("@/pages/mine/order/Order")
     },
-     // 订单详情
-     {
+    // 订单详情
+    {
       path: '/orderdetail/:order_id',
       name: 'OrderDetail',
       component: () => import("@/pages/mine/order/OrderDetail")
@@ -148,14 +160,14 @@ export default new Router({
       name: 'FreezeTransfer',
       component: () => import("@/pages/mine/assets/FreezeTransfer")
     },
-     // 可用转让
-     {
+    // 可用转让
+    {
       path: '/availabletransfer/:code',
       name: 'AvailableTransfer',
       component: () => import("@/pages/mine/assets/AvailableTransfer")
     },
-     // 确认转让
-     {
+    // 确认转让
+    {
       path: '/confirmtransfer',
       name: 'ConfirmTransfer',
       component: () => import("@/pages/mine/assets/ConfirmTransfer")

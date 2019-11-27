@@ -63,7 +63,7 @@
           </div>
           <div>
             <p>最高转入100份</p>
-            <p class="fr">年化利率</p>
+            <p class="fr">年化收益</p>
           </div>
         </div>
       </div> -->

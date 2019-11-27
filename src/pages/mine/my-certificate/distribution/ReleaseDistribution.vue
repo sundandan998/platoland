@@ -95,14 +95,5 @@
         }
       }
     }
-
-    .release-button {
-      .van-button--large {
-        position: fixed;
-        bottom: 10px;
-        background-color: #036EB8;
-        border:1px solid #036EB8;
-      }
-    }
   }
 </style>
