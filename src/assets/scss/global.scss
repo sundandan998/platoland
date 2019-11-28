@@ -192,6 +192,16 @@ label.mint-button-text {
       }
     }
   }
+//   公共进度条
+.progress{
+    margin:0 20px;
+    .mt-progress-runway{
+      border-radius: 10px;
+    }
+    .mt-progress-progress{
+      border-radius: 10px;
+    }
+  }
 //-------------------------登录/忘记密码------------------
 
 //-------------------------登录/重置邮件------------------

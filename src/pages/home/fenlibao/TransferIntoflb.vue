@@ -30,10 +30,10 @@
     <!-- 转入数量 -->
     <div class="transfer-num">
       <p>转入数量</p>
-      <div class="transfer-num-progress">
+      <div class="progress">
         <van-stepper step="2" />
       </div>
-      <div class="transfer-num-progress">
+      <div class="progress">
         <mt-progress :value="20" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">0%</div>
         <div slot="end" class="fr">100%</div>
@@ -150,13 +150,6 @@
         font-size: 26px;
       }
 
-      .transfer-num-progress {
-        margin: 0 20px;
-
-        .van-stepper__input {
-          width: 80%;
-        }
-      }
       .transfer-num-date {
         height: 50px;
         text-align: right;

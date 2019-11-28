@@ -99,7 +99,18 @@ export default new Router({
       name: 'Release',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
     },
-
+    // 发布详情
+    {
+      path: '/releasedetail',
+      name: 'ReleaseDetail',
+      component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDetail")
+    },
+    // 发布详情历史
+    {
+      path: '/releasehistory',
+      name: 'ReleaseHistory',
+      component: () => import("@/pages/mine/my-certificate/distribution/ReleaseHistory")
+    },
     // 探索
     {
       path: '/explore',

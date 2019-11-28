@@ -46,14 +46,15 @@
     </div>
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
-      <mt-cell title="分利计划" to="" is-link>全部 </mt-cell>
-      <router-link to="release">
+      <mt-cell title="分利计划" to="releasehistory" is-link>全部 </mt-cell>
+      <!-- <router-link to="release">
         <div class="no-records">
           <p>暂无分利计划</p>
           <van-button type="primary" class="button">去 发 布</van-button>
         </div>
-      </router-link>
-      <!-- <div class="home-pub-token">
+      </router-link> -->
+      <router-link to="releasedetail">
+      <div class="home-pub-token">
         <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
         <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
         <div class="home-pub-token-days">
@@ -66,7 +67,8 @@
             <p class="fr">年化收益</p>
           </div>
         </div>
-      </div> -->
+      </div>
+    </router-link>
     </div>
   </div>
 </template>

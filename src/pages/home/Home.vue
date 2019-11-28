@@ -168,7 +168,7 @@
       border-radius: 10px;
 
       span {
-        width: 24%;
+        width: 24.15%;
         display: inline-block;
         border-right: 1px solid #f2f2f2;
         height: 100%;
@@ -182,10 +182,6 @@
           display: block;
         }
       }
-    }
-
-    .home-transaction span:last-child {
-      border-right: none;
     }
 
     /* 最新发行 */
