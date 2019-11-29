@@ -78,7 +78,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
   .order-header {
     margin-bottom: 20px;
   }

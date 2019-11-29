@@ -61,7 +61,14 @@
 
 <style lang="scss">
   @import "../../../assets/scss/global";
-  .assest-header {
-    margin-bottom: 28px;
+
+  .assest {
+    .assets-list {
+      margin: 90px 0 10px 0;
+      height: 60px;
+      text-align: center;
+      background-color: #fff;
+    }
+   
   }
 </style>

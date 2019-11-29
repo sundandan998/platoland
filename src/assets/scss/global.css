@@ -814,23 +814,6 @@ table.el-table__body {
   top: 10px;
 }
 
-.assets-list {
-  background-color: #fff;
-  height: 30px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.assets-list img {
-  margin-right: 10px;
-  margin-top: 2px;
-}
-
-.assets-list span {
-  position: relative;
-  top: -4px;
-}
-
 .assets-detailed-list p {
   width: 100%;
   text-align: center;

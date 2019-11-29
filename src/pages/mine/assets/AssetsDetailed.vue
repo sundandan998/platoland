@@ -190,7 +190,13 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
-
+.assets-detailed{
+  .assets-detailed-exhibition{
+    margin-top:90px;
+    .mint-cell{
+      margin-top: 15px;
+    }
+  }
   .details {
     background-color: #fff;
     height: auto;
@@ -213,4 +219,5 @@
       width: 20px;
     }
   }
+}
 </style>

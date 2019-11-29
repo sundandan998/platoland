@@ -7,24 +7,25 @@
         </mt-button>
       </mt-header>
     </div>
+    <div  v-for="item in listData">
     <div class="home-pub-token">
       <img src="../../../../assets/images/life-icon.png" alt="" class="fl icon">
-      <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+      <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
     </div>
-    <div class="release-detail-num">
-      <p>14%</p>
+    <div class="release-detail-num" >
+      <p>{{item.air}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
-          <span class="fl">进行中</span><span class="fr">180天</span>
+          <span class="fl">{{item.status}}</span><span class="fr">{{item.freeze_days}}天</span>
         </div>
         <div class="release-detail-text-right fr">
-          <span>2019-2-10</span>
+          <span>{{item.create_time}}</span>
         </div>
       </div>
       <div class="release-detail-num-progress progress ">
         <mt-progress :value="20" :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">0%</div>
-        <div slot="end" class="fr">100%</div>
+        <div slot="start" class="fl">已售{{item.sold_amount}}</div>
+        <div slot="end" class="fr">总量{{item.total_amount}}</div>
       </div>
     </div>
     <div class="release-history-list">
@@ -36,24 +37,46 @@
         <span>数量</span>
       </div>
       <div class="release-history-title">
-        <span>2018-12-12</span>
-        <span>30</span>
-        <span>10%</span>
-        <span>10</span>
+        <span>{{item.create_time}}</span>
+        <span>{{item.freeze_days}} 天</span>
+        <span>{{item.air}} %</span>
+        <span>{{item.total_amount}}</span>
       </div>
     </div>
   </div>
+  </div>
 </template>
 <script>
+    import api from "@/api/token/Token.js"
   export default {
     data() {
       return {
+        listData:'', 
+        listParams: {
+          admin: 'false',
+          page: 1,
+          page_size:50 
+        }
       }
     },
+    created () {
+      this.list()
+    },
     methods: {
+      // 发布
       release() {
         this.$router.push({
           name: 'Release'
+        })
+      },
+      // 发布列表
+      list(){
+        api.flList(this.listParams).then(res => {
+          if (res.code == 0) {
+            this.listData = res.data
+          }
+        }).catch(err => {
+
         })
       }
     }

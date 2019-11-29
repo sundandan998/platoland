@@ -36,8 +36,9 @@
 								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
 							</mt-cell>
 						</div>
-						<div class="mine-safety mine-token">
-						<mt-cell title="我的通证" to="/certificate" is-link class="mine-cell-list">
+						<div class="mine-safety mine-token" v-if="this.infoData.token_admin==true">
+								<!-- to="/certificate" @click.native="token" -->
+						<mt-cell title="我的通证" is-link class="mine-cell-list" @click.native="token">
 							<img slot="icon" src="../../assets/images/tz.svg" alt="" />
 						</mt-cell>
 					</div>
@@ -73,6 +74,12 @@
 					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 				}).catch(err => {
 					console.log(err)
+				})
+			},
+			token(){
+				this.$router.push({
+					name:'Certificate',
+					params:{code:this.infoData.token_code}
 				})
 			}
 		},

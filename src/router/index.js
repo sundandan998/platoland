@@ -101,7 +101,7 @@ export default new Router({
     },
     // 发布详情
     {
-      path: '/releasedetail',
+      path: '/releasedetail/:id',
       name: 'ReleaseDetail',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDetail")
     },

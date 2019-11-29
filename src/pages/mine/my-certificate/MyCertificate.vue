@@ -7,23 +7,30 @@
     </div>
     <div class="token-detail">
       <div class="home-pub-token">
-        <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
-        <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+        <img :src="this.balancetoken.icon" alt="" class="fl icon">
+        <span><b>{{this.balancetoken.code}}</b>({{balancetoken.nickname}}) <p>{{this.balancetoken.subject}}</p></span>
       </div>
-      <mt-cell title="可用量" to="" is-link>
-        <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
-      </mt-cell>
-      <mt-cell title="冻结量" to="" is-link class="freeze-token">
-        <img slot="icon" src="../../../assets/images/freeze.svg" width="24" height="24">
-      </mt-cell>
+      <!-- availabletransfer -->
+      <!-- <router-link to="/availabletransfer/this.balancetoken.icon"> -->
+      <router-link :to="{name:'AvailableTransfer',params:{code:this.balancetoken.code}}">
+        <mt-cell title="可用量" :value="this.balanceData.balance" is-link>
+          <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
+        </mt-cell>
+      </router-link>
+      <!-- freeze -->
+      <router-link :to="{name:'FreezeDetail',params:{code:this.balancetoken.code}}">
+        <mt-cell title="冻结量" :value="this.balanceData.freeze_amount" is-link class="freeze-token">
+          <img slot="icon" src="../../../assets/images/freeze.svg" width="24" height="24">
+        </mt-cell>
+      </router-link>
     </div>
     <!-- 最近发行 -->
-    <div class="token-recently-released">
+    <!-- <div class="token-recently-released">
       <mt-cell title="最近发行" to="" is-link>全部 </mt-cell>
-      <!-- <div class="no-records">
+      <div class="no-records">
         <p>暂无发行记录</p>
         <van-button  type="primary" class="button">去 发 行</van-button>
-      </div> -->
+      </div>
       <div class="home-pub-token">
         <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
         <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
@@ -43,36 +50,84 @@
           <p class="fr">共2份</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
       <mt-cell title="分利计划" to="releasehistory" is-link>全部 </mt-cell>
-      <!-- <router-link to="release">
+      <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">
           <p>暂无分利计划</p>
           <van-button type="primary" class="button">去 发 布</van-button>
         </div>
-      </router-link> -->
-      <router-link to="releasedetail">
-      <div class="home-pub-token">
-        <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
-        <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
-        <div class="home-pub-token-days">
-          <div class="home-pub-token-days-top">
-            <p>锁仓期限 30 天</span>
-              <p class="fr percentage">2%</p>
-          </div>
-          <div>
-            <p>最高转入100份</p>
-            <p class="fr">年化收益</p>
-          </div>
+      </router-link>
+      <div v-if="this.listData.length!=0||this.listData.status=='进行中'">
+        <div class="home-pub-token" v-for="item in listData">
+            <!-- :to="{name:'ReleaseDetail',params:{id: item.id}}" -->
+          <router-link :to="/releasedetail/+item.id">
+            <img :src="item.token.icon" alt="" class="fl icon">
+            <span><b>{{item.token.code}}</b>( {{item.token.nickname}} )<p>{{item.token.subject}}</p></span>
+            <div class="home-pub-token-days">
+              <div class="home-pub-token-days-top">
+                <p>锁仓期限 {{item.freeze_days}} 天</span>
+                  <p class="fr percentage">{{item.air}}%</p>
+              </div>
+              <div>
+                <p>最高转入{{item.high_amount}}份</p>
+                <p class="fr">分利率</p>
+              </div>
+            </div>
+          </router-link>
         </div>
       </div>
-    </router-link>
     </div>
   </div>
 </template>
-<script></script>
+<script>
+  import api from "@/api/token/Token.js"
+  export default {
+    data() {
+      return {
+        balanceData: '',
+        balancetoken: '',
+        listData: '',
+        infoData: '',
+        listParams: {
+          admin: 'true',
+          page: 1,
+          page_size: 1
+        }
+      }
+    },
+    created() {
+      this.balance()
+      this.list()
+    },
+    methods: {
+      // 余额
+      balance() {
+        // this.$route.params.code
+        api.balance({ token_code: this.$route.params.code }).then(res => {
+          if (res.code == 0) {
+            this.balanceData = res.data
+            this.balancetoken = res.data.token
+          }
+        }).catch(err => {
+
+        })
+      },
+      // 分利列表
+      list() {
+        api.flList(this.listParams).then(res => {
+          if (res.code == 0) {
+            this.listData = res.data
+          }
+        }).catch(err => {
+
+        })
+      }
+    }
+  }
+</script>
 <style lang="scss">
   @import '../../../assets/scss/global';
 
@@ -97,6 +152,7 @@
       margin: 20px 24px;
       border-radius: 10px;
       height: auto;
+
       .mint-cell {
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
@@ -113,6 +169,7 @@
 
       .home-pub-token {
         margin-top: -50px;
+
         .token-days {
           margin-right: 40px;
           font-size: 24px;
@@ -149,6 +206,7 @@
 
         .token-total {
           margin: 0 40px 0px 50px;
+
           p {
             display: inline-block;
             color: #999;

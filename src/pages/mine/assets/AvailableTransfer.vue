@@ -105,7 +105,7 @@
               } else {
                 toast(res)
               }
-            }).catch(err => { })
+            }).catch(err => {})
           }
         }
       },
@@ -133,14 +133,9 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
-  body {
-    background-color: #fff;
-  }
-
   .transfer {
     .transfer-header {
-      margin-bottom: 20px;
+      margin-bottom: 90px;
     }
 
     .transfer-prompt {
