@@ -101,7 +101,6 @@
 
     .release-detail-number {
       margin: 0 24px;
-
       .mint-cell:last-child {
         border-bottom-right-radius: 10px;
         border-bottom-left-radius: 10px;

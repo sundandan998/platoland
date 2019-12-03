@@ -67,7 +67,7 @@
     }
 
     .transfer-token {
-      margin: 0 24px;
+      margin: 20px 24px 0 24px;
       background-color: #fff;
       padding: 10px 0;
       border-radius: 10px;

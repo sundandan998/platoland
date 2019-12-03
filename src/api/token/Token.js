@@ -74,13 +74,20 @@ export default {
         })
     },
     //获取分利计划列表详情
-     flDetail(params = {}) {
+    flDetail(params = {}) {
         return request({
-            url: "/token/fl/" +params.id + "/detail/",
+            url: "/token/fl/" + params.id + "/detail/",
             method: "get",
             params: params
         })
     },
-  
+    // 创建分利计划
+    releaseFl(params = {}) {
+        return request({
+            url: "/token/fl/add/",
+            method: "post",
+            data: params
+        })
+    }
 
 }

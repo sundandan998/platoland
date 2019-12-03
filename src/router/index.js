@@ -89,7 +89,7 @@ export default new Router({
     },
     // 我的通证
     {
-      path: '/certificate',
+      path: '/certificate/:code',
       name: 'Certificate',
       component: () => import("@/pages/mine/my-certificate/MyCertificate")
     },

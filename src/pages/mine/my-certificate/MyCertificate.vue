@@ -12,13 +12,13 @@
       </div>
       <!-- availabletransfer -->
       <!-- <router-link to="/availabletransfer/this.balancetoken.icon"> -->
-      <router-link :to="{name:'AvailableTransfer',params:{code:this.balancetoken.code}}">
+      <router-link :to="{name:'AvailableTransfer',params:{code:'this.balancetoken.code'}}">
         <mt-cell title="可用量" :value="this.balanceData.balance" is-link>
           <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
         </mt-cell>
       </router-link>
       <!-- freeze -->
-      <router-link :to="{name:'FreezeDetail',params:{code:this.balancetoken.code}}">
+      <router-link :to="{name:'FreezeDetail',params:{code:'this.balancetoken.code'}}">
         <mt-cell title="冻结量" :value="this.balanceData.freeze_amount" is-link class="freeze-token">
           <img slot="icon" src="../../../assets/images/freeze.svg" width="24" height="24">
         </mt-cell>
@@ -57,12 +57,16 @@
       <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">
           <p>暂无分利计划</p>
-          <van-button type="primary" class="button">去 发 布</van-button>
+          <!-- <router-link to="/release"> -->
+          <router-link :to="{name:'Release',params:{code:this.balancetoken.code,icon:this.balancetoken.icon,nickname:balancetoken.nickname,
+          subject:balancetoken.subject}}">
+            <van-button type="primary" class="button">去 创 建</van-button>
+          </router-link>
         </div>
       </router-link>
-      <div v-if="this.listData.length!=0||this.listData.status=='进行中'">
+      <div v-if="this.listData.length!=0">
         <div class="home-pub-token" v-for="item in listData">
-            <!-- :to="{name:'ReleaseDetail',params:{id: item.id}}" -->
+          <!-- :to="{name:'ReleaseDetail',params:{id: item.id}}" -->
           <router-link :to="/releasedetail/+item.id">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>( {{item.token.nickname}} )<p>{{item.token.subject}}</p></span>
@@ -94,7 +98,8 @@
         listParams: {
           admin: 'true',
           page: 1,
-          page_size: 1
+          page_size: 1,
+          status: 0
         }
       }
     },

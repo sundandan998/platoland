@@ -37,11 +37,12 @@
 							</mt-cell>
 						</div>
 						<div class="mine-safety mine-token" v-if="this.infoData.token_admin==true">
-								<!-- to="/certificate" @click.native="token" -->
-						<mt-cell title="我的通证" is-link class="mine-cell-list" @click.native="token">
-							<img slot="icon" src="../../assets/images/tz.svg" alt="" />
-						</mt-cell>
-					</div>
+							<router-link :to="{name:'Certificate',params:{code:this.infoData.token_code}}">
+								<mt-cell title="我的通证" is-link class="mine-cell-list">
+									<img slot="icon" src="../../assets/images/tz.svg" alt="" />
+								</mt-cell>
+							</router-link>
+						</div>
 					</div>
 				</mt-tab-container-item>
 			</mt-tab-container>
@@ -57,7 +58,8 @@
 			return {
 				selected: 'mine',
 				message: 'mine',
-				infoData: {}
+				infoData: {},
+				access_token: ''
 			}
 		},
 		components: {
@@ -72,16 +74,11 @@
 				api.getUserInfo().then(res => {
 					this.infoData = res.data
 					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+					// window.localStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 				}).catch(err => {
 					console.log(err)
 				})
 			},
-			token(){
-				this.$router.push({
-					name:'Certificate',
-					params:{code:this.infoData.token_code}
-				})
-			}
 		},
 	}
 
@@ -105,6 +102,9 @@
 
 		.mine-cell {
 			margin: 0 24px;
+			.mint-cell-title {
+				color: #000;
+			}
 
 			.mine-border-radius {
 				a.mint-cell.mine-cell-list {
@@ -117,14 +117,16 @@
 					border-bottom-right-radius: 10px;
 					border-top-left-radius: unset;
 					border-top-right-radius: unset;
+
 				}
 			}
 
 			.mine-safety {
 				margin: 20px 0 20px 0px;
 			}
-			.mine-token{
-				a.mint-cell.mine-cell-list{
+
+			.mine-token {
+				a.mint-cell.mine-cell-list {
 					border-radius: 10px;
 				}
 			}

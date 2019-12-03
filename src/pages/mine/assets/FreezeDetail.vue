@@ -243,7 +243,6 @@
   }
 
   .freeze {
-
     .null-data {
       text-align: center;
       margin: 50px auto;
@@ -270,7 +269,7 @@
       border-top: 1px solid #f6f6f6;
 
       .buy button {
-        height: 25px;
+        height: 40px;
         position: relative;
         top: -90px;
         right: 15px;

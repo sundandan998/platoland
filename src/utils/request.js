@@ -51,6 +51,10 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
+    // if (response.headers['content-type'] != 'application/json') {
+    //   return response.data
+    // }
+    // let data = JSON.parse(response.data)
     if (response.status == 401 || response.status == 403) {
       window.localStorage.removeItem('token')
       router.push({
@@ -82,7 +86,7 @@ service.interceptors.response.use(
     }
     if (errorJSON.ret_code === 403 || errorJSON.ret_code === 401) {
       router.push({
-        path: '/login'
+        path: 'login'
       })
     }
     message.error(errorJSON.ret_msg)

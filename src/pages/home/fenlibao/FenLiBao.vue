@@ -6,52 +6,82 @@
       </mt-header>
     </div>
     <router-link to="/transferflb">
-    <div class="home-pub-token">
-      <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
-      <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
-      <div class="home-pub-token-days">
-        <div class="home-pub-token-days-top">
-          <p>锁仓期限 30 天</span>
-            <p class="fr percentage">2%</p>
-        </div>
-        <div>
-          <p>最高转入100份</p>
-          <p class="fr">年化收益</p>
+      <div class="home-pub-token" v-for="item in listData">
+        <img :src="item.token.icon" alt="" class="fl icon">
+        <span><b>{{item.token.code}}</b>{{item.token.nickname}} <p>{{item.token.subject}}</p></span>
+        <div class="home-pub-token-days">
+          <div class="home-pub-token-days-top">
+            <p>锁仓期限 {{item.freeze_days}}天</span>
+              <p class="fr percentage">{{item.air}}%</p>
+          </div>
+          <div>
+            <p>最高转入{{item.total_amount}}份</p>
+            <p class="fr">分利率</p>
+          </div>
         </div>
       </div>
-    </div>
-  </router-link>
+    </router-link>
   </div>
 </template>
-<script></script>
+<script>
+  import api from "@/api/token/Token.js"
+  export default {
+    data () {
+      return {
+        listData:''
+      }
+    },
+    created () {
+      this.list()
+    },
+    methods: {
+      list(){
+        api.flList().then(res=>{
+          if(res.code==0){
+            this.listData=res.data
+          }
+        }).catch(err=>{
+
+        })
+      }
+    }
+  }
+</script>
 <style lang="scss">
   @import '../../../assets/scss/global';
 
   .bao {
     margin-top: 90px;
+
     .home-pub-token {
-      margin:20px 24px 0px 24px;
+      margin: 20px 24px 0px 24px;
       height: 220px;
-      border-radius:10px;
+      border-radius: 10px;
       background-color: #fff;
-      .home-pub-token-days{
-        margin:20px 24px 0 50px;
-        .home-pub-token-days-top{
+
+      .home-pub-token-days {
+        margin: 20px 24px 0 50px;
+
+        .home-pub-token-days-top {
           margin-bottom: 20px;
         }
-        p{
+
+        p {
           display: inline-block;
-          color:#999999;
+          color: #999999;
         }
-        .percentage{
-            color:#036EB8;
-            font-size:40px;
-          }
+
+        .percentage {
+          color: #036EB8;
+          font-size: 40px;
+        }
       }
-      .icon{
+
+      .icon {
         margin-top: 25px;
       }
-      span{
+
+      span {
         margin-top: 25px;
       }
     }

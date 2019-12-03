@@ -177,11 +177,9 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
-  body {
-    background-color: #fff;
-  }
-
+.confirm-transfer-notice{
+  margin-top: 80px;
+}
   .confirm-transfer {
     .confirm-transfer-button {
       button {
