@@ -5,8 +5,9 @@
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <router-link to="/transferflb">
-      <div class="home-pub-token" v-for="item in listData">
+    <!-- <router-link to="/transferflb"> -->
+    <div class="home-pub-token" v-for="item in listData">
+      <router-link :to="{name:'Transferflb',params:{item:item}}">
         <img :src="item.token.icon" alt="" class="fl icon">
         <span><b>{{item.token.code}}</b>{{item.token.nickname}} <p>{{item.token.subject}}</p></span>
         <div class="home-pub-token-days">
@@ -15,32 +16,33 @@
               <p class="fr percentage">{{item.air}}%</p>
           </div>
           <div>
-            <p>最高转入{{item.total_amount}}份</p>
+            <p>最高转入{{item.high_amount}}份</p>
             <p class="fr">分利率</p>
           </div>
         </div>
-      </div>
-    </router-link>
+      </router-link>
+
+    </div>
   </div>
 </template>
 <script>
   import api from "@/api/token/Token.js"
   export default {
-    data () {
+    data() {
       return {
-        listData:''
+        listData: ''
       }
     },
-    created () {
+    created() {
       this.list()
     },
     methods: {
-      list(){
-        api.flList().then(res=>{
-          if(res.code==0){
-            this.listData=res.data
+      list() {
+        api.flList().then(res => {
+          if (res.code == 0) {
+            this.listData = res.data
           }
-        }).catch(err=>{
+        }).catch(err => {
 
         })
       }
@@ -49,10 +51,8 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
   .bao {
     margin-top: 90px;
-
     .home-pub-token {
       margin: 20px 24px 0px 24px;
       height: 220px;
@@ -80,7 +80,6 @@
       .icon {
         margin-top: 25px;
       }
-
       span {
         margin-top: 25px;
       }

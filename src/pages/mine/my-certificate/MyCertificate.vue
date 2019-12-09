@@ -117,7 +117,6 @@
             this.balancetoken = res.data.token
           }
         }).catch(err => {
-
         })
       },
       // 分利列表

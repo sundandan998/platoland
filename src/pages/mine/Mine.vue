@@ -85,7 +85,6 @@
 </script>
 <style lang="scss">
 	@import '../../assets/scss/global';
-
 	.exchange {
 		.mine-head {
 			img {
@@ -117,7 +116,6 @@
 					border-bottom-right-radius: 10px;
 					border-top-left-radius: unset;
 					border-top-right-radius: unset;
-
 				}
 			}
 

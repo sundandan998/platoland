@@ -7,10 +7,10 @@
     <!-- 轮播部分 -->
     <div class="home-banner">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner2.jpg" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner3.jpg" alt=""></van-swipe-item>
+        <!-- <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
       </van-swipe>
     </div>
     <!-- 交易部分 -->
@@ -25,33 +25,33 @@
     <!-- 最新发行 -->
     <div class="home-latest-release">
       <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
-      <div class="home-latest-release-token">
+      <div class="home-latest-release-token" v-for="item in release">
         <div class="home-pub-token">
-          <img src="../../assets/images/pld-icon.png" alt="" class="fl icon">
-          <span><b>PLD</b>(PLD) <p>柏拉图兰</p></span>
-          <img src="../../assets/images/publicity.png" alt="" class="fr publicity">
-          <!-- <img src="../../assets/images/issued.png" alt="" class="fr publicity"> -->
+          <img :src="item.token.icon" alt="" class="fl icon">
+          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+          <img src="../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
+          <img src="../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
         </div>
         <div class="home-latest-release-token-bot">
           <div class="home-latest-release-token-bot-text fl">
-            <span>第 2 期</span>
-            <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> 80 天</span>
+            <span>第 {{item.periods}} 期</span>
+            <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
           </div>
-          <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> 0.02</span>
+          <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
         </div>
       </div>
     </div>
     <!-- 分利宝 -->
     <div class="home-divided-treasure">
       <p class="home-pub-title">分利宝<span class="fr">全部></span></p>
-      <div class="home-divided-treasure-token">
+      <div class="home-divided-treasure-token" v-for="item in flData">
         <div class="home-pub-token">
-          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
-          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+          <img :src="item.token.icon" alt="" class="fl icon">
+          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
         <div class="home-divided-treasure-token-bot">
-          <p>锁仓期限 30 天 <span class="fr home-percentage">10%</span></p>
-          <p>最高可投 32,000 <span class="fr">年化利率</span></p>
+          <p>锁仓期限 {{item.freeze_days}} 天 <span class="fr home-percentage">{{item.air}}%</span></p>
+          <p>最高可投 {{item.high_amount}}<span class="fr">分利率</span></p>
         </div>
       </div>
     </div>
@@ -108,21 +108,43 @@
 <script>
   // Tabber栏
   import Tabber from './../../assets/pub/Tabber.vue'
+  import store from './../../store/modules/app.js'
+  import { toast } from '@/assets/js/pub.js'
+  // 接口
+  import api from "@/api/system/System.js"
   export default {
     data() {
       return {
         selected: 'home',
         message: 'home',
+        flData:'',
+        release:''
       }
     },
     components: {
       'app-tabber': Tabber
     },
+    created () {
+      this.home()
+    },
+    methods: {
+      home(){
+        api.home().then(res=>{
+          if(res.code==0){
+            // 分利宝列表
+            this.flData = res.data.fl_list
+            // 发行专区列表
+            this.release = res.data.release_list
+          }
+        }).catch(err=>{
+
+        })
+      }
+    }
   }
 </script>
 <style lang="scss">
   @import '../../assets/scss/global';
-
   .home {
     height:auto;
     margin-bottom: 100px;
@@ -201,6 +223,9 @@
             color: #1d92ec;
             display: inline-block;
           }
+          img{
+            width: 30px;
+          }
 
           .home-latest-release-token-bot-text {
             width: 60%;
@@ -217,7 +242,7 @@
         height: 310px;
         background-color: #fff;
         border-radius: 10px;
-
+        margin-bottom: 10px;
         .home-divided-treasure-token-bot {
           p {
             margin: 20px 30px 0 45px;

@@ -88,6 +88,13 @@ export default {
             method: "post",
             data: params
         })
+    },
+    // 转入分利宝
+    transferFlb(params = {}){
+        return request({
+            url: "/token/fl/order/add/",
+            method: "post",
+            data: params
+        })
     }
-
 }
