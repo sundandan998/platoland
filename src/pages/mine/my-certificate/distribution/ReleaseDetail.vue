@@ -10,7 +10,7 @@
       <span><b>{{detailToken.code}}</b>( {{detailToken.nickname}} ) <p>{{detailToken.subject}}</p></span>
     </div>
     <div class="release-detail-num">
-      <p>{{detailData.air}}%</p>
+      <p>{{detailData.air|number}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
           <span class="fl">{{detailData.status}}</span><span class="fr">{{detailData.freeze_days}}天</span>
@@ -27,8 +27,8 @@
     </div>
     <div class="release-detail-number">
       <mt-cell title="分利计划单号" :value="detailData.serial_number"></mt-cell>
-      <mt-cell title="支出利润" value="说明文字"></mt-cell>
-      <mt-cell title="已发放利润" value="说明文字"></mt-cell>
+      <mt-cell title="支出利润" :value="detailData.interest|number"></mt-cell>
+      <mt-cell title="已发放利润" :value="detailData.paid_interest|number"></mt-cell>
       <mt-cell title="最小转入量" :value="detailData.min_amount"></mt-cell>
       <mt-cell title="最大转入量" :value="detailData.high_amount"></mt-cell>
     </div>

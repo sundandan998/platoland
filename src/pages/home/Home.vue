@@ -15,44 +15,54 @@
     </div>
     <!-- 交易部分 -->
     <div class="home-transaction">
-      <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
+      <router-link to="zone">
+        <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
+      </router-link>
       <router-link to="bao">
-      <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
-    </router-link>
+        <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
+      </router-link>
       <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
       <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
     </div>
     <!-- 最新发行 -->
     <div class="home-latest-release">
-      <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
+      <router-link to="zone">
+        <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
+      </router-link>
       <div class="home-latest-release-token" v-for="item in release">
-        <div class="home-pub-token">
-          <img :src="item.token.icon" alt="" class="fl icon">
-          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-          <img src="../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
-          <img src="../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
-        </div>
-        <div class="home-latest-release-token-bot">
-          <div class="home-latest-release-token-bot-text fl">
-            <span>第 {{item.periods}} 期</span>
-            <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+        <router-link :to="{name:'Issued',params:{id:item.id}}">
+          <div class="home-pub-token">
+            <img :src="item.token.icon" alt="" class="fl icon">
+            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+            <img src="../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
+            <img src="../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
           </div>
-          <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
-        </div>
+          <div class="home-latest-release-token-bot">
+            <div class="home-latest-release-token-bot-text fl">
+              <span>第 {{item.periods}} 期</span>
+              <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+            </div>
+            <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
+          </div>
+        </router-link>
       </div>
     </div>
     <!-- 分利宝 -->
     <div class="home-divided-treasure">
-      <p class="home-pub-title">分利宝<span class="fr">全部></span></p>
+      <router-link :to="{name:'Bao'}">
+        <p class="home-pub-title ">分利宝<span class="fr">全部></span></p>
+      </router-link>
       <div class="home-divided-treasure-token" v-for="item in flData">
-        <div class="home-pub-token">
-          <img :src="item.token.icon" alt="" class="fl icon">
-          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-        </div>
-        <div class="home-divided-treasure-token-bot">
-          <p>锁仓期限 {{item.freeze_days}} 天 <span class="fr home-percentage">{{item.air}}%</span></p>
-          <p>最高可投 {{item.high_amount}}<span class="fr">分利率</span></p>
-        </div>
+        <router-link :to="{name:'Transferflb',params:{item:item}}">
+          <div class="home-pub-token">
+            <img :src="item.token.icon" alt="" class="fl icon">
+            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+          </div>
+          <div class="home-divided-treasure-token-bot">
+            <p>锁仓期限 {{item.freeze_days}} 天 <span class="fr home-percentage">{{item.air|number}}%</span></p>
+            <p>最高可投 {{item.high_amount}}<span class="fr">分利率</span></p>
+          </div>
+        </router-link>
       </div>
     </div>
     <!-- 市场交易 -->
@@ -80,27 +90,27 @@
       </div>
     </div>
     <div class="home-market-transaction">
-        <div class="home-market-transaction-token">
-          <div class="home-pub-token">
-            <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
-            <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+      <div class="home-market-transaction-token">
+        <div class="home-pub-token">
+          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
+          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
+        </div>
+        <div class="home-market-transaction-con">
+          <div class="fl home-market-transaction-num">
+            <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+            <span class="fr">数量<p>0.12</p></span>
           </div>
-          <div class="home-market-transaction-con">
-            <div class="fl home-market-transaction-num">
-              <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-              <span class="fr">数量<p>0.12</p></span>
-            </div>
-            <van-button class="fr" type="default">立 即 出 售</van-button>
+          <van-button class="fr" type="default">立 即 出 售</van-button>
+        </div>
+        <div class="home-market-transaction-bot">
+          <div class="fl home-market-transaction-bot-num">
+            <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+            <span class="fr"> 数量<p>0.12</p></span>
           </div>
-          <div class="home-market-transaction-bot">
-            <div class="fl home-market-transaction-bot-num">
-              <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-              <span class="fr"> 数量<p>0.12</p></span>
-            </div>
-            <van-button class="fr" type="danger">立 即 购 买</van-button>
-          </div>
+          <van-button class="fr" type="danger">立 即 购 买</van-button>
         </div>
       </div>
+    </div>
     <!-- Tabber部分 -->
     <app-tabber :message=selected></app-tabber>
   </div>
@@ -117,26 +127,26 @@
       return {
         selected: 'home',
         message: 'home',
-        flData:'',
-        release:''
+        flData: '',
+        release: ''
       }
     },
     components: {
       'app-tabber': Tabber
     },
-    created () {
+    created() {
       this.home()
     },
     methods: {
-      home(){
-        api.home().then(res=>{
-          if(res.code==0){
+      home() {
+        api.home().then(res => {
+          if (res.code == 0) {
             // 分利宝列表
             this.flData = res.data.fl_list
             // 发行专区列表
             this.release = res.data.release_list
           }
-        }).catch(err=>{
+        }).catch(err => {
 
         })
       }
@@ -145,14 +155,17 @@
 </script>
 <style lang="scss">
   @import '../../assets/scss/global';
+
   .home {
-    height:auto;
+    height: auto;
     margin-bottom: 100px;
+
     /* 公共标题部分 /发行专区/分利宝/市场交易 */
     .home-pub-title {
       height: 90px;
       line-height: 90px;
       font-size: 30px;
+      color:#333;
       span {
         font-size: 24px;
         color: #959595;
@@ -160,13 +173,14 @@
     }
 
     /* 公共button */
-    button{
+    button {
       height: 60px;
       width: 180px;
       line-height: 60px;
       border-radius: 10px;
-      font-size:24px;
+      font-size: 24px;
     }
+
     .home-header {
       height: 44px;
       background-color: #fff;
@@ -174,6 +188,7 @@
 
     .home-banner {
       margin: 20px 24px;
+
       /* background: url("../../assets/images/bg.png");
       background-size: 100% 100%;
       background-position: center center; */
@@ -209,21 +224,24 @@
     /* 最新发行 */
     .home-latest-release {
       margin: 0px 24px;
-
+     
       .home-latest-release-token {
         overflow: hidden;
         height: 260px;
         background-color: #fff;
         border-radius: 10px;
+        margin-bottom: 20px;
 
         .home-latest-release-token-bot {
           margin: 0 45px;
+
           span {
             font-size: 28px;
             color: #1d92ec;
             display: inline-block;
           }
-          img{
+
+          img {
             width: 30px;
           }
 
@@ -237,12 +255,12 @@
     /* 分利宝 */
     .home-divided-treasure {
       margin: 0px 24px;
-
       .home-divided-treasure-token {
         height: 310px;
         background-color: #fff;
         border-radius: 10px;
         margin-bottom: 10px;
+
         .home-divided-treasure-token-bot {
           p {
             margin: 20px 30px 0 45px;
@@ -262,6 +280,7 @@
     /* 市场交易 */
     .home-market-transaction {
       margin: 0 24px 20px 24px;
+
       .home-market-transaction-token {
         height: 450px;
         background-color: #fff;
@@ -282,12 +301,14 @@
                 color: #333;
                 margin-top: 5px;
               }
-              img{
+
+              img {
                 height: 30px;
-                margin:5px 10px 0 0;
+                margin: 5px 10px 0 0;
               }
             }
           }
+
           button {
             background-color: #1abc9c;
             color: #fff;
@@ -297,18 +318,22 @@
         .home-market-transaction-bot {
           margin: 0 30px 0 45px;
           height: 120px;
+
           .home-market-transaction-bot-num {
             width: 50%;
+
             span {
               color: #eb4545;
               font-size: 24px;
+
               p {
                 color: #333;
                 margin-top: 5px;
               }
-              img{
+
+              img {
                 height: 30px;
-                margin:5px 10px 0 0;
+                margin: 5px 10px 0 0;
               }
             }
           }

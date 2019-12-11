@@ -63,6 +63,24 @@ export default new Router({
       name: 'Home',
       component: () => import("@/pages/home/Home")
     },
+    // 发行详情
+    {
+      path: '/issued/:id',
+      name: 'Issued',
+      component: () => import("@/pages/home/issued-detail/IssuedDetail")
+    },
+    // 发行情况
+    {
+      path: '/issuance',
+      name: 'Issuance',
+      component: () => import("@/pages/home/issued-detail/Issuance")
+    },
+    // 发行专区
+    {
+      path: '/zone',
+      name: 'Zone',
+      component: () => import("@/pages/home/issued-detail/IssuedZone")
+    },
     // 分利宝
     {
       path: '/bao',
@@ -291,7 +309,7 @@ export default new Router({
       name: 'Version',
       component: () => import("@/pages/mine/version-update/Version")
     },
-    //首页--通正详情
+    //首页--通证详情
     {
       path: '/detail/:code',
       name: 'Detail',

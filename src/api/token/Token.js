@@ -90,11 +90,28 @@ export default {
         })
     },
     // 转入分利宝
-    transferFlb(params = {}){
+    transferFlb(params = {}) {
         return request({
             url: "/token/fl/order/add/",
             method: "post",
             data: params
         })
-    }
+    },
+    // 发行详情
+    issuedDetail(params = {}) {
+        return request({
+            url: "/token/release/" + params.id + "/detail/",
+            method: "get",
+            params: params
+        })
+    },
+    // 获取通证的发行信息列表
+    issuedList(params = {}) {
+        return request({
+            url: "/token/release/list/",
+            method: "get",
+            params: params
+        })
+    },
+
 }

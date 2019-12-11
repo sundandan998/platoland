@@ -7,13 +7,13 @@
         </mt-button>
       </mt-header>
     </div>
-    <div  v-for="item in listData">
     <div class="home-pub-token">
-      <img src="../../../../assets/images/life-icon.png" alt="" class="fl icon">
-      <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+      <img :src="this.$route.params.token.icon" alt="" class="fl icon">
+      <span><b>{{this.$route.params.token.code}}</b>({{this.$route.params.token.nickname}}) <p>
+          {{this.$route.params.token.subject}}</p></span>
     </div>
-    <div class="release-detail-num" >
-      <p>{{item.air}}%</p>
+    <div class="release-detail-num" v-for="item in listData">
+      <p>{{item.air|number}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
           <span class="fl">{{item.status}}</span><span class="fr">{{item.freeze_days}}天</span>
@@ -28,7 +28,7 @@
         <div slot="end" class="fr">总量{{item.total_amount}}</div>
       </div>
     </div>
-    <div class="release-history-list">
+    <div class="release-history-list" >
       <p>发布历史 <span>(已结束)</span></p>
       <div class="release-history-title">
         <span>发布时间</span>
@@ -36,31 +36,31 @@
         <span>分利率</span>
         <span>数量</span>
       </div>
-      <div class="release-history-title">
+      <div class="release-history-title"  v-for="item in listData" v-if="item.status=='已完成'">
         <span>{{item.create_time}}</span>
         <span>{{item.freeze_days}} 天</span>
-        <span>{{item.air}} %</span>
+        <span>{{item.air|number}} %</span>
         <span>{{item.total_amount}}</span>
       </div>
     </div>
   </div>
-  </div>
 </template>
 <script>
-    import api from "@/api/token/Token.js"
+  import api from "@/api/token/Token.js"
   export default {
     data() {
       return {
-        listData:'', 
+        listData: '',
         listParams: {
           admin: 'false',
           page: 1,
-          page_size:50 
+          page_size: 50
         }
       }
     },
-    created () {
+    created() {
       this.list()
+      // console.log()
     },
     methods: {
       // 发布
@@ -70,7 +70,7 @@
         })
       },
       // 发布列表
-      list(){
+      list() {
         api.flList(this.listParams).then(res => {
           if (res.code == 0) {
             this.listData = res.data
@@ -93,7 +93,7 @@
     }
 
     .release-detail-num {
-      margin: 20px 24px;
+      margin: 20px 24px 0 24px;
       background-color: #fff;
       border-radius: 10px;
       height: 220px;
@@ -121,7 +121,7 @@
 
     .release-history-list {
       background-color: #fff;
-      margin: 0 24px;
+      margin: 20px 24px 0 24px;
       border-radius: 10px;
 
       p {

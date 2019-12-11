@@ -12,13 +12,13 @@
       </div>
       <!-- availabletransfer -->
       <!-- <router-link to="/availabletransfer/this.balancetoken.icon"> -->
-      <router-link :to="{name:'AvailableTransfer',params:{code:'this.balancetoken.code'}}">
+      <router-link :to="{name:'AvailableTransfer',params:{code:this.balancetoken.code}}">
         <mt-cell title="可用量" :value="this.balanceData.balance" is-link>
           <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
         </mt-cell>
       </router-link>
       <!-- freeze -->
-      <router-link :to="{name:'FreezeDetail',params:{code:'this.balancetoken.code'}}">
+      <router-link :to="{name:'FreezeDetail',params:{code:this.balancetoken.code}}">
         <mt-cell title="冻结量" :value="this.balanceData.freeze_amount" is-link class="freeze-token">
           <img slot="icon" src="../../../assets/images/freeze.svg" width="24" height="24">
         </mt-cell>
@@ -53,7 +53,9 @@
     </div> -->
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
-      <mt-cell title="分利计划" to="releasehistory" is-link>全部 </mt-cell>
+      <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}">
+        <mt-cell title="分利计划" is-link>全部 </mt-cell>
+      </router-link>
       <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">
           <p>暂无分利计划</p>
@@ -73,7 +75,7 @@
             <div class="home-pub-token-days">
               <div class="home-pub-token-days-top">
                 <p>锁仓期限 {{item.freeze_days}} 天</span>
-                  <p class="fr percentage">{{item.air}}%</p>
+                  <p class="fr percentage">{{item.air|number}}%</p>
               </div>
               <div>
                 <p>最高转入{{item.high_amount}}份</p>
