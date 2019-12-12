@@ -3,7 +3,7 @@
     <div class="release-header header">
       <mt-header fixed title="发行情况">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button slot="right"> <img src="../../../assets/images/release.svg" alt=""> 发布
+        <mt-button slot="right" @click.native="token"> <img src="../../../assets/images/release.svg" alt=""> 发布
         </mt-button>
       </mt-header>
     </div>
@@ -89,6 +89,12 @@
           }
         }).catch(err => {
 
+        })
+      },
+      token(){
+        this.$router.push({
+          name:'Token',
+          params:{token:this.$route.params.token,code:this.$route.params.token.code}
         })
       },
       drawLine() {

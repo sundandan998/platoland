@@ -8,9 +8,11 @@
       </mt-header>
     </div>
     <div class="home-pub-token">
-      <img :src="this.$route.params.token.icon" alt="" class="fl icon">
-      <span><b>{{this.$route.params.token.code}}</b>({{this.$route.params.token.nickname}}) <p>
-          {{this.$route.params.token.subject}}</p></span>
+      <img :src="balanceToken.icon" alt="" class="fl icon">
+      <span><b>{{balanceToken.code}}</b>({{balanceToken.nickname}})
+        <p>{{balanceToken.subject}}</p>
+        <!-- <p v-if="this.$route.params.name=='name'">{{balanceToken.subject.name}}</p> -->
+      </span>
     </div>
     <div class="release-detail-num" v-for="item in listData">
       <p>{{item.air|number}}%</p>
@@ -28,7 +30,7 @@
         <div slot="end" class="fr">总量{{item.total_amount}}</div>
       </div>
     </div>
-    <div class="release-history-list" >
+    <div class="release-history-list">
       <p>发布历史 <span>(已结束)</span></p>
       <div class="release-history-title">
         <span>发布时间</span>
@@ -36,7 +38,7 @@
         <span>分利率</span>
         <span>数量</span>
       </div>
-      <div class="release-history-title"  v-for="item in listData" v-if="item.status=='已完成'">
+      <div class="release-history-title" v-for="item in listData" v-if="item.status=='已完成'">
         <span>{{item.create_time}}</span>
         <span>{{item.freeze_days}} 天</span>
         <span>{{item.air|number}} %</span>
@@ -51,6 +53,7 @@
     data() {
       return {
         listData: '',
+        balanceToken:'',
         listParams: {
           admin: 'false',
           page: 1,
@@ -60,13 +63,16 @@
     },
     created() {
       this.list()
-      // console.log()
+      this.balance()
     },
     methods: {
       // 发布
       release() {
         this.$router.push({
-          name: 'Release'
+          name: 'Release',
+          params: {
+            code: this.$route.params.token.code
+          }
         })
       },
       // 发布列表
@@ -78,7 +84,18 @@
         }).catch(err => {
 
         })
-      }
+      },
+      // 余额
+      balance() {
+        // this.$route.params.code
+        api.balance({ token_code: this.$route.params.code }).then(res => {
+          if (res.code == 0) {
+            this.balanceData = res.data
+            this.balanceToken = res.data.token
+          }
+        }).catch(err => {
+        })
+      },
     }
   }
 </script>

@@ -7,9 +7,10 @@
     </div>
     <div class="release-token">
       <div class="home-pub-token">
-        <img :src="this.$route.params.icon" alt="" class="fl icon">
-        <span><b>{{this.$route.params.code}}</b>( {{this.$route.params.nickname}} ) <p>{{this.$route.params.subject}}
-          </p></span>
+        <img :src="balanceToken.icon" alt="" class="fl icon">
+        <span><b>{{balanceToken.code}}</b>( {{balanceToken.nickname}} ) 
+          <p>{{balanceToken.subject}} </p>
+        </span>
       </div>
     </div>
     <div class="release-item">
@@ -59,6 +60,7 @@
         showPicker: false,
         columns: ['7', '15', '30', '60', '90', '120', '180', '365'],
         balanceData: '',
+        balanceToken:'',
         releaseParams: {
           code: this.$route.params.code,
           total_amount: '',
@@ -96,6 +98,7 @@
         api.balance({ token_code: this.$route.params.code }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
+            this.balanceToken = res.data.token
           }
         }).catch(err => {
         })

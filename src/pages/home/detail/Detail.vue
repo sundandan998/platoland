@@ -23,8 +23,11 @@
     <div class="detail-description">
       <mt-cell title="通证效用" value="效用说明" is-link></mt-cell>
     </div>
+    <!-- 分利宝 -->
     <div class="detail-flb">
-      <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
+      <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}">
+        <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
+      </router-link>
       <div class="detail-flb-token">
         <div class="detail-flb-token-top">
           <img :src="detailData.icon" alt="" class="fl">
@@ -34,13 +37,14 @@
           </span>
         </div>
         <div class="detail-flb-token-bot">
-          <p><span>锁仓期限</span><span class="fr">%</span></p>
-          <p><span>最高转入</span><span class="fr">分利率</span></p>
+          <p><span>锁仓期限 {{release.freeze_days}}天</span><span class="fr rate">
+              {{release.equity_issuance_ratio}}%</span></p>
+          <p><span>最高转入 {{release.max_purchase_number|number}}</span><span class="fr">分利率</span></p>
         </div>
       </div>
     </div>
     <div class="detail-issued">
-      <router-link :to="{name:'Issuance'}">
+      <router-link :to="{name:'Issuance',params:{token:release.token,icon:detailData.icon}}">
         <p class="detail-flb-title">发行情况<span class="fr">全部 ></span></p>
       </router-link>
       <div class="detail-issued-token">
@@ -50,15 +54,15 @@
             {{detailData.code}} ({{detailData.nickname}})
             <p>{{subject.name}}</p>
           </span>
-          <!-- <img src="../../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0"> -->
           <img src="../../../assets/images/issued.png" alt="" class="fr publicity">
         </div>
         <div class="detail-issued-token-bot">
           <div class="detail-issued-token-bot-left fl">
-            <span>第期</span> <span class="fr">天</span>
+            <span>第{{release.periods}}期</span> <span class="fr"><img src="../../../assets/images/lock.svg" alt="">
+              {{release.freeze_days}} 天</span>
           </div>
           <div class="detail-issued-token-bot-right fr">
-            <span>000</span>
+            <img :src="release.d_icon" alt=""> <span>{{release.issue_price|number}}</span>
           </div>
         </div>
       </div>
@@ -73,7 +77,8 @@
     data() {
       return {
         detailData: '',
-        subject: ''
+        subject: '',
+        release: ''
       }
     },
     created() {
@@ -85,7 +90,7 @@
         api.tokenDetail(this.$route.params).then(res => {
           this.detailData = res.data
           this.subject = res.data.subject
-          // this.release = res.data.release
+          this.release = res.data.release
           // this.$store.commit('detail', res.data)
         })
           .catch(err => {
@@ -124,9 +129,16 @@
   .detail {
     .detail-flb-title {
       font-size: 28px;
+      color: #333;
 
       span {
         font-size: 24px;
+      }
+    }
+
+    .mint-cell-value {
+      span {
+        font-size: 12px;
       }
     }
 
@@ -168,6 +180,7 @@
 
     .mint-cell-text {
       margin-left: -13px;
+      font-size: 14px;
     }
 
     .detail-flb {
@@ -177,7 +190,7 @@
         background-color: #fff;
 
         .detail-flb-token-top {
-          height: 100px;
+          height: 110px;
           margin-top: 10px;
 
           img {
@@ -192,9 +205,15 @@
         }
 
         .detail-flb-token-bot {
+          margin: 0 20px 0 30px;
+
           p {
-            margin: 0 20px 0px 90px;
             padding-bottom: 20px;
+          }
+
+          .rate {
+            font-size: 40px;
+            color: #EA1515;
           }
         }
       }
@@ -209,7 +228,7 @@
 
         .detail-issued-token-top {
           margin-top: 10px;
-          height: 100px;
+          height: 110px;
 
           .icon {
             margin: 0 20px;
@@ -231,6 +250,14 @@
 
           .detail-issued-token-bot-left {
             width: 60%;
+          }
+
+          img {
+            height: 30px;
+          }
+
+          span {
+            color: #036EB8;
           }
         }
       }

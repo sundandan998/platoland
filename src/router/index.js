@@ -71,7 +71,7 @@ export default new Router({
     },
     // 发行情况
     {
-      path: '/issuance',
+      path: '/issuance/:code',
       name: 'Issuance',
       component: () => import("@/pages/home/issued-detail/Issuance")
     },
@@ -80,6 +80,12 @@ export default new Router({
       path: '/zone',
       name: 'Zone',
       component: () => import("@/pages/home/issued-detail/IssuedZone")
+    },
+    // 发行通证
+    {
+      path: '/token/:code',
+      name: 'Token',
+      component: () => import("@/pages/home/issued-detail/IssuedToken")
     },
     // 分利宝
     {
@@ -113,7 +119,7 @@ export default new Router({
     },
     // 发布分利计划
     {
-      path: '/release',
+      path: '/release/:code',
       name: 'Release',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
     },
@@ -125,7 +131,7 @@ export default new Router({
     },
     // 发布详情历史
     {
-      path: '/releasehistory',
+      path: '/releasehistory/:code',
       name: 'ReleaseHistory',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseHistory")
     },
