@@ -8,10 +8,13 @@
       </mt-header>
     </div>
     <div class="home-pub-token">
-      <img :src="balanceToken.icon" alt="" class="fl icon">
+      <!-- <img :src="balanceToken.icon" alt="" class="fl icon">
       <span><b>{{balanceToken.code}}</b>({{balanceToken.nickname}})
         <p>{{balanceToken.subject}}</p>
-        <!-- <p v-if="this.$route.params.name=='name'">{{balanceToken.subject.name}}</p> -->
+      </span> -->
+      <img :src="detail.token.icon" alt="" class="fl icon">
+      <span><b>{{detail.token.code}}</b>({{detail.token.nickname}})
+        <p>{{detail.token.subject}}</p>
       </span>
     </div>
     <div class="release-detail-num" v-for="item in listData">
@@ -49,6 +52,7 @@
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -63,7 +67,6 @@
     },
     created() {
       this.list()
-      this.balance()
     },
     methods: {
       // 发布
@@ -71,7 +74,7 @@
         this.$router.push({
           name: 'Release',
           params: {
-            code: this.$route.params.token.code
+            code: this.detail.token.code
           }
         })
       },
@@ -84,18 +87,12 @@
         }).catch(err => {
 
         })
-      },
-      // 余额
-      balance() {
-        // this.$route.params.code
-        api.balance({ token_code: this.$route.params.code }).then(res => {
-          if (res.code == 0) {
-            this.balanceData = res.data
-            this.balanceToken = res.data.token
-          }
-        }).catch(err => {
-        })
-      },
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>

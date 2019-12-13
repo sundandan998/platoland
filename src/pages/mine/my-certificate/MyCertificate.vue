@@ -53,7 +53,8 @@
     </div> -->
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
-      <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}">
+      <!-- <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}"> -->
+      <router-link :to="{name:'ReleaseHistory'}">
         <mt-cell title="分利计划" is-link>全部 </mt-cell>
       </router-link>
       <router-link to="release" v-if="this.listData.length==0">
@@ -117,6 +118,7 @@
           if (res.code == 0) {
             this.balanceData = res.data
             this.balancetoken = res.data.token
+            this.$store.commit('detail', res.data)
           }
         }).catch(err => {
         })

@@ -71,7 +71,7 @@ export default new Router({
     },
     // 发行情况
     {
-      path: '/issuance/:code',
+      path: '/issuance',
       name: 'Issuance',
       component: () => import("@/pages/home/issued-detail/Issuance")
     },
@@ -83,7 +83,7 @@ export default new Router({
     },
     // 发行通证
     {
-      path: '/token/:code',
+      path: '/token',
       name: 'Token',
       component: () => import("@/pages/home/issued-detail/IssuedToken")
     },
@@ -119,7 +119,7 @@ export default new Router({
     },
     // 发布分利计划
     {
-      path: '/release/:code',
+      path: '/release',
       name: 'Release',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
     },
@@ -131,7 +131,7 @@ export default new Router({
     },
     // 发布详情历史
     {
-      path: '/releasehistory/:code',
+      path: '/releasehistory',
       name: 'ReleaseHistory',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseHistory")
     },
@@ -185,7 +185,7 @@ export default new Router({
     },
     //  我的---资产/冻结详情
     {
-      path: '/freeze/:code',
+      path: '/freeze',
       name: 'FreezeDetail',
       component: () => import("@/pages/mine/assets/FreezeDetail")
     },
@@ -197,7 +197,7 @@ export default new Router({
     },
     // 可用转让
     {
-      path: '/availabletransfer/:code',
+      path: '/availabletransfer',
       name: 'AvailableTransfer',
       component: () => import("@/pages/mine/assets/AvailableTransfer")
     },
@@ -317,7 +317,7 @@ export default new Router({
     },
     //首页--通证详情
     {
-      path: '/detail/:code',
+      path: '/detail',
       name: 'Detail',
       component: () => import("@/pages/home/detail/Detail")
     },

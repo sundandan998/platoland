@@ -43,7 +43,7 @@
     <div class="issued-servings">
       <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'"></mt-cell>
       <mt-cell title="开始时间" :value="issuedDetail.publish_time"></mt-cell>
-      <router-link :to="{name:'Issuance',params:{token:detailToken,code:detailToken.code}}">
+      <router-link :to="{name:'Issuance'}">
         <mt-cell title="发行情况" value="查看" is-link class="issued-view"></mt-cell>
       </router-link>
     </div>
@@ -56,7 +56,6 @@
 </template>
 <script>
   import api from "@/api/token/Token.js"
-  import {mapActions,mapGetters } from 'vuex'
   export default {
     data() {
       return {

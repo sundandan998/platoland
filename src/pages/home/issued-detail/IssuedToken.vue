@@ -59,6 +59,7 @@
       return {
         showPicker: false,
         disabled: '',
+        balanceToken:'',
         popupVisible:false,
         showKeyboard: false,
         value:'',
@@ -81,9 +82,9 @@
       }
     },
     created() {
+      this.balance()
     },
     methods: {
-  
       onConfirm(value) {
         this.releaseParams.freeze_days = value
         this.showPicker = false
@@ -96,8 +97,16 @@
       },
       release() {
         this.popupVisible = true
-       
-      }
+      },
+       // 余额
+       balance() {
+        api.balance({ token_code: this.$route.params.code }).then(res => {
+          if (res.code == 0) {
+            this.balanceToken = res.data.token
+          }
+        }).catch(err => {
+        })
+      },
     },
     watch: {
       value() {

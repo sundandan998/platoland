@@ -8,10 +8,15 @@
       </mt-header>
     </div>
     <div class="issuance-token">
-      <img :src="this.$route.params.token.icon" alt="" class="fl">
+      <!-- <img :src="this.$route.params.token.icon" alt="" class="fl">
       <span>
         <span>{{this.$route.params.token.code}} ( {{this.$route.params.token.nickname}} )</span>
         <p>{{this.$route.params.token.subject}}</p>
+      </span> -->
+      <img :src="detail.token.icon" alt="" class="fl">
+      <span>
+        <span>{{detail.token.code}} ( {{detail.token.nickname}} )</span>
+        <p>{{detail.token.subject}}</p>
       </span>
     </div>
     <div class="issued-echarts">
@@ -44,7 +49,7 @@
         <span>单价</span>
         <span>数量</span>
       </div>
-      <div class="release-history-title"  v-for="item in happeDetail" v-if="item.status==1">
+      <div class="release-history-title" v-for="item in happeDetail" v-if="item.status==1">
         <span>{{item.periods}}期</span>
         <span>{{item.freeze_days}} 天</span>
         <span>{{item.issue_price|number}} {{item.denominated_assets}} </span>
@@ -55,6 +60,7 @@
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  import { mapActions, mapGetters } from 'vuex'
   // 引入基本模板
   let echarts = require('echarts')
   // 引入柱状图组件
@@ -66,16 +72,16 @@
     data() {
       return {
         happeDetail: '',
+        balanceToken:'',
         happeParams: {
           page: 1,
           page_size: 10,
-          code: this.$route.params.token.code,
+          code: '',
           status: 1,
         }
       }
     },
-    created() {
-    },
+    created(){},
     mounted() {
       this.drawLine()
       this.happening()
@@ -83,6 +89,7 @@
     methods: {
       // 发行情况
       happening() {
+        this.happeParams.code = this.detail.token.code
         api.issuedList(this.happeParams).then(res => {
           if (res.code == 0) {
             this.happeDetail = res.data
@@ -90,11 +97,11 @@
         }).catch(err => {
 
         })
-      },
-      token(){
+      },    
+      token() {
         this.$router.push({
-          name:'Token',
-          params:{token:this.$route.params.token,code:this.$route.params.token.code}
+          name: 'Token',
+          params: { token: this.detail.token}
         })
       },
       drawLine() {
@@ -160,6 +167,11 @@
           ]
         })
       }
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>
@@ -205,6 +217,7 @@
 
         .current-release-token-top {
           height: 110px;
+
           .icon {
             margin: 25px 20px 0 20px;
           }
@@ -238,20 +251,23 @@
 
       }
     }
+
     /* 发布历史 */
-    .history{
-        margin-left: 30px;
-        font-size: 26px;
-      }
-    .issued-release-history{
-      margin:20px 24px;
+    .history {
+      margin-left: 30px;
+      font-size: 26px;
+    }
+
+    .issued-release-history {
+      margin: 20px 24px;
       background-color: #fff;
-      border-radius:10px;
-     
-      .release-history-title{
+      border-radius: 10px;
+
+      .release-history-title {
         padding-left: 35px;
         border-bottom: 1px solid #EFEFF4;
-        span{
+
+        span {
           width: 24%;
           display: inline-block;
           font-size: 26px;
