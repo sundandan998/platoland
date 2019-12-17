@@ -8,10 +8,6 @@
       </mt-header>
     </div>
     <div class="home-pub-token">
-      <!-- <img :src="balanceToken.icon" alt="" class="fl icon">
-      <span><b>{{balanceToken.code}}</b>({{balanceToken.nickname}})
-        <p>{{balanceToken.subject}}</p>
-      </span> -->
       <img :src="detail.token.icon" alt="" class="fl icon">
       <span><b>{{detail.token.code}}</b>({{detail.token.nickname}})
         <p>{{detail.token.subject}}</p>

@@ -8,11 +8,6 @@
       </mt-header>
     </div>
     <div class="issuance-token">
-      <!-- <img :src="this.$route.params.token.icon" alt="" class="fl">
-      <span>
-        <span>{{this.$route.params.token.code}} ( {{this.$route.params.token.nickname}} )</span>
-        <p>{{this.$route.params.token.subject}}</p>
-      </span> -->
       <img :src="detail.token.icon" alt="" class="fl">
       <span>
         <span>{{detail.token.code}} ( {{detail.token.nickname}} )</span>
@@ -44,7 +39,7 @@
     <p class="current-release-title history">历史发行 <span>(已结束)</span></p>
     <div class="issued-release-history">
       <div class="release-history-title">
-        <span>发行期数</span>
+        <span>发行总量</span>
         <span>锁仓期限</span>
         <span>单价</span>
         <span>数量</span>
@@ -72,18 +67,23 @@
     data() {
       return {
         happeDetail: '',
-        balanceToken:'',
+        balanceToken: '',
         happeParams: {
           page: 1,
           page_size: 10,
           code: '',
-          status: 1,
+          status: '',
+          ordering: 'publish_date'
+        },
+        options: {
+          num: [],
+          price: []
         }
       }
     },
-    created(){},
+    created() { },
     mounted() {
-      this.drawLine()
+      // this.drawLine()
       this.happening()
     },
     methods: {
@@ -93,22 +93,26 @@
         api.issuedList(this.happeParams).then(res => {
           if (res.code == 0) {
             this.happeDetail = res.data
+            for (let i = 0; i < res.data.length; i++) {
+              this.options.price.push(res.data[i].issue_price)
+              this.options.num.push(res.data[i].periods)
+            }
+            this.drawLine()
           }
         }).catch(err => {
 
         })
-      },    
+      },
       token() {
         this.$router.push({
           name: 'Token',
-          params: { token: this.detail.token}
+          params: { token: this.detail.token, code: this.detail.token.code }
         })
       },
       drawLine() {
         // 基于准备好的dom，初始化echarts实例
         let myChart = echarts.init(document.getElementById('myChart'))
-        // 绘制图表
-        myChart.setOption({
+        let option = {
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -124,7 +128,7 @@
           xAxis: [
             {
               type: 'category',
-              data: ['1期', '2期', '3期', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+              data: this.options.num,
               axisPointer: {
                 type: 'shadow'
               }
@@ -134,9 +138,10 @@
             {
               type: 'value',
               name: '总量',
+              // data: this.num,
               min: 0,
-              max: 40,
-              interval: 5,
+              max: 100,
+              interval: 50,
               axisLabel: {
                 formatter: '{value}'
               }
@@ -144,9 +149,10 @@
             {
               type: 'value',
               name: '单价',
+              // data: this.num,
               min: 0,
-              max: 4,
-              interval: 0.5,
+              max: 10,
+              interval: 2,
               axisLabel: {
                 formatter: '{value}'
               }
@@ -156,16 +162,18 @@
             {
               name: '发行总量',
               type: 'bar',
-              data: [16, 19, 10, 14, 17, 13, 16]
+              data: this.options.price
             },
             {
               name: '发行单价',
               type: 'line',
               yAxisIndex: 1,
-              data: [2.6, 2.9, 0, 2.4, 2.7, 2.3, 2.6]
+              data: this.options.price
             }
           ]
-        })
+        }
+        // 绘制图表
+        myChart.setOption(option)
       }
     },
     computed: {
@@ -214,6 +222,7 @@
         background-color: #fff;
         border-radius: 10px;
         height: 160px;
+        margin-bottom: 20px;
 
         .current-release-token-top {
           height: 110px;

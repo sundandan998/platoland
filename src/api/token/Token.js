@@ -116,7 +116,7 @@ export default {
     // 发行通证
     releaseToken(params = {}) {
         return request({
-            url: "/token/release",
+            url: "/token/release/",
             method: "post",
             data: params
         })
