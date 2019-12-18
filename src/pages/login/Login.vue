@@ -93,6 +93,7 @@
       }
     },
     created() {
+      // console.log(localStorage.getItem('token'))
     },
     beforeRouteEnter(to, from, next) {
       window.document.body.style.backgroundColor = "#fff"
@@ -105,6 +106,7 @@
     methods: {
       //  登录
       handleLogin() {
+        // this.verification.token = localStorage.getItem('token')
         api.is_use({ username: this.verification.username }).then(res => {
           if (res.is_use === true) {
             this.$store.dispatch("loginByCode", this.verification).then(res => {

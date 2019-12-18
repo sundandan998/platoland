@@ -147,7 +147,6 @@
             this.release = res.data.release_list
           }
         }).catch(err => {
-
         })
       }
     }
@@ -224,7 +223,6 @@
     /* 最新发行 */
     .home-latest-release {
       margin: 0px 24px;
-     
       .home-latest-release-token {
         overflow: hidden;
         height: 260px;

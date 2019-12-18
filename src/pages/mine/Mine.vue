@@ -75,6 +75,7 @@
 					this.infoData = res.data
 					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 					// window.localStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+					this.access_token = localStorage.getItem('token')
 				}).catch(err => {
 					console.log(err)
 				})
