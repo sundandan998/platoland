@@ -57,7 +57,8 @@
         registerParsms: {
           username: '',
           password: '',
-          code: ''
+          code: '',
+          invite_code:this.$route.params.invite_code
         },
         // 校验验证码参数
         checkCode: {
@@ -77,6 +78,7 @@
       next()
     },
     created() {
+      console.log(this.$route.params.invite_code)
     },
     methods: {
       register() {

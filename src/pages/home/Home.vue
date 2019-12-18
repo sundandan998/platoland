@@ -184,11 +184,11 @@
     .home-header {
       height: 44px;
       background-color: #fff;
+      margin-bottom: 40px;
     }
 
     .home-banner {
       margin: 20px 24px;
-
       /* background: url("../../assets/images/bg.png");
       background-size: 100% 100%;
       background-position: center center; */
@@ -280,7 +280,6 @@
     /* 市场交易 */
     .home-market-transaction {
       margin: 0 24px 20px 24px;
-
       .home-market-transaction-token {
         height: 450px;
         background-color: #fff;

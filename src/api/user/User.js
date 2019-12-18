@@ -215,6 +215,14 @@ export default {
       method: "get",
       params: params
     })
+  },
+  // 获取系统设置信息的接口/注册页是否需要填写邀请码
+  code(params = {}) {
+    return request({
+      url: "/system/config/",
+      method: "get",
+      params: params
+    })
   }
 
 }

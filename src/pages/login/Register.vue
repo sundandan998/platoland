@@ -13,14 +13,14 @@
     <div class="register-tab login-form">
       <van-tabs v-model="active" @click="clear">
         <van-tab title="手机号注册">
-          <mt-field  placeholder="请输入手机号" v-model="verification.username" type="tel"
-            @blur.native.capture="telCheck" :state="telStatus">
+          <mt-field placeholder="请输入手机号" v-model="verification.username" type="tel" @blur.native.capture="telCheck"
+            :state="telStatus">
           </mt-field>
           <img src="../../assets/images/tel.svg" alt="" class="login-icon">
         </van-tab>
         <van-tab title="邮箱注册">
-          <mt-field placeholder="请输入邮箱" v-model="verification.username" type="email"
-            @blur.native.capture="emailCheck" :state="emailStatus">
+          <mt-field placeholder="请输入邮箱" v-model="verification.username" type="email" @blur.native.capture="emailCheck"
+            :state="emailStatus">
           </mt-field>
           <img src="../../assets/images/email.png" alt="" class="login-icon">
         </van-tab>
@@ -28,8 +28,11 @@
     </div>
     <div class="login-form">
       <!-- @blur.native.capture="pwdCheck" -->
-      <mt-field  placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
+      <mt-field placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
+      </mt-field>
+      <img src="../../assets/images/password.svg" alt="" class="login-icon">
+      <mt-field placeholder="请输入6位邀请码" v-model="verification.invite_code"@blur.native.capture="invitation">
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
     </div>
@@ -85,6 +88,7 @@
         verification: {
           username: '',
           password: '',
+          invite_code: ''
         },
         // 忘记密码参数
         forgetPwd: {
@@ -105,6 +109,7 @@
       }
     },
     created() {
+      this.invitationCode()
     },
     beforeRouteEnter(to, from, next) {
       window.document.body.style.backgroundColor = "#fff"
@@ -205,11 +210,28 @@
 
         }
       },
-      router(){
+      router() {
         this.$router.push({
-          name:'Reset',
-          params:{username:this.verification.username,password:this.verification.password}
+          name: 'Reset',
+          params: { username: this.verification.username, password: this.verification.password,invite_code:this.verification.invite_code}
         })
+      },
+      invitationCode() {
+        api.code().then(res => {
+          if (res.code == 0) {
+            if (res.data.is_invite_code == true) {
+              this.verification.code != ''
+            }
+          }
+        }).catch(err => { })
+      },
+      invitation() {
+        if (this.verification.code == '') {
+          Toast({
+            message: '请填写6位邀请码',
+            className: 'zZindex'
+          })
+        }
       },
       // 密码校验
       // pwdCheck() {
@@ -259,83 +281,95 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
-  .register{
+
+  .register {
     .login-cancel {
-    margin:10px 0 30px 54px;
-    img {
-      height: 25px;
-    }
-    span {
-      position: relative;
-      top:-5px;
-      color: #333;
-    }
-  }
-    .logo{
+      margin: 10px 0 30px 54px;
+
       img {
-      width: 60%;
-      margin: 50px auto 150px auto;
-      display: block;
+        height: 25px;
+      }
+
+      span {
+        position: relative;
+        top: -5px;
+        color: #333;
+      }
     }
+
+    .logo {
+      img {
+        width: 60%;
+        margin: 50px auto 150px auto;
+        display: block;
+      }
     }
-  .login-checkbox {
-    margin:50px 0 10px 64px;
-    a {
-      color: #036EB8;
+
+    .login-checkbox {
+      margin: 50px 0 10px 64px;
+
+      a {
+        color: #036EB8;
+      }
+    }
+
+
+    .register-tab {
+      margin-top: 50px;
+
+      .van-tab {
+        flex: none;
+        margin-left: 15px;
+      }
+
+      .van-tabs__content {
+        margin-top: 60px;
+      }
+    }
+
+    .login-form {
+      margin: 0 54px;
+
+      .van-tabs__wrap.van-hairline--top-bottom {
+        height: 60px;
+      }
+
+      .mint-cell-text {
+        color: #999;
+        margin-left: 10px;
+      }
+
+      .mint-cell-wrapper {
+        border-bottom: 1px solid #f6f6f6;
+        margin: 0 20px;
+      }
+
+      .login-icon {
+        top: -50px;
+        position: relative;
+      }
+
+      .van-tabs__wrap.van-hairline--top-bottom {
+        height: unset;
+      }
+
+      [class*=van-hairline]::after {
+        border: none;
+      }
+
+      .van-tabs__nav--line {
+        /* padding-bottom: 0.4rem; */
+      }
+    }
+
+    .login-switch {
+      p {
+        font-size: 24px;
+        text-align: center;
+        color: #036EB8;
+        margin-top: 10px;
+      }
+
     }
   }
-
- 
-  .register-tab {
-    margin-top: 50px;
-    .van-tab {
-      flex: none;
-      margin-left: 15px;
-    }
-
-    .van-tabs__content {
-      margin-top: 60px;
-    }
-  }
-
-  .login-form {
-    margin:0 54px;
-    .van-tabs__wrap.van-hairline--top-bottom{
-      height: 60px;
-    }
-    .mint-cell-text {
-      color: #999;
-      margin-left: 10px;
-    }
-
-    .mint-cell-wrapper {
-      border-bottom: 1px solid #f6f6f6;
-      margin: 0 20px;
-    }
-
-    .login-icon {
-      top: -50px;
-      position: relative;
-    }
-  .van-tabs__wrap.van-hairline--top-bottom {
-      height: unset;
-  }
-  [class*=van-hairline]::after{
-    border:none;
-  }
-  .van-tabs__nav--line {
-    /* padding-bottom: 0.4rem; */
-}  
-  }
-
-  .login-switch {
-    p {
-      font-size: 24px;
-      text-align: center;
-      color: #036EB8;
-      margin-top: 10px;
-    }
-
-  }
-}
 </style>

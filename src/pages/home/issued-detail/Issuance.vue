@@ -149,8 +149,7 @@
             {
               type: 'value',
               name: '单价',
-              // data: this.num,
-              min: 0,
+                min: 0,
               max: 10,
               interval: 2,
               axisLabel: {

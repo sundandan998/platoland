@@ -30,7 +30,7 @@
         <span class="fr">期限(天)</span>
       </div>
       <div class="buy-pass-progress progress">
-        <mt-progress :value="20" :bar-height="7"></mt-progress>
+        <mt-progress :value="10" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已售 {{this.detail.sold_number|number}} 份</div>
         <div slot="end" class="fr">总量 {{this.detail.first_number|number}} 份</div>
       </div>
@@ -39,15 +39,15 @@
     <div class="buy-pass-tab">
       <van-tabs  @click="getActionType">
         <van-tab title="按份数买入">
-          <mt-field placeholder="份起购" type="number" v-model="requsetPay.amount"></mt-field>
-          <span>交易额：24 USDT</span>
+          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'" v-model="requsetPay.amount"  @blur.native.capture="maxnum"></mt-field>
+          <span>交易额：{{requsetPay.amount*detail.issue_price*detail.step_number}} {{detail.denominated_assets}}</span>
         </van-tab>
         <van-tab title="按金额买入">
-          <mt-field placeholder="最少" type="number" v-model="requsetPay.amount"><b>{{detail.denominated_assets}}</b></mt-field>
-          <span>可买入份数：2 份</span>
+          <mt-field :placeholder="'最少'+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price" type="number" v-model="requsetPay.amount"> <b>{{detail.denominated_assets}}</b></mt-field>
+          <span>可买入份数：{{requsetPay.amount/detail.step_number/detail.issue_price }} 份</span>
         </van-tab>
         <div class="fr day">
-          <p>可用额{{detail.denominated_assets}}</p>
+          <p>可用额{{this.balanceData.available_amount}}{{detail.denominated_assets}}</p>
           <p>解锁日:{{detail.end_time}}</p>
         </div>
       </van-tabs>
@@ -57,7 +57,7 @@
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
         <!-- 展示键盘弹起的title -->
         <span class="paymentamount"
-          v-if="numTitle">{{this.detail.issue_price*requsetPay.amount}}&nbsp;({{this.detail.denominated_assets}})</span>
+          v-if="numTitle">{{this.detail.issue_price*requsetPay.amount*detail.step_number}}&nbsp;({{this.detail.denominated_assets}})</span>
         <span class="paymentamount"
           v-else>{{requsetPay.amount}}&nbsp;({{this.detail.denominated_assets}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
@@ -86,6 +86,7 @@
 				disabled: true,
 				showKeyboard: false,
 				popupVisible: false,
+        balanceData:'',
 				// 请求参数
 				requsetPay: {
 					order_type: 0,
@@ -102,6 +103,7 @@
       }
     },
     created() {
+      this.balance()
     },
     methods: {
       onInput(key) {
@@ -110,19 +112,36 @@
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1)
       },
+      // 展示可用余额
+      balance() {
+        api.balance({ token_code: this.detail.token.code }).then(res => {
+          if (res.code == 0) {
+            this.balanceData = res.data
+          }
+        }).catch(err => {
+        })
+      },
+      maxnum(){
+       if(this.requsetPay.amount>this.detail.max_purchase_number/this.detail.step_number){
+        Toast({
+            message: '最多只能购买'+this.detail.max_purchase_number/this.detail.step_number+'份',
+            className: 'zZindex'
+          })
+       }
+      },
       	// tab栏展示
 			getActionType(index, title) {
 				if (index == 0) {
 					this.requsetPay.action_type = 0
 					// 键盘上标题显隐
 					this.numTitle = true
-					this.balance()
+					// this.balance()
 				} else {
 					if (index == 1) {
 						this.requsetPay.action_type = 1
 						// 键盘上标题显隐
 						this.numTitle = false
-						this.balance()
+						// this.balance()
 					}
 				}
 			},
@@ -177,11 +196,10 @@
 					api.confirmPay(this.confirm).then(res => {
 						if (res.code == 0) {
 							toast(res)
-							// if()
 							this.$router.push({
-								name: 'Home',
+								name: 'OrderDetail',
 								params: {
-									code: this.detail.code
+									order_id: res.order_id
 								}
 							})
 						}
@@ -274,7 +292,6 @@
         font-size: 26px;
         color: #036EB8;
       }
-
       .mint-field-core {
         font-size: 14px;
       }

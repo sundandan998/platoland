@@ -34,11 +34,11 @@
         <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
       </div>
       <mt-cell title="每份数量" :value="issuedDetail.step_number|number"></mt-cell>
-      <mt-cell title="每份总价" value="说明文字"></mt-cell>
+      <mt-cell title="每份总价" :value="issuedDetail.issue_price*issuedDetail.step_number"></mt-cell>
     </div>
     <div class="issued-servings">
       <mt-cell title="起购份数" :value="issuedDetail.minimum_number|number"></mt-cell>
-      <mt-cell title="最高起购份数" :value="issuedDetail.max_purchase_number|number"></mt-cell>
+      <mt-cell title="最高可购份数" :value="issuedDetail.max_purchase_number|number"></mt-cell>
     </div>
     <div class="issued-servings">
       <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'"></mt-cell>
@@ -49,6 +49,7 @@
     </div>
     <div class="transfer-button">
       <router-link to="/buy">
+      <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
         <mt-button size="large" type="primary">立即买入</mt-button>
       </router-link>
     </div>

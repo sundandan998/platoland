@@ -365,14 +365,10 @@
   @import '../../../assets/scss/global';
 
   .order-detail-header {
-    margin-bottom: 18px;
+    margin-bottom: 90px;
   }
 
   /* --------------发行买入--------- */
-  .buy {
-    background-color: #fff;
-  }
-
   .buy-title {
     margin: 15px 15px;
   }
