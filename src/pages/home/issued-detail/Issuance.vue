@@ -21,18 +21,20 @@
     <div class="current-release">
       <p class="current-release-title">当前发行</p>
       <div class="current-release-token" v-for="item in happeDetail">
-        <div class="current-release-token-top">
-          <img :src="item.token.icon" alt="" class="fl icon">
-          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-          <img src="../../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
-        </div>
-        <div class="current-release-token-bot">
-          <div class="current-release-token-bot-text fl">
-            <span>第 {{item.periods}} 期</span>
-            <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+        <router-link :to="{name:'Issued',params:{id:item.id}}">
+          <div class="current-release-token-top">
+            <img :src="item.token.icon" alt="" class="fl icon">
+            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+            <img src="../../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
           </div>
-          <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
-        </div>
+          <div class="current-release-token-bot">
+            <div class="current-release-token-bot-text fl">
+              <span>第 {{item.periods}} 期</span>
+              <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+            </div>
+            <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
+          </div>
+        </router-link>
       </div>
     </div>
     <!-- 发布历史 -->
@@ -149,7 +151,7 @@
             {
               type: 'value',
               name: '单价',
-                min: 0,
+              min: 0,
               max: 10,
               interval: 2,
               axisLabel: {

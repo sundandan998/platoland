@@ -21,8 +21,12 @@
       <router-link to="bao">
         <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
       </router-link>
-      <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
-      <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
+      <router-link to="deal">
+        <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
+      </router-link>
+      <router-link to="list">
+        <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
+      </router-link>
     </div>
     <!-- 最新发行 -->
     <div class="home-latest-release">
@@ -164,7 +168,8 @@
       height: 90px;
       line-height: 90px;
       font-size: 30px;
-      color:#333;
+      color: #333;
+
       span {
         font-size: 24px;
         color: #959595;
@@ -188,6 +193,7 @@
 
     .home-banner {
       margin: 20px 24px;
+
       /* background: url("../../assets/images/bg.png");
       background-size: 100% 100%;
       background-position: center center; */
@@ -223,6 +229,7 @@
     /* 最新发行 */
     .home-latest-release {
       margin: 0px 24px;
+
       .home-latest-release-token {
         overflow: hidden;
         height: 260px;
@@ -253,6 +260,7 @@
     /* 分利宝 */
     .home-divided-treasure {
       margin: 0px 24px;
+
       .home-divided-treasure-token {
         height: 310px;
         background-color: #fff;
@@ -278,6 +286,7 @@
     /* 市场交易 */
     .home-market-transaction {
       margin: 0 24px 20px 24px;
+
       .home-market-transaction-token {
         height: 450px;
         background-color: #fff;

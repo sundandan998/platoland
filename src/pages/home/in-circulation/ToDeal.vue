@@ -99,5 +99,10 @@
   }
 </script>
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .to-deal{
+    .to-deal-header{
+      margin-bottom:90px;
+    }
+  }
 </style>

@@ -317,7 +317,7 @@ export default new Router({
     },
     //首页--通证详情
     {
-      path: '/detail',
+      path: '/detail/:code',
       name: 'Detail',
       component: () => import("@/pages/home/detail/Detail")
     },

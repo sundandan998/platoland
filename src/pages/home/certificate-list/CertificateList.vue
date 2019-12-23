@@ -1,22 +1,25 @@
 <template>
   <div class="certificate-list">
     <div class="certificate-list-header">
-      <mt-header fixed :title="$t('m.assetslist')">
+      <mt-header fixed title="通证大全">
         <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData">
-      <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
-        <img class="assets-icon" slot="icon" :src="item.icon">
-        <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
-          <div v-if="refpath=='/book'">
-            <mt-switch class="asset-list-switch" :value="value"></mt-switch>
+        <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
+        <router-link :to="/detail/+item.code">
+        <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
+          <img class="assets-icon" slot="icon" :src="item.icon">
+          <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
+            <div v-if="refpath=='/book'">
+              <mt-switch class="asset-list-switch" :value="value"></mt-switch>
+            </div>
+          </router-link>
+          <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
+            <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
           </div>
-        </router-link>
-        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
-          <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
-        </div>
-      </mt-cell>
+        </mt-cell>
+      </router-link>
     </div>
   </div>
 </template>
@@ -98,5 +101,11 @@
   }
 </script>
 <style lang="scss">
-  @import "../../../assets/scss/global"
+  @import "../../../assets/scss/global";
+
+  .certificate-list {
+    .certificate-list-header {
+      margin-bottom: 90px;
+    }
+  }
 </style>

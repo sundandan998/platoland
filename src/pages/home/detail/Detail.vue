@@ -87,7 +87,7 @@
     methods: {
       //获取详情
       getDetail() {
-        api.tokenDetail({code:this.detail.token.code}).then(res => {
+        api.tokenDetail({ code:this.$route.params.code||this.detail.token.code}).then(res => {
           this.detailData = res.data
           this.subject = res.data.subject
           this.release = res.data.release

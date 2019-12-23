@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="release-detail-num-progress progress ">
-        <mt-progress :value="20" :bar-height="7"></mt-progress>
+        <mt-progress :value="item.air|number" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已售{{item.sold_amount}}</div>
         <div slot="end" class="fr">总量{{item.total_amount}}</div>
       </div>

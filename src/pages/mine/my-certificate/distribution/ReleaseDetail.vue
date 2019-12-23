@@ -20,17 +20,17 @@
         </div>
       </div>
       <div class="release-detail-num-progress progress ">
-        <mt-progress :value="20" :bar-height="7"></mt-progress>
+        <mt-progress :value="detailData.total_amount/(detailData.total_amount-detailData.sold_amount)" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已转入{{detailData.sold_amount}}</div>
         <div slot="end" class="fr">总量{{detailData.total_amount}}</div>
       </div>
     </div>
     <div class="release-detail-number">
       <mt-cell title="分利计划单号" :value="detailData.serial_number"></mt-cell>
-      <mt-cell title="支出利润" :value="detailData.interest|number"></mt-cell>
-      <mt-cell title="已发放利润" :value="detailData.paid_interest|number"></mt-cell>
-      <mt-cell title="最小转入量" :value="detailData.min_amount"></mt-cell>
-      <mt-cell title="最大转入量" :value="detailData.high_amount"></mt-cell>
+      <mt-cell title="支出利润">{{detailData.interest|number}}{{detailData.token.code}}</mt-cell>
+      <mt-cell title="已发放利润">{{detailData.paid_interest|number}}{{detailData.token.code}}</mt-cell>
+      <mt-cell title="最小转入量" :value="detailData.min_amount + detailData.token.code"></mt-cell>
+      <mt-cell title="最大转入量" :value="detailData.high_amount + detailData.token.code"></mt-cell>
     </div>
   </div>
 </template>

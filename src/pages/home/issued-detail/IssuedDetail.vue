@@ -29,7 +29,7 @@
         <span class="fr issued-period">期限(天)</span>
       </div>
       <div class="issued-progress progress">
-        <mt-progress :value="20" :bar-height="7"></mt-progress>
+        <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已售 {{issuedDetail.sold_number|number}} 份</div>
         <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
       </div>
@@ -49,7 +49,7 @@
     </div>
     <div class="transfer-button">
       <router-link to="/buy">
-      <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
+        <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
         <mt-button size="large" type="primary">立即买入</mt-button>
       </router-link>
     </div>
@@ -61,8 +61,7 @@
     data() {
       return {
         issuedDetail: '',
-        detailToken: ''
-
+        detailToken: '',
       }
     },
     created() {

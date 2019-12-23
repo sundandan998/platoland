@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="token-progress">
-        <mt-progress :value="20" :bar-height="7"></mt-progress>
+        <mt-progress :value="this.$route.params.item.high_amount" :bar-height="7"></mt-progress>
       </div>
       <b>可转入数量{{this.$route.params.item.high_amount}}</b>
     </div>
@@ -36,11 +36,11 @@
       <div class="progress">
         <van-stepper step="2" v-model="transferParams.amount" />
       </div>
-      <div class="progress">
+      <!-- <div class="progress">
         <mt-progress :value="20" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">0%</div>
         <div slot="end" class="fr">100%</div>
-      </div>
+      </div> -->
       <div class=" transfer-num-date">
         <span>到期分利{{transferParams.amount*this.$route.params.item.air/365*this.$route.params.item.freeze_days}}</span>
         <span>到期日期 {{this.$route.params.item.update_time}}</span>
