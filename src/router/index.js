@@ -63,6 +63,18 @@ export default new Router({
       name: 'Home',
       component: () => import("@/pages/home/Home")
     },
+    // 轮播图--通证经济
+    {
+      path: '/economy',
+      name: 'Economy',
+      component: () => import("@/pages/home/carousel/TokenEconomy")
+    },
+    // 轮播图--life+
+    {
+      path: '/life',
+      name: 'Life',
+      component: () => import("@/pages/home/carousel/Life")
+    },
     // 发行详情
     {
       path: '/issued/:id',

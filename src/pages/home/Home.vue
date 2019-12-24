@@ -7,8 +7,8 @@
     <!-- 轮播部分 -->
     <div class="home-banner">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item> <img src="../../assets/images/banner2.jpg" alt=""></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner3.jpg" alt=""></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner2.jpg" alt="" @click="life"></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner3.jpg" alt="" @click="token"></van-swipe-item>
         <!-- <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
         <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
       </van-swipe>
@@ -152,6 +152,17 @@
           }
         }).catch(err => {
         })
+      },
+      // 轮播图
+      token(){
+        this.$router.push({
+          name:'Economy'
+        })
+      },
+      life(){
+        this.$router.push({
+          name:'Life'
+        }) 
       }
     }
   }
