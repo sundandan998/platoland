@@ -1,6 +1,6 @@
 <template>
     <div class="open-pay-password">
-      <div class="open-pay-password-header">
+      <div class="open-pay-password-header header">
         <mt-header fixed title="修改支付密码">
           <router-link to="/safety" slot="left">
             <mt-button icon="back">返回</mt-button>

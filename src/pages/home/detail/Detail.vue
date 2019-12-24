@@ -11,21 +11,23 @@
     </div>
     <div class="detai-text">
       <!-- 合约地址 -->
-      <span @click="copy" class=" overflow-text tag-read" :data-clipboard-text="detailData.contract_address">
+      <span @click="copy" class="overflow-text tag-read" :data-clipboard-text="detailData.contract_address">
+        <img src="../../../assets/images/copy.svg" alt="" class="fr">
         <mt-cell :title="$t('m.address')" :value="detailData.contract_address"></mt-cell>
       </span>
       <!-- 通证主体 -->
       <mt-cell :title="$t('m.body')" :value="this.subject.name" :to="{name:'Subject', params:{id:this.subject.id}}"
         is-link></mt-cell>
       <!-- 发行方 -->
-      <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer" is-link></mt-cell>
+      <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer" :to="{name:'Subject', params:{id:this.subject.id,issuer:'issuer'}}" is-link></mt-cell>
     </div>
     <div class="detail-description">
-      <mt-cell title="通证效用" value="效用说明" is-link></mt-cell>
+      <mt-cell title="通证效用" value="效用说明" is-link :to="{name:'Description'}"></mt-cell>
     </div>
     <!-- 分利宝 -->
     <div class="detail-flb">
-      <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}">
+      <!-- <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}"> -->
+      <router-link :to="{name:'ReleaseHistory'}">
         <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
       </router-link>
       <div class="detail-flb-token">
@@ -87,7 +89,7 @@
     methods: {
       //获取详情
       getDetail() {
-        api.tokenDetail({ code:this.$route.params.code||this.detail.token.code}).then(res => {
+        api.tokenDetail({ code: this.$route.params.code || this.detail.token.code }).then(res => {
           this.detailData = res.data
           this.subject = res.data.subject
           this.release = res.data.release
@@ -171,6 +173,20 @@
     .detai-text {
       background-color: #fff;
       margin: 20px 24px;
+
+      img {
+        height: 30px;
+        position: relative;
+        top: 30px;
+        right: 30px;
+        z-index: 1;
+      }
+
+      .overflow-text {
+        span {
+          margin-right: 40px;
+        }
+      }
     }
 
     .detail-description {

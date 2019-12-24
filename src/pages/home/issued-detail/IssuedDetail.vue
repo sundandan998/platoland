@@ -26,19 +26,19 @@
           <span>发行期数 (期)</span>
           <span class="fr">单价 ({{issuedDetail.denominated_assets}})</span>
         </div>
-        <span class="fr issued-period">期限(天)</span>
+        <span class="fr issued-period">冻结时长(天)</span>
       </div>
       <div class="issued-progress progress">
         <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)" :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已售 {{issuedDetail.sold_number|number}} 份</div>
         <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
       </div>
-      <mt-cell title="每份数量" :value="issuedDetail.step_number|number"></mt-cell>
-      <mt-cell title="每份总价" :value="issuedDetail.issue_price*issuedDetail.step_number"></mt-cell>
+      <mt-cell title="每份数量">{{issuedDetail.step_number|number}}{{detailToken.code}}/份</mt-cell>
+      <mt-cell title="每份总价">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/份</mt-cell>
     </div>
     <div class="issued-servings">
-      <mt-cell title="起购份数" :value="issuedDetail.minimum_number|number"></mt-cell>
-      <mt-cell title="最高可购份数" :value="issuedDetail.max_purchase_number|number"></mt-cell>
+      <mt-cell title="起购份数">{{issuedDetail.purchase_number/issuedDetail.step_number}}份</mt-cell>
+      <mt-cell title="最高可购份数" >{{issuedDetail.max_purchase_number/issuedDetail.step_number}}份</mt-cell>
     </div>
     <div class="issued-servings">
       <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'"></mt-cell>

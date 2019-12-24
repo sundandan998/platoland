@@ -5,13 +5,23 @@
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
+		<div class="subject-details-header" v-if="this.$route.params.issuer=='issuer'">
+			<mt-header fixed title="发行方主体">
+				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+			</mt-header>
+		</div>
 		<div class="subject-details-content">
 			<mt-navbar v-model="selected">
-				<mt-tab-item id="information">{{$t('m.bodyinformation')}}</mt-tab-item>
 				<mt-tab-item id="introduce">{{$t('m.bodyintroduce')}}</mt-tab-item>
+				<mt-tab-item id="information">{{$t('m.bodyinformation')}}</mt-tab-item>
 			</mt-navbar>
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
+				<mt-tab-container-item id="introduce">
+					<div class="information-introduction" v-for="(img,index) in subjectData.introduction">
+						<img :src="img" alt="">
+					</div>
+				</mt-tab-container-item>
 				<mt-tab-container-item id="information">
 					<div class="information-content">
 						<!-- 主体名称： -->
@@ -58,11 +68,7 @@
 						</mt-cell>
 					</div>
 				</mt-tab-container-item>
-				<mt-tab-container-item id="introduce">
-					<div class="information-introduction" v-for="(img,index) in subjectData.introduction">
-						<img :src="img" alt="">
-					</div>
-				</mt-tab-container-item>
+
 			</mt-tab-container>
 		</div>
 	</div>
@@ -73,7 +79,7 @@
 	export default {
 		data() {
 			return {
-				selected: 'information',
+				selected: 'introduce',
 				subjectId: {},
 				subjectData: {},
 			}
@@ -102,6 +108,12 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
+
+	.subject-details {
+		.subject-details-header {
+			margin-bottom: 90px;
+		}
+	}
 
 	.subject-address {
 		width: 80%;

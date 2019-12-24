@@ -39,7 +39,8 @@
     <div class="buy-pass-tab">
       <van-tabs  @click="getActionType">
         <van-tab title="按份数买入">
-          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'" v-model="requsetPay.amount"  @blur.native.capture="maxnum"></mt-field>
+            <!-- @blur.native.capture="maxnum" -->
+          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'" v-model="requsetPay.amount" ></mt-field>
           <span>交易额：{{requsetPay.amount*detail.issue_price*detail.step_number}} {{detail.denominated_assets}}</span>
         </van-tab>
         <van-tab title="按金额买入">
@@ -47,7 +48,7 @@
           <span>可买入份数：{{requsetPay.amount/detail.step_number/detail.issue_price }} 份</span>
         </van-tab>
         <div class="fr day">
-          <p>可用额{{this.balanceData.available_amount}}{{detail.denominated_assets}}</p>
+          <p>可用额{{this.balanceData.available_amount|number}} {{detail.denominated_assets}}</p>
           <p>解锁日:{{detail.end_time}}</p>
         </div>
       </van-tabs>
@@ -114,21 +115,21 @@
       },
       // 展示可用余额
       balance() {
-        api.balance({ token_code: this.detail.token.code }).then(res => {
+        api.balance({ token_code: this.detail.denominated_assets }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
           }
         }).catch(err => {
         })
       },
-      maxnum(){
-       if(this.requsetPay.amount>this.detail.max_purchase_number/this.detail.step_number){
-        Toast({
-            message: '最多只能购买'+this.detail.max_purchase_number/this.detail.step_number+'份',
-            className: 'zZindex'
-          })
-       }
-      },
+      // maxnum(){
+      //  if(this.requsetPay.amount>this.detail.max_purchase_number/this.detail.step_number){
+      //   Toast({
+      //       message: '最多只能购买'+this.detail.max_purchase_number/this.detail.step_number+'份',
+      //       className: 'zZindex'
+      //     })
+      //  }
+      // },
       	// tab栏展示
 			getActionType(index, title) {
 				if (index == 0) {

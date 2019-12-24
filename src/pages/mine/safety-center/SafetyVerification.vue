@@ -233,5 +233,10 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.safety-verification{
+		.safety-verification-header{
+			margin-bottom: 90px;
+		}
+	}
 </style>

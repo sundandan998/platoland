@@ -1,6 +1,6 @@
 <template>
 	<div class="safety-center">
-		<div class="safety-center-header">
+		<div class="safety-center-header header">
 			<mt-header fixed :title="$t('m.safetycenter')">
 				<router-link to="/mine" slot="left">
 					<mt-button icon="back">{{$t('m.back')}}</mt-button>
@@ -65,5 +65,7 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.safety-center{
+	}
 </style>

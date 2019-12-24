@@ -321,6 +321,12 @@ export default new Router({
       name: 'Detail',
       component: () => import("@/pages/home/detail/Detail")
     },
+    // 效用说明
+    {
+      path: '/description',
+      name: 'Description',
+      component: () => import("@/pages/home/detail/UtilityDescription")
+    },
     //首页--通证列表
     {
       path: '/list',

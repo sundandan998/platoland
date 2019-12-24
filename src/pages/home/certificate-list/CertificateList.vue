@@ -6,8 +6,8 @@
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData">
-        <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
-        <router-link :to="/detail/+item.code">
+      <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
+      <router-link :to="/detail/+item.code">
         <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
           <img class="assets-icon" slot="icon" :src="item.icon">
           <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
@@ -60,7 +60,8 @@
         // this.$route.params
         api.tokenList({ category: 'all' }).then(res => {
           this.assetsData = res.data
-          this.$store.commit('detail', res.data.is_collection)
+          // this.$store.commit('detail', res.data.is_collection)
+          // this.$store.commit('detail', res.data)
         }).catch(err => {
           console.log(err)
         })

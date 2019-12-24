@@ -21,7 +21,7 @@
       <router-link to="bao">
         <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
       </router-link>
-      <router-link to="deal">
+      <router-link to="deal/LIFE+">
         <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
       </router-link>
       <router-link to="list">
