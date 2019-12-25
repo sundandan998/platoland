@@ -1,6 +1,6 @@
 <template>
 	<div class="assets-detailed">
-		<div class="assets-detailed-header">
+		<div class="assets-detailed-header header">
 			<mt-header fixed title="明细">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
@@ -94,7 +94,6 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-
 	.details-list {
 		/* font-size: 0.78rem; */
 		border-bottom: 1px solid #f2f2f2;
@@ -112,11 +111,6 @@
 			margin-left: 30px;
 		}
 	}
-
-	.assets-detailed-header {
-		margin-bottom: 20px;
-	}
-
 	.assets-detailed-list {
 		background-color: #fff;
 	}

@@ -235,7 +235,7 @@
       <div class="buy-content">
         <p>{{orderData.amount}} {{orderData.token}}</p>
         <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee}} PLD</span></p>
+        <p><span>手续费</span><span class="fr">{{orderData.fee}} {{orderData.token}}</span></p>
       </div>
       <div class="buy-numbering">
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
@@ -248,6 +248,28 @@
         <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
       </div>
     </div>
+    <!-- 锁仓分利 -->
+    <div class="buy" v-if="orderData.flow_type=='分利宝'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount|number}} {{orderData.token}}</p>
+          <!-- <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p> -->
+          <!-- <p><span>手续费</span><span class="fr">{{orderData.fee}} {{orderData.token}}</span></p> -->
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <!-- <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p> -->
+          <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <!-- <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div> -->
+      </div>
     <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="popupVisible=true">去支付
     </mt-button>
     <mt-button v-if="orderData.is_undo==true" class="sell-btn" size="large" type="primary" @click="cancel">撤销
@@ -312,6 +334,7 @@
           if (res.code == 0) {
             this.orderData = res.data
             this.orderList = res.data.otc_order
+            // this.$store.commit('detail', res.data)
           }
         }).catch(err => {
         })

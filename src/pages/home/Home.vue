@@ -57,7 +57,7 @@
         <p class="home-pub-title ">分利宝<span class="fr">全部></span></p>
       </router-link>
       <div class="home-divided-treasure-token" v-for="item in flData">
-        <router-link :to="{name:'Transferflb',params:{item:item}}">
+        <router-link :to="{name:'Transferflb',params:{id:item.id}}">
           <div class="home-pub-token">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
@@ -71,49 +71,33 @@
     </div>
     <!-- 市场交易 -->
     <div class="home-market-transaction">
-      <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
-      <div class="home-market-transaction-token">
-        <div class="home-pub-token">
-          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
-          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
-        </div>
-        <div class="home-market-transaction-con">
-          <div class="fl home-market-transaction-num">
-            <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt=""> 0.12</p></span>
-            <span class="fr">数量<p>0.12</p></span>
+      <!-- <router-link :to="{name:'Purchase'}"> -->
+        <!-- <router-link to="/purchaserelease"> -->
+          <!-- <router-link :to="/Purchase/+item.token.code"> -->
+          <p class="home-pub-title">市场交易<span class="fr" @click="more">全部></span></p>
+        <!-- </router-link> -->
+        <div class="home-market-transaction-token" v-for="item in market">
+          <div class="home-pub-token">
+            <img :src="item.token.icon" alt="" class="fl icon">
+            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
           </div>
-          <van-button class="fr" type="default">立 即 出 售</van-button>
-        </div>
-        <div class="home-market-transaction-bot">
-          <div class="fl home-market-transaction-bot-num">
-            <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-            <span class="fr">数量<p> 0.12</p></span>
+          <!-- <div v-for="marketInfo in item.info"> -->
+          <div class="home-market-transaction-con">
+            <div class="fl home-market-transaction-num">
+              <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt=""> 0.12</p></span>
+              <span class="fr">数量<p>{{}}</p></span>
+            </div>
+            <van-button class="fr" type="default">立 即 出 售</van-button>
           </div>
-          <van-button class="fr" type="danger">立 即 购 买</van-button>
-        </div>
-      </div>
-    </div>
-    <div class="home-market-transaction">
-      <div class="home-market-transaction-token">
-        <div class="home-pub-token">
-          <img src="../../assets/images/life-icon.png" alt="" class="fl icon">
-          <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
-        </div>
-        <div class="home-market-transaction-con">
-          <div class="fl home-market-transaction-num">
-            <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-            <span class="fr">数量<p>0.12</p></span>
+          <div class="home-market-transaction-bot">
+            <div class="fl home-market-transaction-bot-num">
+              <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
+              <span class="fr">数量<p> 0.12</p></span>
+            </div>
+            <van-button class="fr" type="danger">立 即 购 买</van-button>
           </div>
-          <van-button class="fr" type="default">立 即 出 售</van-button>
         </div>
-        <div class="home-market-transaction-bot">
-          <div class="fl home-market-transaction-bot-num">
-            <span class="fl">买盘最高价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-            <span class="fr"> 数量<p>0.12</p></span>
-          </div>
-          <van-button class="fr" type="danger">立 即 购 买</van-button>
-        </div>
-      </div>
+        <!-- </div> -->
     </div>
     <!-- Tabber部分 -->
     <app-tabber :message=selected></app-tabber>
@@ -132,7 +116,8 @@
         selected: 'home',
         message: 'home',
         flData: '',
-        release: ''
+        release: '',
+        market: '',
       }
     },
     components: {
@@ -149,20 +134,29 @@
             this.flData = res.data.fl_list
             // 发行专区列表
             this.release = res.data.release_list
+            // 交易市场
+            this.market = res.data.market_list
+            // this.$store.commit('detail', res.data.market_list)
           }
         }).catch(err => {
         })
       },
-      // 轮播图
-      token(){
+      more(){
         this.$router.push({
-          name:'Economy'
+          name:'Purchase',
+          // params:{code:}
         })
       },
-      life(){
+      // 轮播图
+      token() {
         this.$router.push({
-          name:'Life'
-        }) 
+          name: 'Economy'
+        })
+      },
+      life() {
+        this.$router.push({
+          name: 'Life'
+        })
       }
     }
   }
@@ -302,6 +296,7 @@
         height: 450px;
         background-color: #fff;
         border-radius: 10px;
+        margin-bottom: 10px;
 
         .home-market-transaction-con {
           margin: 0 30px 0 45px;

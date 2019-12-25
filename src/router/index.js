@@ -107,7 +107,7 @@ export default new Router({
     },
     // 转入分利宝
     {
-      path: '/transferflb',
+      path: '/transferflb/:id',
       name: 'Transferflb',
       component: () => import("@/pages/home/fenlibao/TransferIntoflb")
     },
@@ -197,7 +197,7 @@ export default new Router({
     },
     //  我的---资产/冻结详情
     {
-      path: '/freeze',
+      path: '/freeze/:code',
       name: 'FreezeDetail',
       component: () => import("@/pages/mine/assets/FreezeDetail")
     },

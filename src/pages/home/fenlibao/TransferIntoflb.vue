@@ -7,33 +7,34 @@
     </div>
     <!-- <router-link to="buy"> -->
     <div class="transfer-token">
-      <img src="../../../assets/images/ld.png" alt="" class="fl">
+      <img :src="flToken.icon" alt="" class="fl">
       <div class="transfer-token-text">
-        <span>{{this.$route.params.item.token.code}} ({{this.$route.params.item.token.nickname}})</span>
-        <p>{{this.$route.params.item.token.subject}}</p>
+        <span>{{flToken.code}} ({{flToken.nickname}})</span>
+        <p>{{flToken.subject}}</p>
       </div>
-      <img src="../../../assets/images/right.png" alt="" class="fr arrow">
+      <!-- <img src="../../../assets/images/right.png" alt="" class="fr arrow"> -->
     </div>
     <!-- </router-link> -->
     <div class="transfer-token-days">
       <div class="transfer-token-days-top">
         <div class="transfer-token-days-top-left fl">
-          <span class="fl"> {{this.$route.params.item.air}} <p>年化利率(%)</p></span><span
-            class="fr">{{this.$route.params.item.freeze_days}}<p>锁仓期限(天)</p></span>
+          <span class="fl"> {{flbData.air}} <p>年化利率(%)</p></span><span class="fr">{{flbData.freeze_days}}<p>锁仓期限(天)</p>
+          </span>
         </div>
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{this.$route.params.item.total_amount}} <p>万利总量(万)</p></span>
+          <span class="fr">{{flbData.total_amount}} <p>分利总量(万)</p></span>
         </div>
       </div>
       <div class="token-progress">
-        <mt-progress :value="this.$route.params.item.high_amount" :bar-height="7"></mt-progress>
+        <mt-progress :value="flbData.sold_amount/100" :bar-height="7"></mt-progress>
       </div>
-      <b>可转入数量{{this.$route.params.item.high_amount}}</b>
+      <b>可转入数量{{flbData.total_amount-flbData.sold_amount}}</b>
     </div>
     <!-- 转入数量 -->
     <div class="transfer-num">
       <p>转入数量</p>
       <div class="progress">
+        <!-- @blur.native.capture="maxnum" -->
         <van-stepper step="2" v-model="transferParams.amount" />
       </div>
       <!-- <div class="progress">
@@ -41,9 +42,10 @@
         <div slot="start" class="fl">0%</div>
         <div slot="end" class="fr">100%</div>
       </div> -->
+      <!-- .substr(0,11) -->
       <div class=" transfer-num-date">
-        <span>到期分利{{transferParams.amount*this.$route.params.item.air/365*this.$route.params.item.freeze_days}}</span>
-        <span>到期日期 {{this.$route.params.item.update_time}}</span>
+        <span>到期分利{{transferParams.amount*flbData.air/365*flbData.freeze_days}}</span>
+        <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span>
       </div>
     </div>
     <div class="release-button">
@@ -52,6 +54,7 @@
     <!-- 数字键盘 -->
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
+        <span class="paymentamount">{{transferParams.amount}}&nbsp;({{flToken.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -63,20 +66,25 @@
 <script>
   import api from "@/api/token/Token.js"
   import { toast } from '@/assets/js/pub.js'
+  import { Toast } from 'mint-ui'
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
         popupVisible: false,
         showKeyboard: false,
         value: '',
+        flbData: '',
+        flToken: '',
         transferParams: {
-          pk: this.$route.params.item.id,
+          pk: this.$route.params.id,
           amount: '',
           pay_pwd: ''
         }
       }
     },
     created() {
+      this.flbDetail()
     },
     methods: {
       onInput(key) {
@@ -86,8 +94,38 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       transfer() {
-        this.popupVisible = true
+        // this.popupVisible = true
+        if (this.transferParams.amount > this.flbData.high_amount ) {
+          Toast({
+            message: '最多只能购买' + this.flbData.high_amount ,
+            className: 'zZindex'
+          })
+        }else if(this.transferParams.amount < this.flbData.min_amount){
+          Toast({
+            message: '最少只能购买' + this.flbData.min_amount ,
+            className: 'zZindex'
+          })
+        }
+      },
+      flbDetail() {
+        api.flDetail({ id: this.$route.params.id }).then(res => {
+          if (res.code == 0) {
+            this.flbData = res.data
+            this.flToken = res.data.token
+          }
+        }).catch(err => {
+
+        })
       }
+      // 最多转入
+      // maxnum(){
+      //   if(this.transferParams.amount>flbData.max_purchase_number/flbData.step_number){
+      //   Toast({
+      //       message: '最多只能购买'+flbData.max_purchase_number/flbData.step_number+'份',
+      //       className: 'zZindex'
+      //     })
+      //  }
+      // }
     },
     watch: {
       value() {
@@ -98,6 +136,7 @@
               toast(res)
               this.$router.push({
                 name: 'OrderDetail',
+                params: { order_id: res.order_id }
               })
             }
           }).catch(err => {
@@ -109,6 +148,11 @@
           this.popupVisible = false
         }
       }
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>

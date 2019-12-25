@@ -1,6 +1,6 @@
 <template>
   <div class="transfer">
-    <div class="freeze-header">
+    <div class="freeze-header header">
       <mt-header fixed title="转让">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
@@ -150,10 +150,6 @@
   }
 
   .transfer {
-    .freeze-header {
-      margin-bottom: 20px;
-    }
-
     .transfer-prompt {
       background-color: #FFFBE6;
       width: 90%;

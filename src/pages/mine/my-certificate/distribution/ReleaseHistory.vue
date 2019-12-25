@@ -17,10 +17,11 @@
       <p>{{item.air|number}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
-          <span class="fl">{{item.status}}</span><span class="fr">{{item.freeze_days}}天</span>
+          <span class="fl"><img src="../../../../assets/images/geton.svg" alt="" class="img-status">{{item.status}}</span><span class="fr"><img src="../../../../assets/images/lock.svg" alt="">{{item.freeze_days}}天</span>
         </div>
         <div class="release-detail-text-right fr">
-          <span>{{item.create_time}}</span>
+            <!-- item.create_time.substr(0,11) -->
+          <span><img src="../../../../assets/images/clock.svg" alt="">{{(item.create_time).substr(0,11)}}</span>
         </div>
       </div>
       <div class="release-detail-num-progress progress ">
@@ -116,6 +117,15 @@
 
         .release-detail-text-left {
           width: 55%;
+        }
+        img{
+          height: 30px;
+          margin-right: 10px;
+        }
+        .img-status{
+          position: relative;
+          top:10px;
+          height: 40px;
         }
       }
 

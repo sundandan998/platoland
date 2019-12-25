@@ -35,7 +35,7 @@ const app = {
     },
     setLoading: ({ commit }, loading) => {
       commit('set_loading', loading)
-    }
+    },
   }
 }
 export default app

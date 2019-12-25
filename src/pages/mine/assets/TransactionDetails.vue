@@ -1,13 +1,11 @@
 <template>
 	<div class="transaction-details">
-		<div class="transaction-details-header">
-			<div class="assets-detailed-header">
+		<div class="transaction-details-header header">
 				<mt-header fixed title="明细详情">
 					<router-link to="/detailedlist" slot="left">
 						<mt-button icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 					</router-link>
 				</mt-header>
-			</div>
 		</div>
 		<div class="transaction-details-information">
 			<div class="transaction-details-balance">

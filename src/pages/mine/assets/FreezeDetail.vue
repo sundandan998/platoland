@@ -1,6 +1,6 @@
 <template>
   <div class="freeze">
-    <div class="freeze-header">
+    <div class="freeze-header header">
       <mt-header fixed title="冻结详情">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
