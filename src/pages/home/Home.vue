@@ -71,33 +71,41 @@
     </div>
     <!-- 市场交易 -->
     <div class="home-market-transaction">
-      <!-- <router-link :to="{name:'Purchase'}"> -->
-        <!-- <router-link to="/purchaserelease"> -->
-          <!-- <router-link :to="/Purchase/+item.token.code"> -->
-          <p class="home-pub-title">市场交易<span class="fr" @click="more">全部></span></p>
-        <!-- </router-link> -->
-        <div class="home-market-transaction-token" v-for="item in market">
-          <div class="home-pub-token">
-            <img :src="item.token.icon" alt="" class="fl icon">
-            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-          </div>
-          <!-- <div v-for="marketInfo in item.info"> -->
-          <div class="home-market-transaction-con">
+      <router-link :to="{name:'Deal'}">
+        <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
+      </router-link>
+      <div class="home-market-transaction-token" v-for="item in market">
+        <!-- <router-link :to="{name:'Deal',params:{code:item.token.code}}">
+              <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
+            </router-link> -->
+        <div class="home-pub-token">
+          <img :src="item.token.icon" alt="" class="fl icon">
+          <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+        </div>
+        <!-- v-for="marketInfo in item.info" -->
+        <div v-for="marketInfo in item.info">
+          <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-num">
-              <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt=""> 0.12</p></span>
-              <span class="fr">数量<p>{{}}</p></span>
+              <span class="fl">最高买价<p> <img :src="marketInfo.d_icon" alt="">{{marketInfo.high_number|number}} </p>
+                </span>
+              <span class="fr">数量<p>{{marketInfo.amount|number}}</p></span>
             </div>
-            <van-button class="fr" type="default">立 即 出 售</van-button>
+            <router-link :to="{name:'Sell',params:{id:marketInfo.id}}">
+              <van-button class="fr" type="default">立 即 出 售</van-button>
+            </router-link>
           </div>
-          <div class="home-market-transaction-bot">
+          <div class="home-market-transaction-bot" v-if="marketInfo.publish_type==0">
             <div class="fl home-market-transaction-bot-num">
-              <span class="fl">最高买价<p> <img src="../../assets/images/u318.png" alt="">0.12</p></span>
-              <span class="fr">数量<p> 0.12</p></span>
+              <span class="fl">最低卖价<p> <img :src="marketInfo.d_icon" alt="">{{marketInfo.low_number|number}}</p></span>
+              <span class="fr">数量<p>{{marketInfo.amount|number}} </p></span>
             </div>
-            <van-button class="fr" type="danger">立 即 购 买</van-button>
+            <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
+            <!-- <router-link :to="/purchase/+marketInfo.id"> -->
+              <van-button class="fr" type="danger">立 即 购 买</van-button>
+            </router-link>
           </div>
         </div>
-        <!-- </div> -->
+      </div>
     </div>
     <!-- Tabber部分 -->
     <app-tabber :message=selected></app-tabber>
@@ -139,12 +147,6 @@
             // this.$store.commit('detail', res.data.market_list)
           }
         }).catch(err => {
-        })
-      },
-      more(){
-        this.$router.push({
-          name:'Purchase',
-          // params:{code:}
         })
       },
       // 轮播图
@@ -244,7 +246,6 @@
 
         .home-latest-release-token-bot {
           margin: 0 45px;
-
           span {
             font-size: 28px;
             color: #1d92ec;
@@ -293,7 +294,6 @@
       margin: 0 24px 20px 24px;
 
       .home-market-transaction-token {
-        height: 450px;
         background-color: #fff;
         border-radius: 10px;
         margin-bottom: 10px;

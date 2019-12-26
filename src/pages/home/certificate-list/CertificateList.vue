@@ -7,19 +7,25 @@
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData">
       <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
-      <router-link :to="/detail/+item.code">
-        <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
-          <img class="assets-icon" slot="icon" :src="item.icon">
-          <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
+      <!-- <router-link :to="/detail/+item.code"> -->
+      <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
+        <img class="assets-icon" slot="icon" :src="item.icon">
+        <img src="../../../assets/images/r.png" alt="" v-if="refpath=='/'">
+        <!-- <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
             <div v-if="refpath=='/book'">
               <mt-switch class="asset-list-switch" :value="value"></mt-switch>
             </div>
-          </router-link>
-          <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
+          </router-link> -->
+        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
+          <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
+        </div>
+        <router-link :to="{name:'Deal',params:{code:item.code}}">
+          <div v-if="refpath=='/deal'">
             <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
           </div>
-        </mt-cell>
-      </router-link>
+        </router-link>
+      </mt-cell>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>
@@ -66,6 +72,15 @@
           console.log(err)
         })
       },
+      // 跳转到交易市场
+      // deal(){
+      //   this.$router.push({
+      //     name:'Deal',
+      //     params:{
+      //       code:''
+      //     }
+      //   })
+      // },
       // 添加/删除资产
       addAsset(code, is_collection, index) {
         if (is_collection == true) {

@@ -1,6 +1,6 @@
 <template>
 	<div class="purchase-pass">
-		<div class="Purchase-pass-header">
+		<div class="Purchase-pass-header header">
 			<mt-header fixed :title="$t('m.sell')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
@@ -152,7 +152,7 @@
 			},
 			// 交易详情
 			buyDetail() {
-				api.buyDetail(this.$route.params).then(res => {
+				api.buyDetail({id:this.$route.params.id}).then(res => {
 					this.buyData = res.data
 					this.buyDataToken = res.data.token
 				}).catch(err => {

@@ -353,7 +353,7 @@ export default new Router({
     },
     //首页/去交易
     {
-      path: '/deal/:code',
+      path: '/deal',
       name: 'Deal',
       component: () => import("@/pages/home/in-circulation/ToDeal")
     },

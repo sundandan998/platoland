@@ -488,10 +488,6 @@ table.el-table__body {
   border-radius: 45px;
 }
 
-.purchase-pass-header {
-  margin-bottom: 50px;
-}
-
 .to-details-header .release {
   margin-right: 10px;
 }
@@ -514,12 +510,6 @@ table.el-table__body {
 
 .purchase-pass-type-checkbox input {
   margin-left: 50px;
-}
-
-.purchase-pass-buy-assets {
-  height: 80px;
-  background-color: #fff;
-  margin-top: 10px;
 }
 
 .purchase-pass-buy-assets span:first-child {

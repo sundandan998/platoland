@@ -1,6 +1,6 @@
 <template>
 	<div class="release">
-		<div class="purchase-pass-header">
+		<div class="purchase-pass-header header">
 			<mt-header fixed :title="$t('m.release')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
@@ -8,18 +8,18 @@
 		<div class="purchase-pass-buy-assets">
 			<span>交易资产</span>
 			<div class="purchase-pass-buy-information fr">
-				<img :src="this.detail.icon" alt="" />
-				<span>{{this.detail.code}}({{this.detail.nickname}})</span>
-				<p>{{this.detail.subject.issuer}}</p>
+				<img :src="this.detail.token.icon" alt="" />
+				<span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
+				<p>{{this.detail.token.issuer}}</p>
 			</div>
 		</div>
-		<div class="purchase-pass-valuation-assets">
+		<!-- <div class="purchase-pass-valuation-assets">
 			<span>{{$t('m.valuationassets')}}</span>
 			<div class="purchase-pass-valuation-assets-img fr">
-				<img :src="this.detail.release.d_icon" alt="" />
-				<span>{{this.detail.release.denominated_assets}}</span>
+				<img :src="this.detail.info[0].d_icon" alt="" />
+				<span>{{this.detail.info[0].denominated_assets}}</span>
 			</div>
-		</div>
+		</div> -->
 		<div class="purchase-pass-input">
 			<van-tabs @click="index">
 				<van-tab title="购买">
@@ -27,7 +27,7 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.release.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.denominated_assets}}</p>
 				</van-tab>
 				<van-tab title="出售">
 					<span class="purchase-pass-input-title">数量</span>
@@ -54,10 +54,10 @@
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
 				<!-- 数字键盘表头 -->
 				<span v-if="payTitle"
-					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.detail.release.denominated_assets}})
+					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.detail.denominated_assets}})
 				</span>
 				<!-- 数字键盘表头 -->
-				<span v-else class="paymentamount">{{releaseData.amount}} &nbsp;({{this.detail.code}})</span>
+				<span v-else class="paymentamount">{{releaseData.amount}} &nbsp;({{this.detail.token.code}})</span>
 				<van-password-input :value="value" @focus="showKeyboard = true" />
 				<!-- 数字键盘 -->
 				<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -126,7 +126,8 @@
 					// 数字键盘表头
 					this.payTitle = true
 					// 当发布是购买的时候，可用部分是计价资产
-					this.balanceData.token_code = this.detail.release.denominated_assets
+					// this.balanceData.token_code = this.detail.release.denominated_assets
+					this.balanceData.token_code = this.detail.info.denominated_assets
 					this.balance()
 				} else {
 					if (index == 1) {
@@ -136,13 +137,14 @@
 						// 数字键盘表头
 						this.payTitle = false
 						// 当发布是出售的时候，可用部分是pld和ld
-						this.balanceData.token_code = this.detail.code
+						this.balanceData.token_code = this.detail.token.code
 						this.balance()
 					}
 				}
 			},
 			// 获取资产余额
 			balance() {
+				this.balanceData.token_code = this.detail.token.code
 				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
 				}).catch(err => {
@@ -160,7 +162,7 @@
 				let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
 				if (pay_pwd == 'true') {
 					// 发布接口
-					this.releaseData.token_code = this.detail.code
+					this.releaseData.token_code = this.detail.token.code
 					api.release(this.releaseData).then(res => {
 						// 清空密码输入框
 						this.value = ''
@@ -177,22 +179,21 @@
 					})
 				} else {
 					this.$messagebox({
-            title: '提示',
-            message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            showCancelButton: true
-          }).then(action => {
-            if (action == 'confirm') {
-              this.$router.push({
-                name: 'Safety'
-                // params: { id: 'reservation' }
-              })
-            }
-          })
+						title: '提示',
+						message: `请先设置支付密码再进行操作`,
+						cancelButtonText: '取消',
+						confirmButtonText: '确定',
+						showCancelButton: true
+					}).then(action => {
+						if (action == 'confirm') {
+							this.$router.push({
+								name: 'Safety'
+								// params: { id: 'reservation' }
+							})
+						}
+					})
 				}
 			},
-
 		},
 		watch: {
 			value() {
@@ -235,12 +236,26 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-/* 购买出售tab栏 */
-	.purchase-pass-input-title {
-		/* font-size: 0.78rem; */
-		margin-left: 25px;
-		color: #999;
-		margin-top: 20px;
-		display: block;
+
+	.release {
+
+		/* 购买出售tab栏 */
+		.purchase-pass-input-title {
+			/* font-size: 0.78rem; */
+			margin-left: 25px;
+			color: #999;
+			margin-top: 20px;
+			display: block;
+		}
+
+		.purchase-pass-valuation-assets {
+			height: 80px;
+		}
+
+		.purchase-pass-buy-assets {
+			height: 90px;
+			background-color: #fff;
+			margin-top: 10px;
+		}
 	}
 </style>

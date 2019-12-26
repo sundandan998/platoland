@@ -1,7 +1,7 @@
 <template>
   <div class="Purchase-pass">
-    <div class="Purchase-pass-header">
-      <mt-header fixed :title="$t('m.purchasepass')">
+    <div class="Purchase-pass-header header">
+      <mt-header fixed title="购买通证">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)"><span>{{$t('m.back')}}</span></mt-button>
       </mt-header>
     </div>
@@ -85,10 +85,10 @@
       }
     },
     created() {
-      this.balance()
       this.buyDetail()
+      this.balance()
       this.buyIndex(0, '111')
-      this.buyDetailCode = this.$route.params
+      // this.buyDetailCode = this.$route.params
     },
     methods: {
       onInput(key) {
@@ -150,16 +150,17 @@
       },
       // 交易详情
       buyDetail() {
-        api.buyDetail(this.$route.params).then(res => {
+        api.buyDetail({id:this.$route.params.id}).then(res => {
           this.buyData = res.data
           this.buyDataToken = res.data.token
+          console.log(this.buyData)
         }).catch(err => {
           console.log(err)
         })
       },
       // 获取资产余额
       balance() {
-        this.balanceData.token_code = this.detail.release.denominated_assets
+        this.balanceData.token_code = this.$route.params.code
         api.balance(this.balanceData).then(res => {
           this.balData = res.data
         }).catch(err => {
@@ -206,5 +207,10 @@
   }
 </script>
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .Purchase-pass{
+    .Purchase-pass-content{
+      background-color: #fff;
+    }
+  }
 </style>

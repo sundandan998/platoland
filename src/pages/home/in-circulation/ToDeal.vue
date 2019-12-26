@@ -13,6 +13,20 @@
         </mt-header>
       </div>
     </div>
+    <router-link to="/list">
+    <div class="to-deal-token">
+      <div class="to-deal-token-left fl">
+        <span><img :src="dealListToken.icon" alt="" class="fl"></span>
+        <span class="to-deal-token-text">
+          <span>{{dealListToken.code}}({{dealListToken.nickname}})</span>
+          <p>{{dealListToken.subject}} </p>
+        </span>
+      </div>
+      <div class="to-deal-token-right fr">
+        <img src="../../../assets/images/r.png" alt="" >
+      </div>
+    </div>
+  </router-link>
     <div>
       <van-tabs @click="index">
         <van-tab :title="$t('m.purchasebuy')">
@@ -56,15 +70,27 @@
     data() {
       return {
         dealListData: {},
+        dealListToken:{},
         // 市场列表参数
         dealData: {
           publish_type: 0,
-          code:'',
+          code: 'LIFE+',
         },
       }
     },
     created() {
-      this.dealList()
+      this.path()
+      // console.log()
+    },
+    computed: {
+      refpath() {
+        return window.sessionStorage.getItem('refpath')
+      }
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        window.sessionStorage.setItem('refpath', from.path)
+      })
     },
     methods: {
       //  tab栏展示
@@ -79,11 +105,21 @@
           }
         }
       },
+      path(){
+        if(this.refpath=='/deal'){
+          this.dealData.code = this.$route.params.code
+          this.dealList()
+        }else{
+          this.dealData.code = this.dealData.code
+          this.dealList()
+        }
+      },
       //市场列表
       dealList() {
-        this.dealData.code=this.$route.params.code
         api.dealList(this.dealData).then(res => {
-          this.dealListData = res.data
+          this.dealListData = res.data.info
+          this.dealListToken = res.data.token
+          this.$store.commit('detail', res.data)
         }).catch(err => {
           console.log(err)
         })
@@ -100,9 +136,30 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-  .to-deal{
-    .to-deal-header{
-      margin-bottom:90px;
+
+  .to-deal {
+    .to-deal-header {
+      margin-bottom: 90px;
+    }
+    .to-deal-token{
+      height: 120px;
+      background-color: #fff;
+      .to-deal-token-left{
+        width: 80%;
+        img{
+          margin: 20px;
+        }
+        .to-deal-token-text{
+          display: inline-block;
+          margin-top: 20px;
+        }
+      }
+      .to-deal-token-right{
+        img{
+          margin: 40px 20px 0 0 ;
+        }
+      }
+
     }
   }
 </style>
