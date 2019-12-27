@@ -30,12 +30,12 @@
       <mt-field placeholder="最多转入量" @blur.native.capture="limit" class="input-box" v-model="releaseParams.high_amount">
       </mt-field>
       <div class="release-interest">
-        <span>支付利息:{{releaseParams.total_amount*releaseParams.air*releaseParams.freeze_days*0.01}}</span>
+        <span>支出利息:{{releaseParams.total_amount*releaseParams.air*releaseParams.freeze_days*0.01}}{{balanceToken.code}}</span>
         <span>可用数量:{{this.balanceData.balance}}</span>
       </div>
     </div>
     <div class="release-button">
-      <van-button type="warning" size="large" @click.native="release" :disabled="disabled">确定发布</van-button>
+      <mt-button type="primary" size="large" @click.native="release" :disabled="disabled">确定发布</mt-button>
     </div>
     <!-- 数字键盘 -->
     <div>

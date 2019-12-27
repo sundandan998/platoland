@@ -7,7 +7,7 @@
     </div>
     <!-- <router-link to="/transferflb"> -->
     <div class="home-pub-token" v-for="item in listData">
-      <router-link :to="{name:'Transferflb',params:{item:item}}">
+      <router-link :to="{name:'Transferflb',params:{item:item,id:item.id}}">
         <img :src="item.token.icon" alt="" class="fl icon">
         <span><b>{{item.token.code}}</b>{{item.token.nickname}} <p>{{item.token.subject}}</p></span>
         <div class="home-pub-token-days">

@@ -27,7 +27,15 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.detail.denominated_assets}}</p>
+					<div class="purchase-pass-quota">
+						<p>{{$t('m.quota')}}</p> 
+						<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number"
+							class="purchase-pass-quota-input">
+						</mt-field>
+						<mt-field placeholder="卖方最高出售数量" v-model="releaseData.high_number" type="number"
+							class="purchase-pass-quota-input"></mt-field>
+					</div>
 				</van-tab>
 				<van-tab title="出售">
 					<span class="purchase-pass-input-title">数量</span>
@@ -35,17 +43,24 @@
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</p>
-					<p>手续费 : {{releaseData.price*0.002}} PLD</p>
+					<p>手续费 : {{releaseData.amount*0.002}} PLD</p>
+					<div class="purchase-pass-quota">
+						<p>{{$t('m.quota')}}</p>
+						<mt-field placeholder="买方最低购买数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input">
+						</mt-field>
+						<mt-field placeholder="买方最高购买数量" v-model="releaseData.high_number" type="number"
+							class="purchase-pass-quota-input"></mt-field>
+					</div>
 				</van-tab>
 			</van-tabs>
 		</div>
-		<div class="purchase-pass-quota">
+		<!-- <div class="purchase-pass-quota">
 			<p>{{$t('m.quota')}}</p>
 			<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input">
 			</mt-field>
-			<mt-field placeholder="卖方最高出售数量" v-model="releaseData.high_number" type="number"
+			<mt-field placeholder="卖方转入出售数量" v-model="releaseData.high_number" type="number"
 				class="purchase-pass-quota-input"></mt-field>
-		</div>
+		</div> -->
 		<div class="purchase-pass-btn">
 			<mt-button size="large" :disabled="disabled" type="primary" @click="release">{{$t('m.release')}}</mt-button>
 		</div>
@@ -54,7 +69,7 @@
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
 				<!-- 数字键盘表头 -->
 				<span v-if="payTitle"
-					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.detail.denominated_assets}})
+					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.$route.params.code}})
 				</span>
 				<!-- 数字键盘表头 -->
 				<span v-else class="paymentamount">{{releaseData.amount}} &nbsp;({{this.detail.token.code}})</span>
@@ -109,6 +124,7 @@
 		},
 		created() {
 			this.index(0, '111')
+			// console.log()
 		},
 		methods: {
 			onInput(key) {
@@ -144,7 +160,8 @@
 			},
 			// 获取资产余额
 			balance() {
-				this.balanceData.token_code = this.detail.token.code
+				// this.balanceData.token_code = this.detail.token.code
+				this.balanceData.token_code = this.$route.params.code||this.detail.token.code
 				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
 				}).catch(err => {

@@ -36,7 +36,7 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
+        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount*buyData.price}}&nbsp;({{buyData.denominated_assets}})</span>
         <span v-else class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
@@ -88,7 +88,6 @@
       this.buyDetail()
       this.balance()
       this.buyIndex(0, '111')
-      // this.buyDetailCode = this.$route.params
     },
     methods: {
       onInput(key) {
@@ -153,7 +152,6 @@
         api.buyDetail({id:this.$route.params.id}).then(res => {
           this.buyData = res.data
           this.buyDataToken = res.data.token
-          console.log(this.buyData)
         }).catch(err => {
           console.log(err)
         })

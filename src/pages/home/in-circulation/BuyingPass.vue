@@ -30,21 +30,25 @@
         <span class="fr">期限(天)</span>
       </div>
       <div class="buy-pass-progress progress">
-        <mt-progress :value="detail.first_number/(detail.first_number-detail.sold_number)" :bar-height="7"></mt-progress>
+        <mt-progress :value="detail.first_number/(detail.first_number-detail.sold_number)" :bar-height="7">
+        </mt-progress>
         <div slot="start" class="fl">已售 {{this.detail.sold_number|number}} 份</div>
         <div slot="end" class="fr">总量 {{this.detail.first_number|number}} 份</div>
       </div>
     </div>
     <!-- tab切换 -->
     <div class="buy-pass-tab">
-      <van-tabs  @click="getActionType">
+      <van-tabs @click="getActionType">
         <van-tab title="按份数买入">
-            <!-- @blur.native.capture="maxnum" -->
-          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'" v-model="requsetPay.amount" ></mt-field>
+          <!-- @blur.native.capture="maxnum" -->
+          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'"
+            v-model="requsetPay.amount"></mt-field>
           <span>交易额：{{requsetPay.amount*detail.issue_price*detail.step_number}} {{detail.denominated_assets}}</span>
         </van-tab>
         <van-tab title="按金额买入">
-          <mt-field :placeholder="'最少'+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price" type="number" v-model="requsetPay.amount"> <b>{{detail.denominated_assets}}</b></mt-field>
+          <mt-field
+            :placeholder="'最少'+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price"
+            type="number" v-model="requsetPay.amount"> <b>{{detail.denominated_assets}}</b></mt-field>
           <span>可买入份数：{{requsetPay.amount/detail.step_number/detail.issue_price }} 份</span>
         </van-tab>
         <div class="fr day">
@@ -59,8 +63,7 @@
         <!-- 展示键盘弹起的title -->
         <span class="paymentamount"
           v-if="numTitle">{{this.detail.issue_price*requsetPay.amount*detail.step_number}}&nbsp;({{this.detail.denominated_assets}})</span>
-        <span class="paymentamount"
-          v-else>{{requsetPay.amount}}&nbsp;({{this.detail.denominated_assets}})</span>
+        <span class="paymentamount" v-else>{{requsetPay.amount}}&nbsp;({{this.detail.denominated_assets}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -76,31 +79,31 @@
   import { mapGetters } from 'vuex'
   import api from "@/api/market/Market.js"
   import { Toast } from 'mint-ui'
-	import { toast } from '@/assets/js/pub.js'
-	import { MessageBox } from 'mint-ui'
+  import { toast } from '@/assets/js/pub.js'
+  import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
         value: '',
-				// 键盘上标题显隐
-				numTitle: true,
-				disabled: true,
-				showKeyboard: false,
-				popupVisible: false,
-        balanceData:'',
-				// 请求参数
-				requsetPay: {
-					order_type: 0,
-					transaction_id: '',
-					amount: '',
-					action_type: 0
-				},
-				// 确认支付参数
-				confirm: {
-					order_type: 0,
-					payment_id: '',
-					pay_pwd: ''
-				},
+        // 键盘上标题显隐
+        numTitle: true,
+        disabled: true,
+        showKeyboard: false,
+        popupVisible: false,
+        balanceData: '',
+        // 请求参数
+        requsetPay: {
+          order_type: 0,
+          transaction_id: '',
+          amount: '',
+          action_type: 0
+        },
+        // 确认支付参数
+        confirm: {
+          order_type: 0,
+          payment_id: '',
+          pay_pwd: ''
+        },
       }
     },
     created() {
@@ -108,10 +111,10 @@
     },
     methods: {
       onInput(key) {
-				this.value = (this.value + key).slice(0, 6)
-			},
-			onDelete() {
-				this.value = this.value.slice(0, this.value.length - 1)
+        this.value = (this.value + key).slice(0, 6)
+      },
+      onDelete() {
+        this.value = this.value.slice(0, this.value.length - 1)
       },
       // 展示可用余额
       balance() {
@@ -122,30 +125,22 @@
         }).catch(err => {
         })
       },
-      // maxnum(){
-      //  if(this.requsetPay.amount>this.detail.max_purchase_number/this.detail.step_number){
-      //   Toast({
-      //       message: '最多只能购买'+this.detail.max_purchase_number/this.detail.step_number+'份',
-      //       className: 'zZindex'
-      //     })
-      //  }
-      // },
-      	// tab栏展示
-			getActionType(index, title) {
-				if (index == 0) {
-					this.requsetPay.action_type = 0
-					// 键盘上标题显隐
-					this.numTitle = true
-					// this.balance()
-				} else {
-					if (index == 1) {
-						this.requsetPay.action_type = 1
-						// 键盘上标题显隐
-						this.numTitle = false
-						// this.balance()
-					}
-				}
-			},
+      // tab栏展示
+      getActionType(index, title) {
+        if (index == 0) {
+          this.requsetPay.action_type = 0
+          // 键盘上标题显隐
+          this.numTitle = true
+          // this.balance()
+        } else {
+          if (index == 1) {
+            this.requsetPay.action_type = 1
+            // 键盘上标题显隐
+            this.numTitle = false
+            // this.balance()
+          }
+        }
+      },
       // 点击确定按钮
       passwordShow() {
         // 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码
@@ -153,6 +148,17 @@
         // 点击确定按钮发请求
         let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
         if (pay_pwd == 'true') {
+          // if (this.requsetPay.amount > this.detail.max_purchase_number / this.detail.step_number) {
+          //   Toast({
+          //     message: '最多购买' + this.detail.max_purchase_number / this.detail.step_number + '份',
+          //     className: 'zZindex'
+          //   })
+          // }else{
+          //   Toast({
+          //     message: '最少购买' + this.detail.min_purchase_number / this.detail.step_number + '份',
+          //     className: 'zZindex'
+          //   })
+          // }
           this.requsetPay.transaction_id = this.detail.token.id
           api.reqPay(this.requsetPay).then(res => {
             this.value = ''
@@ -186,43 +192,43 @@
       },
     },
     watch: {
-			value() {
-				if (this.value.length == 6) {
-					// debugger
-					this.popupVisible = false
-					this.confirm.pay_pwd = this.value
-					// 清空密码输入框
-					this.value = ''
-					// 确认支付接口
-					api.confirmPay(this.confirm).then(res => {
-						if (res.code == 0) {
-							toast(res)
-							this.$router.push({
-								name: 'OrderDetail',
-								params: {
-									order_id: res.order_id
-								}
-							})
-						}
-					}).catch(err => {
-						if (err.code != 0) {
-							toast(err)
-						}
-					})
-				}
-			},
-			requsetPay: {
-				immediate: true,
-				deep: true,
-				handler(val) {
-					if (val.amount != '' && val.amount != 0) {
-						this.disabled = false
-					} else {
-						this.disabled = true
-					}
-				}
-			}
-		},
+      value() {
+        if (this.value.length == 6) {
+          // debugger
+          this.popupVisible = false
+          this.confirm.pay_pwd = this.value
+          // 清空密码输入框
+          this.value = ''
+          // 确认支付接口
+          api.confirmPay(this.confirm).then(res => {
+            if (res.code == 0) {
+              toast(res)
+              this.$router.push({
+                name: 'OrderDetail',
+                params: {
+                  order_id: res.order_id
+                }
+              })
+            }
+          }).catch(err => {
+            if (err.code != 0) {
+              toast(err)
+            }
+          })
+        }
+      },
+      requsetPay: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          if (val.amount != '' && val.amount != 0) {
+            this.disabled = false
+          } else {
+            this.disabled = true
+          }
+        }
+      }
+    },
     computed: {
       ...mapGetters([
         'detail'
@@ -293,6 +299,7 @@
         font-size: 26px;
         color: #036EB8;
       }
+
       .mint-field-core {
         font-size: 14px;
       }

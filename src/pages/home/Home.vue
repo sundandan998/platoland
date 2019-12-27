@@ -21,11 +21,11 @@
       <router-link to="bao">
         <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
       </router-link>
-      <router-link to="deal/LIFE+">
+      <router-link to="/deal">
         <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
       </router-link>
       <router-link to="list">
-        <span><img src="../../assets/images/pass.svg" alt="">通证大全</span>
+        <span class="token"><img src="../../assets/images/pass.svg" alt="">通证大全</span>
       </router-link>
     </div>
     <!-- 最新发行 -->
@@ -52,7 +52,8 @@
       </div>
     </div>
     <!-- 分利宝 -->
-    <div class="home-divided-treasure">
+    <!-- v-if="this.flData==[]"  -->
+    <div class="home-divided-treasure" v-if="this.flData.length>0">
       <router-link :to="{name:'Bao'}">
         <p class="home-pub-title ">分利宝<span class="fr">全部></span></p>
       </router-link>
@@ -72,25 +73,21 @@
     <!-- 市场交易 -->
     <div class="home-market-transaction">
       <router-link :to="{name:'Deal'}">
-        <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
+        <p class="home-pub-title">交易市场<span class="fr">全部></span></p>
       </router-link>
       <div class="home-market-transaction-token" v-for="item in market">
-        <!-- <router-link :to="{name:'Deal',params:{code:item.token.code}}">
-              <p class="home-pub-title">市场交易<span class="fr">全部></span></p>
-            </router-link> -->
         <div class="home-pub-token">
           <img :src="item.token.icon" alt="" class="fl icon">
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
-        <!-- v-for="marketInfo in item.info" -->
         <div v-for="marketInfo in item.info">
           <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-num">
               <span class="fl">最高买价<p> <img :src="marketInfo.d_icon" alt="">{{marketInfo.high_number|number}} </p>
-                </span>
+              </span>
               <span class="fr">数量<p>{{marketInfo.amount|number}}</p></span>
             </div>
-            <router-link :to="{name:'Sell',params:{id:marketInfo.id}}">
+            <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
               <van-button class="fr" type="default">立 即 出 售</van-button>
             </router-link>
           </div>
@@ -100,7 +97,7 @@
               <span class="fr">数量<p>{{marketInfo.amount|number}} </p></span>
             </div>
             <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
-            <!-- <router-link :to="/purchase/+marketInfo.id"> -->
+              <!-- <router-link :to="/purchase/+marketInfo.id"> -->
               <van-button class="fr" type="danger">立 即 购 买</van-button>
             </router-link>
           </div>
@@ -133,6 +130,7 @@
     },
     created() {
       this.home()
+      this.info()
     },
     methods: {
       home() {
@@ -147,6 +145,15 @@
             // this.$store.commit('detail', res.data.market_list)
           }
         }).catch(err => {
+        })
+      },
+      // 用户信息
+      info() {
+        api.getUserInfo().then(res => {
+          this.infoData = res.data
+          window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+        }).catch(err => {
+          // console.log(err)
         })
       },
       // 轮播图
@@ -215,16 +222,17 @@
       background-color: #fff;
       margin: 0px 24px;
       border-radius: 10px;
-
+      .token{
+        border-right:none;
+      }
       span {
-        width: 24.15%;
+        width: 24%;
         display: inline-block;
         border-right: 1px solid #f2f2f2;
         height: 100%;
         text-align: center;
         font-size: 24px;
         color: #959595;
-
         img {
           height: 80px;
           margin: 30px auto 15px auto;
@@ -246,6 +254,7 @@
 
         .home-latest-release-token-bot {
           margin: 0 45px;
+
           span {
             font-size: 28px;
             color: #1d92ec;

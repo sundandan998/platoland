@@ -45,7 +45,7 @@
       <!-- .substr(0,11) -->
       <div class=" transfer-num-date">
         <span>到期分利{{transferParams.amount*flbData.air/365*flbData.freeze_days}}</span>
-        <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span>
+        <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
     </div>
     <div class="release-button">
@@ -94,17 +94,18 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       transfer() {
-        // this.popupVisible = true
         if (this.transferParams.amount > this.flbData.high_amount ) {
           Toast({
-            message: '最多只能购买' + this.flbData.high_amount ,
+            message: '最多转入' + this.flbData.high_amount+'份' ,
             className: 'zZindex'
           })
         }else if(this.transferParams.amount < this.flbData.min_amount){
           Toast({
-            message: '最少只能购买' + this.flbData.min_amount ,
+            message: '最少转入' + this.flbData.min_amount+'份' ,
             className: 'zZindex'
           })
+        }else{
+          this.popupVisible = true
         }
       },
       flbDetail() {

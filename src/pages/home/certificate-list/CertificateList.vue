@@ -2,30 +2,35 @@
   <div class="certificate-list">
     <div class="certificate-list-header">
       <mt-header fixed title="通证大全">
-        <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- v-on:click="$router.go(-1) -->
+        <!-- @click="back" -->
+        <mt-button slot="left" icon="back"@click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData">
       <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
-      <!-- <router-link :to="/detail/+item.code"> -->
-      <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
-        <img class="assets-icon" slot="icon" :src="item.icon">
-        <img src="../../../assets/images/r.png" alt="" v-if="refpath=='/'">
-        <!-- <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
+      <router-link :to="/detail/+item.code">
+        <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
+          <img class="assets-icon" slot="icon" :src="item.icon">
+          <img src="../../../assets/images/r.png" alt="" v-if="refpath=='/'">
+          <!-- <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
             <div v-if="refpath=='/book'">
               <mt-switch class="asset-list-switch" :value="value"></mt-switch>
             </div>
           </router-link> -->
-        <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
-          <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
-        </div>
-        <router-link :to="{name:'Deal',params:{code:item.code}}">
-          <div v-if="refpath=='/deal'">
+          <div v-if="refpath=='/assets'" @click.prevent="addAsset(item.code,item.is_collection,index)">
             <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
           </div>
-        </router-link>
-      </mt-cell>
-      <!-- </router-link> -->
+          <router-link :to="{name:'Deal',params:{code:item.code}}">
+            <div v-if="refpath=='/deal'">
+              <mt-switch class="asset-list-switch" v-model="item.is_collection"></mt-switch>
+            </div>
+            <!-- <van-radio-group v-model="radio">
+                <van-radio :name="this.selectRadio"></van-radio>
+              </van-radio-group> -->
+          </router-link>
+        </mt-cell>
+      </router-link>
     </div>
   </div>
 </template>
@@ -40,6 +45,8 @@
         popupVisible: true,
         data: [],
         value: false,
+        radio: '',
+        selectRadio:'',
         assetsData: [],
         // 添加资产参数
         addCode: {
@@ -49,6 +56,7 @@
     },
     created() {
       this.list()
+      console.log(this.$route.params.code)
     },
     computed: {
       refpath() {
@@ -66,21 +74,19 @@
         // this.$route.params
         api.tokenList({ category: 'all' }).then(res => {
           this.assetsData = res.data
-          // this.$store.commit('detail', res.data.is_collection)
-          // this.$store.commit('detail', res.data)
+          // for(let i=0;i<this.assetsData.length;i++){
+          //   this.selectRadio=this.assetsData[i].code
+          //   console.log(this.selectRadio)
+          // }
         }).catch(err => {
           console.log(err)
         })
       },
-      // 跳转到交易市场
-      // deal(){
-      //   this.$router.push({
-      //     name:'Deal',
-      //     params:{
-      //       code:''
-      //     }
-      //   })
-      // },
+      back() {
+        this.$router.push({
+          name: 'Home',
+        })
+      },
       // 添加/删除资产
       addAsset(code, is_collection, index) {
         if (is_collection == true) {

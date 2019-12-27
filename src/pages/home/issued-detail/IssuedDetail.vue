@@ -29,43 +29,53 @@
         <span class="fr issued-period">冻结时长(天)</span>
       </div>
       <div class="issued-progress progress">
-        <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)" :bar-height="7"></mt-progress>
+        <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)"
+          :bar-height="7"></mt-progress>
         <div slot="start" class="fl">已售 {{issuedDetail.sold_number|number}} 份</div>
         <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
       </div>
       <mt-cell title="每份数量">{{issuedDetail.step_number|number}}{{detailToken.code}}/份</mt-cell>
-      <mt-cell title="每份总价">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/份</mt-cell>
+      <mt-cell title="每份总价">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/份
+      </mt-cell>
     </div>
     <div class="issued-servings">
       <mt-cell title="起购份数" class="radius-top">{{issuedDetail.purchase_number/issuedDetail.step_number}}份</mt-cell>
-      <mt-cell title="最高可购份数" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}份</mt-cell>
+      <mt-cell title="最高可购份数" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}份
+      </mt-cell>
     </div>
     <div class="issued-servings">
       <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
       <mt-cell title="开始时间" :value="issuedDetail.publish_time"></mt-cell>
       <router-link :to="{name:'Issuance'}">
-        <mt-cell  title="发行情况" value="查看" is-link class="issued-view radius-bottom "></mt-cell>
+        <mt-cell title="发行情况" value="查看" is-link class="issued-view radius-bottom "></mt-cell>
       </router-link>
     </div>
-    <div class="transfer-button">
-      <router-link to="/buy">
-        <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
-        <mt-button size="large" type="primary">立即买入</mt-button>
-      </router-link>
+    <div class="transfer-button" @click="buy">
+      <!-- <router-link to="/buy"> -->
+      <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
+
+      <!-- <mt-button size="large" type="primary">立即买入</mt-button> -->
+      <mt-button size="large" type="primary" v-if="this.issuedDetail.status==1">立即买入</mt-button>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  // 接口
+  import info from "@/api/system/System.js"
+	import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
         issuedDetail: '',
         detailToken: '',
+        infoData: ''
       }
     },
     created() {
       this.issued()
+      this.info()
     },
     methods: {
       // 详情接口
@@ -77,7 +87,27 @@
             this.$store.commit('detail', res.data)
           }
         }).catch()
-      }
+      },
+      buy() {
+        if (this.infoData.token_code == this.detailToken.code) {
+          this.$toast({
+            message: '不能购买自己发行的通证',
+          })
+        } else {
+          this.$router.push({
+            name: 'Buy'
+          })
+        }
+      },
+      // 用户信息
+      info() {
+        info.getUserInfo().then(res => {
+          this.infoData = res.data
+          window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+        }).catch(err => {
+          // console.log(err)
+        })
+      },
     }
   }
 </script>
@@ -85,7 +115,7 @@
   @import '../../../assets/scss/global';
 
   .issued-detail {
-  
+
     .mint-cell-text {
       margin-left: -13px;
     }

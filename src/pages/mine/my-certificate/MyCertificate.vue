@@ -13,7 +13,7 @@
       <!-- availabletransfer -->
       <!-- <router-link to="/availabletransfer/this.balancetoken.icon"> -->
       <router-link :to="{name:'AvailableTransfer',params:{code:this.balancetoken.code}}">
-        <mt-cell title="可用量" :value="this.balanceData.balance" is-link>
+        <mt-cell title="可用量" :value="this.balanceData.available_amount" is-link>
           <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
         </mt-cell>
       </router-link>
@@ -245,6 +245,6 @@
   }
 
   .token-recently-released.plan {
-    height: auto;
+    height: 240px;
   }
 </style>

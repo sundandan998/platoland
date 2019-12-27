@@ -3,9 +3,11 @@
     <div class="to-deal-header">
       <div class="to-details-header">
         <mt-header fixed :title="$t('m.market')">
+          <!--  v-on:click="$router.go(-1)" -->
           <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
           <mt-button icon="" slot="right">
-            <router-link to="/purchaserelease">
+            <!-- <router-link to="/purchaserelease"> -->
+              <router-link :to="{name:'Purchase',params:{code:this.dealListToken.code}}">
               <img src="../../../assets/images/fb.png" alt="" />
               <span class="release">{{$t('m.release')}}</span>
             </router-link>
@@ -13,25 +15,28 @@
         </mt-header>
       </div>
     </div>
-    <router-link to="/list">
-    <div class="to-deal-token">
-      <div class="to-deal-token-left fl">
-        <span><img :src="dealListToken.icon" alt="" class="fl"></span>
-        <span class="to-deal-token-text">
-          <span>{{dealListToken.code}}({{dealListToken.nickname}})</span>
-          <p>{{dealListToken.subject}} </p>
-        </span>
+    <!-- <router-link to="/list"> -->
+    <router-link :to="{name:'List',params:{code:dealListToken.code}}">
+      <div class="to-deal-token">
+        <div class="to-deal-token-left fl">
+          <span><img :src="dealListToken.icon" alt="" class="fl"></span>
+          <span class="to-deal-token-text">
+            <span>{{dealListToken.code}}({{dealListToken.nickname}})</span>
+            <p>{{dealListToken.subject}} </p>
+          </span>
+        </div>
+        <div class="to-deal-token-right fr">
+          <img src="../../../assets/images/r.png" alt="">
+        </div>
       </div>
-      <div class="to-deal-token-right fr">
-        <img src="../../../assets/images/r.png" alt="" >
-      </div>
-    </div>
-  </router-link>
+    </router-link>
     <div>
       <van-tabs @click="index">
         <van-tab :title="$t('m.purchasebuy')">
+          <p class="no-data" v-if="this.dealListData.length==0">暂无数据</p>
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
-            <router-link :to="/purchase/+item.id">
+            <!-- <router-link :to="/purchase/+item.id"> -->
+            <router-link :to="{name:'PurchasePass',params:{id:item.id,code:dealListToken.code}}">
               <div class="to-deal-purchase-top">
                 <span>{{item.publish_name}}</span>
               </div>
@@ -45,8 +50,10 @@
           </div>
         </van-tab>
         <van-tab :title="$t('m.sell')">
+          <p class="no-data" v-if="this.dealListData.length==0">暂无数据</p>
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
-            <router-link :to="/sell/+item.id">
+            <!-- <router-link :to="/sell/+item.id"> -->
+            <router-link :to="{name:'Sell',params:{id:item.id,code:dealListToken.code}}">
               <div class="to-deal-purchase-top">
                 <span>{{item.publish_name}}</span>
               </div>
@@ -69,18 +76,18 @@
   export default {
     data() {
       return {
-        dealListData: {},
-        dealListToken:{},
+        dealListData: '',
+        dealListToken: {},
+        denominated_assets:'',
         // 市场列表参数
         dealData: {
           publish_type: 0,
-          code: 'LIFE+',
+          code: '',
         },
       }
     },
     created() {
       this.path()
-      // console.log()
     },
     computed: {
       refpath() {
@@ -105,19 +112,26 @@
           }
         }
       },
-      path(){
-        if(this.refpath=='/deal'){
-          this.dealData.code = this.$route.params.code
+      path() {
+        if (this.refpath == '/deal') {
+          this.dealData.code = this.$route.params.code||"LIFE+"
           this.dealList()
-        }else{
-          this.dealData.code = this.dealData.code
+        } else {
+          this.dealData.code = "LIFE+"
           this.dealList()
         }
+        // if(this.$route.params.code == undefined){
+        //   console.log('45')
+        // }
       },
-      //市场列表
+      // //市场列表
       dealList() {
+        this.dealData.code = this.dealData.code
         api.dealList(this.dealData).then(res => {
           this.dealListData = res.data.info
+          for(let i=0;i<this.dealListData.length;i++){
+            this.denominated_assets=this.dealListData[i].denominated_assets
+          }
           this.dealListToken = res.data.token
           this.$store.commit('detail', res.data)
         }).catch(err => {
@@ -141,22 +155,32 @@
     .to-deal-header {
       margin-bottom: 90px;
     }
-    .to-deal-token{
+
+    .no-data {
+      text-align: center;
+      margin: 50px auto;
+    }
+
+    .to-deal-token {
       height: 120px;
       background-color: #fff;
-      .to-deal-token-left{
+
+      .to-deal-token-left {
         width: 80%;
-        img{
+
+        img {
           margin: 20px;
         }
-        .to-deal-token-text{
+
+        .to-deal-token-text {
           display: inline-block;
           margin-top: 20px;
         }
       }
-      .to-deal-token-right{
-        img{
-          margin: 40px 20px 0 0 ;
+
+      .to-deal-token-right {
+        img {
+          margin: 40px 20px 0 0;
         }
       }
 

@@ -3,8 +3,8 @@
     <div class="release-header header">
       <mt-header fixed title="发行情况">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button slot="right" @click.native="token"> <img src="../../../assets/images/release.svg" alt=""> 发布
-        </mt-button>
+        <!-- <mt-button slot="right" @click.native="token"> <img src="../../../assets/images/release.svg" alt=""> 发布
+        </mt-button> -->
       </mt-header>
     </div>
     <div class="issuance-token">
@@ -20,12 +20,13 @@
     <!-- 当前发行 -->
     <div class="current-release">
       <p class="current-release-title">当前发行</p>
-      <div class="current-release-token" v-for="item in happeDetail">
+      <div class="current-release-token" v-for="item in happeDetail" v-if="item.status!==2">
         <router-link :to="{name:'Issued',params:{id:item.id}}">
           <div class="current-release-token-top">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
             <img src="../../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
+            <img src="../../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
           </div>
           <div class="current-release-token-bot">
             <div class="current-release-token-bot-text fl">
@@ -52,6 +53,7 @@
         <span>{{item.issue_price|number}} {{item.denominated_assets}} </span>
         <span>{{item.purchase_number|number}}</span>
       </div>
+      <p class="no-deta">暂无数据</p>
     </div>
   </div>
 </template>
