@@ -4,7 +4,7 @@
       <div class="to-details-header">
         <mt-header fixed :title="$t('m.market')">
           <!--  v-on:click="$router.go(-1)" -->
-          <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <mt-button slot="left" icon="back"  @click="back">{{$t('m.back')}}</mt-button>
           <mt-button icon="" slot="right">
             <!-- <router-link to="/purchaserelease"> -->
               <router-link :to="{name:'Purchase',params:{code:this.dealListToken.code}}">
@@ -100,6 +100,11 @@
       })
     },
     methods: {
+      back(){
+        this.$router.push({
+          name:'Home'
+        })
+      },
       //  tab栏展示
       index(index, title) {
         if (index == 0) {

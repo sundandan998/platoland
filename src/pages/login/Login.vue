@@ -215,7 +215,6 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
-
   .login {
     .logo {
       .mint-cell-wrapper {
@@ -223,7 +222,7 @@
       }
       img {
         width: 60%;
-        margin: 10px auto 100px auto;
+        margin: 100px auto 100px auto;
         display: block;
       }
     }
@@ -253,7 +252,7 @@
       }
 
       .login-icon {
-        top: -50px;
+        top: -70px;
         position: relative;
       }
 
