@@ -53,7 +53,8 @@
         </van-tab>
         <div class="fr day">
           <p>可用额{{this.balanceData.available_amount|number}} {{detail.denominated_assets}}</p>
-          <p>解锁日:{{detail.end_time}}</p>
+          <p>解锁日:{{this.timeDate}}</p>
+          <!-- <p>解锁日:{{this.date.time}}</p> -->
         </div>
       </van-tabs>
     </div>
@@ -91,6 +92,7 @@
         showKeyboard: false,
         popupVisible: false,
         balanceData: '',
+        timeDate: '',
         // 请求参数
         requsetPay: {
           order_type: 0,
@@ -108,7 +110,9 @@
     },
     created() {
       this.balance()
+      this.date()
     },
+
     methods: {
       onInput(key) {
         this.value = (this.value + key).slice(0, 6)
@@ -124,6 +128,17 @@
           }
         }).catch(err => {
         })
+      },
+      // 获取当前日期
+      date() {
+        var date1 = new Date()
+        var date2 = new Date(date1)
+        date2.setDate(date1.getDate() +this.detail.freeze_days);
+        const resDate = date2.getFullYear() + '-' + this.p((date2.getMonth() + 1)) + '-' + this.p(date2.getDate())
+        this.timeDate = resDate
+      },
+      p(s) {
+        return s < 10 ? '0' + s : s
       },
       // tab栏展示
       getActionType(index, title) {
