@@ -14,7 +14,7 @@
       </van-swipe>
     </div>
     <!-- 交易部分 -->
-    <div class="home-transaction">
+    <!-- <div class="home-transaction">
       <router-link to="zone">
         <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
       </router-link>
@@ -27,7 +27,7 @@
       <router-link to="list">
         <span class="token"><img src="../../assets/images/pass.svg" alt="">通证大全</span>
       </router-link>
-    </div>
+    </div> -->
     <!-- 最新发行 -->
     <div class="home-latest-release">
       <router-link to="zone">
@@ -131,6 +131,7 @@
     created() {
       this.home()
       this.info()
+      this.version()
     },
     methods: {
       home() {
@@ -165,6 +166,52 @@
       life() {
         this.$router.push({
           name: 'Life'
+        })
+      },
+           //版本升级
+           version() {
+        let vcode = this.$version()
+        api.version({ 'version_code': vcode }).then(res => {
+          if (res.code == 0) {
+            this.versionData = res
+            if(this.versionData.is_update == false) return
+            if (this.versionData.is_force_update == true) {
+              this.$messagebox({
+                title: '版本升级',
+                message: this.versionData.version_info,
+                closeOnClickModal: false,
+                // cancelButtonText: '否',
+                confirmButtonText: '去更新',
+                // showCancelButton: true
+              }).then(action => {
+                // console.log(this.versionData.update_url)
+                if (window.plus) {
+                  plus.runtime.openURL(this.versionData.update_url)
+                  plus.runtime.quit()
+                  // console.log(this.versionData.update_url)
+                }
+              })
+            } else {
+              
+                // isForce = true
+                // this.versionData = res
+                this.$messagebox({
+                  title: '版本升级',
+                  message: this.versionData.version_info,
+                  cancelButtonText: '否',
+                  confirmButtonText: '是',
+                  showCancelButton: true
+                }).then(action => {
+                  if (action === 'confirm') {
+                    if (window.plus) {
+                      // console.log(this.versionData.update_url)
+                      plus.runtime.openURL(this.versionData.update_url)
+                      plus.runtime.quit()
+                    }
+                  }
+                })
+            }
+          }
         })
       }
     }
@@ -206,7 +253,7 @@
     }
 
     .home-banner {
-      margin: 20px 24px;
+      margin: 20px 24px 0 24px;
 
       /* background: url("../../assets/images/bg.png");
       background-size: 100% 100%;
@@ -244,7 +291,6 @@
     /* 最新发行 */
     .home-latest-release {
       margin: 0px 24px;
-
       .home-latest-release-token {
         overflow: hidden;
         height: 260px;

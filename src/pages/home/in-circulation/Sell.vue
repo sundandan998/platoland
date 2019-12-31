@@ -24,12 +24,14 @@
 					<mt-field :placeholder="'最低出售数量'+ buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.available')}}：{{balData.available_amount}} {{buyDataToken.code}}</p> -->
-					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
+					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
+					<p>{{$t('m.servicecharge')}}:推广期暂免</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
 					<mt-field :placeholder="'最低出售金额'+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}}{{buyDataToken.code}}</p>
-					<p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p>
+					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
+					<p>{{$t('m.servicecharge')}}:推广期暂免</p>
 				</van-tab>
 			</van-tabs>
 		</div>
@@ -58,7 +60,6 @@
 	import api from '@/api/market/Market.js'
 	import { toast } from '@/assets/js/pub.js'
 	import { MessageBox } from 'mint-ui'
-
 	export default {
 		data() {
 			return {
