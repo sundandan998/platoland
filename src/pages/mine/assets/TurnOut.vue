@@ -32,7 +32,7 @@
       <p>{{$t('m.turnnum')}}</p>
       <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
       </mt-field>
-      <p>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</p>
+      <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
       <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
     </div>
     <div class="turn-out-exhibition-qrcode">

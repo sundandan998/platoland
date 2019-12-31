@@ -22,12 +22,12 @@
       <van-tabs @click="buyIndex">
         <van-tab :title="$t('m.number')">
           <mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
-          <p>{{$t('m.available')}}: {{balData.available_amount}} {{buyData.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount|number}} {{buyData.denominated_assets}}</p>
         </van-tab>
         <van-tab :title="$t('m.price')">
           <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount">
           </mt-field>
-          <p>{{$t('m.available')}}: {{balData.available_amount}} {{buyData.denominated_assets}}</p>
+          <p>{{$t('m.available')}}: {{balData.available_amount|number}} {{buyData.denominated_assets}}</p>
         </van-tab>
       </van-tabs>
     </div>
@@ -89,6 +89,7 @@
       this.buyDetail()
       this.balance()
       this.buyIndex(0, '111')
+      // console.log(this.$route.params.code)
     },
     methods: {
       onInput(key) {

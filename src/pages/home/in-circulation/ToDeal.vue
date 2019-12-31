@@ -36,7 +36,7 @@
           <p class="no-data" v-if="this.dealListData.length==0">暂无数据</p>
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
             <!-- <router-link :to="/purchase/+item.id"> -->
-            <router-link :to="{name:'PurchasePass',params:{id:item.id,code:dealListToken.code}}">
+            <router-link :to="{name:'PurchasePass',params:{id:item.id,code:denominated_assets}}">
               <div class="to-deal-purchase-top">
                 <span>{{item.publish_name}}</span>
               </div>

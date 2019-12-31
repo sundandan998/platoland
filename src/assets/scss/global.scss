@@ -794,86 +794,85 @@ table.el-table__body {
     margin-bottom: -23px;
 }
 //我的/资产/资产详情
-.assets-detailed-exhibition {
-    background-color: #fff;
-    span{
-        // font-size: 0.8rem;
-        color:#999;
-    }
-}
-.assets-detailed-exhibition-text{
-    text-align: center;
-    padding-top: 30px;
-    span{
-        // font-size: 1.5rem;
+// .assets-detailed-exhibition {
+//     // background-color: #fff;
+//     span{
+//         // font-size: 0.8rem;
+//         color:#999;
+//     }
+// }
+// .assets-detailed-exhibition-text{
+//     text-align: center;
+//     padding-top: 30px;
+//     span{
 
-    }
-}
-.assets-detailed-exhibition-img {
-    width: 58%;
-    margin: 0 auto;
-    height: 80px;
-    padding-top: 20px;
-    li{
-        // font-size: 0.8rem;
-        margin-left: 50px;
-        margin-top: 5px;
-    }
-}
-.assets-detailed-whole {
-    height: 40px;
-    background-color: #fff;
-}
-.assets-detailed-whole-header {
-    span{
-        margin:10px 10px 0 10px;
-        // font-size: 0.9rem;
-    }
-}
-.assets-detailed-tabbar button{
-    margin-top: 20px;
-    position: fixed;
-    bottom: 0;
-}
-//我的/资产/资产详情/转入
-.to-change-into-exhibition{
-    background-color: #fff;
-    margin-top: 45px;
-    height: auto;
-    padding-bottom: 20px;
-    span{
-        // font-size: 1.0rem;
-        text-align: center;
-    }
-}
-.to-change-into-exhibition-img {
-    width: 55%;
-    margin: 0 auto;
-    height: 80px;
-    padding-top: 20px;
-    li{
-        // font-size: 0.8rem;
-    }
-}
-.to-change-into-qrcode {
-    background-color: #fff;
-    margin-top: -1px;
-    text-align: center;
-    p{
-    //   font-size: 0.8rem;
-      color:#999;
-      padding-bottom: 20px;
-    }
-}
-img.fr.tag-read {
-    float: right;
-    margin-top: 20px;
-    margin-right: -50px;
-}
-.to-change-into-exhibition-adress{
-    margin-top: 10px;
-    width: 101%;
-}
+//     }
+// }
+// .assets-detailed-exhibition-img {
+//     width: 58%;
+//     margin: 0 auto;
+//     height: 80px;
+//     padding-top: 20px;
+//     li{
+//         // font-size: 0.8rem;
+//         margin-left: 50px;
+//         margin-top: 5px;
+//     }
+// }
+// .assets-detailed-whole {
+//     height: 40px;
+//     background-color: #fff;
+// }
+// .assets-detailed-whole-header {
+//     span{
+//         margin:10px 10px 0 10px;
+//         // font-size: 0.9rem;
+//     }
+// }
+// .assets-detailed-tabbar button{
+//     margin-top: 20px;
+//     position: fixed;
+//     bottom: 0;
+// }
+// //我的/资产/资产详情/转入
+// .to-change-into-exhibition{
+//     background-color: #fff;
+//     margin-top: 45px;
+//     height: auto;
+//     padding-bottom: 20px;
+//     span{
+//         // font-size: 1.0rem;
+//         text-align: center;
+//     }
+// }
+// .to-change-into-exhibition-img {
+//     width: 55%;
+//     margin: 0 auto;
+//     height: 80px;
+//     padding-top: 20px;
+//     li{
+//         // font-size: 0.8rem;
+//     }
+// }
+// .to-change-into-qrcode {
+//     background-color: #fff;
+//     margin-top: -1px;
+//     text-align: center;
+//     p{
+//     //   font-size: 0.8rem;
+//       color:#999;
+//       padding-bottom: 20px;
+//     }
+// }
+// img.fr.tag-read {
+//     float: right;
+//     margin-top: 20px;
+//     margin-right: -50px;
+// }
+// .to-change-into-exhibition-adress{
+//     margin-top: 10px;
+//     width: 101%;
+// }
 //我的/资产/资产详情/转出
 
 //我的/资产/资产详情/扫一扫

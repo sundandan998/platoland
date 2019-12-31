@@ -27,7 +27,7 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.detail.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.$route.params.code}}</p>
 					<div class="purchase-pass-quota">
 						<p>{{$t('m.quota')}}</p> 
 						<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number"
@@ -42,8 +42,9 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount}} {{this.detail.code}}</p>
-					<p>手续费 : {{releaseData.amount*0.002}} PLD</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.detail.token.code}}</p>
+					<!-- <p>手续费 : {{releaseData.amount*0.002}} PLD</p> -->
+					<p>手续费 : 推广期暂免</p>
 					<div class="purchase-pass-quota">
 						<p>{{$t('m.quota')}}</p>
 						<mt-field placeholder="买方最低购买数量" v-model="releaseData.low_number" type="number" class="purchase-pass-quota-input">
@@ -124,7 +125,7 @@
 		},
 		created() {
 			this.index(0, '111')
-			// console.log()
+			// console.log(this.$router)
 		},
 		methods: {
 			onInput(key) {
@@ -143,7 +144,16 @@
 					this.payTitle = true
 					// 当发布是购买的时候，可用部分是计价资产
 					// this.balanceData.token_code = this.detail.release.denominated_assets
-					this.balanceData.token_code = this.detail.info.denominated_assets
+					this.balanceData.token_code = this.$route.params.code
+					api.balance(this.balanceData).then(res => {
+					this.balData = res.data
+				}).catch(err => {
+					if (err.code == 4003) {
+						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
+					} else {
+						toast(err)
+					}
+				})
 					this.balance()
 				} else {
 					if (index == 1) {
@@ -160,8 +170,6 @@
 			},
 			// 获取资产余额
 			balance() {
-				// this.balanceData.token_code = this.detail.token.code
-				this.balanceData.token_code = this.$route.params.code||this.detail.token.code
 				api.balance(this.balanceData).then(res => {
 					this.balData = res.data
 				}).catch(err => {
