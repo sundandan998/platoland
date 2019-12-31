@@ -3,11 +3,11 @@
     <div class="turn-out-header header">
       <mt-header fixed :title="$t('m.changeout')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button icon="" slot="right">
+        <!-- <mt-button icon="" slot="right">
           <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
           </router-link>
-        </mt-button>
+        </mt-button> -->
       </mt-header>
     </div>
     <div class="turn-out-exhibition">
@@ -25,6 +25,9 @@
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
+          <router-link to="/scan">
+            <img src="../../../assets/images/scan.png" alt="" />
+          </router-link>
         </router-link>
       </mt-field>
     </div>
@@ -33,15 +36,7 @@
       <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
       </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount}} {{this.detail.code}}</p>
-      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
-    </div>
-    <div class="turn-out-exhibition-qrcode">
-      <router-link to="/scan">
-        <span>{{$t('m.scan')}}</span>
-      </router-link>
-    </div>
-    <div class="turn-out-exhibition-btn">
-      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
+      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} ({{this.detail.token.code}})</p>
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
@@ -58,6 +53,10 @@
       <p>{{$t('m.becarefultwo')}}</p>
       <p>{{$t('m.becarefulthree')}}</p>
       <p>{{$t('m.becarefulfour')}}</p>
+    </div>
+    <div class="turn-out-exhibition-btn">
+      <p class="expenditure"><span class="fl">实际支出</span><span class="fr cost">{{turnOut.amount+turnOut.amount*0.002}} ({{this.detail.token.code}})</span></p>
+      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
     </div>
   </div>
 </template>
@@ -186,36 +185,51 @@
       background-color: #fff;
       height: 80px;
       border-radius: 10px;
-      p{
-        margin:10px 0 0 24px;
+
+      p {
+        margin: 10px 0 0 24px;
         display: inline-block;
-        font-size:28px;
+        font-size: 28px;
       }
-      .mint-cell:last-child{
+
+      .mint-cell:last-child {
         border-radius: 10px;
       }
     }
-    .turn-out-input{
+
+    .turn-out-input {
       background-color: #fff;
-      margin:0px 24px;
-      border-radius: 10px;
-      p{
-        margin:10px 0 0 24px;
-        font-size:28px;
+      margin: 0px 24px ;
+      padding-bottom: 40px;
+      border-top-right-radius:10px;
+      border-top-left-radius:10px;
+      p {
+        margin: 10px 0 0 24px;
+        font-size: 28px;
         padding-top: 10px;
       }
     }
-    .turn-out-exhibition-qrcode{
-      margin: 40px auto;
-      text-align: center;
-      span{
-        font-size:28px;
-        color:#036EB8;
+
+    .turn-out-exhibition-btn {
+      width: 100%;
+      position: fixed;
+      bottom:10px;
+      .expenditure{
+        margin:0 0 20px 24px;
+        display: flow-root;
+        .cost{
+          margin-right: 20px;
+        }
       }
     }
-    .turn-out-exhibition-text{
-      margin: 20px 24px;
-      color:#666;
+
+    .turn-out-exhibition-text {
+      margin: 0 24px;
+      color: #666;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-bottom-right-radius:10px;
+      border-bottom-left-radius:10px;
     }
   }
 </style>

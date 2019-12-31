@@ -1,31 +1,28 @@
 <template>
   <div class="to-change-into">
-    <div class="to-change-into-header">
-      <mt-header fixed  title="转入">
+    <div class="to-change-into-header header">
+      <mt-header fixed title="转入">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="to-change-into-exhibition">
-      <div class="to-change-into-exhibition-img">
-        <img class="fl" slot="icon" :src="this.detail.token.icon">
-        <ul>
-          <li>{{this.detail.token.code}}({{this.detail.token.nickname}})</li>
-          <li>{{this.detail.token.subject}}</li>
-        </ul>
-        <div class="to-change-into-exhibition-adress">
-          <span class="overflow-text fl">{{this.detail.address}}</span>
-          <img src="../../../assets/images/u4780.png" alt="" class="fr tag-read" 
-          @click="copy" :data-clipboard-text="this.detail.address"
-          />
-        </div>
+      <img slot="icon" class="fl" :src="this.detail.token.icon">
+      <div class="to-change-into-token">
+        <span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
+        <p>{{this.detail.token.subject}}</p>
       </div>
     </div>
     <!-- 二维码部分 -->
     <div class="to-change-into-qrcode">
-      <div>
-        <div id='code'></div>
-        <canvas id="canvas"></canvas>
-      </div>
+      <div id='code'></div>
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="to-change-into-exhibition-adress">
+      <span class="overflow-text">{{this.detail.address}}</span>
+      <img src="../../../assets/images/u4780.png" alt="" class=" tag-read" @click="copy"
+        :data-clipboard-text="this.detail.address" />
+    </div>
+    <div class="description">
       <p>仅支持{{this.detail.token.code}}({{this.detail.token.nickname}}) 收款，请勿用于其他通证收款</p>
     </div>
   </div>
@@ -88,4 +85,40 @@
 <style lang="scss">
   @import '../../../assets/scss/global';
 
+  .to-change-into {
+    .to-change-into-exhibition {
+      margin: 10px auto;
+      background-color: #fff;
+      height: 110px;
+
+      img {
+        margin: 20px 20px 0 20px;
+      }
+
+      .to-change-into-token {
+        padding-top: 20px;
+      }
+    }
+
+    .to-change-into-qrcode {
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .to-change-into-exhibition-adress {
+      height: 80px;
+      margin-top: 1px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 80px;
+
+      img {
+        margin: 20px 0 0 10px;
+      }
+    }
+    .description{
+      margin-top: 50px;
+      text-align: center;
+    }
+  }
 </style>

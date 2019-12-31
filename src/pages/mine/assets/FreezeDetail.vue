@@ -130,7 +130,6 @@
       }
     },
     created() {
-      console.log(this.freezeParams)
     },
     filters: {
       // 到期时间
