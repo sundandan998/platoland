@@ -1,6 +1,6 @@
 <template>
   <div class="add-address">
-    <div class="add-address-header">
+    <div class="add-address-header header">
       <mt-header fixed :title="$t('m.addaddress')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>

@@ -45,7 +45,7 @@
     </div>
     <div class="login-btn">
       <!-- <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}"> -->
-      <mt-button type="default" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
+      <mt-button  type="primary" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
       <!-- </router-link> -->
     </div>
     <div class="login-switch">
@@ -370,6 +370,9 @@
         margin-top: 10px;
       }
 
+    }
+    .login-btn{
+      margin:0 60px;
     }
   }
 </style>

@@ -31,7 +31,7 @@
           <p class=" fr forget-pwd">忘记密码</p>
         </router-link> -->
         <div class="login-btn">
-          <mt-button type="default" @click="handleLogin" :disabled="disabled" size="large">登&nbsp;录</mt-button>
+          <mt-button type="primary" @click="handleLogin" :disabled="disabled" size="large">登&nbsp;录</mt-button>
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
@@ -271,8 +271,7 @@
     }
 
     .login-btn {
-      width: 100%;
-      display: inline-block;
+      margin:0 60px;
     }
 
     .login-switch {

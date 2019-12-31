@@ -1,6 +1,6 @@
 <template>
   <div class="turn-out">
-    <div class="turn-out-header">
+    <div class="turn-out-header header">
       <mt-header fixed :title="$t('m.changeout')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
@@ -14,21 +14,21 @@
       <div class="turn-out-exhibition-img">
         <img :src="this.detail.token.icon" alt="" class="fl">
         <span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
-        <span>{{this.detail.token.subject}}</span>
+        <p>{{this.detail.token.subject}}</p>
         <!-- <span>{{this.$route.params.token.code}}({{this.$route.params.token.nickname}})</span>
         <span>{{this.$route.params.token.subject}}</span> -->
       </div>
     </div>
-    <div class="purchase-pass-input">
+    <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address">
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address" placeholder="请选择收款地址">
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
-        <!-- <router-link :to="/book/+this.detail.token.code"> -->
+          <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
         </router-link>
       </mt-field>
     </div>
-    <div class="purchase-pass-input">
+    <div class="turn-out-input">
       <p>{{$t('m.turnnum')}}</p>
       <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
       </mt-field>
@@ -162,5 +162,60 @@
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+
+  .turn-out {
+    .turn-out-exhibition {
+      margin: 0 24px 10px 24px;
+      border-radius: 10px;
+      height: 120px;
+      background-color: #fff;
+
+      img {
+        margin: 40px 10px 0 10px;
+      }
+
+      span {
+        margin-top: 20px;
+        display: inline-block;
+      }
+    }
+
+    .payment-input {
+      margin: 10px 24px 80px 24px;
+      background-color: #fff;
+      height: 80px;
+      border-radius: 10px;
+      p{
+        margin:10px 0 0 24px;
+        display: inline-block;
+        font-size:28px;
+      }
+      .mint-cell:last-child{
+        border-radius: 10px;
+      }
+    }
+    .turn-out-input{
+      background-color: #fff;
+      margin:0px 24px;
+      border-radius: 10px;
+      p{
+        margin:10px 0 0 24px;
+        font-size:28px;
+        padding-top: 10px;
+      }
+    }
+    .turn-out-exhibition-qrcode{
+      margin: 40px auto;
+      text-align: center;
+      span{
+        font-size:28px;
+        color:#036EB8;
+      }
+    }
+    .turn-out-exhibition-text{
+      margin: 20px 24px;
+      color:#666;
+    }
+  }
 </style>

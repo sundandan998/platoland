@@ -13,13 +13,13 @@
 				<p>{{this.detail.token.issuer}}</p>
 			</div>
 		</div>
-		<!-- <div class="purchase-pass-valuation-assets">
+		<div class="purchase-pass-valuation-assets" v-if="this.$route.params.code!=''">
 			<span>{{$t('m.valuationassets')}}</span>
 			<div class="purchase-pass-valuation-assets-img fr">
-				<img :src="this.detail.info[0].d_icon" alt="" />
-				<span>{{this.detail.info[0].denominated_assets}}</span>
+				<img :src="this.$route.params.icon" alt="" />
+				<span>{{this.$route.params.code}}</span>
 			</div>
-		</div> -->
+		</div>
 		<div class="purchase-pass-input">
 			<van-tabs @click="index">
 				<van-tab title="购买">

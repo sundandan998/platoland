@@ -62,6 +62,7 @@
       p {
         font-size: 30px;
         font-weight: 700;
+        margin:10px 0 20px 0;
       }
 
       span {

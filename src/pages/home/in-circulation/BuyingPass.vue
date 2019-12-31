@@ -112,7 +112,6 @@
       this.balance()
       this.date()
     },
-
     methods: {
       onInput(key) {
         this.value = (this.value + key).slice(0, 6)
@@ -133,7 +132,7 @@
       date() {
         var date1 = new Date()
         var date2 = new Date(date1)
-        date2.setDate(date1.getDate() +this.detail.freeze_days);
+        date2.setDate(date1.getDate() +this.detail.freeze_days)
         const resDate = date2.getFullYear() + '-' + this.p((date2.getMonth() + 1)) + '-' + this.p(date2.getDate())
         this.timeDate = resDate
       },

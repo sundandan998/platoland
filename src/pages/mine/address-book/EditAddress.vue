@@ -1,6 +1,6 @@
 <template>
 	<div class="edit-adress">
-		<div class="edit-adress-header">
+		<div class="edit-adress-header header">
 			<mt-header fixed :title="$t('m.addressdetail')">
 				<!-- @click="saveBox" -->
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
@@ -137,7 +137,6 @@
 	}
 
 	.edit-title img {
-		/* display: block; */
 		padding: 10px 10px 0 10px;
 	}
 </style>

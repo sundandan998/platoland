@@ -1,6 +1,6 @@
 <template>
 	<div class="adress-book">
-		<div class="adress-book-header">
+		<div class="adress-book-header header">
 			<mt-header fixed :title="$t('m.addressbook')">
 				<!-- <router-link to="mine"> -->
 				<!-- v-on:click="$router.go(-1)" -->
@@ -107,5 +107,8 @@
 	}
 </script>
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.adress-book{
+	
+	}
 </style>

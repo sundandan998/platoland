@@ -177,6 +177,12 @@ label.mint-button-text {
     // position: fixed;
     // bottom: 10px;
 }
+// .van-button--default{
+//     background-color: #036EB8;
+//     height: 24px;
+//     line-height: 24px;
+//     border: none;
+// }
 .van-button--large {
     position: fixed;
     bottom: 10px;
@@ -869,35 +875,7 @@ img.fr.tag-read {
     width: 101%;
 }
 //我的/资产/资产详情/转出
-.turn-out-exhibition {
-    background-color: #fff;
-    height: 70px;
-    margin: 20px 0 10px 0;
-}
-.turn-out-exhibition-img{
-    margin-left: 15px;
-    padding-top: 14px;
-    span{
-      display: block;
-    //   font-size: 0.8rem;
-    }
-    img{
-        margin-right: 15px;
-    }
-}
-.turn-out-exhibition-qrcode {
-    background-color: #fff;
-    text-align: center;
-    margin:30px 0 30px 0;
-    height: 50px;
-    line-height: 50px;
-}
-.turn-out-exhibition-text p{
-    // font-size: 0.8rem;
-    color:#999;
-    margin-left: 10px;
-    margin-top: 10px;
-}
+
 //我的/资产/资产详情/扫一扫
 .scan-button {
     position: relative;
@@ -1096,9 +1074,6 @@ img.fr.tag-read {
     }
 }
 //------------------------------我的/地址薄/编辑---------------
-.adress-book-header {
-    margin-bottom: 45px;
-}
 .edit-adress {
     background-color: #fff;
 }
@@ -1145,9 +1120,6 @@ img.fr.tag-read {
     }
 }
 //------------------------------我的/地址薄/添加--------------
-.add-address-header {
-    margin-bottom: 20px;
-}
 .addaddress-icon{
     margin-left: 15px;
 }
