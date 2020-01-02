@@ -18,6 +18,9 @@
                 </el-dropdown-item>
               </router-link>
               <el-dropdown-item>
+                <span>明细</span>
+              </el-dropdown-item>
+              <el-dropdown-item>
                 <span @click="remove">{{$t('m.remove')}}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
