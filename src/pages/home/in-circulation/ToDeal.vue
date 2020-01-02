@@ -7,7 +7,7 @@
           <mt-button slot="left" icon="back"  @click="back">{{$t('m.back')}}</mt-button>
           <mt-button icon="" slot="right">
             <!-- <router-link to="/purchaserelease"> -->
-              <router-link :to="{name:'Purchase',params:{code:this.denominated_assets,icon:this.icon}}">
+              <router-link :to="{name:'Purchase',params:{code:this.detailCode,icon:this.icon}}">
               <img src="../../../assets/images/fb.png" alt="" />
               <span class="release">{{$t('m.release')}}</span>
             </router-link>
@@ -79,6 +79,7 @@
         dealListData: '',
         dealListToken: {},
         denominated_assets:'',
+        detailCode:'',
         icon:'',
         // 市场列表参数
         dealData: {
@@ -135,6 +136,8 @@
         this.dealData.code = this.dealData.code
         api.dealList(this.dealData).then(res => {
           this.dealListData = res.data.info
+          this.detailCode= res.data.token.code
+          // console.log(this.detailCode)
           for(let i=0;i<this.dealListData.length;i++){
             this.denominated_assets=this.dealListData[i].denominated_assets
             this.icon = this.dealListData[i].d_icon

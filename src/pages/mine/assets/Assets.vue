@@ -17,7 +17,7 @@
     </div>
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">
       <router-link :to="{name:'AssetsDetailed',params:{id:item.id,code:item.token.code}}">
-        <mt-cell :title="item.token.code + '('+item.token.name+')'" :value="item.balance|keepTwoNum"
+        <mt-cell :title="item.token.code + '('+item.token.nickname+')'" :value="item.balance|keepTwoNum"
           :label="item.token.subject" class="certificate-list-card-cell">
           <img class="assets-icon" slot="icon" :src="item.token.icon">
         </mt-cell>

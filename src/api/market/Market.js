@@ -48,4 +48,12 @@ export default {
       params: params
     })
   },
+  // 通证详情
+  tokenDetail(params = {}) {
+    return request({
+      url: "/token/" + params.code + "/detail/",
+      method: "get",
+      params: params
+    })
+  },
 }
