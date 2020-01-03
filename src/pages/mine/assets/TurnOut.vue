@@ -21,7 +21,7 @@
     </div>
     <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address" placeholder="请选择收款地址">
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.name" placeholder="请选择收款地址">
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
@@ -30,6 +30,7 @@
           </router-link>
         </router-link>
       </mt-field>
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address" class="address"></mt-field>
     </div>
     <div class="turn-out-input">
       <p>{{$t('m.turnnum')}}</p>
@@ -40,7 +41,7 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{turnOut.amount}}{{this.detail.token.code}}</span>
+        <span class="paymentamount">{{turnOut.amount+turnOut.amount*0.002}}{{this.detail.token.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -55,7 +56,8 @@
       <p>{{$t('m.becarefulfour')}}</p>
     </div>
     <div class="turn-out-exhibition-btn">
-      <p class="expenditure"><span class="fl">实际支出</span><span class="fr cost">{{turnOut.amount+turnOut.amount*0.002}} ({{this.detail.token.code}})</span></p>
+      <p class="expenditure"><span class="fl">实际支出</span><span class="fr cost">{{turnOut.amount+turnOut.amount*0.002}}
+          ({{this.detail.token.code}})</span></p>
       <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
     </div>
   </div>
@@ -181,9 +183,9 @@
     }
 
     .payment-input {
-      margin: 10px 24px 80px 24px;
+      margin: 10px 24px 20px 24px;
       background-color: #fff;
-      height: 80px;
+      /* height: 160px; */
       border-radius: 10px;
 
       p {
@@ -195,14 +197,22 @@
       .mint-cell:last-child {
         border-radius: 10px;
       }
+
+      .address {
+        .mint-cell-wrapper {
+          position: relative;
+          top: -17px;
+        }
+      }
     }
 
     .turn-out-input {
       background-color: #fff;
-      margin: 0px 24px ;
+      margin: 20px 24px 0 24px;
       padding-bottom: 40px;
-      border-top-right-radius:10px;
-      border-top-left-radius:10px;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+
       p {
         margin: 10px 0 0 24px;
         font-size: 28px;
@@ -213,11 +223,13 @@
     .turn-out-exhibition-btn {
       width: 100%;
       position: fixed;
-      bottom:10px;
-      .expenditure{
-        margin:0 0 20px 24px;
+      bottom: 10px;
+
+      .expenditure {
+        margin: 0 0 20px 24px;
         display: flow-root;
-        .cost{
+
+        .cost {
           margin-right: 20px;
         }
       }
@@ -228,8 +240,8 @@
       color: #666;
       background-color: #fff;
       padding: 10px 20px;
-      border-bottom-right-radius:10px;
-      border-bottom-left-radius:10px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
     }
   }
 </style>

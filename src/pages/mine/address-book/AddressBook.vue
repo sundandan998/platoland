@@ -87,7 +87,7 @@
 						params: {
 							id: item.id, address: item.address,
 							code: item.token.code, subject: item.token.subject,
-							nickname: item.token.nickname
+							nickname: item.token.nickname,name:item.token.name
 						}
 					})
 					// this.$store.commit('detail')
@@ -115,8 +115,14 @@
 	.adress-book {
 		.adress-book-list {
 			margin: 0 24px 10px 24px;
+
 			.mint-cell {
 				border-radius: 10px;
+			}
+
+			.mint-cell-wrapper {
+				display: block;
+				background-image: none  !important;
 			}
 
 			.adress-book-content {

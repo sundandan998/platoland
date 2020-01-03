@@ -1049,14 +1049,6 @@ table.el-table__body {
   margin-left: 10px;
 }
 
-.adress-book-list .mint-cell-wrapper {
-  display: block;
-}
-
-.add-adress-list .mint-cell-wrapper {
-  background-image: none  !important;
-}
-
 .news-center-list .mint-cell-label {
   margin-top: 12px;
   margin-left: 40px;

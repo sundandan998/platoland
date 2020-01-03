@@ -18,9 +18,9 @@
 			</div>
 		</div>
 		<div class="add-adress-list">
-			<span>{{$t('m.remarks')}}</span>
+			<span>姓名</span>
 			<mt-field v-model="editparams.name"></mt-field>
-			<span>{{$t('m.describe')}}</span>
+			<span>备注</span>
 			<mt-field v-model="editparams.remark"> </mt-field>
 			<span>地址</span>
 			<mt-field v-model="editparams.address"></mt-field>
