@@ -12,8 +12,10 @@
 		</div>
 		<div class="edit-title">
 			<img :src="editparams.icon" alt="" class="fl" />
-			<span>{{editparams.code}} ({{editparams.name}})</span>
-			<p>{{editparams.subject}}</p>
+			<div class="edit-title-text">
+				<span>{{editparams.code}} ({{editparams.name}})</span>
+				<p>{{editparams.subject}}</p>
+			</div>
 		</div>
 		<div class="add-adress-list">
 			<span>{{$t('m.remarks')}}</span>
@@ -26,11 +28,12 @@
 				<img src="../../../assets/images/scan.png" alt="">
 			</router-link>
 		</div>
-		<div class="edit-adress-btn">
-			<mt-button type="primary" size="large" @click="edit" :disabled="disabled">{{$t('m.preservation')}}</mt-button>
-		</div>
+
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->
+		</div>
+		<div class="edit-adress-btn">
+			<mt-button type="primary" size="large" @click="edit" :disabled="disabled">{{$t('m.preservation')}}</mt-button>
 		</div>
 	</div>
 </template>
@@ -65,7 +68,7 @@
 					toast(res)
 					this.$router.push({
 						name: 'Book',
-						params:{id:'edit'}
+						params: { id: 'edit' }
 					})
 				}).catch(err => {
 					console.log(err)
@@ -127,16 +130,56 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-	.edit-title {
-		margin: 20px 0 0 20px;
-	}
 
-	.edit-title span {
-		display: block;
-		padding: 10px 0px 0 10px;
-	}
+	.edit-adress {
+		.mint-cell-wrapper {
+			display: block;
+		}
+		.edit-title {
+			margin: 20px 24px 0 24px;
+			background-color: #fff;
+			height: 110px;
+			border-radius: 10px;
+			img{
+				margin:23px 20px 0 10px;
+			}
+			.edit-title-text{
+				display: inline-block;
+				margin-top: 20px;
+			}
+		}
 
-	.edit-title img {
-		padding: 10px 10px 0 10px;
+		.add-adress-list {
+			margin-top: 1px;
+			padding-bottom: 20px;
+
+			img {
+				margin-top: -60px;
+				position: relative;
+				float: right;
+				margin-right: 20px;
+			}
+			span {
+				padding-left: 15px;
+				color: #999;
+				margin:10px 0 10px 24px;
+				display: inline-block;
+				font-size:28px;
+			}
+		 .mint-cell{
+			 margin:0 10px;
+			 border-radius: 10px;
+		 }
+		 .mint-field .mint-cell-value{
+			 height: 48px;
+		 }
+
+		}
+
+		.edit-adress-btn {
+			position: fixed;
+			bottom: 10px;
+			width: 100%;
+		}
 	}
 </style>

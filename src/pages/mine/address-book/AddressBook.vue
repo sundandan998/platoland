@@ -25,7 +25,9 @@
 				</div>
 				<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
 							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}"> -->
-				<mt-button size="small" type="primary" @click.native="address(item)">{{$t('m.edit')}}</mt-button>
+				<div class="edit-button">
+					<mt-button size="small" type="primary" @click.native="address(item)">{{$t('m.edit')}}</mt-button>
+				</div>
 				<!-- </router-link> -->
 			</mt-cell>
 			<!-- </router-link> -->
@@ -82,9 +84,10 @@
 				if (refpath == '/out' || refpath == '/edit') {
 					this.$router.push({
 						name: 'Out',
-						params: { id: item.id, address: item.address,
-							code: item.token.code,subject: item.token.subject,
-							nickname:item.token.nickname
+						params: {
+							id: item.id, address: item.address,
+							code: item.token.code, subject: item.token.subject,
+							nickname: item.token.nickname
 						}
 					})
 					// this.$store.commit('detail')
@@ -108,7 +111,24 @@
 </script>
 <style lang="scss">
 	@import '../../../assets/scss/global';
-	.adress-book{
-	
+
+	.adress-book {
+		.adress-book-list {
+			margin: 0 24px 10px 24px;
+			.mint-cell {
+				border-radius: 10px;
+			}
+
+			.adress-book-content {
+				p {
+					margin: 20px 0;
+				}
+			}
+
+			.edit-button {
+				position: absolute;
+				right: 20px;
+			}
+		}
 	}
 </style>

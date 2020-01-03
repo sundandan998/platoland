@@ -166,10 +166,6 @@ input.el-input__inner {
   top: 16px;
 }
 
-label.mint-button-text {
-  margin-right: 10px;
-}
-
 label.mint-button-text img {
   position: relative;
   top: 4px;
@@ -1053,95 +1049,12 @@ table.el-table__body {
   margin-left: 10px;
 }
 
-.edit-adress {
-  background-color: #fff;
-}
-
-.edit-adress-list {
-  margin-top: 10px;
-}
-
-.edit-adress-list span {
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  padding-left: 15px;
-  color: #999;
-}
-
-.edit-adress-list a.mint-cell.mint-field.is-nolabel {
-  border-bottom: 1px solid #999;
-  margin: 0 20px;
-}
-
-.edit-adress-btn {
-  margin: 20px 0 20px 0;
-}
-
-.edit-adress-text {
-  color: #999;
-  margin-left: 15px;
-  padding-bottom: 20px;
-}
-
 .adress-book-list .mint-cell-wrapper {
   display: block;
 }
 
-.adress-book-list button {
-  position: absolute;
-  top: 10px;
-  right: 5px;
-}
-
-.add-adress-list .mint-field-other {
-  position: unset;
-}
-
-.adress-book-content p {
-  line-height: 20px;
-}
-
-.addaddress-icon {
-  margin-left: 15px;
-}
-
-.add-address {
-  background-color: #fff;
-}
-
-.add-adress-list {
-  margin-top: 1px;
-  padding-bottom: 20px;
-}
-
-.add-adress-list span {
-  padding-left: 15px;
-  color: #999;
-  margin-top: 20px;
-  display: inline-block;
-}
-
-.add-adress-list img {
-  margin-top: -30px;
-  position: relative;
-  float: right;
-  margin-right: 20px;
-}
-
-.add-adress-list a.mint-cell.mint-field.is-nolabel {
-  border-bottom: 1px solid #999;
-  margin: 0 20px;
-}
-
 .add-adress-list .mint-cell-wrapper {
   background-image: none  !important;
-}
-
-.add-adress-btn {
-  margin: 20px 0 20px 0;
-  background-color: #fff;
 }
 
 .news-center-list .mint-cell-label {

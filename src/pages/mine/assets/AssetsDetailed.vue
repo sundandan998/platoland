@@ -64,22 +64,27 @@
             <div class="buy" v-if="item.flow_type=='发行买入'||item.flow_type=='受让'">
               <router-link
                 :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
-                <div class="issue-buy">
+                <div class="issue-buy button">
                   <mt-button size="small" type="primary" class="fr transfer">转让</mt-button>
                 </div>
               </router-link>
               <p class="flow_type">{{item.flow_type}}</p>
-              <p><span class="flow_type">{{item.amount|number}}</span><span
-                  class="fr">还剩{{item.unfreeze_date | days}}天解冻</span>
+              <p><span class="buy-amount">{{item.amount|number}}</span><span
+                  class="fr buy-amount">还剩{{item.unfreeze_date | days}}天解冻</span>
               </p>
-              <p>
+              <p class="progress">
                 <van-slider disabled :value="item.unfreeze_date | total_days(item.transaction_time)" />
               </p>
-              <p>已持有{{item.transaction_time | holding}}天</p>
+              <p class="buy-sold">已持有{{item.transaction_time | holding}}天</p>
             </div>
           </router-link>
           <!-- OTC发布出售 -->
           <div class="buy" v-if="item.flow_type=='OTC发布出售'">
+            <div class="fr button">
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">
+                撤销
+              </mt-button>
+            </div>
             <router-link :to="/orderdetail/+item.order_id">
               <div>
                 <p class="flow_type">{{item.flow_type}}</p>
@@ -90,37 +95,35 @@
                   </span>
                 </p>
                 <p class="progress">
-                  <mt-progress v-if="item.is_undo==true" :value="item.amount" :bar-height="5"></mt-progress>
+                  <!-- :value="item.amount" -->
+                  <mt-progress v-if="item.is_undo==true" :bar-height="5"></mt-progress>
                 </p>
-                <p v-if="item.is_undo==true">已售出{{item.trade_amount|number}}</p>
+                <p v-if="item.is_undo==true" class="sold">已售出{{item.trade_amount|number}}</p>
                 <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
               </div>
             </router-link>
-            <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
-              </mt-button>
-            </div>
           </div>
           <!-- OTC发布买入 -->
           <div class="buy" v-if="item.flow_type=='OTC发布买入'">
-            <router-link :to="/orderdetail/+item.order_id">
-              <div>
-                <p class="flow_type">{{item.flow_type}}</p>
-                <p><span>{{item.amount|number}}</span><span class="fr">
-                    <span v-if="item.is_pay==true"><img style="position: relative;top: 2px;"
-                        src="../../../assets/images/go.svg" alt="">{{item.status|status}}</span>
-                  </span> </p>
-                <p>
-                  <mt-progress :value="item.amount" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
-                </p>
-                <p v-if="item.is_undo==true">已买入：{{item.trade_amount|number}}</p>
-                <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
-              </div>
-            </router-link>
-            <div class="fr">
+            <div class="fr button">
               <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
               </mt-button>
             </div>
+            <router-link :to="/orderdetail/+item.order_id">
+              <div>
+                <p class="flow_type">{{item.flow_type}}</p>
+                <p class="amount"><span>{{item.amount|number}}</span><span class="fr">
+                    <span v-if="item.is_pay==true"><img style="position: relative;top: 2px;"
+                        src="../../../assets/images/go.svg" alt="">{{item.status|status}}</span>
+                  </span> </p>
+                <p class="progress">
+                  <mt-progress :value="item.amount" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
+                </p>
+                <p v-if="item.is_undo==true" class="sold">已买入：{{item.trade_amount|number}}</p>
+                <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
+              </div>
+            </router-link>
+
           </div>
           <!-- 转出 -->
           <router-link :to="/orderdetail/+item.order_id">
@@ -342,8 +345,6 @@
   @import '../../../assets/scss/global';
 
   .assets-detailed {
-
-
     .assets-detailed-exhibition {
       overflow: hidden;
       margin: 90px 24px 20px 24px;
@@ -373,12 +374,21 @@
       }
 
     }
+
     .assets-detailed-freeze {
       margin: 0 24px 20px 24px;
+
       .progress {
-        width: 93% !important;
+        /* width: 93% !important;
         background-color: #26a2ff;
-        margin: 30px auto;
+        margin: 30px auto; */
+      }
+
+      .van-list__error-text, .van-list__finished-text, .van-list__loading-text {
+        color: #969799;
+        font-size: 0.346667rem;
+        margin-bottom: 40px !important;
+        background-color: #f2f2f2;
       }
 
       .mint-cell {
@@ -398,6 +408,29 @@
       .amount {
         margin: 20px 0 0px 20px;
         display: inline-block;
+      }
+      .buy-amount{
+        margin: 20px;
+        display: inline-block;
+      }
+
+      .sold {
+        margin-left: 20px;
+      }
+      .buy-sold{
+        margin: 20px;
+      }
+
+      .button {
+        margin: 20px 20px 0 0;
+      }
+
+      .mint-button--small {
+        height: 22px;
+      }
+
+      .buy {
+        border-bottom: 20px solid #f2f2f2;
       }
     }
 
