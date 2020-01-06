@@ -8,7 +8,7 @@
     <div class="addaddress-icon">
       <img class="assets-icon fl" slot="icon" :src="this.$route.params.icon">
       <div class="addaddress-text fl">
-        <span>{{this.$route.params.code}}({{this.$route.params.name}})</span>
+        <span>{{this.$route.params.code}}({{this.$route.params.nickname}})</span>
         <span>{{this.$route.params.subject}}</span>
       </div>
     </div>

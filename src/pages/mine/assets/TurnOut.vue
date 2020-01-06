@@ -37,11 +37,13 @@
       <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
       </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
-      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} ({{this.detail.token.code}})</p>
+      <!-- {{turnOut.amount*0.002}} -->
+      <p>手续费：{{this.detail.token.fee|number}}({{this.detail.token.code}})</p>
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{turnOut.amount+turnOut.amount*0.002}}{{this.detail.token.code}}</span>
+        <span class="paymentamount">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
+          {{this.detail.token.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -56,7 +58,8 @@
       <p>{{$t('m.becarefulfour')}}</p>
     </div>
     <div class="turn-out-exhibition-btn">
-      <p class="expenditure"><span class="fl">实际支出</span><span class="fr cost">{{turnOut.amount+turnOut.amount*0.002}}
+      <p class="expenditure"><span class="fl">实际支出</span><span
+          class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</span></p>
       <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
     </div>
@@ -135,7 +138,11 @@
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)
-              window.history.go(-1)
+              this.$router.push({
+                name:'OrderDetail',
+                params:{order_id:res.order_id}
+              })
+              // window.history.go(-1)
             }
           }).catch(err => {
             if (err.code != 0) {
@@ -226,12 +233,13 @@
       bottom: 10px;
 
       .expenditure {
-        margin: 0 0 20px 24px;
         display: flow-root;
-
+        background-color: #fff;
+        height: 50px;
         .cost {
           margin-right: 20px;
         }
+
       }
     }
 

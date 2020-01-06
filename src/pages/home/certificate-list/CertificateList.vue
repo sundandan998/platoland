@@ -13,7 +13,7 @@
         <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
           <img class="assets-icon" slot="icon" :src="item.icon">
           <img src="../../../assets/images/r.png" alt="" v-if="refpath=='/'">
-          <router-link :to="{name:'Add',params:{name:item.name,subject:item.subject,icon:item.icon,code:item.code}}">
+          <router-link :to="{name:'Add',params:{name:item.name,nickname:item.nickname,subject:item.subject,icon:item.icon,code:item.code}}">
             <div v-if="refpath=='/book'">
               <mt-switch class="asset-list-switch" :value="value"></mt-switch>
             </div>

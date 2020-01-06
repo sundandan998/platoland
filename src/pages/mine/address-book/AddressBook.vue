@@ -4,7 +4,8 @@
 			<mt-header fixed :title="$t('m.addressbook')">
 				<!-- <router-link to="mine"> -->
 				<!-- v-on:click="$router.go(-1)" -->
-				<mt-button icon="back" slot="left" to="mine" @click="back">返回</mt-button>
+				<!-- @click="back" -->
+				<mt-button icon="back" slot="left" @click="back" to="mine">返回</mt-button>
 				<!-- </router-link> -->
 				<mt-button icon="" slot="right">
 					<router-link to="list">
@@ -13,8 +14,9 @@
 				</mt-button>
 			</mt-header>
 		</div>
-
+		<p class="no-data" v-if="this.book.length==0">暂无数据</p>
 		<div class="adress-book-list" v-for="(item,index) in book">
+		<!-- <p class="no-data" v-if="item.length<0">暂无数据</p> -->
 			<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
 			<!-- <router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}"> -->
 			<mt-cell @click.native="routerLink(item)">
@@ -45,12 +47,10 @@
 				bookParams: {
 					token_code: ''
 				}
-
 			}
 		},
 		created() {
 			this.address()
-
 		},
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
@@ -81,13 +81,13 @@
 				// debugger
 				let refpath = window.sessionStorage.getItem('refpath')
 				// refpath == '/add'
-				if (refpath == '/out' || refpath == '/edit') {
+				if (refpath == '/out' || refpath == '/edit'||refpath == '/add') {
 					this.$router.push({
 						name: 'Out',
 						params: {
 							id: item.id, address: item.address,
 							code: item.token.code, subject: item.token.subject,
-							nickname: item.token.nickname,name:item.name
+							nickname: item.token.nickname, name: item.name
 						}
 					})
 					// this.$store.commit('detail')
@@ -113,6 +113,11 @@
 	@import '../../../assets/scss/global';
 
 	.adress-book {
+		.no-data {
+			margin: 200px auto;
+			text-align:center;
+		}
+
 		.adress-book-list {
 			margin: 0 24px 10px 24px;
 
@@ -122,7 +127,7 @@
 
 			.mint-cell-wrapper {
 				display: block;
-				background-image: none  !important;
+				background-image: none !important;
 			}
 
 			.adress-book-content {
