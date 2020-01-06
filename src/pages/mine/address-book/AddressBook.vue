@@ -87,7 +87,7 @@
 						params: {
 							id: item.id, address: item.address,
 							code: item.token.code, subject: item.token.subject,
-							nickname: item.token.nickname,name:item.token.name
+							nickname: item.token.nickname,name:item.name
 						}
 					})
 					// this.$store.commit('detail')

@@ -2,7 +2,9 @@
   <div class="to-change-into">
     <div class="to-change-into-header header">
       <mt-header fixed title="转入">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- <router-link to="path"> -->
+          <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- </router-link> -->
       </mt-header>
     </div>
     <div class="to-change-into-exhibition">
@@ -116,7 +118,8 @@
         margin: 20px 0 0 10px;
       }
     }
-    .description{
+
+    .description {
       margin-top: 50px;
       text-align: center;
     }

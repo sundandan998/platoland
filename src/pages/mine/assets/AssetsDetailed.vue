@@ -43,7 +43,7 @@
     <!-- 可用 -->
     <div class="assets-detailed-available">
       <router-link :to="{name:'AvailableTransfer',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
-        <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount" is-link>
+        <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount|number" is-link>
           <img slot="icon" src="../../../assets/images/u4662.png">
         </mt-cell>
       </router-link>
@@ -51,7 +51,7 @@
     <!-- 冻结 -->
     <div class="assets-detailed-freeze">
       <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
-        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount">
+        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount|number">
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
       </router-link>
@@ -129,9 +129,9 @@
           <router-link :to="/orderdetail/+item.order_id">
             <div class="buy" v-if="item.flow_type=='转出'">
               <p class="flow_type">{{item.flow_type}}</p>
-              <p><span>{{item.amount|number}}</span><span class="fr"><img style="position: relative;top: 2px;"
+              <p><span class="amount">{{item.amount|number}}</span><span class="fr"><img style="position: relative;top: 2px;"
                     src="../../../assets/images/go.svg" alt="">
-                  <span>{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
+                  <span class="status">{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
                 </span>
               </p>
               <p>
@@ -158,6 +158,7 @@
 <script>
   import api from "@/api/user/User.js"
   import { toast } from '@/assets/js/pub.js'
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -185,6 +186,7 @@
     },
     created() {
       this.assetDetail()
+      // console.log(this.$route.params.code)
     },
     filters: {
       // 到期时间
@@ -229,7 +231,6 @@
           // console.log( )
           this.assetsToken = res.data.token
           this.$store.commit('detail', res.data)
-          // this.details.code = this.assetsToken.code
         }).catch(err => {
           console.log(err)
         })
@@ -261,7 +262,7 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          this.freezeParams.code = this.$route.params.code
+          this.freezeParams.code = this.$route.params.code||this.detail.token.code
           api.freeze(this.freezeParams).then(res => {
             if (res.code == 0) {
               // 冻结详情
@@ -334,11 +335,11 @@
       //   }
       // },
     },
-    // computed: {
-    //   ...mapGetters([
-    //     'detail'
-    //   ])
-    // }
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
+    }
   }
 </script>
 <style lang="scss">
@@ -384,7 +385,9 @@
         margin: 30px auto; */
       }
 
-      .van-list__error-text, .van-list__finished-text, .van-list__loading-text {
+      .van-list__error-text,
+      .van-list__finished-text,
+      .van-list__loading-text {
         color: #969799;
         font-size: 0.346667rem;
         margin-bottom: 40px !important;
@@ -409,15 +412,19 @@
         margin: 20px 0 0px 20px;
         display: inline-block;
       }
-      .buy-amount{
+
+      .buy-amount {
         margin: 20px;
         display: inline-block;
       }
-
+      .status{
+        margin-right: 20px;
+      }
       .sold {
         margin-left: 20px;
       }
-      .buy-sold{
+
+      .buy-sold {
         margin: 20px;
       }
 
@@ -438,6 +445,7 @@
       position: fixed;
       width: 100%;
       bottom: 10px;
+      z-index:1;
     }
   }
 </style>

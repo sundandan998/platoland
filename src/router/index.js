@@ -197,7 +197,7 @@ export default new Router({
     },
     //  我的---资产/冻结详情
     {
-      path: '/freeze/:code',
+      path: '/freeze',
       name: 'FreezeDetail',
       component: () => import("@/pages/mine/assets/FreezeDetail")
     },
