@@ -2,7 +2,9 @@
   <div class="turn-out">
     <div class="turn-out-header header">
       <mt-header fixed :title="$t('m.changeout')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <!-- v-on:click="$router.go(-1)" -->
+          <!-- @click="back" -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <!-- <mt-button icon="" slot="right">
           <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
@@ -22,7 +24,7 @@
     <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
       <mt-field type="text" readonly="readonly" v-model="this.$route.params.name" placeholder="请选择收款地址">
-        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
+        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
           <router-link to="/scan">
@@ -34,7 +36,7 @@
     </div>
     <div class="turn-out-input">
       <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
+      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_out)" v-model="turnOut.amount" type="number">
       </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
       <!-- {{turnOut.amount*0.002}} -->
@@ -102,6 +104,12 @@
       },
       onDelete() {
         this.value = this.value.slice(0, this.value.length - 1)
+      },
+      back(){
+        this.$router.push({
+          name:'AssetsDetailed',
+          params:{code:this.detail.token.code,id:this.detail.id}
+        })
       },
       passwordShow(hide) {
         this.value = ''

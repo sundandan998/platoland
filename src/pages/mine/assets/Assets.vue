@@ -2,7 +2,8 @@
   <div class="assest">
     <div class="assest-header">
       <mt-header fixed :title="$t('m.assets')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <!-- v-on:click="$router.go(-1)" -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <mt-button icon slot="right">
           <router-link to="/detailedlist">
             <img src="../../../assets/images/u2666.png" alt><span>{{$t('m.assetsdetail')}}</span>
@@ -40,6 +41,11 @@
       this.assetList()
     },
     methods: {
+      back(){
+        this.$router.push({
+          name:'Mine'
+        })
+      },
       // 资产列表
       assetList() {
         api.assetList().then(res => {

@@ -6,12 +6,13 @@
         <span>返回</span>
       </div>
     </router-link>
-    <div class="logo">
+    <!-- <div class="logo">
       <img src="../../../assets/images/login-logo.png" alt="" />
-    </div>
+    </div> -->
     <div class="forget-password-title">
       <h1>重置登录密码</h1>
     </div>
+    <p class="account-number">输入账号</p>
     <div class="login-content">
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- v-model="" -->
@@ -195,9 +196,15 @@
       display: block;
     }
     
+    
     }
     .forget-password-title{
-      margin:50px 0 100px 54px;
+      margin: 50px auto;
+      text-align:center;
+    }
+    .account-number{
+      margin-left: 54px;
+      font-size: 28px;
     }
     .login-content {
       margin:0 54px 50px 54px;
@@ -207,9 +214,9 @@
         z-index: 1;
         left: 15px;
       }
-      .mint-field-core{
+      /* .mint-field-core{
         margin-left: 50px;
-      }
+      } */
     }
   }
 </style>
