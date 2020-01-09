@@ -91,7 +91,8 @@ h1{
     font-weight: 400;
 }
 .mint-field-state .mintui {
-    font-size: 30px;
+    // font-size: 30px;
+    display: none;
 }
 //支付密码样式
 
@@ -150,7 +151,7 @@ input.el-input__inner {
 }
 label.mint-button-text {
     // font-size: 0.79rem;
-    margin-right: 10px;
+    // margin-right: 10px;
     img{
         position: relative;
         top: 4px;
@@ -794,85 +795,6 @@ table.el-table__body {
     margin-bottom: -23px;
 }
 //我的/资产/资产详情
-// .assets-detailed-exhibition {
-//     // background-color: #fff;
-//     span{
-//         // font-size: 0.8rem;
-//         color:#999;
-//     }
-// }
-// .assets-detailed-exhibition-text{
-//     text-align: center;
-//     padding-top: 30px;
-//     span{
-
-//     }
-// }
-// .assets-detailed-exhibition-img {
-//     width: 58%;
-//     margin: 0 auto;
-//     height: 80px;
-//     padding-top: 20px;
-//     li{
-//         // font-size: 0.8rem;
-//         margin-left: 50px;
-//         margin-top: 5px;
-//     }
-// }
-// .assets-detailed-whole {
-//     height: 40px;
-//     background-color: #fff;
-// }
-// .assets-detailed-whole-header {
-//     span{
-//         margin:10px 10px 0 10px;
-//         // font-size: 0.9rem;
-//     }
-// }
-// .assets-detailed-tabbar button{
-//     margin-top: 20px;
-//     position: fixed;
-//     bottom: 0;
-// }
-// //我的/资产/资产详情/转入
-// .to-change-into-exhibition{
-//     background-color: #fff;
-//     margin-top: 45px;
-//     height: auto;
-//     padding-bottom: 20px;
-//     span{
-//         // font-size: 1.0rem;
-//         text-align: center;
-//     }
-// }
-// .to-change-into-exhibition-img {
-//     width: 55%;
-//     margin: 0 auto;
-//     height: 80px;
-//     padding-top: 20px;
-//     li{
-//         // font-size: 0.8rem;
-//     }
-// }
-// .to-change-into-qrcode {
-//     background-color: #fff;
-//     margin-top: -1px;
-//     text-align: center;
-//     p{
-//     //   font-size: 0.8rem;
-//       color:#999;
-//       padding-bottom: 20px;
-//     }
-// }
-// img.fr.tag-read {
-//     float: right;
-//     margin-top: 20px;
-//     margin-right: -50px;
-// }
-// .to-change-into-exhibition-adress{
-//     margin-top: 10px;
-//     width: 101%;
-// }
 //我的/资产/资产详情/转出
 
 //我的/资产/资产详情/扫一扫
@@ -1073,85 +995,7 @@ table.el-table__body {
     }
 }
 //------------------------------我的/地址薄/编辑---------------
-.edit-adress {
-    background-color: #fff;
-}
-.edit-adress-list {
-    margin-top: 10px;
-    span{
-        background-color: #fff;
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-        padding-left: 15px;
-        color: #999;
-    }
-}
-.edit-adress-list a.mint-cell.mint-field.is-nolabel {
-    border-bottom: 1px solid #999;
-    margin: 0 20px;
-}
-.edit-adress-btn{
-    margin: 20px 0 20px 0;
-}
-.edit-adress-text {
-    // font-size: 0.8rem;
-    color: #999;
-    margin-left: 15px;
-    padding-bottom: 20px;
-}
-.adress-book-list .mint-cell-wrapper{
-    display: block;
-}
-.adress-book-list button{
-    position: absolute;
-    top: 10px;
-    right: 5px;
-}
 
-.add-adress-list .mint-field-other {
-    position: unset;
-}
-.adress-book-content{
-    p{
-    //   font-size:0.8rem;
-      line-height: 20px;
-    }
-}
-//------------------------------我的/地址薄/添加--------------
-.addaddress-icon{
-    margin-left: 15px;
-}
-.add-address{
-  background-color: #fff;
-}
-.add-adress-list {
-    margin-top: 1px;
-    padding-bottom: 20px;
-    span{
-        padding-left: 15px;
-        color: #999;
-        margin-top: 20px;
-        display: inline-block;
-    }
-    img{
-        margin-top: -30px;
-        position: relative;
-        float: right;
-        margin-right: 20px;
-    }
-}
-.add-adress-list a.mint-cell.mint-field.is-nolabel {
-    border-bottom: 1px solid #999;
-    margin: 0 20px;
-}
-.add-adress-list .mint-cell-wrapper {
-    background-image: none  !important;
-}
-.add-adress-btn{
-    margin: 20px 0 20px 0;
-    background-color: #fff;
-}
 //------------------------------我的/公告中心---------------
 .news-center-list .mint-cell-label {
     margin-top: 12px;

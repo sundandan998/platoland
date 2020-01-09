@@ -27,7 +27,7 @@
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">单价</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
-					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.detailData.denominated_assets}}</p>
+					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.$route.params.code}}</p>
 					<div class="purchase-pass-quota">
 						<p>{{$t('m.quota')}}</p>
 						<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number"
@@ -126,8 +126,8 @@
 			}
 		},
 		created() {
-			this.getDetail()
-			this.index(0, '11')
+			this.index(0, '111')
+			// console.log(this.$router)
 		},
 		methods: {
 			onInput(key) {
@@ -135,6 +135,52 @@
 			},
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1);
+			},
+			// tab切换
+			index(index, title) {
+				if (index == 0) {
+					this.releaseData.publish_type = 0
+					// 是否显示手续费
+					this.hide = false
+					// 数字键盘表头
+					this.payTitle = true
+					// 当发布是购买的时候，可用部分是计价资产
+					// this.balanceData.token_code = this.detail.release.denominated_assets
+					this.balanceData.token_code = this.$route.params.code
+					api.balance(this.balanceData).then(res => {
+					this.balData = res.data
+				}).catch(err => {
+					if (err.code == 4003) {
+						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
+					} else {
+						toast(err)
+					}
+				})
+					this.balance()
+				} else {
+					if (index == 1) {
+						this.releaseData.publish_type = 1
+						// 是否显示手续费
+						this.hide = true
+						// 数字键盘表头
+						this.payTitle = false
+						// 当发布是出售的时候，可用部分是pld和ld
+						this.balanceData.token_code = this.detail.token.code
+						this.balance()
+					}
+				}
+			},
+			// 获取资产余额
+			balance() {
+				api.balance(this.balanceData).then(res => {
+					this.balData = res.data
+				}).catch(err => {
+					if (err.code == 4003) {
+						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
+					} else {
+						toast(err)
+					}
+				})
 			},
 			release() {
 				// 判断pay_pwd_active是否为true,如果是true表示已经设置支付密码

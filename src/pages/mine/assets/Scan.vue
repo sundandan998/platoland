@@ -41,7 +41,7 @@
     mounted() {
       this.startRecognize()
       this.startScan()
-      // this.isShow = true;
+      // this.isShow = true
     },
     methods: {
       //创建扫描控件
@@ -69,15 +69,16 @@
           result = result.replace(/\n/g, '')
           that.codeUrl = result
           that.closeScan()
-          // alert(result)
           location.href = result
 
         }
       },
       //开始扫描
       startScan() {
+        console.log('开始扫描')
         if (!window.plus) return
         scan.start()
+        // console.log('扫描结束')
       },
       //关闭扫描
       cancelScan() {
@@ -89,6 +90,10 @@
         if (!window.plus) return
         scan.close()
       },
+      goback() { // 返回
+        this.closeScan()
+        this.$router.push({ name: 'Out' })
+      }
     },
     // beforeDestroy(){}
   }

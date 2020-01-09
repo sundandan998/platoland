@@ -2,12 +2,14 @@
   <div class="turn-out">
     <div class="turn-out-header header">
       <mt-header fixed :title="$t('m.changeout')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button icon="" slot="right">
+          <!-- v-on:click="$router.go(-1)" -->
+          <!-- @click="back" -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
+        <!-- <mt-button icon="" slot="right">
           <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
           </router-link>
-        </mt-button>
+        </mt-button> -->
       </mt-header>
     </div>
     <div class="turn-out-exhibition">
@@ -21,31 +23,29 @@
     </div>
     <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address" placeholder="请选择收款地址">
-        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code}}">
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.name" placeholder="请选择收款地址">
+        <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
+          <!-- <router-link to="/scan">
+            <img src="../../../assets/images/scan.png" alt="" />
+          </router-link> -->
         </router-link>
       </mt-field>
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.address" class="address"></mt-field>
     </div>
     <div class="turn-out-input">
       <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_limit)" v-model="turnOut.amount" type="number">
+      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_out)" v-model="turnOut.amount" type="number">
       </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
-      <p>{{$t('m.servicecharge')}}：{{turnOut.amount*0.002}} PLD</p>
-    </div>
-    <div class="turn-out-exhibition-qrcode">
-      <router-link to="/scan">
-        <span>{{$t('m.scan')}}</span>
-      </router-link>
-    </div>
-    <div class="turn-out-exhibition-btn">
-      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
+      <!-- {{turnOut.amount*0.002}} -->
+      <p>手续费：{{this.detail.token.fee|number}}({{this.detail.token.code}})</p>
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{turnOut.amount}}{{this.detail.token.code}}</span>
+        <span class="paymentamount">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
+          {{this.detail.token.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -58,6 +58,12 @@
       <p>{{$t('m.becarefultwo')}}</p>
       <p>{{$t('m.becarefulthree')}}</p>
       <p>{{$t('m.becarefulfour')}}</p>
+    </div>
+    <div class="turn-out-exhibition-btn">
+      <p class="expenditure"><span class="fl">实际支出</span><span
+          class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
+          ({{this.detail.token.code}})</span></p>
+      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
     </div>
   </div>
 </template>
@@ -99,6 +105,12 @@
       onDelete() {
         this.value = this.value.slice(0, this.value.length - 1)
       },
+      back(){
+        this.$router.push({
+          name:'AssetsDetailed',
+          params:{code:this.detail.token.code,id:this.detail.id}
+        })
+      },
       passwordShow(hide) {
         this.value = ''
         this.hide = !(hide === 'show')
@@ -134,7 +146,11 @@
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {
               toast(res)
-              window.history.go(-1)
+              this.$router.push({
+                name:'OrderDetail',
+                params:{order_id:res.order_id}
+              })
+              // window.history.go(-1)
             }
           }).catch(err => {
             if (err.code != 0) {
@@ -165,6 +181,9 @@
   @import '../../../assets/scss/global';
 
   .turn-out {
+    .mint-field-clear{
+      display: none;
+    }
     .turn-out-exhibition {
       margin: 0 24px 10px 24px;
       border-radius: 10px;
@@ -182,40 +201,66 @@
     }
 
     .payment-input {
-      margin: 10px 24px 80px 24px;
+      margin: 10px 24px 20px 24px;
       background-color: #fff;
-      height: 80px;
+      /* height: 160px; */
       border-radius: 10px;
-      p{
-        margin:10px 0 0 24px;
+
+      p {
+        margin: 10px 0 0 24px;
         display: inline-block;
-        font-size:28px;
+        font-size: 28px;
       }
-      .mint-cell:last-child{
+
+      .mint-cell:last-child {
         border-radius: 10px;
       }
+
+      .address {
+        .mint-cell-wrapper {
+          position: relative;
+          top: -17px;
+        }
+      }
     }
-    .turn-out-input{
+
+    .turn-out-input {
       background-color: #fff;
-      margin:0px 24px;
-      border-radius: 10px;
-      p{
-        margin:10px 0 0 24px;
-        font-size:28px;
+      margin: 20px 24px 0 24px;
+      padding-bottom: 40px;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+
+      p {
+        margin: 10px 0 0 24px;
+        font-size: 28px;
         padding-top: 10px;
       }
     }
-    .turn-out-exhibition-qrcode{
-      margin: 40px auto;
-      text-align: center;
-      span{
-        font-size:28px;
-        color:#036EB8;
+
+    .turn-out-exhibition-btn {
+      width: 100%;
+      position: fixed;
+      bottom: 10px;
+
+      .expenditure {
+        display: flow-root;
+        background-color: #fff;
+        height: 50px;
+        .cost {
+          margin-right: 20px;
+        }
+
       }
     }
-    .turn-out-exhibition-text{
-      margin: 20px 24px;
-      color:#666;
+
+    .turn-out-exhibition-text {
+      margin: 0 24px;
+      color: #666;
+      background-color: #fff;
+      padding: 10px 20px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
     }
   }
 </style>

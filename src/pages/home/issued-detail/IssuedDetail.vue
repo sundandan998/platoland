@@ -31,7 +31,7 @@
       <div class="issued-progress progress">
         <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)"
           :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">已售 {{issuedDetail.sold_number|number}} 份</div>
+        <div slot="start" class="fl">已售 {{issuedDetail.sold_number/issuedDetail.step_number}} 份</div>
         <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
       </div>
       <mt-cell title="每份数量">{{issuedDetail.step_number|number}}{{detailToken.code}}/份</mt-cell>

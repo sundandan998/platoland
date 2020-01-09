@@ -88,9 +88,11 @@
                   name: 'ConfirmTransfer',
                   params: { detail:this.detail,transferParams: this.transferParams }
                 })
+              }else{
+                toast(res)
               }
             }).catch(err => {
-              if (err.code == 4001) {
+              if (err.code == 4004) {0
                 toast(err)
               }
             })
