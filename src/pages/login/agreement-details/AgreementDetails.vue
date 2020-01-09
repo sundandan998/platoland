@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="turn-out-header">
+    <div class="turn-out-header header">
       <mt-header fixed title="用户使用协议">
         <mt-button icon="back" v-on:click="$router.go(-1)" slot="left">返回</mt-button>
       </mt-header>

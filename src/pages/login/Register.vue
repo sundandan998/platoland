@@ -345,7 +345,7 @@
       }
 
       .login-icon {
-        top: -50px;
+        top: -70px;
         position: relative;
       }
 
