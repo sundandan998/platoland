@@ -32,7 +32,7 @@
       <div class="buy-pass-progress progress">
         <mt-progress :value="detail.first_number/(detail.first_number-detail.sold_number)" :bar-height="7">
         </mt-progress>
-        <div slot="start" class="fl">已售 {{this.detail.sold_number|number}} 份</div>
+        <div slot="start" class="fl">已售 {{this.detail.sold_number/detail.step_number}} 份</div>
         <div slot="end" class="fr">总量 {{this.detail.first_number|number}} 份</div>
       </div>
     </div>

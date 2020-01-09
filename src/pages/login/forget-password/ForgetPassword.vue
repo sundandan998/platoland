@@ -16,7 +16,7 @@
     <div class="login-content">
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- v-model="" -->
-      <mt-field label="邮箱/手机号" v-model="verification.username" placeholder="请输入邮箱或手机号" @blur.native.capture="check"
+      <mt-field  v-model="verification.username" placeholder="请输入邮箱或手机号" @blur.native.capture="check"
         :state="status"></mt-field>
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- <mt-field label="手机号" v-model="verification.username" placeholder="请输入手机号"  type="tel" @blur.native.capture="telCheck" :state="telStatus"></mt-field> -->
@@ -180,13 +180,15 @@
   .forget-password {
     .login-cancel {
       img{
-        margin-left:54px;
+        margin-left:50px;
         width: 25px;
+        position: relative;
+        top:20px;
       }
       span {
         color: #333;
         position: relative;
-        top:-5px;
+        top:15px;
       }
     }
     .logo{
@@ -202,9 +204,12 @@
       margin: 50px auto;
       text-align:center;
     }
+    .mint-cell-wrapper{
+      font-size: 14px;
+    }
     .account-number{
       margin-left: 54px;
-      font-size: 28px;
+      font-size: 32px;
     }
     .login-content {
       margin:0 54px 50px 54px;
@@ -217,6 +222,10 @@
       /* .mint-field-core{
         margin-left: 50px;
       } */
+    }
+    .forget-password-btn{
+      width:85%;
+      margin:0 auto;
     }
   }
 </style>

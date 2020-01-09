@@ -2,17 +2,17 @@
   <div class="assets-detailed">
     <div class="assets-detailed-header header">
       <mt-header fixed :title="$t('m.assetdetails')">
-          <!-- v-on:click="$router.go(-1)" -->
-        <mt-button icon="back" slot="left"@click="back">{{$t('m.back')}}</mt-button>
+        <!-- v-on:click="$router.go(-1)" -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
           <el-dropdown trigger="click">
             <span class="el-dropdown-link">
               <img slot="icon" src="../../../assets/images/gd.png">
             </span>
             <el-dropdown-menu slot="dropdown">
-              <router-link to="/scan">
+              <!-- <router-link to="/scan">
                 <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
-              </router-link>
+              </router-link> -->
               <router-link :to="{name:'Out',params:{min_limit:this.assetsToken.min_limit}}">
                 <el-dropdown-item>
                   <span>{{$t('m.changeout')}}</span>
@@ -130,12 +130,12 @@
           <router-link :to="/orderdetail/+item.order_id">
             <div class="buy" v-if="item.flow_type=='转出'">
               <p class="flow_type">{{item.flow_type}}</p>
-              <p><span class="amount">{{item.amount|number}}</span><span class="fr"><img style="position: relative;top: 2px;"
-                    src="../../../assets/images/go.svg" alt="">
-                  <span class="status">{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
+              <p><span class="turn-amount">{{item.amount|number}}</span><span class="fr"><img
+                    style="position: relative;top: 2px;" src="../../../assets/images/go.svg" alt="">
+                  <span class="turn-status">{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
                 </span>
               </p>
-              <p>
+              <!-- <p>
                 <el-steps :space="300" :active="item.status == 5 ?1:item.status == 0?2:0" finish-status="finish"
                   align-center>
                   <el-step title="发起申请"></el-step>
@@ -143,7 +143,7 @@
                   <el-step title="进行中"></el-step>
                   <el-step title="审核结果"></el-step>
                 </el-steps>
-              </p>
+              </p> -->
             </div>
           </router-link>
         </div>
@@ -224,9 +224,9 @@
       }
     },
     methods: {
-      back(){
+      back() {
         this.$router.push({
-          name:'Assets'
+          name: 'Assets'
         })
       },
       // 资产详情
@@ -268,7 +268,7 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          this.freezeParams.code = this.$route.params.code||this.detail.token.code
+          this.freezeParams.code = this.$route.params.code || this.detail.token.code
           api.freeze(this.freezeParams).then(res => {
             if (res.code == 0) {
               // 冻结详情
@@ -419,13 +419,30 @@
         display: inline-block;
       }
 
+      .turn-amount {
+        font-size: 30px;
+        color: #333;
+        margin: 10px 0 10px 20px;
+      }
+
+      .turn-status {
+        position: relative;
+        top: -12px;
+        right: 20px;
+        margin-left: 30px;
+        font-size: 30px;
+        color:#333;
+      }
+
       .buy-amount {
         margin: 20px;
         display: inline-block;
       }
-      .status{
+
+      .status {
         margin-right: 20px;
       }
+
       .sold {
         margin-left: 20px;
       }
@@ -441,9 +458,12 @@
       .mint-button--small {
         height: 22px;
       }
-
       .buy {
         border-bottom: 20px solid #f2f2f2;
+        img {
+          position: relative;
+          top: -4px;
+        }
       }
     }
 
@@ -451,7 +471,7 @@
       position: fixed;
       width: 100%;
       bottom: 10px;
-      z-index:1;
+      z-index: 1;
     }
   }
 </style>

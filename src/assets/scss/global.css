@@ -99,7 +99,7 @@ h1 {
 }
 
 .mint-field-state .mintui {
-  font-size: 30px;
+  display: none;
 }
 
 .mint-popup-bottom {
