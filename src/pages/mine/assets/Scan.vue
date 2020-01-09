@@ -49,8 +49,7 @@
         let that = this
         if (!window.plus) return
         scan = new plus.barcode.Barcode('bcid')
-        scan.onmarked = onmarked
-        function onmarked(type, result, file) {
+        scan.onmarked = (type, result, file) => {
           switch (type) {
             case plus.barcode.QR:
               type = 'QR'
@@ -67,10 +66,14 @@
           }
           console.log('1')
           result = result.replace(/\n/g, '')
-          that.codeUrl = result
+          //that.codeUrl = result
+          // alert(result)
+          this.$router.push({
+            name:'Out',
+            params:{address:result}
+          })
           that.closeScan()
-          location.href = result
-
+          // location.href = result
         }
       },
       //开始扫描
@@ -89,10 +92,6 @@
       closeScan() {
         if (!window.plus) return
         scan.close()
-      },
-      goback() { // 返回
-        this.closeScan()
-        this.$router.push({ name: 'Out' })
       }
     },
     // beforeDestroy(){}

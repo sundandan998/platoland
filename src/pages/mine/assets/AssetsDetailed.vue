@@ -10,9 +10,9 @@
               <img slot="icon" src="../../../assets/images/gd.png">
             </span>
             <el-dropdown-menu slot="dropdown">
-              <!-- <router-link to="/scan">
+              <router-link to="/scan">
                 <el-dropdown-item>{{$t('m.scan')}}</el-dropdown-item>
-              </router-link> -->
+              </router-link>
               <router-link :to="{name:'Out',params:{min_limit:this.assetsToken.min_limit}}">
                 <el-dropdown-item>
                   <span>{{$t('m.changeout')}}</span>
