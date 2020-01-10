@@ -14,7 +14,7 @@
     </div>
     <div class="add-adress-list">
       <span>姓名:</span>
-      <mt-field v-model="addAddress.name"></mt-field>
+      <mt-field v-model="addAddress.firstName"></mt-field>
       <span>备注:</span>
       <mt-field v-model="addAddress.remark"></mt-field>
       <span>地址:</span>
@@ -51,7 +51,7 @@
         addressData: [],
         // 添加地址
         addAddress: {
-          name: '',
+          firstName: '',
           token_code: '',
           address: '',
           remark: ''

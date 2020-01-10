@@ -88,6 +88,10 @@
   @import '../../../assets/scss/global';
 
   .to-change-into {
+   #canvas{
+    width: 300px !important;
+    height: 300px !important;
+    }
     .to-change-into-exhibition {
       margin: 10px auto;
       background-color: #fff;

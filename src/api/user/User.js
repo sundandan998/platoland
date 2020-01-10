@@ -40,6 +40,14 @@ export default {
       data: params
     })
   },
+  // 必填邀请码
+  inviteCode(params = {}){
+    return request({
+      url: "/user/invite_code/check/",
+      method: "get",
+      params: params
+    })
+  },
   // 用户信息
   getUserInfo(params = {}) {
     return request({

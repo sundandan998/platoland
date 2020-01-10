@@ -32,7 +32,7 @@
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
-      <mt-field placeholder="请输入6位邀请码" v-model="verification.invite_code"@blur.native.capture="invitation">
+      <mt-field placeholder="请输入6位邀请码" v-model="verification.invite_code" @blur.native.capture="invitation">
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
     </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="login-btn">
       <!-- <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}"> -->
-      <mt-button  type="primary" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
+      <mt-button type="primary" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
       <!-- </router-link> -->
     </div>
     <div class="login-switch">
@@ -213,7 +213,7 @@
       router() {
         this.$router.push({
           name: 'Reset',
-          params: { username: this.verification.username, password: this.verification.password,invite_code:this.verification.invite_code}
+          params: { username: this.verification.username, password: this.verification.password, invite_code: this.verification.invite_code }
         })
       },
       invitationCode() {
@@ -226,12 +226,19 @@
         }).catch(err => { })
       },
       invitation() {
-        if (this.verification.code == '') {
-          Toast({
-            message: '请填写6位邀请码',
-            className: 'zZindex'
-          })
-        }
+        api.inviteCode(this.verification).then(res => {
+          if (res.code == 0) {
+            this.router()
+          }
+        }).catch(err => {
+          toast(err)
+        })
+        // if (this.verification.code == '') {
+        //   Toast({
+        //     message: '请填写6位邀请码',
+        //     className: 'zZindex'
+        //   })
+        // }
       },
       // 密码校验
       // pwdCheck() {
@@ -256,7 +263,6 @@
         this.verification.password = ''
       }
     },
-
     watch: {
       // 登录页当邮箱和密码全部输入，按钮变色
       verification: {
@@ -267,7 +273,7 @@
           var tel = /^1[23456789]\d{9}$/
           var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
           // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if (val.username != '' && val.password != '' && (email.test(val.username) || tel.test(val.username))) {
+          if (val.username != '' && val.password != '' && val.invite_code != '' && (email.test(val.username) || tel.test(val.username))) {
             // 高亮
             this.disabled = false
           } else {
@@ -371,8 +377,9 @@
       }
 
     }
-    .login-btn{
-      margin:0 60px;
+
+    .login-btn {
+      margin: 0 60px;
     }
   }
 </style>

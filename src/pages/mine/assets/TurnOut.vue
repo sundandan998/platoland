@@ -23,16 +23,15 @@
     </div>
     <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" v-model="this.$route.params.name">
+      <mt-field type="text" v-model="this.$route.params.name"  readonly="readonly">
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
-          <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
           <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
           </router-link>
         </router-link>
       </mt-field>
-      <mt-field type="text" readonly="readonly" placeholder="请选择收款地址" v-model="this.$route.params.address"
+      <mt-field type="text"  placeholder="请选择收款地址" v-model="this.$route.params.address"
         class="address"></mt-field>
     </div>
     <div class="turn-out-input">
