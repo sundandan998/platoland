@@ -9,9 +9,6 @@
 						<!-- <P>{{infoData.email}}</P> -->
 					</div>
 					<div class="mine-cell mine">
-						<!-- <mt-cell title="邀请新人" to="/invite" is-link class="mine-cell-list">
-							<img slot="icon" src="../../assets/images/people.svg">
-						</mt-cell> -->
 						<div class="mine-border-radius">
 							<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/zc.svg">
@@ -42,6 +39,11 @@
 									<img slot="icon" src="../../assets/images/tz.svg" alt="" />
 								</mt-cell>
 							</router-link>
+						</div>
+						<div class="invite-people">
+							<mt-cell title="邀请新人" to="/invite" is-link class="mine-cell-list">
+								<img slot="icon" src="../../assets/images/people.svg">
+							</mt-cell>
 						</div>
 					</div>
 				</mt-tab-container-item>
@@ -86,6 +88,7 @@
 </script>
 <style lang="scss">
 	@import '../../assets/scss/global';
+
 	.exchange {
 		.mine-head {
 			img {
@@ -102,6 +105,7 @@
 
 		.mine-cell {
 			margin: 0 24px;
+
 			.mint-cell-title {
 				color: #000;
 			}
@@ -125,6 +129,12 @@
 			}
 
 			.mine-token {
+				a.mint-cell.mine-cell-list {
+					border-radius: 10px;
+				}
+			}
+			.invite-people{
+				margin:20px 0;
 				a.mint-cell.mine-cell-list {
 					border-radius: 10px;
 				}
