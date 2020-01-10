@@ -2,8 +2,8 @@
   <div class="turn-out">
     <div class="turn-out-header header">
       <mt-header fixed :title="$t('m.changeout')">
-          <!-- v-on:click="$router.go(-1)" -->
-          <!-- @click="back" -->
+        <!-- v-on:click="$router.go(-1)" -->
+        <!-- @click="back" -->
         <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
           <router-link to="/scan">
@@ -23,7 +23,7 @@
     </div>
     <div class="payment-input">
       <p>{{$t('m.payment')}}</p>
-      <mt-field type="text" readonly="readonly" v-model="this.$route.params.name" >
+      <mt-field type="text" readonly="readonly" v-model="this.$route.params.name">
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
@@ -32,7 +32,8 @@
           </router-link>
         </router-link>
       </mt-field>
-      <mt-field type="text" readonly="readonly"  placeholder="请选择收款地址"v-model="this.$route.params.address" class="address"></mt-field>
+      <mt-field type="text" readonly="readonly" placeholder="请选择收款地址" v-model="this.$route.params.address"
+        class="address"></mt-field>
     </div>
     <div class="turn-out-input">
       <p>{{$t('m.turnnum')}}</p>
@@ -41,16 +42,6 @@
       <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
       <!-- {{turnOut.amount*0.002}} -->
       <p>手续费：{{this.detail.token.fee|number}}({{this.detail.token.code}})</p>
-    </div>
-    <div>
-      <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
-          {{this.detail.token.code}}</span>
-        <van-password-input :value="value" @focus="showKeyboard = true" />
-        <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
-          @blur="showKeyboard = false" />
-      </van-popup>
     </div>
     <div class="turn-out-exhibition-text">
       <p>{{$t('m.becareful')}}</p>
@@ -63,7 +54,9 @@
       <p class="expenditure"><span class="fl">实际支出</span><span
           class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</span></p>
-      <mt-button type="primary" size="large" @click="passwordShow" :disabled="disabled">确定</mt-button>
+      <router-link :to="{name:'OutConfirm',params:{detail: this.detail,amount:turnOut.amount}}">
+        <mt-button type="primary" size="large" :disabled="disabled">确定</mt-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -99,67 +92,14 @@
       ])
     },
     methods: {
-      onInput(key) {
-        this.value = (this.value + key).slice(0, 6)
-      },
-      onDelete() {
-        this.value = this.value.slice(0, this.value.length - 1)
-      },
-      back(){
+      back() {
         this.$router.push({
-          name:'AssetsDetailed',
-          params:{code:this.detail.token.code,id:this.detail.id}
+          name: 'AssetsDetailed',
+          params: { code: this.detail.token.code, id: this.detail.id }
         })
-      },
-      passwordShow(hide) {
-        this.value = ''
-        this.hide = !(hide === 'show')
-        this.popupVisible = !(false === 'true')
-        this.value = ''
-        let pay_pwd = window.sessionStorage.getItem('pay_pwd_active')
-        if (pay_pwd == 'true') {
-          this.popupVisible = true
-        } else {
-          this.$messagebox({
-            title: '提示',
-            message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            showCancelButton: true
-          }).then(action => {
-            if (action == 'confirm') {
-              this.$router.push({
-                name: 'Safety'
-                // params: { id: 'reservation' }
-              })
-            }
-          })
-        }
       },
     },
     watch: {
-      value() {
-        if (this.value.length == 6) {
-          this.turnOut.token = this.detail.token.code
-          this.turnOut.address = this.$route.params.address
-          this.turnOut.pay_pwd = this.value
-          api.outAsset(this.turnOut).then(res => {
-            if (res.code == 0) {
-              toast(res)
-              this.$router.push({
-                name:'OrderDetail',
-                params:{order_id:res.order_id}
-              })
-              // window.history.go(-1)
-            }
-          }).catch(err => {
-            if (err.code != 0) {
-              toast(err)
-            }
-          })
-          this.popupVisible = false
-        }
-      },
       turnOut: {
         immediate: true,
         deep: true,
@@ -181,9 +121,10 @@
   @import '../../../assets/scss/global';
 
   .turn-out {
-    .mint-field-clear{
+    .mint-field-clear {
       display: none;
     }
+
     .turn-out-exhibition {
       margin: 0 24px 10px 24px;
       border-radius: 10px;
@@ -247,6 +188,7 @@
         display: flow-root;
         background-color: #fff;
         height: 50px;
+
         .cost {
           margin-right: 20px;
         }

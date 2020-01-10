@@ -326,6 +326,9 @@
           })
         } else {
           this.$router.go(-1)
+          // this.$router.push({
+          //   name:'Mine'
+          // })
         }
       },
       // 订单详情

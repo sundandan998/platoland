@@ -237,6 +237,12 @@ export default new Router({
       name: 'Out',
       component: () => import("@/pages/mine/assets/TurnOut")
     },
+    // 转出确认
+    {
+      path: '/confirm',
+      name: 'OutConfirm',
+      component: () => import("@/pages/mine/assets/OutConfirm")
+    },
     //首页/我的/资产/明细/扫一扫
     {
       path: '/scan',
