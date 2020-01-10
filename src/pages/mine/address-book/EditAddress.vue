@@ -24,9 +24,9 @@
 			<mt-field v-model="editparams.remark"> </mt-field>
 			<span>地址</span>
 			<mt-field v-model="editparams.address"></mt-field>
-			<!-- <router-link to="/scan">
+			<router-link to="/scan">
 				<img src="../../../assets/images/scan.png" alt="">
-			</router-link> -->
+			</router-link>
 		</div>
 
 		<div class="edit-adress-text">

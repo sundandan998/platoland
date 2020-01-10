@@ -19,9 +19,9 @@
       <mt-field v-model="addAddress.remark"></mt-field>
       <span>地址:</span>
       <mt-field v-model="addAddress.address"></mt-field>
-      <!-- <router-link to="scan">
+      <router-link to="scan">
         <img class="fr" src="../../../assets/images/scan.png" alt="">
-      </router-link> -->
+      </router-link>
     </div>
     <div class="add-adress-btn">
       <!-- <router-link  :to="/book/+this.$route.params.code"> -->

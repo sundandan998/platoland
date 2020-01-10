@@ -5,11 +5,11 @@
           <!-- v-on:click="$router.go(-1)" -->
           <!-- @click="back" -->
         <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
-        <!-- <mt-button icon="" slot="right">
+        <mt-button icon="" slot="right">
           <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
           </router-link>
-        </mt-button> -->
+        </mt-button>
       </mt-header>
     </div>
     <div class="turn-out-exhibition">
@@ -27,9 +27,9 @@
         <router-link :to="{name:'Book',params:{token_code:this.detail.token.code,id:'out'}}">
           <!-- <router-link :to="/book/+this.detail.token.code"> -->
           <img src="../../../assets/images/book.png" alt="" />
-          <!-- <router-link to="/scan">
+          <router-link to="/scan">
             <img src="../../../assets/images/scan.png" alt="" />
-          </router-link> -->
+          </router-link>
         </router-link>
       </mt-field>
       <mt-field type="text" readonly="readonly"  placeholder="请选择收款地址"v-model="this.$route.params.address" class="address"></mt-field>
