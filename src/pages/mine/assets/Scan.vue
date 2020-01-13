@@ -3,16 +3,18 @@
     <div class="scan-header">
       <mt-header fixed :title="$t('m.scan')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button icon slot="right">
+        <!-- <mt-button icon slot="right">
           <router-link to="/">
             <span>相册</span>
           </router-link>
-        </mt-button>
+        </mt-button> -->
       </mt-header>
     </div>
     <div class="scan">
       <div id="bcid">
-        <div style="height:40%"></div>
+        <div>
+          <img src="../../../assets/images/close.svg" alt="">
+        </div>
         <!-- <p class="tip">...载入中...</p> -->
       </div>
       <footer>
@@ -69,8 +71,8 @@
           //that.codeUrl = result
           // alert(result)
           this.$router.push({
-            name:'Out',
-            params:{address:result}
+            name: 'Out',
+            params: { address: result }
           })
           that.closeScan()
           // location.href = result
@@ -105,6 +107,7 @@
 
   .scan #bcid {
     width: 100%;
+    height: 100% !important;
     position: absolute;
     left: 0;
     right: 0;

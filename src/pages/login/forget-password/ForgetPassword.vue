@@ -183,12 +183,12 @@
         margin-left:50px;
         width: 25px;
         position: relative;
-        top:20px;
+        top:40px;
       }
       span {
         color: #333;
         position: relative;
-        top:15px;
+        top:40px;
       }
     }
     .logo{
@@ -201,14 +201,14 @@
     
     }
     .forget-password-title{
-      margin: 50px auto;
+      margin: 100px auto;
       text-align:center;
     }
     .mint-cell-wrapper{
       font-size: 14px;
     }
     .account-number{
-      margin-left: 54px;
+      margin-left: 68px;
       font-size: 32px;
     }
     .login-content {

@@ -109,7 +109,7 @@
       }
     },
     created() {
-      this.invitationCode()
+      // this.invitationCode()
     },
     beforeRouteEnter(to, from, next) {
       window.document.body.style.backgroundColor = "#fff"
@@ -150,8 +150,17 @@
       },
       // 发送验证码
       sendCode() {
+        api.inviteCode(this.verification).then(res => {
+          if (res.code == 0) {
+            this.router()
+          }
+        }).catch(err => {
+          if (err.code == 4003) {
+            toast(err)
+          }
+        })
         var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
-        if (!password.test(this.verification.password)) {
+        if (!password.test(this.verification.password) || res.code == 0) {
           Toast({
             message: '请输入6-16位数字加字母组合密码',
             className: 'zZindex'
@@ -216,22 +225,24 @@
           params: { username: this.verification.username, password: this.verification.password, invite_code: this.verification.invite_code }
         })
       },
-      invitationCode() {
-        api.code().then(res => {
-          if (res.code == 0) {
-            if (res.data.is_invite_code == true) {
-              this.verification.code != ''
-            }
-          }
-        }).catch(err => { })
-      },
+      // invitationCode() {
+      //   api.code().then(res => {
+      //     if (res.code == 0) {
+      //       if (res.data.is_invite_code == true) {
+      //         this.verification.code != ''
+      //       }
+      //     }
+      //   }).catch(err => { })
+      // },
       invitation() {
         api.inviteCode(this.verification).then(res => {
           if (res.code == 0) {
             this.router()
           }
         }).catch(err => {
-          toast(err)
+          if (err.code == 4003) {
+            toast(err)
+          }
         })
         // if (this.verification.code == '') {
         //   Toast({
@@ -294,11 +305,13 @@
 
       img {
         height: 25px;
+        position: relative;
+        top: 40px;
       }
 
       span {
         position: relative;
-        top: -5px;
+        top: 40px;
         color: #333;
       }
     }
@@ -306,7 +319,7 @@
     .logo {
       img {
         width: 60%;
-        margin: 50px auto 150px auto;
+        margin: 100px auto 150px auto;
         display: block;
       }
     }
@@ -373,7 +386,7 @@
         font-size: 24px;
         text-align: center;
         color: #036EB8;
-        margin-top: 10px;
+        margin-top: 60px;
       }
 
     }

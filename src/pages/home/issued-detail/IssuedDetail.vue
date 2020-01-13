@@ -195,5 +195,9 @@
       }
 
     }
+    .transfer-button{
+      position: fixed;
+      width: 100%;
+    }
   }
 </style>

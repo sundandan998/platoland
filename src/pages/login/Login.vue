@@ -279,7 +279,7 @@
         text-align: center;
         color: #036EB8;
         font-size: 26px;
-        margin-top: 10px;
+        margin-top: 60px;
       }
 
     }
