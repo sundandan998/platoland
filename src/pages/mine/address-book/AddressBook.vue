@@ -9,26 +9,26 @@
 				<!-- </router-link> -->
 				<mt-button icon="" slot="right" @click.native="jump">
 					<!-- <router-link to="list"> -->
-						<img src="../../../assets/images/u2664.png" alt="" />
+					<img src="../../../assets/images/u2664.png" alt="" />
 					<!-- </router-link> -->
 				</mt-button>
 			</mt-header>
 		</div>
 		<p class="no-data" v-if="this.book.length==0">暂无数据</p>
 		<div class="adress-book-list" v-for="(item,index) in book">
-		<!-- <p class="no-data" v-if="item.length<0">暂无数据</p> -->
+			<!-- <p class="no-data" v-if="item.length<0">暂无数据</p> -->
 			<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
 			<!-- <router-link :to="{name:'Out', params:{ id:item.id,address:item.address}}"> -->
 			<mt-cell @click.native="routerLink(item)">
 				<div class="adress-book-content fl">
-					<p>{{item.name}}</p>
+					<p class="name">{{item.name}}</p>
 					<p>{{item.remark}}</p>
 					<p>{{item.address}}</p>
 				</div>
 				<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
 							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}"> -->
 				<div class="edit-button">
-					<mt-button size="small" type="primary" @click.native="address(item)">{{$t('m.edit')}}</mt-button>
+					<mt-button size="small" type="primary" @click.native="address(item)">编 辑</mt-button>
 				</div>
 				<!-- </router-link> -->
 			</mt-cell>
@@ -82,7 +82,7 @@
 				// debugger
 				let refpath = window.sessionStorage.getItem('refpath')
 				// refpath == '/add'
-				if (refpath == '/out' || refpath == '/edit'||refpath == '/add') {
+				if (refpath == '/out' || refpath == '/edit' || refpath == '/add') {
 					this.$router.push({
 						name: 'Out',
 						params: {
@@ -106,16 +106,16 @@
 					})
 				}
 			},
-			jump(){
+			jump() {
 				let refpath = window.sessionStorage.getItem('refpath')
-				if (refpath == '/out'){
+				if (refpath == '/out') {
 					this.$router.push({
-						name:'Add',
-						params:{name:this.$route.params.name,icon:this.$route.params.icon,code:this.$route.params.token_code,nickname:this.$route.params.nickname,subject:this.$route.params.subject}
+						name: 'Add',
+						params: { name: this.$route.params.name, icon: this.$route.params.icon, code: this.$route.params.token_code, nickname: this.$route.params.nickname, subject: this.$route.params.subject }
 					})
-				}else{
+				} else {
 					this.$router.push({
-						name:'List'
+						name: 'List'
 					})
 				}
 			}
@@ -128,7 +128,7 @@
 	.adress-book {
 		.no-data {
 			margin: 200px auto;
-			text-align:center;
+			text-align: center;
 		}
 
 		.adress-book-list {
@@ -146,12 +146,21 @@
 			.adress-book-content {
 				p {
 					margin: 20px 0;
+					font-size: 14px;
+				}
+				.name{
+					font-size: 16px;
+					font-weight: 700;
 				}
 			}
 
 			.edit-button {
 				position: absolute;
 				right: 20px;
+				button {
+					font-size: 16px;
+					height: 40px;
+				}
 			}
 		}
 	}

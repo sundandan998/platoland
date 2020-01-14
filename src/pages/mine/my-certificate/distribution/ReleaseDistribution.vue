@@ -1,7 +1,7 @@
 <template>
   <div class="release">
     <div class="release-header header">
-      <mt-header fixed title="创建分利计划">
+      <mt-header fixed title="发布分利计划">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
