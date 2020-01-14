@@ -1,18 +1,19 @@
 <template>
   <div class="scan">
-    <div class="scan-header">
+    <!-- <div class="scan-header">
       <mt-header fixed :title="$t('m.scan')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <!-- <mt-button icon slot="right">
+        <mt-button icon slot="right">
           <router-link to="/">
             <span>相册</span>
           </router-link>
-        </mt-button> -->
+        </mt-button>
       </mt-header>
-    </div>
-    <div class="scan">
+    </div> -->
+
+    <div class="scan-begin">
       <div id="bcid">
-        <div>
+        <div class="scan-close" @click="close">
           <img src="../../../assets/images/close.svg" alt="">
         </div>
         <!-- <p class="tip">...载入中...</p> -->
@@ -46,6 +47,12 @@
       // this.isShow = true
     },
     methods: {
+      // 关闭
+      close() {
+        this.cancelScan()
+        this.closeScan()
+        this.$router.go(-1)
+      },
       //创建扫描控件
       startRecognize() {
         let that = this
@@ -87,6 +94,7 @@
       },
       //关闭扫描
       cancelScan() {
+        console.log('关闭扫描')
         if (!window.plus) return
         scan.cancel()
       },
@@ -102,18 +110,22 @@
 <style lang="scss">
   /* @import '../../../assets/scss/global' */
   .scan {
-    height: 100%;
-  }
+    .scan-close {
+      text-align: left;
+      margin: 50px 0 0 50px;
+      z-index: 111;
+    }
 
-  .scan #bcid {
-    width: 100%;
-    height: 100% !important;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 3rem;
-    text-align: center;
-    color: #333;
+    .scan-begin #bcid {
+      width: 100%;
+      height: 100% !important;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+      color: #333;
+    }
   }
 </style>

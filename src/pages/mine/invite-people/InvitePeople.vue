@@ -14,8 +14,8 @@
       <span>您的邀请码</span>
       <p>{{infoData.invite_code}}</p>
     </div>
-    <div class="invite-code-copy">
-      <span @click="copy" class="tag-read" :data-clipboard-text="infoData.invite_code">复制</span>
+    <div class="invite-code-copy tag-read" @click="copy" :data-clipboard-text="infoData.invite_code">
+      <span>复制</span>
     </div>
   </div>
 </template>
