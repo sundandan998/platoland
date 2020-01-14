@@ -332,7 +332,6 @@
       }
     }
 
-
     .register-tab {
       margin-top: 50px;
 
@@ -342,7 +341,7 @@
       }
 
       .van-tabs__content {
-        margin-top: 60px;
+        margin-top: 40px;
       }
     }
 

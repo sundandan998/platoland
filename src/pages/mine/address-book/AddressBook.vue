@@ -7,10 +7,10 @@
 				<!-- @click="back" -->
 				<mt-button icon="back" slot="left" @click="back" to="mine">返回</mt-button>
 				<!-- </router-link> -->
-				<mt-button icon="" slot="right">
-					<router-link to="list">
+				<mt-button icon="" slot="right" @click.native="jump">
+					<!-- <router-link to="list"> -->
 						<img src="../../../assets/images/u2664.png" alt="" />
-					</router-link>
+					<!-- </router-link> -->
 				</mt-button>
 			</mt-header>
 		</div>
@@ -65,6 +65,7 @@
 				api.addressList(this.bookParams).then(res => {
 					// if(res.code == 0){
 					this.book = res.data
+					// console.log(this.book)
 					// this.$store.commit('detail', res.data)
 					this.$router.push({
 						name: 'Edit',
@@ -97,15 +98,27 @@
 			back() {
 				if (this.$route.params.id == 'out') {
 					this.$router.push({
-						name: 'Out'
+						name: 'Out',
 					})
 				} else {
 					this.$router.push({
 						name: 'Mine'
 					})
 				}
-
 			},
+			jump(){
+				let refpath = window.sessionStorage.getItem('refpath')
+				if (refpath == '/out'){
+					this.$router.push({
+						name:'Add',
+						params:{name:this.$route.params.name,icon:this.$route.params.icon,code:this.$route.params.token_code,nickname:this.$route.params.nickname,subject:this.$route.params.subject}
+					})
+				}else{
+					this.$router.push({
+						name:'List'
+					})
+				}
+			}
 		},
 	}
 </script>

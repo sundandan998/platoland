@@ -12,12 +12,6 @@
     </div> -->
 
     <div class="scan-begin">
-      <div id="bcid">
-        <div class="scan-close" @click="close">
-          <img src="../../../assets/images/close.svg" alt="">
-        </div>
-        <!-- <p class="tip">...载入中...</p> -->
-      </div>
       <footer>
         <p @click="startRecognize"></p>
         <p @click="startScan"></p>
@@ -26,9 +20,10 @@
       </footer>
     </div>
     <div class="scan-button">
-      <router-link to="/scandetail">
-        <!--<mt-button type="primary" size="large">转出</mt-button>-->
-      </router-link>
+      <mt-button type="danger" size="large" @click.native="close">取消</mt-button>
+      <!-- <router-link to="/scandetail">
+        <mt-button type="primary" size="large">转出</mt-button>
+      </router-link> -->
     </div>
   </div>
 </template>
@@ -126,6 +121,16 @@
       bottom: 0;
       text-align: center;
       color: #333;
+    }
+
+    .scan-button {
+      button {
+        width: 100%;
+        background-color: #fff;
+        color: #000;
+        position: fixed;
+        bottom: 10px;
+      }
     }
   }
 </style>
