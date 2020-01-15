@@ -117,6 +117,18 @@ export default new Router({
       name: 'Mine',
       component: () => import("@/pages/mine/Mine")
     },
+    // 修改昵称
+    {
+      path: '/editnickname',
+      name: 'EditNickname',
+      component: () => import("@/pages/mine/nickname/EditNickname")
+    },
+    // 个人信息
+    {
+      path: '/information',
+      name: 'Information',
+      component: () => import("@/pages/mine/nickname/Information")
+    },
     // 邀请新人
     {
       path: '/invite',

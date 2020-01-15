@@ -4,9 +4,12 @@
 			<mt-tab-container class="page-tabbar-container" v-model="selected">
 				<mt-tab-container-item id="mine" class="home-index">
 					<div class="mine-head">
-						<img src="../../assets/images/avatar.png" alt="" />
-						<p>{{infoData.email||infoData.mobile}}</p>
-						<!-- <P>{{infoData.email}}</P> -->
+						<mt-cell v-if="this.infoData.nickname==null" :title="infoData.email||infoData.mobile" to="/information" is-link class="mine-cell-list">
+							<img slot="icon" src="../../assets/images/avatar.svg" class="avatar">
+							去设置</mt-cell>
+						<mt-cell v-if="this.infoData.nickname!=null":title="infoData.email||infoData.mobile" to="/information" is-link class="mine-cell-list">
+							<img slot="icon" src="../../assets/images/avatar.svg" class="avatar">
+							{{infoData.nickname}}</mt-cell>
 					</div>
 					<div class="mine-cell mine">
 						<div class="mine-border-radius">
@@ -61,7 +64,7 @@
 				selected: 'mine',
 				message: 'mine',
 				infoData: {},
-				access_token: ''
+				access_token: '',
 			}
 		},
 		components: {
@@ -84,22 +87,25 @@
 			},
 		},
 	}
-
 </script>
 <style lang="scss">
 	@import '../../assets/scss/global';
 
 	.exchange {
 		.mine-head {
-			img {
-				display: block;
-				margin: 30px auto;
+			margin: 20px 24px;
+
+			.mint-cell:last-child {
+				border-radius: 10px;
 			}
 
-			p {
-				text-align: center;
-				margin-bottom: 50px;
-				font-size: 26px;
+			.mint-cell-value {
+				font-size: 12px;
+			}
+
+			.avatar {
+				width: 50px;
+				height: 50px;
 			}
 		}
 
@@ -133,8 +139,10 @@
 					border-radius: 10px;
 				}
 			}
-			.invite-people{
-				margin:20px 0;
+
+			.invite-people {
+				margin: 20px 0;
+
 				a.mint-cell.mine-cell-list {
 					border-radius: 10px;
 				}
