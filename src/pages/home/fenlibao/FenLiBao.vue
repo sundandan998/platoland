@@ -13,7 +13,7 @@
         <div class="home-pub-token-days">
           <div class="home-pub-token-days-top">
             <p>锁仓期限 {{item.freeze_days}}天</span>
-              <p class="fr percentage">{{item.air}}%</p>
+              <p class="fr percentage">{{item.air|number}}%</p>
           </div>
           <div>
             <p>最高转入{{item.high_amount}}份</p>

@@ -8,31 +8,36 @@
     <div class="release-token">
       <div class="home-pub-token">
         <img :src="balanceToken.icon" alt="" class="fl icon">
-        <span><b>{{balanceToken.code}}</b>( {{balanceToken.nickname}} ) 
+        <span><b>{{balanceToken.code}}</b>( {{balanceToken.nickname}} )
           <p>{{balanceToken.subject}} </p>
         </span>
       </div>
     </div>
     <div class="release-item">
-      <p>分利总额</p>
-      <mt-field placeholder="请输入整数" v-model="releaseParams.total_amount" @blur.native.capture="integer"></mt-field>
-      <p>锁仓期限</p>
-      <mt-field placeholder="请选择锁仓期限 >" readonly @click.native="showPicker = true" v-model="releaseParams.freeze_days">
+      <mt-field label="发布份数" placeholder="最低100" v-model="releaseParams.total_part " @blur.native.capture="num">份
+      </mt-field>
+      <mt-field label="每份数量" placeholder="请输入整数" v-model="releaseParams.step_amount" @blur.native.capture="integer">
+      </mt-field>
+      <mt-field label="冻结时长" placeholder="请选择冻结时长 >" readonly @click.native="showPicker = true"
+        v-model="releaseParams.freeze_days">
       </mt-field>
       <van-popup v-model="showPicker" position="bottom">
         <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
       </van-popup>
-      <p>年化利率</p>
-      <mt-field placeholder="0~200 %" v-model="releaseParams.air" @blur.native.capture="air"></mt-field>
-      <p>转入限额</p>
-      <mt-field placeholder="最少转入量" class="input-box"v-model="releaseParams.min_amount">
+      <mt-field label="分利率" placeholder="0~50%" v-model="releaseParams.air" @blur.native.capture="air">
       </mt-field>
-      <mt-field placeholder="最多转入量" @blur.native.capture="limit" class="input-box" v-model="releaseParams.high_amount">
-      </mt-field>
+      <img src="../../../../assets/images/prompt.svg" alt="" @click="prompt">
       <div class="release-interest">
-        <span>支出利润:{{releaseParams.total_amount*releaseParams.air*releaseParams.freeze_days*0.01}}{{balanceToken.code}}</span>
+        <span>支出利润:{{releaseParams.total_part*releaseParams.air*releaseParams.freeze_days*0.01}}{{balanceToken.code}}</span>
         <span>可用数量:{{this.balanceData.balance}}</span>
       </div>
+      <div class="purchase-quantity">
+        <mt-field label="起购份数" placeholder="请输入整数"  @blur.native.capture="integer" v-model="releaseParams.min_part">份
+        </mt-field>
+        <mt-field label="最多可购份数" placeholder="请输入整数" @blur.native.capture="limit" v-model="releaseParams.high_part">
+        份</mt-field>
+      </div>
+      <mt-field label="截止时间" placeholder="请输入生日" type="date" v-model="releaseParams.deadline_date"></mt-field>
     </div>
     <div class="release-button">
       <mt-button type="primary" size="large" @click.native="release" :disabled="disabled">确定发布</mt-button>
@@ -60,19 +65,21 @@
         showPicker: false,
         columns: ['7', '15', '30', '60', '90', '120', '180', '365'],
         balanceData: '',
-        balanceToken:'',
+        balanceToken: '',
         releaseParams: {
           code: this.$route.params.code,
-          total_amount: '',
-          min_amount: '',
-          high_amount: '',
+          total_part: '',
+          min_part: '',
+          high_part: '',
+          step_amount: '',
           freeze_days: '',
           air: '',
-          pay_pwd: ''
+          pay_pwd: '',
+          deadline_date: ''
         },
         value: '',
         showKeyboard: false,
-        val:'0.0001'
+        val: '0.0001'
       }
     },
     created() {
@@ -103,9 +110,17 @@
         }).catch(err => {
         })
       },
+      // 提示
+      prompt() {
+        this.$messagebox({
+          title: '分利率',
+          message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/360 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/360',
+          confirmButtonText: '我知道了', 
+        })
+      },
       // 判断输入是否是整数
       integer() {
-        if (!(/(^[1-9]\d*$)/.test(this.releaseParams.total_amount))) {
+        if (!(/(^[1-9]\d*$)/.test(this.releaseParams.total_part))) {
           Toast({
             message: '请输入整数',
             className: 'zZindex'
@@ -113,15 +128,24 @@
           return false
         }
       },
+
+      num() {
+        if (this.releaseParams.total_part < 100) {
+          Toast({
+            message: '输入的份数大于100',
+            className: 'zZindex'
+          })
+        }
+      },
       // 最大和最小值
-      limit(){
-        if (this.releaseParams.high_amount < this.releaseParams.min_amount) {
+      limit() {
+        if (this.releaseParams.high_part < this.releaseParams.min_part) {
           Toast({
             message: '最少转入量不得大于最多转入量',
             className: 'zZindex'
           })
         }
-         if(this.releaseParams.total_amount/1000<this.releaseParams.high_amount){
+        if (this.releaseParams.total_part / 1000 < this.releaseParams.high_part) {
           Toast({
             message: '上下限额设置错误, 请重新设置',
             className: 'zZindex'
@@ -162,7 +186,7 @@
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.total_amount && val.min_amount && val.high_amount && val.freeze_days && val.air != '') {
+          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air != '') {
             this.disabled = false
           } else {
             this.disabled = true
@@ -189,6 +213,13 @@
       background-color: #fff;
       border-radius: 10px;
 
+      img {
+        position: relative;
+        top: -70px;
+        left: 160px;
+      }
+
+
       p {
         margin: 0 50px;
         font-size: 26px;
@@ -196,33 +227,35 @@
 
       .mint-field-core {
         text-align: right;
-        border-bottom: 1px solid #ccc;
         width: 85%;
         flex: unset;
         margin: 0 auto;
       }
 
-      .input-box {
-        width: 40%;
-        display: inline-block;
-        margin-left: 55px;
-
-        .mint-field-core {
-          text-align: left;
-        }
-      }
-
       .release-interest {
         text-align: right;
-        padding-bottom: 10px;
-
         span {
           display: block;
           color: #036EB8;
           margin-right: 30px;
+          margin-top: 10px;
         }
+      }
+
+      .purchase-quantity {
+        border-top: 10px solid #f2f2f2;
+        border-bottom: 10px solid #f2f2f2;
+      }
+
+      .mint-cell-wrapper {
+        border-bottom: 1px solid #f2f2f2;
       }
     }
 
+    .release-button {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+    }
   }
 </style>

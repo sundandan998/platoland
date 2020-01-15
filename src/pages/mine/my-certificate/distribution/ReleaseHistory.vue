@@ -1,7 +1,7 @@
 <template>
   <div class="release-history">
     <div class="release-header">
-      <mt-header fixed title="分利计划">
+      <mt-header fixed :title="detail.token.code+'分利计划'">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <mt-button slot="right" @click.native="release"> <img src="../../../../assets/images/release.svg" alt=""> 发布
         </mt-button>

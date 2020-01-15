@@ -63,7 +63,7 @@
           <!-- <router-link to="/release"> -->
           <router-link :to="{name:'Release',params:{code:this.balancetoken.code,icon:this.balancetoken.icon,nickname:balancetoken.nickname,
           subject:balancetoken.subject}}">
-            <van-button type="primary" class="button">去 创 建</van-button>
+            <van-button type="primary" class="button">去 发 布</van-button>
           </router-link>
         </div>
       </router-link>
@@ -242,9 +242,5 @@
         }
       }
     }
-  }
-
-  .token-recently-released.plan {
-    height: 240px;
   }
 </style>
