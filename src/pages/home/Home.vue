@@ -14,7 +14,7 @@
       </van-swipe>
     </div>
     <!-- 交易部分 -->
-    <div class="home-transaction">
+    <!-- <div class="home-transaction">
       <router-link to="zone">
         <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
       </router-link>
@@ -27,7 +27,7 @@
       <router-link to="list">
         <span class="token"><img src="../../assets/images/pass.svg" alt="">通证大全</span>
       </router-link>
-    </div>
+    </div> -->
     <!-- 最新发行 -->
     <div class="home-latest-release">
       <router-link to="zone">

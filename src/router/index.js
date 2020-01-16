@@ -46,12 +46,12 @@ export default new Router({
       name: 'Register',
       component: () => import("@/pages/login/Register")
     },
-    //  注册/发送邮件
-    {
-      path: '/send',
-      name: 'Send',
-      component: () => import("@/pages/register/send-mail/SendMail")
-    },
+    // //  注册/发送邮件
+    // {
+    //   path: '/send',
+    //   name: 'Send',
+    //   component: () => import("@/pages/register/send-mail/SendMail")
+    // },
     // 首页
     {
       path: '/',
