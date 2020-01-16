@@ -78,7 +78,7 @@
       next()
     },
     created() {
-      console.log(this.$route.params.invite_code)
+      console.log(this.$route.params.username)
     },
     methods: {
       register() {

@@ -11,30 +11,56 @@
       <img src="../../assets/images/login-logo.png" alt="" />
     </div>
     <div class="register-tab login-form">
-      <van-tabs v-model="active" @click="clear">
+      <!-- @click="register" -->
+      <van-tabs v-model="active">
         <van-tab title="手机号注册">
-          <mt-field placeholder="请输入手机号" v-model="verification.username" type="tel" @blur.native.capture="telCheck"
-            :state="telStatus">
-          </mt-field>
-          <img src="../../assets/images/tel.svg" alt="" class="login-icon">
+          <el-form :model="verification" ref="verification"  label-width="20px" class="demo-dynamic">
+            <!-- 手机号 -->
+            <el-form-item prop="tel" :rules="[{message: '请输入手机号', trigger: 'blur' },
+            { pattern: /^1[23456789]\d{9}$/, message: '请输入正确手机号' }]">
+              <img src="../../assets/images/tel.svg" alt="" class="login-icon">
+              <el-input v-model="verification.tel" placeholder="请输入手机号"></el-input>
+            </el-form-item>
+            <!-- 密码 -->
+            <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
+              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
+                placeholder="请输入6-16位字母加数字组合密码">
+              </el-input>
+              <img :src="seen?openeye:nopeneye" @click="changeType()" />
+            </el-form-item>
+            <!-- 邀请码 -->
+            <el-form-item prop="invite_code">
+              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
+            </el-form-item>
+          </el-form>
         </van-tab>
         <van-tab title="邮箱注册">
-          <mt-field placeholder="请输入邮箱" v-model="verification.username" type="email" @blur.native.capture="emailCheck"
-            :state="emailStatus">
-          </mt-field>
-          <img src="../../assets/images/email.png" alt="" class="login-icon">
+          <el-form :model="verification"  ref="verification"  label-width="20px" class="demo-dynamic">
+            <!-- 邮箱 -->
+            <el-form-item prop="email" :rules="[ { message: '请输入邮箱地址', trigger: 'blur' },
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]">
+              <img src="../../assets/images/email.png" alt="" class="login-icon">
+              <el-input v-model="verification.email" placeholder="请输入邮箱"></el-input>
+            </el-form-item>
+            <!-- 密码 -->
+            <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
+              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
+                placeholder="请输入6-16位字母加数字组合密码"></el-input>
+              <img :src="seen?openeye:nopeneye" @click="changeType()" />
+            </el-form-item>
+            <!-- 邀请码 -->
+            <el-form-item prop="invite_code">
+              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
+            </el-form-item>
+          </el-form>
         </van-tab>
       </van-tabs>
-    </div>
-    <div class="login-form">
-      <!-- @blur.native.capture="pwdCheck" -->
-      <mt-field placeholder="请输入6-16位数字加字母组合密码" v-model="verification.password" :type="pwdType">
-        <img :src="seen?openeye:nopeneye" @click="changeType()" />
-      </mt-field>
-      <img src="../../assets/images/password.svg" alt="" class="login-icon">
-      <mt-field placeholder="请输入6位邀请码" v-model="verification.invite_code" @blur.native.capture="invitation">
-      </mt-field>
-      <img src="../../assets/images/password.svg" alt="" class="login-icon">
     </div>
     <div class="login-checkbox">
       <span>注册即表示同意
@@ -43,10 +69,8 @@
         </router-link>
       </span>
     </div>
-    <div class="login-btn">
-      <!-- <router-link :to="{name:'Reset',params:{username:verification.username,password:verification.password}}"> -->
-      <mt-button type="primary" @click="sendCode" :disabled="disabled" size="large">注&nbsp;册</mt-button>
-      <!-- </router-link> -->
+    <div class="login-btn" @click="register">
+      <mt-button type="primary" :disabled="disabled" size="large">注&nbsp;册</mt-button>
     </div>
     <div class="login-switch">
       <router-link to="/login">
@@ -55,7 +79,6 @@
     </div>
   </div>
 </template>
-
 <script>
   import { toast } from '@/assets/js/pub.js'
   import { Toast } from 'mint-ui'
@@ -63,6 +86,11 @@
   import api from "@/api/user/User.js"
   export default {
     data() {
+      // let check = (rule, value, callback) => {
+      //   if (!value) {
+      //     return callback(new Error('不能为空'))
+      //   }
+      // }
       return {
         disabled: true,
         emailStatus: '',
@@ -84,11 +112,30 @@
         pwdType: "password",
         openeye: require('../../assets/images/eye-open.svg'), //图片地址
         nopeneye: require('../../assets/images/eye-close.svg'), //图片地址
-        // 登录参数
+        // 注册参数
         verification: {
           username: '',
           password: '',
-          invite_code: ''
+          invite_code: '',
+          email: '',
+          tel: '',
+        },
+        rules: {
+          // 手机号
+          // tel: [
+          //   { validator: check, message: '请输入手机号', trigger: 'blur' },
+          //   { pattern: /^1[23456789]\d{9}$/, message: '请输入正确手机号' }
+          // ],
+          // // 邮箱
+          // email: [
+          //   { validator: check, message: '请输入邮箱地址', trigger: 'blur' },
+          //   { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+          // ],
+          // password: [
+          //   // validator: validatePass,
+          //   { validator: check, message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
+          //   { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }
+          // ]
         },
         // 忘记密码参数
         forgetPwd: {
@@ -107,9 +154,9 @@
           email: []
         },
       }
+
     },
     created() {
-      // this.invitationCode()
     },
     beforeRouteEnter(to, from, next) {
       window.document.body.style.backgroundColor = "#fff"
@@ -120,159 +167,53 @@
       next()
     },
     methods: {
-      //  登录
-      handleLogin() {
-        api.is_use({ username: this.verification.username }).then(res => {
-          if (res.is_use === true) {
-            this.$store.dispatch("loginByCode", this.verification).then(res => {
-              if (res.code == 0) {
-                // 消息提示
-                // toast(res)
-                this.$router.push("/home")
-                this.$Indicator.close()
-              }
-            }).catch(err => {
-              if (err.code !== 0) {
-                toast(err)
-              }
-              this.$Indicator.close()
-            })
-          } else {
-            toast(res)
-            this.$router.push({
-              name: 'Login'
-            })
-          }
-        }).catch(err => {
-          console.log(err)
-        })
-        // window.sessionStorage.setItem('action', this.verification.username)
-      },
-      // 发送验证码
-      sendCode() {
+      register() {
+        // 检测邀请码是否正确
         api.inviteCode(this.verification).then(res => {
           if (res.code == 0) {
             this.router()
+            // 发送信息
+            let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+            if (reg.test(this.verification.email)) {
+              this.action.account_type = 1
+              this.action.action = 2
+              //发送邮箱
+              this.email.email = this.verification.email
+              api.email(this.email).then(res => {
+                toast(res)
+              }).catch(err => {
+                toast(err)
+              })
+            } else {
+              // 发送短信
+              this.action.account_type = 0
+              this.action.action = 1
+              this.sms.mobile = this.verification.tel
+              api.sms(this.sms).then(res => {
+                toast(res)
+              }).catch(err => {
+                toast(err)
+              })
+            }
           }
         }).catch(err => {
           if (err.code == 4003) {
             toast(err)
           }
         })
-        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
-        if (!password.test(this.verification.password) || res.code == 0) {
-          Toast({
-            message: '请输入6-16位数字加字母组合密码',
-            className: 'zZindex'
-          })
-        } else {
-          this.router()
-          // 发送信息
-          var reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-          if (reg.test(this.verification.username)) {
-            this.action.account_type = 1
-            this.action.action = 2
-            //发送邮箱
-            this.email.email = this.verification.username
-            api.email(this.email).then(res => {
-              toast(res)
-            }).catch(err => {
-              toast(err)
-            })
-          } else {
-            // 发送短信
-            this.action.account_type = 0
-            this.action.action = 1
-            this.sms.mobile = this.verification.username
-            api.sms(this.sms).then(res => {
-            }).catch(err => {
-              toast(err)
-            })
-          }
-        }
-
-      },
-      // 邮箱校验
-      emailCheck() {
-        var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-        if (!email.test(this.verification.username)) {
-          // this.emailStatus = 'error'
-          Toast({
-            message: '请填写正确的邮箱地址',
-            className: 'zZindex'
-          })
-        } else {
-          // this.emailStatus = 'success'
-        }
-      },
-      // 手机号校验
-      telCheck() {
-        var tel = /^1[23456789]\d{9}$/
-        if (!tel.test(this.verification.username)) {
-          // this.telStatus = 'error'
-          Toast({
-            message: '请填写正确手机号',
-            className: 'zZindex'
-          })
-        } else {
-          // this.telStatus = 'success'
-
-        }
       },
       router() {
         this.$router.push({
           name: 'Reset',
-          params: { username: this.verification.username, password: this.verification.password, invite_code: this.verification.invite_code }
+          params: { username: this.verification.tel || this.verification.email, password: this.verification.password, invite_code: this.verification.invite_code }
         })
       },
-      // invitationCode() {
-      //   api.code().then(res => {
-      //     if (res.code == 0) {
-      //       if (res.data.is_invite_code == true) {
-      //         this.verification.code != ''
-      //       }
-      //     }
-      //   }).catch(err => { })
-      // },
-      invitation() {
-        api.inviteCode(this.verification).then(res => {
-          if (res.code == 0) {
-            this.router()
-          }
-        }).catch(err => {
-          if (err.code == 4003) {
-            toast(err)
-          }
-        })
-        // if (this.verification.code == '') {
-        //   Toast({
-        //     message: '请填写6位邀请码',
-        //     className: 'zZindex'
-        //   })
-        // }
-      },
-      // 密码校验
-      // pwdCheck() {
-      //   var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-      //   if (!password.test(this.verification.password)) {
-      //     // this.pwdlStatus = 'error'
-      //     Toast({
-      //       message: '请输入8-16位数字加字母组合密码',
-      //       className: 'zZindex'
-      //     })
-      //   } else {
-      //     // this.pwdlStatus = 'success'
-      //   }
-      // },
       // 隐藏与显示密码
       changeType() {
         this.pwdType = this.pwdType === 'password' ? 'text' : 'password'
         this.seen = !this.seen
       },
-      clear(index) {
-        this.verification.username = ''
-        this.verification.password = ''
-      }
+
     },
     watch: {
       // 登录页当邮箱和密码全部输入，按钮变色
@@ -281,13 +222,12 @@
         deep: true,
         handler(val) {
           // debugger
-          var tel = /^1[23456789]\d{9}$/
-          var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-          // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-          if (val.username != '' && val.password != '' && val.invite_code != '' && (email.test(val.username) || tel.test(val.username))) {
-            // 高亮
+          let tel = /^1[23456789]\d{9}$/
+          let email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          let password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
+          if((tel.test(this.verification.tel)&&val.tel!=''&&password.test(this.verification.password)&&val.password!=''&& val.invite_code != '')||(email.test(this.verification.email)&&val.email!=''&&password.test(this.verification.password)&&val.password!=''&& val.invite_code != '')){
             this.disabled = false
-          } else {
+          }else{
             this.disabled = true
           }
         }
@@ -341,17 +281,18 @@
       }
 
       .van-tabs__content {
-        margin-top: 40px;
+        margin: 20px 0 40px 0 ;
       }
     }
 
     .login-form {
       margin: 0 54px;
-
       .van-tabs__wrap.van-hairline--top-bottom {
         height: 60px;
       }
-
+      .el-form-item__error{
+        margin-left: 40px;
+      }
       .mint-cell-text {
         color: #999;
         margin-left: 10px;
@@ -361,22 +302,12 @@
         border-bottom: 1px solid #f6f6f6;
         margin: 0 20px;
       }
-
-      .login-icon {
-        top: -70px;
-        position: relative;
-      }
-
       .van-tabs__wrap.van-hairline--top-bottom {
         height: unset;
       }
 
       [class*=van-hairline]::after {
         border: none;
-      }
-
-      .van-tabs__nav--line {
-        /* padding-bottom: 0.4rem; */
       }
     }
 

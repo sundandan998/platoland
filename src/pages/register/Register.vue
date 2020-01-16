@@ -160,7 +160,7 @@ export default{
 			}
 		},
 //		登录页/点击记住账号 button 改变颜色
-	  	loginCheckbox: function (item) {
+	  	loginCheckbox: function (item) {	
 //		  	item.state = !item.state;
 		  	if(item.state==true){
 		  		document.getElementById("loginbtn").style.background="#F6F8FA";
