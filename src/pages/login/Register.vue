@@ -14,7 +14,7 @@
       <!-- @click="register" -->
       <van-tabs v-model="active">
         <van-tab title="手机号注册">
-          <el-form :model="verification" ref="verification"  label-width="20px" class="demo-dynamic">
+          <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 手机号 -->
             <el-form-item prop="tel" :rules="[{message: '请输入手机号', trigger: 'blur' },
             { pattern: /^1[23456789]\d{9}$/, message: '请输入正确手机号' }]">
@@ -28,17 +28,17 @@
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
                 placeholder="请输入6-16位字母加数字组合密码">
               </el-input>
-              <img :src="seen?openeye:nopeneye" @click="changeType()" />
+              <img :src="seen?openeye:nopeneye" @click="changeType()" class="fr password-img" />
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
-              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <img src="../../assets/images/code.svg" alt="" class="login-icon">
               <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
             </el-form-item>
           </el-form>
         </van-tab>
         <van-tab title="邮箱注册">
-          <el-form :model="verification"  ref="verification"  label-width="20px" class="demo-dynamic">
+          <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 邮箱 -->
             <el-form-item prop="email" :rules="[ { message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]">
@@ -50,12 +50,13 @@
             { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
               <img src="../../assets/images/password.svg" alt="" class="login-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
-                placeholder="请输入6-16位字母加数字组合密码"></el-input>
-              <img :src="seen?openeye:nopeneye" @click="changeType()" />
+                placeholder="请输入6-16位字母加数字组合密码">
+              </el-input>
+              <img :src="seen?openeye:nopeneye" @click="changeType()" class="fr password-img" />
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
-              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <img src="../../assets/images/code.svg" alt="" class="login-icon">
               <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
             </el-form-item>
           </el-form>
@@ -225,9 +226,9 @@
           let tel = /^1[23456789]\d{9}$/
           let email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
           let password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
-          if((tel.test(this.verification.tel)&&val.tel!=''&&password.test(this.verification.password)&&val.password!=''&& val.invite_code != '')||(email.test(this.verification.email)&&val.email!=''&&password.test(this.verification.password)&&val.password!=''&& val.invite_code != '')){
+          if ((tel.test(this.verification.tel) && val.tel != '' && password.test(this.verification.password) && val.password != '' && val.invite_code != '') || (email.test(this.verification.email) && val.email != '' && password.test(this.verification.password) && val.password != '' && val.invite_code != '')) {
             this.disabled = false
-          }else{
+          } else {
             this.disabled = true
           }
         }
@@ -280,19 +281,30 @@
         margin-left: 15px;
       }
 
+      .password-img {
+        position: absolute;
+        top: 20px;
+      }
+      .login-icon{
+        position: relative;
+        top:15px;
+      }
       .van-tabs__content {
-        margin: 20px 0 40px 0 ;
+        margin: 20px 0 40px 0;
       }
     }
 
     .login-form {
       margin: 0 54px;
+
       .van-tabs__wrap.van-hairline--top-bottom {
         height: 60px;
       }
-      .el-form-item__error{
+
+      .el-form-item__error {
         margin-left: 40px;
       }
+
       .mint-cell-text {
         color: #999;
         margin-left: 10px;
@@ -302,6 +314,7 @@
         border-bottom: 1px solid #f6f6f6;
         margin: 0 20px;
       }
+
       .van-tabs__wrap.van-hairline--top-bottom {
         height: unset;
       }
