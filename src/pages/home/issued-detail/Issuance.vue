@@ -81,11 +81,13 @@
         },
         options: {
           num: [],
-          price: []
+          price: [],
+          period: [],
         }
       }
     },
-    created() { },
+    created() {
+     },
     mounted() {
       // this.drawLine()
       this.happening()
@@ -99,7 +101,8 @@
             this.happeDetail = res.data
             for (let i = 0; i < res.data.length; i++) {
               this.options.price.push(res.data[i].issue_price)
-              this.options.num.push(res.data[i].periods)
+              this.options.period.push(res.data[i].periods)
+              this.options.num.push(res.data[i].first_number / res.data[i].step_number/10000)
             }
             this.drawLine()
           }
@@ -132,7 +135,7 @@
           xAxis: [
             {
               type: 'category',
-              data: this.options.num,
+              data: this.options.period,
               axisPointer: {
                 type: 'shadow'
               }
@@ -142,12 +145,12 @@
             {
               type: 'value',
               name: '总量',
-              // data: this.num,
+              // data: this.options.total,
               min: 0,
               max: 100,
-              interval: 50,
+              interval: 20,
               axisLabel: {
-                formatter: '{value}'
+                formatter: '{value}万'
               }
             },
             {
@@ -159,13 +162,16 @@
               axisLabel: {
                 formatter: '{value}'
               }
-            }
+            },
           ],
+          grid: {
+            left:40
+          },
           series: [
             {
               name: '发行总量',
               type: 'bar',
-              data: this.options.price
+              data: this.options.num
             },
             {
               name: '发行单价',

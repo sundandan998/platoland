@@ -24,11 +24,11 @@
             <!-- 密码 -->
             <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
             { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
-              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
+              <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
                 placeholder="请输入6-16位字母加数字组合密码">
               </el-input>
-              <img :src="seen?openeye:nopeneye" @click="changeType()" class="fr password-img" />
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
@@ -48,11 +48,11 @@
             <!-- 密码 -->
             <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
             { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
-              <img src="../../assets/images/password.svg" alt="" class="login-icon">
+              <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
+              <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
                 placeholder="请输入6-16位字母加数字组合密码">
               </el-input>
-              <img :src="seen?openeye:nopeneye" @click="changeType()" class="fr password-img" />
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
@@ -282,13 +282,24 @@
       }
 
       .password-img {
-        position: absolute;
-        top: 20px;
-      }
-      .login-icon{
         position: relative;
-        top:15px;
+        top: 60px;
+        z-index: 11;
       }
+
+      .login-icon {
+        z-index: 11;
+        position: absolute;
+        top: 25px;
+        left: -10px;
+      }
+      .pass-icon{
+        z-index: 11;
+        position: absolute;
+        top: 60px;
+        left: -10px;
+      }
+
       .van-tabs__content {
         margin: 20px 0 40px 0;
       }

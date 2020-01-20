@@ -4,10 +4,7 @@
 			<mt-tab-container class="page-tabbar-container" v-model="selected">
 				<mt-tab-container-item id="mine" class="home-index">
 					<div class="mine-head">
-						<mt-cell v-if="this.infoData.nickname==null" :title="infoData.email||infoData.mobile" to="/information" is-link class="mine-cell-list">
-							<img slot="icon" src="../../assets/images/avatar.svg" class="avatar">
-							去设置</mt-cell>
-						<mt-cell v-if="this.infoData.nickname!=null":title="infoData.email||infoData.mobile" to="/information" is-link class="mine-cell-list">
+						<mt-cell :title="infoData.email||infoData.mobile" to="/information" is-link class="mine-cell-list">
 							<img slot="icon" src="../../assets/images/avatar.svg" class="avatar">
 							{{infoData.nickname}}</mt-cell>
 					</div>

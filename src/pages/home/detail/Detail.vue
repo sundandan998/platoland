@@ -19,29 +19,32 @@
       <mt-cell :title="$t('m.body')" :value="this.subject.name" :to="{name:'Subject', params:{id:this.subject.id}}"
         is-link></mt-cell>
       <!-- 发行方 -->
-      <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer" :to="{name:'Subject', params:{id:this.subject.id,issuer:'issuer'}}" is-link></mt-cell>
+      <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"
+        :to="{name:'Subject', params:{id:this.subject.id,issuer:'issuer'}}" is-link></mt-cell>
     </div>
     <div class="detail-description">
-      <mt-cell title="通证效用" value="效用说明" is-link :to="{name:'Description'}"></mt-cell>
+      <mt-cell title="通证说明"  is-link :to="{name:'Description'}"></mt-cell>
     </div>
     <!-- 分利宝 -->
-    <div class="detail-flb">
-      <!-- <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}"> -->
-      <router-link :to="{name:'ReleaseHistory'}">
-        <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
-      </router-link>
-      <div class="detail-flb-token">
-        <div class="detail-flb-token-top">
-          <img :src="detailData.icon" alt="" class="fl">
-          <span>
-            {{detailData.code}} ({{detailData.nickname}})
-            <p>{{subject.name}}</p>
-          </span>
-        </div>
-        <div class="detail-flb-token-bot">
-          <p><span>锁仓期限 {{release.freeze_days}}天</span><span class="fr rate">
-              {{release.equity_issuance_ratio}}%</span></p>
-          <p><span>最高转入 {{release.max_purchase_number|number}}</span><span class="fr">分利率</span></p>
+    <div class="home-divided-treasure" v-if="this.listData.length>0">
+      <div class="detail-flb">
+        <!-- <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}"> -->
+        <router-link :to="{name:'ReleaseHistory'}">
+          <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
+        </router-link>
+        <div class="detail-flb-token" v-for="(item,index) in listData" v-if="index<1">
+          <div class="detail-flb-token-top">
+            <img :src="item.token.icon" alt="" class="fl">
+            <span>
+              {{item.token.code}} ({{item.token.nickname}})
+              <p>{{item.token.subject}}</p>
+            </span>
+          </div>
+          <div class="detail-flb-token-bot">
+            <p><span>锁仓期限 {{item.freeze_days}}天</span><span class="fr rate">
+                {{item.air|number}}%</span></p>
+            <p><span>最高转入 {{item.high_amount|number}}</span><span class="fr">分利率</span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -80,16 +83,18 @@
       return {
         detailData: '',
         subject: '',
-        release: ''
+        release: '',
+        listData: '',
       }
     },
     created() {
       this.getDetail()
+      this.list()
     },
     methods: {
       //获取详情
       getDetail() {
-        api.tokenDetail({ code: this.$route.params.code || this.detail.token.code }).then(res => {
+        api.tokenDetail({code: this.$route.params.code || this.detail.token.code}).then(res => {
           this.detailData = res.data
           this.subject = res.data.subject
           this.release = res.data.release
@@ -98,6 +103,17 @@
           .catch(err => {
             console.log(err)
           })
+      },
+      // 分利宝
+      list() {
+        api.flList({ admin:true,code: this.$route.params.code || this.detail.token.code}).then(res => {
+          if (res.code == 0) {
+            this.listData = res.data
+            console.log(this.flbData.token.code)
+          }
+        }).catch(err => {
+
+        })
       },
       //复制
       copy() {

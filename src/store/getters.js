@@ -13,9 +13,9 @@ const getters = {
         // let stroageToken = window.sessionStorage.getItem("token");
         let stroageToken = window.localStorage.getItem("token");
         if ((!state.user.token || state.user.token === "") && stroageToken) {
-            store.dispatch("setToken", stroageToken);
+            store.dispatch("setToken", stroageToken)
         }
-        return state.user.token;
+        return state.user.token
     },
     userInfo: state => {
         let stroageUserInfo = JSON.parse(

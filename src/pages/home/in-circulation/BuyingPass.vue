@@ -30,10 +30,10 @@
         <span class="fr">期限(天)</span>
       </div>
       <div class="buy-pass-progress progress">
-        <mt-progress :value="detail.first_number/(detail.first_number-detail.sold_number)" :bar-height="7">
+        <mt-progress :value="progress":bar-height="7">
         </mt-progress>
-        <div slot="start" class="fl">已售 {{this.detail.sold_number/detail.step_number}} 份</div>
-        <div slot="end" class="fr">总量 {{this.detail.first_number|number}} 份</div>
+        <div slot="start" class="fl">已售 {{(this.detail.sold_number/this.detail.step_number).toFixed(0)}} 份</div>
+        <div slot="end" class="fr">总量 {{(this.detail.first_number/this.detail.step_number).toFixed(0)}} 份</div>
       </div>
     </div>
     <!-- tab切换 -->
@@ -43,16 +43,16 @@
           <!-- @blur.native.capture="maxnum" -->
           <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'"
             v-model="requsetPay.amount"></mt-field>
-          <span>交易额：{{requsetPay.amount*detail.issue_price*detail.step_number}} {{detail.denominated_assets}}</span>
+          <span>交易额：{{requsetPay.amount*this.detail.issue_price*this.detail.step_number}} {{this.detail.denominated_assets}}</span>
         </van-tab>
         <van-tab title="按金额买入">
           <mt-field
             :placeholder="'最少'+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price"
-            type="number" v-model="requsetPay.amount"> <b>{{detail.denominated_assets}}</b></mt-field>
-          <span>可买入份数：{{requsetPay.amount/detail.step_number/detail.issue_price }} 份</span>
+            type="number" v-model="requsetPay.amount"> <b>{{this.detail.denominated_assets}}</b></mt-field>
+          <span>可买入份数：{{requsetPay.amount/detail.step_number/this.detail.issue_price }} 份</span>
         </van-tab>
         <div class="fr day">
-          <p>可用额{{this.balanceData.available_amount|number}} {{detail.denominated_assets}}</p>
+          <p>可用额{{this.balanceData.available_amount|number}} {{this.detail.denominated_assets}}</p>
           <p>解锁日:{{this.timeDate}}</p>
           <!-- <p>解锁日:{{this.date.time}}</p> -->
         </div>
@@ -106,11 +106,13 @@
           payment_id: '',
           pay_pwd: ''
         },
+        progress:0,
       }
     },
     created() {
       this.balance()
       this.date()
+      this.progress = ((this.detail.sold_number/this.detail.step_number)/(this.detail.first_number/this.detail.step_number))*100
     },
     methods: {
       onInput(key) {

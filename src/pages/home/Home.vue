@@ -33,8 +33,8 @@
       <router-link to="zone">
         <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
       </router-link>
-      <div class="home-latest-release-token" v-for="item in release">
-        <router-link :to="{name:'Issued',params:{id:item.id}}">
+      <div class="home-latest-release-token" v-for="item in release" @click="jump(item)">
+        <!-- <router-link :to="{name:'Issued',params:{id:item.id}}"> -->
           <div class="home-pub-token">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
@@ -48,7 +48,7 @@
             </div>
             <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
           </div>
-        </router-link>
+        <!-- </router-link> -->
       </div>
     </div>
     <!-- 分利宝 -->
@@ -134,6 +134,19 @@
       this.version()
     },
     methods: {
+      jump(item){
+        if(item.status==1){
+          this.$router.push({
+            name:'Issued',
+            params:{id:item.id}
+          })
+        }else{
+          this.$router.push({
+            name:'Detail',
+            params:{code:item.token.code}
+          })
+        }
+      },
       home() {
         api.home().then(res => {
           if (res.code == 0) {

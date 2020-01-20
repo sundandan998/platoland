@@ -29,10 +29,9 @@
         <span class="fr issued-period">冻结时长(天)</span>
       </div>
       <div class="issued-progress progress">
-        <mt-progress :value="issuedDetail.first_number/(issuedDetail.first_number-issuedDetail.sold_number)"
-          :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">已售 {{issuedDetail.sold_number/issuedDetail.step_number}} 份</div>
-        <div slot="end" class="fr">总量 {{issuedDetail.first_number|number}} 份</div>
+        <mt-progress :value="progress" :bar-height="7"></mt-progress>
+        <div slot="start" class="fl">已售 {{(issuedDetail.sold_number/issuedDetail.step_number).toFixed(0)}} 份</div>
+        <div slot="end" class="fr">总量 {{(issuedDetail.first_number/issuedDetail.step_number).toFixed(0)}} 份</div>
       </div>
       <mt-cell title="每份数量">{{issuedDetail.step_number|number}}{{detailToken.code}}/份</mt-cell>
       <mt-cell title="每份总价">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/份
@@ -64,13 +63,14 @@
   import api from "@/api/token/Token.js"
   // 接口
   import info from "@/api/system/System.js"
-	import { Toast } from 'mint-ui'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
         issuedDetail: '',
         detailToken: '',
-        infoData: ''
+        infoData: '',
+        progress: 0,
       }
     },
     created() {
@@ -83,6 +83,7 @@
         api.issuedDetail({ id: this.$route.params.id }).then(res => {
           if (res.code == 0) {
             this.issuedDetail = res.data
+            this.progress = ((this.issuedDetail.sold_number / this.issuedDetail.step_number) / (this.issuedDetail.first_number / this.issuedDetail.step_number)) * 100
             this.detailToken = res.data.token
             this.$store.commit('detail', res.data)
           }
@@ -195,7 +196,8 @@
       }
 
     }
-    .transfer-button{
+
+    .transfer-button {
       position: fixed;
       width: 100%;
     }
