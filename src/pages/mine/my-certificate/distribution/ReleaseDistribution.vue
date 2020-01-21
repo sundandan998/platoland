@@ -245,6 +245,9 @@
       .purchase-quantity {
         border-top: 10px solid #f2f2f2;
         border-bottom: 10px solid #f2f2f2;
+        .mint-cell-value{
+          background-color: #fff;
+        }
       }
 
       .mint-cell-wrapper {

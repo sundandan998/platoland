@@ -8,7 +8,7 @@
 		<div class="details-search">
 			<!-- @search="onSearch" -->
 			<van-search placeholder="请输入资产代码" show-action shape="round">
-				<div slot="action" >搜索</div>
+				<div slot="action">搜索</div>
 				<!-- @click="onSearch" -->
 			</van-search>
 		</div>
@@ -24,7 +24,7 @@
 							</div>
 							<div class="list-deta">
 								<span>{{item.create_time}}</span>
-								<span class="list-code">{{item.token.code}}</span>
+								<!-- <span class="list-code">{{item.token.name}}</span> -->
 								<span class="fr list-num">{{item.freeze_change}}</span>
 							</div>
 							<img class="fr" src="../../../assets/images/right.svg" alt="">
@@ -94,24 +94,48 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-	.details-list {
-		/* font-size: 0.78rem; */
-		border-bottom: 1px solid #f2f2f2;
-		padding: 10px 15px;
-		.list-num{
-			margin-right: 20px;
+
+	.assets-detailed {
+		.details-search {
+			margin: 0 24px;
+
+			.van-search.van-search--show-action {
+				border-radius: 10px;
+			}
 		}
-		img {
-			position: relative;
-			right: 0px;
-			top: -26px;
-			width: 20px;
+
+		.details-list {
+			/* font-size: 0.78rem; */
+			border-bottom: 1px solid #f2f2f2;
+			padding: 10px 15px;
+
+			.list-num {
+				margin-right: 40px;
+			}
+
+			img {
+				position: relative;
+				top: -60px;
+				width: 40px;
+				right: -8px;
+			}
+
+			.list-code {
+				margin-left: 30px;
+			}
 		}
-		.list-code{
-			margin-left: 30px;
+
+		.assets-detailed-list {
+			margin: 10px 24px;
+			border-radius: 10px;
+
+			.details-list {
+				background-color: #fff;
+				padding: 20px;
+				line-height: 40px;
+				margin: 10px 0;
+				border-radius: 10px;
+			}
 		}
-	}
-	.assets-detailed-list {
-		background-color: #fff;
 	}
 </style>

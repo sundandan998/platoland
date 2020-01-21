@@ -30,26 +30,61 @@
 </template>
 
 <script>
-  export default {
-		data () {
+	export default {
+		data() {
 			return {}
 		},
-		created() {},
-		beforeRouteEnter(to, from, next) {
-      window.document.body.style.backgroundColor = "#fff"
-      next()
-    },
-    beforeRouteLeave(to, from, next) {
-      window.document.body.style.backgroundColor = ""
-      next()
-    }
+		created() { },
+		// beforeRouteEnter(to, from, next) {
+		//   window.document.body.style.backgroundColor = "#fff"
+		//   next()
+		// },
+		// beforeRouteLeave(to, from, next) {
+		//   window.document.body.style.backgroundColor = ""
+		//   next()
+		// }
 	}
 
 </script>
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-	.about-our-text {
-		margin: 30px 0 40px 0;
+
+	.about-our {
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
+
+		.about-our-logo {
+			text-align: center;
+			margin-top: 45px;
+		}
+
+		.about-our-text-content {
+			margin: 30px 24px;
+			line-height: 40px;
+
+			.about-our-text {
+				margin: 30px 0px;
+				p {
+					margin-left: 8px;
+				}
+			}
+
+			b {
+				width: 5px;
+				height: 5px;
+				background-color: #000;
+				border-radius: 50%;
+				display: inline-block;
+				position: relative;
+				top: -3px;
+			}
+		}
+
+		.about-our-contact {
+			margin-top: 160px;
+		}
 	}
 </style>

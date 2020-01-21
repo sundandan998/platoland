@@ -9,7 +9,7 @@
 				<!-- </router-link> -->
 				<mt-button icon="" slot="right" @click.native="jump">
 					<!-- <router-link to="list"> -->
-					<img src="../../../assets/images/u2664.png" alt="" />
+					<img src="../../../assets/images/u2664.svg" alt="" />
 					<!-- </router-link> -->
 				</mt-button>
 			</mt-header>
@@ -146,10 +146,10 @@
 			.adress-book-content {
 				p {
 					margin: 20px 0;
-					font-size: 14px;
+					font-size: 24px;
 				}
 				.name{
-					font-size: 16px;
+					font-size: 26px;
 					font-weight: 700;
 				}
 			}
@@ -158,7 +158,7 @@
 				position: absolute;
 				right: 20px;
 				button {
-					font-size: 16px;
+					font-size:24px;
 					height: 40px;
 				}
 			}

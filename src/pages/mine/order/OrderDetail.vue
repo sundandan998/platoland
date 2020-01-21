@@ -6,69 +6,47 @@
       </mt-header>
     </div>
     <!-- 发行买入 -->
-    <div class="buy" v-if="orderData.flow_type=='发行买入'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
+    <div class="order-detail-list">
+      <div class="buy" v-if="orderData.flow_type=='发行买入'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+          <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+          <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
+          <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
+          <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
       </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-        <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
-        <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-    </div>
-    <!-- 转让 -->
-    <div class="buy" v-if="orderData.flow_type=='转让'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p  v-if="orderData.other!=null"><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-      <!-- <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-        <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
-        <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div> -->
-    </div>
-    <!-- 受让 -->
-    <div class="buy" v-if="orderData.flow_type=='受让'">
-      <!-- <div class="buy-title">
+      <!-- 转让 -->
+      <div class="buy" v-if="orderData.flow_type=='转让'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p v-if="orderData.other!=null"><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+        <!-- <div class="buy-title">
         <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
             alt="">{{orderData.status}}</span>
       </div>
@@ -88,117 +66,11 @@
         <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
         <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
       </div> -->
-      <div class="buy-title">
+      </div>
+      <!-- 受让 -->
+      <div class="buy" v-if="orderData.flow_type=='受让'">
+        <!-- <div class="buy-title">
         <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-    </div>
-    <!-- <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="cancel">去支付
-    </mt-button> -->
-    <!-- otc发布--出售 -->
-    <div class="buy" v-if="orderData.flow_type=='OTC发布出售'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee||number}}{{orderData.exchange_token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}}{{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}}{{orderData.token}}</span></p>
-        <p><span>限额</span><span class="fr">{{orderData.low_number}}-{{orderData.high_number}}{{orderData.token}}</span>
-        </p>
-        <p><span>发布时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>待出售</span><span class="fr">{{orderData.remaining_amount}}</span></p>
-        <p><span>已出售</span><span class="fr">{{orderData.trade_amount}}</span></p>
-        <p v-for="item in orderList" class="order-recording">
-          <router-link :to="{name:'OrderDetailList',params:{order_id:item.order_id}}">
-            <span>{{item.transaction_time}}</span><span class="fr">{{item.amount}}</span>
-          </router-link>
-        </p>
-      </div>
-    </div>
-    <!-- <mt-button @click="cancel" v-if="orderData.flow_type=='OTC发布出售'" class="sell-btn" size="large" type="primary">撤销
-    </mt-button> -->
-    <!-- otc买入 -->
-    <div class="buy" v-if="orderData.flow_type=='OTC买入'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}}{{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}}{{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}}{{orderData.token}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-    </div>
-    <!-- 转出 -->
-    <div class="buy" v-if="orderData.flow_type=='转出'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}}{{orderData.token}}</p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-    </div>
-    <!-- 转入 -->
-    <div class="buy" v-if="orderData.flow_type=='转入'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
-        <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
-      </div>
-    </div>
-    <!-- otc发布--买入 -->
-    <div class="buy" v-if="orderData.flow_type=='OTC发布买入'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
             alt="">{{orderData.status}}</span>
       </div>
       <div class="buy-content">
@@ -209,47 +81,177 @@
         <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
         <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
         <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-        <p><span>限额</span><span class="fr">{{orderData.low_number}}-{{orderData.high_number}} {{orderData.token}}</span>
-        </p>
-        <p><span>发布时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>待买入</span><span class="fr">{{orderData.remaining_amount}}</span></p>
-        <p>
-          <span>已买入</span><span class="fr">{{orderData.trade_amount}}</span>
-        </p>
-        <p v-for="item in orderList" class="order-recording">
-          <router-link :to="{name:'OrderDetailList',params:{order_id:item.order_id}}">
-            <span>{{item.transaction_time}}</span><span class="fr">{{item.amount}}</span>
-          </router-link>
-        </p>
-      </div>
-    </div>
-
-    <!-- OTC售出 -->
-    <div class="buy" v-if="orderData.flow_type=='OTC售出'">
-      <div class="buy-title">
-        <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
-            alt="">{{orderData.status}}</span>
-      </div>
-      <div class="buy-content">
-        <p>{{orderData.amount}} {{orderData.token}}</p>
-        <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p>
-        <p><span>手续费</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
-      </div>
-      <div class="buy-numbering">
-        <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
-        <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
-        <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
-      </div>
-      <div class="buy-date">
-        <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+        <p><span>交易方</span><span class="fr">{{orderData.order}}</span></p>
         <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
       </div>
-    </div>
-    <!-- 锁仓分利 -->
-    <div class="buy" v-if="orderData.flow_type=='分利宝'">
+      <div class="buy-date">
+        <p><span>锁仓期限</span><span class="fr">{{orderData.freeze_days}}</span></p>
+        <p><span>到期时间</span><span class="fr">{{orderData.unfreeze_date}}</span></p>
+        <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+      </div> -->
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+      </div>
+      <!-- <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="cancel">去支付
+    </mt-button> -->
+      <!-- otc发布--出售 -->
+      <div class="buy" v-if="orderData.flow_type=='OTC发布出售'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+          <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+          <p><span>手续费</span><span class="fr">{{orderData.fee||number}}{{orderData.exchange_token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>单价</span><span class="fr">{{orderData.price}}{{orderData.exchange_token}}</span></p>
+          <p><span>数量</span><span class="fr">{{orderData.amount}}{{orderData.token}}</span></p>
+          <p><span>限额</span><span
+              class="fr">{{orderData.low_number}}-{{orderData.high_number}}{{orderData.token}}</span>
+          </p>
+          <p><span>发布时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>待出售</span><span class="fr">{{orderData.remaining_amount}}</span></p>
+          <p><span>已出售</span><span class="fr">{{orderData.trade_amount}}</span></p>
+          <p v-for="item in orderList" class="order-recording">
+            <router-link :to="{name:'OrderDetailList',params:{order_id:item.order_id}}">
+              <span>{{item.transaction_time}}</span><span class="fr">{{item.amount}}</span>
+            </router-link>
+          </p>
+        </div>
+      </div>
+      <!-- <mt-button @click="cancel" v-if="orderData.flow_type=='OTC发布出售'" class="sell-btn" size="large" type="primary">撤销
+    </mt-button> -->
+      <!-- otc买入 -->
+      <div class="buy" v-if="orderData.flow_type=='OTC买入'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}}{{orderData.token}}</p>
+          <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>单价</span><span class="fr">{{orderData.price}}{{orderData.exchange_token}}</span></p>
+          <p><span>数量</span><span class="fr">{{orderData.amount}}{{orderData.token}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+      </div>
+      <!-- 转出 -->
+      <div class="buy" v-if="orderData.flow_type=='转出'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}}{{orderData.token}}</p>
+          <p><span>手续费</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+      </div>
+      <!-- 转入 -->
+      <div class="buy" v-if="orderData.flow_type=='转入'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+      </div>
+      <!-- otc发布--买入 -->
+      <div class="buy" v-if="orderData.flow_type=='OTC发布买入'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+          <p><span>支付总额</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+          <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
+          <p><span>限额</span><span class="fr">{{orderData.low_number}}-{{orderData.high_number}}
+              {{orderData.token}}</span>
+          </p>
+          <p><span>发布时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>待买入</span><span class="fr">{{orderData.remaining_amount}}</span></p>
+          <p>
+            <span>已买入</span><span class="fr">{{orderData.trade_amount}}</span>
+          </p>
+          <p v-for="item in orderList" class="order-recording">
+            <router-link :to="{name:'OrderDetailList',params:{order_id:item.order_id}}">
+              <span>{{item.transaction_time}}</span><span class="fr">{{item.amount}}</span>
+            </router-link>
+          </p>
+        </div>
+      </div>
+      <!-- OTC售出 -->
+      <div class="buy" v-if="orderData.flow_type=='OTC售出'">
+        <div class="buy-title">
+          <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
+              alt="">{{orderData.status}}</span>
+        </div>
+        <div class="buy-content">
+          <p>{{orderData.amount}} {{orderData.token}}</p>
+          <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p>
+          <p><span>手续费</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
+        </div>
+        <div class="buy-numbering">
+          <p><span>订单编号</span><span class="fr">{{orderData.order_id}}</span></p>
+          <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+          <p><span>数量</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
+          <p><span>交易时间</span><span class="fr">{{orderData.transaction_time}}</span></p>
+        </div>
+        <div class="buy-date">
+          <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
+          <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
+        </div>
+      </div>
+      <!-- 锁仓分利 -->
+      <div class="buy" v-if="orderData.flow_type=='分利宝'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
@@ -270,19 +272,21 @@
           <p><span>地址</span><span class="fr">{{orderData.other_address}}</span></p>
         </div> -->
       </div>
-    <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="popupVisible=true">去支付
-    </mt-button>
-    <mt-button v-if="orderData.is_undo==true" class="sell-btn" size="large" type="primary" @click="cancel">撤销
-    </mt-button>
-    <!-- 数字键盘 -->
-    <div>
-      <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{orderData.amount}}({{orderData.exchange_token}})</span>
-        <van-password-input :value="value" @focus="showKeyboard = true" />
-        <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
-          @blur="showKeyboard = false" />
-      </van-popup>
+      <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="popupVisible=true">
+        去支付
+      </mt-button>
+      <mt-button v-if="orderData.is_undo==true" class="sell-btn" size="large" type="primary" @click="cancel">撤销
+      </mt-button>
+      <!-- 数字键盘 -->
+      <div>
+        <van-popup class="popupbox" position="bottom" v-model="popupVisible">
+          <span class="paymentamount">{{orderData.amount}}({{orderData.exchange_token}})</span>
+          <van-password-input :value="value" @focus="showKeyboard = true" />
+          <!-- 数字键盘 -->
+          <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+            @blur="showKeyboard = false" />
+        </van-popup>
+      </div>
     </div>
   </div>
 </template>
@@ -389,61 +393,79 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-  .order-detail{
-    background-color: #fff;
-  .order-detail-header {
-    margin-bottom: 90px;
-  }
 
-  /* --------------发行买入--------- */
-  .buy-title {
-    margin: 15px 15px;
-  }
+  .order-detail {
+    .order-detail-header {
+      margin-bottom: 90px;
+    }
 
-  .buy-content {
-    border-top: 1px solid #f6f6f6;
-    border-bottom: 10px solid #f6f6f6;
-    p {
-      margin: 10px 15px;
+    .order-detail-list {
+      background-color: #fff;
+      margin: 10px 24px;
+      .buy-title {
+        span {
+          font-size: 28px;
+          margin: 20px;
+          display: inline-block;
+        }
 
-      span:first-child {
-        color: #979EAC;
+        img {
+          margin-right: 10px;
+          position: relative;
+          top: 5px;
+        }
+      }
+
+      .buy-content {
+        border-bottom: 10px solid #f2f2f2;
+        border-top:1px solid #f2f2f2;
+        font-size: 26px;
+        line-height: 40px;
+        p {
+          margin: 10px 20px;
+          border-bottom-left-radius:10px;
+          span:first-child {
+            color: #979EAC;
+          }
+        }
+      }
+
+      .buy-numbering {
+        font-size: 26px;
+        line-height: 40px;
       }
     }
-  }
 
-  .buy-numbering {
-    p {
-      margin: 10px 15px;
+    .buy-numbering {
+      p {
+        margin: 10px 15px;
 
-      span:first-child {
-        color: #979EAC;
-      }
-    }
-  }
-
-  .buy-date {
-    border-top: 10px solid #f6f6f6;
-    padding-bottom: 5px;
-
-    p {
-      margin: 10px 15px;
-
-      span:first-child {
-        color: #979EAC;
+        span:first-child {
+          color: #979EAC;
+        }
       }
     }
 
-    .order-recording {
-      margin: 15px 25px;
+    .buy-date {
+      line-height: 40px;
+      font-size: 26px;
+      padding-bottom:10px;
+      p {
+        margin: 10px 15px;
+        span:first-child {
+          color: #979EAC;
+        }
+      }
+      .order-recording {
+        margin: 15px 25px;
+      }
+    }
+
+    /* ----------发布出售------------- */
+    .sell-btn {
+      width: 95%;
+      margin: 20px auto 0 auto;
+
     }
   }
-
-  /* ----------发布出售------------- */
-  .sell-btn {
-    width: 95%;
-    margin: 20px auto 0 auto;
-
-  }
-}
 </style>

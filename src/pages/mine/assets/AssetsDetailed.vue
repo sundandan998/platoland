@@ -131,7 +131,7 @@
             <div class="buy" v-if="item.flow_type=='转出'">
               <p class="flow_type">{{item.flow_type}}</p>
               <p><span class="turn-amount">{{item.amount|number}}</span><span class="fr"><img
-                    style="position: relative;top: 2px;" src="../../../assets/images/go.svg" alt="">
+                    style="position: relative;top: -35px;" src="../../../assets/images/go.svg" alt="">
                   <span class="turn-status">{{item.status == 5 ?'审核中':item.status == 0?'进行中':'发起申请'}}</span>
                 </span>
               </p>
@@ -350,15 +350,15 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
   .assets-detailed {
+    .mint-cell {
+        background-image: none;
+      }
     .assets-detailed-exhibition {
       overflow: hidden;
       margin: 90px 24px 20px 24px;
-      border-radius: 10px;
       height: 120px;
       background-color: #fff;
-
       img {
         margin: 0px 10px;
       }
@@ -374,12 +374,6 @@
 
     .assets-detailed-available {
       margin: 0 24px 20px 24px;
-
-      .mint-cell {
-        border-radius: 10px;
-        background-image: none;
-      }
-
     }
 
     .assets-detailed-freeze {
@@ -399,15 +393,9 @@
         margin-bottom: 40px !important;
         background-color: #f2f2f2;
       }
-
-      .mint-cell {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        background-image: none;
-      }
-
       .transaction-type {
         background-color: #fff;
+        margin-top: -20px;
       }
 
       .flow_type {
@@ -423,11 +411,12 @@
         font-size: 30px;
         color: #333;
         margin: 10px 0 10px 20px;
+        display: block;
       }
 
       .turn-status {
         position: relative;
-        top: -12px;
+        top: -74px;
         right: 20px;
         margin-left: 30px;
         font-size: 30px;

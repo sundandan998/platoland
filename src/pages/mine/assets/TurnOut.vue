@@ -7,7 +7,7 @@
         <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <!-- <mt-button icon="" slot="right">
           <router-link to="/scan">
-            <img src="../../../assets/images/scan.png" alt="" />
+            <img src="../../../assets/images/scan.svg" alt="" />
           </router-link>
         </mt-button> -->
       </mt-header>
@@ -27,7 +27,7 @@
         <router-link :to="{name:'Book',params:{name:this.detail.token.name,icon:this.detail.token.icon,token_code:this.detail.token.code,id:'out',nickname:this.detail.token.nickname,subject:this.detail.token.subject,}}">
           <img src="../../../assets/images/book.png" alt="" />
           <router-link to="/scan">
-            <img src="../../../assets/images/scan.png" alt="" />
+            <img src="../../../assets/images/scan.svg" alt="" />
           </router-link>
         </router-link>
       </mt-field>

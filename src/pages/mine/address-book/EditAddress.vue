@@ -25,7 +25,7 @@
 			<span>地址</span>
 			<mt-field v-model="editparams.address"></mt-field>
 			<router-link to="/scan">
-				<img src="../../../assets/images/scan.png" alt="">
+				<img src="../../../assets/images/scan.svg" alt="">
 			</router-link>
 		</div>
 
@@ -154,10 +154,10 @@
 			padding-bottom: 20px;
 
 			img {
-				margin-top: -60px;
+				margin-top: -75px;
 				position: relative;
 				float: right;
-				margin-right: 20px;
+				margin-right: 40px;
 			}
 			span {
 				padding-left: 15px;

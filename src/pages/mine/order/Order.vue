@@ -16,16 +16,17 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="order-list" v-for="item in orderList">
         <router-link :to="{name:'OrderDetail',params:{order_id: item.order_id}}">
+          <img class="fr" src="../../../assets/images/right.svg" alt="">
           <div class="order-list-data">
             <p class="order-list-date"><span>{{item.transaction_time}}</span><span class="fr">{{item.status}}</span></p>
             <p class="order-list-type">{{item.order_type}} <span
                 v-if="item.order_type !='转出'&&item.order_type !='转入'&&item.order_type !='受让'&&item.order_type !='转让'">-{{item.token}}/{{item.exchange_token}}</span>
             </p>
-            <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr" v-if="item.order_type!='转出'&&item.order_type!='转入'&&item.order_type!='受让'&&item.order_type!='转让'">总额：{{item.total_amount}}</span>
+            <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr"
+                v-if="item.order_type!='转出'&&item.order_type!='转入'&&item.order_type!='受让'&&item.order_type!='转让'">总额：{{item.total_amount}}</span>
             </p>
           </div>
-          <img class="fr" src="../../../assets/images/right.svg" alt="">
-        </router-link> 
+        </router-link>
       </div>
     </van-list>
     <!-- </van-pull-refresh> -->
@@ -68,9 +69,9 @@
           })
         }, 100)
       },
-      back(){
+      back() {
         this.$router.push({
-          name:'Mine'
+          name: 'Mine'
         })
       }
     }
@@ -78,19 +79,22 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .order-header {
     margin-bottom: 90px;
   }
 
   .order-list {
+    margin: 10px 24px;
+    border-radius: 10px;
     background-color: #fff;
     height: auto;
-    border-bottom: 10px solid #f6f6f6;
+    padding: 20px 0;
 
     img {
-      position: relative;
-      top: -64px;
-      right: 0px;
+      position: absolute;
+      right: 30px;
+      height: 40px;
     }
 
     .order-list-data {
@@ -102,6 +106,7 @@
 
         span:last-child {
           color: #000;
+          margin-right: 40px;
         }
 
         span {

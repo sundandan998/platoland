@@ -23,7 +23,7 @@
         :to="{name:'Subject', params:{id:this.subject.id,issuer:'issuer'}}" is-link></mt-cell>
     </div>
     <div class="detail-description">
-      <mt-cell title="通证说明"  is-link :to="{name:'Description'}"></mt-cell>
+      <mt-cell title="通证说明" is-link :to="{name:'Description'}"></mt-cell>
     </div>
     <!-- 分利宝 -->
     <div class="home-divided-treasure" v-if="this.listData.length>0">
@@ -94,7 +94,7 @@
     methods: {
       //获取详情
       getDetail() {
-        api.tokenDetail({code: this.$route.params.code || this.detail.token.code}).then(res => {
+        api.tokenDetail({ code: this.$route.params.code || this.detail.token.code }).then(res => {
           this.detailData = res.data
           this.subject = res.data.subject
           this.release = res.data.release
@@ -106,7 +106,7 @@
       },
       // 分利宝
       list() {
-        api.flList({ admin:true,code: this.$route.params.code || this.detail.token.code}).then(res => {
+        api.flList({ admin: true, code: this.$route.params.code || this.detail.token.code }).then(res => {
           if (res.code == 0) {
             this.listData = res.data
             console.log(this.flbData.token.code)

@@ -1,11 +1,11 @@
 <template>
 	<div class="transaction-details">
 		<div class="transaction-details-header header">
-				<mt-header fixed title="明细详情">
-					<router-link to="/detailedlist" slot="left">
-						<mt-button icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-					</router-link>
-				</mt-header>
+			<mt-header fixed title="明细详情">
+				<router-link to="/detailedlist" slot="left">
+					<mt-button icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+				</router-link>
+			</mt-header>
 		</div>
 		<div class="transaction-details-information">
 			<div class="transaction-details-balance">
@@ -15,14 +15,15 @@
 			<div class="transaction-details-token">
 				<p><span>交易通证</span><span><img :src="detailsCode.icon" alt="">{{detailsCode.code}}</span></p>
 				<p><span>交易类型</span><span>{{details.flow_type}}</span></p>
-				<p><span>解锁时间</span><span>{{details.unfreeze_date}}</span></p>
+				<p v-if="details.unfreeze_date!=null"><span>解锁时间</span><span>{{details.unfreeze_date}}</span></p>
 			</div>
 			<div class="transaction-details-status">
-				<p><span>订单状态</span><span>{{details.status}}</span></p>
+				<p v-if="details.status!=null"><span>订单状态</span><span>{{details.status}}</span></p>
 				<p><span>订单编号</span><span>{{details.order_id}}</span></p>
 				<p><span>交易时间</span><span>{{details.create_time}}</span></p>
 				<p><span>交易方</span><span>{{details.other}}</span></p>
-				<p><span>交易地址</span><span>{{details.other_address}}</span></p>
+				<!-- <p><span>交易地址</span><span>{{details.other_address}}</span></p> -->
+				<p v-if="details.other_address!=null"><span>交易地址</span><span>{{details.other_address}}</span></p>
 			</div>
 			<div class="transaction-details-amount">
 				<p><span>可用余额</span><span>{{details.available_amt}}</span></p>
@@ -77,44 +78,62 @@
 <style lang="scss">
 	@import '../../../assets/scss/global';
 
-	.transaction-details-information {
-		margin-top: 20px;
-		background-color: #fff;
-		height: auto;
+	.transaction-details {
 
-		p {
-			height: 25px;
-			margin: 10px 20px;
-			/* font-size: 0.78rem; */
-			span:last-child {
-				float: right;
-				display: flex;
-			}
-		}
-
-		.transaction-details-balance {
-			padding: 10px 0;
-			border-bottom: 10px solid #f2f2f2;
+		.transaction-details-information {
+			height: auto;
+			margin: 20px 24px;
 
 			p {
-				b {
-					/* font-size: 1.4rem; */
-					font-weight: 400;
-					margin-left: 40px;
+				height: 50px;
+				margin: 10px 20px;
+
+				span:last-child {
+					float: right;
+					display: flex;
+					font-size: 26px;
 				}
 			}
-		}
 
+			.transaction-details-balance {
+				padding: 10px 0;
+				background-color: #fff;
+				border-radius: 10px;
+				font-size: 28px;
 
-		.transaction-details-token {
-			padding-bottom: 8px;
-			border-bottom: 10px solid #f2f2f2;
-		}
+				p {
+					b {
+						font-weight: 400;
+						margin-left: 40px;
+					}
+				}
+			}
 
-		.transaction-details-status {
-			padding-bottom: 8px;
-			border-bottom: 10px solid #f2f2f2;
+			.transaction-details-token {
+				background-color: #fff;
+				border-radius: 10px;
+				margin: 10px 0;
+				padding: 10px 0;
 
+				img {
+					width: 50px;
+					height: 50px;
+					margin-right:20px;
+				}
+			}
+
+			.transaction-details-status {
+				background-color: #fff;
+				border-radius: 10px;
+				padding: 10px 0;
+			}
+
+			.transaction-details-amount {
+				background-color: #fff;
+				margin: 10px 0;
+				border-radius: 10px;
+				padding: 10px 0;
+			}
 		}
 	}
 </style>

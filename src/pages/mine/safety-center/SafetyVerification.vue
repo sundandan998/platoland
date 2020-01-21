@@ -8,26 +8,27 @@
 			</mt-header>
 		</div>
 		<div class="safety-verification-list" v-if="show.mobile">
-			<span>{{infoData.mobile}}</span>
+			<span class="safety-verification-list-username">{{infoData.mobile}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">
 				<span v-show="showTimer" @click="sms_code">发送</span>
 				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-list" v-if="show.email">
-			<span>{{infoData.email}}</span>
+			<span class="safety-verification-list-username">{{infoData.email}}</span>
 			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">
 				<span v-show="showTimer" @click="email_code">发送</span>
 				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-btn">
+			<div class="safety-verification-text">
+				<p>{{$t('m.becareful')}}</p>
+				<p>{{$t('m.securityverificationone')}}</p>
+			</div>
 			<mt-button type="primary" size="large" @click.native="next" :disabled="disabled">{{$t('m.next')}}</mt-button>
 		</div>
-		<div class="safety-verification-text">
-			<p>{{$t('m.becareful')}}</p>
-			<p>{{$t('m.securityverificationone')}}</p>
-		</div>
+
 	</div>
 </template>
 <script>
@@ -234,9 +235,39 @@
 
 <style lang="scss">
 	@import '../../../assets/scss/global';
-	.safety-verification{
-		.safety-verification-header{
+
+	.safety-verification {
+		width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: fixed;
+		.safety-verification-header {
 			margin-bottom: 90px;
+		}
+
+		.safety-verification-list-username {
+			font-size: 30px;
+			margin:0 30px;
+		}
+
+		.safety-verification-list {
+			.mint-field-core {
+				font-size: 14px;
+			}
+			.mint-cell:last-child{
+				margin:0 12px;
+			}
+		}
+
+		.safety-verification-btn {
+			position: fixed;
+			bottom: 10px;
+			width: 100%;
+
+			.safety-verification-text {
+				margin: 0px 24px 20px 24px;
+				color: #999;
+			}
 		}
 	}
 </style>

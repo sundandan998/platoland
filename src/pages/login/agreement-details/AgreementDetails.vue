@@ -49,11 +49,11 @@
 
   .agreement-content p {
     text-indent: 2em;
-    /* font-size: 0.78rem; */
+    line-height: 40px;
+    margin:20px 0;
   }
 
   .agreement-content span {
-    /* font-size: 0.78rem; */
     font-weight: 700;
   }
 </style>

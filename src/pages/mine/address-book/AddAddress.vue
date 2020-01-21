@@ -20,7 +20,7 @@
       <span>地址:</span>
       <mt-field v-model="addAddress.address"></mt-field>
       <router-link to="scan">
-        <img class="fr" src="../../../assets/images/scan.png" alt="">
+        <img class="fr" src="../../../assets/images/scan.svg" alt="">
       </router-link>
     </div>
     <div class="add-adress-btn">

@@ -200,6 +200,7 @@
     .transfer-button {
       position: fixed;
       width: 100%;
+      bottom:10px;
     }
   }
 </style>
