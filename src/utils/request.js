@@ -85,6 +85,7 @@ service.interceptors.response.use(
       result: errorReponse.response
     }
     if (errorJSON.ret_code === 403 || errorJSON.ret_code === 401) {
+      window.localStorage.removeItem('token')
       router.push({
         path: 'login'
       })

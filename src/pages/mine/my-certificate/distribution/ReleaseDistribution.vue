@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="release-item">
-      <mt-field label="发布份数" placeholder="最低100" v-model="releaseParams.total_part " @blur.native.capture="num">份
+      <mt-field label="发布份数" placeholder="最低100" v-model="releaseParams.total_part" @blur.native.capture="num">份
       </mt-field>
       <mt-field label="每份数量" placeholder="请输入整数" v-model="releaseParams.step_amount" @blur.native.capture="integer">
       </mt-field>
@@ -28,14 +28,14 @@
       </mt-field>
       <img src="../../../../assets/images/prompt.svg" alt="" @click="prompt">
       <div class="release-interest">
-        <span>支出利润:{{releaseParams.total_part*releaseParams.air*releaseParams.freeze_days*0.01}}{{balanceToken.code}}</span>
-        <span>可用数量:{{this.balanceData.balance}}</span>
+        <span>支出利润:{{(releaseParams.total_part*(releaseParams.air/100)*releaseParams.step_amount/365*releaseParams.freeze_days).toFixed(2)}}{{balanceToken.code}}</span>
+        <span>可用数量:{{this.balanceData.balance|number}}</span>
       </div>
       <div class="purchase-quantity">
-        <mt-field label="起购份数" placeholder="请输入整数"  @blur.native.capture="integer" v-model="releaseParams.min_part">份
+        <mt-field label="起购份数" placeholder="请输入整数" @blur.native.capture="integer" v-model="releaseParams.min_part">份
         </mt-field>
         <mt-field label="最多可购份数" placeholder="请输入整数" @blur.native.capture="limit" v-model="releaseParams.high_part">
-        份</mt-field>
+          份</mt-field>
       </div>
       <mt-field label="截止时间" placeholder="请输入生日" type="date" v-model="releaseParams.deadline_date"></mt-field>
     </div>
@@ -45,6 +45,8 @@
     <!-- 数字键盘 -->
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
+        <span
+          class="paymentamount">{{(releaseParams.total_part*releaseParams.air*releaseParams.step_amount/365*releaseParams.freeze_days).toFixed(2)}}&nbsp;{{balanceToken.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
           @blur="showKeyboard = false" />
@@ -115,7 +117,7 @@
         this.$messagebox({
           title: '分利率',
           message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/360 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/360',
-          confirmButtonText: '我知道了', 
+          confirmButtonText: '我知道了',
         })
       },
       // 判断输入是否是整数
@@ -139,15 +141,15 @@
       },
       // 最大和最小值
       limit() {
-        if (this.releaseParams.high_part < this.releaseParams.min_part) {
+        if (this.releaseParams.high_part < this.releaseParams.total_part) {
           Toast({
-            message: '最少转入量不得大于最多转入量',
+            message: '最多可购份数不得大于发行数量',
             className: 'zZindex'
           })
         }
-        if (this.releaseParams.total_part / 1000 < this.releaseParams.high_part) {
+        if (this.releaseParams.high_part < 0) {
           Toast({
-            message: '上下限额设置错误, 请重新设置',
+            message: '输入的份数大于0的数',
             className: 'zZindex'
           })
         }
@@ -234,6 +236,7 @@
 
       .release-interest {
         text-align: right;
+
         span {
           display: block;
           color: #036EB8;
@@ -245,7 +248,8 @@
       .purchase-quantity {
         border-top: 10px solid #f2f2f2;
         border-bottom: 10px solid #f2f2f2;
-        .mint-cell-value{
+
+        .mint-cell-value {
           background-color: #fff;
         }
       }
@@ -259,6 +263,10 @@
       position: fixed;
       bottom: 10px;
       width: 100%;
+    }
+
+    input.mint-field-core {
+      background-color: #fff;
     }
   }
 </style>

@@ -16,6 +16,7 @@ const getters = {
             store.dispatch("setToken", stroageToken)
         }
         return state.user.token
+        // localStorage.clear()
     },
     userInfo: state => {
         let stroageUserInfo = JSON.parse(

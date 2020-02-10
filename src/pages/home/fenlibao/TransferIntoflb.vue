@@ -29,13 +29,13 @@
         </div>
         <img src="../../../assets/images/prompt.svg" alt="" @click="duration" class="duration">
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{flbData.total_amount}} <p>分利总量(万)</p></span>
+          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>分利总量(万)</p></span>
         </div>
       </div>
       <div class="token-progress">
-        <mt-progress :value="flbData.sold_amount/100" :bar-height="7"></mt-progress>
+        <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)" :bar-height="7"></mt-progress>
       </div>
-      <b>已转入份数{{flbData.total_amount-flbData.sold_amount}}</b>
+      <b>已转入份数{{flbData.sold_amount/flbData.step_amount}}</b>
       <mt-cell title="每份数量" value="">{{flbData.step_amount}} {{flToken.code}}/份</mt-cell>
       <router-link :to="{name:'ReleaseHistory'}">
         <mt-cell title="发布情况" value="查看" class="release-status" is-link></mt-cell>
@@ -47,7 +47,7 @@
         v-model="transferParams.amount">份</mt-field>
       <div class="transfer-num-amount fl">
         <span>交易数量 {{transferParams.amount*flbData.step_amount}}{{flToken.code}}</span>
-        <span>到期分利 {{transferParams.amount*flbData.air/365*flbData.freeze_days}}{{flToken.code}}</span>
+        <span>到期分利 {{(transferParams.amount*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">

@@ -14,6 +14,7 @@
       </span>
     </div>
     <div class="release-detail-num" v-for="item in listData">
+      <router-link :to="/releasedetail/+item.id">
       <p>{{item.air|number}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
@@ -29,6 +30,7 @@
         <div slot="start" class="fl">已售{{item.sold_amount}}</div>
         <div slot="end" class="fr">总量{{item.total_amount}}</div>
       </div>
+      </router-link>
     </div>
     <div class="release-history-list">
       <p>发布历史 <span>(已结束)</span></p>
