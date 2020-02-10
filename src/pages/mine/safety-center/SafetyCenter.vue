@@ -67,5 +67,8 @@
 <style lang="scss">
 	@import '../../../assets/scss/global';
 	.safety-center{
+		.mint-cell-text{
+			color:#333;
+		}
 	}
 </style>

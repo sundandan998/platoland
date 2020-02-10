@@ -106,7 +106,7 @@
 				detailData: '',
 				// 获取资产余额参数
 				balanceData: {
-					token_code: ''
+					token_code:''
 				},
 				// 发布参数/购买
 				releaseData: {
@@ -126,8 +126,7 @@
 			}
 		},
 		created() {
-			this.index(0, '111')
-			// console.log(this.$router)
+			this.index(1, '111')
 		},
 		methods: {
 			onInput(key) {
@@ -146,16 +145,7 @@
 					this.payTitle = true
 					// 当发布是购买的时候，可用部分是计价资产
 					// this.balanceData.token_code = this.detail.release.denominated_assets
-					this.balanceData.token_code = this.$route.params.code
-					api.balance(this.balanceData).then(res => {
-					this.balData = res.data
-				}).catch(err => {
-					if (err.code == 4003) {
-						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
-					} else {
-						toast(err)
-					}
-				})
+					this.balanceData.token_code = this.detail.token.code
 					this.balance()
 				} else {
 					if (index == 1) {

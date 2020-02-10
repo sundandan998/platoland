@@ -101,5 +101,11 @@
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.open-pay-password{
+	.open-pay-password-keyboard{
+		margin-top: 60px;
+	}
+
+	}
 </style>

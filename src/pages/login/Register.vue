@@ -241,6 +241,12 @@
   @import '../../assets/scss/global';
 
   .register {
+
+    input.el-input__inner {
+      position: relative;
+      left: 10px;
+    }
+
     .login-cancel {
       margin: 10px 0 30px 54px;
 
@@ -293,10 +299,11 @@
         top: 25px;
         left: -10px;
       }
-      .pass-icon{
+
+      .pass-icon {
         z-index: 11;
         position: absolute;
-        top: 60px;
+        top: 30px;
         left: -10px;
       }
 

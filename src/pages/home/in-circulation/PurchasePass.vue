@@ -5,20 +5,20 @@
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)"><span>{{$t('m.back')}}</span></mt-button>
       </mt-header>
     </div>
-    <div class="Purchase-pass-content">
-      <div class="Purchase-pass-content-top">
+    <div class="purchase-pass-content">
+      <div class="purchase-pass-content-top">
         <img :src="buyDataToken.icon" alt="" class="fl" />
         <span>{{buyDataToken.code}}({{buyDataToken.nickname}})</span>
         <span>{{buyDataToken.subject}}</span>
         <p>{{buyData.publish_name}}</p>
         <!-- <P>{{infoData}}</P> -->
       </div>
-      <div class="Purchase-pass-content-bot">
+      <div class="purchase-pass-content-bot">
         <img :src="buyData.d_icon" alt="" />
-        <span>{{buyData.price}}</span>
+        <span>{{buyData.price|number}}</span>
       </div>
     </div>
-    <div class="Purchase-pass-tabbar">
+    <div class="purchase-pass-tabbar">
       <van-tabs @click="buyIndex">
         <van-tab :title="$t('m.number')">
           <mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
@@ -31,7 +31,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <div class="Purchase-pass-btn">
+    <div class="purchase-pass-btn">
       <mt-button size="large" type="primary" @click="passwordShow" :disabled="disabled">{{$t('m.sure')}}</mt-button>
     </div>
     <div>
@@ -209,8 +209,39 @@
 <style lang="scss">
   @import '../../../assets/scss/global';
   .Purchase-pass{
-    .Purchase-pass-content{
+    .purchase-pass-content{
       background-color: #fff;
+      margin:10px 24px;
+      border-radius:10px;
+      padding: 10px ;
+      img{
+        margin-right: 10px;
+      }
+      .purchase-pass-content-bot{
+        margin-top: 10px;
+        img{
+          width: 35px;
+          margin-left: 5px;
+        }
+      }
+    }
+    .purchase-pass-tabbar{
+      margin:0 24px;
+      height: 250px;
+      border-radius: 10px;
+      background-color: #fff;
+      .van-tabs--line .van-tabs__wrap{
+				border-top-left-radius:10px;
+				border-top-right-radius:10px;
+      }
+      p{
+        margin-left: 15px;
+      }
+    }
+    .purchase-pass-btn{
+      width: 100%;
+      position: fixed;
+      bottom:10px;
     }
   }
 </style>

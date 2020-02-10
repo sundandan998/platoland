@@ -292,7 +292,6 @@
         text-align: right;
         display: block;
         margin-right: 20px;
-        padding-bottom: 10px;
       }
 
       .transfer-token-days-top-left {

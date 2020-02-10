@@ -30,7 +30,7 @@
         <span class="fr">期限(天)</span>
       </div>
       <div class="buy-pass-progress progress">
-        <mt-progress :value="progress":bar-height="7">
+        <mt-progress :value="progress" :bar-height="7">
         </mt-progress>
         <div slot="start" class="fl">已售 {{(this.detail.sold_number/this.detail.step_number).toFixed(0)}} 份</div>
         <div slot="end" class="fr">总量 {{(this.detail.first_number/this.detail.step_number).toFixed(0)}} 份</div>
@@ -43,7 +43,8 @@
           <!-- @blur.native.capture="maxnum" -->
           <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'"
             v-model="requsetPay.amount"></mt-field>
-          <span>交易额：{{requsetPay.amount*this.detail.issue_price*this.detail.step_number}} {{this.detail.denominated_assets}}</span>
+          <span>交易额：{{requsetPay.amount*this.detail.issue_price*this.detail.step_number}}
+            {{this.detail.denominated_assets}}</span>
         </van-tab>
         <van-tab title="按金额买入">
           <mt-field
@@ -106,13 +107,13 @@
           payment_id: '',
           pay_pwd: ''
         },
-        progress:0,
+        progress: 0,
       }
     },
     created() {
       this.balance()
       this.date()
-      this.progress = ((this.detail.sold_number/this.detail.step_number)/(this.detail.first_number/this.detail.step_number))*100
+      this.progress = ((this.detail.sold_number / this.detail.step_number) / (this.detail.first_number / this.detail.step_number)) * 100
     },
     methods: {
       onInput(key) {
@@ -134,7 +135,7 @@
       date() {
         var date1 = new Date()
         var date2 = new Date(date1)
-        date2.setDate(date1.getDate() +this.detail.freeze_days)
+        date2.setDate(date1.getDate() + this.detail.freeze_days)
         const resDate = date2.getFullYear() + '-' + this.p((date2.getMonth() + 1)) + '-' + this.p(date2.getDate())
         this.timeDate = resDate
       },
@@ -341,6 +342,12 @@
       .day {
         margin-right: 20px;
       }
+    }
+
+    .transfer-button {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
     }
   }
 </style>

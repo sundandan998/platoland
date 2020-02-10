@@ -133,10 +133,7 @@ h1{
   background-image:none !important;
 } 
 //--------------------------============================
-input.el-input__inner {
-    position: relative;
-    top: 5px;
-}
+
 .el-input__prefix {
     top: 8px;
 }
@@ -357,129 +354,67 @@ table.el-table__body {
 }
 
 //首页/流通中/去交易
-.to-deal-header {
-    margin-bottom: 40px;
-}
-.pass-details-header {
-    margin-bottom: 41px;
-}
-.sell-pass {
-    position: relative;
-    top: -40px;
-}
-.to-deal-purchase {
-    width: 100%;
-    background-color: #fff;
-    margin: 10px auto;
-    height: auto;
-}
-.to-deal-purchase-top{
-    border-bottom: 1px solid #f6f6f6;
-    margin: 5px 18px 5px 18px;
-    height: 40px;
-    line-height: 40px;
-    // font-size: 0.78rem;
-    color: #333;
-    img{
-        width: 25px;
-        vertical-align: middle;
-        margin-right: 10px;
-    }
-}
-.to-deal-purchase-bot span:nth-child(2){
-    color:#1A8EEE;
-    // font-size: 1.1rem;
-    position: relative;
-    top: 10px;
-    left: 56px;
-}
-.to-deal-purchase-bot{
-    
-    span{
-        padding-left: 15px;
-        // font-size: 0.67rem;
-        color:#999;
-        img{
-            width: 20px;
-            position: relative;
-            top: 5px;
-        }
-    }
-    p{
-        padding-left: 15px;
-        // font-size: 0.67rem;
-        color: #999;
-        margin-top: 10px;
-        padding-bottom: 5px;
-    }
-}
+
 //首页/流通中/去交易/购买通证
-.Purchase-pass-content-top {
-    margin-left: 8px;
-}
-.Purchase-pass-content {
-    background-color: #f2f2f2;
-    width: 100%;
-    margin: 43px auto;
-}
-.Purchase-pass-content-top{
-    img{
-        margin: 15px 15px 15px 20px;
-    }
-    span{
-        display: block;
-        // font-size: 0.89rem;
-        padding-top: 6px;
-    }
-    p{
-        margin: 20px 0 0 28px;
-        // font-size: 0.89rem;
-    }
-}
-.Purchase-pass-content-bot {
-    // font-size: 1.0rem;
-    margin: 16px 0 0 36px;
-    padding-bottom: 10px;
-    span{
-        position: relative;
-        top: -3px;
-    }
-}
-.Purchase-pass-tabbar .mint-field .mint-cell-value {
-    border-bottom: 1px solid #ccc;
-    margin: 24px 20px 2px 20px;
-}
-.Purchase-pass-tabbar input.mint-field-core{
-    // font-size: 0.89rem;
-    color:#000;
-    top: -4px;
-    position: relative;
-}
-.mint-field-other{
-    top: -4px;
-}
-.Purchase-pass-tabbar p{
-    height: 20px;
-    background-color: #fff;
-    padding:10px 0 10px 50px;
-    // font-size: 0.67rem;
-    color:#456df1;
-}
-.Purchase-pass-tabbar .mint-cell-wrapper {
-    padding-top: 10px;
-}
-.Purchase-pass-tabbar {
-    margin-top: -10px;
-    margin-bottom: 54px;
-}
-.Purchase-pass-btn {
-    width: 60%;
-    text-align: center;
-    margin: 0 auto;
-}
-.Purchase-pass-btn .mint-button{
-    border-radius: 45px
-}
+// .Purchase-pass-content-top {
+//     margin-left: 8px;
+// }
+// .Purchase-pass-content {
+//     background-color: #f2f2f2;
+//     width: 100%;
+//     margin: 43px auto;
+// }
+// .Purchase-pass-content-top{
+//     img{
+//         margin: 15px 15px 15px 20px;
+//     }
+//     span{
+//         display: block;
+//         // font-size: 0.89rem;
+//         padding-top: 6px;
+//     }
+//     p{
+//         margin: 20px 0 0 28px;
+//         // font-size: 0.89rem;
+//     }
+// }
+// .Purchase-pass-content-bot {
+//     // font-size: 1.0rem;
+//     margin: 16px 0 0 36px;
+//     padding-bottom: 10px;
+//     span{
+//         position: relative;
+//         top: -3px;
+//     }
+// }
+// .Purchase-pass-tabbar .mint-field .mint-cell-value {
+//     border-bottom: 1px solid #ccc;
+//     margin: 24px 20px 2px 20px;
+// }
+// .Purchase-pass-tabbar input.mint-field-core{
+//     // font-size: 0.89rem;
+//     color:#000;
+//     top: -4px;
+//     position: relative;
+// }
+// .mint-field-other{
+//     top: -4px;
+// }
+// .Purchase-pass-tabbar p{
+//     height: 20px;
+//     background-color: #fff;
+//     padding:10px 0 10px 50px;
+//     // font-size: 0.67rem;
+//     color:#456df1;
+// }
+// .Purchase-pass-tabbar .mint-cell-wrapper {
+//     padding-top: 10px;
+// }
+// .Purchase-pass-tabbar {
+//     margin-top: -10px;
+//     margin-bottom: 54px;
+// }
+
 //首页/流通中/购买发布
 .to-details-header .release{
     margin-right: 10px;

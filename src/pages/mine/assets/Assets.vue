@@ -3,7 +3,7 @@
     <div class="assest-header">
       <mt-header fixed :title="$t('m.assets')">
         <!-- v-on:click="$router.go(-1)" -->
-        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
+        <mt-button icon="back" slot="left" @click="back" >{{$t('m.back')}}</mt-button>
         <mt-button icon slot="right">
           <router-link to="/detailedlist">
             <img src="../../../assets/images/u2666.png" alt><span>{{$t('m.assetsdetail')}}</span>
@@ -95,7 +95,7 @@
       margin: 10px 24px;
       background-color: #fff;
       border-radius: 10px;
-      height: auto;
+      height: 80px;
       padding:20px 24px;
       font-size: 24px;
       img{

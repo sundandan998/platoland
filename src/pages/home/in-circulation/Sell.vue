@@ -5,8 +5,8 @@
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
-		<div class="Purchase-pass-content">
-			<div class="Purchase-pass-content-top">
+		<div class="purchase-pass-content">
+			<div class="purchase-pass-content-top">
 				<img :src="buyDataToken.icon" alt="" class="fl" />
 				<span>{{buyDataToken.code}}({{buyDataToken.nickname}})</span>
 				<span>{{buyDataToken.subject}}</span>
@@ -15,27 +15,28 @@
 			</div>
 			<div class="Purchase-pass-content-bot">
 				<img src="../../../assets/images/t.png" alt="" />
-				<span>{{buyData.price}}</span>
+				<span>{{buyData.price|number}}</span>
 			</div>
 		</div>
-		<div class="Purchase-pass-tabbar">
+		<div class="purchase-pass-tabbar">
 			<van-tabs @click="buyIndex">
 				<van-tab :title="$t('m.numsale')">
-					<mt-field :placeholder="'最低出售数量'+ buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="'最低出售数量'+buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.available')}}：{{balData.available_amount}} {{buyDataToken.code}}</p> -->
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
 					<p>{{$t('m.servicecharge')}}：推广期暂免</p>
 				</van-tab>
 				<van-tab :title="$t('m.pricesale')">
-					<mt-field :placeholder="'最低出售金额'+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="'最低出售金额'+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount">
+					</mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}}{{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
 					<p>{{$t('m.servicecharge')}}：推广期暂免</p>
 				</van-tab>
 			</van-tabs>
 		</div>
-		<div class="Purchase-pass-btn">
+		<div class="purchase-pass-btn">
 			<mt-button size="large" type="primary" @click.native="sell" :disabled="disabled">{{$t('m.sure')}}</mt-button>
 		</div>
 		<div class="payment">
@@ -92,7 +93,7 @@
 			}
 		},
 		created() {
-      this.balance()
+			this.balance()
 			this.buyDetail()
 			this.buyIndex(0, '111')
 		},
@@ -127,19 +128,19 @@
 					})
 				} else {
 					this.$messagebox({
-            title: '提示',
-            message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            showCancelButton: true
-          }).then(action => {
-            if (action == 'confirm') {
-              this.$router.push({
-                name: 'Safety'
-                // params: { id: 'reservation' }
-              })
-            }
-          })
+						title: '提示',
+						message: `请先设置支付密码再进行操作`,
+						cancelButtonText: '取消',
+						confirmButtonText: '确定',
+						showCancelButton: true
+					}).then(action => {
+						if (action == 'confirm') {
+							this.$router.push({
+								name: 'Safety'
+								// params: { id: 'reservation' }
+							})
+						}
+					})
 				}
 			},
 			buyIndex(index, title) {
@@ -155,7 +156,7 @@
 			},
 			// 交易详情
 			buyDetail() {
-				api.buyDetail({id:this.$route.params.id}).then(res => {
+				api.buyDetail({ id: this.$route.params.id }).then(res => {
 					this.buyData = res.data
 					this.buyDataToken = res.data.token
 				}).catch(err => {
@@ -212,5 +213,46 @@
 	}
 </script>
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+
+	.purchase-pass {
+		.purchase-pass-content {
+			background-color: #fff;
+			margin: 10px 24px;
+			border-radius: 10px;
+			padding: 10px;
+			img {
+				margin-right: 10px;
+			}
+
+			.Purchase-pass-content-bot {
+				img {
+					margin-top: 20px;
+					margin-left: 10px;
+				}
+			}
+		}
+
+		.purchase-pass-tabbar {
+			margin: 0 24px;
+			border-radius: 10px;
+			height: 300px;
+			background-color: #fff;
+			.van-tabs--line .van-tabs__wrap{
+				border-top-left-radius:10px;
+				border-top-right-radius:10px;
+			}
+			p{
+				margin:0 20px;
+			}
+			.mint-field-core{
+				font-size: 14px;
+			}
+		}
+		.purchase-pass-btn{
+			position: fixed;
+			bottom:10px;
+			width: 100%;
+		}
+	}
 </style>
