@@ -37,7 +37,7 @@
         <mt-field label="最多可购份数" placeholder="请输入整数" @blur.native.capture="limit" v-model="releaseParams.high_part">
           份</mt-field>
       </div>
-      <mt-field label="截止时间" placeholder="请输入生日" type="date" v-model="releaseParams.deadline_date"></mt-field>
+      <mt-field label="截止时间" placeholder="请输入时间" type="date" v-model="releaseParams.deadline_date"></mt-field>
     </div>
     <div class="release-button">
       <mt-button type="primary" size="large" @click.native="release" :disabled="disabled">确定发布</mt-button>
@@ -229,7 +229,7 @@
 
       .mint-field-core {
         text-align: right;
-        width: 85%;
+        width: 100%;
         flex: unset;
         margin: 0 auto;
       }
@@ -253,7 +253,12 @@
           background-color: #fff;
         }
       }
-
+      /* .date{
+        input.mint-field-core{
+          position: relative;
+          right:-40px;
+        }
+      } */
       .mint-cell-wrapper {
         border-bottom: 1px solid #f2f2f2;
       }

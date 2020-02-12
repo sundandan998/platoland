@@ -1,6 +1,6 @@
 <template>
   <div class="open-information">
-    <div class="open-information-header">
+    <div class="open-information-header header">
       <mt-header fixed title="开启邮箱验证">
         <router-link to="/safety" slot="left">
           <mt-button icon="back">{{$t('m.back')}}</mt-button>
@@ -103,5 +103,11 @@
 </script>
 
 <style lang="scss">
-  @import '../../../assets/scss/global'
+  @import '../../../assets/scss/global';
+  .open-information{
+    .mint-cell:last-child{
+      background-image:none;
+    }
+  }
+
 </style>

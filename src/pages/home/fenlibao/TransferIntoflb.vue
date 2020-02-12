@@ -44,10 +44,10 @@
     <!-- 转入数量 -->
     <div class="transfer-num">
       <mt-field @blur.native.capture="maxnum" :placeholder="flbData.min_amount+'~'+flbData.high_amount"
-        v-model="transferParams.amount">份</mt-field>
+        v-model="transferParams.part">份</mt-field>
       <div class="transfer-num-amount fl">
-        <span>交易数量 {{transferParams.amount*flbData.step_amount}}{{flToken.code}}</span>
-        <span>到期分利 {{(transferParams.amount*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+        <span>交易数量 {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
+        <span>到期分利 {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">
@@ -57,12 +57,12 @@
       </div>
     </div>
     <div class="release-button">
-      <van-button type="warning" size="large" @click.native="transfer" :disabled="disabled">确定转入</van-button>
+      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">确定转入</van-button>
     </div>
     <!-- 数字键盘 -->
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{transferParams.amount}}&nbsp;({{flToken.code}})</span>
+        <span class="paymentamount">{{transferParams.part}}&nbsp;({{flToken.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -88,7 +88,7 @@
         disabled: true,
         transferParams: {
           pk: this.$route.params.id,
-          amount: '',
+          part: '',
           pay_pwd: ''
         }
       }
@@ -105,12 +105,12 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       transfer() {
-        if (this.transferParams.amount > this.flbData.high_amount) {
+        if (this.transferParams.part > this.flbData.high_amount) {
           Toast({
             message: '最多转入' + this.flbData.high_amount + '份',
             className: 'zZindex'
           })
-        } else if (this.transferParams.amount < this.flbData.min_amount) {
+        } else if (this.transferParams.part < this.flbData.min_amount) {
           Toast({
             message: '最少转入' + this.flbData.min_amount + '份',
             className: 'zZindex'
@@ -156,7 +156,7 @@
       },
       // 最多转入
       maxnum() {
-        if (this.transferParams.amount > this.flbData.high_amount || this.transferParams.amount < this.flbData.min_amount) {
+        if (this.transferParams.part > this.flbData.high_amount || this.transferParams.part < this.flbData.min_amount) {
           Toast({
             message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
             className: 'zZindex'

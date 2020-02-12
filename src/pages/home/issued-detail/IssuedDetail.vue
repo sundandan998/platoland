@@ -42,7 +42,7 @@
       <mt-cell title="最高可购份数" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}份
       </mt-cell>
     </div>
-    <div class="issued-servings">
+    <div class="issued-servings time">
       <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
       <mt-cell title="开始时间" :value="issuedDetail.publish_time"></mt-cell>
       <router-link :to="{name:'Issuance'}">
@@ -196,7 +196,9 @@
       }
 
     }
-
+    .time{
+      margin-bottom: 100px;
+    }
     .transfer-button {
       position: fixed;
       width: 100%;

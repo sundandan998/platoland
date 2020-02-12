@@ -303,7 +303,7 @@
       .pass-icon {
         z-index: 11;
         position: absolute;
-        top: 30px;
+        top: 50px;
         left: -10px;
       }
 

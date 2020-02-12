@@ -7,7 +7,7 @@
         <mt-button slot="left" icon="back"@click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <div class="certificate-list-card" v-for="(item, index) in assetsData">
+    <div class="certificate-list-card" v-for="(item, index) in assetsData" v-if="item.subject!=null">
       <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
       <router-link :to="/detail/+item.code">
         <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
@@ -73,6 +73,7 @@
         // this.$route.params
         api.tokenList({ category: 'all' }).then(res => {
           this.assetsData = res.data
+          // console.log(this.assetsData.subject)
           // for(let i=0;i<this.assetsData.length;i++){
           //   this.selectRadio=this.assetsData[i].code
           //   console.log(this.selectRadio)

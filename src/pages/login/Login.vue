@@ -215,11 +215,13 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
+
   .login {
     .logo {
       .mint-cell-wrapper {
         background-image: none;
       }
+
       img {
         width: 60%;
         margin: 100px auto 100px auto;
@@ -237,6 +239,7 @@
 
     .login-form {
       margin: 150px 54px 100px 54px;
+
       .mint-field .mint-cell-title {
         width: 40px;
       }
@@ -267,11 +270,11 @@
     .forget-pwd {
       margin-top: 10px;
       font-size: 26px;
-      color:#333;
+      color: #333;
     }
 
     .login-btn {
-      margin:0 60px;
+      margin: 0 60px;
     }
 
     .login-switch {

@@ -28,7 +28,6 @@
     <!-- 分利宝 -->
     <div class="home-divided-treasure" v-if="this.listData.length>0">
       <div class="detail-flb">
-        <!-- <router-link :to="{name:'ReleaseHistory',params:{token:detailData}}"> -->
         <router-link :to="{name:'ReleaseHistory'}">
           <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
         </router-link>
@@ -48,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="detail-issued">
+    <div class="detail-issued" v-if="this.listData.length>0">
       <router-link :to="{name:'Issuance',params:{token:release.token,icon:detailData.icon}}">
         <p class="detail-flb-title">发行情况<span class="fr">全部 ></span></p>
       </router-link>
@@ -57,9 +56,10 @@
           <img :src="detailData.icon" alt="" class="fl icon">
           <span>
             {{detailData.code}} ({{detailData.nickname}})
-            <p>{{subject.name}}</p>
+            <!-- <p>{{subject.name}}</p> -->
           </span>
-          <img src="../../../assets/images/issued.png" alt="" class="fr publicity">
+          <img  v-if="release.status==1" src="../../../assets/images/issued.png" alt="" class="fr publicity">
+          <img  v-if="release.status==0"src="../../../assets/images/publicity.png" alt="" class="fr publicity">
         </div>
         <div class="detail-issued-token-bot">
           <div class="detail-issued-token-bot-left fl">
@@ -109,7 +109,6 @@
         api.flList({ admin: true, code: this.$route.params.code || this.detail.token.code }).then(res => {
           if (res.code == 0) {
             this.listData = res.data
-            console.log(this.flbData.token.code)
           }
         }).catch(err => {
 

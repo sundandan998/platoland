@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="login-btn">
-      <mt-button type="default" @click="register" :disabled="disabled" size="large">确&nbsp;定</mt-button>
+      <mt-button type="primary" @click="register" :disabled="disabled" size="large">确&nbsp;定</mt-button>
     </div>
   </div>
 </template>
@@ -58,7 +58,7 @@
           username: '',
           password: '',
           code: '',
-          invite_code:this.$route.params.invite_code
+          invite_code: this.$route.params.invite_code
         },
         // 校验验证码参数
         checkCode: {
@@ -191,6 +191,8 @@
           if (val.code !== '' && val.code.length == 6) {
             this.disabled = false
             this.showKeyboard = false
+          }else{
+            this.disabled = true
           }
         }
       }
@@ -200,20 +202,24 @@
 
 <style lang="scss">
   @import '../../../assets/scss/global';
-  .reset-mail{
-    .login-cancel{
-      margin:10px 54px;
+
+  .reset-mail {
+    .login-cancel {
+      margin: 10px 54px;
     }
-    .logo{
-      img{
-        display:block;
-        width:60%;
-        margin:0 auto;
+
+    .logo {
+      img {
+        display: block;
+        width: 60%;
+        margin: 0 auto;
       }
     }
-    .login-btn{
-      margin-top: 50px;
+
+    .login-btn {
+      width: 80%;
+      margin: 150px auto;
+      opacity: .8;
     }
   }
-
 </style>
