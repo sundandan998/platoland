@@ -1,7 +1,7 @@
 <template>
   <div class="add-address">
     <div class="add-address-header header">
-      <mt-header fixed :title="$t('m.addaddress')">
+      <mt-header fixed :title="$t('m.addBook')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -13,11 +13,11 @@
       </div>
     </div>
     <div class="add-adress-list">
-      <span>姓名:</span>
+      <span>{{$t('m.name')}}:</span>
       <mt-field v-model="addAddress.firstName"></mt-field>
-      <span>备注:</span>
+      <span>{{$t('m.remark')}}:</span>
       <mt-field v-model="addAddress.remark"></mt-field>
-      <span>地址:</span>
+      <span>{{$t('m.address')}}:</span>
       <mt-field v-model="addAddress.address"></mt-field>
       <router-link to="scan">
         <img class="fr" src="../../../assets/images/scan.svg" alt="">

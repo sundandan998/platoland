@@ -1,14 +1,14 @@
 <template>
   <div class="freeze">
     <div class="freeze-header header">
-      <mt-header fixed title="冻结详情">
+      <mt-header fixed :title="$t('m.freezeDetail')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="freeze-information">
       <div class="freeze-down-menu">
         <span class="el-dropdown-link" index="type" @click="handleType(index)">
-          交易类型<i class="el-icon-arrow-down el-icon--right"></i>
+          {{$t('m.transactionStatus')}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <!-- <span class="el-dropdown-link fr" index="time">
           冻结时间<i class="el-icon-arrow-down el-icon--right"></i>
@@ -16,7 +16,7 @@
       </div>
       <!-- <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p> -->
       <!-- 上拉加载 -->
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+      <van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
@@ -56,7 +56,7 @@
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" class="revoke" type="primary" @click="cancel(item.order_id,index)">撤销
               </mt-button>
             </div>
           </div>
@@ -236,7 +236,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
   .freeze-header {
     margin-bottom: 20px;
   }
@@ -267,13 +266,17 @@
       border-bottom: 10px solid #f6f6f6;
       border-top: 1px solid #f6f6f6;
 
-      .buy button {
+      .buy {
+        .revoke{
+          position: relative;
+          top:-170px;
+        }
+        button {
         height: 40px;
-        position: relative;
-        top: -90px;
         right: 15px;
       }
-
+      }
+     
       .issue-buy button {
         top: 0px;
       }

@@ -16,38 +16,43 @@
     <!-- 交易部分 -->
     <div class="home-transaction">
       <router-link to="zone">
-        <span><img src="../../assets/images/currency.svg" alt="">发行专区</span>
+        <!-- 发行专区 -->
+        <span><img src="../../assets/images/currency.svg" alt="">{{$t('m.distributionArea')}}</span>
       </router-link>
       <router-link to="bao">
-        <span><img src="../../assets/images/distribution.svg" alt="">分利宝</span>
+        <!-- 分利宝 -->
+        <span><img src="../../assets/images/distribution.svg" alt="">{{$t('m.fenlibao')}}</span>
       </router-link>
       <router-link to="/deal">
-        <span><img src="../../assets/images/OTC.svg" alt="">交易市场</span>
+        <!-- 交易市场 -->
+        <span><img src="../../assets/images/OTC.svg" alt="">{{$t('m.marketPlace')}}</span>
       </router-link>
       <router-link to="list">
-        <span class="token"><img src="../../assets/images/pass.svg" alt="">通证大全</span>
+        <!-- 通证大全 -->
+        <span class="token"><img src="../../assets/images/pass.svg" alt="">{{$t('m.tokenDaQuan')}}</span>
       </router-link>
     </div>
     <!-- 最新发行 -->
     <div class="home-latest-release">
       <router-link to="zone">
-        <p class="home-pub-title">发行专区<span class="fr">全部></span></p>
+        <p class="home-pub-title">{{$t('m.distributionArea')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
       <div class="home-latest-release-token" v-for="item in release" @click="jump(item)">
         <!-- <router-link :to="{name:'Issued',params:{id:item.id}}"> -->
-          <div class="home-pub-token">
-            <img :src="item.token.icon" alt="" class="fl icon">
-            <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-            <img src="../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
-            <img src="../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
+        <div class="home-pub-token">
+          <img :src="item.token.icon" alt="" class="fl icon">
+          <span class="fl"><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
+          <span class="fr publicity" v-if="item.status==0"><img src="../../assets/images/gs.svg" alt="">公示中</span>
+          <span class="fr issue" v-if="item.status==1"><img src="../../assets/images/clock.svg" alt="">进行中</span>
+        </div>
+        <div class="home-latest-release-token-bot">
+          <div class="home-latest-release-token-bot-text fl">
+            <span>{{$t('m.first')}} {{item.periods}} {{$t('m.qi')}}</span>
+            <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> {{item.freeze_days}}
+              {{$t('m.day')}}</span>
           </div>
-          <div class="home-latest-release-token-bot">
-            <div class="home-latest-release-token-bot-text fl">
-              <span>第 {{item.periods}} 期</span>
-              <span class="fr"> <img src="../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
-            </div>
-            <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
-          </div>
+          <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
+        </div>
         <!-- </router-link> -->
       </div>
     </div>
@@ -55,7 +60,7 @@
     <!-- v-if="this.flData==[]"  -->
     <div class="home-divided-treasure" v-if="this.flData.length>0">
       <router-link :to="{name:'Bao'}">
-        <p class="home-pub-title ">分利宝<span class="fr">全部></span></p>
+        <p class="home-pub-title ">{{$t('m.fenlibao')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
       <div class="home-divided-treasure-token" v-for="item in flData">
         <router-link :to="{name:'Transferflb',params:{id:item.id}}">
@@ -64,8 +69,9 @@
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
           </div>
           <div class="home-divided-treasure-token-bot">
-            <p>锁仓期限 {{item.freeze_days}} 天 <span class="fr home-percentage">{{item.air|number}}%</span></p>
-            <p>最高可投 {{item.high_amount}}<span class="fr">分利率</span></p>
+            <p>{{$t('m.theTerm')}} {{item.freeze_days}} {{$t('m.day')}} <span
+                class="fr home-percentage">{{item.air|number}}%</span></p>
+            <p>{{$t('m.possibleThrow')}} {{item.high_amount}}<span class="fr">{{$t('m.interestRate')}}</span></p>
           </div>
         </router-link>
       </div>
@@ -73,7 +79,7 @@
     <!-- 市场交易 -->
     <div class="home-market-transaction">
       <router-link :to="{name:'Deal'}">
-        <p class="home-pub-title">交易市场<span class="fr">全部></span></p>
+        <p class="home-pub-title">{{$t('m.marketPlace')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
       <div class="home-market-transaction-token" v-for="item in market">
         <div class="home-pub-token">
@@ -83,22 +89,24 @@
         <div v-for="marketInfo in item.info">
           <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-num">
-              <span class="fl">最高买价<p> <img :src="marketInfo.d_icon" alt="">{{marketInfo.high_number|number}} </p>
+              <span class="fl">{{$t('m.purchasePrice')}}<p> <img :src="marketInfo.d_icon"
+                    alt="">{{marketInfo.high_number|number}} </p>
               </span>
-              <span class="fr">数量<p>{{marketInfo.amount|number}}</p></span>
+              <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}}</p></span>
             </div>
             <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
-              <van-button class="fr" type="default">立 即 出 售</van-button>
+              <van-button class="fr" type="default">{{$t('m.sellNow')}}</van-button>
             </router-link>
           </div>
           <div class="home-market-transaction-bot" v-if="marketInfo.publish_type==0">
             <div class="fl home-market-transaction-bot-num">
-              <span class="fl">最低卖价<p> <img :src="marketInfo.d_icon" alt="">{{marketInfo.low_number|number}}</p></span>
-              <span class="fr">数量<p>{{marketInfo.amount|number}} </p></span>
+              <span class="fl">{{$t('m.AskingPrice')}}<p> <img :src="marketInfo.d_icon"
+                    alt="">{{marketInfo.low_number|number}}</p></span>
+              <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}} </p></span>
             </div>
             <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
               <!-- <router-link :to="/purchase/+marketInfo.id"> -->
-              <van-button class="fr" type="danger">立 即 购 买</van-button>
+              <van-button class="fr" type="danger">{{$t('m.buyNow')}}</van-button>
             </router-link>
           </div>
         </div>
@@ -131,19 +139,19 @@
     created() {
       this.home()
       this.info()
-      this.version()
+      // this.version()
     },
     methods: {
-      jump(item){
-        if(item.status==1){
+      jump(item) {
+        if (item.status == 1) {
           this.$router.push({
-            name:'Issued',
-            params:{id:item.id}
+            name: 'Issued',
+            params: { id: item.id }
           })
-        }else{
+        } else {
           this.$router.push({
-            name:'Detail',
-            params:{code:item.token.code}
+            name: 'Detail',
+            params: { code: item.token.code }
           })
         }
       },
@@ -181,16 +189,17 @@
           name: 'Life'
         })
       },
-           //版本升级
-           version() {
+      //版本升级
+      version() {
         let vcode = this.$version()
         api.version({ 'version_code': vcode }).then(res => {
           if (res.code == 0) {
             this.versionData = res
-            if(this.versionData.is_update == false) return
+            if (this.versionData.is_update == false) return
             if (this.versionData.is_force_update == true) {
               this.$messagebox({
                 title: '版本升级',
+                // title: '버전 업그레이드',
                 message: this.versionData.version_info,
                 closeOnClickModal: false,
                 // cancelButtonText: '否',
@@ -205,24 +214,27 @@
                 }
               })
             } else {
-              
-                // isForce = true
-                // this.versionData = res
-                this.$messagebox({
-                  title: '版本升级',
-                  message: this.versionData.version_info,
-                  cancelButtonText: '否',
-                  confirmButtonText: '是',
-                  showCancelButton: true
-                }).then(action => {
-                  if (action === 'confirm') {
-                    if (window.plus) {
-                      // console.log(this.versionData.update_url)
-                      plus.runtime.openURL(this.versionData.update_url)
-                      plus.runtime.quit()
-                    }
+
+              // isForce = true
+              // this.versionData = res
+              this.$messagebox({
+                title: '版本升级',
+                // title: '버전 업그레이드',
+                message: this.versionData.version_info,
+                cancelButtonText: '否',
+                confirmButtonText: '是',
+                // cancelButtonText: '아니요',
+                // confirmButtonText: '네',
+                showCancelButton: true
+              }).then(action => {
+                if (action === 'confirm') {
+                  if (window.plus) {
+                    // console.log(this.versionData.update_url)
+                    plus.runtime.openURL(this.versionData.update_url)
+                    plus.runtime.quit()
                   }
-                })
+                }
+              })
             }
           }
         })
@@ -282,9 +294,11 @@
       background-color: #fff;
       margin: 0px 24px;
       border-radius: 10px;
-      .token{
-        border-right:none;
+
+      .token {
+        border-right: none;
       }
+
       span {
         width: 24%;
         display: inline-block;
@@ -293,6 +307,7 @@
         text-align: center;
         font-size: 24px;
         color: #959595;
+
         img {
           height: 80px;
           margin: 30px auto 15px auto;
@@ -304,12 +319,33 @@
     /* 最新发行 */
     .home-latest-release {
       margin: 0px 24px;
+
       .home-latest-release-token {
         overflow: hidden;
         height: 260px;
         background-color: #fff;
         border-radius: 10px;
         margin-bottom: 20px;
+
+        .publicity {
+          font-size: 26px;
+          color: #06B56A;
+          margin-right: 40px;
+          img {
+            margin-right: 7px;
+            width: 26px;
+          }
+        }
+        .issue {
+            font-size: 26px;
+            color: #37A7E1;
+            margin-right: 40px;
+
+            img {
+              margin-right: 7px;
+              width: 26px;
+            }
+          }
 
         .home-latest-release-token-bot {
           margin: 0 45px;

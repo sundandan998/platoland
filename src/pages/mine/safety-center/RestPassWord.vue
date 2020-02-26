@@ -1,6 +1,6 @@
 <template>
 	<div class="rest-pass-word">
-		<div class="rest-pass-word-header">
+		<div class="rest-pass-word-header header">
 			<mt-header fixed title="重置登录密码">
 				<mt-button icon="back" v-on:click="$router.go(-1)" slot="left">返回</mt-button>
 			</mt-header>

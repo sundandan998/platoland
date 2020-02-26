@@ -1,20 +1,20 @@
 <template>
 	<div class="assets-detailed">
 		<div class="assets-detailed-header header">
-			<mt-header fixed title="明细">
+			<mt-header fixed :title="$t('m.details')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="details-search">
 			<!-- @search="onSearch" -->
-			<van-search placeholder="请输入资产代码" show-action shape="round">
-				<div slot="action">搜索</div>
+			<van-search :placeholder="$t('m.assetsCode')" show-action shape="round">
+				<div slot="action">{{$t('m.search')}}</div>
 				<!-- @click="onSearch" -->
 			</van-search>
 		</div>
 		<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
 			<div class="assets-detailed-list">
-				<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+				<van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
 					:error.sync="error" error-text="请求失败，点击重新加载">
 					<div v-for="item in listData" class="details-list">
 						<router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">

@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div class="detail-header">
-      <mt-header fixed :title="$t('m.passdetails')">
+      <mt-header fixed :title="$t('m.tokenDetails')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -16,20 +16,20 @@
         <mt-cell :title="$t('m.address')" :value="detailData.contract_address"></mt-cell>
       </span>
       <!-- 通证主体 -->
-      <mt-cell :title="$t('m.body')" :value="this.subject.name" :to="{name:'Subject', params:{id:this.subject.id}}"
+      <mt-cell :title="$t('m.tokenSubject')" :value="this.subject.name" :to="{name:'Subject', params:{id:this.subject.id}}"
         is-link></mt-cell>
       <!-- 发行方 -->
       <mt-cell :title="$t('m.issuer')" :value="this.subject.issuer"
         :to="{name:'Subject', params:{id:this.subject.id,issuer:'issuer'}}" is-link></mt-cell>
     </div>
     <div class="detail-description">
-      <mt-cell title="通证说明" is-link :to="{name:'Description'}"></mt-cell>
+      <mt-cell :title="$t('m.tokenDescription')" is-link :to="{name:'Description'}"></mt-cell>
     </div>
     <!-- 分利宝 -->
     <div class="home-divided-treasure" v-if="this.listData.length>0">
       <div class="detail-flb">
         <router-link :to="{name:'ReleaseHistory'}">
-          <p class="detail-flb-title">分利宝<span class="fr">全部 ></span></p>
+          <p class="detail-flb-title">{{$t('m.fenlibao')}}<span class="fr">{{$t('m.all')}} ></span></p>
         </router-link>
         <div class="detail-flb-token" v-for="(item,index) in listData" v-if="index<1">
           <div class="detail-flb-token-top">
@@ -40,16 +40,17 @@
             </span>
           </div>
           <div class="detail-flb-token-bot">
-            <p><span>锁仓期限 {{item.freeze_days}}天</span><span class="fr rate">
+            <p><span> {{$t('m.theTerm')}} {{item.freeze_days}}{{$t('m.day')}}</span><span class="fr rate">
                 {{item.air|number}}%</span></p>
-            <p><span>最高转入 {{item.high_amount|number}}</span><span class="fr">分利率</span></p>
+            <p><span>{{$t('m.highestTransfer')}} {{item.high_amount|number}}</span><span class="fr">{{$t('m.interestRate')}}</span></p>
           </div>
         </div>
       </div>
     </div>
+    <!-- 发行情况 -->
     <div class="detail-issued" v-if="this.listData.length>0">
       <router-link :to="{name:'Issuance',params:{token:release.token,icon:detailData.icon}}">
-        <p class="detail-flb-title">发行情况<span class="fr">全部 ></span></p>
+        <p class="detail-flb-title">{{$t('m.issuance')}}<span class="fr">{{$t('m.all')}} ></span></p>
       </router-link>
       <div class="detail-issued-token">
         <div class="detail-issued-token-top">
@@ -63,8 +64,8 @@
         </div>
         <div class="detail-issued-token-bot">
           <div class="detail-issued-token-bot-left fl">
-            <span>第{{release.periods}}期</span> <span class="fr"><img src="../../../assets/images/lock.svg" alt="">
-              {{release.freeze_days}} 天</span>
+            <span>{{$t('m.first')}}{{release.periods}}{{$t('m.qi')}}</span> <span class="fr"><img src="../../../assets/images/lock.svg" alt="">
+              {{release.freeze_days}} {{$t('m.day')}}</span>
           </div>
           <div class="detail-issued-token-bot-right fr">
             <img :src="release.d_icon" alt=""> <span>{{release.issue_price|number}}</span>

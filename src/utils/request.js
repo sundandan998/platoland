@@ -28,14 +28,17 @@ const service = axios.create({
   ],
   // 是否跨域
   withCredentials: false,
+  // withCredentials: true,
   // loading加载
   loading: true
 });
 service.interceptors.request.use(
   config => {
-    config.headers["Content-Type"] =
-      "application/x-www-form-urlencoded;charset=UTF-8";
-    // store.dispatch("CheckTokenExpiredTime"); // 每次请求前，检查token是否过期，没过期更新，过期退出登录。
+    config.headers["Content-Type"] ="application/x-www-form-urlencoded;charset=UTF-8"
+    // 国际化语言
+    // config.headers["Accept-Language"] ="ko"
+    // zh-hans
+    config.headers["Accept-Language"] ="zh-hans"
     if (store.getters.token) {
       config.headers["Authorization"] = "JWT " + store.getters.token
     }
@@ -44,10 +47,6 @@ service.interceptors.request.use(
     }
     return config;
   },
-  error => {
-    console.log(error);
-    Promise.reject(error);
-  }
 )
 service.interceptors.response.use(
   response => {
@@ -89,6 +88,7 @@ service.interceptors.response.use(
       router.push({
         path: 'login'
       })
+      window.localStorage.removeItem('token')
     }
     message.error(errorJSON.ret_msg)
     return Promise.reject(errorJSON)

@@ -3,20 +3,20 @@
     <router-link to="login">
       <div class="login-cancel">
         <img src="../../../assets/images/back.svg" alt="" />
-        <span>返回</span>
+        <span>{{$t('m.back')}}</span>
       </div>
     </router-link>
     <!-- <div class="logo">
       <img src="../../../assets/images/login-logo.png" alt="" />
     </div> -->
     <div class="forget-password-title">
-      <h1>重置登录密码</h1>
+      <h1>{{$t('m.resetLoginPass')}}</h1>
     </div>
-    <p class="account-number">输入账号</p>
+    <p class="account-number">{{$t('m.enterAccountNumber')}}</p>
     <div class="login-content">
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- v-model="" -->
-      <mt-field  v-model="verification.username" placeholder="请输入邮箱或手机号" @blur.native.capture="check"
+      <mt-field  v-model="verification.username" :placeholder="$t('m.enterName')" @blur.native.capture="check"
         :state="status"></mt-field>
       <!-- <img src="../../../assets/images/email.png" alt="" class="login-icon"> -->
       <!-- <mt-field label="手机号" v-model="verification.username" placeholder="请输入手机号"  type="tel" @blur.native.capture="telCheck" :state="telStatus"></mt-field> -->
@@ -43,7 +43,7 @@
     </div>
     <div class="forget-password-btn">
       <!-- <router-link :to="{name:'Reset',params:{}}"> -->
-      <mt-button type="primary" @click="resetPwd" class="nextbtn" :disabled="disabled" size="large">下一步</mt-button>
+      <mt-button type="primary" @click="resetPwd" class="nextbtn" :disabled="disabled" size="large">{{$t('m.next')}}</mt-button>
       <!-- </router-link> -->
     </div>
   </div>

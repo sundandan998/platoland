@@ -1,7 +1,7 @@
 <template>
   <div class="issuance">
     <div class="release-header header">
-      <mt-header fixed title="发行情况">
+      <mt-header fixed :title="$t('m.issuance')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <!-- <mt-button slot="right" @click.native="token"> <img src="../../../assets/images/release.svg" alt=""> 发布
         </mt-button> -->
@@ -19,7 +19,7 @@
     </div>
     <!-- 当前发行 -->
     <div class="current-release">
-      <p class="current-release-title">当前发行</p>
+      <p class="current-release-title">{{$t('m.currentRelease')}}</p>
       <div class="current-release-token" v-for="item in happeDetail" v-if="item.status!==2">
         <router-link :to="{name:'Issued',params:{id:item.id}}">
           <div class="current-release-token-top">
@@ -30,8 +30,8 @@
           </div>
           <div class="current-release-token-bot">
             <div class="current-release-token-bot-text fl">
-              <span>第 {{item.periods}} 期</span>
-              <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+              <span>{{$t('m.period')}} {{item.periods}} {{$t('m.qi')}} </span>
+              <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} {{$t('m.day')}}</span>
             </div>
             <span class="fr "> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
           </div>
@@ -39,21 +39,21 @@
       </div>
     </div>
     <!-- 发布历史 -->
-    <p class="current-release-title history">历史发行 <span>(已结束)</span></p>
+    <p class="current-release-title history">{{$t('m.historyRelease')}} <span>({{$t('m.over')}})</span></p>
     <div class="issued-release-history">
       <div class="release-history-title">
-        <span>发行总量</span>
-        <span>锁仓期限</span>
-        <span>单价</span>
-        <span>数量</span>
+        <span>{{$t('m.releaseTotal')}}</span>
+        <span>{{$t('m.theTerm')}}</span>
+        <span>{{$t('m.price')}}</span>
+        <span>{{$t('m.quantity')}}</span>
       </div>
       <div class="release-history-title" v-for="item in happeDetail" v-if="item.status==1">
-        <span>{{item.periods}}期</span>
-        <span>{{item.freeze_days}} 天</span>
+        <span>{{item.periods}}{{$t('m.qi')}}</span>
+        <span>{{item.freeze_days}} {{$t('m.day')}}</span>
         <span>{{item.issue_price|number}} {{item.denominated_assets}} </span>
         <span>{{item.purchase_number|number}}</span>
       </div>
-      <p class="no-deta">暂无数据</p>
+      <p class="no-deta">{{$t('m.noData')}}</p>
     </div>
   </div>
 </template>

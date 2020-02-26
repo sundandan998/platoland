@@ -1,7 +1,7 @@
 <template>
   <div class="open-information">
     <div class="open-information-header header">
-      <mt-header fixed title="开启邮箱验证">
+      <mt-header fixed :title="$t('m.emailVerification')">
         <router-link to="/safety" slot="left">
           <mt-button icon="back">{{$t('m.back')}}</mt-button>
         </router-link>
@@ -9,20 +9,20 @@
     </div>
     <div class="open-information-from">
       <el-form class="demo-ruleForm">
-        <el-form-item label="邮箱">
+        <el-form-item :label="$t('m.email')">
           <br>
-          <mt-field v-model="email.email" placeholder="请输入邮箱" @blur.native.capture="emailCheck" ></mt-field>
+          <mt-field v-model="email.email" :placeholder="$t('m.emailNumber')" @blur.native.capture="emailCheck" ></mt-field>
         </el-form-item>
-        <el-form-item label="邮箱验证">
+        <el-form-item :label="$t('m.emailVerification')">
           <br>
           <span @click="sendEmail" class="fr">{{$t('m.send')}}</span>
-          <mt-field v-model="email.code" placeholder="请输入验证码"></mt-field>
+          <mt-field v-model="email.code" :placeholder="$t('m.verificationCode')"></mt-field>
         </el-form-item>
       </el-form>
     </div>
     <div class="rest-pass-word-text">
-      <p>{{$t('m.becareful')}}</p>
-      <p>{{$t('m.securityverificationone')}}</p>
+      <p>{{$t('m.note')}}</p>
+      <p>{{$t('m.safetyNote')}}</p>
     </div>
     <div class="rest-pass-word-btn">
       <router-link to="/safety">

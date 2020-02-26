@@ -1,7 +1,7 @@
 <template>
   <div class="certificate-list">
     <div class="certificate-list-header">
-      <mt-header fixed title="通证大全">
+      <mt-header fixed :title="$t('m.tokenDaQuan')">
         <!-- v-on:click="$router.go(-1) -->
         <!-- @click="back" -->
         <mt-button slot="left" icon="back"@click="back">{{$t('m.back')}}</mt-button>

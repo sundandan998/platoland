@@ -1,16 +1,16 @@
 <template>
   <div class="editnickname">
     <div class="editnickname-header header">
-      <mt-header fixed title=修改昵称>
+      <mt-header fixed :title="$t('m.editNickname')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="editnickname-body">
-      <mt-field placeholder="请输入昵称" v-model="params.nickname" @blur.native.capture="check"></mt-field>
-      <p>2-7个字符，不支持特殊符号</p>
+      <mt-field :placeholder="$t('m.EnterNickname')" v-model="params.nickname" @blur.native.capture="check"></mt-field>
+      <p>{{$t('m.checkNickname')}}</p>
     </div>
     <div class="editnickname-button" @click="save">
-      <mt-button type="primary" size="large">保存</mt-button>
+      <mt-button type="primary" size="large">{{$t('m.save')}}</mt-button>
     </div>
   </div>
 </template>

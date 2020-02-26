@@ -6,14 +6,14 @@
         <mt-button icon="back" slot="left" @click="back" >{{$t('m.back')}}</mt-button>
         <mt-button icon slot="right">
           <router-link to="/detailedlist">
-            <img src="../../../assets/images/u2666.png" alt><span>{{$t('m.assetsdetail')}}</span>
+            <img src="../../../assets/images/u2666.png" alt><span>{{$t('m.detail')}}</span>
           </router-link>
         </mt-button>
       </mt-header>
     </div>
     <div class="assets-list">
       <router-link to="/list">
-        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addseets')}}</span>
+        <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addAssets')}}</span>
       </router-link>
     </div>
     <div class="certificate-list-card" v-for="(item,index) in assetsdata">

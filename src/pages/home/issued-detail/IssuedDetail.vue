@@ -1,7 +1,8 @@
 <template>
   <div class="issued-detail">
     <div class="release-header header">
-      <mt-header fixed title="发行详情">
+        <!-- 发行详情 -->
+      <mt-header fixed :title="$t('m.releaseDetails')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -23,30 +24,31 @@
         </div>
         <span class="fr issued-period issued-price-num-day">{{issuedDetail.freeze_days}}</span>
         <div class="issued-price-text fl">
-          <span>发行期数 (期)</span>
-          <span class="fr">单价 ({{issuedDetail.denominated_assets}})</span>
+          <span>{{$t('m.issuePeriod')}} ({{$t('m.qi')}})</span>
+          <span class="fr">{{$t('m.price')}} ({{issuedDetail.denominated_assets}})</span>
         </div>
-        <span class="fr issued-period">冻结时长(天)</span>
+        <span class="fr issued-period">{{$t('m.freezeDuration')}}({{$t('m.day')}})</span>
       </div>
       <div class="issued-progress progress">
         <mt-progress :value="progress" :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">已售 {{(issuedDetail.sold_number/issuedDetail.step_number).toFixed(0)}} 份</div>
-        <div slot="end" class="fr">总量 {{(issuedDetail.first_number/issuedDetail.step_number).toFixed(0)}} 份</div>
+        <div slot="start" class="fl">{{$t('m.sold')}} {{(issuedDetail.sold_number/issuedDetail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
+        <div slot="end" class="fr">{{$t('m.total')}} {{(issuedDetail.first_number/issuedDetail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
       </div>
-      <mt-cell title="每份数量">{{issuedDetail.step_number|number}}{{detailToken.code}}/份</mt-cell>
-      <mt-cell title="每份总价">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/份
+      <mt-cell :title="$t('m.perServing')">{{issuedDetail.step_number|number}}{{detailToken.code}}/{{$t('m.share')}}</mt-cell>
+      <mt-cell :title="$t('m.perTotal')">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/{{$t('m.share')}}
       </mt-cell>
     </div>
     <div class="issued-servings">
-      <mt-cell title="起购份数" class="radius-top">{{issuedDetail.purchase_number/issuedDetail.step_number}}份</mt-cell>
-      <mt-cell title="最高可购份数" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}份
+        <!--  -->
+      <mt-cell :title="$t('m.purchaseQuantity')" class="radius-top">{{issuedDetail.purchase_number/issuedDetail.step_number}}{{$t('m.share')}}</mt-cell>
+      <mt-cell :title="$t('m.maxServing')" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}{{$t('m.share')}}
       </mt-cell>
     </div>
     <div class="issued-servings time">
-      <mt-cell title="股权锁定" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
-      <mt-cell title="开始时间" :value="issuedDetail.publish_time"></mt-cell>
+  <mt-cell :title="$t('m.lockIn')" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
+      <mt-cell :title="$t('m.startTime')" :value="issuedDetail.publish_time"></mt-cell>
       <router-link :to="{name:'Issuance'}">
-        <mt-cell title="发行情况" value="查看" is-link class="issued-view radius-bottom "></mt-cell>
+        <mt-cell :title="$t('m.issuance')" :value="$t('m.view')" is-link class="issued-view radius-bottom "></mt-cell>
       </router-link>
     </div>
     <div class="transfer-button" @click="buy">
@@ -54,7 +56,7 @@
       <!-- <router-link :to="{name:'Buy',params:{servings:issuedDetail.minimum_number}}"> -->
 
       <!-- <mt-button size="large" type="primary">立即买入</mt-button> -->
-      <mt-button size="large" type="primary" v-if="this.issuedDetail.status==1">立即买入</mt-button>
+      <mt-button size="large" type="primary" v-if="this.issuedDetail.status==1">{{$t('m.buyNow')}}</mt-button>
       <!-- </router-link> -->
     </div>
   </div>

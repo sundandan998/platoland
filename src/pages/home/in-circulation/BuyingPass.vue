@@ -1,7 +1,7 @@
 <template>
   <div class="buy-pass">
     <div class="buy-pass-header">
-      <mt-header fixed title="买入通证">
+      <mt-header fixed :title="$t('m.purchaseToken')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -13,6 +13,7 @@
         <p>{{this.detail.token.subject}}</p>
       </span>
     </div>
+  
     <!-- 发行期数 -->
     <div class="buy-pass-period">
       <div class="buy-pass-period-top">
@@ -24,37 +25,37 @@
       </div>
       <div class="buy-pass-period-text">
         <div class="buy-pass-period-text-left fl">
-          <span class="fl">发行期数(期)</span>
-          <span class="fr">单价(USDT)</span>
+          <span class="fl">{{$t('m.issuePeriod')}}({{$t('m.qi')}})</span>
+          <span class="fr">{{$t('m.price')}}(USDT)</span>
         </div>
-        <span class="fr">期限(天)</span>
+        <span class="fr">{{$t('m.term')}}({{$t('m.day')}})</span>
       </div>
       <div class="buy-pass-progress progress">
         <mt-progress :value="progress" :bar-height="7">
         </mt-progress>
-        <div slot="start" class="fl">已售 {{(this.detail.sold_number/this.detail.step_number).toFixed(0)}} 份</div>
-        <div slot="end" class="fr">总量 {{(this.detail.first_number/this.detail.step_number).toFixed(0)}} 份</div>
+        <div slot="start" class="fl">{{$t('m.sold')}} {{(this.detail.sold_number/this.detail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
+        <div slot="end" class="fr">{{$t('m.total')}} {{(this.detail.first_number/this.detail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
       </div>
     </div>
     <!-- tab切换 -->
     <div class="buy-pass-tab">
       <van-tabs @click="getActionType">
-        <van-tab title="按份数买入">
+        <van-tab :title="$t('m.buyShare')">
           <!-- @blur.native.capture="maxnum" -->
-          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+'份起购'"
+          <mt-field type="number" :placeholder="this.detail.purchase_number/this.detail.step_number+$t('m.share')+$t('m.purchase')"
             v-model="requsetPay.amount"></mt-field>
-          <span>交易额：{{requsetPay.amount*this.detail.issue_price*this.detail.step_number}}
+          <span>{{$t('m.transactionAmount')}}：{{requsetPay.amount*this.detail.issue_price*this.detail.step_number}}
             {{this.detail.denominated_assets}}</span>
         </van-tab>
-        <van-tab title="按金额买入">
+        <van-tab :title="$t('m.priceBuy')">
           <mt-field
-            :placeholder="'最少'+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price"
+            :placeholder="$t('m.least')+this.detail.purchase_number/this.detail.step_number*detail.step_number*detail.issue_price"
             type="number" v-model="requsetPay.amount"> <b>{{this.detail.denominated_assets}}</b></mt-field>
-          <span>可买入份数：{{requsetPay.amount/detail.step_number/this.detail.issue_price }} 份</span>
+          <span>{{$t('m.buyableShares')}}：{{requsetPay.amount/detail.step_number/this.detail.issue_price }} {{$t('m.share')}}</span>
         </van-tab>
         <div class="fr day">
-          <p>可用额{{this.balanceData.available_amount|number}} {{this.detail.denominated_assets}}</p>
-          <p>解锁日:{{this.timeDate}}</p>
+          <p>{{$t('m.availableQuota')}}{{this.balanceData.available_amount|number}} {{this.detail.denominated_assets}}</p>
+          <p>{{$t('m.unlockTime')}}:{{this.timeDate}}</p>
           <!-- <p>解锁日:{{this.date.time}}</p> -->
         </div>
       </van-tabs>
@@ -73,7 +74,7 @@
       </van-popup>
     </div>
     <div class="transfer-button">
-      <mt-button size="large" type="primary" :disabled="disabled" @click="passwordShow">确定买入</mt-button>
+      <mt-button size="large" type="primary" :disabled="disabled" @click="passwordShow">{{$t('m.sureBuy')}}</mt-button>
     </div>
   </div>
 </template>
@@ -258,6 +259,10 @@
   @import '../../../assets/scss/global';
 
   .buy-pass {
+    .note{
+			margin: 10px 24px;
+			background-color: #fff;
+		}
     .buy-pass-token {
       background-color: #fff;
       margin: 100px 24px 2px 24px;

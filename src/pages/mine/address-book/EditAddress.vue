@@ -1,9 +1,10 @@
 <template>
 	<div class="edit-adress">
 		<div class="edit-adress-header header">
-			<mt-header fixed :title="$t('m.addressdetail')">
+			<mt-header fixed :title="$t('m.addressDetail')">
 				<!-- @click="saveBox" -->
-				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+				<!-- v-on:click="$router.go(-1)" -->
+				<mt-button icon="back" slot="left"@click="back">{{$t('m.back')}}</mt-button>
 				<mt-button icon="" slot="right" @click="del">
 					<img src="../../../assets/images/delete.png" alt="" />
 					<span>{{$t('m.delete')}}</span>
@@ -18,22 +19,21 @@
 			</div>
 		</div>
 		<div class="add-adress-list">
-			<span>姓名</span>
+			<span>{{$t('m.name')}}</span>
 			<mt-field v-model="editparams.name"></mt-field>
-			<span>备注</span>
+			<span>{{$t('m.remark')}}</span>
 			<mt-field v-model="editparams.remark"> </mt-field>
-			<span>地址</span>
+			<span>{{$t('m.address')}}</span>
 			<mt-field v-model="editparams.address"></mt-field>
 			<router-link to="/scan">
 				<img src="../../../assets/images/scan.svg" alt="">
 			</router-link>
 		</div>
-
 		<div class="edit-adress-text">
 			<!--<p>注意：所有地址和账户均保存本地，删除APP前请备份</p>-->
 		</div>
 		<div class="edit-adress-btn">
-			<mt-button type="primary" size="large" @click="edit" :disabled="disabled">{{$t('m.preservation')}}</mt-button>
+			<mt-button type="primary" size="large" @click="edit" :disabled="disabled">{{$t('m.save')}}</mt-button>
 		</div>
 	</div>
 </template>
@@ -61,6 +61,11 @@
 			// console.log(this.$route.params.id)
 		},
 		methods: {
+			back(){
+				this.$router.push({
+					name:'Book'
+				})
+			},
 			// 编辑修改地址
 			edit() {
 				this.editparams.id = this.$route.params.id
@@ -71,7 +76,7 @@
 						params: { id: 'edit',token_code:res.data.token.code }
 					})
 				}).catch(err => {
-					console.log(err)
+					// console.log(err)
 				})
 			},
 			// 删除地址

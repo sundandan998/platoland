@@ -1,7 +1,7 @@
 <template>
 	<div class="version">
 		<div class="version-header header">
-			<mt-header fixed :title="$t('m.versionupdate')">
+			<mt-header fixed :title="$t('m.versionUpgrade')">
 				<router-link to="/mine" slot="left">
 					<mt-button icon="back">{{$t('m.back')}}</mt-button>
 				</router-link>
@@ -12,7 +12,7 @@
 			<p>{{this.$version()}}</p>
 		</div>
 		<div class="version-update">
-			<mt-cell :title="$t('m.versionupdate')" :value="$t('m.versiontips')"></mt-cell>
+			<mt-cell :title="$t('m.versionUpgrade')" :value="$t('m.latestVersion')"></mt-cell>
 		</div>
 
 	</div>

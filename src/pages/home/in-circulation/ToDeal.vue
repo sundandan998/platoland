@@ -2,7 +2,7 @@
   <div class="to-deal">
     <div class="to-deal-header">
       <div class="to-details-header">
-        <mt-header fixed :title="$t('m.market')">
+        <mt-header fixed :title="$t('m.marketPlace')">
           <!--  v-on:click="$router.go(-1)" -->
           <mt-button slot="left" icon="back" @click="back">{{$t('m.back')}}</mt-button>
           <mt-button icon="" slot="right">
@@ -32,8 +32,8 @@
     </router-link>
     <div class="deal-list">
       <van-tabs @click="index">
-        <van-tab :title="$t('m.purchasebuy')">
-          <p class="no-data" v-if="this.dealListData.length==0">暂无数据</p>
+        <van-tab :title="$t('m.buy')">
+          <p class="no-data" v-if="this.dealListData.length==0">{{$t('m.noData')}}</p>
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
             <!-- <router-link :to="/purchase/+item.id"> -->
             <router-link :to="{name:'PurchasePass',params:{id:item.id,code:denominated_assets}}">
@@ -41,16 +41,16 @@
                 <span>{{item.publish_name}}</span>
               </div>
               <div class="to-deal-purchase-bot">
-                <span class="to-deal-purchase-bot-num">{{$t('m.transactionnum')}}:{{item.amount|number}}</span>
+                <span class="to-deal-purchase-bot-num">{{$t('m.quantity')}}:{{item.amount|number}}</span>
                 <span>
                   <img :src="item.d_icon">{{item.price|number}}</span>
-                <p>{{$t('m.quota')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
+                <p>{{$t('m.limit')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
               </div>
             </router-link>
           </div>
         </van-tab>
         <van-tab :title="$t('m.sell')">
-          <p class="no-data" v-if="this.dealListData.length==0">暂无数据</p>
+          <p class="no-data" v-if="this.dealListData.length==0">{{$t('m.noData')}}</p>
           <div class="to-deal-purchase" v-for="(item,index) in dealListData">
             <!-- <router-link :to="/sell/+item.id"> -->
             <router-link :to="{name:'Sell',params:{id:item.id,code:dealListToken.code}}">
@@ -58,10 +58,10 @@
                 <span>{{item.publish_name}}</span>
               </div>
               <div class="to-deal-purchase-bot">
-                <span class="to-deal-purchase-bot-num">{{$t('m.transactionnum')}}:{{item.amount|number}}</span>
+                <span class="to-deal-purchase-bot-num">{{$t('m.quantity')}}:{{item.amount|number}}</span>
                 <span>
                   <img :src="item.d_icon">{{item.price|number}}</span>
-                <p>{{$t('m.quota')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
+                <p>{{$t('m.limit')}}:{{item.low_number|keepTwoNum}} -{{item.high_number|keepTwoNum}}</p>
               </div>
             </router-link>
           </div>

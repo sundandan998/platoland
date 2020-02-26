@@ -1,9 +1,9 @@
 <template>
   <div class="release-history">
     <div class="release-header">
-      <mt-header fixed :title="detail.token.code+'分利计划'">
+      <mt-header fixed :title="detail.token.code+$t('m.distributionPlan')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button slot="right" @click.native="release"> <img src="../../../../assets/images/release.svg" alt=""> 发布
+        <mt-button slot="right" @click.native="release"> <img src="../../../../assets/images/release.svg" alt=""> {{$t('m.release')}}
         </mt-button>
       </mt-header>
     </div>
@@ -18,7 +18,7 @@
       <p>{{item.air|number}}%</p>
       <div class="release-detail-text">
         <div class="release-detail-text-left fl">
-          <span class="fl"><img src="../../../../assets/images/geton.svg" alt="" class="img-status">{{item.status}}</span><span class="fr"><img src="../../../../assets/images/lock.svg" alt="">{{item.freeze_days}}天</span>
+          <span class="fl"><img src="../../../../assets/images/geton.svg" alt="" class="img-status">{{item.status}}</span><span class="fr"><img src="../../../../assets/images/lock.svg" alt="">{{item.freeze_days}}{{$t('m.day')}}</span>
         </div>
         <div class="release-detail-text-right fr">
             <!-- item.create_time.substr(0,11) -->
@@ -27,22 +27,22 @@
       </div>
       <div class="release-detail-num-progress progress ">
         <mt-progress :value="item.air|number" :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">已售{{item.sold_amount}}</div>
-        <div slot="end" class="fr">总量{{item.total_amount}}</div>
+        <div slot="start" class="fl">{{$t('m.sold')}}{{item.sold_amount}}</div>
+        <div slot="end" class="fr">{{$t('m.total')}}{{item.total_amount}}</div>
       </div>
       </router-link>
     </div>
     <div class="release-history-list">
-      <p>发布历史 <span>(已结束)</span></p>
+      <p>{{$t('m.releaseHistory')}} <span>({{$t('m.over')}})</span></p>
       <div class="release-history-title">
-        <span>发布时间</span>
-        <span>锁仓期限</span>
-        <span>分利率</span>
-        <span>数量</span>
+        <span>{{$t('m.releaseTime')}}</span>
+        <span>{{$t('m.theTerm')}}</span>
+        <span>{{$t('m.interestRate')}}</span>
+        <span>{{$t('m.quantity')}}</span>
       </div>
       <div class="release-history-title" v-for="item in listData" v-if="item.status=='已完成'">
         <span>{{item.create_time}}</span>
-        <span>{{item.freeze_days}} 天</span>
+        <span>{{item.freeze_days}} {{$t('m.day')}}</span>
         <span>{{item.air|number}} %</span>
         <span>{{item.total_amount}}</span>
       </div>

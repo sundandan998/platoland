@@ -26,7 +26,7 @@
       </footer>
     </div>
     <div class="scan-button" @click="close">
-      <mt-button type="danger" size="large">取消</mt-button>
+      <mt-button type="danger" size="large">{{$t('m.cancel')}}</mt-button>
       <!-- <router-link to="/scandetail">
         <mt-button type="primary" size="large">转出</mt-button>
       </router-link> -->

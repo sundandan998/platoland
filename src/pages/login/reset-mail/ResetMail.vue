@@ -10,18 +10,19 @@
       <img src="../../../assets/images/r-email.png" alt="" />
       <!-- 注册时展示 -->
       <!-- <p></p> -->
-      <p>已向{{this.$route.params.username}}发送验证信息</p>
-      <span>请输入验证码。</span>
+      <!-- <p>{{$t('m.verifyMessage')}}{{this.$route.params.username}}</p> -->
+      <p>已向{{this.$route.params.username}}发送验证码</p>
+      <span>{{$t('m.verificationCode')}}</span>
       <div class="verification-code">
         <van-password-input :value="registerParsms.code" @focus="showKeyboard = true" />
-        <span v-show="showTimer" class="fr" @click="renewCode">重新发送验证码</span>
+        <span v-show="showTimer" class="fr" @click="renewCode">{{$t('m.reCode')}}</span>
         <span v-show="!showTimer" class="count fr">{{count}} s</span>
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
       </div>
     </div>
     <div class="login-btn">
-      <mt-button type="primary" @click="register" :disabled="disabled" size="large">确&nbsp;定</mt-button>
+      <mt-button type="primary" @click="register" :disabled="disabled" size="large">{{$t('m.sure')}}</mt-button>
     </div>
   </div>
 </template>

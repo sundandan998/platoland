@@ -13,26 +13,30 @@
 				<p>{{buyData.publish_name}}</p>
 				<!-- <P>{{infoData}}</P> -->
 			</div>
-			<div class="Purchase-pass-content-bot">
+			<div class="purchase-pass-content-bot">
 				<img src="../../../assets/images/t.png" alt="" />
 				<span>{{buyData.price|number}}</span>
 			</div>
 		</div>
+			<!-- 备注 -->
+			<div class="note">
+					<p>{{$t('m.remark')}}</p>
+			</div>
 		<div class="purchase-pass-tabbar">
 			<van-tabs @click="buyIndex">
-				<van-tab :title="$t('m.numsale')">
-					<mt-field :placeholder="'最低出售数量'+buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
+				<van-tab :title="$t('m.numSell')">
+					<mt-field :placeholder="$t('m.lowSellnum')+buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.available')}}：{{balData.available_amount}} {{buyDataToken.code}}</p> -->
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
-					<p>{{$t('m.servicecharge')}}：推广期暂免</p>
+					<p>{{$t('m.handlingFee')}}：{{$t('m.suspend')}}</p>
 				</van-tab>
-				<van-tab :title="$t('m.pricesale')">
-					<mt-field :placeholder="'最低出售金额'+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount">
+				<van-tab :title="$t('m.priceSell')">
+					<mt-field :placeholder="$t('m.lowSellAmount')+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount">
 					</mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}}{{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
-					<p>{{$t('m.servicecharge')}}：推广期暂免</p>
+					<p>{{$t('m.handlingFee')}}：{{$t('m.suspend')}}</p>
 				</van-tab>
 			</van-tabs>
 		</div>
@@ -224,15 +228,30 @@
 			img {
 				margin-right: 10px;
 			}
+			.purchase-pass-content-top{
+				span{
+					display: block;
+				}
+				p{
+					margin-left: 70px;
+					margin-top: 10px;
+				}
+			}
 
-			.Purchase-pass-content-bot {
+			.purchase-pass-content-bot {
+				margin-left: 65px;
 				img {
 					margin-top: 20px;
 					margin-left: 10px;
+					position: relative;
+					top:5px;
 				}
 			}
 		}
-
+		.note{
+			margin: 10px 24px;
+			background-color: #fff;
+		}
 		.purchase-pass-tabbar {
 			margin: 0 24px;
 			border-radius: 10px;

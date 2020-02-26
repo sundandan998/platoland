@@ -1,7 +1,7 @@
 <template>
   <div class="turn-out">
     <div class="turn-out-header header">
-      <mt-header fixed :title="$t('m.changeout')">
+      <mt-header fixed :title="$t('m.transferOut')">
         <!-- v-on:click="$router.go(-1)" -->
         <!-- @click="back" -->
         <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="payment-input">
-      <p>{{$t('m.payment')}}</p>
+      <p>{{$t('m.payTo')}}</p>
       <mt-field type="text" v-model="this.$route.params.name"  readonly="readonly">
         <router-link :to="{name:'Book',params:{name:this.detail.token.name,icon:this.detail.token.icon,token_code:this.detail.token.code,id:'out',nickname:this.detail.token.nickname,subject:this.detail.token.subject,}}">
           <img src="../../../assets/images/book.png" alt="" />
@@ -31,30 +31,30 @@
           </router-link>
         </router-link>
       </mt-field>
-      <mt-field type="text"  placeholder="请选择收款地址" v-model="this.$route.params.address"
+      <mt-field type="text"  :placeholder="$t('m.selectAddress')" v-model="this.$route.params.address"
         class="address"></mt-field>
     </div>
     <div class="turn-out-input">
-      <p>{{$t('m.turnnum')}}</p>
-      <mt-field :placeholder="'最小转出数量' + parseInt(this.detail.token.min_out)" v-model="turnOut.amount" type="number">
+      <p>{{$t('m.transferOutNum')}}</p>
+      <mt-field :placeholder="$t('m.lowOutNum') + parseInt(this.detail.token.min_out)" v-model="turnOut.amount" type="number">
       </mt-field>
       <p>{{$t('m.available')}}：{{this.detail.available_amount|number}} {{this.detail.code}}</p>
       <!-- {{turnOut.amount*0.002}} -->
-      <p>手续费：{{this.detail.token.fee|number}}({{this.detail.token.code}})</p>
+      <p>{{$t('m.handlingFee')}}：{{this.detail.token.fee|number}}({{this.detail.token.code}})</p>
     </div>
     <div class="turn-out-exhibition-text">
-      <p>{{$t('m.becareful')}}</p>
+      <p>{{$t('m.note')}}</p>
       <p>{{$t('m.becarefulone')}}</p>
       <p>{{$t('m.becarefultwo')}}</p>
       <p>{{$t('m.becarefulthree')}}</p>
       <p>{{$t('m.becarefulfour')}}</p>
     </div>
     <div class="turn-out-exhibition-btn">
-      <p class="expenditure"><span class="fl">实际支出</span><span
+      <p class="expenditure"><span class="fl">{{$t('m.actualExpenditure')}}</span><span
           class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</span></p>
       <router-link :to="{name:'OutConfirm',params:{detail: this.detail,amount:turnOut.amount}}">
-        <mt-button type="primary" size="large" :disabled="disabled">确定</mt-button>
+        <mt-button type="primary" size="large" :disabled="disabled">{{$t('m.sure')}}</mt-button>
       </router-link>
     </div>
   </div>

@@ -13,12 +13,12 @@
 							<mt-cell :title="$t('m.assets')" to="/assets" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/zc.svg">
 							</mt-cell>
-							<mt-cell title="订单" to="/order" is-link class="mine-cell-list">
+							<mt-cell :title="$t('m.order')" to="/order" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/dd.svg">
 							</mt-cell>
 						</div>
 						<div class="mine-safety mine-border-radius">
-							<mt-cell :title="$t('m.addressbook')" to="/book" is-link class="mine-cell-list">
+							<mt-cell :title="$t('m.addressBook')" to="/book" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/dzb.svg">
 							</mt-cell>
 							<mt-cell :title="$t('m.security')" to="/safety" is-link class="mine-cell-list">
@@ -29,19 +29,19 @@
 							<mt-cell :title="$t('m.version')" to="/version" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/bb.svg" alt="" />
 							</mt-cell>
-							<mt-cell :title="$t('m.our')" to="/about" is-link class="mine-cell-list">
+							<mt-cell :title="$t('m.aboutUs')" to="/about" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
 							</mt-cell>
 						</div>
 						<div class="mine-safety mine-token" v-if="this.infoData.token_admin==true">
 							<router-link :to="{name:'Certificate',params:{code:this.infoData.token_code}}">
-								<mt-cell title="我的通证" is-link class="mine-cell-list">
+								<mt-cell :title="$t('m.myToken')" is-link class="mine-cell-list">
 									<img slot="icon" src="../../assets/images/tz.svg" alt="" />
 								</mt-cell>
 							</router-link>
 						</div>
 						<div class="invite-people">
-							<mt-cell title="邀请新人" to="/invite" is-link class="mine-cell-list">
+							<mt-cell :title="$t('m.invite')" to="/invite" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/people.svg">
 							</mt-cell>
 						</div>
@@ -74,6 +74,7 @@
 			// 用户信息
 			info() {
 				api.getUserInfo().then(res => {
+					// Request.setCookie(django_language,ko)
 					this.infoData = res.data
 					window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 					// window.localStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)

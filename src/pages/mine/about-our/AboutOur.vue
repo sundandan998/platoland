@@ -1,7 +1,7 @@
 <template>
 	<div class="about-our">
 		<div class="about-our-header header">
-			<mt-header fixed :title="$t('m.our')">
+			<mt-header fixed :title="$t('m.aboutUs')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="about-our-contact">
-			<mt-cell title="《用户协议》" to="agreement" is-link>
+			<mt-cell :title="'《'+$t('m.protocol')+'》'" to="agreement" is-link>
 			</mt-cell>
 		</div>
 	</div>

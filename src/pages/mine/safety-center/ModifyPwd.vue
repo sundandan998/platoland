@@ -1,9 +1,9 @@
 <template>
     <div class="open-pay-password">
       <div class="open-pay-password-header header">
-        <mt-header fixed title="修改支付密码">
+        <mt-header fixed title="设置支付密码">
           <router-link to="/safety" slot="left">
-            <mt-button icon="back">返回</mt-button>
+            <mt-button icon="back">{{$t('m.back')}}</mt-button>
           </router-link>
         </mt-header>
       </div>

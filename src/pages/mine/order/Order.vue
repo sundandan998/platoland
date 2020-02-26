@@ -1,7 +1,7 @@
 <template>
   <div class="order">
     <div class="order-header">
-      <mt-header fixed title="订单">
+      <mt-header fixed :title="$t('m.order')">
         <mt-button icon="back" slot="left" @click.native="back">{{$t('m.back')}}</mt-button>
         <!-- <mt-button icon slot="right">
           <router-link to="/detailedlist">
@@ -10,9 +10,20 @@
         </mt-button> -->
       </mt-header>
     </div>
+     <!-- (0, _('发行买入')),
+    (1, _('OTC买入')),
+    (2, _('OTC售出')),
+    (3, _('OTC发布买入')),
+    (4, _('OTC发布出售')),
+    (5, _('转入')),
+    (6, _('转出')),
+    (7, _('受让')),
+    (8, _('转让')),
+    (9, _('存入分利宝')) -->
+    <!-- 发行买入 -->
     <!-- 下拉刷新 -->
     <!-- <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> -->
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+    <van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="order-list" v-for="item in orderList">
         <router-link :to="{name:'OrderDetail',params:{order_id: item.order_id}}">
@@ -22,8 +33,8 @@
             <p class="order-list-type">{{item.order_type}} <span
                 v-if="item.order_type !='转出'&&item.order_type !='转入'&&item.order_type !='受让'&&item.order_type !='转让'">-{{item.token}}/{{item.exchange_token}}</span>
             </p>
-            <p class="order-list-num"><span>数量：{{item.amount}}</span><span class="fr"
-                v-if="item.order_type!='转出'&&item.order_type!='转入'&&item.order_type!='受让'&&item.order_type!='转让'">总额：{{item.total_amount}}</span>
+            <p class="order-list-num"><span>{{$t('m.quantity')}}：{{item.amount}}</span><span class="fr"
+                v-if="item.order_type!='转出'&&item.order_type!='转入'&&item.order_type!='受让'&&item.order_type!='转让'">{{$t('m.lumpSum')}}：{{item.total_amount}}</span>
             </p>
           </div>
         </router-link>
@@ -52,7 +63,7 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          api.order({ 'page': this.pageNum }).then(res => {
+          api.order({ 'page': this.pageNum}).then(res => {
             if (res.code == 0) {
               this.orderList.push.apply(this.orderList, res.data)
               this.loading = false

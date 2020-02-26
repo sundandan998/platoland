@@ -1,11 +1,11 @@
 <template>
 	<div class="adress-book">
 		<div class="adress-book-header header">
-			<mt-header fixed :title="$t('m.addressbook')">
+			<mt-header fixed :title="$t('m.addressBook')">
 				<!-- <router-link to="mine"> -->
 				<!-- v-on:click="$router.go(-1)" -->
 				<!-- @click="back" -->
-				<mt-button icon="back" slot="left" @click="back" to="mine">返回</mt-button>
+				<mt-button icon="back" slot="left" @click="back" to="mine">{{$t('m.back')}}</mt-button>
 				<!-- </router-link> -->
 				<mt-button icon="" slot="right" @click.native="jump">
 					<!-- <router-link to="list"> -->
@@ -14,7 +14,7 @@
 				</mt-button>
 			</mt-header>
 		</div>
-		<p class="no-data" v-if="this.book.length==0">暂无数据</p>
+		<p class="no-data" v-if="this.book.length==0">{{$t('m.noData')}}</p>
 		<div class="adress-book-list" v-for="(item,index) in book">
 			<!-- <p class="no-data" v-if="item.length<0">暂无数据</p> -->
 			<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark}}"> -->
@@ -28,7 +28,7 @@
 				<!-- <router-link :to="{name:'Edit', params:{ id:item.id,name:item.name,address:item.address,remark:item.remark,
 							icon:item.token.icon,subject:item.token.subject,code:item.token.code}}"> -->
 				<div class="edit-button">
-					<mt-button size="small" type="primary" @click.native="address(item)">编 辑</mt-button>
+					<mt-button size="small" type="primary" @click.native="address(item)">{{$t('m.edit')}}</mt-button>
 				</div>
 				<!-- </router-link> -->
 			</mt-cell>

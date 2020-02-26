@@ -1,7 +1,7 @@
 <template>
   <div class="token">
     <div class="token-header header">
-      <mt-header fixed title="我的通证">
+  <mt-header fixed  :title="$t('m.myToken')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -13,13 +13,13 @@
       <!-- availabletransfer -->
       <!-- <router-link to="/availabletransfer/this.balancetoken.icon"> -->
       <router-link :to="{name:'AvailableTransfer',params:{code:this.balancetoken.code}}">
-        <mt-cell title="可用量" :value="this.balanceData.available_amount" is-link>
+        <mt-cell :title="$t('m.availableAmount')" :value="this.balanceData.available_amount" is-link>
           <img slot="icon" src="../../../assets/images/available.svg" width="24" height="24">
         </mt-cell>
       </router-link>
       <!-- freeze -->
       <router-link :to="{name:'FreezeDetail',params:{code:this.balancetoken.code}}">
-        <mt-cell title="冻结量" :value="this.balanceData.freeze_amount" is-link class="freeze-token">
+        <mt-cell :title="$t('m.freezeAmount')" :value="this.balanceData.freeze_amount" is-link class="freeze-token">
           <img slot="icon" src="../../../assets/images/freeze.svg" width="24" height="24">
         </mt-cell>
       </router-link>
@@ -55,15 +55,15 @@
     <div class=" token-recently-released plan">
       <!-- <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}"> -->
       <router-link :to="{name:'ReleaseHistory'}">
-        <mt-cell title="分利计划" is-link>全部 </mt-cell>
+        <mt-cell  :title="$t('m.distributionPlan')" is-link>{{$t('m.all')}} </mt-cell>
       </router-link>
       <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">
-          <p>暂无分利计划</p>
+          <p>{{$t('m.noPlan')}}</p>
           <!-- <router-link to="/release"> -->
           <router-link :to="{name:'Release',params:{code:this.balancetoken.code,icon:this.balancetoken.icon,nickname:balancetoken.nickname,
           subject:balancetoken.subject}}">
-            <van-button type="primary" class="button">去 发 布</van-button>
+            <van-button type="primary" class="button">{{$t('m.goRelease')}}</van-button>
           </router-link>
         </div>
       </router-link>
@@ -75,12 +75,12 @@
             <span><b>{{item.token.code}}</b>( {{item.token.nickname}} )<p>{{item.token.subject}}</p></span>
             <div class="home-pub-token-days">
               <div class="home-pub-token-days-top">
-                <p>锁仓期限 {{item.freeze_days}} 天</span>
+                <p>{{$t('m.theTerm')}} {{item.freeze_days}} {{$t('m.day')}}</span>
                   <p class="fr percentage">{{item.air|number}}%</p>
               </div>
               <div>
-                <p>最高转入{{item.high_amount}}份</p>
-                <p class="fr">分利率</p>
+                <p>{{$t('m.highestTransfer')}}{{item.high_amount}}{{$t('m.share')}}</p>
+                <p class="fr">{{$t('m.interestRate')}}</p>
               </div>
             </div>
           </router-link>

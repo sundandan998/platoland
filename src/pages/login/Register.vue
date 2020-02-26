@@ -3,7 +3,7 @@
     <router-link to="login">
       <div class="login-cancel">
         <img src="../../assets/images/back.svg" alt="" />
-        <span>登录</span>
+        <span>{{$t('m.login')}}</span>
         <!-- <img src="../../assets/images/cancel.png" alt="" /> -->
       </div>
     </router-link>
@@ -13,7 +13,7 @@
     <div class="register-tab login-form">
       <!-- @click="register" -->
       <van-tabs v-model="active">
-        <van-tab title="手机号注册">
+        <van-tab :title="$t('m.telRegister')">
           <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 手机号 -->
             <el-form-item prop="tel" :rules="[{message: '请输入手机号', trigger: 'blur' },
@@ -27,23 +27,23 @@
               <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
               <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
-                placeholder="请输入6-16位字母加数字组合密码">
+                :placeholder="$t('m.registerPass')">
               </el-input>
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
               <img src="../../assets/images/code.svg" alt="" class="login-icon">
-              <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
+              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')"></el-input>
             </el-form-item>
           </el-form>
         </van-tab>
-        <van-tab title="邮箱注册">
+        <van-tab :title="$t('m.emilRegister')">
           <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 邮箱 -->
             <el-form-item prop="email" :rules="[ { message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]">
               <img src="../../assets/images/email.png" alt="" class="login-icon">
-              <el-input v-model="verification.email" placeholder="请输入邮箱"></el-input>
+              <el-input v-model="verification.email" :placeholder="$t('m.emailNumber')"></el-input>
             </el-form-item>
             <!-- 密码 -->
             <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
@@ -51,31 +51,32 @@
               <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
               <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
-                placeholder="请输入6-16位字母加数字组合密码">
+                :placeholder="$t('m.registerPass')">
               </el-input>
             </el-form-item>
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
               <img src="../../assets/images/code.svg" alt="" class="login-icon">
-              <el-input v-model="verification.invite_code" autocomplete="off" placeholder="请输入6位邀请码"></el-input>
+              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')"></el-input>
             </el-form-item>
           </el-form>
         </van-tab>
       </van-tabs>
     </div>
     <div class="login-checkbox">
-      <span>注册即表示同意
+      <span>
+          {{$t('m.agree')}}
         <router-link to="agreement">
-          <a href="">《用户使用协议》</a>
+          <a href="">《{{$t('m.userAgreement')}}》</a>
         </router-link>
       </span>
     </div>
     <div class="login-btn" @click="register">
-      <mt-button type="primary" :disabled="disabled" size="large">注&nbsp;册</mt-button>
+      <mt-button type="primary" :disabled="disabled" size="large">{{$t('m.register')}}</mt-button>
     </div>
     <div class="login-switch">
       <router-link to="/login">
-        <p>已有账号？去登录</p>
+        <p>{{$t('m.goLogin')}}</p>
       </router-link>
     </div>
   </div>

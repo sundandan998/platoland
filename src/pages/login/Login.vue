@@ -9,20 +9,20 @@
       <img src="../../assets/images/login-logo.png" alt="" />
     </div>
     <div class="login-title">
-      <span>登录</span>
+      <span>{{$t('m.login')}}</span>
     </div>
     <div class="login-form">
-      <mt-field placeholder="请输入手机号/邮箱" v-model="verification.username" type="email" @blur.native.capture="check"
+      <mt-field :placeholder="$t('m.enterName')" v-model="verification.username" type="email" @blur.native.capture="check"
         :state="status">
       </mt-field>
       <img src="../../assets/images/login-mine.svg" alt="" class="login-icon">
       <!-- @blur.native.capture="pwdCheck" :state="pwdlStatus" -->
-      <mt-field placeholder="请输入登录密码" v-model="verification.password" :type="pwdType">
+      <mt-field :placeholder="$t('m.enterPass')" v-model="verification.password" :type="pwdType">
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
       <router-link to="password">
-        <p class=" fr forget-pwd">忘记密码 ?</p>
+  <p class=" fr forget-pwd">{{$t('m.forgetPass')}} ?</p>
       </router-link>
     </div>
     <mt-tab-container v-model="active">
@@ -31,13 +31,13 @@
           <p class=" fr forget-pwd">忘记密码</p>
         </router-link> -->
         <div class="login-btn">
-          <mt-button type="primary" @click="handleLogin" :disabled="disabled" size="large">登&nbsp;录</mt-button>
+          <mt-button type="primary" @click="handleLogin" :disabled="disabled" size="large">{{$t('m.login')}}</mt-button>
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
     <div class="login-switch">
       <router-link to="/register">
-        <p>没有账号？去注册</p>
+        <p>{{$t('m.goRegister')}}</p>
       </router-link>
     </div>
   </div>
@@ -129,7 +129,8 @@
             })
           }
         }).catch(err => {
-          console.log(err)
+          // toast(err)
+          // console.log(err)
         })
         // window.sessionStorage.setItem('action', this.verification.username)
       },

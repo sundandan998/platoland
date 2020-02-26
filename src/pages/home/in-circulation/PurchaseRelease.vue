@@ -6,7 +6,7 @@
 			</mt-header>
 		</div>
 		<div class="purchase-pass-buy-assets">
-			<span>交易资产</span>
+			<span>{{$t('m.tradingAssets')}}</span>
 			<div class="purchase-pass-buy-information fr">
 				<img :src="this.detail.token.icon" alt="" />
 				<span>{{this.detail.token.code}}({{this.detail.token.nickname}})</span>
@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<div class="purchase-pass-valuation-assets" v-if="this.$route.params.code!=''">
-			<span>{{$t('m.valuationassets')}}</span>
+			<span>{{$t('m.valuationAssets')}}</span>
 			<div class="purchase-pass-valuation-assets-img fr">
 				<img :src="this.detailData.d_icon" alt="" />
 				<span>{{this.detailData.denominated_assets}}</span>
@@ -22,35 +22,35 @@
 		</div>
 		<div class="purchase-pass-input">
 			<van-tabs @click="index">
-				<van-tab title="购买">
-					<span class="purchase-pass-input-title">数量</span>
+				<van-tab :title="$t('m.buy')">
+					<span class="purchase-pass-input-title">{{$t('m.quantity')}}</span>
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
-					<span class="purchase-pass-input-title">单价</span>
+					<span class="purchase-pass-input-title">{{$t('m.price')}}</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.$route.params.code}}</p>
 					<div class="purchase-pass-quota">
-						<p>{{$t('m.quota')}}</p>
-						<mt-field placeholder="卖方最低出售数量" v-model="releaseData.low_number" type="number"
+						<p>{{$t('m.limit')}}</p>
+						<mt-field :placeholder="$t('m.sellLowNum')" v-model="releaseData.low_number" type="number"
 							class="purchase-pass-quota-input">
 						</mt-field>
-						<mt-field placeholder="卖方最高出售数量" v-model="releaseData.high_number" type="number"
+						<mt-field :placeholder="$t('m.sellHeighNum')" v-model="releaseData.high_number" type="number"
 							class="purchase-pass-quota-input"></mt-field>
 					</div>
 				</van-tab>
-				<van-tab title="出售">
-					<span class="purchase-pass-input-title">数量</span>
+				<van-tab :title="$t('m.sell')">
+					<span class="purchase-pass-input-title">{{$t('m.quantity')}}</span>
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
-					<span class="purchase-pass-input-title">单价</span>
+					<span class="purchase-pass-input-title">{{$t('m.price')}}</span>
 					<mt-field type="number" v-model="releaseData.price"></mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{this.detail.token.code}}</p>
 					<!-- <p>手续费 : {{releaseData.amount*0.002}} PLD</p> -->
-					<p>手续费 : 推广期暂免</p>
+					<p>{{$t('m.handlingFee')}} :{{$t('m.suspend')}}</p>
 					<div class="purchase-pass-quota">
-						<p>{{$t('m.quota')}}</p>
-						<mt-field placeholder="买方最低购买数量" v-model="releaseData.low_number" type="number"
+						<p>{{$t('m.limit')}}</p>
+						<mt-field :placeholder="$t('m.buyLowNum')" v-model="releaseData.low_number" type="number"
 							class="purchase-pass-quota-input">
 						</mt-field>
-						<mt-field placeholder="买方最高购买数量" v-model="releaseData.high_number" type="number"
+						<mt-field :placeholder="$t('m.buyHeighNum')" v-model="releaseData.high_number" type="number"
 							class="purchase-pass-quota-input"></mt-field>
 					</div>
 				</van-tab>
@@ -63,6 +63,18 @@
 			<mt-field placeholder="卖方转入出售数量" v-model="releaseData.high_number" type="number"
 				class="purchase-pass-quota-input"></mt-field>
 		</div> -->
+		<!-- 添加备注 -->
+		<!-- v-model="message" -->
+		<div class="leave-message">
+				<van-field
+					rows="2"
+					autosize
+					type="textarea"
+					maxlength="50"
+					:placeholder="$t('m.addNotes')"
+					show-word-limit
+				/>
+			</div>
 		<div class="purchase-pass-btn">
 			<mt-button size="large" :disabled="disabled" type="primary" @click="release">{{$t('m.release')}}</mt-button>
 		</div>
@@ -106,7 +118,7 @@
 				detailData: '',
 				// 获取资产余额参数
 				balanceData: {
-					token_code:''
+					token_code: ''
 				},
 				// 发布参数/购买
 				releaseData: {
@@ -322,6 +334,13 @@
 			height: 90px;
 			background-color: #fff;
 			margin-top: 10px;
+		}
+
+		.purchase-pass-btn {
+			margin-top: 20px;
+		}
+		.leave-message{
+			height: 200px;
 		}
 	}
 </style>

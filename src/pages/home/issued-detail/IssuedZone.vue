@@ -1,7 +1,8 @@
 <template>
   <div class="issued-zone">
     <div class="issued-zone-header header">
-      <mt-header fixed title="发行专区">
+        <!-- 发行专区 -->
+      <mt-header fixed :title="$t('m.distributionArea')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -10,13 +11,13 @@
         <div class="zone-list-top">
           <img :src="item.token.icon" alt="" class="fl icon">
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-          <img src="../../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
-          <img src="../../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
+          <span class="fr publicity" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+          <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">进行中</span>
         </div>
         <div class="zone-list-bot">
           <div class="zone-list-bot-text fl">
-            <span>第 {{item.periods}} 期</span>
-            <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} 天</span>
+            <span>{{$t('m.first')}} {{item.periods}} {{$t('m.qi')}}</span>
+            <span class="fr"> <img src="../../../assets/images/lock.svg" alt=""> {{item.freeze_days}} {{$t('m.day')}}</span>
           </div>
           <span class="fr"> <img :src="item.d_icon" alt=""> {{item.issue_price|number}}</span>
         </div>
@@ -74,11 +75,27 @@
           margin-top: 25px;
           display: inline-block;
         }
-
         .publicity {
           height: 100px;
           border-top-right-radius: 10px;
+          font-size: 26px;
+          color: #06B56A;
+          margin-right: 40px;
+          img {
+            margin-right: 7px;
+            width: 26px;
+          }
         }
+        .issue {
+            font-size: 26px;
+            color: #37A7E1;
+            margin-right: 40px;
+
+            img {
+              margin-right: 7px;
+              width: 26px;
+            }
+          }
       }
 
       .zone-list-bot {

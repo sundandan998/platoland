@@ -1,7 +1,7 @@
 <template>
   <div class="bao">
     <div class="release-header">
-      <mt-header fixed title="分利宝">
+      <mt-header fixed :title="$t('m.fenlibao')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -12,12 +12,12 @@
         <span><b>{{item.token.code}}</b>{{item.token.nickname}} <p>{{item.token.subject}}</p></span>
         <div class="home-pub-token-days">
           <div class="home-pub-token-days-top">
-            <p>锁仓期限 {{item.freeze_days}}天</span>
+            <p>{{$t('m.theTerm')}} {{item.freeze_days}}{{$t('m.day')}}</span>
               <p class="fr percentage">{{item.air|number}}%</p>
           </div>
           <div>
-            <p>最高转入{{item.high_amount}}份</p>
-            <p class="fr">分利率</p>
+            <p>{{$t('m.highestTransfer')}} {{item.high_amount}}{{$t('m.share')}}</p>
+            <p class="fr">{{$t('m.interestRate')}}</p>
           </div>
         </div>
       </router-link>

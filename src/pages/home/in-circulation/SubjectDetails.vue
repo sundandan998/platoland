@@ -1,19 +1,19 @@
 <template>
 	<div class="subject-details">
 		<div class="subject-details-header">
-			<mt-header fixed :title="$t('m.body')">
+			<mt-header fixed :title="$t('m.tokenSubject')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="subject-details-header" v-if="this.$route.params.issuer=='issuer'">
-			<mt-header fixed title="发行方主体">
+			<mt-header fixed :title="$t('m.issuerSubject')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="subject-details-content">
 			<mt-navbar v-model="selected">
-				<mt-tab-item id="introduce">{{$t('m.bodyintroduce')}}</mt-tab-item>
-				<mt-tab-item id="information">{{$t('m.bodyinformation')}}</mt-tab-item>
+				<mt-tab-item id="introduce">{{$t('m.mainIntroduction')}}</mt-tab-item>
+				<mt-tab-item id="information">{{$t('m.subjectInformation')}}</mt-tab-item>
 			</mt-navbar>
 			<!-- tab-container -->
 			<mt-tab-container v-model="selected">
@@ -25,18 +25,18 @@
 				<mt-tab-container-item id="information">
 					<div class="information-content">
 						<!-- 主体名称： -->
-						<mt-cell title="主体名称">
+						<mt-cell :title="$t('m.subjectName')">
 							<span>{{subjectData.name}}</span>
 						</mt-cell>
 						<!-- 通证标识 -->
-						<mt-cell :title="$t('m.identitycard')">
+						<mt-cell :title="$t('m.tokenLogo')">
 							<span>
 								<img :src="subject.icon">
 								{{subject.code+'('+subject.name+')'}}
 							</span>
 						</mt-cell>
 						<!-- 通证昵称 -->
-						<mt-cell :title="$t('m.nickname')">
+						<mt-cell :title="$t('m.tokenNickname')">
 							<span>{{subject.nickname}}</span>
 						</mt-cell>
 						<!-- 注册住所 -->
@@ -64,7 +64,7 @@
 							<span>{{subjectData.start_time}} 至 {{subjectData.end_time}}</span>
 						</mt-cell> -->
 						<!-- 经营范围 -->
-						<mt-cell :title="$t('m.range')" :label="subjectData.business_scope">
+						<mt-cell :title="$t('m.businessScope')" :label="subjectData.business_scope">
 						</mt-cell>
 					</div>
 				</mt-tab-container-item>

@@ -1,7 +1,7 @@
 <template>
 	<div class="open-information">
-		<div class="open-information-header">
-			<mt-header fixed :title="$t('m.opensmsverification')">
+		<div class="open-information-header header">
+			<mt-header fixed :title="$t('m.opensmsVerification')">
 				<router-link to="/safety" slot="left">
 					<mt-button icon="back">{{$t('m.back')}}</mt-button>
 				</router-link>
@@ -9,14 +9,14 @@
 		</div>
 		<div class="open-information-from">
 			<el-form class="demo-ruleForm">
-				<el-form-item :label="$t('m.phonenumber')">
+				<el-form-item :label="$t('m.tel')">
 					<br>
-					<mt-field v-model="openinformation.mobile" placeholder="请输入手机号码" type="number" :attr="{ oninput: 'if(value.length>11)value=value.slice(0,11)' }"></mt-field>
+					<mt-field v-model="openinformation.mobile" :placeholder="$t('m.telNumber')" type="number" :attr="{ oninput: 'if(value.length>11)value=value.slice(0,11)' }"></mt-field>
 				</el-form-item>
-				<el-form-item :label="$t('m.smsverification')">
+				<el-form-item :label="$t('m.smsVerification')">
 					<br>
 					<span class="fr" @click="smsCode">{{$t('m.send')}}</span>
-					<mt-field v-model="openinformation.code" placeholder="请输入验证码"></mt-field>
+					<mt-field v-model="openinformation.code" :placeholder="$t('m.verificationCode')"></mt-field>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -26,8 +26,8 @@
 			</router-link>
 		</div>
 		<div class="rest-pass-word-text">
-			<p>{{$t('m.becareful')}}</p>
-			<p>{{$t('m.securityverificationone')}}</p>
+			<p>{{$t('m.note')}}</p>
+      <p>{{$t('m.safetyNote')}}</p>
 		</div>
 	</div>
 </template>
@@ -80,6 +80,8 @@
 				handler(val) {
 					if (val.mobile != '' && val.code != '') {
 						this.disabled = false
+					}else{
+						this.disabled = true
 					}
 				}
 			}

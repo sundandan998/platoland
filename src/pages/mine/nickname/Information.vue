@@ -1,15 +1,15 @@
 <template>
   <div class="information">
     <div class="information-header header">
-      <mt-header fixed title=个人信息>
+      <mt-header fixed :title="$t('m.personalInformation')">
         <router-link :to="{name:'Mine',params:{nickname:this.$route.params.nickname}}" slot="left">
           <mt-button icon="back">{{$t('m.back')}}</mt-button>
         </router-link>
       </mt-header>
     </div>
     <div class="information-body">
-      <mt-cell title="昵称" to="/editnickname" is-link v-if="this.infoData.nickname==null"> 暂未设置昵称</mt-cell>
-      <mt-cell title="昵称" to="/editnickname" is-link  v-if="this.infoData.nickname!=null">
+      <mt-cell :title="$t('m.nickName')" to="/editnickname" is-link v-if="this.infoData.nickname==null"> 暂未设置昵称</mt-cell>
+      <mt-cell :title="$t('m.nickName')" to="/editnickname" is-link  v-if="this.infoData.nickname!=null">
         {{this.infoData.nickname}}</mt-cell>
     </div>
   </div>

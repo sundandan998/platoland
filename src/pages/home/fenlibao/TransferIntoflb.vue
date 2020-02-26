@@ -1,7 +1,7 @@
 <template>
   <div class="transfer">
     <div class="transfer-header header">
-      <mt-header fixed title="转入分利宝">
+      <mt-header fixed :title="$t('m.transferFLB')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -17,47 +17,47 @@
     <!-- </router-link> -->
     <div class="remaining-days">
       <img src="../../../assets/images/note.svg" alt="">
-      <span> 距离活动结束还有{{flbData.freeze_days}}天</span>
+      <span> {{$t('m.endDays')}}{{flbData.freeze_days}}{{$t('m.day')}}</span>
     </div>
     <div class="transfer-token-days">
       <div class="transfer-token-days-top">
         <div class="transfer-token-days-top-left fl">
           <img src="../../../assets/images/prompt.svg" alt="" @click="prompt">
-          <span class="fl"> {{flbData.air}} <p>分利率(%)</p></span>
-          <span class="fr">{{flbData.freeze_days}}<p>冻结时长(天)</p>
+          <span class="fl"> {{flbData.air}} <p>{{$t('m.interestRate')}}(%)</p></span>
+          <span class="fr">{{flbData.freeze_days}}<p>{{$t('m.freezeDuration')}}({{$t('m.day')}})</p>
           </span>
         </div>
         <img src="../../../assets/images/prompt.svg" alt="" @click="duration" class="duration">
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>分利总量(万)</p></span>
+          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>{{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
         </div>
       </div>
       <div class="token-progress">
         <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)" :bar-height="7"></mt-progress>
       </div>
-      <b>已转入份数{{flbData.sold_amount/flbData.step_amount}}</b>
-      <mt-cell title="每份数量" value="">{{flbData.step_amount}} {{flToken.code}}/份</mt-cell>
+      <b>{{$t('m.transfersIn')}}{{flbData.sold_amount/flbData.step_amount}}</b>
+      <mt-cell :title="$t('m.perServing')" value="">{{flbData.step_amount}} {{flToken.code}}/{{$t('m.share')}}</mt-cell>
       <router-link :to="{name:'ReleaseHistory'}">
-        <mt-cell title="发布情况" value="查看" class="release-status" is-link></mt-cell>
+        <mt-cell :title="$t('m.releaseStatus')" :value="$t('m.view')" class="release-status" is-link></mt-cell>
       </router-link>
     </div>
     <!-- 转入数量 -->
     <div class="transfer-num">
       <mt-field @blur.native.capture="maxnum" :placeholder="flbData.min_amount+'~'+flbData.high_amount"
-        v-model="transferParams.part">份</mt-field>
+        v-model="transferParams.part">{{$t('m.share')}}</mt-field>
       <div class="transfer-num-amount fl">
-        <span>交易数量 {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
-        <span>到期分利 {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+        <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
+        <span>{{$t('m.dividendMaturity')}} {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">
-        <span>可用份数 {{(balanceData.available_amount/flbData.step_amount).toFixed(0)}}</span>
-        <span>解冻日 {{flbData.deadline_date}}</span>
+        <span>{{$t('m.availableCopies')}} {{(balanceData.available_amount/flbData.step_amount).toFixed(0)}}</span>
+        <span>{{$t('m.thawDay')}} {{flbData.deadline_date}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
     </div>
     <div class="release-button">
-      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">确定转入</van-button>
+      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">{{$t('m.sureTransfer')}}</van-button>
     </div>
     <!-- 数字键盘 -->
     <div>
@@ -96,6 +96,7 @@
     created() {
       this.flbDetail()
       this.balance()
+      // console.log(this.detail.token.code)
     },
     methods: {
       onInput(key) {
@@ -147,7 +148,7 @@
       },
       // 可用
       balance() {
-        api.balance({ token_code:this.detail.token.code}).then(res => {
+        api.balance({token_code:this.detail.token.code}).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
           }

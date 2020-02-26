@@ -1,31 +1,31 @@
 <template>
   <div class="transfer">
     <div class="freeze-header header">
-      <mt-header fixed title="转让">
+      <mt-header fixed  :title="$t('m.transfer')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <mt-cell title="商城账户">
+    <mt-cell :title="$t('m.mallAccount')">
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <p v-if="transferParams.out==true" class="transfer-prompt">
       <img src="../../../assets/images/alert.svg" alt="">
-      请确认收款人账号已在商城注册
+      {{$t('m.transferPrompt')}}
     </p>
     <div class="transfer-content">
       <div class="transfer-progress-name">
-        <span>收款人</span>
-        <mt-field v-model="transferParams.email" placeholder="请输入收款人账号" @blur.native.capture="check">
+        <span>{{$t('m.payee')}}</span>
+        <mt-field v-model="transferParams.email" :placeholder="$t('m.beneficiaryAccount')" @blur.native.capture="check">
         </mt-field>
       </div>
       <div class="transfer-progress-amount">
-        <span>数量</span>
-        <mt-field placeholder="请输入数量" type="number" v-model="transferParams.amount"></mt-field>
-        <span class="transfer-fee">手续费：0</span>
+        <span>{{$t('m.quantity')}}</span>
+        <mt-field :placeholder="$t('m.enterNum')" type="number" v-model="transferParams.amount"></mt-field>
+        <span class="transfer-fee">{{$t('m.handlingFee')}}：0</span>
       </div>
     </div>
     <div class="transfer-button">
-      <mt-button size="large" type="primary" @click="transfer" v-show="showBtn">转让</mt-button>
+      <mt-button size="large" type="primary" @click="transfer" v-show="showBtn">{{$t('m.transfer')}}</mt-button>
     </div>
   </div>
 </template>
@@ -144,11 +144,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
-  body {
-    background-color: #fff;
-  }
-
   .transfer {
     .transfer-prompt {
       background-color: #FFFBE6;

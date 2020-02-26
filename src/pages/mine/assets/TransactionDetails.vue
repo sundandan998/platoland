@@ -1,7 +1,7 @@
 <template>
 	<div class="transaction-details">
 		<div class="transaction-details-header header">
-			<mt-header fixed title="明细详情">
+			<mt-header fixed :title="$t('m.details')">
 				<router-link to="/detailedlist" slot="left">
 					<mt-button icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
 				</router-link>
@@ -9,25 +9,25 @@
 		</div>
 		<div class="transaction-details-information">
 			<div class="transaction-details-balance">
-				<p><span>可用额</span><b>{{details.available_change}}</b></p>
-				<p><span>冻结额</span><b>{{details.freeze_change}}</b></p>
+				<p><span>{{$t('m.availableQuota')}}</span><b>{{details.available_change}}</b></p>
+				<p><span>{{$t('m.freezeQuota')}}</span><b>{{details.freeze_change}}</b></p>
 			</div>
 			<div class="transaction-details-token">
-				<p><span>交易通证</span><span><img :src="detailsCode.icon" alt="">{{detailsCode.code}}</span></p>
-				<p><span>交易类型</span><span>{{details.flow_type}}</span></p>
-				<p v-if="details.unfreeze_date!=null"><span>解锁时间</span><span>{{details.unfreeze_date}}</span></p>
+				<p><span>{{$t('m.transactionToken')}}</span><span><img :src="detailsCode.icon" alt="">{{detailsCode.code}}</span></p>
+				<p><span>{{$t('m.transactionStatus')}}</span><span>{{details.flow_type}}</span></p>
+				<p v-if="details.unfreeze_date!=null"><span>{{$t('m.unlockTime')}}</span><span>{{details.unfreeze_date}}</span></p>
 			</div>
 			<div class="transaction-details-status">
-				<p v-if="details.status!=null"><span>订单状态</span><span>{{details.status}}</span></p>
-				<p><span>订单编号</span><span>{{details.order_id}}</span></p>
-				<p><span>交易时间</span><span>{{details.create_time}}</span></p>
-				<p><span>交易方</span><span>{{details.other}}</span></p>
+				<p v-if="details.status!=null"><span>{{$t('m.unlockTime')}}</span><span>{{details.status}}</span></p>
+				<p><span>{{$t('m.orderNumber')}}</span><span>{{details.order_id}}</span></p>
+				<p><span>{{$t('m.orderTime')}}</span><span>{{details.create_time}}</span></p>
+				<p><span>{{$t('m.counterparty')}}</span><span>{{details.other}}</span></p>
 				<!-- <p><span>交易地址</span><span>{{details.other_address}}</span></p> -->
-				<p v-if="details.other_address!=null"><span>交易地址</span><span>{{details.other_address}}</span></p>
+				<p v-if="details.other_address!=null"><span>{{$t('transactionAddress')}}</span><span>{{details.other_address}}</span></p>
 			</div>
 			<div class="transaction-details-amount">
-				<p><span>可用余额</span><span>{{details.available_amt}}</span></p>
-				<p><span>冻结余额</span><span>{{details.freeze_amt}}</span></p>
+				<p><span>{{$t('m.availableBalance')}}</span><span>{{details.available_amt}}</span></p>
+				<p><span>{{$t('m.freezeBalance')}}</span><span>{{details.freeze_amt}}</span></p>
 			</div>
 		</div>
 	</div>

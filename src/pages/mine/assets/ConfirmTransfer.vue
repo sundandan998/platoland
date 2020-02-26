@@ -1,9 +1,9 @@
 <template>
   <div class="confirm-transfer">
     <div class="freeze-header">
-      <mt-header fixed title="确认转让">
+      <mt-header fixed :title="$t('m.sureTransfer')">
         <!-- v-on:click="$router.go(-2)" -->
-        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-1)">取消</mt-button>
+        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-1)">{{$t('m.cancel')}}</mt-button>
       </mt-header>
     </div>
     <div class="confirm-transfer-notice">
@@ -12,12 +12,12 @@
       </van-notice-bar>
     </div>
     <div class="confirm-transfer-info">
-      <mt-cell title="收款人" :value="this.$route.params.transferParams.email"></mt-cell>
-      <mt-cell title="数量"v-if="this.$route.params.code!=undefined"
+      <mt-cell :title="$t('m.payee')" :value="this.$route.params.transferParams.email"></mt-cell>
+      <mt-cell :title="$t('m.quantity')" v-if="this.$route.params.code!=undefined"
         :value="this.$route.params.transferParams.amount+'('+this.$route.params.code+')'"></mt-cell>
-        <mt-cell title="数量" v-if="this.$route.params.code==undefined"
+        <mt-cell :title="$t('m.quantity')" v-if="this.$route.params.code==undefined"
         :value="this.$route.params.transferParams.amount+'('+confirmTransfer.code+')'"></mt-cell>
-      <mt-cell title="手续费" value="推广期暂免手续费"></mt-cell>
+      <mt-cell  :title="$t('m.handlingFee')" :value="$t('m.suspend')"></mt-cell>
     </div>
     <div class="confirm-transfer-progress" v-if="this.$route.params.transferParams.action=='freeze'">
       <span class="confirm-transfer-type">{{this.$route.params.transferParams.type||freezeData.flow_type}}</span>
@@ -30,7 +30,7 @@
       <span v-if="this.$route.params.transferParams.date!=null">到期日 {{this.$route.params.transferParams.date}}</span>
     </div>
     <div class="confirm-transfer-button">
-      <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button>
+      <mt-button size="large" type="primary" @click.native="transfer">{{$t('m.transfer')}}</mt-button>
       <!-- <mt-button size="large" type="primary" @click.native="transfer">转让</mt-button> -->
     </div>
     <!-- 数字键盘 -->

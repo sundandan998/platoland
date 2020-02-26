@@ -2,7 +2,7 @@
   <div class="invite-people">
     <!-- 头部 -->
     <div class="invite-header">
-      <mt-header fixed title="邀请新人">
+      <mt-header fixed :title="$t('m.invite')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -11,11 +11,11 @@
       <!-- <img src="../../../assets/images/u125.png" alt=""> -->
     </div>
     <div class="invite-code">
-      <span>您的邀请码</span>
+      <span>{{$t('m.inviteCode')}}</span>
       <p>{{infoData.invite_code}}</p>
     </div>
     <div class="invite-code-copy tag-read" @click="copy" :data-clipboard-text="infoData.invite_code">
-      <span>复制</span>
+      <span>{{$t('m.copy')}}</span>
     </div>
   </div>
 </template>

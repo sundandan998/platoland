@@ -1,7 +1,7 @@
 <template>
   <div class="release-detail">
     <div class="release-header">
-      <mt-header fixed title="分利宝详情">
+      <mt-header fixed :title="$t('m.flbDetail')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -18,7 +18,7 @@
             <span class="fl"><img src="../../../../assets/images/geton.svg" alt=""
                 class="processing">{{detailData.status}}</span>
             <span class="fr"><img src="../../../../assets/images/lock.svg" alt=""
-                class="lock">{{detailData.freeze_days}}天</span>
+                class="lock">{{detailData.freeze_days}}{{$t('m.day')}}</span>
           </div>
           <div class="release-detail-text-right fr">
             <span><img src="../../../../assets/images/clock.svg" alt="" class="lock">{{date}}</span>
@@ -27,38 +27,39 @@
         <div class="release-detail-num-progress progress">
           <mt-progress :value="detailData.total_amount/(detailData.total_amount-detailData.sold_amount)"
             :bar-height="7"></mt-progress>
-          <div slot="start" class="fl">已转入{{detailData.sold_amount}}</div>
-          <div slot="end" class="fr">总量{{detailData.total_amount}}</div>
+          <div slot="start" class="fl">{{$t('m.transferred')}}{{detailData.sold_amount}}</div>
+          <div slot="end" class="fr">{{$t('m.total')}}{{detailData.total_amount}}</div>
         </div>
       </div>
       <div class="release-detail-number">
-        <mt-cell title="分利计划单号" :value="detailData.serial_number"></mt-cell>
-        <mt-cell title="发布总数量" :value="detailData.total_amount"></mt-cell>
-        <mt-cell title="支出利润" class="servings">{{detailData.interest}}{{detailToken.code}}</mt-cell>
-        <mt-cell title="起购份数" class="servings">{{detailData.min_amount}}{{detailToken.code}}份</mt-cell>
-        <mt-cell title="最多可购份数" :value="detailData.high_amount + detailToken.code"></mt-cell>
-        <mt-cell title="活动截止时间" :value="detailData.deadline_date"></mt-cell>
+        <mt-cell :title="$t('m.distributionPlanNumber')" :value="detailData.serial_number"></mt-cell>
+        <mt-cell :title="$t('m.releaseTotal')" :value="detailData.total_amount"></mt-cell>
+        <mt-cell :title="$t('m.expenditureProfit')" class="servings">{{detailData.interest}}{{detailToken.code}}</mt-cell>
+        <mt-cell :title="$t('m.purchaseQuantity')" class="servings">{{detailData.min_amount}}{{detailToken.code}}{{$t('m.share')}}</mt-cell>
+        <mt-cell :title="$t('m.maxServing')" :value="detailData.high_amount + detailToken.code"></mt-cell>
+        <mt-cell :title="$t('m.deadline')" :value="detailData.deadline_date"></mt-cell>
       </div>
     </div>
     <!-- 已结束 -->
     <div v-if="detailData.status!='进行中'">
       <div class="release-detail-number">
         <div class="end-order">
-          <mt-cell title="分利计划单号" :value="detailData.serial_number"></mt-cell>
-          <mt-cell title="当前状态" :value="detailData.status"></mt-cell>
-          <mt-cell title="发布时间" :value="date"></mt-cell>
-          <mt-cell title="活动截止时间" :value="detailData.deadline_date"></mt-cell>
+          <mt-cell :title="$t('m.distributionPlanNumber')" :value="detailData.serial_number"></mt-cell>
+          <mt-cell :title="$t('m.currentStatus')" :value="detailData.status"></mt-cell>
+          <mt-cell :title="$t('m.releaseTime')" :value="date"></mt-cell>
+          <mt-cell :title="$t('m.deadline')" :value="detailData.deadline_date"></mt-cell>
         </div>
         <div class="end-order">
-          <mt-cell title="发布总数量" :value="detailData.total_amount"></mt-cell>
-          <mt-cell title="发布份数" class="servings">{{detailData.total_amount/detailData.step_amount}}份</mt-cell>
-          <mt-cell title="每份数量" :value="detailData.step_amount"></mt-cell>
-          <mt-cell title="冻结时长" :value="detailData.freeze_days"></mt-cell>
-          <mt-cell title="支出利润" class="servings">{{detailData.interest}}{{detailToken.code}}</mt-cell>
+          <mt-cell :title="$t('m.releaseTotal')" :value="detailData.total_amount"></mt-cell>
+          <mt-cell :title="$t('m.numberOfReleases')" class="servings">{{detailData.total_amount/detailData.step_amount}}{{$t('m.share')}}
+          </mt-cell>
+          <mt-cell :title="$t('m.perServing')" :value="detailData.step_amount"></mt-cell>
+          <mt-cell :title="$t('m.freezeDuration')" :value="detailData.freeze_days"></mt-cell>
+          <mt-cell :title="$t('m.expenditureProfit')" class="servings">{{detailData.interest}}{{detailToken.code}}</mt-cell>
         </div>
         <div class="end-order">
-          <mt-cell title="起购份数" :value="detailData.min_amount + detailToken.code"></mt-cell>
-          <mt-cell title="最多可购份数" :value="detailData.high_amount + detailToken.code"></mt-cell>
+          <mt-cell :title="$t('m.purchaseQuantity')" :value="detailData.min_amount + detailToken.code"></mt-cell>
+          <mt-cell :title="$t('m.maxServing')" :value="detailData.high_amount + detailToken.code"></mt-cell>
         </div>
       </div>
     </div>
@@ -149,10 +150,12 @@
         border-bottom-right-radius: 10px;
         border-bottom-left-radius: 10px;
       }
-      .servings{
+
+      .servings {
         font-size: 14px;
         font-weight: 400;
       }
+
       .mint-cell-value {
         span {
           font-size: 12px;

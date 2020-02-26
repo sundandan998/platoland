@@ -1,7 +1,7 @@
 <template>
 	<div class="safety-verification">
 		<div class="safety-verification-header">
-			<mt-header fixed :title="$t('m.securityverification')">
+			<mt-header fixed :title="$t('m.safetyVerification')">
 				<router-link to="/safety" slot="left">
 					<mt-button icon="back">{{$t('m.back')}}</mt-button>
 				</router-link>
@@ -9,22 +9,22 @@
 		</div>
 		<div class="safety-verification-list" v-if="show.mobile">
 			<span class="safety-verification-list-username">{{infoData.mobile}}</span>
-			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.sms_code" type="number">
-				<span v-show="showTimer" @click="sms_code">发送</span>
+			<mt-field :placeholder="$t('m.verificationCode')" v-model="nextParam.sms_code" type="number">
+				<span v-show="showTimer" @click="sms_code">{{$t('m.send')}}</span>
 				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-list" v-if="show.email">
 			<span class="safety-verification-list-username">{{infoData.email}}</span>
-			<mt-field :placeholder="$t('m.verificationcode')" v-model="nextParam.email_code" type="number">
-				<span v-show="showTimer" @click="email_code">发送</span>
+			<mt-field :placeholder="$t('m.verificationCode')" v-model="nextParam.email_code" type="number">
+				<span v-show="showTimer" @click="email_code">{{$t('m.send')}}</span>
 				<span v-show="!showTimer" class="count">{{count}} s</span>
 			</mt-field>
 		</div>
 		<div class="safety-verification-btn">
 			<div class="safety-verification-text">
-				<p>{{$t('m.becareful')}}</p>
-				<p>{{$t('m.securityverificationone')}}</p>
+				<p>{{$t('m.note')}}</p>
+				<p>{{$t('m.safetyNote')}}</p>
 			</div>
 			<mt-button type="primary" size="large" @click.native="next" :disabled="disabled">{{$t('m.next')}}</mt-button>
 		</div>
@@ -224,8 +224,18 @@
 				immediate: true,
 				deep: true,
 				handler(val) {
-					if (val.sms_code != '' || val.email_code != '') {
-						this.disabled = false
+					if (this.infoData.email == null) {
+						if (val.sms_code != '') {
+							this.disabled = false
+						} else {
+							this.disabled = true
+						}
+					}else{
+						if (val.email_code != '') {
+							this.disabled = false
+						} else {
+							this.disabled = true
+						}
 					}
 				}
 			}
@@ -238,24 +248,26 @@
 
 	.safety-verification {
 		width: 100%;
-    height: 100%;
-    background-color: #fff;
-    position: fixed;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
+
 		.safety-verification-header {
 			margin-bottom: 90px;
 		}
 
 		.safety-verification-list-username {
 			font-size: 30px;
-			margin:0 30px;
+			margin: 0 30px;
 		}
 
 		.safety-verification-list {
 			.mint-field-core {
 				font-size: 14px;
 			}
-			.mint-cell:last-child{
-				margin:0 12px;
+
+			.mint-cell:last-child {
+				margin: 0 12px;
 			}
 		}
 

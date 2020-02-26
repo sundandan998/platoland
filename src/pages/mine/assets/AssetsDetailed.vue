@@ -1,7 +1,7 @@
 <template>
   <div class="assets-detailed">
     <div class="assets-detailed-header header">
-      <mt-header fixed :title="$t('m.assetdetails')">
+      <mt-header fixed :title="$t('m.assetsDetail')">
         <!-- v-on:click="$router.go(-1)" -->
         <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
         <mt-button icon="" slot="right">
@@ -15,12 +15,12 @@
               </router-link>
               <router-link :to="{name:'Out',params:{min_limit:this.assetsToken.min_limit}}">
                 <el-dropdown-item>
-                  <span>{{$t('m.changeout')}}</span>
+                  <span>{{$t('m.transferOut')}}</span>
                 </el-dropdown-item>
               </router-link>
               <router-link :to="{name:'DetailedList'}">
                 <el-dropdown-item>
-                  <span>明细</span>
+                  <span>{{$t('m.detail')}}</span>
                 </el-dropdown-item>
               </router-link>
               <el-dropdown-item>
@@ -44,7 +44,7 @@
     <!-- 可用 -->
     <div class="assets-detailed-available">
       <router-link :to="{name:'AvailableTransfer',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
-        <mt-cell :title="$t('m.availablenum')" :value="this.assetsData.available_amount|number" is-link>
+        <mt-cell :title="$t('m.availableAmount')" :value="this.assetsData.available_amount|number" is-link>
           <img slot="icon" src="../../../assets/images/u4662.png">
         </mt-cell>
       </router-link>
@@ -52,38 +52,48 @@
     <!-- 冻结 -->
     <div class="assets-detailed-freeze">
       <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
-        <mt-cell :title="$t('m.frozen')" :value="this.assetsData.freeze_amount|number">
+        <mt-cell :title="$t('m.freezeAmount')" :value="this.assetsData.freeze_amount|number">
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
       </router-link>
       <!-- 上拉加载 -->
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+      <!-- (0, _('发行买入')),
+    (1, _('OTC买入')),
+    (2, _('OTC售出')),
+    (3, _('OTC发布买入')),
+    (4, _('OTC发布出售')),
+    (5, _('转入')),
+    (6, _('转出')),
+    (7, _('受让')),
+    (8, _('转让')),
+    (9, _('存入分利宝')) -->
+      <van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载" class="transaction-type">
         <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
-            <div class="buy" v-if="item.flow_type=='发行买入'||item.flow_type=='受让'">
+            <div class="buy" v-if="item.flow_type_code=='0'||item.flow_type_code=='7'">
               <router-link
                 :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
                 <div class="issue-buy button">
-                  <mt-button size="small" type="primary" class="fr transfer">转让</mt-button>
+                  <mt-button size="small" type="primary" class="fr transfer">{{$t('m.transfer')}}</mt-button>
                 </div>
               </router-link>
               <p class="flow_type">{{item.flow_type}}</p>
               <p><span class="buy-amount">{{item.amount|number}}</span><span
-                  class="fr buy-amount">还剩{{item.unfreeze_date | days}}天解冻</span>
+                  class="fr buy-amount">{{$t('m.left')}}{{item.unfreeze_date | days}}{{$t('m.thawDays')}}</span>
               </p>
               <p class="progress">
                 <van-slider disabled :value="item.unfreeze_date | total_days(item.transaction_time)" />
               </p>
-              <p class="buy-sold">已持有{{item.transaction_time | holding}}天</p>
+              <p class="buy-sold">{{$t('m.holdingDays')}}{{item.transaction_time | holding}}{{$t('m.day')}}</p>
             </div>
           </router-link>
           <!-- OTC发布出售 -->
-          <div class="buy" v-if="item.flow_type=='OTC发布出售'">
+          <div class="buy" v-if="item.flow_type_code=='4'">
             <div class="fr button">
               <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">
-                撤销
+                {{$t('m.revoke')}}
               </mt-button>
             </div>
             <router-link :to="/orderdetail/+item.order_id">
@@ -105,9 +115,10 @@
             </router-link>
           </div>
           <!-- OTC发布买入 -->
-          <div class="buy" v-if="item.flow_type=='OTC发布买入'">
+          <div class="buy" v-if="item.flow_type_code=='3'">
             <div class="fr button">
-              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">
+                {{$t('m.revoke')}}
               </mt-button>
             </div>
             <router-link :to="/orderdetail/+item.order_id">
@@ -128,7 +139,7 @@
           </div>
           <!-- 转出 -->
           <router-link :to="/orderdetail/+item.order_id">
-            <div class="buy" v-if="item.flow_type=='转出'">
+            <div class="buy" v-if="item.flow_type_code=='6'">
               <p class="flow_type">{{item.flow_type}}</p>
               <p><span class="turn-amount">{{item.amount|number}}</span><span class="fr"><img
                     style="position: relative;top: -35px;" src="../../../assets/images/go.svg" alt="">
@@ -151,7 +162,7 @@
     </div>
     <div class="transfer-btn">
       <router-link to="/into">
-        <mt-button size="large" type="primary">{{$t('m.changeinto')}} </mt-button>
+        <mt-button size="large" type="primary">{{$t('m.TransferInto')}} </mt-button>
       </router-link>
     </div>
   </div>

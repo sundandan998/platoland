@@ -1,7 +1,7 @@
 <template>
   <div class="Purchase-pass">
     <div class="Purchase-pass-header header">
-      <mt-header fixed title="购买通证">
+      <mt-header fixed :title="$t('m.buyToken')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)"><span>{{$t('m.back')}}</span></mt-button>
       </mt-header>
     </div>
@@ -18,14 +18,19 @@
         <span>{{buyData.price|number}}</span>
       </div>
     </div>
+    <!-- 备注 -->
+    <div class="note">
+      <p>{{$t('m.remark')}}</p>
+    </div>
     <div class="purchase-pass-tabbar">
       <van-tabs @click="buyIndex">
-        <van-tab :title="$t('m.number')">
-          <mt-field :placeholder="buyData.low_number+'起购'" type="number" v-model="reqPay.amount"></mt-field>
+        <van-tab :title="$t('m.numBuy')">
+          <mt-field :placeholder="buyData.low_number+$t('m.purchase')" type="number" v-model="reqPay.amount"></mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount|number}} {{buyData.denominated_assets}}</p>
         </van-tab>
-        <van-tab :title="$t('m.price')">
-          <mt-field :placeholder="buyData.low_number* buyData.price+'起购'" type="number" v-model="reqPay.amount">
+        <van-tab :title="$t('m.priceBuy')">
+          <mt-field :placeholder="buyData.low_number* buyData.price+$t('m.purchase')" type="number"
+            v-model="reqPay.amount">
           </mt-field>
           <p>{{$t('m.available')}}: {{balData.available_amount|number}} {{buyData.denominated_assets}}</p>
         </van-tab>
@@ -36,7 +41,8 @@
     </div>
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span v-if="buyTitle" class="paymentamount">{{reqPay.amount*buyData.price}}&nbsp;({{buyData.denominated_assets}})</span>
+        <span v-if="buyTitle"
+          class="paymentamount">{{reqPay.amount*buyData.price}}&nbsp;({{buyData.denominated_assets}})</span>
         <!-- <span  v-if="buyTitle" class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span> -->
         <span v-else class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
@@ -52,7 +58,7 @@
   import { Toast } from 'mint-ui'
   import api from '@/api/market/Market.js'
   import { toast } from '@/assets/js/pub.js'
-	import { MessageBox } from 'mint-ui'
+  import { MessageBox } from 'mint-ui'
   export default {
     data() {
       return {
@@ -151,7 +157,7 @@
       },
       // 交易详情
       buyDetail() {
-        api.buyDetail({id:this.$route.params.id}).then(res => {
+        api.buyDetail({ id: this.$route.params.id }).then(res => {
           this.buyData = res.data
           this.buyDataToken = res.data.token
         }).catch(err => {
@@ -208,40 +214,64 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-  .Purchase-pass{
-    .purchase-pass-content{
+
+  .Purchase-pass {
+    .purchase-pass-content {
       background-color: #fff;
-      margin:10px 24px;
-      border-radius:10px;
-      padding: 10px ;
-      img{
+      margin: 10px 24px;
+      border-radius: 10px;
+      padding: 10px;
+
+      img {
         margin-right: 10px;
       }
-      .purchase-pass-content-bot{
+
+      .purchase-pass-content-top {
+        span {
+          display: block;
+        }
+
+        p {
+          margin: 10px 0 0 75px;
+        }
+      }
+
+      .purchase-pass-content-bot {
         margin-top: 10px;
-        img{
+        margin-left: 70px;
+
+        img {
           width: 35px;
           margin-left: 5px;
+          position: relative;
+          top: 5px;
         }
       }
     }
-    .purchase-pass-tabbar{
-      margin:0 24px;
+    .note{
+			margin: 10px 24px;
+			background-color: #fff;
+		}
+    .purchase-pass-tabbar {
+      margin: 0 24px;
       height: 250px;
       border-radius: 10px;
       background-color: #fff;
-      .van-tabs--line .van-tabs__wrap{
-				border-top-left-radius:10px;
-				border-top-right-radius:10px;
+
+      .van-tabs--line .van-tabs__wrap {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
       }
-      p{
+
+      p {
         margin-left: 15px;
       }
     }
-    .purchase-pass-btn{
+
+    .purchase-pass-btn {
       width: 100%;
       position: fixed;
-      bottom:10px;
+      bottom: 10px;
     }
   }
 </style>

@@ -20,6 +20,7 @@ import Vuex from 'vuex'
 import 'lib-flexible'
 // 提示消息
 import { message } from '@/assets/lang/message.js'
+// import { message } from '@/assets/lang/messageko.js'
 //引入jquery
 import $ from 'jquery'
 //api接口
@@ -43,7 +44,9 @@ const i18n = new VueI18n({
   messages: {
     'zh-CN': require('./assets/lang/zh'),   // 中文语言包
     'en-US': require('./assets/lang/en'), // 英文语言包
-    'msg': require('./assets/lang/message') // 提示信息
+    'ko': require('./assets/lang/ko'), //韩语语言包
+    'msg': require('./assets/lang/message'),// 提示信息
+    // 'msg': require('./assets/lang/messageko') // 提示信息韩语版
   }
 })
 // 全局过滤
