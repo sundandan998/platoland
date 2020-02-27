@@ -66,6 +66,7 @@ export const m = {
   copySuccess:'복사성공',
   yes:'是',
   no:'否',
+  buyRecord:'买入记录',
   // 登录
   login:'登录',
   enterName:'请输入手机号/邮箱',

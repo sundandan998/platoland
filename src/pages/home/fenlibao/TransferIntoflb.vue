@@ -29,11 +29,13 @@
         </div>
         <img src="../../../assets/images/prompt.svg" alt="" @click="duration" class="duration">
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>{{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
+          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>
+              {{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
         </div>
       </div>
       <div class="token-progress">
-        <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)" :bar-height="7"></mt-progress>
+        <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)"
+          :bar-height="7"></mt-progress>
       </div>
       <b>{{$t('m.transfersIn')}}{{flbData.sold_amount/flbData.step_amount}}</b>
       <mt-cell :title="$t('m.perServing')" value="">{{flbData.step_amount}} {{flToken.code}}/{{$t('m.share')}}</mt-cell>
@@ -47,7 +49,8 @@
         v-model="transferParams.part">{{$t('m.share')}}</mt-field>
       <div class="transfer-num-amount fl">
         <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
-        <span>{{$t('m.dividendMaturity')}} {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+        <span>{{$t('m.dividendMaturity')}}
+          {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">
@@ -57,7 +60,8 @@
       </div>
     </div>
     <div class="release-button">
-      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">{{$t('m.sureTransfer')}}</van-button>
+      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">{{$t('m.sureTransfer')}}
+      </van-button>
     </div>
     <!-- 数字键盘 -->
     <div>
@@ -65,7 +69,7 @@
         <span class="paymentamount">{{transferParams.part}}&nbsp;({{flToken.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
-        <van-number-keyboard  :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
           @blur="showKeyboard = false" />
       </van-popup>
     </div>
@@ -108,12 +112,12 @@
       transfer() {
         if (this.transferParams.part > this.flbData.high_amount) {
           Toast({
-            message: '最多转入' + this.flbData.high_amount + '份',
+            message: '최대양도' + this.flbData.high_amount + '분',
             className: 'zZindex'
           })
         } else if (this.transferParams.part < this.flbData.min_amount) {
           Toast({
-            message: '最少转入' + this.flbData.min_amount + '份',
+            message: '최소 이체' + this.flbData.min_amount + '분',
             className: 'zZindex'
           })
         } else {
@@ -134,21 +138,21 @@
       // 提示
       prompt() {
         this.$messagebox({
-          title: '分利率',
+          title: '분리율',
           message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/360 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/360',
           confirmButtonText: '我知道了',
         })
       },
       duration() {
         this.$messagebox({
-          title: '冻结时长',
+          title: '잠금시간',
           message: '冻结时长是指，将交易的资产冻结部分功能一定时间发行买入、受让的资产，在冻结时长内，不可转出至第三方钱包、不可在交易市场发布。',
           confirmButtonText: '我知道了',
         })
       },
       // 可用
       balance() {
-        api.balance({token_code:this.detail.token.code}).then(res => {
+        api.balance({ token_code: this.detail.token.code }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
           }
@@ -159,7 +163,7 @@
       maxnum() {
         if (this.transferParams.part > this.flbData.high_amount || this.transferParams.part < this.flbData.min_amount) {
           Toast({
-            message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
+            message: '수량을 입력하십시오' + this.flbData.min_amount + '~' + this.flbData.high_amount + '사이',
             className: 'zZindex'
           })
           this.disabled = true

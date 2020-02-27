@@ -4,7 +4,7 @@
       <mt-header fixed :title="$t('m.tokenDaQuan')">
         <!-- v-on:click="$router.go(-1) -->
         <!-- @click="back" -->
-        <mt-button slot="left" icon="back"@click="back">{{$t('m.back')}}</mt-button>
+        <mt-button slot="left" icon="back"v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="certificate-list-card" v-for="(item, index) in assetsData" v-if="item.subject!=null">

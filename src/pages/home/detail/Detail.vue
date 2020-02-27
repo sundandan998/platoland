@@ -129,7 +129,7 @@
         })
         clipboard.on('error', e => {
           // 不支持复制
-          console.log('该浏览器不支持自动复制')
+          // console.log('该浏览器不支持自动复制')
           // 释放内存
           clipboard.destroy()
         })

@@ -1,7 +1,7 @@
 <template>
   <div class="buy-record">
     <div class="buy-record-header">
-      <mt-header fixed title="买入记录">
+      <mt-header fixed :title="$t('m.buyRecord')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
