@@ -16,7 +16,8 @@
       </div>
     </div>
     <!-- <router-link to="/list"> -->
-    <router-link :to="{name:'List',params:{code:dealListToken.code}}">
+    <!-- <router-link :to="{name:'List',params:{code:dealListToken.code}}"> -->
+    <router-link :to="{name:'MarketToken',params:{code:dealListToken.code}}">
       <div class="to-deal-token">
         <div class="to-deal-token-left fl">
           <span><img :src="dealListToken.icon" alt="" class="fl"></span>
@@ -89,7 +90,7 @@
       }
     },
     created() {
-      this.path()
+      this.dealList()
     },
     computed: {
       refpath() {
@@ -119,21 +120,22 @@
           }
         }
       },
-      path() {
-        if (this.refpath == '/deal') {
-          this.dealData.code = this.$route.params.code || "LIFE+"
-          this.dealList()
-        } else {
-          this.dealData.code = "LIFE+"
-          this.dealList()
-        }
-        // if(this.$route.params.code == undefined){
-        //   console.log('45')
-        // }
-      },
+      // path() {
+      //   if (this.refpath == '/markettoken') {
+      //     this.dealData.code = this.$route.params.code || "LIFE+"
+      //     this.dealList()
+      //   } else {
+      //     this.dealData.code = "LIFE+"
+      //     this.dealList()
+      //   }
+      //   // if(this.$route.params.code == undefined){
+      //   //   console.log('45')
+      //   // }
+      // },
       // //市场列表
       dealList() {
-        this.dealData.code = this.dealData.code
+        // this.dealData.code = this.dealData.code
+        this.dealData.code = this.$route.params.code || "LIFE+"
         api.dealList(this.dealData).then(res => {
           this.dealListData = res.data.info
           this.detailCode = res.data.token.code

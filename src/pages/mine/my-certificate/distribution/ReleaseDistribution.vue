@@ -188,11 +188,10 @@
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air != '') {
+          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air != ''&&val.deadline_date!='') {
             this.disabled = false
           } else {
             this.disabled = true
-
           }
         }
       }

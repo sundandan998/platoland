@@ -375,6 +375,12 @@ export default new Router({
       name: 'Deal',
       component: () => import("@/pages/home/in-circulation/ToDeal")
     },
+    // 交易市场通证
+    {
+      path: '/markettoken',
+      name: 'MarketToken',
+      component: () => import("@/pages/home/in-circulation/MarketToken")
+    },
     //首页/去交易/购买通证
     {
       path: '/purchase/:id',
