@@ -52,7 +52,7 @@
 					<span v-else class="paymentamount">{{reqPay.amount}}&nbsp;({{buyData.denominated_assets}})</span>
 					<van-password-input :value="value" @focus="showKeyboard = true" />
 					<!-- 数字键盘 -->
-					<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+					<van-number-keyboard   :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
 						@blur="showKeyboard = false" />
 				</van-popup>
 			</div>

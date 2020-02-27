@@ -1,12 +1,12 @@
 <template>
   <div class="description">
     <div class="description-header">
-      <mt-header fixed title="通证效用说明">
+      <mt-header fixed :title="$t('m.tokenDescription')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="description-img">
-      <img src="../../../assets/images/description.png" alt="">
+      <img src="../../../assets/images/descriptionko.jpg" alt="">
     </div>
   </div>
 </template>

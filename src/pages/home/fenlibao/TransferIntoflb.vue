@@ -17,7 +17,7 @@
     <!-- </router-link> -->
     <div class="remaining-days">
       <img src="../../../assets/images/note.svg" alt="">
-      <span> {{$t('m.endDays')}}{{flbData.freeze_days}}{{$t('m.day')}}</span>
+      <span> {{$t('m.endDays')}}{{flbData.freeze_days}}{{$t('m.endDays1')}}</span>
     </div>
     <div class="transfer-token-days">
       <div class="transfer-token-days-top">
@@ -65,7 +65,7 @@
         <span class="paymentamount">{{transferParams.part}}&nbsp;({{flToken.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+        <van-number-keyboard  :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
           @blur="showKeyboard = false" />
       </van-popup>
     </div>

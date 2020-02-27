@@ -1,6 +1,6 @@
 import { Toast } from '../../../node_modules/mint-ui'
-// import { message } from '@/assets/lang/messageko.js'
-import { message } from '@/assets/lang/message.js'
+import { message } from '@/assets/lang/messageko.js'
+// import { message } from '@/assets/lang/message.js'
 
 // function toast(res) {
 // 	

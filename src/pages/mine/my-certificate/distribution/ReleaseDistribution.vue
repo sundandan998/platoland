@@ -48,7 +48,7 @@
         <span
           class="paymentamount">{{(releaseParams.total_part*releaseParams.air*releaseParams.step_amount/365*releaseParams.freeze_days).toFixed(2)}}&nbsp;{{balanceToken.code}}</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+        <van-number-keyboard  :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
           @blur="showKeyboard = false" />
       </van-popup>
     </div>

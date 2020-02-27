@@ -19,7 +19,7 @@
 			</div>
 			<van-password-input :value="pass.pwd2" :mask="true" @focus="passIndex1" />
 			<!-- 数字键盘 -->
-			<van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
+			<van-number-keyboard delete-button-text="Delete" :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
 		</div>
 		<div class="rest-pass-word-btn">
 			<mt-button type="primary" size="large" @click="payPwd" :disabled=disabled>确认</mt-button>

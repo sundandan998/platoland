@@ -1,6 +1,6 @@
 <template>
 	<div class="safety-verification">
-		<div class="safety-verification-header">
+		<div class="safety-verification-header header">
 			<mt-header fixed :title="$t('m.safetyVerification')">
 				<router-link to="/safety" slot="left">
 					<mt-button icon="back">{{$t('m.back')}}</mt-button>

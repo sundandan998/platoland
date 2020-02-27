@@ -32,7 +32,7 @@
 						<mt-cell :title="$t('m.tokenLogo')">
 							<span>
 								<img :src="subject.icon">
-								{{subject.code+'('+subject.name+')'}}
+								{{subject.code+'('+subject.nickname+')'}}
 							</span>
 						</mt-cell>
 						<!-- 通证昵称 -->

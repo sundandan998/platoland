@@ -18,7 +18,7 @@
         <span v-show="showTimer" class="fr" @click="renewCode">{{$t('m.reCode')}}</span>
         <span v-show="!showTimer" class="count fr">{{count}} s</span>
         <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
+        <van-number-keyboard delete-button-text="Delete":show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
       </div>
     </div>
     <div class="login-btn">

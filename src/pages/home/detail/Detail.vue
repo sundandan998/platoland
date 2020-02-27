@@ -59,8 +59,8 @@
             {{detailData.code}} ({{detailData.nickname}})
             <!-- <p>{{subject.name}}</p> -->
           </span>
-          <img  v-if="release.status==1" src="../../../assets/images/issued.png" alt="" class="fr publicity">
-          <img  v-if="release.status==0"src="../../../assets/images/publicity.png" alt="" class="fr publicity">
+          <span class="fr publicity" v-if="release.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+            <span class="fr issue" v-if="release.status==1"><img src="../../../assets/images/clock.svg" alt="">{{$t('m.processing')}}</span>
         </div>
         <div class="detail-issued-token-bot">
           <div class="detail-issued-token-bot-left fl">
@@ -120,7 +120,8 @@
         var clipboard = new Clipboard('.tag-read')
         clipboard.on('success', e => {
           this.$toast({
-            message: '复制成功',
+            // message: '复制成功',
+            message: '복사성공',
             duration: 1800
           })
           // 释放内存
@@ -273,7 +274,25 @@
           }
 
           .publicity {
-            height: 100px;
+          height: 100px;
+          border-top-right-radius: 10px;
+          font-size: 26px;
+          color: #06B56A;
+          margin-right: 40px;
+          img {
+            margin-right: 7px;
+            width: 26px;
+          }
+        }
+        .issue {
+            font-size: 26px;
+            color: #37A7E1;
+            margin-right: 40px;
+
+            img {
+              margin-right: 7px;
+              width: 26px;
+            }
           }
         }
 

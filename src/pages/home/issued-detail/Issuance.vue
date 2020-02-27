@@ -25,8 +25,8 @@
           <div class="current-release-token-top">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-            <img src="../../../assets/images/issued.png" alt="" class="fr publicity" v-if="item.status==1">
-            <img src="../../../assets/images/publicity.png" alt="" class="fr publicity" v-if="item.status==0">
+            <span class="fr publicity" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+            <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">{{$t('m.processing')}}</span>
           </div>
           <div class="current-release-token-bot">
             <div class="current-release-token-bot-text fl">
@@ -130,7 +130,9 @@
             }
           },
           legend: {
-            data: ['发行总量', '发行单价']
+            // data: ['发行总量', '发行单价'],
+            data: ['발행총량', '발행단가']
+
           },
           xAxis: [
             {
@@ -144,7 +146,8 @@
           yAxis: [
             {
               type: 'value',
-              name: '总量',
+              // name: '总量',
+              name: '총량',
               // data: this.options.total,
               min: 0,
               max: 100,
@@ -155,7 +158,8 @@
             },
             {
               type: 'value',
-              name: '单价',
+              // name: '单价',
+              name: '단가',
               min: 0,
               max: 10,
               interval: 2,
@@ -169,12 +173,14 @@
           },
           series: [
             {
-              name: '发行总量',
+              // name: '发行总量',
+              name:'발행총량',
               type: 'bar',
               data: this.options.num
             },
             {
-              name: '发行单价',
+              // name: '发行单价',
+              name: '발행단가',
               type: 'line',
               yAxisIndex: 1,
               data: this.options.price
@@ -246,8 +252,25 @@
           }
 
           .publicity {
-            height: 100px;
-            border-top-right-radius: 10px;
+          height: 100px;
+          border-top-right-radius: 10px;
+          font-size: 26px;
+          color: #06B56A;
+          margin-right: 40px;
+          img {
+            margin-right: 7px;
+            width: 26px;
+          }
+        }
+        .issue {
+            font-size: 26px;
+            color: #37A7E1;
+            margin-right: 40px;
+
+            img {
+              margin-right: 7px;
+              width: 26px;
+            }
           }
         }
 

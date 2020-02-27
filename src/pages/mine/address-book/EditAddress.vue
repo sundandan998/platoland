@@ -83,10 +83,14 @@
 			del() {
 				// 删除地址弹框
 				this.$messagebox({
-					title: '提示',
+					// title: '提示',
+					title:'알림',
+					// message: '确定要删除改地址吗?',
 					message: '确定要删除改地址吗?',
-					cancelButtonText: '取消',
-					confirmButtonText: '确定',
+					// cancelButtonText: '取消',
+					cancelButtonText: '취소',
+					// confirmButtonText: '确定',
+					confirmButtonText: '확인',
 					showCancelButton: true
 				}).then(action => {
 					if (action === 'confirm') {

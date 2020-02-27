@@ -11,28 +11,28 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item :label="$t('m.newLoginPass')" prop="new_pwd" v-if="visible">
           <el-input type="password" v-model="ruleForm.new_pwd" autocomplete="off">
-            <i slot="suffix" title="隐藏密码" @click="changePass('show')">
+            <i slot="suffix" :title="$t('m.hidePass')"  @click="changePass('show')">
               <img src="../../../assets/images/eye-close.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('m.newLoginPass')" prop="new_pwd" v-else>
           <el-input type="text" v-model="ruleForm.new_pwd">
-            <i slot="suffix" title="显示密码" @click="changePass('hide')">
+            <i slot="suffix" :title="$t('m.showPass')" @click="changePass('hide')">
               <img src="../../../assets/images/eye-open.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('m.surePass')" prop="new_pwd2" v-if="visible1">
           <el-input type="password" v-model="ruleForm.new_pwd2" autocomplete="off">
-            <i slot="suffix" title="隐藏密码" @click="changePass1('show')">
+            <i slot="suffix" :title="$t('m.hidePass')" @click="changePass1('show')">
               <img src="../../../assets/images/eye-close.svg" />
             </i>
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('m.surePass')" prop="new_pwd2" v-else>
           <el-input type="text" v-model="ruleForm.new_pwd2" autocomplete="off">
-            <i slot="suffix" title="隐藏密码" @click="changePass1('hide')">
+            <i slot="suffix" :title="$t('m.showPass')" @click="changePass1('hide')">
               <img src="../../../assets/images/eye-open.svg" />
             </i>
           </el-input>
@@ -58,7 +58,7 @@
     data() {
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入密码'))
+          callback(new Error('비밀번호를입력하십시오'))
         } else {
           if (this.ruleForm.new_pwd2 !== '') {
             this.$refs.ruleForm.validateField('new_pwd2')
@@ -68,9 +68,9 @@
       };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请再次输入密码'));
+          callback(new Error('비밀번호를다시입력하십시오'));
         } else if (value !== this.ruleForm.new_pwd) {
-          callback(new Error('两次输入密码不一致!'));
+          callback(new Error('잘못된비밀번호를두번입력했습니다!'));
         } else {
           callback();
         }
@@ -87,7 +87,7 @@
         rules: {
           new_pwd: [
             { validator: validatePass, trigger: 'blur' },
-            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '密码为8-16位字母加数字组合' }
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/, message: '6-16개 영문과 숫자로 비밀번호를 입력하십시오' }
           ],
           new_pwd2: [
             { validator: validatePass2, trigger: 'blur' }

@@ -51,7 +51,8 @@
         var clipboard = new Clipboard('.tag-read')
         clipboard.on('success', e => {
           this.$toast({
-            message: '复制成功',
+            // message: '复制成功',
+            message: '복사성공',
             duration: 1800
           })
           // 释放内存

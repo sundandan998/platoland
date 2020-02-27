@@ -1,7 +1,7 @@
 <template>
     <div class="open-pay-password">
       <div class="open-pay-password-header header">
-        <mt-header fixed title="设置支付密码">
+        <mt-header fixed :title="$t('m.setPayPass')">
           <router-link to="/safety" slot="left">
             <mt-button icon="back">{{$t('m.back')}}</mt-button>
           </router-link>
@@ -9,24 +9,24 @@
       </div>
       <div class="open-pay-password-keyboard">
         <div class="open-pay-password-keyboard-title">
-          <span>设置6位数字支付密码</span>
+          <span>{{$t('m.sixPayPass')}}</span>
         </div>
         <!-- 密码输入框 -->
         <!-- info="支付密码不能是重复、连续的数字" -->
         <van-password-input :value="pass.pwd" :mask="true"  @focus="passIndex" />
         <div class="open-pay-password-keyboard-title">
-          <span>再次输入支付密码</span>
+          <span>{{$t('m.aginPayPass')}}</span>
         </div>
         <van-password-input :value="pass.pwd2" :mask="true" @focus="passIndex1" />
         <!-- 数字键盘 -->
-        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
+        <van-number-keyboard delete-button-text="Delete" :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
       </div>
       <div class="rest-pass-word-btn">
-        <mt-button type="primary" size="large" @click="payPwd" :disabled=disabled>确认</mt-button>
+        <mt-button type="primary" size="large" @click="payPwd" :disabled=disabled>{{$t('m.sure')}}</mt-button>
       </div>
       <div class="open-pay-password-keyboard-text">
-        <p>注意：</p>
-        <p>支付密码将用于资产转出时的验证，请妥善保管</p>
+        <p>{{$t('m.note')}}：</p>
+        <p>{{$t('m.payPassNote')}}</p>
       </div>
     </div>
   </template>

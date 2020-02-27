@@ -39,14 +39,14 @@ Vue.use(message)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 const i18n = new VueI18n({
-  locale: 'zh-CN',  // 语言标识
+  locale: 'ko',  // 语言标识
   //this.$i18n.locale // 通过切换locale的值来实现语言切换
   messages: {
     'zh-CN': require('./assets/lang/zh'),   // 中文语言包
     'en-US': require('./assets/lang/en'), // 英文语言包
     'ko': require('./assets/lang/ko'), //韩语语言包
-    'msg': require('./assets/lang/message'),// 提示信息
-    // 'msg': require('./assets/lang/messageko') // 提示信息韩语版
+    // 'msg': require('./assets/lang/message'),// 提示信息
+    'msg': require('./assets/lang/messageko') // 提示信息韩语版
   }
 })
 // 全局过滤

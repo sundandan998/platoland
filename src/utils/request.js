@@ -36,9 +36,9 @@ service.interceptors.request.use(
   config => {
     config.headers["Content-Type"] ="application/x-www-form-urlencoded;charset=UTF-8"
     // 国际化语言
-    // config.headers["Accept-Language"] ="ko"
+    config.headers["Accept-Language"] ="ko"
     // zh-hans
-    config.headers["Accept-Language"] ="zh-hans"
+    // config.headers["Accept-Language"] ="zh-hans"
     if (store.getters.token) {
       config.headers["Authorization"] = "JWT " + store.getters.token
     }
@@ -85,10 +85,12 @@ service.interceptors.response.use(
     }
     if (errorJSON.ret_code === 403 || errorJSON.ret_code === 401) {
       window.localStorage.removeItem('token')
+      window.localStorage.removeItem('userInfo')
       router.push({
         path: 'login'
       })
       window.localStorage.removeItem('token')
+      window.localStorage.removeItem('userInfo')
     }
     message.error(errorJSON.ret_msg)
     return Promise.reject(errorJSON)

@@ -109,8 +109,8 @@
                   <!-- :value="item.amount" -->
                   <mt-progress v-if="item.is_undo==true" :bar-height="5"></mt-progress>
                 </p>
-                <p v-if="item.is_undo==true" class="sold">已售出{{item.trade_amount|number}}</p>
-                <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
+                <p v-if="item.is_undo==true" class="sold">{{$t('m.sold')}} {{item.trade_amount|number}}</p>
+                <p v-if="item.is_pay==true">{{$t('m.cancelAutomatically')}}</p>
               </div>
             </router-link>
           </div>
@@ -255,10 +255,14 @@
       //点击移除弹出的消息框
       remove() {
         this.$messagebox({
-          title: '提示',
-          message: '你确定要移除资产吗？',
-          cancelButtonText: '取消',
-          confirmButtonText: '确认',
+          // title: '提示',
+          title: '알림',
+          // message: '你确定要移除资产吗？',
+          message: '자산 이전을 확인하시겠습니까？',
+          // cancelButtonText: '取消',
+          cancelButtonText: '취소',
+          // confirmButtonText: '确认',
+          confirmButtonText: '확인',
           showCancelButton: true
         }).then(action => {
           if (action === 'confirm') {
@@ -303,7 +307,8 @@
       cancel(order_id, index) {
         // debugger
         this.$messagebox({
-          title: '温馨提示',
+           // title: '提示',
+           title: '알림',
           message: `确定撤销这笔已发布的广告？`,
           confirmButtonText: '撤销发布',
           cancelButtonText: '我再想想',

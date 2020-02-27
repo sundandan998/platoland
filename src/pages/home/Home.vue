@@ -7,8 +7,8 @@
     <!-- 轮播部分 -->
     <div class="home-banner">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item> <img src="../../assets/images/banner2.jpg" alt="" @click="life"></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner3.jpg" alt="" @click="token"></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner1ko.jpg" alt="" @click="life"></van-swipe-item>
+        <van-swipe-item> <img src="../../assets/images/banner2ko.jpg" alt="" @click="token"></van-swipe-item>
         <!-- <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
         <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
       </van-swipe>
@@ -43,7 +43,7 @@
           <img :src="item.token.icon" alt="" class="fl icon">
           <span class="fl"><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
           <span class="fr publicity" v-if="item.status==0"><img src="../../assets/images/gs.svg" alt="">公示中</span>
-          <span class="fr issue" v-if="item.status==1"><img src="../../assets/images/clock.svg" alt="">进行中</span>
+          <span class="fr issue" v-if="item.status==1"><img src="../../assets/images/clock.svg" alt="">{{$t('m.processing')}}</span>
         </div>
         <div class="home-latest-release-token-bot">
           <div class="home-latest-release-token-bot-text fl">
