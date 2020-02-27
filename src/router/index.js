@@ -369,6 +369,12 @@ export default new Router({
       name: 'Subject',
       component: () => import("@/pages/home/in-circulation/SubjectDetails")
     },
+    // 通证列表
+    {
+      path: '/markettoken',
+      name: 'MarketToken',
+      component: () => import("@/pages/home/in-circulation/MarketToken")
+    },
     //首页/去交易
     {
       path: '/deal',
