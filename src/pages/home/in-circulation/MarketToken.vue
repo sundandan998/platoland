@@ -44,24 +44,24 @@
       methods: {
         // 列表信息
         list() {
-          // this.$route.params
-          api.tokenList({ category: 'all' }).then(res => {
-            this.assetsData = res.data
-            if (this.$route.params.code == 'LIFE+') {
-              this.assetsData[2].is_collection = false
-            }else if(this.$route.params.code == 'PLD'){
-              this.assetsData[0].is_collection = false
+        // debugger
+        api.tokenList().then(res => {
+          this.assetsData = res.data
+          // 循环得到code和is_collectio,
+          for (let i = 0; i < this.assetsData.length; i++) {
+            this.selectRadio = this.assetsData[i].code
+            this.is_collection = this.assetsData[i].is_collection
+            // 判断如果从deal页面传来的code==本页面的code就改变本页的is_collection==true,
+            // 其他is_collection为false
+            if (this.$route.params.code == this.selectRadio) {
+              this.assetsData[i].is_collection=true
+            } else {
+              this.assetsData[i].is_collection=false
             }
-            // this.assetsData[2].is_collection = false
-            // console.log(this.assetsData.subject)
-            // for(let i=0;i<this.assetsData.length;i++){
-            //   this.selectRadio=this.assetsData[i].code
-            //   console.log(this.selectRadio)
-            // }
-          }).catch(err => {
-            console.log(err)
-          })
-        },
+          }
+        }).catch(err => {
+        })
+      },
       }
     }
   
