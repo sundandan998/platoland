@@ -18,21 +18,24 @@
 				<span>{{buyData.price|number}}</span>
 			</div>
 		</div>
-			<!-- 备注 -->
-			<div class="note">
-					<p>{{$t('m.remark')}}</p>
-			</div>
+		<!-- 备注 -->
+		<div class="note">
+			<p>{{$t('m.remark')}}</p>
+			<span>{{buyData.remark}}</span>
+		</div>
 		<div class="purchase-pass-tabbar">
 			<van-tabs @click="buyIndex">
 				<van-tab :title="$t('m.numSell')">
-					<mt-field :placeholder="$t('m.lowSellnum')+buyData.low_number" type="number" v-model="reqPay.amount"></mt-field>
+					<mt-field :placeholder="$t('m.lowSellnum')+buyData.low_number" type="number" v-model="reqPay.amount">
+					</mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}} {{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.available')}}：{{balData.available_amount}} {{buyDataToken.code}}</p> -->
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
 					<p>{{$t('m.handlingFee')}}：{{$t('m.suspend')}}</p>
 				</van-tab>
 				<van-tab :title="$t('m.priceSell')">
-					<mt-field :placeholder="$t('m.lowSellAmount')+ buyData.low_number*buyData.price" type="number" v-model="reqPay.amount">
+					<mt-field :placeholder="$t('m.lowSellAmount')+ buyData.low_number*buyData.price" type="number"
+						v-model="reqPay.amount">
 					</mt-field>
 					<p>{{$t('m.available')}}：{{balData.available_amount|number}}{{buyDataToken.code}}</p>
 					<!-- <p>{{$t('m.servicecharge')}}：{{reqPay.amount*0.002}}PLD</p> -->
@@ -225,14 +228,17 @@
 			margin: 10px 24px;
 			border-radius: 10px;
 			padding: 10px;
+
 			img {
 				margin-right: 10px;
 			}
-			.purchase-pass-content-top{
-				span{
+
+			.purchase-pass-content-top {
+				span {
 					display: block;
 				}
-				p{
+
+				p {
 					margin-left: 70px;
 					margin-top: 10px;
 				}
@@ -240,37 +246,55 @@
 
 			.purchase-pass-content-bot {
 				margin-left: 65px;
+
 				img {
 					margin-top: 20px;
 					margin-left: 10px;
 					position: relative;
-					top:5px;
+					top: 5px;
 				}
 			}
 		}
-		.note{
+
+		.note {
 			margin: 10px 24px;
 			background-color: #fff;
+			border-radius: 10px;
+
+			p {
+				padding: 20px;
+			}
+
+			span {
+				padding-bottom: 20px;
+				padding-left: 20px;
+				display: inline-block;
+			}
 		}
+
 		.purchase-pass-tabbar {
 			margin: 0 24px;
 			border-radius: 10px;
 			height: 300px;
 			background-color: #fff;
-			.van-tabs--line .van-tabs__wrap{
-				border-top-left-radius:10px;
-				border-top-right-radius:10px;
+
+			.van-tabs--line .van-tabs__wrap {
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
 			}
-			p{
-				margin:0 20px;
+
+			p {
+				margin: 0 20px;
 			}
-			.mint-field-core{
+
+			.mint-field-core {
 				font-size: 14px;
 			}
 		}
-		.purchase-pass-btn{
+
+		.purchase-pass-btn {
 			position: fixed;
-			bottom:10px;
+			bottom: 10px;
 			width: 100%;
 		}
 	}

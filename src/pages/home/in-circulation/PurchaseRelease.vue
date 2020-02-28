@@ -73,6 +73,7 @@
 					maxlength="50"
 					:placeholder="$t('m.addNotes')"
 					show-word-limit
+					v-model="releaseData.remark"
 				/>
 			</div>
 		<div class="purchase-pass-btn">
@@ -127,7 +128,8 @@
 					amount: '',
 					price: '',
 					low_number: '',
-					high_number: ''
+					high_number: '',
+					remark:'',
 				},
 				// 确认支付参数
 				confirm: {

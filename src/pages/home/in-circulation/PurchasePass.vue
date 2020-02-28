@@ -21,6 +21,7 @@
     <!-- 备注 -->
     <div class="note">
       <p>{{$t('m.remark')}}</p>
+      <span>{{buyData.remark}}</span>
     </div>
     <div class="purchase-pass-tabbar">
       <van-tabs @click="buyIndex">
@@ -250,7 +251,16 @@
     }
     .note{
 			margin: 10px 24px;
-			background-color: #fff;
+      background-color: #fff;
+      border-radius:10px;
+      p{
+        padding:20px;
+      }
+      span{
+        padding-bottom: 20px;
+        padding-left: 20px;
+        display: inline-block;
+      }
 		}
     .purchase-pass-tabbar {
       margin: 0 24px;
