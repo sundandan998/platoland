@@ -1,7 +1,7 @@
 <template>
 	<div class="scandetail">
 		<div class="scandetail-header">
-			<mt-header fixed title="扫一扫">
+			<mt-header fixed :title="$t('m.scan')">
 				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">返回</mt-button>
 			</mt-header>
 		</div>

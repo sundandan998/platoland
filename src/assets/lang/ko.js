@@ -33,6 +33,8 @@ export const m = {
   over: '종료',
   processing: '진행중',
   cancelled: '최소됨',
+  public:'公示中',
+  buyed:'已买入',
   cancel: '취소',
   noData: '데이터가 없습니다',
   delAddress: '确定要删除改地址吗？',
@@ -66,6 +68,8 @@ export const m = {
   yes: '네',
   no: '아니요',
   buyRecord:'구매기록',
+  directed:'감독',
+  sendCode:'인증 코드 보내기',
   // 登录
   login: '로그인',
   enterName: '핸드폰 또는 이메일을 입력하십시오',
@@ -189,6 +193,10 @@ export const m = {
   remark: '비고',
   // 转出
   payTo: '지불',
+  payTo: '付款给',
+  sureTurn:'确认转出',
+  turnSure:'转出确认',
+  totalExpenses:'总支出',
   selectAddress: '입금주소 선택',
   transferOutNum: '전출 수량',
   lowOutNum: '최저 전출 수량',

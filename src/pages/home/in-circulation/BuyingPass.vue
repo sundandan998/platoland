@@ -193,10 +193,10 @@
           })
         } else {
           this.$messagebox({
-            title: '提示',
+            title: '알림',
             message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
+            cancelButtonText: '취소',
+            confirmButtonText: '확인',
             showCancelButton: true
           }).then(action => {
             if (action == 'confirm') {

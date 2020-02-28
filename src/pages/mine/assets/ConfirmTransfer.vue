@@ -23,11 +23,11 @@
       <span class="confirm-transfer-type">{{this.$route.params.transferParams.type||freezeData.flow_type}}</span>
       <!-- <span class="confirm-transfer-type">{{}}</span> -->
       <p><span>{{this.$route.params.transferParams.num||freezeData.amount}}</span><span
-          class="fr">还剩{{freezeData.unfreeze_date|days}}天解冻</span></p>
+          class="fr">{{$t('m.left')}}{{freezeData.unfreeze_date|days}}{{$t('m.thawDays')}}</span></p>
       <div class="confirm-transfer-num">
         <van-slider disabled :value="freezeData.unfreeze_date | total_days(freezeData.transaction_time)" />
       </div>
-      <span v-if="this.$route.params.transferParams.date!=null">到期日 {{this.$route.params.transferParams.date}}</span>
+      <span v-if="this.$route.params.transferParams.date!=null">{{$t('m.expireDate')}} {{this.$route.params.transferParams.date}}</span>
     </div>
     <div class="confirm-transfer-button">
       <mt-button size="large" type="primary" @click.native="transfer">{{$t('m.transfer')}}</mt-button>
@@ -85,10 +85,10 @@
           this.popupVisible = true
         } else {
           this.$messagebox({
-            title: '提示',
+            title: '알림',
             message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
+            cancelButtonText: '취소',
+            confirmButtonText: '확인',
             showCancelButton: true
           }).then(action => {
             if (action == 'confirm') {
@@ -105,9 +105,9 @@
         // 判断是否转到千企商城
         if (this.$route.params.transferParams.out == true) {
           this.$messagebox({
-            title: '提示',
+            title: '알림',
             message: `将转让至收款人千企商城账号是否继续?`,
-            cancelButtonText: '取消',
+            cancelButtonText: '취소',
             confirmButtonText: '继续',
             showCancelButton: true
           }).then(action => {

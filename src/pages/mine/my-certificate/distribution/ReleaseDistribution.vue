@@ -124,7 +124,7 @@
       integer() {
         if (!(/(^[1-9]\d*$)/.test(this.releaseParams.total_part))) {
           Toast({
-            message: '请输入整数',
+            message: '정수를입력하세요',
             className: 'zZindex'
           })
           return false

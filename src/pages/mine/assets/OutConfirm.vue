@@ -1,26 +1,26 @@
 <template>
   <div class="out-confirm">
     <div class="freeze-header header">
-      <mt-header fixed title="转出确认">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">返回</mt-button>
+      <mt-header fixed :title="$t('m.turnSure')">
+        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="confirm-title">
-      <span>请仔细核实转出信息,转出成功后资产无法返还</span>
+      <span>{{$t('m.turnOut')}}</span>
     </div>
     <div class="payment">
-      <mt-cell title="付款给" :value="this.detail.address"></mt-cell>
+      <mt-cell :title="$t('m.payTo')" :value="this.detail.address"></mt-cell>
     </div>
     <div class="expenditure">
-      <mt-cell title="总支出" >{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
+      <mt-cell :title="$t('m.totalExpenses')" >{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</mt-cell>
       <div class="expenditure-detail">
-        <p><span>转出数量</span><span class="fr">{{this.$route.params.amount}}{{this.detail.token.code}}</span></p>
-        <p><span>手续费</span><span class="fr">{{this.detail.token.fee|number}}{{this.detail.token.code}}</span></p>
+        <p><span>{{$t('m.transferOutNum')}}</span><span class="fr">{{this.$route.params.amount}}{{this.detail.token.code}}</span></p>
+        <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{this.detail.token.fee|number}}{{this.detail.token.code}}</span></p>
       </div>
     </div>
     <div class="transfer-button">
-      <mt-button size="large" type="primary" @click="passwordShow">确认转出</mt-button>
+      <mt-button size="large" type="primary" @click="passwordShow">{{$t('m.sureTurn')}}</mt-button>
     </div>
     <!-- 数字键盘 -->
     <div>

@@ -16,14 +16,14 @@
         <van-tab :title="$t('m.telRegister')">
           <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 手机号 -->
-            <el-form-item prop="tel" :rules="[{message: '请输入手机号', trigger: 'blur' },
-            { pattern: /^1[23456789]\d{9}$/, message: '请输入正确手机号' }]">
+            <el-form-item prop="tel" :rules="[{message: '인증 코드 보내기', trigger: 'blur' },
+            { pattern: /^1[23456789]\d{9}$/, message: '정확한 휴대 전화 번호를 입력하십시오' }]">
               <img src="../../assets/images/tel.svg" alt="" class="login-icon">
-              <el-input v-model="verification.tel" placeholder="请输入手机号"></el-input>
+              <el-input v-model="verification.tel" :placeholder="$t('m.telNumber')"></el-input>
             </el-form-item>
             <!-- 密码 -->
-            <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
-            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
+            <el-form-item prop="password" :rules="[ { message: '6-16개 영문과 숫자로 비밀번호를 입력하십시오', trigger: 'blur' },
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '6-16개 영문과 숫자로 비밀번호를 입력하십시오' }]">
               <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
               <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"
@@ -40,14 +40,14 @@
         <van-tab :title="$t('m.emilRegister')">
           <el-form :model="verification" ref="verification" label-width="20px" class="demo-dynamic">
             <!-- 邮箱 -->
-            <el-form-item prop="email" :rules="[ { message: '请输入邮箱地址', trigger: 'blur' },
-            { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }]">
+            <el-form-item prop="email" :rules="[ { message: '이메일 주소를 입력하십시오', trigger: 'blur' },
+            { type: 'email', message: '올바른 이메일 주소를 입력하십시오', trigger: ['blur', 'change'] }]">
               <img src="../../assets/images/email.png" alt="" class="login-icon">
               <el-input v-model="verification.email" :placeholder="$t('m.emailNumber')"></el-input>
             </el-form-item>
             <!-- 密码 -->
-            <el-form-item prop="password" :rules="[ { message: '请输入6-16位字母加数字组合密码', trigger: 'blur' },
-            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '密码为6-16位字母加数字组合' }]">
+            <el-form-item prop="password" :rules="[ { message: '6-16개 영문과 숫자로 비밀번호를 입력하십시오', trigger: 'blur' },
+            { pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/, message: '6-16개 영문과 숫자로 비밀번호를 입력하십시오' }]">
               <img :src="seen?openeye:nopeneye" @click="changeType()" class=" fr password-img" />
               <img src="../../assets/images/password.svg" alt="" class="pass-icon">
               <el-input :type="pwdType" v-model="verification.password" autocomplete="off"

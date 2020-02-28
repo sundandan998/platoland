@@ -33,6 +33,7 @@ export const m = {
   over: '已结束',
   processing: '进行中',
   public:'公示中',
+  buyed:'已买入',
   cancelled: '已取消',
   cancel:'取消',
   noData: '暂无数据',
@@ -85,6 +86,8 @@ export const m = {
   userAgreement:'用户使用协议',
   verifyMessage:'已向xx发送验证信息,请输入验证码',
   reCode:'重新发送验证码',
+  directed:'已向',
+  sendCode:'发送验证码',
   //弹框提示
   versionUpgrade:'版本升级',
   latestVersion:'当前为最新版本',
@@ -109,6 +112,7 @@ export const m = {
   email:'邮箱',
   emailNumber:'请输入邮箱',
   telNumber:'请输入手机号码',
+  // tel
   resetLoginPass:'重置登录密码',
   newLoginPass:'新登录密码',
   surePass:'确认密码',
@@ -190,6 +194,10 @@ export const m = {
   remark: '备注',
   // 转出
   payTo: '付款给',
+  sureTurn:'确认转出',
+  turnSure:'转出确认',
+  totalExpenses:'总支出',
+  turnOut:'请仔细核实转出信息,转出成功后资产无法返还',
   selectAddress: '请选择收款地址',
   transferOutNum: '转出数量',
   lowOutNum: '最小转出数量',

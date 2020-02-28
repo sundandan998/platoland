@@ -11,7 +11,7 @@
       <!-- 注册时展示 -->
       <!-- <p></p> -->
       <!-- <p>{{$t('m.verifyMessage')}}{{this.$route.params.username}}</p> -->
-      <p>已向{{this.$route.params.username}}发送验证码</p>
+      <p>{{$t('m.directed')}}{{this.$route.params.username}}{{$t('m.sendCode')}}</p>
       <span>{{$t('m.verificationCode')}}</span>
       <div class="verification-code">
         <van-password-input :value="registerParsms.code" @focus="showKeyboard = true" />

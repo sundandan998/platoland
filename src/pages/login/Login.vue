@@ -166,7 +166,7 @@
         if (!email.test(this.verification.username) && !tel.test(this.verification.username)) {
           // this.status = 'error'
           Toast({
-            message: '请填写正确的手机号或邮箱地址',
+            message: '정확한 휴대 전화 번호 또는 이메일 주소를 입력하십시오',
             className: 'zZindex'
           })
         } else {

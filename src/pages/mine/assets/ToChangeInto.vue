@@ -1,7 +1,7 @@
 <template>
   <div class="to-change-into">
     <div class="to-change-into-header header">
-      <mt-header fixed title="转入">
+      <mt-header fixed :title="$t('m.TransferInto')">
         <!-- <router-link to="path"> -->
           <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
         <!-- </router-link> -->
