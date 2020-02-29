@@ -13,11 +13,11 @@
 				<p>{{this.detail.token.issuer}}</p>
 			</div>
 		</div>
-		<div class="purchase-pass-valuation-assets" v-if="this.$route.params.code!=''">
+		<div class="purchase-pass-valuation-assets" v-if="this.$route.params.denominated_assets!=''">
 			<span>{{$t('m.valuationAssets')}}</span>
 			<div class="purchase-pass-valuation-assets-img fr">
 				<img :src="this.detailData.d_icon" alt="" />
-				<span>{{this.detailData.denominated_assets}}</span>
+				<span>{{this.$route.params.denominated_assets}}</span>
 			</div>
 		</div>
 		<div class="purchase-pass-input">
@@ -141,6 +141,7 @@
 		},
 		created() {
 			this.index(1, '111')
+			// this.$route.params.code
 		},
 		methods: {
 			onInput(key) {
@@ -343,6 +344,9 @@
 		}
 		.leave-message{
 			height: 200px;
+		}
+		.mint-cell:last-child{
+		 background-image:none !important;
 		}
 	}
 </style>

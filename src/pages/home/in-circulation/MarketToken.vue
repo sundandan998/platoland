@@ -8,10 +8,12 @@
       </mt-header>
     </div>
     <!-- 通证列表 -->
-    <div class="token-list" v-for="(item,index) in assetsData" :key="index" v-if="item.subject!=null">
+    <!-- v-if="item.subject!=null&&(item.release.status==1||item.release.status==2) -->
+    <div class="token-list" v-for="(item,index) in assetsData" :key="index"v-if="item.subject!=null" >
       <router-link :to="{name:'Deal',params:{code:item.code}}">
         <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
           <img class="assets-icon" slot="icon" :src="item.icon">
+          <!-- <span>{{item.release.id}}</span> -->
         </mt-cell>
         <!-- class="radio" -->
         <van-radio-group v-model="radio" class="radio" :key="index">

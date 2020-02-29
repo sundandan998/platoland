@@ -269,6 +269,8 @@
 				padding-bottom: 20px;
 				padding-left: 20px;
 				display: inline-block;
+				width: 80%;
+				word-wrap: break-word;
 			}
 		}
 
