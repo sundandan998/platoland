@@ -15,7 +15,7 @@
 		<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
 			<div class="assets-detailed-list">
 				<van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
-					:error.sync="error" error-text="请求失败，点击重新加载">
+					:error.sync="error" :error-text="$t('m.load')">
 					<div v-for="item in listData" class="details-list">
 						<router-link :to="{name:'TransactionDetails',params:{id:item.id,order_type:item.order_type}}">
 							<!-- <mt-cell  is-link> -->
@@ -80,7 +80,7 @@
 			// 下拉刷新
 			onRefresh() {
 				setTimeout(() => {
-					this.$toast('刷新成功')
+					this.$toast('갱신성공')
 					this.isLoading = false
 				}, 500)
 			},

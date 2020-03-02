@@ -45,7 +45,7 @@
         let reg = /(^$)|(^[\u4E00-\u9FA5a-zA-Z0-9,，]{2,7}$)/
         if(!reg.test(this.params.nickname)){
           Toast({
-            message: '请填写正确昵称',
+            message: '정확한 닉네임을 입력하십시오',
             className: 'zZindex'
           })
         }

@@ -74,7 +74,7 @@
       transfer() {
         if (this.transferParams.email == '' || this.transferParams.amount == '') {
           Toast({
-            message: '接收人和转出数量不能为空',
+            message: '접수인과 전출 수량을 입력하십시오',
             className: 'zZindex'
           })
         } else {
@@ -118,7 +118,7 @@
         if (!email.test(this.transferParams.email) && !tel.test(this.transferParams.email)) {
           // this.status = 'error'
           Toast({
-            message: '请填写正确的手机号或邮箱地址',
+            message: '정확한 전화번호나 이메일 주소를 입력하십시오',
             className: 'zZindex'
           })
         } else {

@@ -24,7 +24,7 @@
     <!-- 下拉刷新 -->
     <!-- <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> -->
     <van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
-      :error.sync="error" error-text="请求失败，点击重新加载">
+      :error.sync="error" :error-text="$t('m.load')">
       <div class="order-list" v-for="item in orderList">
         <router-link :to="{name:'OrderDetail',params:{order_id: item.order_id}}">
           <img class="fr" src="../../../assets/images/right.svg" alt="">

@@ -17,7 +17,7 @@
       <!-- <p class="null-data" v-if="this.freezeData.length === 0">暂无数据</p> -->
       <!-- 上拉加载 -->
       <van-list v-model="loading" :finished="finished" :finished-text="$t('m.noMore')" @load="onLoad" :offset="100"
-        :error.sync="error" error-text="请求失败，点击重新加载">
+        :error.sync="error" :error-text="$t('m.load')">
         <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
@@ -52,7 +52,7 @@
                   <mt-progress v-if="item.is_undo==true" :value="item.amount" :bar-height="5"></mt-progress>
                 </p>
                 <p v-if="item.is_undo==true">已售出{{item.trade_amount}}</p>
-                <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
+                <p v-if="item.is_pay==true">{{$t('m.cancelAutomatically')}}</p>
               </div>
             </router-link>
             <div class="fr">
@@ -73,7 +73,7 @@
                   <mt-progress :value="item.amount" :bar-height="5" v-if="item.is_undo==true"></mt-progress>
                 </p>
                 <p v-if="item.is_undo==true">已买入：{{item.trade_amount|number}}</p>
-                <p v-if="item.is_pay==true">待支付订单在30分钟后自动取消</p>
+                <p v-if="item.is_pay==true">{{$t('m.cancelAutomatically')}}</p>
               </div>
             </router-link>
             <div class="fr">
@@ -193,10 +193,10 @@
       cancel(order_id, index) {
         // debugger
         this.$messagebox({
-          title: '温馨提示',
-          message: `确定撤销这笔已发布的广告？`,
-          confirmButtonText: '撤销发布',
-          cancelButtonText: '我再想想',
+          title: '알림',
+          message: `이미 발표된 광고를 삭제하시겠습니까?`,
+          confirmButtonText: '삭제',
+          cancelButtonText: '최소',
           showCancelButton: true
         }).then(action => {
           if (action == 'confirm') {

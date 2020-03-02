@@ -86,7 +86,7 @@
 					// title: '提示',
 					title:'알림',
 					// message: '确定要删除改地址吗?',
-					message: '确定要删除改地址吗?',
+					message: '변경된 주소를 삭제하시겠습니까?',
 					// cancelButtonText: '取消',
 					cancelButtonText: '취소',
 					// confirmButtonText: '确定',

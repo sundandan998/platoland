@@ -94,7 +94,7 @@
       buy() {
         if (this.infoData.token_code == this.detailToken.code) {
           this.$toast({
-            message: '不能购买自己发行的通证',
+            message: '자신이 발행한 토큰을 구매할 수 없습니다',
           })
         } else {
           this.$router.push({

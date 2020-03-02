@@ -360,10 +360,10 @@
       // 撤销
       cancel() {
         this.$messagebox({
-          title: '温馨提示',
-          message: `确定撤销这笔已发布的广告？`,
-          confirmButtonText: '撤销发布',
-          cancelButtonText: '我再想想',
+          title: '알림',
+          message: `이미 발표된 광고를 삭제하시겠습니까?`,
+          confirmButtonText: '삭제',
+          cancelButtonText: '최소',
           showCancelButton: true
         }).then(action => {
           if (action == 'confirm') {

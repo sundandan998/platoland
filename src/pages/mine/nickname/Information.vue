@@ -8,7 +8,7 @@
       </mt-header>
     </div>
     <div class="information-body">
-      <mt-cell :title="$t('m.nickName')" to="/editnickname" is-link v-if="this.infoData.nickname==null"> 暂未设置昵称</mt-cell>
+      <mt-cell :title="$t('m.nickName')" to="/editnickname" is-link v-if="this.infoData.nickname==null"> 닉네임을 아직 설정하지 않습니다</mt-cell>
       <mt-cell :title="$t('m.nickName')" to="/editnickname" is-link  v-if="this.infoData.nickname!=null">
         {{this.infoData.nickname}}</mt-cell>
     </div>

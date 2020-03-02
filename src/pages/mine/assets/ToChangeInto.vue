@@ -25,7 +25,7 @@
         :data-clipboard-text="this.detail.address" />
     </div>
     <div class="description">
-      <p>仅支持{{this.detail.token.code}}({{this.detail.token.nickname}}) 收款，请勿用于其他通证收款</p>
+      <p>{{$t('m.TransferIntoPromp')}}{{this.detail.token.code}}({{this.detail.token.nickname}}) {{$t('m.TransferIntoPromp1')}}，{{$t('m.TransferIntoPromp2')}}</p>
     </div>
   </div>
 </template>

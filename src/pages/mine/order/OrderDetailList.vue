@@ -136,10 +136,10 @@
           api.cancel({ order_id: this.orderData.order_id }).then(res => {
             if (res.code == 0) {
               this.$messagebox({
-                title: '温馨提示',
-                message: `确定撤销这笔已发布的广告？`,
-                cancelButtonText: '我再想想',
-                confirmButtonText: '撤销发布',
+                title: '알림',
+                message: `이미 발표된 광고를 삭제하시겠습니까?`,
+                cancelButtonText: '최소',
+                confirmButtonText: '삭제',
                 showCancelButton: true
               }).then(action => {
                 if (action == 'confirm') {

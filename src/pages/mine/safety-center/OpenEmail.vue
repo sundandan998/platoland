@@ -81,7 +81,7 @@
         var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
         if (!email.test(this.email.email)) {
           Toast({
-            message: '请填写正确的邮箱地址',
+            message: '정확한 이메일 주소를 입력하십시오',
             className: 'zZindex'
           })
         } 

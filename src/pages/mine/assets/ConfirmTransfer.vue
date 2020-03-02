@@ -3,12 +3,12 @@
     <div class="freeze-header">
       <mt-header fixed :title="$t('m.sureTransfer')">
         <!-- v-on:click="$router.go(-2)" -->
-        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-1)">{{$t('m.cancel')}}</mt-button>
+        <mt-button icon="back"  slot="left"  v-on:click="$router.go(-1)"></mt-button>{{$t('m.cancel')}}</mt-button>
       </mt-header>
     </div>
     <div class="confirm-transfer-notice">
       <van-notice-bar :scrollable="false">
-        请仔细核实交易信息,交易成功后资产无法撤回
+        {{$t('m.cannotWithdraw')}}
       </van-notice-bar>
     </div>
     <div class="confirm-transfer-info">
@@ -68,7 +68,7 @@
       }
     },
     created() {
-      document.title = '确认转让'
+      document.title = '전출 확인'
       this.freeze()
     },
     methods: {
@@ -86,7 +86,7 @@
         } else {
           this.$messagebox({
             title: '알림',
-            message: `请先设置支付密码再进行操作`,
+            message: `결제 비밀번호를 먼저 설정한 후에 조작하십시오`,
             cancelButtonText: '취소',
             confirmButtonText: '확인',
             showCancelButton: true
@@ -106,9 +106,9 @@
         if (this.$route.params.transferParams.out == true) {
           this.$messagebox({
             title: '알림',
-            message: `将转让至收款人千企商城账号是否继续?`,
+            message: `수취인 Qianqi Mall 계정으로의 이체가 계속됩니까？`,
             cancelButtonText: '취소',
-            confirmButtonText: '继续',
+            confirmButtonText: '다음',
             showCancelButton: true
           }).then(action => {
             if (action == 'confirm') {

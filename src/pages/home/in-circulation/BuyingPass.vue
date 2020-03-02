@@ -194,7 +194,7 @@
         } else {
           this.$messagebox({
             title: '알림',
-            message: `请先设置支付密码再进行操作`,
+            message: `결제 비밀번호를 먼저 설정한 후에 조작하십시오`,
             cancelButtonText: '취소',
             confirmButtonText: '확인',
             showCancelButton: true

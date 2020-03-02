@@ -115,9 +115,9 @@
       // 提示
       prompt() {
         this.$messagebox({
-          title: '分利率',
-          message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/360 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/360',
-          confirmButtonText: '我知道了',
+          title: '분리율',
+          message: '배당률은 분리바오에 전입한 1년 기한인 수익률을 말합니다.실제 획득한 수익 계산 공식: 자본금×배당률×투자일수/360. 예:A토큰은 분리바오에 표시된 배당률이 24%이고, 잠금기한이 30일입니다. 만약 10000위안(RMB)을 전입하면 수익=10000*24%*30/360입니다',
+          confirmButtonText: '알겠습니다',
         })
       },
       // 判断输入是否是整数
@@ -134,7 +134,7 @@
       num() {
         if (this.releaseParams.total_part < 100) {
           Toast({
-            message: '输入的份数大于100',
+            message: '입력한 수량이 100보다 큽니다',
             className: 'zZindex'
           })
         }
@@ -143,13 +143,13 @@
       limit() {
         if (this.releaseParams.high_part < this.releaseParams.total_part) {
           Toast({
-            message: '最多可购份数不得大于发行数量',
+            message: '최대 구매 수량은 발행 수량보다 크면 안 됩니다',
             className: 'zZindex'
           })
         }
         if (this.releaseParams.high_part < 0) {
           Toast({
-            message: '输入的份数大于0的数',
+            message: '0보다 큰 부수를 입력하십시오',
             className: 'zZindex'
           })
         }
@@ -157,7 +157,7 @@
       air() {
         if (!(this.releaseParams.air < 200 && this.releaseParams.air > 0)) {
           Toast({
-            message: '年化利率在0%~200%',
+            message: '연이율0%~200%',
             className: 'zZindex'
           })
           return false

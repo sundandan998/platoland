@@ -59,7 +59,7 @@
             {{detailData.code}} ({{detailData.nickname}})
             <!-- <p>{{subject.name}}</p> -->
           </span>
-          <span class="fr publicity" v-if="release.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+          <span class="fr publicity" v-if="release.status==0"><img src="../../../assets/images/gs.svg" alt="">{{$t('m.public')}}</span>
             <span class="fr issue" v-if="release.status==1"><img src="../../../assets/images/clock.svg" alt="">{{$t('m.processing')}}</span>
         </div>
         <div class="detail-issued-token-bot">

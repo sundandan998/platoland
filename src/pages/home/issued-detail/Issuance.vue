@@ -25,7 +25,7 @@
           <div class="current-release-token-top">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-            <span class="fr publicity" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+            <span class="fr publicity" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">{{$t('m.public')}}</span>
             <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">{{$t('m.processing')}}</span>
           </div>
           <div class="current-release-token-bot">
