@@ -141,6 +141,17 @@ export default new Router({
       name: 'Certificate',
       component: () => import("@/pages/mine/my-certificate/MyCertificate")
     },
+    {
+      path: '/tokenlist',
+      name: 'TokenList',
+      component: () => import("@/pages/mine/my-certificate/my-token/MyTokenList")
+    },
+    // 审核中
+    {
+      path: '/underreview',
+      name: 'UnderReview',
+      component: () => import("@/pages/mine/my-certificate/my-token/UnderReview")
+    },
     // 发布分利计划
     {
       path: '/release',
