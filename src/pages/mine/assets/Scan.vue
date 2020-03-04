@@ -134,7 +134,8 @@
         color: #000;
         width: 100%;
         position: fixed;
-        bottom: 5px;
+        bottom: 10px;
+        z-index: 1;
       }
     }
   }

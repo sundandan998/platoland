@@ -91,6 +91,7 @@
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  import { toast } from '@/assets/js/pub.js'
   export default {
     data() {
       return {
@@ -121,6 +122,7 @@
             this.$store.commit('detail', res.data)
           }
         }).catch(err => {
+          toast(err)
         })
       },
       // 分利列表

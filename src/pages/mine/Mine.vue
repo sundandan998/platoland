@@ -33,12 +33,13 @@
 								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
 							</mt-cell>
 						</div>
-						<div class="mine-safety mine-token" v-if="this.infoData.token_admin==true">
-							<router-link :to="{name:'Certificate',params:{code:this.infoData.token_code}}">
-								<mt-cell :title="$t('m.myToken')" is-link class="mine-cell-list">
-									<img slot="icon" src="../../assets/images/tz.svg" alt="" />
-								</mt-cell>
-							</router-link>
+						<!-- v-if="this.infoData.token_admin==true" -->
+						<div class="mine-safety mine-token"  @click="myToken">
+							<!-- <router-link :to="{name:'Certificate',params:{code:this.infoData.token_code}}"> -->
+							<mt-cell :title="$t('m.myToken')" is-link class="mine-cell-list">
+								<img slot="icon" src="../../assets/images/tz.svg" alt="" />
+							</mt-cell>
+							<!-- </router-link> -->
 						</div>
 						<div class="invite-people">
 							<mt-cell :title="$t('m.invite')" to="/invite" is-link class="mine-cell-list">
@@ -55,6 +56,7 @@
 <script>
 	import Tabber from './../../assets/pub/Tabber.vue'
 	import api from "@/api/user/User.js"
+	import { toast } from '@/assets/js/pub.js'
 	export default {
 		data() {
 			return {
@@ -83,6 +85,48 @@
 					console.log(err)
 				})
 			},
+			myToken() {
+				// 判断是否认证过通证，如果没有认证过，判断时候有过申请
+				if (this.infoData.token_code == null) {
+					api.certification().then(res => {
+						// this.
+						if (res.data == null) {
+							this.$router.push({
+								name: 'TokenList'
+							})
+						} else if (res.data.order_status == 0) {
+							this.$eouter.push({
+								name: 'CertificationToken'
+							})
+						} else if (res.data.order_status == 1) {
+							this.$router.push({
+								name: 'UnderReview',
+								params:{token:res.data.token}
+							})
+						} else if (res.data.order_status == 2) {
+							this.$router.push({
+								name: 'Certificate',
+								params: {
+									code: this.infoData.token_code
+								}
+							})
+						} else if (res.data.order_status == 3) {
+							this.$router.push({
+								name: 'Failed',
+							})
+						}
+					}).catch(err => {
+						toast(err)
+					})
+				} else {
+					this.$router.push({
+						name: 'Certificate',
+						params: {
+							code: this.infoData.token_code
+						}
+					})
+				}
+			}
 		},
 	}
 </script>

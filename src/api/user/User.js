@@ -232,5 +232,13 @@ export default {
       data: params
     })
   },
-
+  // 获取用户的通证认证申请
+  
+  certification(params={}){
+    return request({
+      url: "/token/authentication/",
+      method: "get",
+      params: params
+    })
+  },
 }

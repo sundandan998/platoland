@@ -121,4 +121,20 @@ export default {
             data: params
         })
     },
+    // 提交通证认证申请
+    Apply(params = {}) {
+        return request({
+            url: "/token/" + params.code + "/authentication/apply/",
+            method: "post",
+            data: params
+        })
+    },
+    // 确认通证认证申请
+    confirmApply(params = {}) {
+        return request({
+            url: "/token/" + params.order_id + "/authentication/confirm/",
+            method: "post",
+            data: params
+        })
+    },
 }

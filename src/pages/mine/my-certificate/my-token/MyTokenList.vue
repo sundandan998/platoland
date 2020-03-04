@@ -9,33 +9,63 @@
     <div class="token-list" v-for="item in listData">
       <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
-        <mt-switch v-model="value"></mt-switch>
+        <mt-switch @change="turn(item,value)" v-model="item.value"></mt-switch>
       </mt-cell>
     </div>
     <div class="token-list-button">
-        <mt-button size="large" type="primary" :disabled="disabled">提交审核</mt-button>
+      <mt-button size="large" type="primary" :disabled="disabled" @click.native="submit">提交审核</mt-button>
     </div>
   </div>
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  import { toast } from '@/assets/js/pub.js'
   export default {
     data() {
       return {
         listData: '',
-        value:false,
-        disabled:true,
+        value: false,
+        disabled: true,
+        listData: '',
+        applyParams: {
+          code: ''
+        }
       }
     },
     created() {
       this.list()
     },
     methods: {
+      // 列表
       list() {
-        api.tokenList().then(res => {
+        api.tokenList({ has_admin: false }).then(res => {
           this.listData = res.data
+          // console.log(this.listData[0])
         }).catch(err => {
 
+        })
+      },
+      turn(item, value) {
+        this.applyParams.code = item.code
+        // console.log(this.value)
+        this.value=!this.value
+        if(item.value==true){
+          this.disabled=false
+        }else{
+          this.disabled=true
+        }
+      },
+      // 提交按钮
+      submit() {
+        api.Apply(this.applyParams).then(res => {
+          if(res.code==0){
+            this.$router.push({
+              name:'CertificationToken',
+              params:{order_id:res.data.order_id}
+            })
+          }
+        }).catch(err => {
+          toast(err)
         })
       }
     }
@@ -43,21 +73,24 @@
 </script>
 <style lang="scss">
   @import '../../../../assets/scss/global';
-  .my-token{
-    .select-token{
+
+  .my-token {
+    .select-token {
       background-color: #fff;
       height: 60px;
-      line-height:60px;
+      line-height: 60px;
       padding-left: 24px;
     }
-    .token-list{
-      .mint-cell-label{
+
+    .token-list {
+      .mint-cell-label {
         padding-bottom: 10px;
       }
     }
-    .token-list-button{
+
+    .token-list-button {
       position: fixed;
-      bottom:10px;
+      bottom: 10px;
       width: 100%;
     }
   }

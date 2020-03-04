@@ -1,27 +1,28 @@
 <template>
-  <div class="under-review">
+  <div class="failed">
     <div class="token-header header">
       <mt-header fixed :title="$t('m.myToken')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <div class="under-review-body">
-      <img src="../../../../assets/images/review.svg" alt="">
-      <p>审核中</p>
-      <p class="time">平台将在1-2个工作日内完成认证审核</p>
-      <span class="tel tag-read"  @click="copy"  data-clipboard-text="kefu@paltoland.com">有疑问？联系我们:kefu@paltoland.com
+    <div class="failed-body">
+      <img src="../../../../assets/images/failed.svg" alt="">
+      <p>认证未通过</p>
+      <!-- <p class="tel">有疑问？联系我们:kefu@paltoland.com</p> -->
+      <span class="tel tag-read" @click="copy" data-clipboard-text="kefu@paltoland.com">有疑问？联系我们:kefu@paltoland.com
         <img src="../../../../assets/images/copy.svg" alt="" class="fr">
       </span>
     </div>
-    <div class="under-review-time">
-      <mt-cell title="申请时间">{{this.$route.params.time}}</mt-cell>
-      <mt-cell title="认证通证" class="under-review-token">
-        <img :src="this.$route.params.token.icon" alt="">
-        <span class="under-review-text">
-          <p>{{this.$route.params.token.code}} ({{this.$route.params.token.nickname}})</p>
-          <p>{{this.$route.params.token.subject}}</p>
-        </span>
-      </mt-cell>
+    <p class="reason">原因</p>
+    <div class="failed-reason">
+      <p>转出地址与线下签约填写地址不一致</p>
+      <p>该转出地址已被认证</p>
+      <p> 未查询到该转出地址</p>
+    </div>
+    <div class="failed-button">
+      <router-link to="/tokenlist">
+        <mt-button size="large" type="primary">重新认证</mt-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -60,17 +61,17 @@
 <style lang="scss">
   @import '../../../../assets/scss/global';
 
-  .under-review {
+  .failed {
     width: 100%;
     height: 100%;
     background-color: #fff;
     position: fixed;
 
-    .mint-header.is-fixed {
-      border-bottom: 1px solid #f2f2f2;
+    p {
+      font-size: 28px;
     }
 
-    .under-review-body {
+    .failed-body {
       margin-top: 160px;
 
       img {
@@ -81,12 +82,7 @@
 
       p {
         text-align: center;
-        margin: 40px 0;
-      }
-
-      .time {
-        color: #999;
-        font-size: 28px;
+        margin-bottom: 40px;
       }
 
       .tel {
@@ -105,18 +101,20 @@
       }
     }
 
-    .under-review-time {
-      margin-top: 40px;
-      .under-review-token {
-        img {
-          width: 40px;
-          margin-right: 10px;
-        }
+    .reason {
+      margin-left: 24px;
+    }
 
-        .under-review-text {
-          font-size: 24px;
-        }
-      }
+    .failed-reason {
+      margin-left: 50px;
+      color: #999;
+      margin-top: 10px;
+    }
+
+    .failed-button {
+      position: fixed;
+      width: 100%;
+      bottom: 10px;
     }
   }
 </style>

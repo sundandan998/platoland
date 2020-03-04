@@ -141,6 +141,7 @@ export default new Router({
       name: 'Certificate',
       component: () => import("@/pages/mine/my-certificate/MyCertificate")
     },
+    // 通证列表
     {
       path: '/tokenlist',
       name: 'TokenList',
@@ -151,6 +152,18 @@ export default new Router({
       path: '/underreview',
       name: 'UnderReview',
       component: () => import("@/pages/mine/my-certificate/my-token/UnderReview")
+    },
+    // 认证未通过
+    {
+      path: '/failed',
+      name: 'Failed',
+      component: () => import("@/pages/mine/my-certificate/my-token/CertificationFailed")
+    },
+    // 通证认证
+    {
+      path: '/CertificationToken',
+      name: 'CertificationToken',
+      component: () => import("@/pages/mine/my-certificate/my-token/CertificationToken")
     },
     // 发布分利计划
     {
