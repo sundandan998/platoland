@@ -127,11 +127,12 @@
       bottom: 0;
       text-align: center;
       color: #333;
+      background-color: #000;
     }
     .scan-button {
       button {
-        background-color: #fff;
-        color: #000;
+        background-color: #036EB8;
+        color: #fff;
         width: 100%;
         position: fixed;
         bottom: 5px;
