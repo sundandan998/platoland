@@ -77,7 +77,7 @@
       </div>
     </div>
     <!-- 市场交易 -->
-    <div class="home-market-transaction">
+    <div class="home-market-transaction"  v-if="this.market.length>0">
       <router-link :to="{name:'Deal'}">
         <p class="home-pub-title">{{$t('m.marketPlace')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>

@@ -17,7 +17,7 @@
     <!-- </router-link> -->
     <div class="remaining-days">
       <img src="../../../assets/images/note.svg" alt="">
-      <span> {{$t('m.endDays')}}{{flbData.freeze_days}}{{$t('m.day')}}</span>
+      <span> {{$t('m.endDays')}}{{flbData.deadline_date-this.times}}{{$t('m.day')}}</span>
     </div>
     <div class="transfer-token-days">
       <div class="transfer-token-days-top">
@@ -29,11 +29,13 @@
         </div>
         <img src="../../../assets/images/prompt.svg" alt="" @click="duration" class="duration">
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>{{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
+          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>
+              {{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
         </div>
       </div>
       <div class="token-progress">
-        <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)" :bar-height="7"></mt-progress>
+        <mt-progress :value="(flbData.sold_amount/flbData.step_amount)/(flbData.total_amount/flbData.step_amount)"
+          :bar-height="7"></mt-progress>
       </div>
       <b>{{$t('m.transfersIn')}}{{flbData.sold_amount/flbData.step_amount}}</b>
       <mt-cell :title="$t('m.perServing')" value="">{{flbData.step_amount}} {{flToken.code}}/{{$t('m.share')}}</mt-cell>
@@ -47,7 +49,8 @@
         v-model="transferParams.part">{{$t('m.share')}}</mt-field>
       <div class="transfer-num-amount fl">
         <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
-        <span>{{$t('m.dividendMaturity')}} {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+        <span>{{$t('m.dividendMaturity')}}
+          {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">
@@ -57,7 +60,8 @@
       </div>
     </div>
     <div class="release-button">
-      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">{{$t('m.sureTransfer')}}</van-button>
+      <van-button type="primary" size="large" @click.native="transfer" :disabled="disabled">{{$t('m.sureTransfer')}}
+      </van-button>
     </div>
     <!-- 数字键盘 -->
     <div>
@@ -86,6 +90,7 @@
         flToken: '',
         balanceData: '',
         disabled: true,
+        times:'',
         transferParams: {
           pk: this.$route.params.id,
           part: '',
@@ -96,9 +101,22 @@
     created() {
       this.flbDetail()
       this.balance()
-      // console.log(this.detail.token.code)
+      this.dateFormat()
     },
     methods: {
+      dateFormat() {
+        var date = new Date()
+        var year = date.getFullYear()
+        /* 在日期格式中，月份是从0开始的，因此要加0
+         * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+         * */
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
+        var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
+        // 拼接
+        this.times = year + "-" + month + "-" + day
+        console.log(this.times)
+        // return this.times
+      },
       onInput(key) {
         this.value = (this.value + key).slice(0, 6)
       },
@@ -124,6 +142,9 @@
         api.flDetail({ id: this.$route.params.id }).then(res => {
           if (res.code == 0) {
             this.flbData = res.data
+            // console.log(this.flbData.deadline_date)
+            this.we = this.flbData.deadline_date
+            console.log(this.we-this.times)
             this.flToken = res.data.token
             this.$store.commit('detail', res.data)
           }
@@ -148,7 +169,7 @@
       },
       // 可用
       balance() {
-        api.balance({token_code:this.detail.token.code}).then(res => {
+        api.balance({ token_code: this.detail.token.code }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
           }

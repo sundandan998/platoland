@@ -66,16 +66,9 @@
 		<!-- 添加备注 -->
 		<!-- v-model="message" -->
 		<div class="leave-message">
-				<van-field
-					rows="2"
-					autosize
-					type="textarea"
-					maxlength="50"
-					:placeholder="$t('m.addNotes')"
-					show-word-limit
-					v-model="releaseData.remark"
-				/>
-			</div>
+			<van-field rows="2" autosize type="textarea" maxlength="50" :placeholder="$t('m.addNotes')" show-word-limit
+				v-model="releaseData.remark" />
+		</div>
 		<div class="purchase-pass-btn">
 			<mt-button size="large" :disabled="disabled" type="primary" @click="release">{{$t('m.release')}}</mt-button>
 		</div>
@@ -84,7 +77,7 @@
 			<van-popup class="popupbox" position="bottom" v-model="popupVisible">
 				<!-- 数字键盘表头 -->
 				<span v-if="payTitle"
-					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.detailData.denominated_assets}})
+					class="paymentamount">{{releaseData.amount * releaseData.price }}&nbsp;({{this.$route.params.denominated_assets}})
 				</span>
 				<!-- 数字键盘表头 -->
 				<span v-else class="paymentamount">{{releaseData.amount}} &nbsp;({{this.detail.token.code}})</span>
@@ -117,7 +110,7 @@
 				popupVisible: false,
 				balData: '',
 				detailData: '',
-				// 获取资产余额参数
+				// // 获取资产余额参数
 				balanceData: {
 					token_code: ''
 				},
@@ -129,7 +122,7 @@
 					price: '',
 					low_number: '',
 					high_number: '',
-					remark:'',
+					remark: '',
 				},
 				// 确认支付参数
 				confirm: {
@@ -140,8 +133,8 @@
 			}
 		},
 		created() {
-			this.index(1, '111')
-			// this.$route.params.code
+			this.balance()
+			console.log(this.$route.params.denominated_assets)
 		},
 		methods: {
 			onInput(key) {
@@ -150,40 +143,15 @@
 			onDelete() {
 				this.value = this.value.slice(0, this.value.length - 1);
 			},
-			// tab切换
-			index(index, title) {
-				if (index == 0) {
-					this.releaseData.publish_type = 0
-					// 是否显示手续费
-					this.hide = false
-					// 数字键盘表头
-					this.payTitle = true
-					// 当发布是购买的时候，可用部分是计价资产
-					// this.balanceData.token_code = this.detail.release.denominated_assets
-					this.balanceData.token_code = this.detail.token.code
-					this.balance()
-				} else {
-					if (index == 1) {
-						this.releaseData.publish_type = 1
-						// 是否显示手续费
-						this.hide = true
-						// 数字键盘表头
-						this.payTitle = false
-						// 当发布是出售的时候，可用部分是pld和ld
-						this.balanceData.token_code = this.detail.token.code
-						this.balance()
-					}
-				}
-			},
 			// 获取资产余额
 			balance() {
-				api.balance(this.balanceData).then(res => {
+				api.balance({token_code:this.$route.params.code}).then(res => {
 					this.balData = res.data
 				}).catch(err => {
 					if (err.code == 4003) {
 						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
 					} else {
-						toast(err)
+						// toast(err)
 					}
 				})
 			},
@@ -240,6 +208,7 @@
 			},
 			// tab切换
 			index(index, title) {
+				console.log(index)
 				if (index == 0) {
 					this.releaseData.publish_type = 0
 					// 是否显示手续费
@@ -248,6 +217,7 @@
 					this.payTitle = true
 					// 当发布是购买的时候，可用部分是计价资产
 					this.balanceData.token_code = this.detailData.denominated_assets
+					// this.balanceData.token_code = this.$route.params.denominated_assets
 					this.balance()
 				} else {
 					if (index == 1) {
@@ -262,19 +232,7 @@
 					}
 				}
 			},
-			// 获取资产余额
-			balance() {
-				// debu
-				api.balance(this.balanceData).then(res => {
-					this.balData = res.data
-				}).catch(err => {
-					if (err.code == 4003) {
-						this.balData = { 'available_amount': '0', 'freeze_amount': '0', 'id': null }
-					} else {
-						// toast(err)
-					}
-				})
-			},
+
 		},
 		watch: {
 			value() {
@@ -342,11 +300,13 @@
 		.purchase-pass-btn {
 			margin-top: 20px;
 		}
-		.leave-message{
+
+		.leave-message {
 			height: 200px;
 		}
-		.mint-cell:last-child{
-		 background-image:none !important;
+
+		.mint-cell:last-child {
+			background-image: none !important;
 		}
 	}
 </style>

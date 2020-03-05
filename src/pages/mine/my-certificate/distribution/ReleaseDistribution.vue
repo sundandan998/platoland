@@ -19,7 +19,7 @@
       <mt-field :label="$t('m.perServing')" :placeholder="$t('m.integer')" v-model="releaseParams.step_amount" @blur.native.capture="integer">
       </mt-field>
       <mt-field :label="$t('m.freezeDuration')" :placeholder="$t('m.freezeDuration')+'>'" readonly @click.native="showPicker = true"
-        v-model="releaseParams.freeze_days">
+        v-model="releaseParams.freeze_days">天
       </mt-field>
       <van-popup v-model="showPicker" position="bottom">
         <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />

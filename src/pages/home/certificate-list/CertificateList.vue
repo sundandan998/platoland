@@ -1,13 +1,14 @@
 <template>
   <div class="certificate-list">
     <div class="certificate-list-header">
-      <mt-header fixed :title="$t('m.tokenDaQuan')">
+      <mt-header fixed title="添加资产">
         <!-- v-on:click="$router.go(-1) -->
         <!-- @click="back" -->
         <mt-button slot="left" icon="back" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
-    <div class="certificate-list-card" v-for="(item, index) in assetsData" v-if="item.subject!=null">
+    <!-- v-if="item.subject!=null" -->
+    <div class="certificate-list-card" v-for="(item, index) in assetsData" >
       <!-- <router-link :to="{name:'Detail', params: {code:item.code}}"> -->
       <router-link :to="/detail/+item.code">
         <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">

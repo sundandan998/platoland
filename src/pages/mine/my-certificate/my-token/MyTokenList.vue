@@ -6,7 +6,7 @@
       </mt-header>
     </div>
     <p class="select-token">选择您要认证的通证</p>
-    <div class="token-list" v-for="item in listData">
+    <div class="token-list" v-for="(item,index) in listData">
       <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
         <mt-switch @change="turn(item,value)" v-model="item.value"></mt-switch>
@@ -40,14 +40,15 @@
       list() {
         api.tokenList({ has_admin: false }).then(res => {
           this.listData = res.data
-          // console.log(this.listData[0])
         }).catch(err => {
 
         })
       },
       turn(item, value) {
+        // console.log(item.id)
+        if(item.id){
+        }
         this.applyParams.code = item.code
-        // console.log(this.value)
         this.value=!this.value
         if(item.value==true){
           this.disabled=false
@@ -59,9 +60,11 @@
       submit() {
         api.Apply(this.applyParams).then(res => {
           if(res.code==0){
+            console.log(res.data.user_address)
             this.$router.push({
               name:'CertificationToken',
-              params:{order_id:res.data.order_id}
+              // c
+              params:{order_id:res.data.order_id,token:res.data.token,address:res.data.user_address}
             })
           }
         }).catch(err => {

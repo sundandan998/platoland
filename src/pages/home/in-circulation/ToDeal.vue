@@ -110,6 +110,7 @@
       },
       //  tab栏展示
       index(index, title) {
+        console.log(index)
         if (index == 0) {
           this.dealData.publish_type = 0
           this.dealList()

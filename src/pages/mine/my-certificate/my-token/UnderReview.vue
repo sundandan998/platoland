@@ -2,7 +2,8 @@
   <div class="under-review">
     <div class="token-header header">
       <mt-header fixed :title="$t('m.myToken')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <!-- v-on:click="$router.go(-1) -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="under-review-body">
@@ -36,6 +37,11 @@
     created() {
     },
     methods: {
+      back(){
+        this.$router.push({
+          name:'Mine'
+        })
+      },
       //复制
       copy() {
         var clipboard = new Clipboard('.tag-read')
