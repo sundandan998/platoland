@@ -267,6 +267,9 @@
             api.delAsset(this.delasset).then(res => {
               if (res.code == 0) {
                 toast(res)
+                this.$router.push({
+                  name:'Assets'
+                })
               }
             }).catch(err => {
               if (err.code != 0) {

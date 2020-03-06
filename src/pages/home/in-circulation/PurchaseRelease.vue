@@ -2,7 +2,8 @@
 	<div class="release">
 		<div class="purchase-pass-header header">
 			<mt-header fixed :title="$t('m.release')">
-				<mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+				<!-- v-on:click="$router.go(-1)" -->
+				<mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
 			</mt-header>
 		</div>
 		<div class="purchase-pass-buy-assets">
@@ -134,9 +135,15 @@
 		},
 		created() {
 			this.balance()
-			console.log(this.$route.params.denominated_assets)
+			console.log(this.$route.params.code)
 		},
 		methods: {
+			back() {
+				this.$router.push({
+					name: 'Deal',
+					params: { code: this.$route.params.code }
+				})
+			},
 			onInput(key) {
 				this.value = (this.value + key).slice(0, 6);
 			},
@@ -145,7 +152,7 @@
 			},
 			// 获取资产余额
 			balance() {
-				api.balance({token_code:this.$route.params.code}).then(res => {
+				api.balance({ token_code: this.$route.params.code }).then(res => {
 					this.balData = res.data
 				}).catch(err => {
 					if (err.code == 4003) {
@@ -243,7 +250,8 @@
 						if (res.code == 0) {
 							toast(res)
 							this.$router.push({
-								name: 'Deal'
+								name: 'Deal',
+								params: { code: this.$route.params.code }
 							})
 						}
 					}).catch(err => {

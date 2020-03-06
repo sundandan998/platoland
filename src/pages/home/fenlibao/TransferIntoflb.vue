@@ -17,7 +17,7 @@
     <!-- </router-link> -->
     <div class="remaining-days">
       <img src="../../../assets/images/note.svg" alt="">
-      <span> {{$t('m.endDays')}}{{flbData.deadline_date-this.times}}{{$t('m.day')}}</span>
+      <span> {{$t('m.endDays')}}{{this.days}}{{$t('m.day')}}</span>
     </div>
     <div class="transfer-token-days">
       <div class="transfer-token-days-top">
@@ -45,8 +45,9 @@
     </div>
     <!-- 转入数量 -->
     <div class="transfer-num">
-      <mt-field @blur.native.capture="maxnum" :placeholder="flbData.min_amount+'~'+flbData.high_amount"
-        v-model="transferParams.part">{{$t('m.share')}}</mt-field>
+      <!-- @blur.native.capture="maxnum" -->
+      <mt-field :placeholder="flbData.min_amount+'~'+flbData.high_amount" v-model="transferParams.part">
+        {{$t('m.share')}}</mt-field>
       <div class="transfer-num-amount fl">
         <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
         <span>{{$t('m.dividendMaturity')}}
@@ -66,7 +67,7 @@
     <!-- 数字键盘 -->
     <div>
       <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-        <span class="paymentamount">{{transferParams.part}}&nbsp;({{flToken.code}})</span>
+        <span class="paymentamount">{{transferParams.part*flbData.step_amount}}&nbsp;({{flToken.code}})</span>
         <van-password-input :value="value" @focus="showKeyboard = true" />
         <!-- 数字键盘 -->
         <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
@@ -90,7 +91,10 @@
         flToken: '',
         balanceData: '',
         disabled: true,
-        times:'',
+        times: '',
+        date: '',
+        we: '',
+        days: '',
         transferParams: {
           pk: this.$route.params.id,
           part: '',
@@ -102,20 +106,16 @@
       this.flbDetail()
       this.balance()
       this.dateFormat()
+      // console.log(this.times)
     },
     methods: {
       dateFormat() {
         var date = new Date()
         var year = date.getFullYear()
-        /* 在日期格式中，月份是从0开始的，因此要加0
-         * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
-         * */
         var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
         var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
         // 拼接
         this.times = year + "-" + month + "-" + day
-        console.log(this.times)
-        // return this.times
       },
       onInput(key) {
         this.value = (this.value + key).slice(0, 6)
@@ -139,12 +139,13 @@
         }
       },
       flbDetail() {
+        // debugger
         api.flDetail({ id: this.$route.params.id }).then(res => {
           if (res.code == 0) {
             this.flbData = res.data
-            // console.log(this.flbData.deadline_date)
-            this.we = this.flbData.deadline_date
-            console.log(this.we-this.times)
+            this.we = Date.parse(this.flbData.deadline_date)
+            this.date = Date.parse(this.times)
+            this.days = ((this.we - this.date) / (24 * 60 * 60 * 1000))
             this.flToken = res.data.token
             this.$store.commit('detail', res.data)
           }
@@ -177,17 +178,17 @@
         })
       },
       // 最多转入
-      maxnum() {
-        if (this.transferParams.part > this.flbData.high_amount || this.transferParams.part < this.flbData.min_amount) {
-          Toast({
-            message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
-            className: 'zZindex'
-          })
-          this.disabled = true
-        } else {
-          this.disabled = false
-        }
-      }
+      // maxnum() {
+      //   if (this.transferParams.part > this.flbData.high_amount || this.transferParams.part < this.flbData.min_amount) {
+      //     Toast({
+      //       message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
+      //       className: 'zZindex'
+      //     })
+      //     this.disabled = true
+      //   } else {
+      //     this.disabled = false
+      //   }
+      // }
     },
     watch: {
       value() {
@@ -209,7 +210,22 @@
           this.value = ''
           this.popupVisible = false
         }
-      }
+      },
+      transferParams: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          if (val.part!=''&& (val.part < this.flbData.high_amount || val.part > this.flbData.min_amount)) {
+            Toast({
+              message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
+              className: 'zZindex'
+            })
+            this.disabled = false
+          } else {
+            this.disabled = true
+          }
+        }
+      },
     },
     computed: {
       ...mapGetters([

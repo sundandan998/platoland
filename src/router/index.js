@@ -171,6 +171,7 @@ export default new Router({
       name: 'Release',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseDistribution")
     },
+
     // 发布详情
     {
       path: '/releasedetail/:id',
@@ -182,6 +183,12 @@ export default new Router({
       path: '/releasehistory',
       name: 'ReleaseHistory',
       component: () => import("@/pages/mine/my-certificate/distribution/ReleaseHistory")
+    },
+    // 从我的通证进-发布分利计划
+    {
+      path: '/releasetoken',
+      name: 'ReleaseToken',
+      component: () => import("@/pages/mine/my-certificate/distribution/ReleaseHistoryToken")
     },
     // 探索
     {

@@ -6,11 +6,12 @@
       </mt-header>
     </div>
     <div class="editnickname-body">
-      <mt-field :placeholder="$t('m.EnterNickname')" v-model="params.nickname" @blur.native.capture="check"></mt-field>
+      <!-- @blur.native.capture="check" -->
+      <mt-field :placeholder="$t('m.EnterNickname')" v-model="params.nickname"></mt-field>
       <p>{{$t('m.checkNickname')}}</p>
     </div>
     <div class="editnickname-button" @click="save">
-      <mt-button type="primary" size="large">{{$t('m.save')}}</mt-button>
+      <mt-button type="primary" size="large" :disabled="disabled">{{$t('m.save')}}</mt-button>
     </div>
   </div>
 </template>
@@ -20,34 +21,43 @@
   export default {
     data() {
       return {
-        name:'',
-        params:{
-          nickname:''
+        name: '',
+        disabled: true,
+        params: {
+          nickname: ''
         }
       }
     },
-    created () {},
-    methods:{
+    created() { },
+    methods: {
       // 昵称
-      save(){
-        api.nickname(this.params).then(res=>{
+      save() {
+        api.nickname(this.params).then(res => {
           this.name = res.data
           this.$router.push({
-            name:'Information',
-            params:{nickname:this.name.nickname}
+            name: 'Information',
+            params: { nickname: this.name.nickname }
           })
-        }).catch(err=>{
-
+        }).catch(err => {
+          
         })
       },
-      // 校验
-      check(){
-        let reg = /(^$)|(^[\u4E00-\u9FA5a-zA-Z0-9,，]{2,7}$)/
-        if(!reg.test(this.params.nickname)){
-          Toast({
-            message: '请填写正确昵称',
-            className: 'zZindex'
-          })
+    },
+    watch: {
+      params: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          let reg = /(^$)|(^[\u4E00-\u9FA5a-zA-Z0-9,]{2,7}$)/
+          if (!reg.test(val.nickname) && val.nickname != '') {
+            this.disabled = true
+            Toast({
+              message: '请填写正确昵称',
+              className: 'zZindex'
+            })
+          } else {
+            this.disabled = false
+          }
         }
       }
     }

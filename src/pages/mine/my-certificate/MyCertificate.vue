@@ -1,7 +1,7 @@
 <template>
   <div class="token">
     <div class="token-header header">
-  <mt-header fixed  :title="$t('m.myToken')">
+      <mt-header fixed :title="$t('m.myToken')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
@@ -25,13 +25,15 @@
       </router-link>
     </div>
     <!-- 最近发行 -->
-    <!-- <div class="token-recently-released">
-      <mt-cell title="最近发行" to="" is-link>全部 </mt-cell>
+    <div class="token-recently-released">
+      <mt-cell title="最近发行" to=""></mt-cell>
       <div class="no-records">
         <p>暂无发行记录</p>
-        <van-button  type="primary" class="button">去 发 行</van-button>
+        <router-link :to="{name:'Token',params:{code:this.balancetoken.code,icon:this.balancetoken.icon}}">
+          <van-button type="primary" class="button">去 发 行</van-button>
+        </router-link>
       </div>
-      <div class="home-pub-token">
+      <!-- <div class="home-pub-token">
         <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
         <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
         <span class="token-days fr">已发行20天</span>
@@ -49,13 +51,13 @@
           <p>已售1份</p>
           <p class="fr">共2份</p>
         </div>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
       <!-- <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}"> -->
-      <router-link :to="{name:'ReleaseHistory'}">
-        <mt-cell  :title="$t('m.distributionPlan')" is-link>{{$t('m.all')}} </mt-cell>
+      <router-link :to="{name:'ReleaseToken'}">
+        <mt-cell :title="$t('m.distributionPlan')"></mt-cell>
       </router-link>
       <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">

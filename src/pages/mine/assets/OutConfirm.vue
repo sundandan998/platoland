@@ -9,11 +9,13 @@
       <span>请仔细核实转出信息,转出成功后资产无法返还</span>
     </div>
     <div class="payment">
-      <mt-cell title="付款给" :value="this.detail.address"></mt-cell>
+      <p><span class="fl payment-to">付款给</span> <span class="fr"><span>{{this.$route.params.name}}</span>
+          <p>{{this.detail.address}}</p>
+        </span></p>
     </div>
     <div class="expenditure">
-      <mt-cell title="总支出" >{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
-          ({{this.detail.token.code}})</mt-cell>
+      <mt-cell title="总支出">{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
+        ({{this.detail.token.code}})</mt-cell>
       <div class="expenditure-detail">
         <p><span>转出数量</span><span class="fr">{{this.$route.params.amount}}{{this.detail.token.code}}</span></p>
         <p><span>手续费</span><span class="fr">{{this.detail.token.fee|number}}{{this.detail.token.code}}</span></p>
@@ -24,15 +26,15 @@
     </div>
     <!-- 数字键盘 -->
     <div>
-        <van-popup class="popupbox" position="bottom" v-model="popupVisible">
-          <span class="paymentamount">{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
-            {{this.detail.token.code}}</span>
-          <van-password-input :value="value" @focus="showKeyboard = true" />
-          <!-- 数字键盘 -->
-          <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
-            @blur="showKeyboard = false" />
-        </van-popup>
-      </div>
+      <van-popup class="popupbox" position="bottom" v-model="popupVisible">
+        <span class="paymentamount">{{Number(this.$route.params.amount)+Number(this.detail.token.fee)}}
+          {{this.detail.token.code}}</span>
+        <van-password-input :value="value" @focus="showKeyboard = true" />
+        <!-- 数字键盘 -->
+        <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" delete-button-text="Delete"
+          @blur="showKeyboard = false" />
+      </van-popup>
+    </div>
   </div>
 </template>
 <script>
@@ -110,7 +112,7 @@
               toast(res)
               this.$router.push({
                 name: 'OrderDetail',
-                params: { order_id: res.order_id,path:'confirm'}
+                params: { order_id: res.order_id, path: 'confirm' }
               })
               // window.history.go(-1)
             }
@@ -142,7 +144,18 @@
         margin-top: -10px;
       }
     }
-
+      
+    .payment{
+      height: 90px;
+      background-color: #fff;
+      .payment-to{
+        line-height: 90px;
+        margin-left: 50px;
+      }
+      .fr{
+        padding:10px;
+      }
+    }
     .expenditure-detail {
       background-color: #fff;
       overflow: hidden;

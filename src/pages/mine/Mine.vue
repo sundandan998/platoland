@@ -34,11 +34,12 @@
 							</mt-cell>
 						</div>
 						<!-- v-if="this.infoData.token_admin==true" -->
-						<div class="mine-safety mine-token" @click="myToken">
+						<!-- @click="myToken" -->
+						<div class="mine-safety mine-token"@click="myToken">
 							<!-- <router-link :to="{name:'Certificate',params:{code:this.infoData.token_code}}"> -->
-							<mt-cell :title="$t('m.myToken')" is-link class="mine-cell-list">
-								<img slot="icon" src="../../assets/images/tz.svg" alt="" />
-							</mt-cell>
+								<mt-cell :title="$t('m.myToken')" is-link class="mine-cell-list">
+									<img slot="icon" src="../../assets/images/tz.svg" alt="" />
+								</mt-cell>
 							<!-- </router-link> -->
 						</div>
 						<div class="invite-people">
@@ -104,7 +105,7 @@
 						} else if (res.data.order_status == 1) {
 							this.$router.push({
 								name: 'UnderReview',
-								params: { token: res.data.token,time:res.data.create_time }
+								params: { token: res.data.token, time: res.data.create_time }
 							})
 						} else if (res.data.order_status == 2) {
 							this.$router.push({

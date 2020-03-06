@@ -3,8 +3,9 @@
     <div class="release-header">
       <mt-header fixed :title="detail.token.code+$t('m.distributionPlan')">
         <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button slot="right" @click.native="release"> <img src="../../../../assets/images/release.svg" alt=""> {{$t('m.release')}}
-        </mt-button>
+        <!-- <mt-button slot="right" @click.native="release"> <img src="../../../../assets/images/release.svg" alt="">
+          {{$t('m.release')}}
+        </mt-button> -->
       </mt-header>
     </div>
     <div class="home-pub-token">
@@ -15,37 +16,42 @@
     </div>
     <div class="release-detail-num" v-for="item in listData">
       <router-link :to="/releasedetail/+item.id">
-      <p>{{item.air|number}}%</p>
-      <div class="release-detail-text">
-        <div class="release-detail-text-left fl">
-          <span class="fl"><img src="../../../../assets/images/geton.svg" alt="" class="img-status">{{item.status}}</span><span class="fr"><img src="../../../../assets/images/lock.svg" alt="">{{item.freeze_days}}{{$t('m.day')}}</span>
-        </div>
-        <div class="release-detail-text-right fr">
+        <p>{{item.air|number}}%</p>
+        <div class="release-detail-text">
+          <div class="release-detail-text-left fl">
+            <span class="fl"><img src="../../../../assets/images/geton.svg" alt=""
+                class="img-status">{{item.status}}</span><span class="fr"><img src="../../../../assets/images/lock.svg"
+                alt="">{{item.freeze_days}}{{$t('m.day')}}</span>
+          </div>
+          <div class="release-detail-text-right fr">
             <!-- item.create_time.substr(0,11) -->
-          <span><img src="../../../../assets/images/clock.svg" alt="">{{(item.create_time).substr(0,11)}}</span>
+            <span><img src="../../../../assets/images/clock.svg" alt="">{{(item.create_time).substr(0,11)}}</span>
+          </div>
         </div>
-      </div>
-      <div class="release-detail-num-progress progress ">
-        <mt-progress :value="item.air|number" :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">{{$t('m.sold')}}{{item.sold_amount}}</div>
-        <div slot="end" class="fr">{{$t('m.total')}}{{item.total_amount}}</div>
-      </div>
+        <div class="release-detail-num-progress progress ">
+          <mt-progress :value="item.air|number" :bar-height="7"></mt-progress>
+          <div slot="start" class="fl">{{$t('m.sold')}}{{item.sold_amount}}</div>
+          <div slot="end" class="fr">{{$t('m.total')}}{{item.total_amount}}</div>
+        </div>
       </router-link>
     </div>
-    <div class="release-history-list">
+    <div class="release-history-list" v-for="item in listData">
       <p>{{$t('m.releaseHistory')}} <span>({{$t('m.over')}})</span></p>
-      <div class="release-history-title">
-        <span>{{$t('m.releaseTime')}}</span>
-        <span>{{$t('m.theTerm')}}</span>
-        <span>{{$t('m.interestRate')}}</span>
-        <span>{{$t('m.quantity')}}</span>
+      <div>
+        <div class="release-history-title" v-if="item.status=='已结束'">
+          <span>{{$t('m.releaseTime')}}</span>
+          <span>{{$t('m.theTerm')}}</span>
+          <span>{{$t('m.interestRate')}}</span>
+          <span>{{$t('m.quantity')}}</span>
+        </div>
+        <div class="release-history-title" v-if="item.status=='已结束'">
+          <span>{{item.create_time}}</span>
+          <span>{{item.freeze_days}} {{$t('m.day')}}</span>
+          <span>{{item.air|number}} %</span>
+          <span>{{item.total_amount}}</span>
+        </div>
       </div>
-      <div class="release-history-title" v-for="item in listData" v-if="item.status=='已完成'">
-        <span>{{item.create_time}}</span>
-        <span>{{item.freeze_days}} {{$t('m.day')}}</span>
-        <span>{{item.air|number}} %</span>
-        <span>{{item.total_amount}}</span>
-      </div>
+      <p class="no-data" v-if="item.status!='已结束'">暂无数据</p>
     </div>
   </div>
 </template>
@@ -56,11 +62,12 @@
     data() {
       return {
         listData: '',
-        balanceToken:'',
+        balanceToken: '',
         listParams: {
-          admin: 'false',
+          admin: '',
           page: 1,
-          page_size: 50
+          page_size: 50,
+          code: '',
         }
       }
     },
@@ -73,12 +80,13 @@
         this.$router.push({
           name: 'Release',
           params: {
-            code: this.detail.token.code
+            code: this.detail.token.code,
           }
         })
       },
       // 发布列表
       list() {
+        this.listParams.code = this.detail.token.code
         api.flList(this.listParams).then(res => {
           if (res.code == 0) {
             this.listData = res.data
@@ -106,11 +114,12 @@
     }
 
     .release-detail-num {
-      margin: 20px 24px 0 24px;
+      margin: 20px 24px 0px 24px;
       background-color: #fff;
       border-radius: 10px;
       height: 220px;
 
+      /* margin-bottom:40px; */
       .release-detail-text {
         height: 50px;
         margin: 10px 20px 0 55px;
@@ -120,13 +129,15 @@
         .release-detail-text-left {
           width: 55%;
         }
-        img{
+
+        img {
           height: 30px;
           margin-right: 10px;
         }
-        .img-status{
+
+        .img-status {
           position: relative;
-          top:10px;
+          top: 10px;
           height: 40px;
         }
       }
@@ -143,7 +154,7 @@
 
     .release-history-list {
       background-color: #fff;
-      margin: 20px 24px 0 24px;
+      margin: 20px 24px 24px 24px;
       border-radius: 10px;
 
       p {
@@ -153,6 +164,10 @@
         span {
           font-size: 24px;
         }
+      }
+
+      .no-data {
+        text-align: center;
       }
 
       .release-history-title {

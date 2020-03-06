@@ -81,12 +81,12 @@
       <router-link :to="{name:'Deal'}">
         <p class="home-pub-title">{{$t('m.marketPlace')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
-      <div class="home-market-transaction-token" v-for="item in market">
+      <div class="home-market-transaction-token" v-for="item in market" v-if="item.info.length>0">
         <div class="home-pub-token">
           <img :src="item.token.icon" alt="" class="fl icon">
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
-        <div v-for="marketInfo in item.info">
+        <div v-for="marketInfo in item.info" >
           <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-num">
               <span class="fl">{{$t('m.purchasePrice')}}<p> <img :src="marketInfo.d_icon"
@@ -164,6 +164,7 @@
             this.release = res.data.release_list
             // 交易市场
             this.market = res.data.market_list
+            // console.log(this.market)
             // this.$store.commit('detail', res.data.market_list)
           }
         }).catch(err => {

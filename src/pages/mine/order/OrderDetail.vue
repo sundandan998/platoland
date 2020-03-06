@@ -17,20 +17,23 @@
     (9, _('存入分利宝')) -->
     <!-- 发行买入 -->
     <div class="order-detail-list">
-      <div class="buy" v-if="orderData.flow_type_code=='0'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='0'"> -->
+      <div class="buy" v-if="orderData.flow_type=='发行买入'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
         </div>
         <div class="buy-content">
           <p>{{orderData.amount}} {{orderData.token}}</p>
-          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}}
+              {{orderData.exchange_token}}</span></p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
           <p><span>{{$t('m.price')}}</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
           <p><span>{{$t('m.quantity')}}</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
         <div class="buy-date">
@@ -40,7 +43,8 @@
         </div>
       </div>
       <!-- 转让 -->
-      <div class="buy" v-if="orderData.flow_type_code=='8'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='8'"> -->
+      <div class="buy" v-if="orderData.flow_type=='转让'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
@@ -53,7 +57,8 @@
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null">
+            <span>{{$t('m.counterparty')}</span><span class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
         <!-- <div class="buy-title">
@@ -78,7 +83,9 @@
       </div> -->
       </div>
       <!-- 受让 -->
-      <div class="buy" v-if="orderData.flow_type_code=='7'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='7'"> -->
+      <div class="buy" v-if="orderData.flow_type=='受让'">
+
         <!-- <div class="buy-title">
         <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
             alt="">{{orderData.status}}</span>
@@ -111,22 +118,26 @@
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
       </div>
       <!-- <mt-button v-if="orderData.is_pay==true" class="sell-btn" size="large" type="primary" @click="cancel">去支付
     </mt-button> -->
       <!-- otc发布--出售 -->
-      <div class="buy" v-if="orderData.flow_type_code=='4'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='4'"> -->
+      <div class="buy" v-if="orderData.flow_type=='OTC发布出售'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
               alt="">{{orderData.status}}</span>
         </div>
         <div class="buy-content">
           <p>{{orderData.amount}} {{orderData.token}}</p>
-          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
-          <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{orderData.fee||number}}{{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}}
+              {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.handlingFee')}}</span><span
+              class="fr">{{orderData.fee||number}}{{orderData.exchange_token}}</span></p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
@@ -150,14 +161,16 @@
       <!-- <mt-button @click="cancel" v-if="orderData.flow_type=='OTC发布出售'" class="sell-btn" size="large" type="primary">撤销
     </mt-button> -->
       <!-- otc买入 -->
-      <div class="buy" v-if="orderData.flow_type_code=='1'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='1'"> -->
+      <div class="buy" v-if="orderData.flow_type=='OTC买入'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
         </div>
         <div class="buy-content">
           <p>{{orderData.amount}}{{orderData.token}}</p>
-          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}}
+              {{orderData.exchange_token}}</span></p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
@@ -166,31 +179,36 @@
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
       </div>
       <!-- 转出 -->
-      <div class="buy" v-if="orderData.flow_type_code=='6'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='6'"> -->
+      <div class="buy" v-if="orderData.flow_type=='转出'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
               alt="">{{orderData.status}}</span>
         </div>
         <div class="buy-content">
           <p>{{orderData.amount}}{{orderData.token}}</p>
-          <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
+          <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span>
+          </p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
       </div>
       <!-- 转入 -->
-      <div class="buy" v-if="orderData.flow_type_code=='5'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='5'"> -->
+      <div class="buy" v-if="orderData.flow_type=='转入'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
@@ -203,23 +221,27 @@
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
       </div>
       <!-- otc发布--买入 -->
-      <div class="buy" v-if="orderData.flow_type_code=='3'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='3'"> -->
+      <div class="buy" v-if="orderData.flow_type=='OTC发布买入'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/go.svg"
               alt="">{{orderData.status}}</span>
         </div>
         <div class="buy-content">
           <p>{{orderData.amount}} {{orderData.token}}</p>
-          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}} {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}}
+              {{orderData.exchange_token}}</span></p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
-          <p><span>{{$t('m.price')}}</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.price')}}</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span>
+          </p>
           <p><span>{{$t('m.quantity')}}</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
           <p><span>{{$t('m.limit')}}</span><span class="fr">{{orderData.low_number}}-{{orderData.high_number}}
               {{orderData.token}}</span>
@@ -239,7 +261,8 @@
         </div>
       </div>
       <!-- OTC售出 -->
-      <div class="buy" v-if="orderData.flow_type_code=='2'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='2'"> -->
+      <div class="buy" v-if="orderData.flow_type=='OTC售出'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
@@ -247,21 +270,25 @@
         <div class="buy-content">
           <p>{{orderData.amount}} {{orderData.token}}</p>
           <p><span>{{$t('m.paySum')}}</span><span class="fr">{{orderData.total_amount}}</span></p>
-          <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span></p>
+          <p><span>{{$t('m.handlingFee')}}</span><span class="fr">{{orderData.fee|number}} {{orderData.token}}</span>
+          </p>
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
-          <p><span>{{$t('m.price')}}</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p>
+          <p><span>{{$t('m.price')}}</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span>
+          </p>
           <p><span>{{$t('m.quantity')}}</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
           <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
         </div>
         <div class="buy-date">
-          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
+          <p v-if="orderData.other!=null"><span>{{$t('m.counterparty')}}</span><span
+              class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
       </div>
       <!-- 锁仓分利 -->
-      <div class="buy" v-if="orderData.flow_type_code=='9'">
+      <!-- <div class="buy" v-if="orderData.flow_type_code=='9'"> -->
+      <div class="buy" v-if="orderData.flow_type=='存入分利宝'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
@@ -286,8 +313,8 @@
         {{$t('m.goPay')}}
       </mt-button>
       <mt-button v-if="orderData.is_undo==true" class="sell-btn" size="large" type="primary" @click="cancel">
-          {{$t('m.revoke')}}
-        </mt-button>
+        {{$t('m.revoke')}}
+      </mt-button>
       <!-- 数字键盘 -->
       <div>
         <van-popup class="popupbox" position="bottom" v-model="popupVisible">
@@ -413,6 +440,7 @@
     .order-detail-list {
       background-color: #fff;
       margin: 10px 24px;
+
       .buy-title {
         span {
           font-size: 28px;
@@ -429,12 +457,14 @@
 
       .buy-content {
         border-bottom: 10px solid #f2f2f2;
-        border-top:1px solid #f2f2f2;
+        border-top: 1px solid #f2f2f2;
         font-size: 26px;
         line-height: 40px;
+
         p {
           margin: 10px 20px;
-          border-bottom-left-radius:10px;
+          border-bottom-left-radius: 10px;
+
           span:first-child {
             color: #979EAC;
           }
@@ -460,13 +490,16 @@
     .buy-date {
       line-height: 40px;
       font-size: 26px;
-      padding-bottom:10px;
+      padding-bottom: 10px;
+
       p {
         margin: 10px 15px;
+
         span:first-child {
           color: #979EAC;
         }
       }
+
       .order-recording {
         margin: 15px 25px;
       }
@@ -477,7 +510,7 @@
       width: 95%;
       margin: 20px auto 0 auto;
       position: fixed;
-      bottom:10px;
+      bottom: 10px;
     }
   }
 </style>
