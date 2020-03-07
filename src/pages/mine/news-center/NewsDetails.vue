@@ -48,5 +48,20 @@ export default{
 
 <style lang="scss">
   @import '../../../assets/scss/global';
+  .news-details{
+    width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
+    .news-details-header{
+      margin-bottom: 81px;
+    }
+    .news-details-list{
+      span{
+        margin:10px 20px;
+        display: inline-block;
+      }
+    }
+  }
  
 </style>

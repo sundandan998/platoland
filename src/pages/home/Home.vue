@@ -13,6 +13,15 @@
         <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
       </van-swipe>
     </div>
+    <!-- 公告消息 -->
+    <div class="box">
+      <router-link to="news">
+        <img src="../../assets/images/news.svg" alt="" class="fl">
+        <ul class="con1" ref="con1" :class="{anim:animate==true}">
+          <li v-for='item in items'>{{item.name}}</li>
+        </ul>
+      </router-link>
+    </div>
     <!-- 交易部分 -->
     <div class="home-transaction">
       <router-link to="zone">
@@ -77,7 +86,7 @@
       </div>
     </div>
     <!-- 市场交易 -->
-    <div class="home-market-transaction"  v-if="this.market.length>0">
+    <div class="home-market-transaction" v-if="this.market.length>0">
       <router-link :to="{name:'Deal'}">
         <p class="home-pub-title">{{$t('m.marketPlace')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
@@ -86,7 +95,7 @@
           <img :src="item.token.icon" alt="" class="fl icon">
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
-        <div v-for="marketInfo in item.info" >
+        <div v-for="marketInfo in item.info">
           <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-num">
               <span class="fl">{{$t('m.purchasePrice')}}<p> <img :src="marketInfo.d_icon"
@@ -131,6 +140,13 @@
         flData: '',
         release: '',
         market: '',
+        // 公告消息
+        animate: false,
+        items: [
+          { name: "PLATOLAND生态获区块链协会创新应用大奖!" },
+          { name: "PLATOLAND生态获区块链协会创新应用大奖!" },
+          { name: "PLATOLAND生态获区块链协会创新应用大奖!" }
+        ]
       }
     },
     components: {
@@ -140,8 +156,18 @@
       this.home()
       this.info()
       // this.version()
+      setInterval(this.scroll, 3000)
     },
     methods: {
+      // 公告消息
+      scroll() {
+        this.animate = true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
+        setTimeout(() => {      //  这里直接使用了es6的箭头函数，省去了处理this指向偏移问题，代码也比之前简化了很多
+          this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
+          this.items.shift();               //删除数组的第一个元素
+          this.animate = false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
+        }, 500)
+      },
       jump(item) {
         if (item.status == 1) {
           this.$router.push({
@@ -290,6 +316,30 @@
       }
     }
 
+    /* 消息公告 */
+    .box {
+      overflow: hidden;
+      height: 40px;
+      margin: 20px 24px;
+      background-color: #FFFBE8;
+      color: #ED6A0C;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .anim {
+      transition: all 0.5s;
+      margin-top: -30px;
+    }
+
+    .con1 li {
+      list-style: none;
+      line-height: 55px;
+      height: 55px;
+      margin-left: 60px;
+      color: #ED6A0C;
+    }
+
     .home-transaction {
       height: 200px;
       background-color: #fff;
@@ -332,21 +382,23 @@
           font-size: 26px;
           color: #06B56A;
           margin-right: 40px;
+
           img {
             margin-right: 7px;
             width: 26px;
           }
         }
-        .issue {
-            font-size: 26px;
-            color: #37A7E1;
-            margin-right: 40px;
 
-            img {
-              margin-right: 7px;
-              width: 26px;
-            }
+        .issue {
+          font-size: 26px;
+          color: #37A7E1;
+          margin-right: 40px;
+
+          img {
+            margin-right: 7px;
+            width: 26px;
           }
+        }
 
         .home-latest-release-token-bot {
           margin: 0 45px;

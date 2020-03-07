@@ -2,7 +2,7 @@
 	<div class="news-center">
 		<!--顶部标题-->
 		<div class="news-center-header">
-			<mt-header fixed  title="公告中心">
+			<mt-header fixed  title="公告中心" >
 			  <router-link to="/" slot="left">
 			    <mt-button icon="back">{{$t('m.back')}}</mt-button>
 			  </router-link>
@@ -43,5 +43,19 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../../../assets/scss/global'
+	@import '../../../assets/scss/global';
+	.news-center{
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
+		.news-center-header{
+			margin-bottom: 81px;
+		}
+		.news-center-list{
+			span{
+				font-size:22px;
+			}
+		}
+	}
 </style>
