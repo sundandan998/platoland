@@ -99,6 +99,12 @@ export default new Router({
       name: 'Token',
       component: () => import("@/pages/home/issued-detail/IssuedToken")
     },
+    // 支付通证
+    {
+      path: '/paytoken',
+      name: 'PayToken',
+      component: () => import("@/pages/home/issued-detail/PaymentToken")
+    },
     // 分利宝
     {
       path: '/bao',

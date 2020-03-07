@@ -83,7 +83,7 @@
 					// window.localStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
 					this.access_token = localStorage.getItem('token')
 				}).catch(err => {
-					console.log(err)
+					// console.log(err)
 				})
 			},
 			myToken() {
@@ -111,7 +111,7 @@
 							this.$router.push({
 								name: 'Certificate',
 								params: {
-									code: this.infoData.token_code
+									code: res.data.token.code
 								}
 							})
 						} else if (res.data.order_status == 3) {

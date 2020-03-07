@@ -26,32 +26,40 @@
     </div>
     <!-- 最近发行 -->
     <div class="token-recently-released">
-      <mt-cell title="最近发行" to=""></mt-cell>
-      <div class="no-records">
-        <p>暂无发行记录</p>
-        <router-link :to="{name:'Token',params:{code:this.balancetoken.code,icon:this.balancetoken.icon}}">
-          <van-button type="primary" class="button">去 发 行</van-button>
-        </router-link>
+      <div class="no-records" v-if="this.issuedList==[]">
+        <mt-cell title="最近发行"></mt-cell>
+        <div class="no-records">
+          <p>暂无发行记录</p>
+          <router-link :to="{name:'Token',params:{code:this.balancetoken.code,icon:this.balancetoken.icon}}">
+            <van-button type="primary" class="button">去发行</van-button>
+          </router-link>
+        </div>
       </div>
-      <!-- <div class="home-pub-token">
-        <img src="../../../assets/images/life-icon.png" alt="" class="fl icon">
-        <span><b>LIFE+</b>(来福家) <p>斯帕尔克细胞</p></span>
-        <span class="token-days fr">已发行20天</span>
+      <router-link :to="{name:'Issuance',params:{release:'show'}}">
+      <mt-cell title="最近发行" is-link v-if="this.issuedList!=[]">全部</mt-cell>
+     </router-link>
+      <div class="home-pub-token" v-if="this.issuedList!=[]">
+        <img :src="this.issuedList.icon" alt="" class="fl icon">
+        <span><b>{{this.issuedList.code}}</b>({{this.issuedList.nickname}}) <p>{{this.issuedList.subject.issuer}}</p>
+          </span>
+        <!-- <span class="token-days fr">已发行20天</span> -->
         <div class="token-home-pub-days">
           <div class="fl">
-            <p>第2期</p>
-            <p class="fr"><img src="../../../assets/images/lock.svg" alt=""> 80天</p>
+            <p>第{{this.issuedList.release.periods}}期</p>
+            <p class="fr"><img src="../../../assets/images/lock.svg" alt=""> {{this.issuedList.release.freeze_days}}天
+            </p>
           </div>
-          <p class="fr"> <img src="../../../assets/images/lock.svg" alt=""> 0.1</p>
+          <p class="fr"> <img src="../../../assets/images/lock.svg" alt="">
+            {{this.issuedList.release.issue_price|number}}</p>
         </div>
         <div class="token-progress">
           <mt-progress :value="20" :bar-height="7"></mt-progress>
         </div>
         <div class="token-total">
-          <p>已售1份</p>
-          <p class="fr">共2份</p>
+          <p>已售{{this.issuedList.release.sold_number|number}}份</p>
+          <p class="fr">共{{this.issuedList.total_circulation|number}}份</p>
         </div>
-      </div> -->
+      </div>
     </div>
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
@@ -101,6 +109,7 @@
         balancetoken: '',
         listData: '',
         infoData: '',
+        issuedList: '',
         listParams: {
           admin: 'true',
           page: 1,
@@ -112,6 +121,8 @@
     created() {
       this.balance()
       this.list()
+      this.issuedToken()
+      // console.log()
     },
     methods: {
       // 余额
@@ -121,6 +132,7 @@
           if (res.code == 0) {
             this.balanceData = res.data
             this.balancetoken = res.data.token
+            // console.log(this.balancetoken.code)
             this.$store.commit('detail', res.data)
           }
         }).catch(err => {
@@ -136,6 +148,14 @@
         }).catch(err => {
 
         })
+      },
+      // 发行通证
+      issuedToken() {
+        api.tokenDetail({ code: this.$route.params.code }).then(res => {
+          if (res.code == 0) {
+            this.issuedList = res.data
+          }
+        }).catch()
       }
     }
   }
@@ -152,9 +172,10 @@
       margin: 90px 24px 20px 24px;
       background-color: #fff;
       border-radius: 10px;
-
     }
-
+    .mint-cell-title{
+      text-align: left;
+    }
     .freeze-token {
       border-radius: 10px;
     }
@@ -173,6 +194,11 @@
       .no-records {
         text-align: center;
         color: #CDCDCD;
+        .recently-release {
+          margin: 20px;
+          display: block;
+          height: 60px;
+        }
 
         .button {
           margin: 20px 0 30px 0;

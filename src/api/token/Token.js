@@ -137,4 +137,12 @@ export default {
             data: params
         })
     },
+    // 获取通证的简单信息
+    tokenSimple(params = {}) {
+        return request({
+            url: "/token/" + params.code + "/simple/",
+            method: "get",
+            param: params
+        })
+    },
 }
