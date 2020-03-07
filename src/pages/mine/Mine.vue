@@ -26,8 +26,10 @@
 							</mt-cell>
 						</div>
 						<div class="mine-our mine-border-radius">
-							<mt-cell :title="$t('m.version')" to="/version" is-link class="mine-cell-list">
+							<mt-cell :title="$t('m.version')" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/bb.svg" alt="" />
+								<img  src="../../assets/images/new.svg" alt="" class="fr">
+								<span class="version"> v{{this.$version()}}</span>
 							</mt-cell>
 							<mt-cell :title="$t('m.aboutUs')" to="/about" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
@@ -194,6 +196,10 @@
 					border-radius: 10px;
 				}
 			}
+		}
+		.version{
+			font-size:20px;
+			margin-left: 20px;
 		}
 	}
 </style>
