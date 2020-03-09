@@ -45,8 +45,7 @@ const user = {
     },
     loginByCode({ dispatch, commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        api.loginByCode(userInfo)
-          .then(response => {
+        api.loginByCode(userInfo).then(response => {
             // let nowTime = new Date().getTime();
             commit("SET_TOKEN", response.token);
             // commit(

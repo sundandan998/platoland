@@ -9,8 +9,11 @@
     <div class="token-list" v-for="(item,index) in listData">
       <mt-cell :title="item.code+'('+ item.nickname+')'" :label="item.subject">
         <img class="assets-icon" slot="icon" :src="item.icon">
-        <mt-switch @change="turn(item,value)" v-model="item.value"></mt-switch>
+        <!-- <mt-switch  @change="turn(item,value,index)" v-model="item.value"></mt-switch> -->
       </mt-cell>
+      <van-radio-group class="radio" v-model="radio">
+        <van-radio :name="item.id" @click="turn(item)"/>
+      </van-radio-group>
     </div>
     <div class="token-list-button">
       <mt-button size="large" type="primary" :disabled="disabled" @click.native="submit">提交审核</mt-button>
@@ -24,9 +27,9 @@
     data() {
       return {
         listData: '',
-        value: false,
         disabled: true,
         listData: '',
+        radio: false,
         applyParams: {
           code: ''
         }
@@ -44,34 +47,28 @@
 
         })
       },
-      turn(item, value) {
-        // console.log(item.id)
-        if(item.id){
-        }
+      turn(item) {
         this.applyParams.code = item.code
-        this.value=!this.value
-        if(item.value==true){
+        if(this.radio!=''){
           this.disabled=false
-        }else{
-          this.disabled=true
         }
       },
       // 提交按钮
       submit() {
         api.Apply(this.applyParams).then(res => {
-          if(res.code==0){
-            console.log(res.data.user_address)
+          if (res.code == 0) {
             this.$router.push({
-              name:'CertificationToken',
+              name: 'CertificationToken',
               // c
-              params:{order_id:res.data.order_id,token:res.data.token,address:res.data.user_address}
+              params: { order_id: res.data.order_id, token: res.data.token, address: res.data.user_address }
             })
           }
         }).catch(err => {
           toast(err)
         })
       }
-    }
+    },
+  
   }
 </script>
 <style lang="scss">
@@ -86,6 +83,9 @@
     }
 
     .token-list {
+      margin-top: 10px;
+      height: 120px;
+
       .mint-cell-label {
         padding-bottom: 10px;
       }
@@ -95,6 +95,13 @@
       position: fixed;
       bottom: 10px;
       width: 100%;
+    }
+
+    .radio {
+      position: relative;
+      top: -70px;
+      right: 20px;
+      text-align: right;
     }
   }
 </style>

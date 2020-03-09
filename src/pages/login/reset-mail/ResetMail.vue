@@ -205,6 +205,10 @@
   @import '../../../assets/scss/global';
 
   .reset-mail {
+    width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
     .login-cancel {
       margin: 10px 54px;
     }

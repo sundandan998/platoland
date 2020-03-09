@@ -178,6 +178,10 @@
 <style lang="scss">
   @import '../../../assets/scss/global';
   .forget-password {
+    width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
     .login-cancel {
       img{
         margin-left:50px;

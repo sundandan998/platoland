@@ -3,7 +3,7 @@
  */
 import store from "@/store/index";
 const getters = {
-  showFooter: state => state.app.showFooter,
+    showFooter: state => state.app.showFooter,
     remarks: state => state.app.remarks,
     detail: state => state.app.detail,
     refpath: state => state.app.refpath,
@@ -11,7 +11,19 @@ const getters = {
     loading: state => state.app.loading,
     token: state => {
         // let stroageToken = window.sessionStorage.getItem("token");
+        // let switchStatus = JSON.parse(localStorage.getItem('switch'))
+        // // console.log(switchStatus)
+        // if (switchStatus == false||switchStatus ==null) {
+        //   this.$router.push({
+        //     path: '/login'
+        //   })
+        // }else if(switchStatus == true) {
+        //   this.$router.push({
+        //     path: '/'
+        //   })
+        // }
         let stroageToken = window.localStorage.getItem("token");
+        // if ((!state.user.token || state.user.token === "") && stroageToken) {
         if ((!state.user.token || state.user.token === "") && stroageToken) {
             store.dispatch("setToken", stroageToken)
         }
@@ -19,13 +31,10 @@ const getters = {
         // localStorage.clear()
     },
     userInfo: state => {
-        let stroageUserInfo = JSON.parse(
-            window.sessionStorage.getItem("userInfo")
+        let stroageUserInfo = JSON.parse(window.sessionStorage.getItem("userInfo")
             // window.localStorage.getItem("userInfo")
         )
-        if (
-            (!state.user.userInfo ||
-                JSON.stringify(state.user.userInfo) === "{}") &&
+        if ((!state.user.userInfo || JSON.stringify(state.user.userInfo) === "{}") &&
             stroageUserInfo
         ) {
             store.dispatch("setUserInfo", stroageUserInfo);

@@ -34,16 +34,16 @@ const service = axios.create({
 });
 service.interceptors.request.use(
   config => {
-    config.headers["Content-Type"] ="application/x-www-form-urlencoded;charset=UTF-8"
+    config.headers["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8"
     // 国际化语言
     // config.headers["Accept-Language"] ="ko"
     // zh-hans
-    config.headers["Accept-Language"] ="zh-hans"
+    config.headers["Accept-Language"] = "zh-hans"
     if (store.getters.token) {
       config.headers["Authorization"] = "JWT " + store.getters.token
     }
     if (config.loading) {
-      store.dispatch("setLoading", true);
+      store.dispatch("setLoading", true)
     }
     return config;
   },
@@ -54,6 +54,8 @@ service.interceptors.response.use(
     //   return response.data
     // }
     // let data = JSON.parse(response.data)
+    // let switchStatus = JSON.parse(localStorage.getItem('switch'))
+    // console.log(switchStatus)
     if (response.status == 401 || response.status == 403) {
       window.localStorage.removeItem('token')
       router.push({
@@ -62,7 +64,7 @@ service.interceptors.response.use(
     }
     let data = JSON.parse(response.data)
     if (response.config.loading) {
-      store.dispatch("setLoading", false);
+      store.dispatch("setLoading", false)
     }
     if (data.code === 0) {
       return data;
@@ -71,6 +73,8 @@ service.interceptors.response.use(
     }
   },
   errorReponse => {
+    // debugger
+
     // 服务器请求错误
     // 为了保持统一的错误处理，修改了浏览器报错的格式，与接口返回的失败格式一致
     let response = errorReponse.response;
@@ -90,6 +94,7 @@ service.interceptors.response.use(
       })
       window.localStorage.removeItem('token')
     }
+
     message.error(errorJSON.ret_msg)
     return Promise.reject(errorJSON)
   }

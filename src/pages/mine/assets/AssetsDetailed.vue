@@ -72,7 +72,8 @@
         <div class="freeze-content" v-for="(item,index) in freezeData">
           <router-link :to="/orderdetail/+item.order_id">
             <!-- 发行买入 -->
-            <div class="buy" v-if="item.flow_type_code=='0'||item.flow_type_code=='7'">
+            <!-- <div class="buy" v-if="item.flow_type_code=='0'||item.flow_type_code=='7'"> -->
+            <div class="buy" v-if="item.flow_type=='发行买入'||item.flow_type=='受让'">
               <router-link
                 :to="{name:'FreezeTransfer',params:{order_id:item.order_id,code:freezeParams.code,type:item.flow_type,num:item.amount,date:item.unfreeze_date}}">
                 <div class="issue-buy button">
@@ -90,7 +91,8 @@
             </div>
           </router-link>
           <!-- OTC发布出售 -->
-          <div class="buy" v-if="item.flow_type_code=='4'">
+          <!-- <div class="buy" v-if="item.flow_type_code=='4'"> -->
+          <div class="buy" v-if="item.flow_type=='OTC发布出售'">
             <div class="fr button">
               <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">
                 {{$t('m.revoke')}}
@@ -115,7 +117,8 @@
             </router-link>
           </div>
           <!-- OTC发布买入 -->
-          <div class="buy" v-if="item.flow_type_code=='3'">
+          <!-- <div class="buy" v-if="item.flow_type_code=='3'"> -->
+          <div class="buy" v-if="item.flow_type=='OTC发布买入'">
             <div class="fr button">
               <mt-button v-if="item.is_undo==true" size="small" type="primary" @click="cancel(item.order_id,index)">
                 {{$t('m.revoke')}}
@@ -137,9 +140,21 @@
             </router-link>
 
           </div>
+          <!-- 分利宝 -->
+          <div class="buy" v-if="item.flow_type=='分利宝'">
+            <p class="flow_type">{{item.flow_type}}</p>
+            <p><span class="buy-amount">{{item.amount|number}}</span><span class="fr buy-amount"></span>
+              <mt-button @click="income(item)" size="small" type="danger" class="fr collect">点击领取+{{item.interest}}
+              </mt-button>
+              <!-- <p class="fr">{{item.amount+item.interest}}</p> -->
+            </p>
+            <mt-progress class="progress" :value="10" :bar-height="7"></mt-progress>
+            <p class="expiry-date ">到期日:{{item.unfreeze_date}}</p>
+          </div>
           <!-- 转出 -->
           <router-link :to="/orderdetail/+item.order_id">
-            <div class="buy" v-if="item.flow_type_code=='6'">
+            <!-- <div class="buy" v-if="item.flow_type_code=='6'"> -->
+            <div class="buy" v-if="item.flow_type=='转出'">
               <p class="flow_type">{{item.flow_type}}</p>
               <p><span class="turn-amount">{{item.amount|number}}</span><span class="fr"><img
                     style="position: relative;top: -35px;" src="../../../assets/images/go.svg" alt="">
@@ -177,6 +192,8 @@
         data: {},
         assetsData: {},
         assetsToken: {},
+        creatTime: '',
+        reultPoint: '',
         // 删除资产参数
         delasset: {
           code: '',
@@ -198,7 +215,6 @@
     },
     created() {
       this.assetDetail()
-      // console.log(this.$route.params.code)
     },
     filters: {
       // 到期时间
@@ -208,6 +224,7 @@
         let date = new Date(unfreeze_date + ' 00:00:00')
         let days_number = date - today
         return days_number / (24 * 3600 * 1000)
+        // console.log(days_number)
       },
       // 创建时间
       holding(transaction_time) {
@@ -240,12 +257,45 @@
           name: 'Assets'
         })
       },
+      // 收取利息
+      income(item) {
+        // 创建时间
+        let createTime = Date.parse(item.transaction_time.split(' ')[0])
+        console.log(createTime)
+        // 当前时间
+        let timestamp = Date.parse(new Date())
+        console.log(timestamp)
+        //过去的天数
+        let useDay = (timestamp - createTime) / (24 * 60 * 60 * 1000)
+        console.log(useDay)
+        // 结束时间
+        let unfreeze_date = Date.parse(item.unfreeze_date)
+        //总天数
+        let allDay = Math.ceil((unfreeze_date - createTime) / (24 * 60 * 60 * 1000))
+        console.log(allDay)
+        //过去的时间百分比
+        this.reultPoint = Number((useDay / allDay) * 100).toFixed(0)
+        this.reultPoint += "%"
+        console.log(this.reultPoint)
+        this.$messagebox({
+          message: '+' + item.interest + '<p>分利宝分利领取成功啦</p>',
+          cancelButtonText: '返回资产',
+          confirmButtonText: '查看详情',
+          showCancelButton: true
+        }).then(action => {
+          if (action === 'confirm') {
+            this.$router.push({
+              name: 'OrderDetail',
+              params: { order_id: item.order_id }
+            })
+          }
+        })
+      },
       // 资产详情
       assetDetail() {
         // debugger
         api.assetDetail(this.$route.params).then(res => {
           this.assetsData = res.data
-          // console.log( )
           this.assetsToken = res.data.token
           this.$store.commit('detail', res.data)
         }).catch(err => {
@@ -268,7 +318,7 @@
               if (res.code == 0) {
                 toast(res)
                 this.$router.push({
-                  name:'Assets'
+                  name: 'Assets'
                 })
               }
             }).catch(err => {
@@ -364,15 +414,18 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .assets-detailed {
     .mint-cell {
-        background-image: none;
-      }
+      background-image: none;
+    }
+
     .assets-detailed-exhibition {
       overflow: hidden;
       margin: 90px 24px 20px 24px;
       height: 120px;
       background-color: #fff;
+
       img {
         margin: 0px 10px;
       }
@@ -388,6 +441,11 @@
 
     .assets-detailed-available {
       margin: 0 24px 20px 24px;
+    }
+
+    .expiry-date {
+      padding: 20px 10px;
+      margin-top: 10px;
     }
 
     .assets-detailed-freeze {
@@ -407,6 +465,7 @@
         margin-bottom: 40px !important;
         background-color: #f2f2f2;
       }
+
       .transaction-type {
         background-color: #fff;
         margin-top: -20px;
@@ -434,7 +493,7 @@
         right: 20px;
         margin-left: 30px;
         font-size: 30px;
-        color:#333;
+        color: #333;
       }
 
       .buy-amount {
@@ -458,11 +517,20 @@
         margin: 20px 20px 0 0;
       }
 
+      .collect {
+        width: 25%;
+        height: 60px !important;
+        margin-top: -20px;
+        font-size: 20px;
+      }
+
       .mint-button--small {
         height: 22px;
       }
+
       .buy {
         border-bottom: 20px solid #f2f2f2;
+
         img {
           position: relative;
           top: -4px;

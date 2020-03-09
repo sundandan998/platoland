@@ -9,8 +9,8 @@
     <div class="transfer-token">
       <img :src="flToken.icon" alt="" class="fl">
       <div class="transfer-token-text">
-        <span>{{flToken.code}} ({{flToken.nickname}})</span>
-        <p>{{flToken.subject}}</p>
+        <span>{{this.flToken.code}} ({{this.flToken.nickname}})</span>
+        <p>{{this.flToken.subject}}</p>
       </div>
       <!-- <img src="../../../assets/images/right.png" alt="" class="fr arrow"> -->
     </div>
@@ -143,10 +143,10 @@
         api.flDetail({ id: this.$route.params.id }).then(res => {
           if (res.code == 0) {
             this.flbData = res.data
+            this.flToken = res.data.token
             this.we = Date.parse(this.flbData.deadline_date)
             this.date = Date.parse(this.times)
             this.days = ((this.we - this.date) / (24 * 60 * 60 * 1000))
-            this.flToken = res.data.token
             this.$store.commit('detail', res.data)
           }
         }).catch(err => {

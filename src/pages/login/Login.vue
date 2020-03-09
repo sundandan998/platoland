@@ -12,8 +12,8 @@
       <span>{{$t('m.login')}}</span>
     </div>
     <div class="login-form">
-      <mt-field :placeholder="$t('m.enterName')" v-model="verification.username" type="email" @blur.native.capture="check"
-        :state="status">
+      <mt-field :placeholder="$t('m.enterName')" v-model="verification.username" type="email"
+        @blur.native.capture="check" :state="status">
       </mt-field>
       <img src="../../assets/images/login-mine.svg" alt="" class="login-icon">
       <!-- @blur.native.capture="pwdCheck" :state="pwdlStatus" -->
@@ -22,8 +22,11 @@
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
       <router-link to="password">
-  <p class=" fr forget-pwd">{{$t('m.forgetPass')}} ?</p>
+        <p class=" fr forget-pwd">{{$t('m.forgetPass')}} ?</p>
       </router-link>
+      <div class="login-radio">
+        <mt-switch v-model="value" class="fr" size="12px"></mt-switch>
+      </div>
     </div>
     <mt-tab-container v-model="active">
       <mt-tab-container-item id="login">
@@ -57,6 +60,7 @@
         username: {},
         hide: false,
         show: true,
+        value: true,
         action: {
           account_type: null,
           action: null
@@ -106,32 +110,34 @@
     methods: {
       //  登录
       handleLogin() {
-        // this.verification.token = localStorage.getItem('token')
-        api.is_use({ username: this.verification.username }).then(res => {
-          if (res.is_use === true) {
-            this.$store.dispatch("loginByCode", this.verification).then(res => {
-              if (res.code == 0) {
-                // 消息提示
-                // toast(res)
-                this.$router.push("/home")
+          // this.verification.token = localStorage.getItem('token')
+          api.is_use({ username: this.verification.username }).then(res => {
+            if (res.is_use === true) {
+              this.$store.dispatch("loginByCode", this.verification).then(res => {
+                if (res.code == 0) {
+                  // 消息提示
+                  // toast(res)
+                  this.$router.push("/home")
+                  localStorage.setItem('switch', JSON.stringify(this.value))
+                  this.$Indicator.close()
+                }
+              }).catch(err => {
+                if (err.code !== 0) {
+                  toast(err)
+                }
                 this.$Indicator.close()
-              }
-            }).catch(err => {
-              if (err.code !== 0) {
-                toast(err)
-              }
-              this.$Indicator.close()
-            })
-          } else {
-            toast(res)
-            this.$router.push({
-              name: 'Login'
-            })
-          }
-        }).catch(err => {
-          // toast(err)
-          // console.log(err)
-        })
+              })
+            } else {
+              toast(res)
+              this.$router.push({
+                name: 'Login'
+              })
+            }
+          }).catch(err => {
+            // toast(err)
+            // console.log(err)
+          })
+        // } 
         // window.sessionStorage.setItem('action', this.verification.username)
       },
       // 发送验证码
@@ -216,8 +222,11 @@
 
 <style lang="scss">
   @import '../../assets/scss/global';
-
   .login {
+    width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
     .logo {
       .mint-cell-wrapper {
         background-image: none;
@@ -286,6 +295,11 @@
         margin-top: 60px;
       }
 
+    }
+
+    .login-radio {
+      margin: 30px 0;
+      height: 20px;
     }
   }
 </style>

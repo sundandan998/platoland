@@ -15,22 +15,22 @@
   </div>
 </template>
 <script>
-import api from "@/api/system/System.js"
-  export default { 
-  data() {
+  import api from "@/api/system/System.js"
+  export default {
+    data() {
       return {
         versionData: '',
       }
-    }, 
-mounted() {
+    },
+    mounted() {
       this.version()
     },
-methods: {
-  //版本升级
-      
-}
-}    
-</script>      
+    created() {
+    },
+    methods: {
+    }
+  }    
+</script>
 <style lang="scss">
   /* prettier-ignore */
   #app {
@@ -68,7 +68,7 @@ methods: {
     data() {
       return {
         loading: false,
-        num:0
+        num: 0
       };
     },
     computed: {},

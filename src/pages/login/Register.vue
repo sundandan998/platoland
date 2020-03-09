@@ -242,7 +242,10 @@
   @import '../../assets/scss/global';
 
   .register {
-
+    width: 100%;
+		height: 100%;
+		background-color: #fff;
+		position: fixed;
     input.el-input__inner {
       position: relative;
       left: 10px;

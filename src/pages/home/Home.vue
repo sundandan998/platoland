@@ -157,8 +157,27 @@
       this.info()
       // this.version()
       setInterval(this.scroll, 3000)
+      this.loginswitch()
     },
     methods: {
+      // switch状态判断
+      loginswitch() {
+        let switchStatus = JSON.parse(localStorage.getItem('switch'))
+        if (switchStatus == false || switchStatus == null) {
+          this.$router.push({
+            name: 'Login'
+          })
+          sessionStorage.setItem("switch", JSON.stringify(false))
+          let switchName = JSON.parse(sessionStorage.getItem('switch'))
+          if (switchName == false) {
+            this.$router.push("/home")
+          } else {
+            this.$router.push({
+              name: 'Login'
+            })
+          }
+        }
+      },
       // 公告消息
       scroll() {
         this.animate = true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true
@@ -182,6 +201,7 @@
         }
       },
       home() {
+        // debugger
         api.home().then(res => {
           if (res.code == 0) {
             // 分利宝列表
@@ -334,7 +354,7 @@
 
     .con1 li {
       list-style: none;
-      line-height: 55px;
+      line-height: 45px;
       height: 55px;
       margin-left: 60px;
       color: #ED6A0C;

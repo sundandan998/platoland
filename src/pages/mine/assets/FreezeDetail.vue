@@ -56,7 +56,8 @@
               </div>
             </router-link>
             <div class="fr">
-              <mt-button v-if="item.is_undo==true" size="small" class="revoke" type="primary" @click="cancel(item.order_id,index)">撤销
+              <mt-button v-if="item.is_undo==true" size="small" class="revoke" type="primary"
+                @click="cancel(item.order_id,index)">撤销
               </mt-button>
             </div>
           </div>
@@ -101,6 +102,16 @@
               </p>
             </div>
           </router-link>
+          <!-- 分利宝 -->
+          <div class="buy" v-if="item.flow_type=='分利宝'">
+            <p class="flow_type">{{item.flow_type}}</p>
+            <p><span class="buy-amount">{{item.amount|number}}</span><span class="fr buy-amount"></span>
+              <mt-button size="small" type="danger" class="fr collect">点击领取+{{item.interest}}
+              </mt-button>
+            </p>
+            <mt-progress class="progress" :value="10" :bar-height="7"></mt-progress>
+            <p class="expiry-date ">到期日:{{item.unfreeze_date}}</p>
+          </div>
         </div>
       </van-list>
     </div>
@@ -236,6 +247,7 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
+
   .freeze-header {
     margin-bottom: 20px;
   }
@@ -247,6 +259,13 @@
       font-size: 20px;
       color: #999;
     }
+  }
+
+  .collect {
+    width: 25%;
+    height: 60px !important;
+    margin-top: -20px;
+    font-size: 20px;
   }
 
   .freeze-down-menu {
@@ -267,16 +286,17 @@
       border-top: 1px solid #f6f6f6;
 
       .buy {
-        .revoke{
+        .revoke {
           position: relative;
-          top:-170px;
+          top: -170px;
         }
+
         button {
-        height: 40px;
-        right: 15px;
+          height: 40px;
+          right: 15px;
+        }
       }
-      }
-     
+
       .issue-buy button {
         top: 0px;
       }

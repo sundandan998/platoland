@@ -288,7 +288,7 @@
       </div>
       <!-- 锁仓分利 -->
       <!-- <div class="buy" v-if="orderData.flow_type_code=='9'"> -->
-      <div class="buy" v-if="orderData.flow_type=='存入分利宝'">
+      <div class="buy" v-if="orderData.flow_type=='分利宝'">
         <div class="buy-title">
           <span>{{orderData.flow_type}}</span><span class="fr"> <img src="../../../assets/images/fineshed.svg"
               alt="">{{orderData.status}}</span>
