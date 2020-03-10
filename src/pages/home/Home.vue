@@ -161,14 +161,18 @@
     },
     methods: {
       // switch状态判断
+      // 登录时是否选择switch开关状态
       loginswitch() {
         let switchStatus = JSON.parse(localStorage.getItem('switch'))
+        // 如果没选，switch状态为false或者null,直接跳到登录
         if (switchStatus == false || switchStatus == null) {
           this.$router.push({
             name: 'Login'
           })
+          // 跳到登录后，在session中存储一个标记，表示已经登陆过，避免在首页一直循环
           sessionStorage.setItem("switch", JSON.stringify(false))
           let switchName = JSON.parse(sessionStorage.getItem('switch'))
+          // 判断session中是否有标记，如果有直接跳到首页，否则跳到登录
           if (switchName == false) {
             this.$router.push("/home")
           } else {

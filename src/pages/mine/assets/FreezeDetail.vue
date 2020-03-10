@@ -247,11 +247,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/global';
-
-  .freeze-header {
-    margin-bottom: 20px;
-  }
-
   .freeze {
     .null-data {
       text-align: center;

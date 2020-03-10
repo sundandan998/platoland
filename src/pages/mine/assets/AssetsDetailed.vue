@@ -144,11 +144,12 @@
           <div class="buy" v-if="item.flow_type=='分利宝'">
             <p class="flow_type">{{item.flow_type}}</p>
             <p><span class="buy-amount">{{item.amount|number}}</span><span class="fr buy-amount"></span>
-              <mt-button @click="income(item)" size="small" type="danger" class="fr collect">点击领取+{{item.interest}}
+              <mt-button v-if="item.can_take==true" @click="income(item)" size="small" type="danger" class="fr collect">
+                点击领取+{{item.interest}}
               </mt-button>
-              <!-- <p class="fr">{{item.amount+item.interest}}</p> -->
+              <p class="fr income">收益 {{currentInterval.toFixed(8)}}</p>
             </p>
-            <mt-progress class="progress" :value="10" :bar-height="7"></mt-progress>
+            <mt-progress class="progress" :value="reultPoint" :bar-height="7"></mt-progress>
             <p class="expiry-date ">到期日:{{item.unfreeze_date}}</p>
           </div>
           <!-- 转出 -->
@@ -193,7 +194,7 @@
         assetsData: {},
         assetsToken: {},
         creatTime: '',
-        reultPoint: '',
+        reultPoint: 0,
         // 删除资产参数
         delasset: {
           code: '',
@@ -210,7 +211,16 @@
           page_size: 10,
           code: '',
           ordering: '',
-        }
+        },
+        // 定时器
+        // 每秒利息
+        currentInterval:0,
+        interest: '',
+        timer: '',
+        // 过去的天数的秒数
+        EarnedInterest: '',
+        // 过去的天数的秒数*每秒利息
+        totalInterest: ''
       }
     },
     created() {
@@ -251,7 +261,26 @@
           : status == 5 ? '审核中' : status == 6 ? '审核未通过' : status == 7 ? '锁仓中' : '已撤销'
       }
     },
+    mounted() {
+      this.timer = setInterval(this.setTimer, 1000);
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
+    },
     methods: {
+      setTimer(item) {
+        // 当前时间
+        let timestamp = Date.parse(new Date())
+        //过去的天数
+        let useDay = (timestamp -  this.createTime) / (24 * 60 * 60 * 1000)
+        //过去的秒数
+        this.earnedInterest = useDay * 24 * 60 * 60
+        // 过去的秒数*每秒利息
+        this.totalInterest = this.earnedInterest * this.interest1
+        // 当前页面展示的利息
+        this.currentInterval = this.totalInterest
+      },
+
       back() {
         this.$router.push({
           name: 'Assets'
@@ -259,26 +288,9 @@
       },
       // 收取利息
       income(item) {
-        // 创建时间
-        let createTime = Date.parse(item.transaction_time.split(' ')[0])
-        console.log(createTime)
-        // 当前时间
-        let timestamp = Date.parse(new Date())
-        console.log(timestamp)
-        //过去的天数
-        let useDay = (timestamp - createTime) / (24 * 60 * 60 * 1000)
-        console.log(useDay)
-        // 结束时间
-        let unfreeze_date = Date.parse(item.unfreeze_date)
-        //总天数
-        let allDay = Math.ceil((unfreeze_date - createTime) / (24 * 60 * 60 * 1000))
-        console.log(allDay)
-        //过去的时间百分比
-        this.reultPoint = Number((useDay / allDay) * 100).toFixed(0)
-        this.reultPoint += "%"
-        console.log(this.reultPoint)
+        // this.interest++
         this.$messagebox({
-          message: '+' + item.interest + '<p>分利宝分利领取成功啦</p>',
+          message: '+' + this.interest + '<p>分利宝分利领取成功啦</p>',
           cancelButtonText: '返回资产',
           confirmButtonText: '查看详情',
           showCancelButton: true
@@ -335,6 +347,28 @@
           this.freezeParams.code = this.$route.params.code || this.detail.token.code
           api.freeze(this.freezeParams).then(res => {
             if (res.code == 0) {
+              // 判断展示的是否是分利宝
+              for (let i = 0; i < res.data.length; i++) {
+                if (res.data[i].flow_type == '分利宝') {
+                  // 创建时间
+                  let createTime = Date.parse(res.data[i].transaction_time.split(' ')[0])
+                  this.createTime =createTime
+                  // 当前时间
+                  let timestamp = Date.parse(new Date())
+                  //过去的天数
+                  let useDay = (timestamp - createTime) / (24 * 60 * 60 * 1000)
+                  this.earnedInterest = useDay * 24 * 60 * 60
+                  // 结束时间
+                  let unfreeze_date = Date.parse(res.data[i].unfreeze_date)
+                  //总天数
+                  let allDay = Math.ceil((unfreeze_date - createTime) / (24 * 60 * 60 * 1000))
+                  this.interest = res.data[i].interest / allDay / 24 / 60 / 60
+                  //过去的时间百分比
+                  this.reultPoint = (useDay / allDay) * 100
+                  this.interest1 = res.data[i].interest / allDay / 24 / 60 / 60
+                  // console.log(this.interest1)
+                }
+              }
               // 冻结详情
               this.freezeData.push.apply(this.freezeData, res.data)
               // this.$store.commit('detail', res.this.freezePara)
@@ -543,6 +577,13 @@
       width: 100%;
       bottom: 10px;
       z-index: 1;
+    }
+
+    .income {
+      margin-top: -80px;
+      margin-right: 20px;
+      font-size: 28px;
+      color: #FF8888;
     }
   }
 </style>
