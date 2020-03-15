@@ -2,21 +2,6 @@ import { Toast } from '../../../node_modules/mint-ui'
 // import { message } from '@/assets/lang/messageko.js'
 import { message } from '@/assets/lang/message.js'
 
-// function toast(res) {
-// 	
-// 	var index = res.msg
-// 	var msg = message[index]
-// 	Toast({
-// 		message: msg,
-// 		position: 'top',
-// 		className: 'zZindex'
-// 	})
-// 	
-// }
-// export {
-// 	toast
-// }
-
 // 消息弹框
 export function toast(res) {
 	var index = res.msg
@@ -45,6 +30,7 @@ export function getCode() {
 		}, 1000)
 	// }
 }
+// 获取当前时间
 export default {
 	toast,
 	getCode

@@ -28,7 +28,7 @@
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
             <span class="fr publicity-img" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
-            <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">进行中</span>
+            <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">发行中</span>
           </div>
           <div class="current-release-token-bot">
             <div class="current-release-token-bot-text fl">
@@ -50,7 +50,7 @@
         <span>{{$t('m.price')}}</span>
         <span>{{$t('m.quantity')}}</span>
       </div>
-      <div class="release-history-title" v-for="item in happeDetail" v-if="item.status==1">
+      <div class="release-history-title" v-for="item in happeDetail" v-if="item.status==2">
         <span>{{item.periods}}{{$t('m.qi')}}</span>
         <span>{{item.freeze_days}} {{$t('m.day')}}</span>
         <span>{{item.issue_price|number}} {{item.denominated_assets}} </span>
@@ -90,7 +90,6 @@
       }
     },
     created() {
-      console.log()
     },
     mounted() {
       // this.drawLine()

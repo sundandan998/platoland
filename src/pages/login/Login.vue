@@ -21,10 +21,9 @@
         <img :src="seen?openeye:nopeneye" @click="changeType()" />
       </mt-field>
       <img src="../../assets/images/password.svg" alt="" class="login-icon">
-      <router-link to="password">
-        <p class=" fr forget-pwd">{{$t('m.forgetPass')}} ?</p>
-      </router-link>
+      
       <div class="login-radio">
+        <span>下次自动登录</span>
         <mt-switch v-model="value" class="fr" size="12px"></mt-switch>
       </div>
     </div>
@@ -38,11 +37,14 @@
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
-    <div class="login-switch">
+    <div class="login-switch fl">
       <router-link to="/register">
         <p>{{$t('m.goRegister')}}</p>
       </router-link>
     </div>
+    <router-link to="password">
+        <p class=" fr forget-pwd">{{$t('m.forgetPass')}} ?</p>
+      </router-link>
   </div>
 </template>
 
@@ -205,8 +207,8 @@
         deep: true,
         handler(val) {
           // debugger
-          var tel = /^1[23456789]\d{9}$/
-          var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+          let tel = /^1[23456789]\d{9}$/
+          let email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
           // var pass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
           if (val.username != '' && val.password != '' && (email.test(val.username) || tel.test(val.username))) {
             // 高亮
@@ -278,9 +280,9 @@
     }
 
     .forget-pwd {
-      margin-top: 10px;
       font-size: 26px;
       color: #333;
+      margin:40px 60px 0 0;
     }
 
     .login-btn {
@@ -289,10 +291,9 @@
 
     .login-switch {
       p {
-        text-align: center;
         color: #036EB8;
         font-size: 26px;
-        margin-top: 60px;
+        margin: 40px 0 0 60px;
       }
 
     }

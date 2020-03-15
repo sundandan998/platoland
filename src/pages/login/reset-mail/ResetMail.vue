@@ -79,7 +79,7 @@
       next()
     },
     created() {
-      console.log(this.$route.params.username)
+      // console.log(this.$route.params.username)
     },
     methods: {
       register() {

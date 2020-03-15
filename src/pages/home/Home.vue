@@ -51,8 +51,10 @@
         <div class="home-pub-token">
           <img :src="item.token.icon" alt="" class="fl icon">
           <span class="fl"><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-          <span class="fr publicity" v-if="item.status==0"><img src="../../assets/images/gs.svg" alt="">公示中</span>
-          <span class="fr issue" v-if="item.status==1"><img src="../../assets/images/clock.svg" alt="">进行中</span>
+          <span class="fr publicity" v-if="item.status==0"><img src="../../assets/images/gs.svg"
+              alt="">{{$t('m.public')}}</span>
+          <span class="fr issue" v-if="item.status==1"><img src="../../assets/images/clock.svg"
+              alt="">{{$t('m.processing')}}</span>
         </div>
         <div class="home-latest-release-token-bot">
           <div class="home-latest-release-token-bot-text fl">
@@ -72,7 +74,7 @@
         <p class="home-pub-title ">{{$t('m.fenlibao')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
       <div class="home-divided-treasure-token" v-for="item in flData">
-        <router-link :to="{name:'Transferflb',params:{id:item.id}}">
+        <router-link :to="{name:'Transferflb',params:{id:item.id,code:item.token.code}}">
           <div class="home-pub-token">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>

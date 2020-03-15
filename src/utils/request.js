@@ -54,8 +54,6 @@ service.interceptors.response.use(
     //   return response.data
     // }
     // let data = JSON.parse(response.data)
-    // let switchStatus = JSON.parse(localStorage.getItem('switch'))
-    // console.log(switchStatus)
     if (response.status == 401 || response.status == 403) {
       window.localStorage.removeItem('token')
       router.push({

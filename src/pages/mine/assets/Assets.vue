@@ -16,7 +16,8 @@
         <img src="../../../assets/images/u3511.png" alt><span>{{$t('m.addAssets')}}</span>
       </router-link>
     </div>
-    <div class="certificate-list-card" v-for="(item,index) in assetsdata" v-if="item.token.subject!=null">
+    <!-- v-if="item.token.subject!=null" -->
+    <div class="certificate-list-card" v-for="(item,index) in assetsdata" >
       <router-link :to="{name:'AssetsDetailed',params:{id:item.id,code:item.token.code}}">
         <!-- <mt-cell :title="item.token.code + '('+item.token.nickname+')'" :value="item.balance|keepTwoNum"
           :label="item.token.subject" class="certificate-list-card-cell">

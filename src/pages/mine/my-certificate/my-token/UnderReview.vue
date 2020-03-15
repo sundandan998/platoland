@@ -8,7 +8,7 @@
     </div>
     <div class="under-review-body">
       <img src="../../../../assets/images/review.svg" alt="">
-      <p>审核中</p>
+      <p>{{$t('m.underReview')}}</p>
       <p class="time">平台将在1-2个工作日内完成认证审核</p>
       <span class="tel tag-read"  @click="copy"  data-clipboard-text="kefu@paltoland.com">有疑问？联系我们:kefu@paltoland.com
         <img src="../../../../assets/images/copy.svg" alt="" class="fr">

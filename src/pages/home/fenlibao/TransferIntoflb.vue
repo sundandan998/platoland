@@ -15,7 +15,7 @@
       <!-- <img src="../../../assets/images/right.png" alt="" class="fr arrow"> -->
     </div>
     <!-- </router-link> -->
-    <div class="remaining-days">
+    <div class="remaining-days" v-if="this.days>0">
       <img src="../../../assets/images/note.svg" alt="">
       <span> {{$t('m.endDays')}}{{this.days}}{{$t('m.day')}}</span>
     </div>
@@ -29,7 +29,7 @@
         </div>
         <img src="../../../assets/images/prompt.svg" alt="" @click="duration" class="duration">
         <div class="transfer-token-days-top-right fr">
-          <span class="fr">{{flbData.total_amount/flbData.step_amount}} <p>
+          <span class="fr">{{flbData.total_amount/10000}} <p>
               {{$t('m.totaldistribution')}}({{$t('m.wan')}})</p></span>
         </div>
       </div>
@@ -46,16 +46,17 @@
     <!-- 转入数量 -->
     <div class="transfer-num">
       <!-- @blur.native.capture="maxnum" -->
-      <mt-field :placeholder="flbData.min_amount+'~'+flbData.high_amount" v-model="transferParams.part">
+      <mt-field :placeholder="flbData.min_amount/flbData.step_amount+'~'+flbData.high_amount/flbData.step_amount"
+        v-model="transferParams.part">
         {{$t('m.share')}}</mt-field>
       <div class="transfer-num-amount fl">
         <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
         <span>{{$t('m.dividendMaturity')}}
-          {{(transferParams.part*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+          {{(transferParams.part*flbData.step_amount*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">
-        <span>{{$t('m.availableCopies')}} {{(balanceData.available_amount/flbData.step_amount).toFixed(0)}}</span>
+        <span>{{$t('m.availableCopies')}} {{(balanceData.available_amount/flbData.step_amount|number)}}</span>
         <span>{{$t('m.thawDay')}} {{flbData.deadline_date}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
@@ -95,6 +96,7 @@
         date: '',
         we: '',
         days: '',
+        number: '',
         transferParams: {
           pk: this.$route.params.id,
           part: '',
@@ -106,7 +108,7 @@
       this.flbDetail()
       this.balance()
       this.dateFormat()
-      // console.log(this.times)
+      this.info()
     },
     methods: {
       dateFormat() {
@@ -124,14 +126,20 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       transfer() {
-        if (this.transferParams.part > this.flbData.high_amount) {
+        this.value = ''
+        if (this.flToken.code == this.infoData.token_code) {
           Toast({
-            message: '最多转入' + this.flbData.high_amount + '份',
+            message: '不能购买自己发布的分利计划',
             className: 'zZindex'
           })
-        } else if (this.transferParams.part < this.flbData.min_amount) {
+        } else if (this.transferParams.part > this.flbData.high_amount) {
           Toast({
-            message: '最少转入' + this.flbData.min_amount + '份',
+            message: '最多转入' + this.flbData.high_amount / this.flbData.step_amount + '份',
+            className: 'zZindex'
+          })
+        } else if (this.transferParams.part < this.flbData.min_amount / this.flbData.step_amount) {
+          Toast({
+            message: '最少转入' + this.flbData.min_amount / this.flbData.step_amount + '份',
             className: 'zZindex'
           })
         } else {
@@ -168,9 +176,18 @@
           confirmButtonText: '我知道了',
         })
       },
+      // 用户信息
+      info() {
+        api.getUserInfo().then(res => {
+          this.infoData = res.data
+          window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+        }).catch(err => {
+          // console.log(err)
+        })
+      },
       // 可用
       balance() {
-        api.balance({ token_code: this.detail.token.code }).then(res => {
+        api.balance({ token_code: this.$route.params.code }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
           }
@@ -207,7 +224,7 @@
               toast(err)
             }
           })
-          this.value = ''
+          // this.value = ''
           this.popupVisible = false
         }
       },
@@ -215,14 +232,28 @@
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.part!=''&& (val.part < this.flbData.high_amount || val.part > this.flbData.min_amount)) {
+          // if (val.part != '' && (val.part < this.flbData.high_amount / this.flbData.step_amount || val.part > this.flbData.min_amount / this.flbData.step_amount)) {
+          //   Toast({
+          //     message: '转入份数限额为' + this.flbData.min_amount / this.flbData.step_amount + '~' + this.flbData.high_amount / this.flbData.step_amount + '份',
+          //     className: 'zZindex'
+          //   })
+          //   this.disabled = false
+          // } else {
+          //   this.disabled = true
+          // }
+          // 
+          if (val.part != ''&&(val.part <= this.flbData.high_amount / this.flbData.step_amount) && (val.part >= this.flbData.min_amount / this.flbData.step_amount)) {
+            // Toast({
+            //   message: '转入份数限额为' + this.flbData.min_amount / this.flbData.step_amount + '~' + this.flbData.high_amount / this.flbData.step_amount + '份',
+            //   className: 'zZindex'
+            // })
+            this.disabled = false
+          }else{
+            this.disabled = true
             Toast({
-              message: '请输入的数量在' + this.flbData.min_amount + '~' + this.flbData.high_amount + '份之间',
+              message: '请输入正确的转出数量',
               className: 'zZindex'
             })
-            this.disabled = false
-          } else {
-            this.disabled = true
           }
         }
       },

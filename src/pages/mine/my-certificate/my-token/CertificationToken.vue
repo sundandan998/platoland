@@ -29,7 +29,7 @@
         :data-clipboard-text="this.$route.params.ddress" />
     </div>
     <div class="certification-token-btn">
-      <mt-button size="large" type="primary" @click.native="turn">已转入</mt-button>
+      <mt-button size="large" type="primary" @click.native="turn">{{$t('m.transferred')}}</mt-button>
     </div>
   </div>
 </template>

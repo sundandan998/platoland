@@ -145,4 +145,12 @@ export default {
             param: params
         })
     },
+    // 用户信息
+    getUserInfo(params = {}) {
+        return request({
+            url: "/user/info/",
+            method: "get",
+            params: params
+        })
+    },
 }

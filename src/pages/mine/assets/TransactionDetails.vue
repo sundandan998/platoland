@@ -23,7 +23,7 @@
 				<p><span>{{$t('m.orderTime')}}</span><span>{{details.create_time}}</span></p>
 				<p><span>{{$t('m.counterparty')}}</span><span>{{details.other}}</span></p>
 				<!-- <p><span>交易地址</span><span>{{details.other_address}}</span></p> -->
-				<p v-if="details.other_address!=null"><span>{{$t('transactionAddress')}}</span><span>{{details.other_address}}</span></p>
+				<p v-if="details.other_address!=null"><span>{{$t('m.transactionAddress')}}</span><span>{{details.other_address}}</span></p>
 			</div>
 			<div class="transaction-details-amount">
 				<p><span>{{$t('m.availableBalance')}}</span><span>{{details.available_amt}}</span></p>

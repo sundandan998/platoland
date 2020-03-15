@@ -86,6 +86,7 @@
 					this.$router.push({
 						name: 'Out',
 						params: {
+							item:item,
 							id: item.id, address: item.address,
 							code: item.token.code, subject: item.token.subject,
 							nickname: item.token.nickname, name: item.name

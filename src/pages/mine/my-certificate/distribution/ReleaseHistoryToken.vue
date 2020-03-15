@@ -86,7 +86,7 @@
         },
         // 发布列表
         list() {
-          // this.listParams.code = this.detail.token.code
+          this.listParams.code = this.detail.token.code
           api.flList(this.listParams).then(res => {
             if (res.code == 0) {
               this.listData = res.data

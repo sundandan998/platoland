@@ -36,12 +36,12 @@
         </div>
       </div>
       <router-link :to="{name:'Issuance',params:{release:'show'}}">
-      <mt-cell title="最近发行" is-link v-if="this.issuedList!=[]">全部</mt-cell>
-     </router-link>
+        <mt-cell title="最近发行" is-link v-if="this.issuedList!=[]">{{$t('m.all')}}</mt-cell>
+      </router-link>
       <div class="home-pub-token" v-if="this.issuedList!=[]">
         <img :src="this.issuedList.icon" alt="" class="fl icon">
         <span><b>{{this.issuedList.code}}</b>({{this.issuedList.nickname}}) <p>{{this.issuedList.subject.issuer}}</p>
-          </span>
+        </span>
         <!-- <span class="token-days fr">已发行20天</span> -->
         <div class="token-home-pub-days">
           <div class="fl">
@@ -63,10 +63,6 @@
     </div>
     <!-- 分利计划 -->
     <div class=" token-recently-released plan">
-      <!-- <router-link :to="{name:'ReleaseHistory',params:{token:this.balancetoken}}"> -->
-      <router-link :to="{name:'ReleaseToken'}">
-        <mt-cell :title="$t('m.distributionPlan')"></mt-cell>
-      </router-link>
       <router-link to="release" v-if="this.listData.length==0">
         <div class="no-records">
           <p>{{$t('m.noPlan')}}</p>
@@ -78,6 +74,9 @@
         </div>
       </router-link>
       <div v-if="this.listData.length!=0">
+        <router-link :to="{name:'ReleaseToken'}">
+          <mt-cell :title="$t('m.distributionPlan')" is-link>{{$t('m.all')}}</mt-cell>
+        </router-link>
         <div class="home-pub-token" v-for="item in listData">
           <!-- :to="{name:'ReleaseDetail',params:{id: item.id}}" -->
           <router-link :to="/releasedetail/+item.id">
@@ -173,9 +172,11 @@
       background-color: #fff;
       border-radius: 10px;
     }
-    .mint-cell-title{
+
+    .mint-cell-title {
       text-align: left;
     }
+
     .freeze-token {
       border-radius: 10px;
     }
@@ -194,6 +195,7 @@
       .no-records {
         text-align: center;
         color: #CDCDCD;
+
         .recently-release {
           margin: 20px;
           display: block;

@@ -8,6 +8,8 @@ const app = {
     version: '',
     // loading加載
     loading:false,
+    // 用户信息
+    // info:{}
   },
   mutations: {
     detail: (state, detail) => {
@@ -22,6 +24,9 @@ const app = {
     set_loading: (state, loading) => {
       state.loading = loading
     },
+    // info: (state, info) => {
+    //   state.info = info
+    // },
   },
   actions: {
     detail: ({ commit }, detail) => {
@@ -36,6 +41,10 @@ const app = {
     setLoading: ({ commit }, loading) => {
       commit('set_loading', loading)
     },
+    // 用户信息
+    // info: ({ commit }, info) => {
+    //   commit('info', info)
+    // },
   }
 }
 export default app

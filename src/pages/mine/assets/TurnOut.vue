@@ -53,7 +53,7 @@
       <p class="expenditure"><span class="fl">{{$t('m.actualExpenditure')}}</span><span
           class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</span></p>
-      <router-link :to="{name:'OutConfirm',params:{detail: this.detail,amount:turnOut.amount,name:this.$route.params.name}}">
+      <router-link :to="{name:'OutConfirm',params:{detail: this.detail,item:this.$route.params.item,amount:turnOut.amount,name:this.$route.params.name}}">
         <mt-button type="primary" size="large" :disabled="disabled">{{$t('m.sure')}}</mt-button>
       </router-link>
     </div>

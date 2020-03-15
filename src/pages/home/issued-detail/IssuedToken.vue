@@ -23,19 +23,19 @@
           </mt-cell>
         </router-link>
         <!--  -->
-        <mt-field v-if="this.issuedDate.last_issue_price!=null" label="单价" @blur.native.capture="price" :placeholder="'请输入的单价大于'+this.issuedDate.last_issue_price"
-          v-model="issuedParams.price"><span>{{this.$route.params.assets}}</span>
+        <mt-field label="单价" @blur.native.capture="price" placeholder="请输入整数" v-model="issuedParams.price">
+          <span>{{this.$route.params.assets}}</span>
         </mt-field>
-        <mt-field v-if="this.issuedDate.last_issue_price==null" label="单价" @blur.native.capture="price" placeholder="请输入的单价大于0"
+        <!-- <mt-field v-if="this.issuedDate.last_issue_price==null" label="单价" @blur.native.capture="price" placeholder="请输入的单价大于0"
           v-model="issuedParams.price"><span>{{this.$route.params.assets}}</span>
-        </mt-field>
+        </mt-field> -->
       </div>
       <div class="issued-token-num distance">
         <!--  -->
         <mt-field @blur.native.capture="integer" label="发行份数" placeholder="请输入大于100的整数"
           v-model="issuedParams.total_part"><span>份</span></mt-field>
         <!-- -->
-        <mt-field @blur.native.capture="num" label="发行份数" placeholder="请输入整数" v-model="issuedParams.step_number">
+        <mt-field @blur.native.capture="num" label="每份数量" placeholder="请输入整数" v-model="issuedParams.step_number">
         </mt-field>
         <div class="fr">
           <p>发行总量{{issuedParams.total_part*issuedParams.step_number}}</p>
@@ -55,18 +55,26 @@
         </van-popup>
       </div>
       <div class="issued-token-date">
-        <!--  -->
-        <!--  -->
-        <mt-field v-if="this.issuedDate.last_end_date==null" class="date" label="选择发行开始日期"  type="date"
-          v-model="issuedParams.start_date">
+        <!-- 开始日期 -->
+        <mt-field v-if="this.issuedDate.last_end_date==null" label="开始日期" placeholder="选择发行开始日期">
+          <mt-field class="date" type="date" v-model="issuedParams.start_date">
+          </mt-field>
         </mt-field>
-        <mt-field v-if="this.issuedDate.last_end_date!=null"class="date" :label="'选择发行开始日期在'+this.issuedDate.last_end_date+'之后'" type="date"
-        v-model="issuedParams.start_date">
-      </mt-field>
-        <mt-field class="date" v-if="issuedParams.start_date!=''" :label="'选择发行结束日期在'+issuedParams.start_date+'之后'"
-          type="date" v-model="issuedParams.end_date"></mt-field>
-        <mt-field class="date" v-if="issuedParams.start_date==''" :label="'选择发行结束日期在开始日期之后'" type="date"
-          v-model="issuedParams.end_date"></mt-field>
+        <mt-field v-if="this.issuedDate.last_end_date!=null" label="开始日期"
+          :placeholder="'必须大于'+this.issuedDate.last_end_date">
+          <mt-field class="date" type="date" v-model="issuedParams.start_date">
+          </mt-field>
+        </mt-field>
+        <!-- 结束日期 -->
+        <mt-field class="date" v-if="issuedParams.start_date!=''" label="结束日期"
+          :placeholder="'必须大于'+this.issuedParams.start_date">
+          <mt-field class="date" type="date" v-model="issuedParams.end_date">
+          </mt-field>
+        </mt-field>
+        <mt-field class="date" v-if="issuedParams.start_date==''" label="结束日期" placeholder="选择发行结束日期在开始日期之后">
+          <mt-field class="date" type="date" v-model="issuedParams.end_date">
+          </mt-field>
+        </mt-field>
         <!--  -->
         <mt-field label="锁定股权" placeholder="大于0" v-model="issuedParams.equity"><span>%</span></mt-field>
         <!--  -->
@@ -132,6 +140,17 @@
       this.date()
     },
     methods: {
+      // 余额
+      balance() {
+        api.balance({ token_code: this.$route.params.code}).then(res => {
+          if (res.code == 0) {
+            this.balanceData = res.data
+            this.$store.commit('detail', res.data)
+            this.balanceToken = res.data.token
+          }
+        }).catch(err => {
+        })
+      },
       onConfirm(value) {
         this.issuedParams.freeze_days = value
         this.showPicker = false
@@ -143,7 +162,7 @@
         this.value = this.value.slice(0, this.value.length - 1)
       },
       release() {
-        if (this.balanceData.balance > 0) {
+        if (this.detail.available_amount > 0) {
           this.popupVisible = true
         } else {
           this.$messagebox({
@@ -169,16 +188,7 @@
 
         })
       },
-      // 余额
-      balance() {
-        api.balance({ token_code: this.$route.params.code }).then(res => {
-          if (res.code == 0) {
-            this.balanceData = res.data
-            this.balanceToken = res.data.token
-          }
-        }).catch(err => {
-        })
-      },
+
       // 校验
       // 单价校验
       price() {

@@ -14,33 +14,39 @@
       </div>
     </div>
     <div class="release-item">
-      <mt-field :label="$t('m.numberOfReleases')" placeholder="最低100" v-model="releaseParams.total_part" @blur.native.capture="num">{{$t('m.share')}}
+      <mt-field :label="$t('m.numberOfReleases')" placeholder="请输入整数" v-model="releaseParams.total_part"
+        @blur.native.capture="num">{{$t('m.share')}}
       </mt-field>
-      <mt-field :label="$t('m.perServing')" :placeholder="$t('m.integer')" v-model="releaseParams.step_amount" @blur.native.capture="integer">
+      <mt-field :label="$t('m.perServing')" :placeholder="$t('m.integer')" v-model="releaseParams.step_amount"
+        @blur.native.capture="integer">
       </mt-field>
-      <mt-field :label="$t('m.freezeDuration')" :placeholder="$t('m.freezeDuration')+'>'" readonly @click.native="showPicker = true"
-        v-model="releaseParams.freeze_days">天
+      <mt-field :label="$t('m.freezeDuration')" :placeholder="$t('m.freezeDuration')+'>'" readonly
+        @click.native="showPicker = true" v-model="releaseParams.freeze_days">天
       </mt-field>
       <van-popup v-model="showPicker" position="bottom">
         <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
       </van-popup>
-      <mt-field :label="$t('m.interestRate')" placeholder="0~50%" v-model="releaseParams.air" @blur.native.capture="air">
-      </mt-field>
+      <mt-field :label="$t('m.interestRate')" placeholder="0~50" v-model="releaseParams.air" @blur.native.capture="air">
+        %</mt-field>
       <img src="../../../../assets/images/prompt.svg" alt="" @click="prompt">
       <div class="release-interest">
         <span>{{$t('m.expenditureProfit')}}:{{(releaseParams.total_part*(releaseParams.air/100)*releaseParams.step_amount/365*releaseParams.freeze_days).toFixed(2)}}{{balanceToken.code}}</span>
         <span>{{$t('m.quantityAvailable')}}:{{this.balanceData.balance|number}}</span>
       </div>
       <div class="purchase-quantity">
-        <mt-field :label="$t('m.purchaseQuantity')" :placeholder="$t('m.integer')" @blur.native.capture="integer" v-model="releaseParams.min_part">{{$t('m.share')}}
+        <mt-field :label="$t('m.purchaseQuantity')" :placeholder="$t('m.integer')" @blur.native.capture="integer"
+          v-model="releaseParams.min_part">{{$t('m.share')}}
         </mt-field>
-        <mt-field :label="$t('m.maxServing')" :placeholder="$t('m.integer')" @blur.native.capture="limit" v-model="releaseParams.high_part">
+        <mt-field :label="$t('m.maxServing')" :placeholder="$t('m.integer')" @blur.native.capture="limit"
+          v-model="releaseParams.high_part">
           {{$t('m.share')}}</mt-field>
       </div>
-      <mt-field :label="$t('m.deadline')" placeholder="请输入时间" type="date" v-model="releaseParams.deadline_date"></mt-field>
+      <mt-field :label="$t('m.deadline')" placeholder="请输入时间" type="date" v-model="releaseParams.deadline_date">
+      </mt-field>
     </div>
     <div class="release-button">
-      <mt-button type="primary" size="large" @click.native="release" :disabled="disabled">{{$t('m.sureRelease')}}</mt-button>
+      <mt-button type="primary" size="large" @click.native="release" :disabled="disabled">{{$t('m.sureRelease')}}
+      </mt-button>
     </div>
     <!-- 数字键盘 -->
     <div>
@@ -122,12 +128,11 @@
       },
       // 判断输入是否是整数
       integer() {
-        if (!(/(^[1-9]\d*$)/.test(this.releaseParams.total_part))) {
+        if (!(/(^[1-9]\d*$)/.test(this.releaseParams.step_amount))) {
           Toast({
             message: '请输入整数',
             className: 'zZindex'
           })
-          return false
         }
       },
 
@@ -143,7 +148,7 @@
       limit() {
         if (this.releaseParams.high_part < this.releaseParams.total_part) {
           Toast({
-            message: '最多可购份数不得大于发行数量',
+            message: '最多可购份数大于发行数量',
             className: 'zZindex'
           })
         }
@@ -160,7 +165,6 @@
             message: '年化利率在0%~200%',
             className: 'zZindex'
           })
-          return false
         }
       }
     },
@@ -187,8 +191,11 @@
       releaseParams: {
         immediate: true,
         deep: true,
+        // 整数校验
         handler(val) {
-          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air != ''&&val.deadline_date!='') {
+         let integerNum = /(^[1-9]\d*$)/
+          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air && val.deadline_date != '')
+          {
             this.disabled = false
           } else {
             this.disabled = true
@@ -252,6 +259,7 @@
           background-color: #fff;
         }
       }
+
       /* .date{
         input.mint-field-core{
           position: relative;

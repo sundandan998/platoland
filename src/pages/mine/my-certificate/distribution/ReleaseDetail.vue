@@ -35,8 +35,8 @@
         <mt-cell :title="$t('m.distributionPlanNumber')" :value="detailData.serial_number"></mt-cell>
         <mt-cell :title="$t('m.releaseTotal')" :value="detailData.total_amount"></mt-cell>
         <mt-cell :title="$t('m.expenditureProfit')" class="servings">{{detailData.interest}}{{detailToken.code}}</mt-cell>
-        <mt-cell :title="$t('m.purchaseQuantity')" class="servings">{{detailData.min_amount}}{{detailToken.code}}{{$t('m.share')}}</mt-cell>
-        <mt-cell :title="$t('m.maxServing')" :value="detailData.high_amount + detailToken.code"></mt-cell>
+        <mt-cell :title="$t('m.purchaseQuantity')" class="servings">{{detailData.min_amount/detailData.step_amount}}{{detailToken.code}}{{$t('m.share')}}</mt-cell>
+        <mt-cell :title="$t('m.maxServing')">{{detailData.high_amount/detailData.step_amount}}{{detailToken.code}}</mt-cell>
         <mt-cell :title="$t('m.deadline')" :value="detailData.deadline_date"></mt-cell>
       </div>
     </div>

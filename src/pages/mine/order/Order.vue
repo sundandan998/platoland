@@ -34,7 +34,7 @@
                 v-if="item.order_type !='转出'&&item.order_type !='转入'&&item.order_type !='受让'&&item.order_type !='转让'">-{{item.token}}/{{item.exchange_token}}</span>
             </p>
             <p class="order-list-num"><span>{{$t('m.quantity')}}：{{item.amount}}</span><span class="fr"
-                v-if="item.order_type!='转出'&&item.order_type!='转入'&&item.order_type!='受让'&&item.order_type!='转让'">{{$t('m.lumpSum')}}：{{item.total_amount}}</span>
+                v-if="item.total_amount!=null">{{$t('m.lumpSum')}}：{{item.total_amount}}</span>
             </p>
           </div>
         </router-link>

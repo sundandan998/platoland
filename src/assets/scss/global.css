@@ -217,7 +217,8 @@ label.mint-button-text img {
 }
 
 .progress {
-  margin: 0 20px;
+  margin: 0 auto;
+  width: 95%;
 }
 
 .progress .mt-progress-runway {

@@ -17,7 +17,7 @@
 		<div class="purchase-pass-valuation-assets" v-if="this.$route.params.denominated_assets!=''">
 			<span>{{$t('m.valuationAssets')}}</span>
 			<div class="purchase-pass-valuation-assets-img fr">
-				<img :src="this.detailData.d_icon" alt="" />
+				<img :src="this.$route.params.icon" alt="" />
 				<span>{{this.$route.params.denominated_assets}}</span>
 			</div>
 		</div>
@@ -315,6 +315,13 @@
 
 		.mint-cell:last-child {
 			background-image: none !important;
+		}
+		.purchase-pass-valuation-assets-img{
+			margin-right: 120px;
+			img{
+				height: 40px;
+				margin-top: 20px;
+			}
 		}
 	}
 </style>

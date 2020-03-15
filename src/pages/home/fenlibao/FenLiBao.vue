@@ -6,8 +6,8 @@
       </mt-header>
     </div>
     <!-- <router-link to="/transferflb"> -->
-    <div class="home-pub-token" v-for="item in listData">
-      <router-link :to="{name:'Transferflb',params:{item:item,id:item.id}}">
+    <div class="home-pub-token" v-for="item in listData" v-if="item.status=='进行中'">
+      <router-link :to="{name:'Transferflb',params:{item:item,id:item.id,code:item.token.code}}">
         <img :src="item.token.icon" alt="" class="fl icon">
         <span><b>{{item.token.code}}</b>{{item.token.nickname}} <p>{{item.token.subject}}</p></span>
         <div class="home-pub-token-days">

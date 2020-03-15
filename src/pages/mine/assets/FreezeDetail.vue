@@ -106,7 +106,7 @@
           <div class="buy" v-if="item.flow_type=='分利宝'">
             <p class="flow_type">{{item.flow_type}}</p>
             <p><span class="buy-amount">{{item.amount|number}}</span><span class="fr buy-amount"></span>
-              <mt-button size="small" type="danger" class="fr collect">点击领取+{{item.interest}}
+              <mt-button size="small" type="danger" class="fr collect">点击领取+{{item.interest|number}}
               </mt-button>
             </p>
             <mt-progress class="progress" :value="10" :bar-height="7"></mt-progress>

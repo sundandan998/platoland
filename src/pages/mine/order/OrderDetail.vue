@@ -58,7 +58,7 @@
         </div>
         <div class="buy-date">
           <p v-if="orderData.other!=null">
-            <span>{{$t('m.counterparty')}</span><span class="fr">{{orderData.other}}</span></p>
+            <span>{{$t('m.counterparty')}}</span><span class="fr">{{orderData.other}}</span></p>
           <p><span>{{$t('m.address')}}</span><span class="fr">{{orderData.other_address}}</span></p>
         </div>
         <!-- <div class="buy-title">

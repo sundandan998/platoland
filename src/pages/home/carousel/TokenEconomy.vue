@@ -8,51 +8,51 @@
     <div class="economy-text">
       <div>
         <p class="title"> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitle')}}？</p>
-        <span>{{$t('m.tokenEconomyOne')}}。</span>
+        <span>{{$t('m.tokenEconomyOne')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleOne')}}？</p>
-        <span>{{$t('m.tokenEconomyTwo')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleOne')}}</p>
+        <span>{{$t('m.tokenEconomyTwo')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleTwo')}}？</p>
-        <span>{{$t('m.tokenEconomyThree')}}。<br>
-          &nbsp;&nbsp;1，{{$t('m.tokenEconomyThree1')}}；<br>
-          &nbsp;&nbsp;2，{{$t('m.tokenEconomyThree2')}}；<br>
-          &nbsp;&nbsp;3，{{$t('m.tokenEconomyThree3')}}。
+        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleTwo')}}</p>
+        <span>{{$t('m.tokenEconomyThree')}}<br>
+          &nbsp;&nbsp;{{$t('m.tokenEconomyThree1')}}<br>
+          &nbsp;&nbsp;{{$t('m.tokenEconomyThree2')}}<br>
+          &nbsp;&nbsp;{{$t('m.tokenEconomyThree3')}}
         </span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleThree')}}？</p>
+        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleThree')}}</p>
         <span>{{$t('m.tokenEconomyFour')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleFour')}}？</p>
-        <span>{{$t('m.tokenEconomyFive')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.tokenEconomyTitleFour')}}</p>
+        <span>{{$t('m.tokenEconomyFive')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleFive')}}？</p>
-        <span>{{$t('m.tokenEconomySix')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleFive')}}</p>
+        <span>{{$t('m.tokenEconomySix')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleSix')}}？</p>
-        <span>{{$t('m.tokenEconomySeven')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleSix')}}</p>
+        <span>{{$t('m.tokenEconomySeven')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleSeven')}}？</p>
-        <span>{{$t('m.tokenEconomyEight')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleSeven')}}</p>
+        <span>{{$t('m.tokenEconomyEight')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleEight')}}？</p>
-        <span>{{$t('m.tokenEconomyNine')}}。</span>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleEight')}}</p>
+        <span>{{$t('m.tokenEconomyNine')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleNine')}}？</p>
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleNine')}}</p>
         <span>{{$t('m.tokenEconomyTen')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleTen')}}？</p>
-        <span class="footer">{{$t('m.tokenEconomyEnd')}}。
+        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleTen')}}</p>
+        <span class="footer">{{$t('m.tokenEconomyEnd')}}
         </span>
       </div>
     </div>
