@@ -2,8 +2,9 @@
   <div class="issuance">
     <div class="release-header header">
       <mt-header fixed :title="$t('m.issuance')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
-        <mt-button v-if="this.$route.params.release" icon="" slot="right" @click.native="token">
+          <!-- v-on:click="$router.go(-1)" -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
+        <mt-button v-if="this.infoData.token_code==detail.token.code" icon="" slot="right" @click.native="token">
           <img src="../../../assets/images/release.svg" alt="">
           <span class="release">{{$t('m.release')}}</span>
         </mt-button>
@@ -27,7 +28,8 @@
           <div class="current-release-token-top">
             <img :src="item.token.icon" alt="" class="fl icon">
             <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
-            <span class="fr publicity-img" v-if="item.status==0"><img src="../../../assets/images/gs.svg" alt="">公示中</span>
+            <span class="fr publicity-img" v-if="item.status==0"><img src="../../../assets/images/gs.svg"
+                alt="">公示中</span>
             <span class="fr issue" v-if="item.status==1"><img src="../../../assets/images/clock.svg" alt="">发行中</span>
           </div>
           <div class="current-release-token-bot">
@@ -75,6 +77,7 @@
       return {
         happeDetail: '',
         balanceToken: '',
+        infoData:'',
         happeParams: {
           page: 1,
           page_size: 10,
@@ -90,6 +93,8 @@
       }
     },
     created() {
+      this.info()
+      console.log(this.$route.params.url)
     },
     mounted() {
       // this.drawLine()
@@ -101,6 +106,24 @@
       ])
     },
     methods: {
+      back(){
+        if(this.$route.params.url=='issuedetail'){
+          this.$router.push({
+            name:'Issued',
+            params:{id:this.$route.params.id}
+          })
+        }else if(this.$route.params.url=='mytoken'){
+          this.$router.push({
+            name:'Certificate',
+            params:{code:this.$route.params.code||this.detail.token.code}
+          }) 
+        }else{
+          this.$router.push({
+            name:'Certificate',
+            params:{code:this.$route.params.code||this.detail.token.code}
+          }) 
+        }
+      },
       // 发行情况
       happening() {
         this.happeParams.code = this.detail.token.code
@@ -118,10 +141,20 @@
 
         })
       },
+      // 用户信息
+      info() {
+        api.getUserInfo().then(res => {
+          this.infoData = res.data
+          window.sessionStorage.setItem('pay_pwd_active', this.infoData.pay_pwd_active)
+          // console.log(this.infoData)
+        }).catch(err => {
+          // console.log(err)
+        })
+      },
       token() {
         this.$router.push({
           name: 'Token',
-          params: { token: this.detail.token, code: this.detail.token.code }
+          params: {token: this.detail.token, code: this.detail.token.code,url:this.$route.params.url,id:this.$route.params.id}
         })
       },
       drawLine() {
@@ -193,7 +226,7 @@
         myChart.setOption(option)
       }
     },
-   
+
   }
 </script>
 <style lang="scss">
@@ -244,19 +277,20 @@
             margin: 25px 20px 0 20px;
           }
 
-           .publicity-img{
+          .publicity-img {
             height: 80px;
             border-top-right-radius: 10px;
             font-size: 26px;
             color: #06B56A;
             margin-right: 40px;
+
             img {
               margin-right: 7px;
               width: 26px;
             }
           }
 
-         .issue {
+          .issue {
             font-size: 26px;
             color: #37A7E1;
             margin-right: 40px;

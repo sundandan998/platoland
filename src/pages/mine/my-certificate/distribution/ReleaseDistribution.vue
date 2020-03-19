@@ -20,7 +20,7 @@
       <mt-field :label="$t('m.perServing')" :placeholder="$t('m.integer')" v-model="releaseParams.step_amount"
         @blur.native.capture="integer">
       </mt-field>
-      <mt-field :label="$t('m.freezeDuration')" :placeholder="$t('m.freezeDuration')+'>'" readonly
+      <mt-field :label="$t('m.freezeDuration')" :placeholder="$t('m.freezeDuration')" readonly
         @click.native="showPicker = true" v-model="releaseParams.freeze_days">天
       </mt-field>
       <van-popup v-model="showPicker" position="bottom">
@@ -146,9 +146,9 @@
       },
       // 最大和最小值
       limit() {
-        if (this.releaseParams.high_part < this.releaseParams.total_part) {
+        if (this.releaseParams.high_part > this.releaseParams.total_part) {
           Toast({
-            message: '最多可购份数大于发行数量',
+            message: '请输入最多可购份数小于发行数量的数',
             className: 'zZindex'
           })
         }
@@ -194,7 +194,11 @@
         // 整数校验
         handler(val) {
          let integerNum = /(^[1-9]\d*$)/
-          if (val.total_part && val.min_part && val.high_part && val.freeze_days && val.air && val.deadline_date != '')
+          if ((val.total_part && val.min_part && val.high_part && val.freeze_days && val.air && val.deadline_date != '')
+          &&(integerNum.test(val.total_part)&&integerNum.test(val.step_amount)&&integerNum.test(val.min_part)&&integerNum.test(val.high_part)
+          &&val.high_part<=val.total_part
+          )
+          )
           {
             this.disabled = false
           } else {

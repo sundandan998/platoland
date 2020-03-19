@@ -10,7 +10,7 @@
     </div>
     <div class="payment">
       <p><span class="fl payment-to">付款给</span> <span class="fr"><span>{{this.$route.params.name}}</span>
-          <p>{{this.$route.params.item.address}}</p>
+          <p>{{this.$route.params.address}}</p>
         </span></p>
     </div>
     <div class="expenditure">
@@ -105,7 +105,7 @@
         if (this.value.length == 6) {
           this.turnOut.token = this.detail.token.code
           this.turnOut.amount = this.$route.params.amount
-          this.turnOut.address = this.$route.params.item.address
+          this.turnOut.address = this.$route.params.address
           this.turnOut.pay_pwd = this.value
           api.outAsset(this.turnOut).then(res => {
             if (res.code == 0) {

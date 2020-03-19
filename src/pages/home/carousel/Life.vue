@@ -50,11 +50,13 @@
 
   .life {
     background-color: #fff;
-
+    width: 100%;
+    height: 100%;
+    position: fixed;
     .life-text {
-      margin: 0 24px;
+      padding: 0 24px;
       padding-bottom: 20px;
-
+      border-top: 7px solid #f2f2f2;
       p {
         font-size: 26px;
         font-weight: 700;

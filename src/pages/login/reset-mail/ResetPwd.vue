@@ -166,7 +166,6 @@
 		height: 100%;
 		background-color: #fff;
 		position: fixed;
-    margin: 0 24px;
     .rest-pass-word-header{
       margin-top: 10px;
     }

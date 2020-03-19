@@ -51,11 +51,11 @@
     </div>
     <!-- 冻结 -->
     <div class="assets-detailed-freeze">
-      <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}">
+      <!-- <router-link :to="{name:'FreezeDetail',params:{code:this.assetsToken.code,id:this.assetsData.id}}"> -->
         <mt-cell :title="$t('m.freezeAmount')" :value="this.assetsData.freeze_amount|number">
           <img slot="icon" src="../../../assets/images/u4666.png">
         </mt-cell>
-      </router-link>
+      <!-- </router-link> -->
       <!-- 上拉加载 -->
       <!-- (0, _('发行买入')),
     (1, _('OTC买入')),
@@ -291,6 +291,7 @@
             this.totalInterest = earnedInterest * interest
               // 当前页面展示的利息
             this.$set(this.freezeData[i], 'totalInterest', (this.totalInterest).toFixed(8))
+            // this.$store.commit('detail', this.totalInterest)
           }
         }
       },

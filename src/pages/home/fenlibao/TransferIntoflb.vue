@@ -52,7 +52,7 @@
       <div class="transfer-num-amount fl">
         <span>{{$t('m.transactionNumber')}} {{transferParams.part*flbData.step_amount}}{{flToken.code}}</span>
         <span>{{$t('m.dividendMaturity')}}
-          {{(transferParams.part*flbData.step_amount*flbData.air/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
+          {{(transferParams.part*flbData.step_amount*(flbData.air/100)/365*flbData.freeze_days).toFixed(2)}}{{flToken.code}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
       <div class="transfer-num-date fr">

@@ -76,12 +76,14 @@
           }
           console.log('1')
           result = result.replace(/\n/g, '')
-          //that.codeUrl = result
+          that.codeUrl = result
           // alert(result)
           this.$router.push({
             name: 'Out',
-            params: { address: result }
+            params: {address: result }
           })
+          // this.$store.commit('detail', result)
+          // console.log(this.address)
           that.closeScan()
           // location.href = result
         }
@@ -128,6 +130,7 @@
       text-align: center;
       color: #333;
     }
+
     .scan-button {
       button {
         background-color: #fff;

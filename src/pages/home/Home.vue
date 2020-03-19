@@ -9,8 +9,8 @@
       <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item> <img src="../../assets/images/banner2.jpg" alt="" @click="life"></van-swipe-item>
         <van-swipe-item> <img src="../../assets/images/banner3.jpg" alt="" @click="token"></van-swipe-item>
-        <!-- <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item>
-        <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
+        <van-swipe-item> <img src="../../assets/images/flb.png" alt=""@click="flb"></van-swipe-item>
+        <!-- <van-swipe-item> <img src="../../assets/images/banner.png" alt=""></van-swipe-item> -->
       </van-swipe>
     </div>
     <!-- 公告消息 -->
@@ -105,8 +105,10 @@
               </span>
               <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}}</p></span>
             </div>
-            <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
-              <van-button class="fr" type="default">{{$t('m.sellNow')}}</van-button>
+
+            <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
+              <!-- <router-link :to="/purchase/+marketInfo.id"> -->
+              <van-button class="fr" type="danger">{{$t('m.buyNow')}}</van-button>
             </router-link>
           </div>
           <div class="home-market-transaction-bot" v-if="marketInfo.publish_type==0">
@@ -115,9 +117,8 @@
                     alt="">{{marketInfo.low_number|number}}</p></span>
               <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}} </p></span>
             </div>
-            <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
-              <!-- <router-link :to="/purchase/+marketInfo.id"> -->
-              <van-button class="fr" type="danger">{{$t('m.buyNow')}}</van-button>
+            <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
+              <van-button class="fr" type="default">{{$t('m.sellNow')}}</van-button>
             </router-link>
           </div>
         </div>
@@ -176,7 +177,9 @@
           let switchName = JSON.parse(sessionStorage.getItem('switch'))
           // 判断session中是否有标记，如果有直接跳到首页，否则跳到登录
           if (switchName == false) {
-            this.$router.push("/home")
+            this.$router.push({
+            name: 'Home'
+          })
           } else {
             this.$router.push({
               name: 'Login'
@@ -240,6 +243,11 @@
       life() {
         this.$router.push({
           name: 'Life'
+        })
+      },
+      flb(){
+        this.$router.push({
+          name: 'Flb'
         })
       },
       //版本升级
@@ -339,6 +347,7 @@
       img {
         width: 100%;
         border-radius: 10px;
+        height:321px;
       }
     }
 
@@ -507,6 +516,7 @@
           button {
             background-color: #1abc9c;
             color: #fff;
+            border:1px solid #1abc9c;
           }
         }
 
@@ -531,6 +541,11 @@
                 margin: 5px 10px 0 0;
               }
             }
+          }
+          button{
+            background-color: #eb4545;
+            color:#fff;
+            border:1px solid #eb4545;
           }
         }
       }

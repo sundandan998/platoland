@@ -1,9 +1,10 @@
 <template>
   <div class="issued-detail">
     <div class="release-header header">
-        <!-- 发行详情 -->
+      <!-- 发行详情 -->
       <mt-header fixed :title="$t('m.releaseDetails')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <!-- v-on:click="$router.go(-1) -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="issued-token">
@@ -31,23 +32,30 @@
       </div>
       <div class="issued-progress progress">
         <mt-progress :value="progress" :bar-height="7"></mt-progress>
-        <div slot="start" class="fl">{{$t('m.sold')}} {{(issuedDetail.sold_number/issuedDetail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
-        <div slot="end" class="fr">{{$t('m.total')}} {{(issuedDetail.first_number/issuedDetail.step_number).toFixed(0)}} {{$t('m.share')}}</div>
+        <div slot="start" class="fl">{{$t('m.sold')}} {{(issuedDetail.sold_number/issuedDetail.step_number).toFixed(0)}}
+          {{$t('m.share')}}</div>
+        <div slot="end" class="fr">{{$t('m.total')}} {{(issuedDetail.first_number/issuedDetail.step_number).toFixed(0)}}
+          {{$t('m.share')}}</div>
       </div>
-      <mt-cell :title="$t('m.perServing')">{{issuedDetail.step_number|number}}{{detailToken.code}}/{{$t('m.share')}}</mt-cell>
-      <mt-cell :title="$t('m.perTotal')">{{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/{{$t('m.share')}}
+      <mt-cell :title="$t('m.perServing')">{{issuedDetail.step_number|number}}{{detailToken.code}}/{{$t('m.share')}}
+      </mt-cell>
+      <mt-cell :title="$t('m.perTotal')">
+        {{issuedDetail.issue_price*issuedDetail.step_number}}{{issuedDetail.denominated_assets}}/{{$t('m.share')}}
       </mt-cell>
     </div>
     <div class="issued-servings">
-        <!--  -->
-      <mt-cell :title="$t('m.purchaseQuantity')" class="radius-top">{{issuedDetail.purchase_number/issuedDetail.step_number}}{{$t('m.share')}}</mt-cell>
-      <mt-cell :title="$t('m.maxServing')" class="radius-bottom">{{issuedDetail.max_purchase_number/issuedDetail.step_number}}{{$t('m.share')}}
+      <!--  -->
+      <mt-cell :title="$t('m.purchaseQuantity')" class="radius-top">
+        {{issuedDetail.purchase_number/issuedDetail.step_number}}{{$t('m.share')}}</mt-cell>
+      <mt-cell :title="$t('m.maxServing')" class="radius-bottom">
+        {{issuedDetail.max_purchase_number/issuedDetail.step_number}}{{$t('m.share')}}
       </mt-cell>
     </div>
     <div class="issued-servings time">
-  <mt-cell :title="$t('m.lockIn')" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
+      <mt-cell :title="$t('m.lockIn')" :value="issuedDetail.equity_issuance_ratio+'%'" class="radius-top"></mt-cell>
       <mt-cell :title="$t('m.startTime')" :value="issuedDetail.publish_time"></mt-cell>
-      <router-link :to="{name:'Issuance'}">
+      <mt-cell title="结束时间" :value="issuedDetail.end_time"></mt-cell>
+      <router-link :to="{name:'Issuance',params:{url:'issuedetail',id:issuedDetail.id}}">
         <mt-cell :title="$t('m.issuance')" :value="$t('m.view')" is-link class="issued-view radius-bottom "></mt-cell>
       </router-link>
     </div>
@@ -80,6 +88,11 @@
       this.info()
     },
     methods: {
+      back(){
+        this.$router.push({
+          name:'Home'
+        })
+      },
       // 详情接口
       issued() {
         api.issuedDetail({ id: this.$route.params.id }).then(res => {
@@ -198,13 +211,15 @@
       }
 
     }
-    .time{
+
+    .time {
       margin-bottom: 100px;
     }
+
     .transfer-button {
       position: fixed;
       width: 100%;
-      bottom:10px;
+      bottom: 10px;
     }
   }
 </style>

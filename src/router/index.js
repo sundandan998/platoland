@@ -75,6 +75,12 @@ export default new Router({
       name: 'Life',
       component: () => import("@/pages/home/carousel/Life")
     },
+     // 轮播图--分利宝说明
+     {
+      path: '/flb',
+      name: 'Flb',
+      component: () => import("@/pages/home/carousel/Flb")
+    },
     // 发行详情
     {
       path: '/issued/:id',
@@ -394,6 +400,7 @@ export default new Router({
       name: 'Description',
       component: () => import("@/pages/home/detail/UtilityDescription")
     },
+   
     //首页--通证列表
     {
       path: '/list',

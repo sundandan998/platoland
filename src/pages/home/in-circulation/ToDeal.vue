@@ -91,6 +91,7 @@
     },
     created() {
       this.dealList()
+      console.log(this.$route.params.code)
     },
     computed: {
       refpath() {

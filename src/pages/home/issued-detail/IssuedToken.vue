@@ -2,7 +2,8 @@
   <div class="issued-token">
     <div class="issued-token-header">
       <mt-header fixed title="发行通证">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+        <!-- v-on:click="$router.go(-1) -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="issued-token-code">
@@ -23,7 +24,7 @@
           </mt-cell>
         </router-link>
         <!--  -->
-        <mt-field label="单价" @blur.native.capture="price" placeholder="请输入整数" v-model="issuedParams.price">
+        <mt-field label="单价" @blur.native.capture="price" placeholder="请输入单价" v-model="issuedParams.price">
           <span>{{this.$route.params.assets}}</span>
         </mt-field>
         <!-- <mt-field v-if="this.issuedDate.last_issue_price==null" label="单价" @blur.native.capture="price" placeholder="请输入的单价大于0"
@@ -32,8 +33,8 @@
       </div>
       <div class="issued-token-num distance">
         <!--  -->
-        <mt-field @blur.native.capture="integer" label="发行份数" placeholder="请输入大于100的整数"
-          v-model="issuedParams.total_part"><span>份</span></mt-field>
+        <mt-field @blur.native.capture="integer" label="发行份数" placeholder="请输入整数" v-model="issuedParams.total_part">
+          <span>份</span></mt-field>
         <!-- -->
         <mt-field @blur.native.capture="num" label="每份数量" placeholder="请输入整数" v-model="issuedParams.step_number">
         </mt-field>
@@ -56,25 +57,26 @@
       </div>
       <div class="issued-token-date">
         <!-- 开始日期 -->
-        <mt-field v-if="this.issuedDate.last_end_date==null" label="开始日期" placeholder="选择发行开始日期">
+        <!-- <mt-field v-if="this.issuedDate.last_end_date==null" label="开始日期" placeholder="选择发行开始日期"> -->
+        <mt-field @blur.native.capture="createTime" class="date" type="date" v-model="issuedParams.start_date"
+          label="开始日期">
+        </mt-field>
+        <!-- </mt-field> -->
+        <!-- <mt-field v-if="this.issuedDate.last_end_date!=null" label="开始日期"
+          :placeholder="'必须大于'+this.issuedDate.last_end_date" readonly>
           <mt-field class="date" type="date" v-model="issuedParams.start_date">
           </mt-field>
-        </mt-field>
-        <mt-field v-if="this.issuedDate.last_end_date!=null" label="开始日期"
-          :placeholder="'必须大于'+this.issuedDate.last_end_date">
-          <mt-field class="date" type="date" v-model="issuedParams.start_date">
-          </mt-field>
-        </mt-field>
+        </mt-field> -->
         <!-- 结束日期 -->
-        <mt-field class="date" v-if="issuedParams.start_date!=''" label="结束日期"
-          :placeholder="'必须大于'+this.issuedParams.start_date">
+        <!-- <mt-field class="date" v-if="issuedParams.start_date!=''" label="结束日期"
+          :placeholder="'必须大于'+this.issuedParams.start_date"readonly>
           <mt-field class="date" type="date" v-model="issuedParams.end_date">
           </mt-field>
+        </mt-field> -->
+        <!-- <mt-field class="date" v-if="issuedParams.start_date==''" label="结束日期" placeholder="选择发行结束日期在开始日期之后"> -->
+        <mt-field @blur.native.capture="endTime" class="date" type="date" v-model="issuedParams.end_date" label="结束日期">
         </mt-field>
-        <mt-field class="date" v-if="issuedParams.start_date==''" label="结束日期" placeholder="选择发行结束日期在开始日期之后">
-          <mt-field class="date" type="date" v-model="issuedParams.end_date">
-          </mt-field>
-        </mt-field>
+        <!-- </mt-field> -->
         <!--  -->
         <mt-field label="锁定股权" placeholder="大于0" v-model="issuedParams.equity"><span>%</span></mt-field>
         <!--  -->
@@ -140,9 +142,15 @@
       this.date()
     },
     methods: {
+      back() {
+        this.$router.push({
+          name: 'Issuance',
+          params: { url: this.$route.params.url, id: this.$route.params.id, code: this.$route.params.code }
+        })
+      },
       // 余额
       balance() {
-        api.balance({ token_code: this.$route.params.code}).then(res => {
+        api.balance({ token_code: this.$route.params.code }).then(res => {
           if (res.code == 0) {
             this.balanceData = res.data
             this.$store.commit('detail', res.data)
@@ -160,6 +168,23 @@
       },
       onDelete() {
         this.value = this.value.slice(0, this.value.length - 1)
+      },
+      // 开始时间
+      createTime() {
+        if (this.issuedParams.start_date < this.issuedDate.last_end_date) {
+          Toast({
+            message: '请输入的开始日期大于' + this.issuedDate.last_end_date,
+            className: 'zZindex'
+          })
+        }
+      },
+      endTime() {
+        if (this.issuedParams.end_date < this.issuedParams.start_date) {
+          Toast({
+            message: '请输入的结束日期大于' + this.issuedParams.start_date,
+            className: 'zZindex'
+          })
+        }
       },
       release() {
         if (this.detail.available_amount > 0) {
@@ -259,7 +284,9 @@
         immediate: true,
         deep: true,
         handler(val) {
-          if (val.price && val.total_part && val.step_number && val.freeze_days && val.start_date && val.end_date && val.equity && val.min_buy_part && val.max_buy_part != '') {
+          if ((val.price && val.total_part && val.step_number && val.freeze_days && val.start_date && val.end_date && val.equity && val.min_buy_part && val.max_buy_part != '')
+            && (val.start_date > this.issuedDate.last_end_date) && (val.end_date > this.issuedParams.start_date)
+          ) {
             this.disabled = false
           } else {
             this.disabled = true
@@ -320,12 +347,10 @@
 
     .issued-token-date {
       margin-bottom: 150px;
+    }
 
-      .date {
-        .mint-cell-title {
-          width: 70%;
-        }
-      }
+    input.mint-field-core {
+      background-color: #fff !important;
     }
   }
 </style>

@@ -295,14 +295,18 @@
         </div>
         <div class="buy-content">
           <p>{{orderData.amount|number}} {{orderData.token}}</p>
+          <!-- <p> <span>已产生收益</span> <span class="fr">{{(this.detail).toFixed(8)}}</span></p> -->
           <!-- <p><span>支付总额</span><span class="fr">{{orderData.total_amount}}</span></p> -->
           <!-- <p><span>手续费</span><span class="fr">{{orderData.fee}} {{orderData.token}}</span></p> -->
         </div>
         <div class="buy-numbering">
           <p><span>{{$t('m.orderNumber')}}</span><span class="fr">{{orderData.order_id}}</span></p>
           <!-- <p><span>单价</span><span class="fr">{{orderData.price}} {{orderData.exchange_token}}</span></p> -->
-          <p><span>{{$t('m.quantity')}}</span><span class="fr">{{orderData.amount}} {{orderData.token}}</span></p>
-          <p><span>{{$t('m.orderTime')}}</span><span class="fr">{{orderData.transaction_time}}</span></p>
+          <p><span>锁仓数量</span><span class="fr">{{orderData.amount|number}} {{orderData.token}}</span></p>
+          <p><span>全部收益</span><span class="fr"> {{orderData.interest}}</span></p>
+          <p><span>冻结时长</span><span class="fr"> {{orderData.freeze_days}} 天</span></p>
+          <p><span>到期时间</span><span class="fr"> {{orderData.unfreeze_date}}</span></p>
+          <p><span>分利率</span><span class="fr"> {{orderData.air}} %</span></p>
         </div>
         <!-- <div class="buy-date">
           <p><span>交易方</span><span class="fr">{{orderData.other}}</span></p>
@@ -332,6 +336,7 @@
   import { MessageBox } from 'mint-ui'
   import api from "@/api/user/User.js"
   import { toast } from '@/assets/js/pub.js'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -351,6 +356,7 @@
     },
     created() {
       this.orderDetail()
+      // console.log(this.detail)
     },
     methods: {
       onInput(key) {
@@ -406,6 +412,11 @@
           }
         })
       },
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     },
     // 去支付
     watch: {

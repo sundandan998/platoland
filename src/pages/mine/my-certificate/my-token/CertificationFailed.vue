@@ -15,9 +15,7 @@
     </div>
     <p class="reason">原因</p>
     <div class="failed-reason">
-      <p>转出地址与线下签约填写地址不一致</p>
-      <p>该转出地址已被认证</p>
-      <p> 未查询到该转出地址</p>
+      <p>{{this.$route.params.remark}}</p>
     </div>
     <div class="failed-button">
       <router-link to="/tokenlist">

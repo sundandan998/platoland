@@ -59,7 +59,6 @@
           if (res.code == 0) {
             this.$router.push({
               name: 'CertificationToken',
-              // c
               params: { order_id: res.data.order_id, token: res.data.token, address: res.data.user_address }
             })
           }

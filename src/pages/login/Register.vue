@@ -33,7 +33,8 @@
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
               <img src="../../assets/images/code.svg" alt="" class="login-icon">
-              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')"></el-input>
+              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')">
+              </el-input>
             </el-form-item>
           </el-form>
         </van-tab>
@@ -57,7 +58,8 @@
             <!-- 邀请码 -->
             <el-form-item prop="invite_code">
               <img src="../../assets/images/code.svg" alt="" class="login-icon">
-              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')"></el-input>
+              <el-input v-model="verification.invite_code" autocomplete="off" :placeholder="$t('m.registerCode')">
+              </el-input>
             </el-form-item>
           </el-form>
         </van-tab>
@@ -65,7 +67,7 @@
     </div>
     <div class="login-checkbox">
       <span>
-          {{$t('m.agree')}}
+        {{$t('m.agree')}}
         <router-link to="agreement">
           <a href="">《{{$t('m.userAgreement')}}》</a>
         </router-link>
@@ -170,39 +172,49 @@
     },
     methods: {
       register() {
-        // 检测邀请码是否正确
-        api.inviteCode(this.verification).then(res => {
-          if (res.code == 0) {
-            this.router()
-            // 发送信息
-            let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-            if (reg.test(this.verification.email)) {
-              this.action.account_type = 1
-              this.action.action = 2
-              //发送邮箱
-              this.email.email = this.verification.email
-              api.email(this.email).then(res => {
-                toast(res)
-              }).catch(err => {
+        // 判断用户是否注册过
+        api.is_use({ username: this.verification.tel || this.verification.email }).then(res => {
+          // 判断用户是否注册过
+          if (res.is_use == true) {
+            toast(res)
+          } else {
+            // 检测邀请码是否正确
+            api.inviteCode(this.verification).then(res => {
+              if (res.code == 0) {
+                this.router()
+                let reg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+                if (reg.test(this.verification.email)) {
+                  this.action.account_type = 1
+                  this.action.action = 2
+                  //发送邮箱
+                  this.email.email = this.verification.email
+                  api.email(this.email).then(res => {
+                    toast(res)
+                  }).catch(err => {
+                    toast(err)
+                  })
+                } else {
+                  // 发送短信
+                  this.action.account_type = 0
+                  this.action.action = 1
+                  this.sms.mobile = this.verification.tel
+                  api.sms(this.sms).then(res => {
+                    toast(res)
+                  }).catch(err => {
+                    toast(err)
+                  })
+                }
+              }
+            }).catch(err => {
+              if (err.code == 4003) {
                 toast(err)
-              })
-            } else {
-              // 发送短信
-              this.action.account_type = 0
-              this.action.action = 1
-              this.sms.mobile = this.verification.tel
-              api.sms(this.sms).then(res => {
-                toast(res)
-              }).catch(err => {
-                toast(err)
-              })
-            }
+              }
+            })
           }
         }).catch(err => {
-          if (err.code == 4003) {
-            toast(err)
-          }
+
         })
+
       },
       router() {
         this.$router.push({
@@ -243,9 +255,10 @@
 
   .register {
     width: 100%;
-		height: 100%;
-		background-color: #fff;
-		position: fixed;
+    height: 100%;
+    background-color: #fff;
+    position: fixed;
+
     input.el-input__inner {
       position: relative;
       left: 10px;

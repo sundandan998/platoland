@@ -26,10 +26,11 @@
 							</mt-cell>
 						</div>
 						<div class="mine-our mine-border-radius">
-							<mt-cell :title="$t('m.version')" is-link class="mine-cell-list">
+								<!-- @click.native="version" -->
+							<mt-cell :title="$t('m.version')" is-link class="mine-cell-list" >
 								<img slot="icon" src="../../assets/images/bb.svg" alt="" />
-								<img  src="../../assets/images/new.svg" alt="" class="fr">
-								<span class="version"> v{{this.$version()}}</span>
+								<!-- <img  src="../../assets/images/new.svg" alt="" class="fr"> -->
+								<span class="version"> V {{this.$version()}}</span>
 							</mt-cell>
 							<mt-cell :title="$t('m.aboutUs')" to="/about" is-link class="mine-cell-list">
 								<img slot="icon" src="../../assets/images/gy.svg" alt="" />
@@ -76,6 +77,12 @@
 			this.info()
 		},
 		methods: {
+			// // 升级提示
+			// version(){
+			// 	if(this.$version()==this.$version()){
+
+			// 	}
+			// },
 			// 用户信息
 			info() {
 				api.getUserInfo().then(res => {
@@ -119,6 +126,9 @@
 						} else if (res.data.order_status == 3) {
 							this.$router.push({
 								name: 'Failed',
+								params: {
+									remark: res.data.remark
+								}
 							})
 						}
 					}).catch(err => {

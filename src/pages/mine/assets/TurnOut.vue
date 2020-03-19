@@ -24,7 +24,7 @@
     <div class="payment-input">
       <p>{{$t('m.payTo')}}</p>
       <mt-field type="text" v-model="this.$route.params.name"  readonly="readonly">
-        <router-link :to="{name:'Book',params:{name:this.detail.token.name,icon:this.detail.token.icon,token_code:this.detail.token.code,id:'out',nickname:this.detail.token.nickname,subject:this.detail.token.subject,}}">
+        <router-link :to="{name:'Book',params:{name:this.detail.token.name,icon:this.detail.token.icon,token_code:this.detail.token.code,id:'out',nickname:this.detail.token.nickname,subject:this.detail.token.subject}}">
           <img src="../../../assets/images/book.png" alt="" />
           <router-link to="/scan">
             <img src="../../../assets/images/scan.svg" alt="" />
@@ -53,8 +53,9 @@
       <p class="expenditure"><span class="fl">{{$t('m.actualExpenditure')}}</span><span
           class="fr cost">{{Number(turnOut.amount)+Number(this.detail.token.fee)}}
           ({{this.detail.token.code}})</span></p>
-      <router-link :to="{name:'OutConfirm',params:{detail: this.detail,item:this.$route.params.item,amount:turnOut.amount,name:this.$route.params.name}}">
-        <mt-button type="primary" size="large" :disabled="disabled">{{$t('m.sure')}}</mt-button>
+      <router-link :to="{name:'OutConfirm',params:{address:this.$route.params.address,detail: this.detail,amount:turnOut.amount,name:this.$route.params.name}}">
+      <!-- <router-link :to="{name:'OutConfirm'}"> -->
+        <mt-button type="primary" size="large" :disabled="disabled" >{{$t('m.sure')}}</mt-button>
       </router-link>
     </div>
   </div>
@@ -84,7 +85,6 @@
     },
     created() {
       this.addAddress = this.$route.params
-      // console.log()
     },
     computed: {
       ...mapGetters([

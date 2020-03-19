@@ -2,7 +2,8 @@
   <div class="token">
     <div class="token-header header">
       <mt-header fixed :title="$t('m.myToken')">
-        <mt-button icon="back" slot="left" v-on:click="$router.go(-1)">{{$t('m.back')}}</mt-button>
+          <!-- v-on:click="$router.go(-1) -->
+        <mt-button icon="back" slot="left" @click="back">{{$t('m.back')}}</mt-button>
       </mt-header>
     </div>
     <div class="token-detail">
@@ -35,7 +36,7 @@
           </router-link>
         </div>
       </div>
-      <router-link :to="{name:'Issuance',params:{release:'show'}}">
+      <router-link :to="{name:'Issuance',params:{release:'show',url:'mytoken'}}">
         <mt-cell title="最近发行" is-link v-if="this.issuedList!=[]">{{$t('m.all')}}</mt-cell>
       </router-link>
       <div class="home-pub-token" v-if="this.issuedList!=[]">
@@ -136,6 +137,11 @@
           }
         }).catch(err => {
           toast(err)
+        })
+      },
+      back(){
+        this.$router.push({
+          name:'Mine'
         })
       },
       // 分利列表
