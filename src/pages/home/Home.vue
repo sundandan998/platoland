@@ -98,27 +98,27 @@
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
         <div v-for="marketInfo in item.info">
-          <div class="home-market-transaction-con" v-if="marketInfo.publish_type==1">
+          <div class="home-market-transaction-con" v-if="marketInfo.publish_type==0">
             <div class="fl home-market-transaction-num">
               <span class="fl">{{$t('m.purchasePrice')}}<p> <img :src="marketInfo.d_icon"
-                    alt="">{{marketInfo.high_number|number}} </p>
+                    alt="">{{marketInfo.price|number}} </p>
               </span>
               <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}}</p></span>
             </div>
-
-            <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
               <!-- <router-link :to="/purchase/+marketInfo.id"> -->
-              <van-button class="fr" type="danger">{{$t('m.buyNow')}}</van-button>
+            <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
+
+              <van-button class="fr" type="danger">{{$t('m.sellNow')}}</van-button>
             </router-link>
           </div>
-          <div class="home-market-transaction-bot" v-if="marketInfo.publish_type==0">
+          <div class="home-market-transaction-bot" v-if="marketInfo.publish_type==1">
             <div class="fl home-market-transaction-bot-num">
               <span class="fl">{{$t('m.AskingPrice')}}<p> <img :src="marketInfo.d_icon"
-                    alt="">{{marketInfo.low_number|number}}</p></span>
+                    alt="">{{marketInfo.price|number}}</p></span>
               <span class="fr">{{$t('m.quantity')}}<p>{{marketInfo.amount|number}} </p></span>
             </div>
-            <router-link :to="{name:'Sell',params:{id:marketInfo.id,code:marketInfo.token.code}}">
-              <van-button class="fr" type="default">{{$t('m.sellNow')}}</van-button>
+            <router-link :to="{name:'PurchasePass',params:{id:marketInfo.id,code:marketInfo.token.code}}">
+              <van-button class="fr" type="default">{{$t('m.buyNow')}}</van-button>
             </router-link>
           </div>
         </div>
