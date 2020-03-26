@@ -22,26 +22,6 @@
         <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.lifeSix')}}</p>
         <span>  {{$t('m.lifeSeven')}}</span>
       </div>
-      <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.lifeEight')}} </p>
-        <span> {{$t('m.lifeNine')}}</span>
-      </div>
-      <div>
-        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.lifeTen')}}</p>
-        <span>{{$t('m.lifetitleOne')}}</span>
-      </div>
-      <div>
-        <p> <img src="../../../assets/images/point.svg" alt=""> {{$t('m.lifetitleTwo')}}</p>
-        <span class="footer">
-            {{$t('m.lifeFooterOne')}}<br>
-            {{$t('m.lifeFooterTwo')}}<br>
-            {{$t('m.lifeFooterThree')}}<br>
-           {{$t('m.lifeFooterFour')}} <br>
-          &nbsp;&nbsp;1）{{$t('m.lifeFooterFive')}} <br>
-          &nbsp;&nbsp;2）{{$t('m.lifeFooterSix')}}<br>
-          &nbsp;&nbsp;3）{{$t('m.lifeFooterSeven')}} 
-        </span>
-      </div>
     </div>
   </div>
 </template>
@@ -52,7 +32,6 @@
     background-color: #fff;
     width: 100%;
     height: 100%;
-    position: fixed;
     .life-text {
       padding: 0 24px;
       padding-bottom: 20px;

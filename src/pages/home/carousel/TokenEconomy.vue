@@ -39,16 +39,8 @@
         <span>{{$t('m.tokenEconomySeven')}}</span>
       </div>
       <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleSeven')}}</p>
-        <span>{{$t('m.tokenEconomyEight')}}</span>
-      </div>
-      <div>
         <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleEight')}}</p>
         <span>{{$t('m.tokenEconomyNine')}}</span>
-      </div>
-      <div>
-        <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleNine')}}</p>
-        <span>{{$t('m.tokenEconomyTen')}}</span>
       </div>
       <div>
         <p> <img src="../../../assets/images/point.svg" alt="">{{$t('m.tokenEconomyTitleTen')}}</p>
