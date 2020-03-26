@@ -57,7 +57,7 @@
       </div>
       <div class="transfer-num-date fr">
         <span>{{$t('m.availableCopies')}} {{(balanceData.available_amount/flbData.step_amount|number)}}</span>
-        <span>{{$t('m.thawDay')}} {{flbData.deadline_date}}</span>
+        <span>{{$t('m.thawDay')}} {{unfreeze_date}}</span>
         <!-- <span v-html="'到期日期'+flbData.create_time.substr(0,11)"></span> -->
       </div>
     </div>
@@ -79,6 +79,7 @@
 </template>
 <script>
   import api from "@/api/token/Token.js"
+  import {dateToStr} from "@/utils/util.js"
   import { toast } from '@/assets/js/pub.js'
   import { Toast } from 'mint-ui'
   import { mapGetters } from 'vuex'
@@ -91,7 +92,7 @@
         flbData: '',
         flToken: '',
         balanceData: '',
-        disabled: true,
+        disabled: false,
         times: '',
         date: '',
         we: '',
@@ -127,24 +128,27 @@
       },
       transfer() {
         this.value = ''
-        if (this.flToken.code == this.infoData.token_code) {
-          Toast({
-            message: '不能购买自己发布的分利计划',
-            className: 'zZindex'
-          })
-        } else if (this.transferParams.part > this.flbData.high_amount) {
-          Toast({
-            message: '最多转入' + this.flbData.high_amount / this.flbData.step_amount + '份',
-            className: 'zZindex'
-          })
-        } else if (this.transferParams.part < this.flbData.min_amount / this.flbData.step_amount) {
-          Toast({
-            message: '最少转入' + this.flbData.min_amount / this.flbData.step_amount + '份',
-            className: 'zZindex'
-          })
-        } else {
+        let msg = this.validate()
+        if(msg ==''){
           this.popupVisible = true
+        }else{
+        Toast({
+            message: msg,
+            className: 'zZindex'
+          })
         }
+      },
+      validate(){
+        if (this.flToken.code == this.infoData.token_code) {
+          return '不能购买自己发布的分利计划'
+          }
+        if (this.transferParams.part > this.flbData.high_amount){
+          return '最多转入' + this.flbData.high_amount / this.flbData.step_amount + '份'
+        }
+        if (this.transferParams.part < this.flbData.min_amount / this.flbData.step_amount){
+          return '最少转入' + this.flbData.min_amount / this.flbData.step_amount + '份'
+        }
+          return ''
       },
       flbDetail() {
         // debugger
@@ -165,7 +169,7 @@
       prompt() {
         this.$messagebox({
           title: '分利率',
-          message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/360 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/360',
+          message: '分利率是指，转入分利宝期限为一年所获的收益率。实际获得的收益计算公式为：本金×分利率×投资天数/365 , 例如，A通证分利宝活动标明的分利率是24%，而其冻结时长为30天。您如果转入10000元，那么您的收益为= 10000*24%*30/365',
           confirmButtonText: '我知道了',
         })
       },
@@ -232,36 +236,19 @@
         immediate: true,
         deep: true,
         handler(val) {
-          // if (val.part != '' && (val.part < this.flbData.high_amount / this.flbData.step_amount || val.part > this.flbData.min_amount / this.flbData.step_amount)) {
-          //   Toast({
-          //     message: '转入份数限额为' + this.flbData.min_amount / this.flbData.step_amount + '~' + this.flbData.high_amount / this.flbData.step_amount + '份',
-          //     className: 'zZindex'
-          //   })
-          //   this.disabled = false
-          // } else {
-          //   this.disabled = true
-          // }
-          // 
-          if (val.part != ''&&(val.part <= this.flbData.high_amount / this.flbData.step_amount) && (val.part >= this.flbData.min_amount / this.flbData.step_amount)) {
-            // Toast({
-            //   message: '转入份数限额为' + this.flbData.min_amount / this.flbData.step_amount + '~' + this.flbData.high_amount / this.flbData.step_amount + '份',
-            //   className: 'zZindex'
-            // })
-            this.disabled = false
-          }else{
-            this.disabled = true
-            Toast({
-              message: '请输入正确的转出数量',
-              className: 'zZindex'
-            })
+          
           }
-        }
       },
     },
     computed: {
       ...mapGetters([
         'detail'
-      ])
+      ]),
+      unfreeze_date(){
+        let date = new Date()
+        date.setDate(new Date().getDate()+this.flbData.freeze_days)
+        return dateToStr(date)
+      },
     }
   }
 </script>

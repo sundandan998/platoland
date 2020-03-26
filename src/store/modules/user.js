@@ -1,4 +1,6 @@
 import api from "@/api/user/User.js"
+import {setToken} from "@/utils/util.js"
+
 let webTokenExpiredTime = 60 * 60 * 1000 // 前端控制，如果两个小时没有操作，退出登录。
 const user = {
   state: {
@@ -9,8 +11,8 @@ const user = {
   },
   mutations: {
     SET_TOKEN: (state, token) => {
-      state.token = token;
-      window.localStorage.setItem("token", token);
+      state.token = token
+      setToken(token)
     },
     SET_USERINFO: (state, userInfo) => {
       state.userInfo = userInfo;
@@ -44,6 +46,7 @@ const user = {
       commit("SET_TOKENEXPIREDTIME", tokenExpiredTime);
     },
     loginByCode({ dispatch, commit }, userInfo) {
+      window.localStorage.setItem("switch",userInfo.model)
       return new Promise((resolve, reject) => {
         api.loginByCode(userInfo).then(response => {
             // let nowTime = new Date().getTime();

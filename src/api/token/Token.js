@@ -97,6 +97,14 @@ export default {
             data: params
         })
     },
+      // 领取收益
+      unfreeze(params = {}){
+        return request({
+          url: "/token/fl/"+ params.id + "/unfreeze/",
+          method: "post",
+          data: params
+        })
+      },
     // 发行详情
     issuedDetail(params = {}) {
         return request({

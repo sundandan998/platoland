@@ -23,7 +23,7 @@
 		</div>
 		<div class="purchase-pass-input">
 			<van-tabs @click="index">
-				<van-tab :title="$t('m.buy')">
+				<van-tab :title="$t('m.buy2')">
 					<span class="purchase-pass-input-title">{{$t('m.quantity')}}</span>
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">{{$t('m.price')}}</span>
@@ -38,7 +38,7 @@
 							class="purchase-pass-quota-input"></mt-field>
 					</div>
 				</van-tab>
-				<van-tab :title="$t('m.sell')">
+				<van-tab :title="$t('m.sell2')">
 					<span class="purchase-pass-input-title">{{$t('m.quantity')}}</span>
 					<mt-field type="number" v-model="releaseData.amount"></mt-field>
 					<span class="purchase-pass-input-title">{{$t('m.price')}}</span>

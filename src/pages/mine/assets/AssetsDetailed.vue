@@ -145,11 +145,11 @@
             <p class="flow_type">{{item.flow_type}}</p>
             <p><span class="buy-amount">{{item.amount|number}}</span><span class="fr buy-amount"></span>
               <mt-button v-if="item.can_take==true" @click="income(item)" size="small" type="danger" class="fr collect">
-                点击领取+{{item.interest}}
+                领取收益
               </mt-button>
               <!-- v-for="items in arrList" -->
               <!-- <div > -->
-              <p class="fr income">收益 {{item.totalInterest}}</p>
+              <p class="fr income" v-if="item.can_take==false" >已获收益 {{item.totalInterest}}</p>
               <!-- </div> -->
             </p>
             <mt-progress class="progress" :value="item.reultPoint" :bar-height="7"></mt-progress>
@@ -188,6 +188,8 @@
 </template>
 <script>
   import api from "@/api/user/User.js"
+  import BigNumber from "bignumber.js"
+  import tokenApi from "@/api/token/Token.js"
   import { toast } from '@/assets/js/pub.js'
   import { mapGetters } from 'vuex'
   export default {
@@ -269,29 +271,26 @@
         // console.log(timerData)
         for (let i = 0; i < this.freezeData.length; i++) {
           if (this.freezeData[i].flow_type == '分利宝') {
-            // console.log(this.allArr[i])
             // 创建时间
-            let createTime = Date.parse(this.freezeData[i].transaction_time.split(' ')[0])
-            // let createTime = res.data[i].transaction_time
-            // this.createDate = createTime
+            let createTime = Date.parse(this.freezeData[i].transaction_time)
             // 当前时间
-            let timestamp = Date.parse(new Date())
-            //过去的天数
-            let useDay = (timestamp - createTime) / (24 * 60 * 60 * 1000)
-            // 过去的秒数
-            let earnedInterest = useDay * 24 * 60 * 60
-            // 结束时间
-            let unfreeze_date = Date.parse(this.freezeData[i].unfreeze_date)
-            //总天数
-            let allDay = Math.ceil((unfreeze_date - createTime) / (24 * 60 * 60 * 1000))
-            let interest = this.freezeData[i].interest / allDay / 24 / 60 / 60
-            //过去的时间百分比
-            let reultPoint = (useDay / allDay) * 100
+            let timestamp = new Date().getTime()
 
-            this.totalInterest = earnedInterest * interest
+            let unfreeze_date = Date.parse(this.freezeData[i].unfreeze_date)
+            //已发生时间
+            let useSecond = BigNumber((timestamp - createTime) / 1000)
+            //剩余时间
+            let remainSecond = BigNumber((unfreeze_date - timestamp) / 1000)
+
+            if(remainSecond > 0){
+            this.totalInterest = useSecond.multipliedBy(this.freezeData[i].air / 100).dividedBy(365).multipliedBy(this.freezeData[i].amount).dividedBy(24).dividedBy(60).dividedBy(60) 
               // 当前页面展示的利息
-            this.$set(this.freezeData[i], 'totalInterest', (this.totalInterest).toFixed(8))
+            this.$set(this.freezeData[i], 'totalInterest', this.totalInterest.toFixed(4))
             // this.$store.commit('detail', this.totalInterest)
+            }else{
+              this.freezeData[i].can_take = true
+            }
+            
           }
         }
       },
@@ -303,8 +302,10 @@
       // 收取利息
       income(item) {
         // this.interest++
-        this.$messagebox({
-          message: '+' + this.interest + '<p>分利宝分利领取成功啦</p>',
+        tokenApi.unfreeze({ id: item.order_id }).then(res => {
+          if (res.code == 0) {
+              this.$messagebox({
+          message: '+' + item.interest + '<p>分利领取成功</p>',
           cancelButtonText: '返回资产',
           confirmButtonText: '查看详情',
           showCancelButton: true
@@ -314,8 +315,18 @@
               name: 'OrderDetail',
               params: { order_id: item.order_id }
             })
+          }else{
+            //删除该项元素
+            this.freezeData.splice(this.freezeData.findIndex(item => item.id === item.id), 1)
           }
         })
+          }
+        
+        }).catch(err => {
+              if (err.code == 4001) {
+                toast(err)
+              }
+            })
       },
       // 资产详情
       assetDetail() {

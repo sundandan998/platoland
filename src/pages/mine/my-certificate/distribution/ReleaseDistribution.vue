@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="release-item">
-      <mt-field :label="$t('m.numberOfReleases')" placeholder="请输入整数" v-model="releaseParams.total_part"
+      <mt-field :label="$t('m.numberOfReleases')" :placeholder="$t('m.integer')" v-model="releaseParams.total_part"
         @blur.native.capture="num">{{$t('m.share')}}
       </mt-field>
       <mt-field :label="$t('m.perServing')" :placeholder="$t('m.integer')" v-model="releaseParams.step_amount"
@@ -139,22 +139,22 @@
       num() {
         if (this.releaseParams.total_part < 100) {
           Toast({
-            message: '输入的份数大于100',
+            message: '输入的份数须大于100',
             className: 'zZindex'
           })
         }
       },
       // 最大和最小值
       limit() {
-        if (this.releaseParams.high_part > this.releaseParams.total_part) {
+        if (parseInt(this.releaseParams.high_part) > parseInt(this.releaseParams.total_part)) {
           Toast({
-            message: '请输入最多可购份数小于发行数量的数',
+            message: '最多可购份数须小于发行数',
             className: 'zZindex'
           })
         }
         if (this.releaseParams.high_part < 0) {
           Toast({
-            message: '输入的份数大于0的数',
+            message: '输入的份数须大于0',
             className: 'zZindex'
           })
         }
@@ -162,7 +162,7 @@
       air() {
         if (!(this.releaseParams.air < 200 && this.releaseParams.air > 0)) {
           Toast({
-            message: '年化利率在0%~200%',
+            message: '年化利率应在0%~200%',
             className: 'zZindex'
           })
         }
@@ -196,7 +196,7 @@
          let integerNum = /(^[1-9]\d*$)/
           if ((val.total_part && val.min_part && val.high_part && val.freeze_days && val.air && val.deadline_date != '')
           &&(integerNum.test(val.total_part)&&integerNum.test(val.step_amount)&&integerNum.test(val.min_part)&&integerNum.test(val.high_part)
-          &&val.high_part<=val.total_part
+          &&parseInt(val.high_part)<=parseInt(val.total_part)
           )
           )
           {

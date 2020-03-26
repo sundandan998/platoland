@@ -3,6 +3,7 @@ import qs from "qs"
 // import { message } from "ant-design-vue";
 import store from "@/store/index"
 import baseURL from "./baseURL"
+import {getToken,clearToken} from "@/utils/util.js"
 import router from "@/router/index.js"
 import NProgress from "nprogress";
 import 'nprogress/nprogress.css'
@@ -39,8 +40,9 @@ service.interceptors.request.use(
     // config.headers["Accept-Language"] ="ko"
     // zh-hans
     config.headers["Accept-Language"] = "zh-hans"
-    if (store.getters.token) {
-      config.headers["Authorization"] = "JWT " + store.getters.token
+    const token = getToken()
+    if (token) {
+      config.headers["Authorization"] = "JWT " + token
     }
     if (config.loading) {
       store.dispatch("setLoading", true)
@@ -55,7 +57,7 @@ service.interceptors.response.use(
     // }
     // let data = JSON.parse(response.data)
     if (response.status == 401 || response.status == 403) {
-      window.localStorage.removeItem('token')
+      clearToken()
       router.push({
         path: '/login'
       })
@@ -86,11 +88,10 @@ service.interceptors.response.use(
       result: errorReponse.response
     }
     if (errorJSON.ret_code === 403 || errorJSON.ret_code === 401) {
-      window.localStorage.removeItem('token')
+      clearToken()
       router.push({
         path: 'login'
       })
-      window.localStorage.removeItem('token')
     }
 
     message.error(errorJSON.ret_msg)

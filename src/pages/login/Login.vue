@@ -24,7 +24,7 @@
       
       <div class="login-radio">
         <span>下次自动登录</span>
-        <mt-switch v-model="value" class="fr" size="12px"></mt-switch>
+        <mt-switch v-model="verification.model" class="fr" size="12px"></mt-switch>
       </div>
     </div>
     <mt-tab-container v-model="active">
@@ -62,7 +62,6 @@
         username: {},
         hide: false,
         show: true,
-        value: true,
         action: {
           account_type: null,
           action: null
@@ -79,6 +78,7 @@
         verification: {
           username: '',
           password: '',
+          model: false,
         },
         // 忘记密码参数
         forgetPwd: {
@@ -120,7 +120,6 @@
                   // 消息提示
                   // toast(res)
                   this.$router.push("/home")
-                  localStorage.setItem('switch', JSON.stringify(this.value))
                   this.$Indicator.close()
                 }
               }).catch(err => {

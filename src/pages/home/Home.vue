@@ -14,11 +14,11 @@
       </van-swipe>
     </div>
     <!-- 公告消息 -->
-    <div class="box">
+    <div class="box" v-if='items.length > 0'>
       <router-link to="news">
         <img src="../../assets/images/news.svg" alt="" class="fl">
         <ul class="con1" ref="con1" :class="{anim:animate==true}">
-          <li v-for='item in items'>{{item.name}}</li>
+          <li v-for='item in items' v-bind:key='item.id'>{{item.name}}</li>
         </ul>
       </router-link>
     </div>
@@ -46,7 +46,7 @@
       <router-link to="zone">
         <p class="home-pub-title">{{$t('m.distributionArea')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
-      <div class="home-latest-release-token" v-for="item in release" @click="jump(item)">
+      <div class="home-latest-release-token" v-for="item in release" @click="jump(item)" v-bind:key='item.id'>
         <!-- <router-link :to="{name:'Issued',params:{id:item.id}}"> -->
         <div class="home-pub-token">
           <img :src="item.token.icon" alt="" class="fl icon">
@@ -73,7 +73,7 @@
       <router-link :to="{name:'Bao'}">
         <p class="home-pub-title ">{{$t('m.fenlibao')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
-      <div class="home-divided-treasure-token" v-for="item in flData">
+      <div class="home-divided-treasure-token" v-for="item in flData" v-bind:key='item.id'>
         <router-link :to="{name:'Transferflb',params:{id:item.id,code:item.token.code}}">
           <div class="home-pub-token">
             <img :src="item.token.icon" alt="" class="fl icon">
@@ -92,12 +92,12 @@
       <router-link :to="{name:'Deal'}">
         <p class="home-pub-title">{{$t('m.marketPlace')}}<span class="fr">{{$t('m.all')}}></span></p>
       </router-link>
-      <div class="home-market-transaction-token" v-for="item in market" v-if="item.info.length>0">
+      <div class="home-market-transaction-token" v-for="item in market" v-if="item.info.length>0" v-bind:key='item.id'>
         <div class="home-pub-token">
           <img :src="item.token.icon" alt="" class="fl icon">
           <span><b>{{item.token.code}}</b>({{item.token.nickname}}) <p>{{item.token.subject}}</p></span>
         </div>
-        <div v-for="marketInfo in item.info">
+        <div v-for="marketInfo in item.info"  v-bind:key='marketInfo.id'>
           <div class="home-market-transaction-con" v-if="marketInfo.publish_type==0">
             <div class="fl home-market-transaction-num">
               <span class="fl">{{$t('m.purchasePrice')}}<p> <img :src="marketInfo.d_icon"
@@ -146,9 +146,6 @@
         // 公告消息
         animate: false,
         items: [
-          { name: "PLATOLAND生态获区块链协会创新应用大奖!" },
-          { name: "PLATOLAND生态获区块链协会创新应用大奖!" },
-          { name: "PLATOLAND生态获区块链协会创新应用大奖!" }
         ]
       }
     },
@@ -160,33 +157,8 @@
       this.info()
       // this.version()
       setInterval(this.scroll, 3000)
-      this.loginswitch()
     },
     methods: {
-      // switch状态判断
-      // 登录时是否选择switch开关状态
-      loginswitch() {
-        let switchStatus = JSON.parse(localStorage.getItem('switch'))
-        // 如果没选，switch状态为false或者null,直接跳到登录
-        if (switchStatus == false || switchStatus == null) {
-          this.$router.push({
-            name: 'Login'
-          })
-          // 跳到登录后，在session中存储一个标记，表示已经登陆过，避免在首页一直循环
-          sessionStorage.setItem("switch", JSON.stringify(false))
-          let switchName = JSON.parse(sessionStorage.getItem('switch'))
-          // 判断session中是否有标记，如果有直接跳到首页，否则跳到登录
-          if (switchName == false) {
-            this.$router.push({
-            name: 'Home'
-          })
-          } else {
-            this.$router.push({
-              name: 'Login'
-            })
-          }
-        }
-      },
       // 公告消息
       scroll() {
         this.animate = true;    // 因为在消息向上滚动的时候需要添加css3过渡动画，所以这里需要设置true

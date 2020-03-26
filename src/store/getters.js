@@ -2,6 +2,8 @@
  * 在刷新的过程中，token和userinfo可能会被刷新掉，所以必须让其和本地缓存保持统一，目的解决刷新后的一些bug。
  */
 import store from "@/store/index";
+import {getToken} from "@/utils/util.js"
+
 const getters = {
     showFooter: state => state.app.showFooter,
     remarks: state => state.app.remarks,
@@ -10,25 +12,7 @@ const getters = {
     version: state => state.app.version,
     loading: state => state.app.loading,
     token: state => {
-        // let stroageToken = window.sessionStorage.getItem("token");
-        // let switchStatus = JSON.parse(localStorage.getItem('switch'))
-        // // console.log(switchStatus)
-        // if (switchStatus == false||switchStatus ==null) {
-        //   this.$router.push({
-        //     path: '/login'
-        //   })
-        // }else if(switchStatus == true) {
-        //   this.$router.push({
-        //     path: '/'
-        //   })
-        // }
-        let stroageToken = window.localStorage.getItem("token");
-        // if ((!state.user.token || state.user.token === "") && stroageToken) {
-        if ((!state.user.token || state.user.token === "") && stroageToken) {
-            store.dispatch("setToken", stroageToken)
-        }
-        return state.user.token
-        // localStorage.clear()
+        return getToken()
     },
     userInfo: state => {
         let stroageUserInfo = JSON.parse(window.sessionStorage.getItem("userInfo")
